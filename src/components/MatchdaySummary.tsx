@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import type { Match, Prediction, PostMatchReview } from '../lib/types'
 import { cn, flag, teamRatings } from '../data/matches'
+import DailyReturns from './DailyReturns'
 
 // 赔率 = 1/模型预测概率 × 博彩边际（模拟真实盘口抽水）
 const _d = (n: number) => +(1 / n).toFixed(2)
@@ -23,6 +24,12 @@ export default function MatchdaySummary({ allMatches, remainingMatches, predicti
   const matches = allMatches
   const validMatches = matches.filter(m => predictions[m.id])
   const matchCount = validMatches.length
+
+  // 历史完赛比赛用于收益分析
+  const historicalMatches = useMemo(
+    () => allMatches.filter(m => m.status === 'finished' && m.homeScore !== undefined).sort((a, b) => b.date.localeCompare(a.date)),
+    [allMatches],
+  )
 
   if (matchCount === 0) {
     return (
@@ -524,6 +531,9 @@ function RemainingOptimization({
         每行是一个具体的投注建议。百分比 = 占你总预算的比例。如果你投 100 块，就把金额乘以百分比。
         串关单独占 10%，其余按比例均分。由于已有一场出冷，建议比分仓位比原方案多加 5%。
       </div>
+
+      {/* Historical returns */}
+      <DailyReturns historicalMatches={historicalMatches} predictions={predictions} />
     </div>
   )
 }
