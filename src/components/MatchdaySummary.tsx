@@ -529,6 +529,7 @@ function RemainingOptimization({
 
       {/* Historical returns */}
       <DailyReturns historicalMatches={historicalMatches} predictions={predictions} />
+      <div className="text-[8px] text-[#555555] text-center">DEBUG: 历史比赛 {historicalMatches.length} 场 | 有预测 {historicalMatches.filter(m => predictions[m.id]).length} 场 | 有比分 {historicalMatches.filter(m => m.homeScore !== undefined).length} 场</div>
     </div>
   )
 }

@@ -38,7 +38,12 @@ export default function DailyReturns({ historicalMatches, predictions }: {
 
   const [expandedDate, setExpandedDate] = useState<string | null>(null)
 
-  if (dailyData.days.length === 0) return null
+  if (dailyData.days.length === 0) return (
+    <section className="bg-[#141937] rounded-xl border border-[#1a1f3a] p-5">
+      <h3 className="text-xs font-bold text-[#a0a0a0] mb-2 uppercase tracking-wider">💰 比赛日收益分析</h3>
+      <p className="text-[10px] text-[#555555]">暂无完赛数据（历史比赛{historicalMatches.length}场，有预测{historicalMatches.filter(m => predictions[m.id]).length}场，可计算{predictions ? Object.keys(predictions).length : 0}条）</p>
+    </section>
+  )
 
   const strategyCards = [
     { key: 'cons', label: '🛡️ 保守方案', color: '#54a0ff', v: dailyData.total.cons },
