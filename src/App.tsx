@@ -167,6 +167,7 @@ export default function App() {
             remainingMatches={upcomingOnly}
             predictions={predictions}
             postMatchReviews={postMatchReviews}
+            historicalMatches={historicalMatches}
             onSelectMatch={handleSelectMatch}
           />
         )}

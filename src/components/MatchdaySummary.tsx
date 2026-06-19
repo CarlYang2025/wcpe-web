@@ -17,19 +17,14 @@ interface Props {
   remainingMatches: Match[]
   predictions: Record<string, Prediction>
   postMatchReviews: Record<string, PostMatchReview>
+  historicalMatches: Match[]
   onSelectMatch?: (match: Match) => void
 }
 
-export default function MatchdaySummary({ allMatches, remainingMatches, predictions, postMatchReviews, onSelectMatch }: Props) {
+export default function MatchdaySummary({ allMatches, remainingMatches, predictions, postMatchReviews, historicalMatches, onSelectMatch }: Props) {
   const matches = allMatches
   const validMatches = matches.filter(m => predictions[m.id])
   const matchCount = validMatches.length
-
-  // 历史完赛比赛用于收益分析
-  const historicalMatches = useMemo(
-    () => allMatches.filter(m => m.status === 'finished' && m.homeScore !== undefined).sort((a, b) => b.date.localeCompare(a.date)),
-    [allMatches],
-  )
 
   if (matchCount === 0) {
     return (
