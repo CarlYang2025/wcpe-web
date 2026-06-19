@@ -1,37 +1,6 @@
 import type { Match, Prediction, PostMatchReview } from '../lib/types'
 import { cn } from '../data/matches'
-
-/** 粗算已完成比赛的三方案收益率 */
-function computeROI(directionHit: boolean | null, top3: boolean | null, top1: boolean | null, pred?: Prediction) {
-  if (directionHit === null) return null
-  const oddsDir = 1.9
-  const oddsScoreTop3 = 5.0
-  const oddsScoreTop1 = 9.5
-
-  function roialloc(a: Record<string, number>): number | null {
-    const sum = Object.values(a).reduce((s, v) => s + v, 0)
-    if (sum === 0) return null
-    let ret = 0
-    ret += directionHit ? (a['胜平负'] || 0) * oddsDir : 0
-    const sb = a['比分'] || 0
-    if (top1) ret += sb * oddsScoreTop1
-    else if (top3) ret += sb * oddsScoreTop3
-    ret += (a['大小球'] || 0)
-    ret += (a['串关'] || 0)
-    return Math.round(ret - 100)
-  }
-
-  const alloc = pred?.bankroll
-  const notEmpty = (o?: Record<string, number>) => o && Object.keys(o).length > 0
-  const consAlloc = notEmpty(alloc?.conservative.allocations) ? alloc!.conservative.allocations : { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 }
-  const balAlloc = notEmpty(alloc?.balanced.allocations) ? alloc!.balanced.allocations : { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 }
-  const aggAlloc = notEmpty(alloc?.aggressive.allocations) ? alloc!.aggressive.allocations : { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }
-  return {
-    cons: roialloc(consAlloc),
-    bal: roialloc(balAlloc),
-    agg: roialloc(aggAlloc),
-  }
-}
+import { preciseMatchROI } from '../lib/preciseRoi'
 
 function Roi({ v, label }: { v: number; label: string }) {
   const color = v > 0 ? '#00ff88' : v < 0 ? '#ff4757' : '#555555'
@@ -131,7 +100,7 @@ export default function RecapTable({ matches, predictions, reviews, onSelect }: 
                 </td>
                 <td className="py-2.5 px-2 hidden md:table-cell">
                   {(() => {
-                    const roi = computeROI(directionHit, scoreHitTop3, scoreHitTop1, pred)
+                    const roi = pred ? preciseMatchROI(match, pred) : null
                     if (!roi) return <span className="text-[#555555] text-[9px]">-</span>
                     return (
                       <div className="flex flex-col gap-0.5">

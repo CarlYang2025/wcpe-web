@@ -1,60 +1,10 @@
 import { useState, useMemo } from 'react'
 import type { Match, Prediction, PostMatchReview, ModelState } from '../lib/types'
 import { teamRatings, cn, flag } from '../data/matches'
+import { preciseMatchROI, oddsSourceLabel } from '../lib/preciseRoi'
+import type { RoiResult } from '../lib/preciseRoi'
 import MatchCard from './MatchCard'
 import RecapTable from './RecapTable'
-
-/** 默认资金分配（100%），用于 bankroll 数据缺失的比赛 */
-const DEFAULT_ALLOC = {
-  cons: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 },
-  bal: { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 },
-  agg: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 },
-}
-
-/** 单场ROI计算 */
-function matchROI(match: Match, pred: Prediction) {
-  if (match.homeScore === undefined) return null
-  const actual = match.homeScore === match.awayScore ? 'draw' : match.homeScore > match.awayScore ? 'home_win' : 'away_win'
-  const dirHit = pred.predictedDirection === actual
-  const actualScore = `${match.homeScore}:${match.awayScore}`
-  const top3Hit = pred.top5Scores.slice(0, 3).some(s => s.score === actualScore)
-  const top1Hit = pred.top5Scores[0].score === actualScore
-
-  const oddsDir = 1.9, oddsTop3 = 5.0, oddsTop1 = 9.5
-  const calc = (a: Record<string, number>) => {
-    const sum = Object.values(a).reduce((s, v) => s + v, 0)
-    if (sum === 0) return null // empty allocation → skip
-    let r = 0
-    r += dirHit ? (a['胜平负'] || 0) * oddsDir : 0
-    const sb = a['比分'] || 0
-    if (top1Hit) r += sb * oddsTop1
-    else if (top3Hit) r += sb * oddsTop3
-    r += (a['大小球'] || 0) + (a['串关'] || 0)
-    return Math.round(r - 100)
-  }
-
-  // 优先用预测自带的分配，回退到默认值（注意空对象 {} 视为无数据）
-  const b = pred.bankroll
-  const notEmpty = (o?: Record<string, number>) => o && Object.keys(o).length > 0
-  const allocCons = notEmpty(b?.conservative.allocations) ? b!.conservative.allocations : DEFAULT_ALLOC.cons
-  const allocBal = notEmpty(b?.balanced.allocations) ? b!.balanced.allocations : DEFAULT_ALLOC.bal
-  const allocAgg = notEmpty(b?.aggressive.allocations) ? b!.aggressive.allocations : DEFAULT_ALLOC.agg
-  const sumCons = Object.values(allocCons).reduce((s, v) => s + v, 0)
-  const sumBal = Object.values(allocBal).reduce((s, v) => s + v, 0)
-  const sumAgg = Object.values(allocAgg).reduce((s, v) => s + v, 0)
-
-  return {
-    cons: sumCons === 0 ? null : calc(allocCons),
-    bal: sumBal === 0 ? null : calc(allocBal),
-    agg: sumAgg === 0 ? null : calc(allocAgg),
-    // 附带详细信息便于展开查看
-    detail: {
-      dirHit, top3Hit, top1Hit,
-      predicted: pred.predictedScore,
-      actual: actualScore,
-    },
-  }
-}
 
 interface Props {
   historicalMatches: Match[]
@@ -231,11 +181,11 @@ function MetricBox({ label, value, unit, color = '#ffffff', detail }: {
 
 function DailyReturns({ historicalMatches, predictions }: { historicalMatches: Match[]; predictions: Record<string, Prediction> }) {
   const dailyData = useMemo(() => {
-    const map = new Map<string, { matches: Match[]; rois: ReturnType<typeof matchROI>[] }>()
+    const map = new Map<string, { matches: Match[]; rois: RoiResult[] }>()
     for (const m of historicalMatches) {
       const pred = predictions[m.id]
       if (!pred) continue
-      const roi = matchROI(m, pred)
+      const roi = preciseMatchROI(m, pred)
       if (!roi) continue
       const date = m.date
       if (!map.has(date)) map.set(date, { matches: [], rois: [] })
@@ -273,8 +223,8 @@ function DailyReturns({ historicalMatches, predictions }: { historicalMatches: M
   return (
     <section className="bg-[#141937] rounded-xl border border-[#1a1f3a] p-5">
       <h3 className="text-xs font-bold text-[#a0a0a0] mb-4 uppercase tracking-wider">💰 比赛日收益分析</h3>
-      <p className="text-[10px] text-[#555555] mb-1">按100单位预算 × 预测命中折算 · 点击日期展开单场明细</p>
-      <p className="text-[8px] text-[#555555] mb-4">赔率参考：方向1.9 / TOP3比分5.0 / TOP1比分9.5</p>
+      <p className="text-[10px] text-[#555555] mb-1">基于当日方案资金分配 × 真实赔率（Bet365→MVI→模型概率）计算</p>
+      <p className="text-[8px] text-[#555555] mb-4">赔率来源缩写：B=Bet365 M=MVI P=概率 S=串关 | 点击日期展开单场明细</p>
 
       {/* Strategy Summary Cards */}
       <div className="grid grid-cols-3 gap-3 mb-5">
@@ -324,22 +274,30 @@ function DailyReturns({ historicalMatches, predictions }: { historicalMatches: M
                     <tr key={r.match.id} className="border-b border-[#1a1f3a] bg-[#0d1127]">
                       <td></td>
                       <td className="py-1.5 px-2" colSpan={5}>
-                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px]">
-                          <span className="text-white">{r.home} vs {r.away}</span>
-                          <span className="text-[#555555]">预<span className="text-[#ffd700] font-mono ml-0.5">{r.roi?.detail?.predicted || '-'}</span></span>
-                          <span className="text-[#555555]">实<span className="text-white font-mono font-bold ml-0.5">{r.roi?.detail?.actual || '-'}</span></span>
-                          <span style={{ color: r.roi?.detail?.dirHit ? '#00ff88' : '#ff4757' }}>
-                            方向{r.roi?.detail?.dirHit ? '✓' : '✗'}
-                          </span>
-                          <span style={{ color: r.roi?.detail?.top3Hit ? '#ffa502' : '#555555' }}>
-                            TOP3{r.roi?.detail?.top3Hit ? '🎯' : '✗'}
-                          </span>
-                          <span style={{ color: r.roi?.detail?.top1Hit ? '#ffa502' : '#555555' }}>
-                            TOP1{r.roi?.detail?.top1Hit ? '🎯' : '✗'}
-                          </span>
-                          <RoiMini v={r.roi?.cons ?? null} label="保守" />
-                          <RoiMini v={r.roi?.bal ?? null} label="平衡" />
-                          <RoiMini v={r.roi?.agg ?? null} label="激进" />
+                        <div className="space-y-1">
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px]">
+                            <span className="text-white">{r.home} vs {r.away}</span>
+                            <span className="text-[#555555]">预<span className="text-[#ffd700] font-mono ml-0.5">{r.roi?.detail?.predicted || '-'}</span></span>
+                            <span className="text-[#555555]">实<span className="text-white font-mono font-bold ml-0.5">{r.roi?.detail?.actual || '-'}</span></span>
+                            <span style={{ color: r.roi?.detail?.dirHit ? '#00ff88' : '#ff4757' }}>
+                              方向{r.roi?.detail?.dirHit ? '✓' : '✗'}
+                              <span className="text-[8px] text-[#555555] ml-0.5">({oddsSourceLabel(r.roi?.detail?.oddsSource?.dir || '')}@{r.roi?.detail?.odds?.dir})</span>
+                            </span>
+                            <span style={{ color: r.roi?.detail?.top3Hit ? '#ffa502' : '#555555' }}>
+                              TOP3{r.roi?.detail?.top3Hit ? (r.roi?.detail?.top1Hit ? '🎯' : '✓') : '✗'}
+                              <span className="text-[8px] text-[#555555] ml-0.5">({oddsSourceLabel(r.roi?.detail?.oddsSource?.score || '')}@{r.roi?.detail?.odds?.score})</span>
+                            </span>
+                            <RoiMini v={r.roi?.cons ?? null} label="保守" />
+                            <RoiMini v={r.roi?.bal ?? null} label="平衡" />
+                            <RoiMini v={r.roi?.agg ?? null} label="激进" />
+                          </div>
+                          {r.roi?.detail?.oddsSource?.ou !== 'model' && r.roi?.detail?.ouHit !== null && (
+                            <div className="text-[9px] text-[#555555]">
+                              大小球: {r.roi?.detail?.ouHit ? '✓' : '✗'}
+                              <span className="ml-0.5">({oddsSourceLabel(r.roi?.detail?.oddsSource?.ou || '')}@{r.roi?.detail?.odds?.ou})</span>
+                              {r.roi?.detail?.parlayHit && <span className="ml-2">串关: ✓@{r.roi?.detail?.odds?.parlay}</span>}
+                            </div>
+                          )}
                         </div>
                       </td>
                     </tr>
