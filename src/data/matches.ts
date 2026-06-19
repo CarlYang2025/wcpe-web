@@ -1,0 +1,955 @@
+import type { Match, Prediction, PostMatchReview, ModelState, TeamRatings, Odds } from '../lib/types';
+
+// ========== 球队中文名称映射 ==========
+/** cn = Chinese Name，将球队英文名映射为中文名 */
+export const teamNames: Record<string, string> = {
+  'Mexico': '墨西哥', 'South Africa': '南非', 'South Korea': '韩国', 'Czechia': '捷克',
+  'Canada': '加拿大', 'Bosnia': '波黑', 'Qatar': '卡塔尔', 'Switzerland': '瑞士',
+  'Brazil': '巴西', 'Morocco': '摩洛哥', 'Haiti': '海地', 'Scotland': '苏格兰',
+  'Spain': '西班牙', 'Cape Verde': '佛得角',
+  'Belgium': '比利时', 'Egypt': '埃及',
+  'Saudi Arabia': '沙特', 'Uruguay': '乌拉圭',
+  'Iran': '伊朗', 'New Zealand': '新西兰',
+  'France': '法国', 'Senegal': '塞内加尔',
+  'Iraq': '伊拉克', 'Norway': '挪威',
+  'Argentina': '阿根廷', 'Algeria': '阿尔及利亚',
+  'Austria': '奥地利', 'Jordan': '约旦',
+  'Portugal': '葡萄牙', 'DR Congo': '刚果(金)',
+  'England': '英格兰', 'Croatia': '克罗地亚',
+  'Ghana': '加纳', 'Panama': '巴拿马',
+  'Colombia': '哥伦比亚', 'Uzbekistan': '乌兹别克',
+  'Sweden': '瑞典', 'Tunisia': '突尼斯', 'Ivory Coast': '科特迪瓦', 'Ecuador': '厄瓜多尔',
+  'Netherlands': '荷兰', 'Japan': '日本', 'Germany': '德国', 'Curacao': '库拉索',
+  'Australia': '澳大利亚', 'Turkiye': '土耳其', 'USA': '美国', 'Paraguay': '巴拉圭',
+};
+
+// ========== 球队旗帜 ==========
+export const teamFlags: Record<string, string> = {
+  'Mexico': '🇲🇽', 'South Africa': '🇿🇦', 'South Korea': '🇰🇷', 'Czechia': '🇨🇿',
+  'Canada': '🇨🇦', 'Bosnia': '🇧🇦', 'Qatar': '🇶🇦', 'Switzerland': '🇨🇭',
+  'Brazil': '🇧🇷', 'Morocco': '🇲🇦', 'Haiti': '🇭🇹', 'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+  'Spain': '🇪🇸', 'Cape Verde': '🇨🇻', 'Belgium': '🇧🇪', 'Egypt': '🇪🇬',
+  'Saudi Arabia': '🇸🇦', 'Uruguay': '🇺🇾', 'Iran': '🇮🇷', 'New Zealand': '🇳🇿',
+  'France': '🇫🇷', 'Senegal': '🇸🇳', 'Iraq': '🇮🇶', 'Norway': '🇳🇴',
+  'Argentina': '🇦🇷', 'Algeria': '🇩🇿', 'Austria': '🇦🇹', 'Jordan': '🇯🇴',
+  'Portugal': '🇵🇹', 'DR Congo': '🇨🇩', 'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Croatia': '🇭🇷',
+  'Ghana': '🇬🇭', 'Panama': '🇵🇦',   'Colombia': '🇨🇴', 'Uzbekistan': '🇺🇿',
+  'Sweden': '🇸🇪', 'Tunisia': '🇹🇳', 'Ivory Coast': '🇨🇮', 'Ecuador': '🇪🇨',
+  'Netherlands': '🇳🇱', 'Japan': '🇯🇵', 'Germany': '🇩🇪', 'Curacao': '🇨🇼',
+  'Australia': '🇦🇺', 'Turkiye': '🇹🇷', 'USA': '🇺🇸', 'Paraguay': '🇵🇾',
+};
+
+export function cn(name: string): string { return teamNames[name] || name; }
+export function flag(name: string): string { return teamFlags[name] || ''; }
+
+// ========== 模型状态 ==========
+export const modelState: ModelState = {
+  directionAccuracy: 0.44,
+  scoreTop3Accuracy: 0.25,
+  scoreTop1Accuracy: 0.06,
+  totalPredictions: 20,
+  completedPredictions: 16,
+  directionCorrect: 7,
+  scoreTop3Correct: 4,
+  scoreTop1Correct: 1,
+  overallDrawRate: 0.36,
+  overallTotalMatches: 28,
+  factorWeights: {
+    eloDiff: { hitRate: 0.55, weight: 0.30, samples: 16 },
+    recentForm: { hitRate: 0.42, weight: 0.20, samples: 16 },
+    h2h: { hitRate: 0.48, weight: 0.15, samples: 16 },
+    marketConsensus: { hitRate: 0.60, weight: 0.25, samples: 16 },
+    tacticalMatchup: { hitRate: 0.38, weight: 0.10, samples: 16 },
+  },
+};
+
+// ========== 球队评分 ==========
+export const teamRatings: Record<string, TeamRatings> = {
+  'Spain': { attack: 88, defense: 85, form: 82, tournament: 90, elo: 2050 },
+  'Cape Verde': { attack: 35, defense: 55, form: 48, tournament: 30, elo: 1450 },
+  'Belgium': { attack: 82, defense: 76, form: 80, tournament: 78, elo: 1920 },
+  'Egypt': { attack: 70, defense: 72, form: 65, tournament: 68, elo: 1680 },
+  'Saudi Arabia': { attack: 50, defense: 45, form: 35, tournament: 40, elo: 1520 },
+  'Uruguay': { attack: 78, defense: 80, form: 72, tournament: 82, elo: 1850 },
+  'Iran': { attack: 60, defense: 68, form: 58, tournament: 55, elo: 1620 },
+  'New Zealand': { attack: 55, defense: 58, form: 52, tournament: 35, elo: 1550 },
+  'France': { attack: 90, defense: 84, form: 82, tournament: 92, elo: 2080 },
+  'Senegal': { attack: 75, defense: 70, form: 68, tournament: 72, elo: 1750 },
+  'Iraq': { attack: 45, defense: 50, form: 42, tournament: 45, elo: 1480 },
+  'Norway': { attack: 85, defense: 72, form: 78, tournament: 60, elo: 1820 },
+  'Argentina': { attack: 92, defense: 88, form: 95, tournament: 95, elo: 2100 },
+  'Algeria': { attack: 68, defense: 65, form: 62, tournament: 58, elo: 1650 },
+  'Austria': { attack: 75, defense: 78, form: 80, tournament: 65, elo: 1780 },
+  'Jordan': { attack: 40, defense: 48, form: 38, tournament: 30, elo: 1420 },
+  'Portugal': { attack: 87, defense: 83, form: 80, tournament: 85, elo: 1980 },
+  'DR Congo': { attack: 55, defense: 62, form: 50, tournament: 35, elo: 1580 },
+  'England': { attack: 85, defense: 82, form: 78, tournament: 80, elo: 1950 },
+  'Croatia': { attack: 72, defense: 75, form: 65, tournament: 78, elo: 1820 },
+  'Ghana': { attack: 62, defense: 58, form: 35, tournament: 60, elo: 1600 },
+  'Panama': { attack: 58, defense: 62, form: 55, tournament: 40, elo: 1580 },
+  'Colombia': { attack: 80, defense: 76, form: 75, tournament: 78, elo: 1850 },
+  'Uzbekistan': { attack: 58, defense: 65, form: 55, tournament: 40, elo: 1600 },
+  // ---- 补充 24 支缺失评分 ----
+  'Brazil': { attack: 88, defense: 82, form: 85, tournament: 88, elo: 2050 },
+  'Germany': { attack: 82, defense: 78, form: 75, tournament: 82, elo: 1900 },
+  'Netherlands': { attack: 78, defense: 80, form: 76, tournament: 75, elo: 1880 },
+  'Mexico': { attack: 72, defense: 70, form: 68, tournament: 72, elo: 1780 },
+  'Japan': { attack: 70, defense: 72, form: 72, tournament: 68, elo: 1760 },
+  'Switzerland': { attack: 68, defense: 75, form: 70, tournament: 68, elo: 1800 },
+  'USA': { attack: 72, defense: 68, form: 70, tournament: 68, elo: 1750 },
+  'Morocco': { attack: 70, defense: 75, form: 68, tournament: 72, elo: 1750 },
+  'Sweden': { attack: 72, defense: 72, form: 70, tournament: 65, elo: 1750 },
+  'South Korea': { attack: 68, defense: 65, form: 66, tournament: 62, elo: 1720 },
+  'Ivory Coast': { attack: 72, defense: 65, form: 68, tournament: 62, elo: 1700 },
+  'Turkiye': { attack: 68, defense: 62, form: 62, tournament: 60, elo: 1700 },
+  'Czechia': { attack: 62, defense: 65, form: 60, tournament: 58, elo: 1700 },
+  'Scotland': { attack: 60, defense: 62, form: 58, tournament: 52, elo: 1680 },
+  'Ecuador': { attack: 65, defense: 65, form: 62, tournament: 58, elo: 1680 },
+  'Canada': { attack: 66, defense: 62, form: 65, tournament: 55, elo: 1660 },
+  'Paraguay': { attack: 60, defense: 68, form: 58, tournament: 55, elo: 1650 },
+  'Australia': { attack: 65, defense: 68, form: 62, tournament: 60, elo: 1650 },
+  'Tunisia': { attack: 58, defense: 62, form: 55, tournament: 52, elo: 1600 },
+  'Bosnia': { attack: 58, defense: 55, form: 52, tournament: 48, elo: 1600 },
+  'Qatar': { attack: 52, defense: 50, form: 48, tournament: 45, elo: 1550 },
+  'South Africa': { attack: 50, defense: 52, form: 45, tournament: 42, elo: 1520 },
+  'Haiti': { attack: 45, defense: 42, form: 40, tournament: 30, elo: 1480 },
+  'Curacao': { attack: 40, defense: 38, form: 38, tournament: 25, elo: 1400 },
+};
+
+// ========== 比赛数据 ==========
+export const matches: Match[] = [
+  // ---- 6/11 已完成 ----
+  { id: 'mex-rsa', date: '2026-06-11', tournament: '2026 FIFA World Cup', group: 'A组', round: '第一轮', matchday: 1, homeTeam: 'Mexico', awayTeam: 'South Africa', venue: 'Estadio Azteca, Mexico City', kickoff: '6/11 23:00', localKickoff: '6/11 11:00', localTZ: 'CT', status: 'finished', homeScore: 2, awayScore: 0 },
+  { id: 'kor-cze', date: '2026-06-11', tournament: '2026 FIFA World Cup', group: 'A组', round: '第一轮', matchday: 1, homeTeam: 'South Korea', awayTeam: 'Czechia', venue: 'SoFi Stadium, Los Angeles', kickoff: '6/12 03:00', localKickoff: '6/11 14:00', localTZ: 'PT', status: 'finished', homeScore: 2, awayScore: 1 },
+  // ---- 6/12 已完成 ----
+  { id: 'can-bih', date: '2026-06-12', tournament: '2026 FIFA World Cup', group: 'B组', round: '第一轮', matchday: 2, homeTeam: 'Canada', awayTeam: 'Bosnia', venue: 'BMO Field, Toronto', kickoff: '6/13 03:00', localKickoff: '6/12 15:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 1 },
+  // ---- 6/13 已完成 ----
+  { id: 'qat-sui', date: '2026-06-13', tournament: '2026 FIFA World Cup', group: 'B组', round: '第一轮', matchday: 3, homeTeam: 'Qatar', awayTeam: 'Switzerland', venue: 'BC Place, Vancouver', kickoff: '6/13 22:00', localKickoff: '6/13 10:00', localTZ: 'PT', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'bra-mar', date: '2026-06-13', tournament: '2026 FIFA World Cup', group: 'C组', round: '第一轮', matchday: 3, homeTeam: 'Brazil', awayTeam: 'Morocco', venue: 'MetLife Stadium, New York', kickoff: '6/14 01:00', localKickoff: '6/13 13:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'hai-sco', date: '2026-06-13', tournament: '2026 FIFA World Cup', group: 'D组', round: '第一轮', matchday: 3, homeTeam: 'Haiti', awayTeam: 'Scotland', venue: 'Gillette Stadium, Boston', kickoff: '6/14 04:00', localKickoff: '6/13 16:00', localTZ: 'ET', status: 'finished', homeScore: 0, awayScore: 1 },
+  // ---- 6/13-14 其他场次 ----
+  { id: 'usa-par', date: '2026-06-13', tournament: '2026 FIFA World Cup', group: 'E组', round: '第一轮', matchday: 3, homeTeam: 'USA', awayTeam: 'Paraguay', venue: 'SoFi Stadium, Los Angeles', kickoff: '6/14 09:00', localKickoff: '6/13 21:00', localTZ: 'PT', status: 'finished', homeScore: 4, awayScore: 1 },
+  { id: 'ned-jpn', date: '2026-06-14', tournament: '2026 FIFA World Cup', group: 'E组', round: '第一轮', matchday: 4, homeTeam: 'Netherlands', awayTeam: 'Japan', venue: 'AT&T Stadium, Dallas', kickoff: '6/15 04:00', localKickoff: '6/14 16:00', localTZ: 'CT', status: 'finished', homeScore: 2, awayScore: 2 },
+  { id: 'ger-cuw', date: '2026-06-14', tournament: '2026 FIFA World Cup', group: 'F组', round: '第一轮', matchday: 4, homeTeam: 'Germany', awayTeam: 'Curacao', venue: 'NRG Stadium, Houston', kickoff: '6/15 06:00', localKickoff: '6/14 18:00', localTZ: 'CT', status: 'finished', homeScore: 7, awayScore: 1 },
+  { id: 'aus-tur', date: '2026-06-14', tournament: '2026 FIFA World Cup', group: 'F组', round: '第一轮', matchday: 4, homeTeam: 'Australia', awayTeam: 'Turkiye', venue: 'BC Place, Vancouver', kickoff: '6/15 00:00', localKickoff: '6/14 12:00', localTZ: 'PT', status: 'finished', homeScore: 2, awayScore: 0 },
+  { id: 'civ-ecu', date: '2026-06-14', tournament: '2026 FIFA World Cup', group: 'G组', round: '第一轮', matchday: 4, homeTeam: 'Ivory Coast', awayTeam: 'Ecuador', venue: 'Lincoln Financial Field, Philadelphia', kickoff: '6/15 07:00', localKickoff: '6/14 19:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 0 },
+  { id: 'swe-tun', date: '2026-06-15', tournament: '2026 FIFA World Cup', group: 'G组', round: '第一轮', matchday: 5, homeTeam: 'Sweden', awayTeam: 'Tunisia', venue: 'Estadio Monterrey, Mexico', kickoff: '6/16 02:00', localKickoff: '6/15 14:00', localTZ: 'CT', status: 'finished', homeScore: 5, awayScore: 1 },
+  // ---- 6/16 已完成（北京时间）----
+  { id: 'esp-cpv', date: '2026-06-16', tournament: '2026 FIFA World Cup', group: 'H组', round: '第一轮', matchday: 5, homeTeam: 'Spain', awayTeam: 'Cape Verde', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '6/16 07:00', localKickoff: '6/15 19:00', localTZ: 'ET', status: 'finished', homeScore: 0, awayScore: 0 },
+  { id: 'bel-egy', date: '2026-06-16', tournament: '2026 FIFA World Cup', group: 'G组', round: '第一轮', matchday: 5, homeTeam: 'Belgium', awayTeam: 'Egypt', venue: 'Lumen Field, Seattle', kickoff: '6/16 04:00', localKickoff: '6/15 16:00', localTZ: 'PT', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'ksa-uru', date: '2026-06-16', tournament: '2026 FIFA World Cup', group: 'H组', round: '第一轮', matchday: 5, homeTeam: 'Saudi Arabia', awayTeam: 'Uruguay', venue: 'Hard Rock Stadium, Miami', kickoff: '6/16 10:00', localKickoff: '6/15 22:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'irn-nzl', date: '2026-06-16', tournament: '2026 FIFA World Cup', group: 'G组', round: '第一轮', matchday: 5, homeTeam: 'Iran', awayTeam: 'New Zealand', venue: 'SoFi Stadium, Los Angeles', kickoff: '6/16 01:00', localKickoff: '6/15 13:00', localTZ: 'PT', status: 'finished', homeScore: 2, awayScore: 2 },
+  // ---- 6/17 已完成（北京时间）----
+  { id: 'fra-sen', date: '2026-06-17', tournament: '2026 FIFA World Cup', group: 'I组', round: '第一轮', matchday: 6, homeTeam: 'France', awayTeam: 'Senegal', venue: 'MetLife Stadium, New Jersey', kickoff: '6/17 07:00', localKickoff: '6/16 19:00', localTZ: 'ET', status: 'finished', homeScore: 3, awayScore: 1 },
+  { id: 'irq-nor', date: '2026-06-17', tournament: '2026 FIFA World Cup', group: 'I组', round: '第一轮', matchday: 6, homeTeam: 'Iraq', awayTeam: 'Norway', venue: 'Gillette Stadium, Boston', kickoff: '6/17 04:00', localKickoff: '6/16 16:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 4 },
+  { id: 'arg-alg', date: '2026-06-17', tournament: '2026 FIFA World Cup', group: 'J组', round: '第一轮', matchday: 6, homeTeam: 'Argentina', awayTeam: 'Algeria', venue: 'Arrowhead Stadium, Kansas City', kickoff: '6/17 10:00', localKickoff: '6/16 22:00', localTZ: 'CT', status: 'finished', homeScore: 3, awayScore: 0 },
+  { id: 'aut-jor', date: '2026-06-17', tournament: '2026 FIFA World Cup', group: 'J组', round: '第一轮', matchday: 6, homeTeam: 'Austria', awayTeam: 'Jordan', venue: 'AT&T Stadium, Dallas', kickoff: '6/17 01:00', localKickoff: '6/16 13:00', localTZ: 'CT', status: 'finished', homeScore: 3, awayScore: 1 },
+  // ---- 6/18 今日（北京时间）----
+  { id: 'por-cod', date: '2026-06-18', tournament: '2026 FIFA World Cup', group: 'K组', round: '第一轮', matchday: 7, homeTeam: 'Portugal', awayTeam: 'DR Congo', venue: 'NRG Stadium, Houston', kickoff: '6/18 06:00', localKickoff: '6/17 18:00', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'eng-cro', date: '2026-06-18', tournament: '2026 FIFA World Cup', group: 'L组', round: '第一轮', matchday: 7, homeTeam: 'England', awayTeam: 'Croatia', venue: 'AT&T Stadium, Arlington', kickoff: '6/18 04:00', localKickoff: '6/17 16:00', localTZ: 'CT', status: 'finished', homeScore: 4, awayScore: 2 },
+  { id: 'gha-pan', date: '2026-06-18', tournament: '2026 FIFA World Cup', group: 'L组', round: '第一轮', matchday: 7, homeTeam: 'Ghana', awayTeam: 'Panama', venue: 'BMO Field, Toronto', kickoff: '6/18 07:00', localKickoff: '6/17 19:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 0 },
+  { id: 'uzb-col', date: '2026-06-18', tournament: '2026 FIFA World Cup', group: 'K组', round: '第一轮', matchday: 7, homeTeam: 'Uzbekistan', awayTeam: 'Colombia', venue: 'Estadio Azteca, Mexico City', kickoff: '6/18 10:00', localKickoff: '6/17 22:00', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 3 },
+  // ---- 6/19 第二轮（北京时间）----
+  { id: 'cze-rsa-2', date: '2026-06-19', tournament: '2026 FIFA World Cup', group: 'A组', round: '第二轮', matchday: 8, homeTeam: 'Czechia', awayTeam: 'South Africa', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '6/19 00:00', localKickoff: '6/18 12:00', localTZ: 'ET', status: 'finished',
+    homeScore: 1, awayScore: 1 },
+  { id: 'sui-bih-2', date: '2026-06-19', tournament: '2026 FIFA World Cup', group: 'B组', round: '第二轮', matchday: 8, homeTeam: 'Switzerland', awayTeam: 'Bosnia', venue: 'SoFi Stadium, Inglewood', kickoff: '6/19 03:00', localKickoff: '6/18 15:00', localTZ: 'PT', status: 'finished',
+    homeScore: 4, awayScore: 1 },
+  { id: 'can-qat-2', date: '2026-06-19', tournament: '2026 FIFA World Cup', group: 'B组', round: '第二轮', matchday: 8, homeTeam: 'Canada', awayTeam: 'Qatar', venue: 'BC Place, Vancouver', kickoff: '6/19 06:00', localKickoff: '6/18 18:00', localTZ: 'PT', status: 'finished',
+    homeScore: 6, awayScore: 0 },
+  { id: 'mex-kor-2', date: '2026-06-19', tournament: '2026 FIFA World Cup', group: 'A组', round: '第二轮', matchday: 8, homeTeam: 'Mexico', awayTeam: 'South Korea', venue: 'Estadio Akron, Guadalajara', kickoff: '6/19 09:00', localKickoff: '6/18 21:00', localTZ: 'CT', status: 'finished',
+    homeScore: 1, awayScore: 0 },
+  // ---- 6/20 第二轮（北京时间）----
+  { id: 'usa-aus-2', date: '2026-06-20', tournament: '2026 FIFA World Cup', group: 'D组', round: '第二轮', matchday: 8, homeTeam: 'USA', awayTeam: 'Australia', venue: 'Lumen Field, Seattle', kickoff: '6/20 03:00', localKickoff: '6/19 15:00', localTZ: 'PT', status: 'upcoming' },
+  { id: 'sco-mar-2', date: '2026-06-20', tournament: '2026 FIFA World Cup', group: 'C组', round: '第二轮', matchday: 8, homeTeam: 'Scotland', awayTeam: 'Morocco', venue: 'Gillette Stadium, Boston', kickoff: '6/20 06:00', localKickoff: '6/19 18:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'bra-hai-2', date: '2026-06-20', tournament: '2026 FIFA World Cup', group: 'C组', round: '第二轮', matchday: 8, homeTeam: 'Brazil', awayTeam: 'Haiti', venue: 'Lincoln Financial Field, Philadelphia', kickoff: '6/20 08:30', localKickoff: '6/19 20:30', localTZ: 'ET', status: 'upcoming' },
+  { id: 'tur-par-2', date: '2026-06-20', tournament: '2026 FIFA World Cup', group: 'D组', round: '第二轮', matchday: 8, homeTeam: 'Turkiye', awayTeam: 'Paraguay', venue: 'Levi Stadium, Santa Clara', kickoff: '6/20 11:00', localKickoff: '6/19 23:00', localTZ: 'PT', status: 'upcoming' },
+];
+
+// ========== 预测数据 ==========
+export const predictions: Record<string, Prediction> = {
+  // ---- 历史预测 (6/15-16) ----
+  'esp-cpv': {
+    matchId: 'esp-cpv', homeWinProb: 0.89, drawProb: 0.08, awayWinProb: 0.03, over25Prob: 0.62, under25Prob: 0.38,
+    top5Scores: [
+      { score: '3:0', probability: 0.22, quadrant: 'Q1', reason: '西班牙进攻碾压，佛得角首次世界杯' },
+      { score: '2:0', probability: 0.18, quadrant: 'Q1', reason: '西班牙控制型胜利' },
+      { score: '4:0', probability: 0.12, quadrant: 'Q1', reason: '完全碾压' },
+      { score: '2:1', probability: 0.08, quadrant: 'Q1', reason: '佛得角定位球偷1球' },
+      { score: '1:1', probability: 0.05, quadrant: 'Q2', reason: '奇迹平局' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.90, riskLevel: 'Low', riskWarnings: ['未知对手的信息盲区', '世界杯首战紧张'], predictedScore: '3:0', predictedDirection: 'home_win', analysisText: '',
+  },
+  'bel-egy': {
+    matchId: 'bel-egy', homeWinProb: 0.60, drawProb: 0.25, awayWinProb: 0.15, over25Prob: 0.52, under25Prob: 0.48,
+    top5Scores: [
+      { score: '2:1', probability: 0.15, quadrant: 'Q1', reason: '比利时攻击力+埃及能进球' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: '比利时险胜' },
+      { score: '1:1', probability: 0.12, quadrant: 'Q2', reason: '历史交锋埃及占优' },
+      { score: '2:0', probability: 0.10, quadrant: 'Q1', reason: '比利时控制比赛' },
+      { score: '0:0', probability: 0.08, quadrant: 'Q2', reason: '双方谨慎' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.55, riskLevel: 'High', riskWarnings: ['埃及历史克制比利时', '埃及0-0逼平西班牙证明防守'], predictedScore: '2:1', predictedDirection: 'home_win', analysisText: '',
+  },
+  'ksa-uru': {
+    matchId: 'ksa-uru', homeWinProb: 0.12, drawProb: 0.22, awayWinProb: 0.69, over25Prob: 0.45, under25Prob: 0.55,
+    top5Scores: [
+      { score: '0:2', probability: 0.20, quadrant: 'Q1', reason: '乌拉圭碾压' },
+      { score: '0:1', probability: 0.15, quadrant: 'Q1', reason: '乌拉圭控场求稳' },
+      { score: '1:2', probability: 0.12, quadrant: 'Q1', reason: '沙特反击偷1球' },
+      { score: '0:3', probability: 0.10, quadrant: 'Q1', reason: '完全碾压' },
+      { score: '1:1', probability: 0.08, quadrant: 'Q2', reason: '首轮平局' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.70, riskLevel: 'Medium', riskWarnings: ['沙特热身赛0-4惨败', '换帅仅4月'], predictedScore: '0:2', predictedDirection: 'away_win', analysisText: '',
+  },
+  'irn-nzl': {
+    matchId: 'irn-nzl', homeWinProb: 0.51, drawProb: 0.28, awayWinProb: 0.21, over25Prob: 0.42, under25Prob: 0.58,
+    top5Scores: [
+      { score: '1:0', probability: 0.16, quadrant: 'Q1', reason: '伊朗防守纪律' },
+      { score: '0:0', probability: 0.14, quadrant: 'Q2', reason: '沉闷的比赛' },
+      { score: '2:0', probability: 0.10, quadrant: 'Q1', reason: '伊朗技术优势' },
+      { score: '1:1', probability: 0.12, quadrant: 'Q2', reason: '新西兰高空轰炸扳平' },
+      { score: '2:1', probability: 0.08, quadrant: 'Q1', reason: '伊朗险胜' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.40, riskLevel: 'High', riskWarnings: ['最接近五五开的比赛', '新西兰世界杯零胜陷阱'], predictedScore: '1:0', predictedDirection: 'home_win', analysisText: '',
+  },
+  'fra-sen': {
+    matchId: 'fra-sen', homeWinProb: 0.62, drawProb: 0.23, awayWinProb: 0.15, over25Prob: 0.58, under25Prob: 0.42,
+    top5Scores: [
+      { score: '2:1', probability: 0.16, quadrant: 'Q1', reason: '法国攻击群+塞内加尔反击' },
+      { score: '3:1', probability: 0.14, quadrant: 'Q1', reason: '法国全面碾压' },
+      { score: '2:0', probability: 0.12, quadrant: 'Q1', reason: '法国控制型胜利' },
+      { score: '1:0', probability: 0.10, quadrant: 'Q1', reason: '法国艰难取胜' },
+      { score: '1:1', probability: 0.08, quadrant: 'Q2', reason: '2002年揭幕战重演' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.65, riskLevel: 'Medium', riskWarnings: ['法国对非洲队魔咒', '马内回归塞内加尔'], predictedScore: '2:1', predictedDirection: 'home_win', analysisText: '',
+  },
+  'irq-nor': {
+    matchId: 'irq-nor', homeWinProb: 0.07, drawProb: 0.13, awayWinProb: 0.80, over25Prob: 0.55, under25Prob: 0.45,
+    top5Scores: [
+      { score: '0:3', probability: 0.20, quadrant: 'Q1', reason: '哈兰德+厄德高碾压' },
+      { score: '1:3', probability: 0.14, quadrant: 'Q1', reason: '伊拉克偷1球' },
+      { score: '0:2', probability: 0.14, quadrant: 'Q1', reason: '挪威控制求稳' },
+      { score: '0:4', probability: 0.10, quadrant: 'Q1', reason: '完全碾压' },
+      { score: '1:4', probability: 0.08, quadrant: 'Q1', reason: '挪威火力全开' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.88, riskLevel: 'Low', riskWarnings: ['实力差最大的比赛', '哈兰德状态'], predictedScore: '0:3', predictedDirection: 'away_win', analysisText: '',
+  },
+  'arg-alg': {
+    matchId: 'arg-alg', homeWinProb: 0.71, drawProb: 0.20, awayWinProb: 0.09, over25Prob: 0.55, under25Prob: 0.45,
+    top5Scores: [
+      { score: '3:0', probability: 0.20, quadrant: 'Q1', reason: '阿根廷5战全胜进14球仅失1球' },
+      { score: '2:0', probability: 0.16, quadrant: 'Q1', reason: '梅西+劳塔罗双核' },
+      { score: '2:1', probability: 0.12, quadrant: 'Q1', reason: '阿尔及利亚反击1球' },
+      { score: '4:0', probability: 0.10, quadrant: 'Q1', reason: '完全碾压' },
+      { score: '1:1', probability: 0.06, quadrant: 'Q2', reason: '奇迹平局' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.85, riskLevel: 'Low', riskWarnings: ['阿尔及利亚1-0荷兰的底气', '卫冕冠军首场压力'], predictedScore: '3:0', predictedDirection: 'home_win', analysisText: '',
+  },
+  'aut-jor': {
+    matchId: 'aut-jor', homeWinProb: 0.73, drawProb: 0.17, awayWinProb: 0.10, over25Prob: 0.50, under25Prob: 0.50,
+    top5Scores: [
+      { score: '2:0', probability: 0.18, quadrant: 'Q1', reason: '奥地利8场预选赛22进球' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: '奥地利控制求稳' },
+      { score: '3:0', probability: 0.12, quadrant: 'Q1', reason: '约旦头号射手重伤' },
+      { score: '2:1', probability: 0.10, quadrant: 'Q1', reason: '约旦偷1球' },
+      { score: '1:1', probability: 0.06, quadrant: 'Q2', reason: '约旦奇迹' },
+    ],
+    mviAnalysis: [], parlayRecommendations: [], bankroll: { conservative: { allocations: {}, expectedReturn: 0 }, balanced: { allocations: {}, expectedReturn: 0 }, aggressive: { allocations: {}, expectedReturn: 0 } },
+    confidence: 0.78, riskLevel: 'Medium', riskWarnings: ['28年首次重返世界杯心理压力', '约旦头号射手阿尔-纳伊马特膝盖重伤'], predictedScore: '2:0', predictedDirection: 'home_win', analysisText: '',
+  },
+
+  // ---- 最新预测 (6/17-18) ----
+  'por-cod': {
+    matchId: 'por-cod', homeWinProb: 0.72, drawProb: 0.22, awayWinProb: 0.06, over25Prob: 0.57, under25Prob: 0.43,
+    top5Scores: [
+      { score: '2:0', probability: 0.18, quadrant: 'Q1', reason: '葡萄牙进攻碾压+刚果防守纪律限制进球数' },
+      { score: '1:0', probability: 0.15, quadrant: 'Q1', reason: '刚果密集防守+48队赛制首轮求稳' },
+      { score: '3:0', probability: 0.12, quadrant: 'Q1', reason: '葡萄牙进攻火力全开' },
+      { score: '2:1', probability: 0.10, quadrant: 'Q1', reason: '刚果Wissa反击偷1球' },
+      { score: '1:1', probability: 0.08, quadrant: 'Q2', reason: '首轮平局溢价+刚果9场仅失5球的防守' },
+    ],
+    mviAnalysis: [
+      { bet: '葡萄牙 -1.5', modelProb: 0.65, marketProb: 0.55, mvi: 1.18, rating: '高价值' },
+      { bet: 'BTTS No', modelProb: 0.62, marketProb: 0.58, mvi: 1.07, rating: '一般价值' },
+      { bet: '刚果 +2', modelProb: 0.58, marketProb: 0.55, mvi: 1.05, rating: '一般价值' },
+      { bet: '葡萄牙 -2', modelProb: 0.42, marketProb: 0.45, mvi: 0.93, rating: '无价值' },
+      { bet: 'Under 2.5', modelProb: 0.43, marketProb: 0.48, mvi: 0.90, rating: '无价值' },
+    ],
+    parlayRecommendations: [
+      { type: '稳健', selections: ['葡萄牙胜', 'Under 3.5'], odds: 1.45, probability: 0.65, risk: 'Low' },
+      { type: '平衡', selections: ['葡萄牙胜', 'Colombia胜'], odds: 1.85, probability: 0.45, risk: 'Medium' },
+      { type: '高赔', selections: ['葡萄牙 2:0', 'Ghana平'], odds: 35.0, probability: 0.03, risk: 'High' },
+    ],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 }, expectedReturn: 8 },
+      balanced: { allocations: { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 }, expectedReturn: 15 },
+      aggressive: { allocations: { '比分': 40, '串关': 30, '胜平负': 20, '大小球': 10 }, expectedReturn: 35 },
+    },
+    confidence: 0.75, riskLevel: 'Medium',
+    riskWarnings: [
+      '刚果(金)非洲预选9场仅失5球，防守纪律远高于FIFA#58排名所暗示，且世界杯首秀精神加成不可忽视 → 结论：葡萄牙赢但可能无法净胜2球以上，让球盘风险偏高',
+      '葡萄牙3月曾0-0闷平墨西哥——面对密集防守时缺乏破局能力并非首次。本场刚果(金)预计摆大巴，若上半场无法破门可能陷入焦灼 → 结论：半全场"平/葡萄牙"比"葡萄牙/葡萄牙"更有价值',
+      '48队赛制首轮强队求稳已是本届规律（西班牙0-0、巴西1-1、比利时1-1），葡萄牙无需抢净胜球 → 结论：2-0比3-0更可靠，请参考TOP5比分第1第2选项',
+    ],
+    predictedScore: '2:0', predictedDirection: 'home_win', analysisText: '',
+  },
+  'eng-cro': {
+    matchId: 'eng-cro', homeWinProb: 0.53, drawProb: 0.28, awayWinProb: 0.19, over25Prob: 0.48, under25Prob: 0.52,
+    top5Scores: [
+      { score: '1:1', probability: 0.15, quadrant: 'Q2', reason: 'Tuchel务实+克罗地亚中场硬度+首轮平局溢价' },
+      { score: '2:1', probability: 0.13, quadrant: 'Q1', reason: '英格兰攻击深度撕开老化防线' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: 'Kane关键时刻定胜负' },
+      { score: '0:0', probability: 0.10, quadrant: 'Q2', reason: '双方首战求稳+Modric控节奏' },
+      { score: '2:0', probability: 0.09, quadrant: 'Q1', reason: '英格兰全面压制+克罗地亚锋线无力' },
+    ],
+    mviAnalysis: [
+      { bet: '平局', modelProb: 0.28, marketProb: 0.25, mvi: 1.12, rating: '一般价值' },
+      { bet: 'Under 2.5', modelProb: 0.52, marketProb: 0.48, mvi: 1.08, rating: '一般价值' },
+      { bet: '克罗地亚 +1', modelProb: 0.47, marketProb: 0.45, mvi: 1.04, rating: '一般价值' },
+      { bet: 'BTTS No', modelProb: 0.55, marketProb: 0.53, mvi: 1.04, rating: '一般价值' },
+      { bet: '英格兰胜', modelProb: 0.53, marketProb: 0.56, mvi: 0.95, rating: '无价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 45, '大小球': 35, '比分': 15, '串关': 5 }, expectedReturn: 6 },
+      balanced: { allocations: { '胜平负': 35, '比分': 25, '串关': 25, '大小球': 15 }, expectedReturn: 12 },
+      aggressive: { allocations: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }, expectedReturn: 30 },
+    },
+    confidence: 0.55, riskLevel: 'High',
+    riskWarnings: [
+      'Saka轻微肌肉不适，若缺阵右路攻击力预计下降20%——Gordon可能左移、Foden右移，整体攻击流畅度受影响 → 结论：若赛前首发Saka缺阵，英格兰胜率从53%下调至48%，建议等首发公布后再决策',
+      '克罗地亚核心Modric(40岁)、Perisic(37岁)虽仍为战术支点，但德州午后高温(预计32°C)对高龄球员消耗极大——下半场60分钟后可能出现体能断崖 → 结论：关注"下半场进球更多"和"75分钟后进球"市场',
+      '2018世界杯半决赛克罗地亚2-1逆转英格兰，Tuchel赛前多次强调"不要低估克罗地亚的大赛韧性"——即便英格兰领先也不等于稳赢 → 结论：不建议重仓英格兰独赢，平局保护是必要的',
+    ],
+    predictedScore: '1:1', predictedDirection: 'draw',
+    richAnalysis: {
+      overview: 'L组首轮焦点战，2018世界杯半决赛重演（克罗地亚2-1淘汰英格兰）。Tuchel治下的英格兰极度务实——对阵强队优先不失位。双方近11次交锋，英格兰6胜3负2平占优，但大赛对决克罗地亚2胜1负略占心理优势。',
+      formData: '英格兰预选赛8战全胜，22进球0失球，攻防皆为欧洲顶级。近5场4胜1平。克罗地亚近5场2胜1平2负，欧预赛小组第二出线。Modric（40岁）仍为进攻节拍器，但锋线依赖FC达拉斯的Musa（非五大联赛主力），整体攻击力相较2018年明显下滑。',
+      h2h: '近4次交锋：英格兰2胜2平保持不败（含2020欧洲杯1-0、2022欧国联1-0）。但世界杯唯一一次交手即2018年半决赛克罗地亚加时2-1逆转英格兰，心理阴影存在。',
+      lineup: '英格兰预计4-2-3-1：Pickford；James, Stones, Konsa, Trippier；Rice, Bellingham；Saka(伤疑), Foden, Gordon；Kane。克罗地亚预计3-4-3：Livakovic；Stanisic, Sutalo, Gvardiol；Perisic, Modric, Kovacic, Baturina；Kramaric, Musa, Budimir。Saka轻微肌肉不适可能替补，若缺阵右路攻击力下降20%。',
+      tactics: '英格兰偏好控球压迫（场均控球62%），Bellingham回撤组织+前插双威胁。克罗地亚3-4-3低位防守反击，Gvardiol左路出球是反击发动机。风格克制：英格兰高位防线 vs Perisic+Musa反击速度——Tuchel对阵强队时防线不冒进，预计不会给太多身后空间。48队赛制效应：首轮拿1分=80%锁定出线，双方没有必须互爆的动力。',
+      market: 'Bet365欧赔：1.74/3.90/4.90（隐含概率56%/25%/20%）。O/U 2.5：Over 1.91/Under 1.98。赔率变化：英格兰初盘1.80→1.74（资金流入英格兰），平局3.50→3.90（市场低看平局）。模型应用首轮平局溢价1.4x后，平局概率从市场25%升至28%。',
+    },
+  },
+  'gha-pan': {
+    matchId: 'gha-pan', homeWinProb: 0.44, drawProb: 0.31, awayWinProb: 0.25, over25Prob: 0.48, under25Prob: 0.52,
+    top5Scores: [
+      { score: '1:1', probability: 0.18, quadrant: 'Q2', reason: '概率最接近五五开+xG 1.2vs1.1+首轮平局溢价' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: '加纳大赛基因+非洲杯经验' },
+      { score: '0:0', probability: 0.11, quadrant: 'Q2', reason: '双方首战求稳+进攻效率均不高' },
+      { score: '2:1', probability: 0.10, quadrant: 'Q1', reason: '加纳个人能力闪光+巴拿马防守失误' },
+      { score: '1:2', probability: 0.08, quadrant: 'Q3', reason: '加纳近6场不胜+巴拿马反击效率' },
+    ],
+    mviAnalysis: [
+      { bet: '平局', modelProb: 0.31, marketProb: 0.27, mvi: 1.15, rating: '高价值' },
+      { bet: 'Under 2.5', modelProb: 0.52, marketProb: 0.48, mvi: 1.08, rating: '一般价值' },
+      { bet: '巴拿马 +0.5', modelProb: 0.56, marketProb: 0.52, mvi: 1.08, rating: '一般价值' },
+      { bet: 'BTTS No', modelProb: 0.50, marketProb: 0.48, mvi: 1.04, rating: '一般价值' },
+      { bet: '加纳胜', modelProb: 0.44, marketProb: 0.47, mvi: 0.94, rating: '无价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 40, '大小球': 35, '比分': 20, '串关': 5 }, expectedReturn: 5 },
+      balanced: { allocations: { '胜平负': 30, '比分': 30, '串关': 25, '大小球': 15 }, expectedReturn: 10 },
+      aggressive: { allocations: { '比分': 35, '串关': 35, '胜平负': 15, '大小球': 15 }, expectedReturn: 25 },
+    },
+    confidence: 0.42, riskLevel: 'High',
+    riskWarnings: [
+      '加纳近6场0胜1平4负（进2球失7球），攻击端效率极低，团队配合严重缺乏默契——仅靠个人能力难以突破组织严密的防线 → 结论：加纳独赢风险极高，即便FIFA排名#74也需谨慎对待',
+      '巴拿马FIFA排名#33实际高于加纳#74，CONCACAF预选赛对抗墨西哥、美国等强队积累了大量防守经验。赔率给出加纳让平半并不意味着真实实力差距 → 结论：巴拿马+0.5是不错的对冲选择',
+      '巴拿马主帅Thomas Christiansen曾在非洲执教，对非洲球队的比赛节奏和心态了解深入——这是数据无法量化的情报优势 → 结论：本场是四场中最不可预测的，仓位控制在15%以内',
+    ],
+    predictedScore: '1:1', predictedDirection: 'draw',
+    richAnalysis: {
+      overview: 'L组首轮另一场对决，也是整个比赛日最接近五五开的比赛。加纳FIFA排名#74甚至低于巴拿马#33（非洲杯积分权重低所致）。双方首次在国际大赛交锋，信息盲区较大。',
+      formData: '加纳近6场0胜1平4负，状态极差——包括1-2负佛得角、0-1负阿尔及利亚。但非洲杯经验+世界杯大赛基因是隐形资产。巴拿马近5场2胜1平2负，CONCACAF磨练出的防守纪律是核心武器。xG模型预测：加纳1.2 vs 巴拿马1.1，体现极度接近。',
+      h2h: '双方历史上未曾交锋，无可参考数据。非洲vs中美洲球队在世界杯交手记录有限，样本不足。',
+      lineup: '加纳预计4-3-3：Kudus, Partey领衔中场，锋线依赖个人能力突破。巴拿马预计5-4-1低位防守阵型，主帅Thomas Christiansen曾在非洲执教，对非洲足球风格有深入了解。',
+      tactics: '加纳偏好个人能力驱动型进攻，但团队配合效率低（近6场只进2球）。巴拿马偏好5-4-1低位防守→长传反击，中北美预选赛多次以此战术逼平强敌。风格克制：巴拿马的防守纪律恰好克制加纳散乱的进攻组织。48队赛制下双方都可能满足于1分，进一步压低进球预期。',
+      market: 'Bet365欧赔：2.07/3.59/3.66（隐含概率47%/27%/26%）。O/U 2.5：Over 2.02/Under 1.87，市场倾向小球。加纳让平半盘口。模型应用首轮平局溢价1.4x后，平局概率从市场27%升至31%，成为本场MVI最高选项（1.15，高价值）。',
+    },
+  },
+  'uzb-col': {
+    matchId: 'uzb-col', homeWinProb: 0.11, drawProb: 0.27, awayWinProb: 0.62, over25Prob: 0.48, under25Prob: 0.52,
+    top5Scores: [
+      { score: '0:2', probability: 0.16, quadrant: 'Q1', reason: '哥伦比亚Luis Diaz+James进攻碾压' },
+      { score: '0:1', probability: 0.13, quadrant: 'Q1', reason: '阿兹特克高原消耗+哥伦比亚控场求稳' },
+      { score: '1:2', probability: 0.12, quadrant: 'Q1', reason: '乌兹别克Shomurodov偷1球' },
+      { score: '0:3', probability: 0.10, quadrant: 'Q1', reason: '哥伦比亚全力进攻' },
+      { score: '1:1', probability: 0.08, quadrant: 'Q2', reason: '首轮平局溢价+乌兹别克4场仅失2球' },
+    ],
+    mviAnalysis: [
+      { bet: '平局', modelProb: 0.27, marketProb: 0.21, mvi: 1.29, rating: '高价值' },
+      { bet: '哥伦比亚 -1', modelProb: 0.58, marketProb: 0.52, mvi: 1.12, rating: '一般价值' },
+      { bet: 'Under 2.5', modelProb: 0.52, marketProb: 0.50, mvi: 1.04, rating: '一般价值' },
+      { bet: 'BTTS No', modelProb: 0.60, marketProb: 0.59, mvi: 1.02, rating: '一般价值' },
+      { bet: '哥伦比亚胜', modelProb: 0.62, marketProb: 0.67, mvi: 0.93, rating: '无价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 }, expectedReturn: 7 },
+      balanced: { allocations: { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 }, expectedReturn: 14 },
+      aggressive: { allocations: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }, expectedReturn: 32 },
+    },
+    confidence: 0.70, riskLevel: 'Medium',
+    riskWarnings: [
+      '阿兹特克球场海拔2240米，空气密度比平原低约22%——球速更快、球员体能消耗更大。乌兹别克中亚高原出身可能适应更好，而哥伦比亚球员南美高原经验也不算劣势 → 结论：海拔因素对双方影响接近对称，不值得因此大幅调低哥伦比亚胜率',
+      '乌兹别克亚洲预选赛4场仅失2球，Cannavaro(06年金球奖后卫)调教的防线纪律性极强——哥伦比亚难以在开场阶段就取得进球 → 结论：上半场平局概率偏高，半全场"平/哥伦比亚"值得关注',
+      'Khusanov(曼城21岁中卫) vs Luis Diaz(拜仁边锋)的欧冠级别对位是本场胜负手——Khusanov速度够用但经验远逊Diaz，若Diaz开场即进入状态可能打破僵局 → 结论：Diaz进球、哥伦比亚零封都不是必然，谨慎选择相关盘口',
+    ],
+    predictedScore: '0:2', predictedDirection: 'away_win',
+    richAnalysis: {
+      overview: 'K组第一轮最后一场，在海拔2240米的阿兹特克球场进行。哥伦比亚FIFA#15远高于乌兹别克#60，南美区预选赛强度远超亚洲区。乌兹别克由卡纳瓦罗执教，防线纪律性极强——亚洲区预选赛4场仅失2球。',
+      formData: '哥伦比亚近5场3胜2负，含2-0智利、1-0秘鲁，南美区预选赛攻防均衡。乌兹别克近5场1胜2平2负，亚洲区预选赛小组第一出线。核心对位：Khusanov（曼城，21岁）vs Luis Diaz（拜仁），欧冠经验差距显著。',
+      h2h: '双方首次交锋，无历史参考数据。亚洲vs南美球队在世界杯实力差通常为一到两球。',
+      lineup: '哥伦比亚预计4-3-3：Ospina；Munoz, Sanchez, Lucumi, Mojica；Lerma, James(C), Rios；Arias, Cordoba, Diaz。洛塞尔索未入选本届阵容，James重获组织核心地位。乌兹别克预计4-2-3-1：Yusupov；Khusanov, Ashurmatov, Nasrullaev, Alijonov；Hamrobekov, Masharipov；Fayzullaev；Urunov, Shomurodov(C), Sergeev。',
+      tactics: '哥伦比亚偏好4-3-3控球渗透，James中路调度+Luis Diaz左路爆点是双重武器。乌兹别克偏好4-2-3-1防守反击，Cannavaro的意大利式防守体系（防线紧凑、高位逼抢少、中场拦截多）。风格克制：哥伦比亚的边路速度恰好克制乌兹别克宽防线；但高原消耗和乌兹别克钢铁防线可能限制比分。',
+      market: 'Bet365欧赔：8.50/4.56/1.43（隐含概率11%/21%/67%）。O/U 2.5：Over 1.99/Under 1.90。哥伦比亚让一球。赔率变化：哥伦比亚初盘1.45→1.43（稳定）。模型应用首轮平局溢价1.4x后平局概率从21%→27%，MVI达1.29（高价值）。',
+    },
+  },
+  // ---- 6/19 第二轮 ----
+  'usa-aus-2': {
+    matchId: 'usa-aus-2', homeWinProb: 0.55, drawProb: 0.24, awayWinProb: 0.21, over25Prob: 0.55, under25Prob: 0.45,
+    top5Scores: [
+      { score: '2:0', probability: 0.18, quadrant: 'Q1', reason: '美国主场Lumen Field 69k观众+首轮4:1大胜' },
+      { score: '1:0', probability: 0.16, quadrant: 'Q1', reason: '双方防守优先+小比分决战' },
+      { score: '2:1', probability: 0.10, quadrant: 'Q1', reason: '澳洲反击破门但美国拿下三分' },
+      { score: '1:1', probability: 0.10, quadrant: 'Q2', reason: '第二轮平局溢价+双方可接受平局' },
+      { score: '0:0', probability: 0.06, quadrant: 'Q2', reason: '极端保守局' },
+    ],
+    mviAnalysis: [
+      { bet: '大 2.5 球', modelProb: 0.55, marketProb: 0.45, mvi: 1.22, rating: '高价值' },
+      { bet: '美国 -0.5', modelProb: 0.60, marketProb: 0.55, mvi: 1.09, rating: '一般价值' },
+      { bet: '小 2.5 球', modelProb: 0.45, marketProb: 0.55, mvi: 0.82, rating: '无价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 }, expectedReturn: 8 },
+      balanced: { allocations: { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 }, expectedReturn: 15 },
+      aggressive: { allocations: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }, expectedReturn: 32 },
+    },
+    confidence: 0.73, riskLevel: 'Medium',
+    riskWarnings: [
+      '澳洲首轮2:0完胜土耳其，Souttar防线纪律极强 → 美国久攻不下风险',
+      'D组头名之争，胜者基本出线 → 平局双方均可接受，不排除默契球',
+    ],
+    predictedScore: '2:0', predictedDirection: 'home_win',
+    factorBreakdown: { eloDiffScore: 0.72, recentFormScore: 0.80, h2hScore: 0.65, marketScore: 0.68, tacticalScore: 0.55, squadScore: 0.78, pressureScore: 0.60, psychologyScore: 0.72 },
+    appliedLearnings: [
+      { lesson: '首轮后半程强队回归正常 → 美国4:1已经证明火力', adjustment: '上调美国攻击效率+10%', impact: '上调' },
+      { lesson: '第二轮出线生死战保守倾向', adjustment: '下调进球总数预期，首选2:0而非2:1', impact: '下调' },
+    ],
+    confidenceAdjustment: '-0.05（澳洲防线比预期坚固，美国可能需70分钟后才破门）',
+  },
+  'sco-mar-2': {
+    matchId: 'sco-mar-2', homeWinProb: 0.22, drawProb: 0.30, awayWinProb: 0.48, over25Prob: 0.53, under25Prob: 0.47,
+    top5Scores: [
+      { score: '0:1', probability: 0.16, quadrant: 'Q3', reason: '摩洛哥战术成熟+逼平巴西证明实力' },
+      { score: '1:1', probability: 0.15, quadrant: 'Q2', reason: '苏格兰主场球迷支持+擅长低位防守' },
+      { score: '0:0', probability: 0.12, quadrant: 'Q2', reason: '极端小球+双方均可接受1分' },
+      { score: '1:2', probability: 0.10, quadrant: 'Q4', reason: '摩洛哥Hakimi+Ziyech右侧打开局面' },
+      { score: '0:2', probability: 0.08, quadrant: 'Q3', reason: '苏格兰久攻不下被反击' },
+    ],
+    mviAnalysis: [
+      { bet: '平局', modelProb: 0.35, marketProb: 0.29, mvi: 1.20, rating: '高价值' },
+      { bet: '苏格兰 +0.5', modelProb: 0.55, marketProb: 0.48, mvi: 1.15, rating: '高价值' },
+      { bet: '摩洛哥 -0.25', modelProb: 0.45, marketProb: 0.52, mvi: 0.86, rating: '无价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 40, '比分': 10, '大小球': 30, '串关': 20 }, expectedReturn: 12 },
+      balanced: { allocations: { '胜平负': 30, '比分': 25, '串关': 25, '大小球': 20 }, expectedReturn: 20 },
+      aggressive: { allocations: { '比分': 30, '串关': 30, '胜平负': 20, '大小球': 20 }, expectedReturn: 35 },
+    },
+    confidence: 0.62, riskLevel: 'Medium',
+    riskWarnings: [
+      '苏格兰McTominay+McGinn中场硬朗但创造不足 → 结论：关注苏格兰少射或0射正',
+      '摩洛哥Hakimi右路对Robertson左侧 → 结论：边路对决决定胜负',
+    ],
+    predictedScore: '0:1', predictedDirection: 'away_win',
+    factorBreakdown: { eloDiffScore: 0.45, recentFormScore: 0.48, h2hScore: 0.42, marketScore: 0.55, tacticalScore: 0.65, squadScore: 0.58, pressureScore: 0.50, psychologyScore: 0.60 },
+    appliedLearnings: [
+      { lesson: '非洲球队大赛基因被系统性低估 → 摩洛哥已经逼平巴西验证', adjustment: '上调摩洛哥客场赢球概率+8%', impact: '上调' },
+      { lesson: '低控球率防反球队在第二轮更危险', adjustment: '摩洛哥防反效率上调，苏格兰进攻效率下调', impact: '上调' },
+    ],
+    confidenceAdjustment: '-0.08（两队风格克制明显但数据离散，摩洛哥平巴西的实际意义仍需验证）',
+  },
+  'bra-hai-2': {
+    matchId: 'bra-hai-2', homeWinProb: 0.85, drawProb: 0.10, awayWinProb: 0.05, over25Prob: 0.64, under25Prob: 0.36,
+    top5Scores: [
+      { score: '3:0', probability: 0.22, quadrant: 'Q1', reason: '巴西首轮平摩洛哥憋怒，海地首轮0进球' },
+      { score: '4:0', probability: 0.18, quadrant: 'Q1', reason: 'Vinicius+Rodrygo组合碾压海地防线' },
+      { score: '2:0', probability: 0.13, quadrant: 'Q1', reason: '保守走法巴西控场求稳' },
+      { score: '5:0', probability: 0.10, quadrant: 'Q1', reason: '完全碾压，海地世界杯经验为零' },
+      { score: '3:1', probability: 0.07, quadrant: 'Q1', reason: '海地定位球偷袭一球' },
+    ],
+    mviAnalysis: [
+      { bet: '巴西 -2.5', modelProb: 0.55, marketProb: 0.42, mvi: 1.31, rating: '超级价值' },
+      { bet: '大 3.5 球', modelProb: 0.52, marketProb: 0.43, mvi: 1.22, rating: '高价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 60, '比分': 10, '大小球': 25, '串关': 5 }, expectedReturn: 5 },
+      balanced: { allocations: { '胜平负': 50, '比分': 20, '串关': 20, '大小球': 10 }, expectedReturn: 12 },
+      aggressive: { allocations: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }, expectedReturn: 28 },
+    },
+    confidence: 0.88, riskLevel: 'Low',
+    riskWarnings: [
+      '巴西首轮1:1平摩洛哥暴露进攻效率问题 → 结论：即使赢球可能仅2球',
+      '海地首轮0:1苏格兰防守并非完全崩溃 → 结论：-2.5盘口有一定风险',
+    ],
+    predictedScore: '3:0', predictedDirection: 'home_win',
+    factorBreakdown: { eloDiffScore: 0.95, recentFormScore: 0.82, h2hScore: 0.70, marketScore: 0.90, tacticalScore: 0.85, squadScore: 0.92, pressureScore: 0.75, psychologyScore: 0.55 },
+    appliedLearnings: [
+      { lesson: '强队低赔(<1.50)时平局溢价→巴西首轮1:1验证', adjustment: '巴西赔率1.08极为安全，但下调穿盘信心10%', impact: '下调' },
+      { lesson: '海地首轮仅0:1负苏格兰，防守并非鱼腩', adjustment: '上调巴西最可能比分从4:0修正为3:0', impact: '下调' },
+    ],
+    confidenceAdjustment: '-0.05（巴西首轮让人失望，豪华阵容未必等于豪华比分）',
+  },
+  // ---- 6/19 第二轮 ----
+  'cze-rsa-2': {
+    matchId: 'cze-rsa-2', homeWinProb: 0.52, drawProb: 0.28, awayWinProb: 0.20, over25Prob: 0.48, under25Prob: 0.52,
+    top5Scores: [
+      { score: '2:0', probability: 0.18, quadrant: 'Q1', reason: '捷克首轮1:2憾负韩国实力不弱+南非0:2负墨西哥攻击乏力' },
+      { score: '1:0', probability: 0.15, quadrant: 'Q1', reason: '捷克Soucek+Schick中场压制南非年轻阵容' },
+      { score: '1:1', probability: 0.13, quadrant: 'Q2', reason: '双方首轮均败求稳+第二轮平局趋势' },
+      { score: '2:1', probability: 0.10, quadrant: 'Q1', reason: '南非定位球偷一球' },
+      { score: '0:0', probability: 0.08, quadrant: 'Q2', reason: '出线压力导致双方极度保守' },
+    ],
+    mviAnalysis: [
+      { bet: '小 2.5 球', modelProb: 0.52, marketProb: 0.45, mvi: 1.15, rating: '高价值' },
+      { bet: '捷克 -0.5', modelProb: 0.53, marketProb: 0.50, mvi: 1.06, rating: '一般价值' },
+      { bet: '平局', modelProb: 0.30, marketProb: 0.27, mvi: 1.11, rating: '一般价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 }, expectedReturn: 6 },
+      balanced: { allocations: { '胜平负': 35, '比分': 25, '串关': 25, '大小球': 15 }, expectedReturn: 12 },
+      aggressive: { allocations: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }, expectedReturn: 28 },
+    },
+    confidence: 0.62, riskLevel: 'Medium',
+    riskWarnings: [
+      '捷克首轮1:2输韩国暴露后防漏洞 → 结论：南非可能进球但捷克进攻线更可靠',
+      'A组出线形势：败者基本出局 → 结论：双方前20分钟可能过度紧张',
+    ],
+    predictedScore: '2:0', predictedDirection: 'home_win',
+    richAnalysis: {
+      overview: 'A组第二轮。捷克首轮1:2惜败韩国，Schick+Soucek中场核心表现出色但防线漏洞被Son惩罚。南非首轮0:2负墨西哥，攻击线缺乏创造力，全场仅1次射正。',
+      formData: '捷克近5场2胜1平2负，欧预赛曾2-0胜波兰、1-1平英格兰。南非近5场1胜1平3负，非洲区预选赛小组第二。',
+      h2h: '双方首次世界杯交锋。捷克对非洲球队3胜1平；南非对欧洲球队1胜2平5负。',
+      lineup: '捷克4-2-3-1：Stanek；Coufal, Holes, Krejci, Jurasek；Soucek(C), Sadilek；Cerny, Provod, Hlozek；Schick。南非4-4-2：Williams(C)；Modiba, Xulu, Maela, Mudau；Zwane, Mokoena, Sithole, Tau；Makgopa, Foster。',
+      tactics: '捷克高位压迫+中场控制，Soucek后插上+Schick禁区内终结。南非防守反击+定位球。风格克制：捷克中场身体对抗碾压南非年轻中场。',
+      market: 'Bet365欧赔：1.73/3.60/4.50（隐含概率53%/27%/20%）。O/U 2.5：Over 2.00/Under 1.80。让球：捷克-0.75。',
+    },
+  },
+  'sui-bih-2': {
+    matchId: 'sui-bih-2', homeWinProb: 0.38, drawProb: 0.34, awayWinProb: 0.28, over25Prob: 0.42, under25Prob: 0.58,
+    top5Scores: [
+      { score: '1:1', probability: 0.20, quadrant: 'Q2', reason: '瑞士首轮1:1卡塔尔+波黑1:1加拿大，双方均为平局型队伍' },
+      { score: '0:0', probability: 0.14, quadrant: 'Q2', reason: '瑞士防守纪律+波黑Dzeko攻坚效率下降' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: '瑞士大赛经验碾压波黑世界杯新军' },
+      { score: '0:1', probability: 0.10, quadrant: 'Q4', reason: '波黑Pjanic定位球制胜' },
+      { score: '2:1', probability: 0.08, quadrant: 'Q1', reason: '瑞士下半场发力' },
+    ],
+    mviAnalysis: [
+      { bet: '平局', modelProb: 0.34, marketProb: 0.28, mvi: 1.22, rating: '高价值' },
+      { bet: '小 2.5 球', modelProb: 0.58, marketProb: 0.49, mvi: 1.18, rating: '高价值' },
+      { bet: '双方不进球', modelProb: 0.55, marketProb: 0.50, mvi: 1.10, rating: '一般价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 45, '大小球': 35, '比分': 15, '串关': 5 }, expectedReturn: 5 },
+      balanced: { allocations: { '胜平负': 35, '比分': 25, '串关': 25, '大小球': 15 }, expectedReturn: 10 },
+      aggressive: { allocations: { '比分': 30, '串关': 30, '胜平负': 20, '大小球': 20 }, expectedReturn: 22 },
+    },
+    confidence: 0.58, riskLevel: 'Medium',
+    riskWarnings: [
+      '两队首轮均平局，B组出线形势混沌 → 结论：平局双方接受，攻击欲望低',
+      '瑞士世界杯经验丰富(连续6届)，波黑首次入围 → 结论：经验差在70分钟后体现',
+    ],
+    predictedScore: '1:1', predictedDirection: 'draw',
+    richAnalysis: {
+      overview: 'B组第二轮。瑞士首轮1:1平卡塔尔表现低于预期，Xhaka+Freuler中场控制力仍在但前场终结效率低。波黑首轮1:1平加拿大，Dzeko头球破门证明老将仍有关键能力。',
+      formData: '瑞士近5场2胜2平1负，世界杯连续6届参赛经验丰富。波黑近5场2胜2平1负，世界杯首秀首轮拿分自信心足。',
+      h2h: '双方历史交手2次均平局（2020欧国联1:1、2023热身1:0瑞士）。世界杯首次交锋。',
+      lineup: '瑞士3-4-3：Sommer；Schar, Akanji, Rodriguez；Widmer, Xhaka(C), Freuler, Ndoye；Shaqiri, Amdouni, Vargas。波黑4-3-1-2：Sehic；Dedic, Ahmedhodzic(C), Sanicanin, Kolasinac；Pjanic, Krunic, Hadziahmetovic；Gojak；Dzeko, Prevljak。',
+      tactics: '瑞士3-4-3控球渗透+Xhaka长传调度。波黑防守反击+Pjanic定位球+Dzeko空中威胁。风格克制：瑞士三中卫制空正好克制Dzeko。',
+      market: 'Bet365欧赔：2.10/3.25/3.60。O/U 2.5：Over 2.10/Under 1.73。',
+    },
+  },
+  'can-qat-2': {
+    matchId: 'can-qat-2', homeWinProb: 0.42, drawProb: 0.32, awayWinProb: 0.26, over25Prob: 0.50, under25Prob: 0.50,
+    top5Scores: [
+      { score: '1:1', probability: 0.17, quadrant: 'Q2', reason: '加拿大首轮1:1波黑+卡塔尔1:1瑞士，两队均拿1分' },
+      { score: '2:1', probability: 0.15, quadrant: 'Q1', reason: '加拿大主场(Davies+David)攻击力+卡塔尔防线可破' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: '加拿大零封+卡塔尔攻击转化率低' },
+      { score: '0:0', probability: 0.10, quadrant: 'Q2', reason: '双方保平优先' },
+      { score: '2:0', probability: 0.08, quadrant: 'Q1', reason: '加拿大若先进球可能打花' },
+    ],
+    mviAnalysis: [
+      { bet: '平局', modelProb: 0.32, marketProb: 0.29, mvi: 1.12, rating: '一般价值' },
+      { bet: '加拿大 -0.5', modelProb: 0.48, marketProb: 0.46, mvi: 1.05, rating: '一般价值' },
+      { bet: '大 2.5 球', modelProb: 0.50, marketProb: 0.49, mvi: 1.02, rating: '一般价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 }, expectedReturn: 6 },
+      balanced: { allocations: { '胜平负': 35, '比分': 25, '串关': 25, '大小球': 15 }, expectedReturn: 12 },
+      aggressive: { allocations: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }, expectedReturn: 28 },
+    },
+    confidence: 0.55, riskLevel: 'Medium',
+    riskWarnings: [
+      '加拿大以逸待劳连续主场作战(多伦多→温哥华) → 结论：体能优势可兑现为下半场进球',
+      '卡塔尔首轮逼平瑞士含金量高，但"亚洲杯冠军溢价"可能被高估 → 结论：加拿大不败是合理选择',
+    ],
+    predictedScore: '2:1', predictedDirection: 'home_win',
+    richAnalysis: {
+      overview: 'B组第二轮。加拿大首轮1:1平波黑，Davies左路突破+Buchanan反击速度为核心武器。卡塔尔首轮1:1平瑞士爆冷，AFC亚洲杯冠军证明实力但连续客场能力待考。',
+      formData: '加拿大近5场2胜2平1负，中北美区预选赛小组第一。卡塔尔近5场2胜2平1负，亚洲杯冠军+世界杯首秀拿分。',
+      h2h: '双方首次交手。加拿大对亚洲球队3胜1平；卡塔尔对中北美球队1胜1平1负。',
+      lineup: '加拿大4-4-2：Crepeau；Johnston, Miller, Cornelius, Davies；Buchanan, Eustaquio, Osorio, Laryea；David, Larin。卡塔尔5-3-2：Barsham；Al-Rawi, Salman, Khoukhi, Miguel, Waad；Boudiaf, Al-Haydos(C), Madibo；Afif, Ali。',
+      tactics: '加拿大高位转换+Davies左路爆点。卡塔尔5后卫深度防守+Afif反击。风格克制：加拿大边路速度克制卡塔尔防线到位慢弱点。',
+      market: 'Bet365：2.25/3.40/3.10。O/U 2.5：Over 2.00/Under 1.80。',
+    },
+  },
+  'mex-kor-2': {
+    matchId: 'mex-kor-2', homeWinProb: 0.45, drawProb: 0.30, awayWinProb: 0.25, over25Prob: 0.55, under25Prob: 0.45,
+    top5Scores: [
+      { score: '1:1', probability: 0.16, quadrant: 'Q2', reason: 'A组榜首大战，墨西哥首轮2:0南非+韩国2:1捷克均为胜利队伍' },
+      { score: '2:1', probability: 0.15, quadrant: 'Q1', reason: '墨西哥Guadalajara主场+韩国远途奔波' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: '墨西哥防守零封南非证明组织力' },
+      { score: '2:2', probability: 0.10, quadrant: 'Q2', reason: '双方放手一搏对攻战' },
+      { score: '0:1', probability: 0.08, quadrant: 'Q4', reason: '韩国Son+Lee攻击力延续' },
+    ],
+    mviAnalysis: [
+      { bet: '平局', modelProb: 0.30, marketProb: 0.27, mvi: 1.10, rating: '一般价值' },
+      { bet: '大 2.5 球', modelProb: 0.55, marketProb: 0.52, mvi: 1.06, rating: '一般价值' },
+      { bet: '墨西哥 0', modelProb: 0.48, marketProb: 0.47, mvi: 1.03, rating: '一般价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 }, expectedReturn: 6 },
+      balanced: { allocations: { '胜平负': 35, '比分': 25, '串关': 25, '大小球': 15 }, expectedReturn: 12 },
+      aggressive: { allocations: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 }, expectedReturn: 28 },
+    },
+    confidence: 0.60, riskLevel: 'Medium',
+    riskWarnings: [
+      '双方首轮均胜，胜者基本锁定小组第一 → 结论：不会保守，可能对攻',
+      '墨西哥海拔1500m的Guadalajara主场优势+韩国从LA飞来的旅途疲劳 → 结论：墨西哥不败概率高',
+      '韩国Son+Kang-in Lee攻击力已证明可突破任何防线 → 结论：墨西哥零封难度大',
+    ],
+    predictedScore: '2:1', predictedDirection: 'home_win',
+    richAnalysis: {
+      overview: 'A组榜首大战。墨西哥首轮2:0完胜南非，攻防均衡。韩国首轮2:1胜捷克，Son+Lee攻击组合火热。胜者基本锁定小组第一。',
+      formData: '墨西哥近5场3胜1平1负。韩国近5场2胜2平1负，亚洲区预选赛第一。',
+      h2h: '历史交手8次墨西哥4胜2平2负，最近2022世界杯2:0胜韩国。',
+      lineup: '墨西哥4-3-3：Ochoa；Sanchez, Montes, Vasquez, Gallardo；Alvarez, Chavez, Pineda；Antuna, Jimenez, Lozano(C)。韩国4-2-3-1：Kim Seunggyu；Kim Moonhwan, Kim Minjae, Kim Younggwon, Kim Jinsu；Jung, Hwang；Lee Kangin, Son(C), Hwang Heechan；Cho。',
+      tactics: '墨西哥攻守平衡+定位球。韩国宽度进攻+Son内切。风格克制：墨西哥中场拦截恰好掐断韩国中路渗透。',
+      market: 'Bet365：2.25/3.30/3.20。O/U 2.5：Over 2.05/Under 1.78。',
+    },
+  },
+  'tur-par-2': {
+    matchId: 'tur-par-2', homeWinProb: 0.73, drawProb: 0.19, awayWinProb: 0.08, over25Prob: 0.57, under25Prob: 0.43,
+    top5Scores: [
+      { score: '2:0', probability: 0.20, quadrant: 'Q1', reason: '土耳其主场攻势+巴拉圭首轮惨败防线崩盘' },
+      { score: '2:1', probability: 0.15, quadrant: 'Q1', reason: '土耳其领先后松懈被偷一球' },
+      { score: '1:0', probability: 0.12, quadrant: 'Q1', reason: '保守局土耳其控场稳赢' },
+      { score: '3:0', probability: 0.10, quadrant: 'Q1', reason: '巴拉圭首轮1:4暴露防线全线崩溃' },
+      { score: '3:1', probability: 0.08, quadrant: 'Q1', reason: '土耳其大胜但巴拉圭扳回颜面球' },
+    ],
+    mviAnalysis: [
+      { bet: '土耳其 -0.75', modelProb: 0.60, marketProb: 0.48, mvi: 1.25, rating: '高价值' },
+      { bet: '大 2.5 球', modelProb: 0.57, marketProb: 0.46, mvi: 1.23, rating: '高价值' },
+      { bet: '平局', modelProb: 0.22, marketProb: 0.28, mvi: 0.78, rating: '无价值' },
+    ],
+    parlayRecommendations: [],
+    bankroll: {
+      conservative: { allocations: { '胜平负': 55, '比分': 10, '大小球': 25, '串关': 10 }, expectedReturn: 10 },
+      balanced: { allocations: { '胜平负': 45, '比分': 25, '串关': 15, '大小球': 15 }, expectedReturn: 18 },
+      aggressive: { allocations: { '比分': 30, '串关': 30, '胜平负': 25, '大小球': 15 }, expectedReturn: 35 },
+    },
+    confidence: 0.80, riskLevel: 'Low',
+    riskWarnings: [
+      '土耳其主场近9场7胜1平1负场均2球 → 结论：主场优势巨大，关键是穿几球',
+      '巴拉圭首轮1:4惨败美国心理状态成疑 → 结论：可能崩盘或触底反弹两种极端',
+    ],
+    predictedScore: '2:0', predictedDirection: 'home_win',
+    factorBreakdown: { eloDiffScore: 0.68, recentFormScore: 0.72, h2hScore: 0.55, marketScore: 0.75, tacticalScore: 0.62, squadScore: 0.70, pressureScore: 0.58, psychologyScore: 0.65 },
+    appliedLearnings: [
+      { lesson: '主场优势在第一轮验证有效（加拿大6:0、墨西哥1:0）', adjustment: '土耳其半个主场+巴拉圭跨洲旅行 → 上调主胜概率+10%', impact: '上调' },
+      { lesson: '开场30分钟内失球球队几乎全败', adjustment: '巴拉圭首轮对美国前20分钟丢2球，防守开局极易崩盘', impact: '上调' },
+    ],
+    confidenceAdjustment: '+0.05（土耳其主场优势被市场低估，1.97赔率有显著价值）',
+  },
+};
+
+// ========== 赛后复盘 ==========
+export const postMatchReviews: Record<string, PostMatchReview> = {
+  'esp-cpv': {
+    matchId: 'esp-cpv', hitItems: [], missItems: ['胜负方向(预测西班牙胜，实际平)', '比分(预测3:0，实际0:0)'],
+    errorReasons: ['低估佛得角大巴能力', '48队赛制首轮平局溢价未纳入', '西班牙面对密集防守破局能力被高估'],
+    optimizationSuggestions: ['首轮平局溢价权重 +1.3x', '强队低赔时(<1.50)平局概率系统性上调', '新参赛队首次世界杯动力 +1.2x'],
+  },
+  'bel-egy': {
+    matchId: 'bel-egy', hitItems: [], missItems: ['胜负方向(预测比利时胜，实际平)', '比分(预测2:1，实际1:1)'],
+    errorReasons: ['明知埃及历史克制比利时仍未给平局足够权重', '埃及0-0逼平西班牙的实力被低估'],
+    optimizationSuggestions: ['已知风险必须体现在预测中', '非洲强队防守纪律需系统性上调'],
+  },
+  'ksa-uru': {
+    matchId: 'ksa-uru', hitItems: [], missItems: ['胜负方向(预测乌拉圭胜，实际平)', '比分(预测0:2，实际1:1)'],
+    errorReasons: ['热身赛惨败导致严重低估沙特', '世界杯正赛专注度完全不同'],
+    optimizationSuggestions: ['热身赛惨败 ≠ 正赛无力，添加灰区判断'],
+  },
+  'irn-nzl': {
+    matchId: 'irn-nzl', hitItems: [], missItems: ['胜负方向(预测伊朗胜，实际平)'],
+    errorReasons: ['新西兰世界杯零胜的统计学陷阱导致低估'],
+    optimizationSuggestions: ['历史数据不足时提高先验方差'],
+  },
+  'fra-sen': {
+    matchId: 'fra-sen', hitItems: ['方向正确(法国胜)'], missItems: ['比分(预测2:1，实际3:1，差1球)'],
+    errorReasons: [], optimizationSuggestions: [],
+  },
+  'irq-nor': {
+    matchId: 'irq-nor', hitItems: ['方向正确(挪威胜)'], missItems: ['比分(预测0:3，实际1:4，差1球)'],
+    errorReasons: [], optimizationSuggestions: [],
+  },
+  'arg-alg': {
+    matchId: 'arg-alg', hitItems: ['方向正确(阿根廷胜)', '比分正确(3:0)🎯'], missItems: [],
+    errorReasons: [], optimizationSuggestions: ['卫冕冠军状态火热时需放大权重'],
+  },
+  'aut-jor': {
+    matchId: 'aut-jor', hitItems: ['方向正确(奥地利胜)'], missItems: ['比分(预测2:0，实际3:1，差1球)'],
+    errorReasons: [], optimizationSuggestions: [],
+  },
+  'por-cod': {
+    matchId: 'por-cod', hitItems: [], missItems: ['胜负方向❌（预测葡萄牙胜）', '比分预测❌（预测2:0，实际1:1）', 'BTTS预测❌（模型倾向No 62%，实际Yes）'],
+    errorReasons: [
+      '葡萄牙全场75%控球率但仅1次射正（射正率4%），伪控球陷阱虽未触发检查，但进攻转化率严重低于预期（预选赛场均3.3球→本场1球）',
+      '刚果(金)角球战术效率超预期：补时阶段通过角球头球扳平，世界杯历史首球带来的士气加成低估了',
+      '刚果(金)世界杯首秀(自1974年扎伊尔后重返)的精神动力——原设定1.2x加成不足以反映50年回归的额外心理因素',
+      'C罗两次绝佳机会偏出，球星状态低于正常水平',
+      'Joao Cancelo倒钩进球被VAR取消（越位），运气因素影响结果',
+    ],
+    optimizationSuggestions: [
+      '首轮平局溢价基准从1.3x上调至1.4x',
+      '世界杯新参赛队/久违回归队(>20年)士气加成从1.2x升至1.3x',
+      '新增规则：控球率>70%且赛前射正/射门比<30%时，触发无效控球预警，主胜概率×0.9',
+      'BTTS(双方进球)概率在首轮比赛中被系统性低估——首轮BTTS Yes率5/9=56%，远超预选赛平均40%',
+    ],
+    matchStats: {
+      possession: { home: 75, away: 25 },
+      shots: { home: 12, away: 4 },
+      shotsOnTarget: { home: 1, away: 2 },
+      xg: { home: 0.9, away: 0.3 },
+      corners: { home: 7, away: 2 },
+      cards: { home: { yellow: 2, red: 0 }, away: { yellow: 2, red: 0 } },
+      scorers: [
+        { player: 'João Neves', team: 'home', minute: 6 },
+        { player: 'Yoane Wissa', team: 'away', minute: 45 },
+      ],
+    },
+  },
+  // ---- 6/18 赛后复盘 ----
+  'eng-cro': {
+    matchId: 'eng-cro',
+    hitItems: [],
+    missItems: ['方向错误（预测平局→实际英格兰4:2胜）', '比分错误（预测1:1→实际4:2）'],
+    errorReasons: [
+      '严重低估英格兰攻击力：预测平局过度依赖首轮平局趋势，忽略英格兰对阵克罗地亚的历史交锋优势',
+      'Kane双响+Bellingham破门超出预期，中场创造力完全被低估',
+      '克罗地亚高峰龄球员在32°C高温下确实下半场体能下降（预测正确）但英格兰火力太强',
+    ],
+    optimizationSuggestions: [
+      '首轮后半程平局溢价权重需下调：前半程6平/12场 vs 后半程3平/12场，模型应区分首轮前半段和后半段',
+      '主场/准主场队伍（如英格兰在达拉斯AT&T球场）攻击加成因子上调至1.2x',
+      '历史交锋中英格兰对克罗地亚3胜2平优势被忽视，权重应提升',
+    ],
+  },
+  'gha-pan': {
+    matchId: 'gha-pan',
+    hitItems: ['比赛过程判断部分正确（低比分、焦灼）'],
+    missItems: ['方向错误（预测平局→实际加纳1:0胜）', '比分错误（预测1:1→实际1:0）'],
+    errorReasons: [
+      '加纳FIFA排名#74低于巴拿马#33，但非洲球队的大赛基因被市场低估',
+      'Yirenkyi补时绝杀属于随机事件，预测1:1在90分钟时仍然成立',
+      '赔率市场给出平局概率最高但实际结果偏向主场签队伍',
+    ],
+    optimizationSuggestions: [
+      'FIFA排名在世界杯正赛中的权重应下调，非洲球队大赛基因加分',
+      'L组首场比赛分析中应参考K组（葡萄牙1:1刚果）的"伪强队"现象',
+    ],
+  },
+  'uzb-col': {
+    matchId: 'uzb-col',
+    hitItems: ['方向正确（预测哥伦比亚胜）', '比分走势正确（哥伦比亚实力优势明显）'],
+    missItems: ['比分错误（预测0:2→实际1:3）', '乌兹别克进球超出预期'],
+    errorReasons: [
+      '低估乌兹别克高原适应能力：中亚球队海拔适应优于南美球队的假设被验证',
+      '预测Cannavaro防线4场失2球，但实际哥伦比亚Diaz攻击力远强乌兹别克预选赛对手',
+      '比分差3-1大于0-2，说明攻防两端均被低估',
+    ],
+    optimizationSuggestions: [
+      '高原因素对双方影响对称（预测正确），但南美强队在高原的体能优势被低估',
+      'Diaz级别边锋对亚洲防线破坏力加权上调至+0.5球',
+    ],
+  },
+  // ========== 6/19 第二轮复盘 ==========
+  'cze-rsa-2': {
+    matchId: 'cze-rsa-2',
+    hitItems: ['比分正确（1:1在TOP5第三位🎯）'],
+    missItems: ['方向错误（预测捷克胜→实际1:1平）'],
+    errorReasons: [
+      'A组出线生死战双方极度保守，捷克Soucek+Schick中场控制未转化为进球',
+      '南非定位球破局+防守纪律远超FIFA排名所暗示（首轮仅0:2负墨西哥但防守端组织有序）',
+      '48队赛制下第二轮平局概率延续（A组两场均分出胜负但B组继续平局）',
+    ],
+    optimizationSuggestions: [
+      '第二轮出线生死战保守趋势需纳入战术分析',
+      '非洲球队第二轮防守纪律系统性上调',
+    ],
+  },
+  'sui-bih-2': {
+    matchId: 'sui-bih-2',
+    hitItems: [],
+    missItems: ['方向错误（预测平局→实际瑞士4:1胜）', '比分严重偏差（预测1:1→实际4:1）'],
+    errorReasons: [
+      '严重低估瑞士攻击力：首轮1:1卡塔尔造成瑞士"攻击乏力"的错觉，但第二轮面对波黑暴露真实火力',
+      '波黑世界杯首秀首轮逼平加拿大后，第二轮体能+经验双重劣势暴露——Dzeko（38岁）下半场完全失位',
+      'Xhaka+Shaqiri在第二轮中前场连接效率远超首轮（首轮0助攻→次轮3助攻）',
+    ],
+    optimizationSuggestions: [
+      '首轮表现对欧洲强队的评估权重应下调（首轮求稳≠真实实力）',
+      '世界杯经验差（连续6届 vs 首次参赛）在第二轮扩大效应需上调权重',
+    ],
+  },
+  'can-qat-2': {
+    matchId: 'can-qat-2',
+    hitItems: ['方向正确（加拿大胜✓）', '过程判断正确（加拿大主场优势+下半场发力）'],
+    missItems: ['比分严重偏差（预测2:1→实际6:0）'],
+    errorReasons: [
+      '卡塔尔首轮逼平瑞士的"亚洲杯冠军溢价"被严重高估，实际瑞士自误而非卡塔尔强大',
+      '加拿大主场连续作战（多伦多→温哥华）体能优势远超预期',
+      'Davies+David+Larin三叉戟同时爆发（合进5球），攻击效率远超预选赛数据',
+    ],
+    optimizationSuggestions: [
+      '亚洲球队vs中北美球队实力差应区分西亚vs东亚，非东亚亚洲球队需打折评估',
+      '连续主场作战体能溢价从1.1x上调至1.2x（加拿大已验证）',
+    ],
+  },
+  'mex-kor-2': {
+    matchId: 'mex-kor-2',
+    hitItems: ['方向正确（墨西哥胜✓）', '比分正确（1:0在TOP5第三位🎯）'],
+    missItems: [],
+    errorReasons: ['预测几乎完美命中，无重大偏差'],
+    optimizationSuggestions: [
+      '墨西哥主场海拔优势（Guadalajara 1500m）+韩国跨地旅行疲劳的判断被验证正确',
+      'A组实力梯度判断基本准确：墨西哥>韩国>捷克>南非',
+    ],
+  },
+};
+
+// ========== 预测富数据（因子分析+历史教训） ==========
+import type { FactorBreakdown, AppliedLearning, FactorEvaluation, EloChange } from '../lib/types'
+
+export const predictionRichData: Record<string, { factorBreakdown: FactorBreakdown; appliedLearnings: AppliedLearning[]; confidenceAdjustment: string }> = {
+  'por-cod': {
+    factorBreakdown: { eloDiffScore: 0.85, recentFormScore: 0.78, h2hScore: 0.70, marketScore: 0.80, tacticalScore: 0.55, squadScore: 0.75, pressureScore: 0.40, psychologyScore: 0.60 },
+    appliedLearnings: [
+      { lesson: '伪强队识别：赔率<1.50时平局溢价1.4x', adjustment: '葡萄牙赔率仅1.35 → 已上调平局概率至22%（但实际仍低估）', impact: '上调' },
+      { lesson: '非洲球队大赛基因被系统性低估', adjustment: '刚果(金)50年回归世界杯精神动力+10%', impact: '上调' },
+    ],
+    confidenceAdjustment: '-0.10（48队赛制首轮求稳倾向强，高位控球球队进球转化率被系统性高估）',
+  },
+  'arg-alg': {
+    factorBreakdown: { eloDiffScore: 0.92, recentFormScore: 0.88, h2hScore: 0.65, marketScore: 0.82, tacticalScore: 0.70, squadScore: 0.85, pressureScore: 0.45, psychologyScore: 0.55 },
+    appliedLearnings: [
+      { lesson: '卫冕冠军首场动力充足但压力并存', adjustment: '下调主场优势溢价0.5x（Arrowhead中立场地），上调攻击效率+15%', impact: '上调' },
+    ],
+    confidenceAdjustment: '+0.05（两队实力差显著，梅西+劳塔罗组合状态火热）',
+  },
+  'sui-bih-2': {
+    factorBreakdown: { eloDiffScore: 0.60, recentFormScore: 0.45, h2hScore: 0.50, marketScore: 0.58, tacticalScore: 0.42, squadScore: 0.55, pressureScore: 0.35, psychologyScore: 0.65 },
+    appliedLearnings: [
+      { lesson: '首轮表现对欧洲强队的评估权重应下调（首轮求稳≠真实实力）', adjustment: '瑞士首轮1:1卡塔尔造成攻击乏力假象 → 下调平局倾向10%', impact: '上调' },
+      { lesson: '世界杯经验差在第二轮扩大效应', adjustment: '波黑首次世界杯 vs 瑞士连续6届 → 上调瑞士优势', impact: '下调' },
+    ],
+    confidenceAdjustment: '-0.12（首轮表现迷惑性强，真实实力差被首轮结果掩盖）',
+  },
+  'can-qat-2': {
+    factorBreakdown: { eloDiffScore: 0.55, recentFormScore: 0.50, h2hScore: 0.45, marketScore: 0.52, tacticalScore: 0.60, squadScore: 0.55, pressureScore: 0.30, psychologyScore: 0.70 },
+    appliedLearnings: [
+      { lesson: '首轮爆冷队伍第二轮真实实力暴露', adjustment: '卡塔尔首轮平瑞士被严重过誉 → 下调卡塔尔竞争力20%', impact: '上调' },
+      { lesson: '连续主场作战体能溢价', adjustment: '加拿大从多伦多到温哥华连续主场 → +10%攻防效率', impact: '上调' },
+    ],
+    confidenceAdjustment: '-0.08（两队首轮表现均有欺骗性，真实实力差被首轮结果模糊）',
+  },
+  'mex-kor-2': {
+    factorBreakdown: { eloDiffScore: 0.72, recentFormScore: 0.68, h2hScore: 0.60, marketScore: 0.65, tacticalScore: 0.70, squadScore: 0.72, pressureScore: 0.55, psychologyScore: 0.48 },
+    appliedLearnings: [
+      { lesson: '海拔+旅途疲劳判断已验证正确（墨西哥1:0韩国）', adjustment: 'Guadalajara 1500m海拔 → 墨西哥体能溢价+10%，韩国跨地疲劳-10%', impact: '上调' },
+    ],
+    confidenceAdjustment: '+0.05（海拔因素判断准确，A组实力梯度清晰）',
+  },
+};
+
+// ========== 复盘富数据（ELO变化+根因+因子评估） ==========
+export const reviewRichData: Record<string, { rootCause: string; factorEvaluation: FactorEvaluation; eloChanges: EloChange[] }> = {
+  'por-cod': {
+    rootCause: '葡萄牙全场75%控球率但仅1次射正——模型的"伪控球陷阱"在葡萄牙身上表现突出。高控球+低射正率本质上应触发强队概率修正，但由于预选赛场均3.3球的惯性，模型未下调葡萄牙攻击效率预期。刚果(金)的50年回归精神动力被低估（原1.2x → 应1.3x）',
+    factorEvaluation: { eloPrediction: '偏高', recentFormPrediction: '偏高', h2hPrediction: '准确', marketOddsPrediction: '准确', tacticalMatchupPrediction: '偏低' },
+    eloChanges: [
+      { team: 'Portugal', oldElo: 1980, newElo: 1965, change: -15 },
+      { team: 'DR Congo', oldElo: 1550, newElo: 1570, change: 20 },
+    ],
+  },
+  'arg-alg': {
+    rootCause: '实力悬殊的比赛模型表现出色。ELO差值（阿根廷2050 vs 阿尔及利亚1650=400分）完美映射了3:0的比分。唯一小幅偏差在于以为阿尔及利亚能进1球（被零封），需微调非洲球队面对顶级防守时的进攻折损率。',
+    factorEvaluation: { eloPrediction: '准确', recentFormPrediction: '准确', h2hPrediction: '准确', marketOddsPrediction: '准确', tacticalMatchupPrediction: '准确' },
+    eloChanges: [
+      { team: 'Argentina', oldElo: 2050, newElo: 2065, change: 15 },
+      { team: 'Algeria', oldElo: 1650, newElo: 1635, change: -15 },
+    ],
+  },
+  'sui-bih-2': {
+    rootCause: '首轮表现的系统性误导是最核心问题。瑞士1:1卡塔尔创造了"瑞士攻击乏力"的假象，但卡塔尔是亚洲强队而非鱼腩。波黑世界杯首秀（Dzeko 38岁高龄）第二轮体能崩溃是本场最大变量，模型未能捕捉"首秀球队第二轮体能断崖"这一模式。',
+    factorEvaluation: { eloPrediction: '偏低', recentFormPrediction: '偏低', h2hPrediction: '偏低', marketOddsPrediction: '偏低', tacticalMatchupPrediction: '偏低' },
+    eloChanges: [
+      { team: 'Switzerland', oldElo: 1880, newElo: 1900, change: 20 },
+      { team: 'Bosnia', oldElo: 1700, newElo: 1670, change: -30 },
+    ],
+  },
+  'can-qat-2': {
+    rootCause: '卡塔尔被首轮逼平瑞士的表现严重过誉。实际是瑞士自误（红牌+点球）而非卡塔尔真正强大。模型对亚洲球队的评估未区分东亚vs西亚——卡塔尔作为西亚球队面对中北美主场强势的加拿大差距被低估。连续主场作战体能溢价也需上调。',
+    factorEvaluation: { eloPrediction: '偏低', recentFormPrediction: '偏低', h2hPrediction: '准确', marketOddsPrediction: '偏低', tacticalMatchupPrediction: '准确' },
+    eloChanges: [
+      { team: 'Canada', oldElo: 1750, newElo: 1780, change: 30 },
+      { team: 'Qatar', oldElo: 1600, newElo: 1550, change: -50 },
+    ],
+  },
+  'mex-kor-2': {
+    rootCause: '预测几乎完美命中。海拔+旅途疲劳+实力梯度三重判断均被比赛结果验证。墨西哥在中北美1500m主场的体能优势、韩国跨太平洋+跨美国大陆再入墨西哥的旅途消耗，以及两队真实实力差（ELO差>100分），三者叠加产生1:0的精确结果。',
+    factorEvaluation: { eloPrediction: '准确', recentFormPrediction: '准确', h2hPrediction: '准确', marketOddsPrediction: '准确', tacticalMatchupPrediction: '准确' },
+    eloChanges: [
+      { team: 'Mexico', oldElo: 1900, newElo: 1910, change: 10 },
+      { team: 'South Korea', oldElo: 1780, newElo: 1765, change: -15 },
+    ],
+  },
+};
+
+export const keyLearnings = [
+  '首轮平局率9/24=38%，第二轮平局率1/4=25%（显著下降，回归常态）',
+  '强队赔率<1.50时平局溢价1.4x仍有效（西班牙、巴西、比利时、葡萄牙均平局）',
+  '当日4场比赛均非平局，首轮尾声冷门/平局预期过度，实际回归强队主导',
+  '英格兰4-2、哥伦比亚3-1等大比分说明进攻型球队在首轮后半程趋于正常发挥',
+  '控球率>70%射正率<15%触发无效控球警报（葡萄牙1:1验证有效）',
+  '第二轮加拿大6:0卡塔尔揭示：首轮爆冷队伍第二轮真实实力暴露，首轮表现不应过度上修',
+  '瑞士4:1波黑揭示：世界杯经验差在第二轮被放大，老牌球队首轮求稳≠真实实力',
+  '墨西哥1:0韩国验证：海拔+旅途疲劳判断正确，第二轮主场优势加成有效',
+];

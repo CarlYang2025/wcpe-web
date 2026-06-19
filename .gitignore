@@ -1,0 +1,10 @@
+.vercel
+node_modules/
+dist/
+*.local
+.env
+.env.*
+!.env.example
+src/data/remote.json
+.DS_Store
+*.log
