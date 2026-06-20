@@ -4,10 +4,11 @@ import { preciseMatchROI, oddsSourceLabel } from '../lib/preciseRoi'
 import type { RoiResult } from '../lib/preciseRoi'
 import { cn } from '../data/matches'
 
-export default function DailyReturns({ historicalMatches, predictions }: {
-  historicalMatches: Match[]
+export default function DailyReturns({ history, predictions }: {
+  history: Match[]
   predictions: Record<string, Prediction>
 }) {
+  const historicalMatches = history
   const dailyData = useMemo(() => {
     const map = new Map<string, { matches: Match[]; rois: RoiResult[] }>()
     for (const m of historicalMatches) {

@@ -21,8 +21,8 @@ interface Props {
   onSelectMatch?: (match: Match) => void
 }
 
-export default function MatchdaySummary({ allMatches, remainingMatches, predictions, postMatchReviews, historicalMatches, onSelectMatch }: Props) {
-  const hm = historicalMatches
+export default function MatchdaySummary(props: Props) {
+  const { allMatches, remainingMatches, predictions, postMatchReviews, onSelectMatch } = props
   const matches = allMatches
   const validMatches = matches.filter(m => predictions[m.id])
   const matchCount = validMatches.length
@@ -529,8 +529,8 @@ function RemainingOptimization({
       </div>
 
       {/* Historical returns */}
-      <DailyReturns historicalMatches={hm} predictions={predictions} />
-      <div className="text-[8px] text-[#555555] text-center">DEBUG: 历史比赛 {hm.length} 场 | 有预测 {hm.filter(m => predictions[m.id]).length} 场 | 有比分 {hm.filter(m => m.homeScore !== undefined).length} 场</div>
+      <DailyReturns history={props.historicalMatches} predictions={predictions} />
+      <div className="text-[8px] text-[#555555] text-center">DEBUG: 历史比赛 {props.historicalMatches.length} 场 | 有预测 {props.historicalMatches.filter(m => predictions[m.id]).length} 场 | 有比分 {props.historicalMatches.filter(m => m.homeScore !== undefined).length} 场</div>
     </div>
   )
 }
