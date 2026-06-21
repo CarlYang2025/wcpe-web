@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const DATA_URL = 'https://jsonblob.com/api/jsonBlob/019edb19-4cc7-7b7f-90f3-c51f403b0da4'
+const DATA_URL = 'https://jsonblob.com/api/jsonBlob/019eea35-7c76-73f3-9fa1-65555c53b3d2'
 
 interface RemoteData {
   modelState?: any

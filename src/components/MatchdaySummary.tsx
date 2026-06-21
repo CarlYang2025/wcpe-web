@@ -326,7 +326,7 @@ export default function MatchdaySummary(props: Props) {
                 <div key={m.id} className="mb-1 last:mb-0">
                   {flag(m.homeTeam)} {cn(m.homeTeam)} {m.homeScore}:{m.awayScore} {cn(m.awayTeam)} {flag(m.awayTeam)}
                   <span className="text-[#ff4757] ml-1">
-                    （{review?.missItems[0]?.includes('方向') ? '方向×' : '方向×'}，已结束）
+                    （已结束{m.homeScore !== undefined && m.awayScore !== undefined ? ` ${m.homeScore}:${m.awayScore}` : ''}）
                   </span>
                 </div>
               )
@@ -335,6 +335,9 @@ export default function MatchdaySummary(props: Props) {
           <RemainingOptimization matches={validRemaining} predictions={predictions} cn={cn} flag={flag} />
         </section>
       )}
+
+      {/* ---- 比赛日收益分析 ---- */}
+      <DailyReturns history={props.historicalMatches} predictions={predictions} />
 
       <div className="text-center text-[9px] text-[#555555] pb-4">
         以上方案基于概率模型推演，仅供参考，不构成投注建议
@@ -482,7 +485,14 @@ function RemainingOptimization({
     <div className="space-y-4">
       {/* Redistribution summary */}
       <div className="bg-[#ff4757]/5 border border-[#ff4757]/20 rounded-lg p-3 text-[10px] text-[#a0a0a0]">
-        葡萄牙 1:1 刚果(金) — 原方案中该场分配已失效。以下将预算集中到剩余 {remaining.length} 场：
+        {matches.filter(m => m.status === 'finished').slice(0, 3).map((m, i) => (
+          <span key={m.id}>
+            {i > 0 && '、'}
+            {cn(m.homeTeam)} {m.homeScore}:{m.awayScore} {cn(m.awayTeam)}
+          </span>
+        ))}
+        {matches.filter(m => m.status === 'finished').length === 0 && '已有比赛结束'}
+        {' — '}原方案中该场分配已失效。以下将预算集中到剩余 {remaining.length} 场：
       </div>
 
       {/* Betting slip */}
@@ -527,10 +537,6 @@ function RemainingOptimization({
         每行是一个具体的投注建议。百分比 = 占你总预算的比例。如果你投 100 块，就把金额乘以百分比。
         串关单独占 10%，其余按比例均分。由于已有一场出冷，建议比分仓位比原方案多加 5%。
       </div>
-
-      {/* Historical returns */}
-      <DailyReturns history={props.historicalMatches} predictions={predictions} />
-      <div className="text-[8px] text-[#555555] text-center">DEBUG: 历史比赛 {props.historicalMatches.length} 场 | 有预测 {props.historicalMatches.filter(m => predictions[m.id]).length} 场 | 有比分 {props.historicalMatches.filter(m => m.homeScore !== undefined).length} 场</div>
     </div>
   )
 }

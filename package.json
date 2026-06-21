@@ -1,1 +1,29 @@
-{"name":"wcpe-web","private":true,"version":"2.0.0","type":"module","scripts":{"prebuild":"curl -s 'https://jsonblob.com/api/jsonBlob/019edb19-4cc7-7b7f-90f3-c51f403b0da4' -o src/data/remote.json && echo 'Remote data downloaded'","dev":"vite","build":"npm run prebuild && vite build","preview":"vite preview"},"dependencies":{"@tailwindcss/vite":"^4.3.1","react":"^19.1.0","react-dom":"^19.1.0"},"devDependencies":{"@types/react":"^19.1.0","@types/react-dom":"^19.1.0","@vitejs/plugin-react":"^4.4.1","autoprefixer":"^10.4.21","postcss":"^8.5.3","tailwindcss":"^4.1.4","terser":"^5.48.0","typescript":"~5.8.2","vite":"^6.3.1"}}
+{
+  "name": "wcpe-web",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "prebuild": "node -e \"fetch('https://jsonblob.com/api/jsonBlob/019eea35-7c76-73f3-9fa1-65555c53b3d2').then(r=>r.json()).then(d=>require('fs').writeFileSync('src/data/remote.json',JSON.stringify(d)))\" && echo 'Remote data downloaded'",
+    "dev": "vite",
+    "build": "npm run prebuild && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.4",
+    "terser": "^5.48.0",
+    "tsx": "^4.22.4",
+    "typescript": "~5.8.2",
+    "vite": "^6.3.1"
+  }
+}

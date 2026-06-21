@@ -1,6 +1,7 @@
 import type { Match, Prediction, PostMatchReview } from '../lib/types'
 import { QUADRANT_NAMES, QUADRANT_COLORS, RISK_COLORS } from '../lib/types'
 import { teamRatings, cn, flag } from '../data/matches'
+import { useLiveMinute } from '../lib/useMatchTimer'
 import QuadrantChart from './QuadrantChart'
 import MviTable from './MviTable'
 import BankrollBreakdown from './BankrollBreakdown'
@@ -34,7 +35,10 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
   const awayFlag = flag(match.awayTeam)
   const ra = prediction.richAnalysis
 
-  const statusText = match.status === 'finished' ? '已完赛' : match.status === 'live' ? '● 进行中' : '待开赛'
+  const liveMinute = useLiveMinute(match)
+  const statusText = match.status === 'finished' ? '已完赛'
+    : match.status === 'live' ? `● ${liveMinute !== null ? liveMinute + "' " : ''}进行中`
+    : '待开赛'
   const statusColor = match.status === 'finished' ? '#a0a0a0' : match.status === 'live' ? '#ff4757' : '#ffa502'
 
   return (

@@ -54,3 +54,33 @@ export function formatCountdown(kickoff: string, status?: string): string {
   if (hours > 0) return `${hours}时${mins}分后`
   return `${mins}分钟后`
 }
+
+/**
+ * 实时计算比赛进行到的分钟数
+ * 每秒更新，用于显示 "● 56' 进行中" 等状态
+ */
+export function useLiveMinute(match: Match): number | null {
+  const [minute, setMinute] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (match.status !== 'live') {
+      setMinute(null)
+      return
+    }
+
+    const kickoff = parseBeijingTime(match.kickoff)
+
+    const tick = () => {
+      const elapsed = Math.floor((Date.now() - kickoff.getTime()) / 60000)
+      // 上半场 0-45，中场休息 45+，下半场 45-90+，加时/补时 90+
+      const capped = Math.min(Math.max(elapsed, 0), 120)
+      setMinute(capped)
+    }
+
+    tick()
+    const interval = setInterval(tick, 1000) // 每秒更新
+    return () => clearInterval(interval)
+  }, [match.status, match.kickoff])
+
+  return minute
+}

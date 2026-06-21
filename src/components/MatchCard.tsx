@@ -1,7 +1,7 @@
 import type { Match, Prediction } from '../lib/types'
 import { QUADRANT_NAMES, QUADRANT_COLORS, RISK_COLORS } from '../lib/types'
 import { cn, flag } from '../data/matches'
-import { formatCountdown } from '../lib/useMatchTimer'
+import { formatCountdown, useLiveMinute } from '../lib/useMatchTimer'
 
 interface Props {
   match: Match
@@ -113,6 +113,8 @@ export default function MatchCard({ match, prediction, onClick }: Props) {
 }
 
 function StatusBadge({ match }: { match: Match }) {
+  const liveMinute = useLiveMinute(match)
+
   if (match.status === 'finished') {
     return (
       <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#555555]/20 text-[#555555]">
@@ -121,9 +123,10 @@ function StatusBadge({ match }: { match: Match }) {
     )
   }
   if (match.status === 'live') {
+    const minuteText = liveMinute !== null ? `${liveMinute}'` : ''
     return (
-      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#ff4757]/20 text-[#ff4757] animate-pulse">
-        ● 进行中
+      <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#ff4757]/20 text-[#ff4757]">
+        <span className="animate-pulse">●</span> {minuteText} 进行中
       </span>
     )
   }

@@ -1,18 +1,28 @@
 /**
- * 精确方案盈亏计算器
+ * 方案盈亏计算器 — 模型赔率版
  *
- * 赔率来源优先级：
- *   方向赔率：richAnalysis.market 的 Bet365 欧赔 → MVI marketProb → 模型概率反推
- *   大小球赔率：richAnalysis.market 的 O/U 赔率 → MVI marketProb → 模型概率反推
- *   比分赔率：概率反推（1/probability，天然等价于公平赔率，无真实比分赔率数据）
- *   串关赔率：parlayRecommendations 中明确给出的 odds
+ * 核心理念：「如果按照网站当天显示的方案投注，我的盈亏是多少？」
+ * 所有赔率均使用模型概率反推（1/prob × 抽水），与 MatchdaySummary 页面显示完全一致。
  *
- * 资金分配来源：
- *   prediction.bankroll.{conservative,balanced,aggressive}.allocations
- *   若为空对象或缺失 → 回退 DEFAULT_ALLOC
+ * 资金分配：与 MatchdaySummary 三道方案完全一致
+ *   保守：胜平负60 + 大小球25 + 比分10 + 串关5
+ *   平衡：胜平负40 + 比分25 + 串关20 + 大小球15
+ *   激进：串关35 + 比分30 + 胜平负20 + 大小球15
  */
 
 import type { Match, Prediction } from './types'
+
+// 抽水系数（与 MatchdaySummary.tsx 中的 MARGIN_* 完全一致）
+const MARGIN_DIR = 0.93   // 胜平负 ~7%
+const MARGIN_OU = 0.93    // 大小球 ~7%
+const MARGIN_SCORE = 0.75 // 比分 ~25%
+
+// 资金分配（与 MatchdaySummary.tsx bankrollPlans 完全一致）
+const ALLOC = {
+  cons: { '胜平负': 60, '大小球': 25, '比分': 10, '串关': 5 },
+  bal: { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 },
+  agg: { '串关': 35, '比分': 30, '胜平负': 20, '大小球': 15 },
+}
 
 export interface RoiDetail {
   dirHit: boolean
@@ -28,12 +38,6 @@ export interface RoiDetail {
     score: number
     parlay: number
   }
-  oddsSource: {
-    dir: 'bet365' | 'mvi' | 'model'
-    ou: 'bet365' | 'mvi' | 'model'
-    score: 'probability' | 'none'
-    parlay: 'explicit' | 'none'
-  }
 }
 
 export interface RoiResult {
@@ -43,92 +47,57 @@ export interface RoiResult {
   detail: RoiDetail
 }
 
-const DEFAULT_ALLOC = {
-  cons: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 },
-  bal: { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 },
-  agg: { '比分': 35, '串关': 30, '胜平负': 20, '大小球': 15 },
-}
-
 function notEmpty(o?: Record<string, number>): o is Record<string, number> {
   return !!o && Object.keys(o).length > 0
 }
 
-/** 从 richAnalysis.market 提取 Bet365 方向赔率 */
-function extractBet365DirOdds(market: string | undefined, predictedDir: string): number {
-  if (!market) return 0
-  const m = market.match(/(\d+\.?\d*)\/(\d+\.?\d*)\/(\d+\.?\d*)/)
-  if (!m) return 0
-  const [home, draw, away] = [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])]
-  if (predictedDir === 'home_win') return home
-  if (predictedDir === 'draw') return draw
-  return away
-}
-
-/** 从 richAnalysis.market 提取 Bet365 O/U 赔率 */
-function extractBet365OuOdds(market: string | undefined, predictedOver: boolean): number {
-  if (!market) return 0
-  const m = market.match(/Over\s+(\d+\.?\d*)[\s\S]*?Under\s+(\d+\.?\d*)/i)
-  if (!m) return 0
-  return predictedOver ? parseFloat(m[1]) : parseFloat(m[2])
-}
-
-/** 从 MVI 提取方向隐含赔率 */
-function extractMviDirOdds(pred: Prediction, predictedDir: string): number {
-  if (!pred.mviAnalysis?.length) return 0
-  const keywords: Record<string, string[]> = {
-    'home_win': ['胜', '主胜', 'home', '-0', '无平'],
-    'draw': ['平局', '平', 'draw'],
-    'away_win': ['客胜', 'away', '+0'],
-  }
-  const item = pred.mviAnalysis.find(mvi =>
-    keywords[predictedDir]?.some(k => mvi.bet.toLowerCase().includes(k.toLowerCase()))
-  )
-  return item ? 1 / item.marketProb : 0
-}
-
-/** 从 MVI 提取大小球隐含赔率 */
-function extractMviOuOdds(pred: Prediction, predictedOver: boolean): number {
-  if (!pred.mviAnalysis?.length) return 0
-  const item = pred.mviAnalysis.find(mvi => {
-    const b = mvi.bet.toLowerCase()
-    if (predictedOver) return b.includes('大') || b.includes('over')
-    return b.includes('小') || b.includes('under')
-  })
-  return item ? 1 / item.marketProb : 0
-}
-
-/** 从模型概率反推方向赔率 */
+/**
+ * 模型方向赔率 = 1/预测方向概率 × 0.93
+ * 与 MatchdaySummary dirOdds() 完全一致
+ */
 function modelDirOdds(pred: Prediction): number {
-  const map: Record<string, number> = {
-    'home_win': pred.homeWinProb,
-    'draw': pred.drawProb,
-    'away_win': pred.awayWinProb,
-  }
-  return 1 / (map[pred.predictedDirection] || 0.33)
+  const prob = pred.predictedDirection === 'home_win' ? pred.homeWinProb
+    : pred.predictedDirection === 'away_win' ? pred.awayWinProb : pred.drawProb
+  return +((1 / prob) * MARGIN_DIR).toFixed(2)
 }
 
-/** 提取比分赔率（从概率反推） */
-function extractScoreOdds(pred: Prediction, top1Hit: boolean, top3Hit: boolean, actualScore: string): number {
+/**
+ * 模型大小球赔率 = 1/预测O/U概率 × 0.93
+ * 与 MatchdaySummary ouOdds() 完全一致
+ */
+function modelOuOdds(pred: Prediction): number {
+  const over = pred.over25Prob > pred.under25Prob
+  const prob = over ? pred.over25Prob : pred.under25Prob
+  return +((1 / prob) * MARGIN_OU).toFixed(2)
+}
+
+/**
+ * 模型比分赔率 = 1/比分概率 × 0.75
+ * 与 MatchdaySummary scoreOdds() 完全一致
+ */
+function modelScoreOdds(pred: Prediction, top1Hit: boolean, top3Hit: boolean, actualScore: string): number {
   if (!top1Hit && !top3Hit) return 0
   if (top1Hit && pred.top5Scores?.[0]) {
-    return 1 / pred.top5Scores[0].probability
+    return +((1 / pred.top5Scores[0].probability) * MARGIN_SCORE).toFixed(2)
   }
   if (top3Hit && pred.top5Scores?.length >= 3) {
     const avgProb = pred.top5Scores.slice(0, 3).reduce((s, sc) => s + sc.probability, 0) / 3
-    return (1 / avgProb) * 0.7
+    return +((1 / avgProb) * MARGIN_SCORE).toFixed(2)
   }
-  if (top3Hit && pred.top5Scores?.length > 0) {
-    const found = pred.top5Scores.find(s => s.score === actualScore)
-    if (found) return 1 / found.probability
+  if (top3Hit) {
+    const found = pred.top5Scores?.find(s => s.score === actualScore)
+    if (found) return +((1 / found.probability) * MARGIN_SCORE).toFixed(2)
   }
   return 0
 }
 
-/** 提取串关结果 */
-function extractParlayResult(
-  pred: Prediction,
-  dirHit: boolean,
-): { hit: boolean; odds: number; count: number; hitCount: number } {
+/**
+ * 串关命中检测 + 赔率提取
+ * 串关赔率直接使用 parlayRecommendations 中给出的 odds
+ */
+function parlayResult(pred: Prediction, dirHit: boolean): {
+  hit: boolean; odds: number; count: number; hitCount: number
+} {
   if (!pred.parlayRecommendations?.length) {
     return { hit: false, odds: 0, count: 0, hitCount: 0 }
   }
@@ -153,8 +122,21 @@ function extractParlayResult(
   return { hit: hitCount > 0, odds: totalOdds, count: pred.parlayRecommendations.length, hitCount }
 }
 
-/** 精确计算单场三方案盈亏 */
-export function preciseMatchROI(match: Match, pred: Prediction): RoiResult | null {
+/**
+ * 单场盈亏计算
+ *
+ * 核心逻辑：当日总预算 100% 均分到当天每场比赛。
+ *   - 每场本金 = 100 / matchCount
+ *   - 每场分配 = 方案比例 × (1/matchCount)
+ *
+ * 盈亏 = 命中回报 - 单场本金
+ *   方向命中 → (分配% / N) × 赔率
+ *   比分命中 → (分配% / N) × 赔率
+ *   ...
+ *   全部不中 → 0 - (100/N) = 单场最多亏 100/N %
+ *   当日最多亏 (100/N) × N = 100%
+ */
+export function preciseMatchROI(match: Match, pred: Prediction, matchCount: number = 1): RoiResult | null {
   if (match.homeScore === undefined || match.awayScore === undefined) return null
 
   const actualScore = `${match.homeScore}:${match.awayScore}`
@@ -164,7 +146,6 @@ export function preciseMatchROI(match: Match, pred: Prediction): RoiResult | nul
   const actual = match.homeScore === match.awayScore ? 'draw'
     : match.homeScore > match.awayScore ? 'home_win' : 'away_win'
   const dirHit = pred.predictedDirection === actual
-
   const top3Hit = pred.top5Scores?.slice(0, 3).some(s => s.score === actualScore) ?? false
   const top1Hit = pred.top5Scores?.[0]?.score === actualScore
 
@@ -176,54 +157,33 @@ export function preciseMatchROI(match: Match, pred: Prediction): RoiResult | nul
     ? null
     : predictedOver === actualOver
 
-  // ---- 赔率提取 ----
-  const market = pred.richAnalysis?.market
+  // ---- 模型赔率（与网站显示完全一致） ----
+  const dirOdds = modelDirOdds(pred)
+  const ouOdds = modelOuOdds(pred)
+  const scoreOddsVal = modelScoreOdds(pred, top1Hit, top3Hit, actualScore)
+  const parlayRes = parlayResult(pred, dirHit)
 
-  let dirOdds = extractBet365DirOdds(market, pred.predictedDirection)
-  let dirSource: RoiDetail['oddsSource']['dir'] = 'bet365'
-  if (dirOdds === 0) {
-    dirOdds = extractMviDirOdds(pred, pred.predictedDirection)
-    dirSource = 'mvi'
-  }
-  if (dirOdds === 0) {
-    dirOdds = modelDirOdds(pred)
-    dirSource = 'model'
-  }
-
-  let ouOdds = extractBet365OuOdds(market, predictedOver)
-  let ouSource: RoiDetail['oddsSource']['ou'] = 'bet365'
-  if (ouOdds === 0) {
-    ouOdds = extractMviOuOdds(pred, predictedOver)
-    ouSource = 'mvi'
-  }
-  if (ouOdds === 0) {
-    ouOdds = predictedOver ? 1 / pred.over25Prob : 1 / pred.under25Prob
-    ouSource = 'model'
-  }
-
-  const scoreOdds = extractScoreOdds(pred, top1Hit, top3Hit, actualScore)
-  const scoreSource: RoiDetail['oddsSource']['score'] = top1Hit || top3Hit ? 'probability' : 'none'
-
-  const parlayResult = extractParlayResult(pred, dirHit)
-  const parlaySource: RoiDetail['oddsSource']['parlay'] = parlayResult.count > 0 ? 'explicit' : 'none'
+  const share = 1 / matchCount
 
   // ---- 盈亏计算 ----
   const calc = (a: Record<string, number>): number | null => {
     const sum = Object.values(a).reduce((s, v) => s + v, 0)
     if (sum === 0) return null
     let r = 0
-    if (dirHit) r += (a['胜平负'] || 0) * dirOdds
-    if (ouHit === true && (a['大小球'] || 0) > 0) r += (a['大小球'] || 0) * ouOdds
-    else if (ouHit === null) r += (a['大小球'] || 0)
-    if (scoreOdds > 0) r += (a['比分'] || 0) * scoreOdds
-    if (parlayResult.hit) r += (a['串关'] || 0) * parlayResult.odds
-    return Math.round(r - 100)
+    if (dirHit) r += (a['胜平负'] || 0) * share * dirOdds
+    if (ouHit === true && (a['大小球'] || 0) > 0) r += (a['大小球'] || 0) * share * ouOdds
+    else if (ouHit === null) r += (a['大小球'] || 0) * share // push，退还本金
+    if (scoreOddsVal > 0) r += (a['比分'] || 0) * share * scoreOddsVal
+    if (parlayRes.hit) r += (a['串关'] || 0) * share * parlayRes.odds
+    // stake = 方案中该比赛日均摊的本金（sum × share，约等于 100/N）
+    return Math.round(r - sum * share)
   }
 
+  // 优先使用 prediction.bankroll 的自定义分配，否则用统一 ALLOC
   const b = pred.bankroll
-  const allocCons = notEmpty(b?.conservative.allocations) ? b.conservative.allocations : DEFAULT_ALLOC.cons
-  const allocBal = notEmpty(b?.balanced.allocations) ? b.balanced.allocations : DEFAULT_ALLOC.bal
-  const allocAgg = notEmpty(b?.aggressive.allocations) ? b.aggressive.allocations : DEFAULT_ALLOC.agg
+  const allocCons = notEmpty(b?.conservative.allocations) ? b.conservative.allocations : ALLOC.cons
+  const allocBal = notEmpty(b?.balanced.allocations) ? b.balanced.allocations : ALLOC.bal
+  const allocAgg = notEmpty(b?.aggressive.allocations) ? b.aggressive.allocations : ALLOC.agg
 
   return {
     cons: calc(allocCons),
@@ -231,24 +191,20 @@ export function preciseMatchROI(match: Match, pred: Prediction): RoiResult | nul
     agg: calc(allocAgg),
     detail: {
       dirHit, top3Hit, top1Hit, ouHit,
-      parlayHit: parlayResult.hit,
+      parlayHit: parlayRes.hit,
       predicted: pred.predictedScore,
       actual: actualScore,
       odds: {
-        dir: Math.round(dirOdds * 100) / 100,
-        ou: Math.round(ouOdds * 100) / 100,
-        score: Math.round(scoreOdds * 100) / 100,
-        parlay: Math.round(parlayResult.odds * 100) / 100,
+        dir: dirOdds,
+        ou: ouOdds,
+        score: scoreOddsVal,
+        parlay: Math.round(parlayRes.odds * 100) / 100,
       },
-      oddsSource: { dir: dirSource, ou: ouSource, score: scoreSource, parlay: parlaySource },
     },
   }
 }
 
-/** 赔率来源标签 */
+/** 赔率来源标签（现统一为 M = 模型赔率） */
 export function oddsSourceLabel(source: string): string {
-  const map: Record<string, string> = {
-    bet365: 'B', mvi: 'M', model: 'P', probability: 'P', explicit: 'S', none: '-',
-  }
-  return map[source] || source
+  return 'M'
 }
