@@ -33,22 +33,6 @@ export default function App() {
     return result
   }, [mergedPreds])
 
-  const enrichedReviews = useMemo(() => {
-    const result = { ...mergedReviews }
-    for (const id in reviewRichData) {
-      if (result[id]) {
-        result[id] = { ...result[id], ...reviewRichData[id as keyof typeof reviewRichData] }
-      }
-    }
-    // If review has no matchStats, fallback to Match.matchStats (FBref data)
-    for (const m of fullMatches) {
-      if (m.matchStats && result[m.id] && !result[m.id].matchStats) {
-        result[m.id] = { ...result[m.id], matchStats: m.matchStats }
-      }
-    }
-    return result
-  }, [mergedReviews, fullMatches])
-
   // Use remote data when available, fall back to static
   const displayModelState = useMemo(() => remoteData?.modelState || modelState, [remoteData])
   const displayKeyLearnings = useMemo(() => remoteData?.keyLearnings || keyLearnings, [remoteData])
@@ -80,6 +64,23 @@ export default function App() {
     }
     return merged
   }, [rawMatches, remoteData])
+
+  // Enrich reviews with matchStats from Match objects (FBref data fallback)
+  const enrichedReviews = useMemo(() => {
+    const result = { ...mergedReviews }
+    for (const id in reviewRichData) {
+      if (result[id]) {
+        result[id] = { ...result[id], ...reviewRichData[id as keyof typeof reviewRichData] }
+      }
+    }
+    // If review has no matchStats, fallback to Match.matchStats (FBref data)
+    for (const m of fullMatches) {
+      if (m.matchStats && result[m.id] && !result[m.id].matchStats) {
+        result[m.id] = { ...result[m.id], matchStats: m.matchStats }
+      }
+    }
+    return result
+  }, [mergedReviews, fullMatches])
 
   // Timer: switches upcoming→live→finished based on kickoff time
   const timerMatches = useMatchTimer(fullMatches)
