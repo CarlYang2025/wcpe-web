@@ -270,16 +270,16 @@ export function generateParlays(predictions: { match: string; direction: string;
 export function generateBankroll(): { conservative: BankrollPlan; balanced: BankrollPlan; aggressive: BankrollPlan } {
   return {
     conservative: {
-      allocations: { '胜平负': 50, '大小球': 30, '比分': 15, '串关': 5 },
+      allocations: { '胜平负': 60, '大小球': 25, '比分': 10, '串关': 5 },
       expectedReturn: 8,
     },
     balanced: {
       allocations: { '胜平负': 40, '比分': 25, '串关': 20, '大小球': 15 },
-      expectedReturn: 15,
+      expectedReturn: 18,
     },
     aggressive: {
-      allocations: { '比分': 40, '串关': 30, '胜平负': 20, '大小球': 10 },
-      expectedReturn: 35,
+      allocations: { '串关': 35, '比分': 30, '胜平负': 20, '大小球': 15 },
+      expectedReturn: 40,
     },
   };
 }

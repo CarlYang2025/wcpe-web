@@ -33,15 +33,22 @@ export default function BankrollBreakdown({ bankroll, match, prediction }: Props
     }
     if (alloc['比分']) {
       const a = alloc['比分']
-      const piece = Math.floor(a / 3)
-      topScores.forEach((s, i) => {
+      const numScores = Math.min(topScores.length, 3)
+      const base = Math.floor(a / numScores)
+      const remainder = a - base * numScores
+      topScores.slice(0, numScores).forEach((s, i) => {
         const scoreOdds = i === 0 ? 6.00 : i === 1 ? 7.00 : 8.00
+        const piece = base + (i < remainder ? 1 : 0)
         lines.push({ what: `比分 ${s.score}`, odds: `@${scoreOdds.toFixed(2)}`, alloc: piece, returns: Math.round(piece * scoreOdds) })
       })
     }
     if (alloc['大小球']) {
       const a = alloc['大小球']
       lines.push({ what: `${ouLabel}`, odds: `@${ouOdds}`, alloc: a, returns: Math.round(a * parseFloat(ouOdds)) })
+    }
+    if (alloc['串关']) {
+      const a = alloc['串关']
+      lines.push({ what: '串关预留', odds: '', alloc: a, returns: 0 })
     }
     return lines
   }
@@ -72,13 +79,15 @@ export default function BankrollBreakdown({ bankroll, match, prediction }: Props
                       <span className="text-[#a0a0a0] font-mono">{l.odds}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="text-[10px] text-[#555555]">投<span className="text-white">{l.alloc}%</span> → 回<span className="text-[#ffd700]">{l.returns}%</span></span>
+                      <span className="text-[10px] text-[#555555]">投<span className="text-white">{l.alloc}%</span>
+                        {l.returns > 0 ? ` → 回<span className="text-[#ffd700]">${l.returns}%</span>` : ''}
+                      </span>
                     </div>
                   </div>
                 ))}
               </div>
               <div className="mt-2 pt-2 border-t border-[#1a1f3a] text-[9px] text-[#555555]">
-                总计 100% → 预期回收 ~{100 + plan.expectedReturn}%
+                总计 {lines.reduce((s, l) => s + l.alloc, 0)}% → 预期回收 ~{100 + plan.expectedReturn}%
               </div>
             </div>
           </div>
