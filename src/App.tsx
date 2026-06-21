@@ -40,8 +40,14 @@ export default function App() {
         result[id] = { ...result[id], ...reviewRichData[id as keyof typeof reviewRichData] }
       }
     }
+    // If review has no matchStats, fallback to Match.matchStats (FBref data)
+    for (const m of fullMatches) {
+      if (m.matchStats && result[m.id] && !result[m.id].matchStats) {
+        result[m.id] = { ...result[m.id], matchStats: m.matchStats }
+      }
+    }
     return result
-  }, [mergedReviews])
+  }, [mergedReviews, fullMatches])
 
   // Use remote data when available, fall back to static
   const displayModelState = useMemo(() => remoteData?.modelState || modelState, [remoteData])

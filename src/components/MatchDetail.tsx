@@ -281,8 +281,14 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
                   <StatRow label="控球率" h={`${review.matchStats.possession.home}%`} a={`${review.matchStats.possession.away}%`} />
                   <StatRow label="射门" h={String(review.matchStats.shots.home)} a={String(review.matchStats.shots.away)} />
                   <StatRow label="射正" h={String(review.matchStats.shotsOnTarget.home)} a={String(review.matchStats.shotsOnTarget.away)} />
-                  <StatRow label="xG" h={review.matchStats.xg.home.toFixed(1)} a={review.matchStats.xg.away.toFixed(1)} />
+                  <StatRow label="xG" h={review.matchStats.xg.home > 0 ? review.matchStats.xg.home.toFixed(1) : '-'} a={review.matchStats.xg.away > 0 ? review.matchStats.xg.away.toFixed(1) : '-'} />
                   {review.matchStats.corners && <StatRow label="角球" h={String(review.matchStats.corners.home)} a={String(review.matchStats.corners.away)} />}
+                  {review.matchStats.fouls && <StatRow label="犯规" h={String(review.matchStats.fouls.home)} a={String(review.matchStats.fouls.away)} />}
+                  {review.matchStats.cards && (review.matchStats.cards.home.yellow > 0 || review.matchStats.cards.away.yellow > 0) && <StatRow label="黄牌" h={String(review.matchStats.cards.home.yellow)} a={String(review.matchStats.cards.away.yellow)} />}
+                  {review.matchStats.offsides && <StatRow label="越位" h={String(review.matchStats.offsides.home)} a={String(review.matchStats.offsides.away)} />}
+                  {review.matchStats.crosses && <StatRow label="传中" h={String(review.matchStats.crosses.home)} a={String(review.matchStats.crosses.away)} />}
+                  {review.matchStats.interceptions && <StatRow label="拦截" h={String(review.matchStats.interceptions.home)} a={String(review.matchStats.interceptions.away)} />}
+                  {review.matchStats.saves && <StatRow label="扑救" h={String(review.matchStats.saves.home)} a={String(review.matchStats.saves.away)} />}
                 </div>
                 {review.matchStats.scorers && (
                   <div className="mt-2 pt-2 border-t border-[#141937] text-[9px] text-[#a0a0a0]">
