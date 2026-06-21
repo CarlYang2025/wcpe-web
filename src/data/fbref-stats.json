@@ -82,5 +82,61 @@
     "interceptions": { "home": 5, "away": 4 },
     "saves": { "home": 2, "away": 4 },
     "_source": "fbref.com"
+  },
+  "tun-jpn-2": {
+    "possession": { "home": 38, "away": 62 },
+    "shots": { "home": 2, "away": 11 },
+    "shotsOnTarget": { "home": 0, "away": 5 },
+    "xg": { "home": 0, "away": 0 },
+    "corners": { "home": 3, "away": 5 },
+    "fouls": { "home": 8, "away": 15 },
+    "cards": { "home": { "yellow": 0, "red": 0 }, "away": { "yellow": 0, "red": 0 } },
+    "offsides": { "home": 1, "away": 1 },
+    "crosses": { "home": 10, "away": 11 },
+    "interceptions": { "home": 14, "away": 6 },
+    "saves": { "home": 1, "away": 0 },
+    "_source": "fbref.com"
+  },
+  "ned-swe-2": {
+    "possession": { "home": 51, "away": 49 },
+    "shots": { "home": 10, "away": 16 },
+    "shotsOnTarget": { "home": 7, "away": 8 },
+    "xg": { "home": 0, "away": 0 },
+    "corners": { "home": 2, "away": 5 },
+    "fouls": { "home": 9, "away": 12 },
+    "cards": { "home": { "yellow": 0, "red": 0 }, "away": { "yellow": 3, "red": 0 } },
+    "offsides": { "home": 3, "away": 3 },
+    "crosses": { "home": 15, "away": 21 },
+    "interceptions": { "home": 8, "away": 6 },
+    "saves": { "home": 7, "away": 2 },
+    "_source": "fbref.com"
+  },
+  "ger-civ-2": {
+    "possession": { "home": 59, "away": 41 },
+    "shots": { "home": 16, "away": 9 },
+    "shotsOnTarget": { "home": 7, "away": 2 },
+    "xg": { "home": 0, "away": 0 },
+    "corners": { "home": 8, "away": 3 },
+    "fouls": { "home": 5, "away": 7 },
+    "cards": { "home": { "yellow": 0, "red": 0 }, "away": { "yellow": 0, "red": 0 } },
+    "offsides": { "home": 0, "away": 1 },
+    "crosses": { "home": 21, "away": 9 },
+    "interceptions": { "home": 7, "away": 13 },
+    "saves": { "home": 1, "away": 5 },
+    "_source": "fbref.com"
+  },
+  "ecu-cuw-2": {
+    "possession": { "home": 75, "away": 25 },
+    "shots": { "home": 27, "away": 10 },
+    "shotsOnTarget": { "home": 15, "away": 3 },
+    "xg": { "home": 0, "away": 0 },
+    "corners": { "home": 9, "away": 0 },
+    "fouls": { "home": 7, "away": 10 },
+    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 5, "red": 0 } },
+    "offsides": { "home": 1, "away": 2 },
+    "crosses": { "home": 32, "away": 1 },
+    "interceptions": { "home": 7, "away": 8 },
+    "saves": { "home": 3, "away": 15 },
+    "_source": "fbref.com"
   }
 }
