@@ -1,0 +1,32 @@
+{
+  "mex-rsa": {
+    "possession": { "home": 61, "away": 40 },
+    "shots": { "home": 16, "away": 3 },
+    "shotsOnTarget": { "home": 4, "away": 2 },
+    "xg": { "home": 0, "away": 0 },
+    "corners": { "home": 3, "away": 1 },
+    "fouls": { "home": 12, "away": 11 },
+    "cards": { "home": { "yellow": 2, "red": 0 }, "away": { "yellow": 4, "red": 0 } },
+    "offsides": { "home": 1, "away": 1 },
+    "crosses": { "home": 12, "away": 8 },
+    "interceptions": { "home": 8, "away": 7 },
+    "saves": { "home": 2, "away": 2 },
+    "_source": "fbref.com",
+    "_scrapedAt": "2026-06-21T21:35:00.000Z"
+  },
+  "kor-cze": {
+    "possession": { "home": 62, "away": 38 },
+    "shots": { "home": 15, "away": 7 },
+    "shotsOnTarget": { "home": 6, "away": 4 },
+    "xg": { "home": 0, "away": 0 },
+    "corners": { "home": 4, "away": 5 },
+    "fouls": { "home": 9, "away": 16 },
+    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 0, "red": 0 } },
+    "offsides": { "home": 2, "away": 2 },
+    "crosses": { "home": 12, "away": 15 },
+    "interceptions": { "home": 11, "away": 7 },
+    "saves": { "home": 3, "away": 4 },
+    "_source": "fbref.com",
+    "_scrapedAt": "2026-06-21T21:35:00.000Z"
+  }
+}

@@ -119,8 +119,34 @@ export const teamRatings: Record<string, TeamRatings> = {
 // ========== 比赛数据 ==========
 export const matches: Match[] = [
   // ---- 6/11 已完成 ----
-  { id: 'mex-rsa', date: '2026-06-11', tournament: '2026 FIFA World Cup', group: 'A组', round: '第一轮', matchday: 1, homeTeam: 'Mexico', awayTeam: 'South Africa', venue: 'Estadio Azteca, Mexico City', kickoff: '6/11 23:00', localKickoff: '6/11 11:00', localTZ: 'CT', status: 'finished', homeScore: 2, awayScore: 0 },
-  { id: 'kor-cze', date: '2026-06-11', tournament: '2026 FIFA World Cup', group: 'A组', round: '第一轮', matchday: 1, homeTeam: 'South Korea', awayTeam: 'Czechia', venue: 'SoFi Stadium, Los Angeles', kickoff: '6/12 03:00', localKickoff: '6/11 14:00', localTZ: 'PT', status: 'finished', homeScore: 2, awayScore: 1 },
+  { id: 'mex-rsa', date: '2026-06-11', tournament: '2026 FIFA World Cup', group: 'A组', round: '第一轮', matchday: 1, homeTeam: 'Mexico', awayTeam: 'South Africa', venue: 'Estadio Azteca, Mexico City', kickoff: '6/11 23:00', localKickoff: '6/11 11:00', localTZ: 'CT', status: 'finished',
+    matchStats: {
+    possession: { home: 61, away: 40 },
+    shots: { home: 16, away: 3 },
+    shotsOnTarget: { home: 4, away: 2 },
+    xg: { home: 0, away: 0 },
+    corners: { home: 3, away: 1 },
+    fouls: { home: 12, away: 11 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 4, red: 0 } },
+    offsides: { home: 1, away: 1 },
+    crosses: { home: 12, away: 8 },
+    interceptions: { home: 8, away: 7 },
+    saves: { home: 2, away: 2 }
+  }, homeScore: 2, awayScore: 0 },
+  { id: 'kor-cze', date: '2026-06-11', tournament: '2026 FIFA World Cup', group: 'A组', round: '第一轮', matchday: 1, homeTeam: 'South Korea', awayTeam: 'Czechia', venue: 'SoFi Stadium, Los Angeles', kickoff: '6/12 03:00', localKickoff: '6/11 14:00', localTZ: 'PT', status: 'finished',
+    matchStats: {
+    possession: { home: 62, away: 38 },
+    shots: { home: 15, away: 7 },
+    shotsOnTarget: { home: 6, away: 4 },
+    xg: { home: 0, away: 0 },
+    corners: { home: 4, away: 5 },
+    fouls: { home: 9, away: 16 },
+    cards: { home: { yellow: 1, red: 0 }, away: { yellow: 0, red: 0 } },
+    offsides: { home: 2, away: 2 },
+    crosses: { home: 12, away: 15 },
+    interceptions: { home: 11, away: 7 },
+    saves: { home: 3, away: 4 }
+  }, homeScore: 2, awayScore: 1 },
   // ---- 6/12 已完成 ----
   { id: 'can-bih', date: '2026-06-12', tournament: '2026 FIFA World Cup', group: 'B组', round: '第一轮', matchday: 2, homeTeam: 'Canada', awayTeam: 'Bosnia', venue: 'BMO Field, Toronto', kickoff: '6/13 03:00', localKickoff: '6/12 15:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 1 },
   // ---- 6/13 已完成 ----

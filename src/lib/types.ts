@@ -14,6 +14,8 @@ export interface Match {
   status: 'upcoming' | 'live' | 'finished';
   homeScore?: number;
   awayScore?: number;
+  /** FBref 赛后详细统计数据（仅 finished 比赛有效） */
+  matchStats?: MatchStats;
 }
 
 export interface Odds {
@@ -109,7 +111,15 @@ export interface MatchStats {
   shotsOnTarget: { home: number; away: number };
   xg: { home: number; away: number };
   corners?: { home: number; away: number };
+  fouls?: { home: number; away: number };
   cards?: { home: { yellow: number; red: number }; away: { yellow: number; red: number } };
+  offsides?: { home: number; away: number };
+  crosses?: { home: number; away: number };
+  interceptions?: { home: number; away: number };
+  saves?: { home: number; away: number };
+  tackles?: { home: number; away: number };
+  passes?: { home: number; away: number };
+  passCompletion?: { home: number; away: number };
   scorers?: { player: string; team: 'home' | 'away'; minute: number }[];
 }
 
