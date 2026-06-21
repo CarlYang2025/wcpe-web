@@ -15,7 +15,7 @@ export default function App() {
   const [sourceTab, setSourceTab] = useState<Tab>('dashboard')
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null)
 
-  // Remote data source (fetched once on mount from jsonblob)
+  // Remote data source (fetched once on mount from GitHub Pages)
   const { data: remoteData, loading: remoteLoading } = useRemoteData()
 
   // Merge remote predictions/reviews (remote takes priority over static)

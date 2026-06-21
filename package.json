@@ -4,9 +4,9 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node -e \"fetch('https://jsonblob.com/api/jsonBlob/019eea42-7a83-7313-8cd1-c1b4873b988e').then(r=>r.json()).then(d=>require('fs').writeFileSync('src/data/remote.json',JSON.stringify(d)))\" && echo 'Remote data downloaded'",
+    "prebuild": "node --import tsx scripts/export-json.mjs",
     "dev": "vite",
-    "build": "npm run prebuild && vite build",
+    "build": "vite build && cp src/data/remote.json dist/",
     "preview": "vite preview"
   },
   "dependencies": {
