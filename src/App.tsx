@@ -73,9 +73,9 @@ export default function App() {
         result[id] = { ...result[id], ...reviewRichData[id as keyof typeof reviewRichData] }
       }
     }
-    // If review has no matchStats, fallback to Match.matchStats (FBref data)
+    // FBref matchStats always take precedence (authoritative data source)
     for (const m of fullMatches) {
-      if (m.matchStats && result[m.id] && !result[m.id].matchStats) {
+      if (m.matchStats && result[m.id]) {
         result[m.id] = { ...result[m.id], matchStats: m.matchStats }
       }
     }
