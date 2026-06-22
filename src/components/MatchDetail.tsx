@@ -108,7 +108,46 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
           <p className="text-xs text-[#a0a0a0] leading-relaxed">{ra.tactics}</p>
         ) : (
           <div className="text-xs text-[#a0a0a0] space-y-2">
-            <p>⚡ 控球陷阱检查：未触发</p><p>🎯 {homeName}控球进攻 vs {awayName}防守反击</p><p>🗺️ 48队赛制：首轮求稳抑制比分</p>
+            {(() => {
+              // Dynamic tactical summary based on available prediction data
+              const { predictedDirection, predictedScore, homeWinProb, drawProb, awayWinProb, over25Prob, factorBreakdown, riskLevel } = prediction
+              const ft = factorBreakdown
+              
+              // Line 1: Style matchup based on predicted direction & probabilities
+              const styleLine = (() => {
+                if (predictedDirection === 'home_win') {
+                  if (homeWinProb > 0.55) return `🎯 ${homeName}主导控球压制，${homeWinProb > 0.65 ? '大概率' : '有望'}通过${ft?.tacticalScore && ft.tacticalScore > 0.6 ? '战术克制' : '进攻端优势'}拿下比赛`
+                  return `🎯 ${homeName}稍占上风，但${awayName}的${ft?.tacticalScore && ft.tacticalScore > 0.45 ? '战术纪律' : '防守韧性'}可能制造麻烦`
+                } else if (predictedDirection === 'away_win') {
+                  if (awayWinProb > 0.55) return `🎯 ${awayName}反客为主，${awayWinProb > 0.65 ? '大概率' : '有望'}通过${ft?.tacticalScore && ft.tacticalScore > 0.6 ? '战术克制' : '进攻端优势'}拿下比赛`
+                  return `🎯 ${awayName}稍占上风，但${homeName}主场${ft?.tacticalScore && ft.tacticalScore > 0.45 ? '战术纪律' : '防守韧性'}可能制造麻烦`
+                } else {
+                  return `🎯 双方势均力敌（主${Math.round(homeWinProb*100)}%/平${Math.round(drawProb*100)}%/客${Math.round(awayWinProb*100)}%），预计慢节奏拉锯战`
+                }
+              })()
+
+              // Line 2: Goal expectation
+              const goalLine = (() => {
+                const score = predictedScore || ''
+                const [h, a] = score.split(':').map(Number)
+                const total = isNaN(h) || isNaN(a) ? null : h + a
+                if (total === null) {
+                  return over25Prob > 0.5 ? '⚽ 大球概率较高，预计进球偏多' : '⚽ 小球倾向明显，预计进球偏少'
+                }
+                if (total >= 3) return `⚽ 预计总进球≥${total}（大球概率${Math.round(over25Prob*100)}%），进攻端有望主导`
+                if (total <= 1) return `⚽ 预计总进球≤${total}（小球概率${Math.round((1-over25Prob)*100)}%），防守大战在即`
+                return `⚽ 预计总进球约${total}个，攻守平衡态势`
+              })()
+
+              // Line 3: Risk context
+              const riskLine = (() => {
+                if (riskLevel === 'Low') return `🛡️ 低风险比赛，${predictedDirection === 'draw' ? '平局概率偏高需注意' : '预测方向置信度较高'}`
+                if (riskLevel === 'High') return `⚠️ 高风险比赛，${ft?.psychologyScore && ft.psychologyScore < 0.4 ? '心理因素' : '不确定性'}较大，建议谨慎`
+                return `🛡️ 中等风险，${ft?.marketScore && ft.marketScore > 0.5 ? '市场数据与模型一致' : '需关注临场变化'}`
+              })()
+
+              return <>{[styleLine, goalLine, riskLine].map((line, i) => <p key={i}>{line}</p>)}</>
+            })()}
           </div>
         )}
       </section>
