@@ -150,6 +150,20 @@ function normalizeSinglePrediction(p) {
     ec = undefined
   }
 
+  // 10. predictedDirection: normalize to one of 'home_win'|'draw'|'away_win'
+  let pd = p.predictedDirection
+  const validDirs = ['home_win', 'draw', 'away_win']
+  if (typeof pd === 'string') {
+    // Map common automation variants to canonical form
+    const lower = pd.toLowerCase().replace(/[_-]/g, '')
+    if (lower === 'homewin' || lower === 'home' || lower === '1') pd = 'home_win'
+    else if (lower === 'draw' || lower === 'tie' || lower === 'x') pd = 'draw'
+    else if (lower === 'awaywin' || lower === 'away' || lower === '2') pd = 'away_win'
+    else if (!validDirs.includes(pd)) pd = undefined
+  } else if (typeof pd !== 'string') {
+    pd = undefined
+  }
+
   return {
     ...p,
     top5Scores: top5,
@@ -161,6 +175,7 @@ function normalizeSinglePrediction(p) {
     ...(gt !== undefined && { goalTimeline: gt }),
     ...(br !== undefined && { bankroll: br }),
     ...(ec !== undefined && { eloChanges: ec }),
+    ...(pd !== undefined && { predictedDirection: pd }),
   }
 }
 
@@ -201,11 +216,19 @@ function computeModelState(matches, predictions, existingModelState) {
     const actualScore = `${m.homeScore}:${m.awayScore}`
     const totalGoals = m.homeScore + m.awayScore
 
-    // Direction accuracy
+    // Direction accuracy — fallback to probability-based direction if predictedDirection missing
     const actualDir = m.homeScore > m.awayScore ? 'home_win'
       : m.homeScore < m.awayScore ? 'away_win' : 'draw'
     if (actualDir === 'draw') drawCount++
-    if (pred.predictedDirection === actualDir) {
+
+    let predDir = pred.predictedDirection
+    if (!predDir && typeof pred.homeWinProb === 'number' && typeof pred.awayWinProb === 'number') {
+      // Infer direction from probabilities when explicit field is missing
+      if (pred.homeWinProb > pred.awayWinProb && pred.homeWinProb > (pred.drawProb || 0)) predDir = 'home_win'
+      else if (pred.awayWinProb > pred.homeWinProb && pred.awayWinProb > (pred.drawProb || 0)) predDir = 'away_win'
+      else predDir = 'draw'
+    }
+    if (predDir === actualDir) {
       directionCorrect++
     }
 

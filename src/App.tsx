@@ -18,42 +18,46 @@ export default function App() {
   // Remote data source (fetched once on mount from GitHub Pages)
   const { data: remoteData, loading: remoteLoading } = useRemoteData()
 
-  // Merge remote predictions/reviews (remote takes priority over static)
-  const mergedPreds = useMemo(() => ({ ...staticPreds, ...(remoteData?.predictions || {}) }), [staticPreds, remoteData])
+  // Merge remote predictions: field-level deep merge (remote updates, static safety net)
+  // CRITICAL: shallow spread {...static, ...remote} would overwrite entire predictions
+  // with potentially incomplete remote versions, losing safe default arrays.
+  const mergedPreds = useMemo(() => {
+    if (!remoteData?.predictions) return staticPreds
+    const result = { ...staticPreds }
+    for (const [id, remotePred] of Object.entries(remoteData.predictions)) {
+      if (!remotePred || typeof remotePred !== 'object') continue
+      const staticPred = staticPreds[id]
+      if (staticPred) {
+        // Field-level merge: remote overrides, but static keeps non-empty arrays when remote gives empty/null
+        result[id] = mergePredictionFields(staticPred, remotePred as Record<string, unknown>)
+      } else {
+        // New prediction from automation: normalize critical fields
+        result[id] = ensureSafePrediction(remotePred as Record<string, unknown>)
+      }
+    }
+    return result
+  }, [staticPreds, remoteData])
   const mergedReviews = useMemo(() => ({ ...staticReviews, ...(remoteData?.reviews || {}) }), [staticReviews, remoteData])
 
-  // Normalize predictions: ensure top5Scores are always object arrays (defense against string-format data)
-  const normalizedPreds = useMemo(() => {
-    const result = { ...mergedPreds }
-    for (const id of Object.keys(result)) {
-      const p = result[id]
-      if (!p?.top5Scores?.length) continue
-      // Check if top5Scores are strings (e.g., ["2-1"]) → normalize to objects
-      if (typeof p.top5Scores[0] === 'string') {
-        result[id] = {
-          ...p,
-          top5Scores: p.top5Scores.map((s: any, i: number) => ({
-            score: String(s).replace(/-/g, ':'),
-            probability: 0.10 + i * 0.03, // fallback distribution
-            quadrant: 'Q1',
-            reason: '自动化生成预测',
-          })),
-        }
-      }
+  // Runtime safety net: normalize critical prediction fields before rendering
+  const safePredictions = useMemo(() => {
+    const result: Record<string, any> = {}
+    for (const [id, p] of Object.entries(mergedPreds)) {
+      result[id] = ensureSafePrediction(p as Record<string, unknown>)
     }
     return result
   }, [mergedPreds])
 
   // Merge rich data (factorBreakdown, appliedLearnings, eloChanges, etc.) into predictions and reviews
   const enrichedPreds = useMemo(() => {
-    const result = { ...normalizedPreds }
+    const result = { ...safePredictions }
     for (const id in predictionRichData) {
       if (result[id]) {
         result[id] = { ...result[id], ...predictionRichData[id as keyof typeof predictionRichData] }
       }
     }
     return result
-  }, [normalizedPreds])
+  }, [safePredictions])
 
   // Use remote data when available, fall back to static
   const displayModelState = useMemo(() => remoteData?.modelState || modelState, [remoteData])
@@ -216,6 +220,78 @@ export default function App() {
       </footer>
     </div>
   )
+}
+
+/**
+ * Field-level merge: remote overrides static, but static non-empty arrays are
+ * preserved when remote provides empty/null arrays. This prevents incomplete
+ * automation data from blowing away safe defaults.
+ */
+function mergePredictionFields(staticPred: Record<string, unknown>, remotePred: Record<string, unknown>): Record<string, unknown> {
+  const merged = { ...staticPred }
+  for (const [key, remoteVal] of Object.entries(remotePred)) {
+    if (remoteVal === undefined) continue // Skip undefined — keep static
+    const staticVal = merged[key]
+    // Preserve static non-empty arrays when remote provides empty/null
+    if (Array.isArray(staticVal) && staticVal.length > 0) {
+      if (!Array.isArray(remoteVal) || (remoteVal as unknown[]).length === 0) {
+        continue // Keep static array
+      }
+    }
+    merged[key] = remoteVal
+  }
+  return merged
+}
+
+/**
+ * Runtime safety net: ensures every prediction object has safe default values
+ * for all array fields that MatchDetail iterates with .map().
+ * Prevents "Cannot read property 'map' of undefined" crashes.
+ */
+function ensureSafePrediction(p: Record<string, unknown>): Record<string, unknown> {
+  if (!p || typeof p !== 'object') return p
+  const result = { ...p }
+
+  // top5Scores: MUST be object array. String elements → normalize
+  if (Array.isArray(result.top5Scores) && result.top5Scores.length > 0) {
+    if (typeof result.top5Scores[0] === 'string') {
+      result.top5Scores = (result.top5Scores as string[]).map((s: string, i: number) => ({
+        score: String(s).replace(/-/g, ':'),
+        probability: 0.10 + i * 0.03,
+        quadrant: 'Q1',
+        reason: '自动化生成预测',
+      }))
+    }
+  } else if (!Array.isArray(result.top5Scores)) {
+    result.top5Scores = [{ score: '?', probability: 0, quadrant: 'Q2', reason: '无数据' }]
+  }
+
+  // riskWarnings: MUST be string array
+  if (!Array.isArray(result.riskWarnings)) {
+    result.riskWarnings = ['暂无风险提示数据']
+  }
+
+  // mviAnalysis: MUST be object array
+  if (!Array.isArray(result.mviAnalysis)) {
+    result.mviAnalysis = []
+  }
+
+  // parlayRecommendations: MUST be array
+  if (!Array.isArray(result.parlayRecommendations)) {
+    result.parlayRecommendations = []
+  }
+
+  // appliedLearnings: allow undefined (guarded by && check), but ensure array if present
+  if (result.appliedLearnings !== undefined && !Array.isArray(result.appliedLearnings)) {
+    result.appliedLearnings = undefined
+  }
+
+  // factorBreakdown: allow undefined, but ensure object if present
+  if (result.factorBreakdown !== undefined && (typeof result.factorBreakdown !== 'object' || result.factorBreakdown === null || Array.isArray(result.factorBreakdown))) {
+    result.factorBreakdown = undefined
+  }
+
+  return result
 }
 
 function TabBtn({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {

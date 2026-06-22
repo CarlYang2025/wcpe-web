@@ -67,7 +67,7 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
       {/* ====== 2. 数据分析 ====== */}
       <section className="bg-[#141937] border border-[#1a1f3a] rounded-xl p-5">
         <M num="2" label="数据分析" />
-        {ra ? (
+        {ra && (ra.formData || ra.h2h || ra.lineup) ? (
           <div className="space-y-3 text-xs text-[#a0a0a0] leading-relaxed">
             {ra.formData && <div><h4 className="text-[#54a0ff] font-bold mb-1">📈 近期战绩</h4><p>{ra.formData}</p></div>}
             {ra.h2h && <div className="pt-1"><h4 className="text-[#ffa502] font-bold mb-1">🤝 历史交锋</h4><p>{ra.h2h}</p></div>}
@@ -193,7 +193,7 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
       <section className="bg-[#141937] border border-[#1a1f3a] rounded-xl p-5">
         <M num="7" label="TOP5 比分预测" />
         <div className="space-y-2 mb-3">
-          {prediction.top5Scores.map((s, i) => {
+          {(prediction.top5Scores || []).map((s: any, i: number) => {
             const c = QUADRANT_COLORS[s.quadrant]
             return (
               <div key={i} className="flex items-center gap-2 text-xs">
@@ -257,7 +257,7 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
       <section className="bg-[#141937] border border-[#1a1f3a] rounded-xl p-5">
         <M num="11" label="风险提示" />
         <div className="space-y-2 mb-4">
-          {prediction.riskWarnings.map((r, i) => (
+          {(prediction.riskWarnings ?? []).map((r, i) => (
             <div key={i} className="flex items-start gap-2 text-xs text-[#a0a0a0]"><span className="text-[#ff4757] font-bold">!</span><span>{r}</span></div>
           ))}
         </div>
@@ -315,7 +315,7 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
                 <ul className="space-y-0.5">{review.errorReasons.map((e, i) => <li key={i} className="text-[10px] text-[#a0a0a0]">• {e}</li>)}</ul>
               </div>
             )}
-            {review.optimizationSuggestions.length > 0 && (
+            {review.optimizationSuggestions?.length > 0 && (
               <div className="bg-[#a55eea]/5 border border-[#a55eea]/20 rounded-lg p-3">
                 <h4 className="text-xs text-[#a55eea] font-bold mb-1">💡 模型优化</h4>
                 <ul className="space-y-0.5">{review.optimizationSuggestions.map((o, i) => <li key={i} className="text-[10px] text-[#a0a0a0]">• {o}</li>)}</ul>
@@ -345,7 +345,7 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
             {review.rootCause && (
               <div className="bg-[#ff4757]/5 border border-[#ff4757]/20 rounded-lg p-3">
                 <h4 className="text-xs text-[#ff4757] font-bold mb-1">🔬 模型根因</h4>
-                <p className="text-[10px] text-[#a0a0a0] leading-relaxed">{review.rootCause}</p>
+                <p className="text-[10px] text-[#a0a0a0] leading-relaxed">{typeof review.rootCause === 'string' ? review.rootCause : JSON.stringify(review.rootCause)}</p>
               </div>
             )}
             {/* ELO变化 */}
