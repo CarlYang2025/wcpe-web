@@ -242,6 +242,11 @@ class ErrorBoundary extends Component<{ children: React.ReactNode }, { hasError:
           <div className="text-4xl">⚠️</div>
           <p className="text-[#a0a0a0]">页面出现异常，请刷新重试</p>
           <p className="text-[10px] text-[#555555] font-mono">{this.state.error?.message}</p>
+          {this.state.error?.stack && (
+            <pre className="text-[9px] text-[#555555] font-mono text-left max-w-lg mx-auto whitespace-pre-wrap break-all bg-[#0a0e27] p-3 rounded overflow-auto max-h-48">
+              {this.state.error.stack}
+            </pre>
+          )}
           <button onClick={() => { this.setState({ hasError: false, error: null }); window.location.reload() }}
             className="px-4 py-2 text-xs rounded-lg bg-[#1a1f3a] text-[#ffd700] hover:bg-[#252b4a] transition-colors">
             刷新页面
