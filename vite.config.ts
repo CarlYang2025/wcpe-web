@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: '/wcpe-web/',
   build: {
-    minify: 'terser',
+    minify: false,
+    sourcemap: true,
   },
 })
