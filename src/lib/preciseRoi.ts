@@ -104,8 +104,11 @@ function parlayResult(pred: Prediction, dirHit: boolean): {
   let hitCount = 0
   let totalOdds = 0
   for (const p of pred.parlayRecommendations) {
+    // 兼容两种数据格式：selections (旧) / matches (新)
+    const sels = p.selections ?? p.matches ?? []
+    if (!Array.isArray(sels)) continue
     let allHit = true
-    for (const sel of p.selections) {
+    for (const sel of sels) {
       const s = sel.toLowerCase()
       if (s.includes('胜') || s.includes('win')) {
         if (!dirHit) allHit = false
@@ -116,7 +119,8 @@ function parlayResult(pred: Prediction, dirHit: boolean): {
     }
     if (allHit) {
       hitCount++
-      totalOdds += p.odds
+      // 兼容两种赔率字段：odds (旧) / estOdds (新)
+      totalOdds += (p.odds ?? p.estOdds ?? 0)
     }
   }
   return { hit: hitCount > 0, odds: totalOdds, count: pred.parlayRecommendations.length, hitCount }

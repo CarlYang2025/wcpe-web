@@ -1043,7 +1043,7 @@ export const predictions: Record<string, Prediction> = {
       { bet: '小 2.5 球', modelProb: 0.42, marketProb: 0.48, mvi: 0.88, rating: '无价值' },
     ],
     parlayRecommendations: [
-      { type: '稳健串关', matches: ['esp-ksa-2 西班牙胜', 'nzl-egy-2 埃及胜'], hitProb: 0.58, estOdds: 2.15, risk: '低' },
+      { type: '稳健', selections: ['esp-ksa-2 西班牙胜', 'nzl-egy-2 埃及胜'], odds: 2.15, probability: 0.58, risk: 'Low' },
     ],
     bankroll: {
       conservative: { allocations: { '胜平负': 55, '比分': 10, '大小球': 25, '串关': 10 }, expectedReturn: 9 },
@@ -1070,8 +1070,8 @@ export const predictions: Record<string, Prediction> = {
       { bet: '平局', modelProb: 0.26, marketProb: 0.25, mvi: 1.04, rating: '一般价值' },
     ],
     parlayRecommendations: [
-      { type: '稳健串关', matches: ['bel-irn-2 比利时胜', 'esp-ksa-2 西班牙胜'], hitProb: 0.55, estOdds: 2.30, risk: '低' },
-      { type: '平衡串关', matches: ['bel-irn-2 比利时胜', 'nzl-egy-2 埃及胜', 'esp-ksa-2 西班牙胜'], hitProb: 0.38, estOdds: 3.80, risk: '中' },
+      { type: '稳健', selections: ['bel-irn-2 比利时胜', 'esp-ksa-2 西班牙胜'], odds: 2.30, probability: 0.55, risk: 'Low' },
+      { type: '平衡', selections: ['bel-irn-2 比利时胜', 'nzl-egy-2 埃及胜', 'esp-ksa-2 西班牙胜'], odds: 3.80, probability: 0.38, risk: 'Medium' },
     ],
     bankroll: {
       conservative: { allocations: { '胜平负': 50, '大小球': 30, '比分': 10, '串关': 10 }, expectedReturn: 8 },
@@ -1098,7 +1098,7 @@ export const predictions: Record<string, Prediction> = {
       { bet: '小 2.5 球', modelProb: 0.50, marketProb: 0.48, mvi: 1.04, rating: '一般价值' },
     ],
     parlayRecommendations: [
-      { type: '保守串关', matches: ['uru-cpv-2 平局保护', 'nzl-egy-2 埃及胜'], hitProb: 0.18, estOdds: 5.20, risk: '高' },
+      { type: '高赔', selections: ['uru-cpv-2 平局保护', 'nzl-egy-2 埃及胜'], odds: 5.20, probability: 0.18, risk: 'High' },
     ],
     bankroll: {
       conservative: { allocations: { '胜平负': 40, '平局保护': 20, '大小球': 20, '比分': 10, '串关': 10 }, expectedReturn: 6 },
@@ -1125,8 +1125,8 @@ export const predictions: Record<string, Prediction> = {
       { bet: '埃及胜', modelProb: 0.70, marketProb: 0.65, mvi: 1.08, rating: '一般价值' },
     ],
     parlayRecommendations: [
-      { type: '稳健串关', matches: ['nzl-egy-2 埃及胜', 'esp-ksa-2 西班牙胜'], hitProb: 0.58, estOdds: 2.15, risk: '低' },
-      { type: '平衡串关', matches: ['nzl-egy-2 埃及胜', 'bel-irn-2 比利时胜', 'esp-ksa-2 西班牙胜'], hitProb: 0.35, estOdds: 3.50, risk: '中' },
+      { type: '稳健', selections: ['nzl-egy-2 埃及胜', 'esp-ksa-2 西班牙胜'], odds: 2.15, probability: 0.58, risk: 'Low' },
+      { type: '平衡', selections: ['nzl-egy-2 埃及胜', 'bel-irn-2 比利时胜', 'esp-ksa-2 西班牙胜'], odds: 3.50, probability: 0.35, risk: 'Medium' },
     ],
     bankroll: {
       conservative: { allocations: { '胜平负': 55, '比分': 10, '大小球': 25, '串关': 10 }, expectedReturn: 8 },
