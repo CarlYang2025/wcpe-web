@@ -22,16 +22,38 @@ export default function App() {
   const mergedPreds = useMemo(() => ({ ...staticPreds, ...(remoteData?.predictions || {}) }), [staticPreds, remoteData])
   const mergedReviews = useMemo(() => ({ ...staticReviews, ...(remoteData?.reviews || {}) }), [staticReviews, remoteData])
 
+  // Normalize predictions: ensure top5Scores are always object arrays (defense against string-format data)
+  const normalizedPreds = useMemo(() => {
+    const result = { ...mergedPreds }
+    for (const id of Object.keys(result)) {
+      const p = result[id]
+      if (!p?.top5Scores?.length) continue
+      // Check if top5Scores are strings (e.g., ["2-1"]) → normalize to objects
+      if (typeof p.top5Scores[0] === 'string') {
+        result[id] = {
+          ...p,
+          top5Scores: p.top5Scores.map((s: any, i: number) => ({
+            score: String(s).replace(/-/g, ':'),
+            probability: 0.10 + i * 0.03, // fallback distribution
+            quadrant: 'Q1',
+            reason: '自动化生成预测',
+          })),
+        }
+      }
+    }
+    return result
+  }, [mergedPreds])
+
   // Merge rich data (factorBreakdown, appliedLearnings, eloChanges, etc.) into predictions and reviews
   const enrichedPreds = useMemo(() => {
-    const result = { ...mergedPreds }
+    const result = { ...normalizedPreds }
     for (const id in predictionRichData) {
       if (result[id]) {
         result[id] = { ...result[id], ...predictionRichData[id as keyof typeof predictionRichData] }
       }
     }
     return result
-  }, [mergedPreds])
+  }, [normalizedPreds])
 
   // Use remote data when available, fall back to static
   const displayModelState = useMemo(() => remoteData?.modelState || modelState, [remoteData])

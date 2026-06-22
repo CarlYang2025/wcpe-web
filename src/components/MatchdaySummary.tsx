@@ -10,7 +10,13 @@ const MARGIN_OU = 0.93    // 大小球  ~7%
 const MARGIN_SCORE = 0.75 // 比分    ~25%（比分盘抽水远超其他盘口）
 const dirOdds = (p: Prediction) => +(p.predictedDirection === 'home_win' ? _d(p.homeWinProb) * MARGIN_DIR : p.predictedDirection === 'away_win' ? _d(p.awayWinProb) * MARGIN_DIR : _d(p.drawProb) * MARGIN_DIR).toFixed(2)
 const ouOdds = (p: Prediction, over: boolean) => +(_d(over ? p.over25Prob : p.under25Prob) * MARGIN_OU).toFixed(2)
-const scoreOdds = (p: Prediction, pos: number) => +(_d(p.top5Scores[pos].probability) * MARGIN_SCORE).toFixed(2)
+const scoreOdds = (p: Prediction, pos: number) => {
+  const item = p.top5Scores[pos]
+  // 防御：兼容 string 格式和 object 格式的 top5Scores
+  const prob = (typeof item === 'object' && item !== null ? (item as any).probability : 0) ?? 0
+  if (prob <= 0) return 0
+  return +(_d(prob) * MARGIN_SCORE).toFixed(2)
+}
 
 interface Props {
   allMatches: Match[]
@@ -297,13 +303,18 @@ export default function MatchdaySummary(props: Props) {
                 <div className="text-[10px] text-[#a0a0a0] mb-2">
                   {flag(m.homeTeam)} {cn(m.homeTeam)} vs {cn(m.awayTeam)} {flag(m.awayTeam)}
                 </div>
-                {p.top5Scores.slice(0, 5).map((s, idx) => (
-                  <div key={idx} className="flex items-center text-[10px] py-0.5">
-                    <span className="w-4 text-[#ffd700] font-bold">#{idx + 1}</span>
-                    <span className="w-8 font-mono text-white font-bold">{s.score}</span>
-                    <span className="text-[#a0a0a0] ml-1">{Math.round(s.probability * 100)}%</span>
-                  </div>
-                ))}
+                {p.top5Scores.slice(0, 5).map((s, idx) => {
+                  const isStr = typeof s === 'string'
+                  const score = isStr ? s : (s as any).score
+                  const prob = isStr ? 0 : ((s as any).probability ?? 0)
+                  return (
+                    <div key={idx} className="flex items-center text-[10px] py-0.5">
+                      <span className="w-4 text-[#ffd700] font-bold">#{idx + 1}</span>
+                      <span className="w-8 font-mono text-white font-bold">{score}</span>
+                      <span className="text-[#a0a0a0] ml-1">{prob > 0 ? Math.round(prob * 100) + '%' : ''}</span>
+                    </div>
+                  )
+                })}
                 <div className="mt-2 pt-2 border-t border-[#141937] text-[9px] text-[#ff4757] truncate">
                   ⚠️ {p.riskWarnings[0]?.slice(0, 35) || '无'}
                 </div>
@@ -379,8 +390,8 @@ function generateAllocExamples(
       if (!p || !p.top5Scores?.length) return
       const piece = Math.floor(amount / 4)
       const s1 = p.top5Scores[0], s2 = p.top5Scores[1]
-      if (s1) { const o1 = scoreOdds(p, 0); examples.push(`${cn(m.homeTeam)} vs ${cn(m.awayTeam)} → ${s1.score} @${o1.toFixed(2)} 投${piece}% → 回${Math.round(piece * o1)}%`) }
-      if (s2) { const o2 = scoreOdds(p, 1); examples.push(`                    → ${s2.score} @${o2.toFixed(2)} 投${piece}% → 回${Math.round(piece * o2)}%`) }
+      if (s1 && typeof s1 === 'object') { const o1 = scoreOdds(p, 0); const score1 = (s1 as any).score ?? String(s1); examples.push(`${cn(m.homeTeam)} vs ${cn(m.awayTeam)} → ${score1} @${o1.toFixed(2)} 投${piece}% → 回${Math.round(piece * o1)}%`) }
+      if (s2 && typeof s2 === 'object') { const o2 = scoreOdds(p, 1); const score2 = (s2 as any).score ?? String(s2); examples.push(`                    → ${score2} @${o2.toFixed(2)} 投${piece}% → 回${Math.round(piece * o2)}%`) }
     })
   } else if (label === '串关') {
     const picks = sorted.slice(0, 3)
@@ -454,10 +465,10 @@ function RemainingOptimization({
     const top5 = p.top5Scores
     if (!top5?.length) return
     const s1 = top5[0], s2 = top5[1]
-    if (s1) { const o1 = scoreOdds(p, 0); suggestions.push({ match: name, bet: `${s1.score} @${o1.toFixed(2)}`, odds: o1, alloc: 6,
-      reason: `TOP1比分，概率${Math.round(s1.probability*100)}%` }) }
-    if (s2) { const o2 = scoreOdds(p, 1); suggestions.push({ match: name, bet: `${s2.score} @${o2.toFixed(2)}`, odds: o2, alloc: 4,
-      reason: `TOP2比分，概率${Math.round(s2.probability*100)}%` }) }
+    if (s1 && typeof s1 === 'object') { const o1 = scoreOdds(p, 0); const score1 = (s1 as any).score ?? String(s1); suggestions.push({ match: name, bet: `${score1} @${o1.toFixed(2)}`, odds: o1, alloc: 6,
+      reason: `TOP1比分，概率${Math.round((s1 as any).probability*100)}%` }) }
+    if (s2 && typeof s2 === 'object') { const o2 = scoreOdds(p, 1); const score2 = (s2 as any).score ?? String(s2); suggestions.push({ match: name, bet: `${score2} @${o2.toFixed(2)}`, odds: o2, alloc: 4,
+      reason: `TOP2比分，概率${Math.round((s2 as any).probability*100)}%` }) }
 
     // O/U bet
     const over = p.over25Prob > 0.5
