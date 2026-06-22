@@ -22,14 +22,13 @@ const staticFactorWeights = {
 
 /**
  * Normalize parlayRecommendations to use 'selections' field consistently.
- * Handles both 'matches' (new format) and 'selections' (old format) keys.
- * Also normalizes odds/probability field names.
  */
 function normalizeParlayRecommendations(pr) {
-  if (!Array.isArray(pr)) return pr
+  if (!Array.isArray(pr)) return []
   return pr.map(p => ({
-    type: p.type,
-    selections: Array.isArray(p.selections) ? p.selections : (Array.isArray(p.matches) ? p.matches : (p.selections || p.matches || [])),
+    type: p.type || '未命名',
+    selections: Array.isArray(p.selections) ? p.selections
+      : (Array.isArray(p.matches) ? p.matches : []),
     odds: p.odds ?? p.estOdds ?? 0,
     probability: p.probability ?? p.hitProb ?? 0,
     risk: p.risk || 'Medium',
@@ -37,16 +36,142 @@ function normalizeParlayRecommendations(pr) {
 }
 
 /**
- * Normalize predictions: ensure parlayRecommendations use 'selections' field
+ * Normalize a single prediction to standard format.
+ * This is the single choke point — no matter what format the automation
+ * produces, this function ensures every field meets the expected contract.
+ *
+ * Standard format for each field:
+ *   top5Scores: Array<{score:string, probability:number, quadrant:string, reason:string}>
+ *   parlayRecommendations: Array<{type:string, selections:string[], odds:number, probability:number, risk:string}>
+ *   mviAnalysis: Array<{bet:string, modelProb:number, marketProb:number, mvi:number, rating:string}>
+ *   riskWarnings: string[]
+ *   appliedLearnings: string[]
+ *   bankroll: { conservative: {allocations:Record<string,number>, expectedReturn:number},
+ *               balanced: ..., aggressive: ... }
+ */
+function normalizeSinglePrediction(p) {
+  if (!p || typeof p !== 'object') return p
+
+  // 1. top5Scores: always array of objects. String elements → {score, probability, quadrant, reason}
+  let top5 = p.top5Scores
+  if (!Array.isArray(top5)) {
+    top5 = []
+  } else {
+    top5 = top5.map((s, i) => {
+      if (typeof s === 'string') {
+        return {
+          score: s,
+          probability: 0.10 + i * 0.03,
+          quadrant: 'Q2',
+          reason: '自动化生成预测（字符串格式已标准化）',
+        }
+      }
+      if (typeof s === 'object' && s !== null) {
+        return {
+          score: s.score ?? String(s),
+          probability: s.probability ?? (0.10 + i * 0.03),
+          quadrant: s.quadrant || 'Q2',
+          reason: s.reason || '预测生成',
+        }
+      }
+      return { score: String(s), probability: 0.08, quadrant: 'Q2', reason: '标准化兜底' }
+    })
+  }
+
+  // 2. parlayRecommendations: already normalized by parent, ensure array
+  const parlay = normalizeParlayRecommendations(p.parlayRecommendations)
+
+  // 3. mviAnalysis: always array of objects
+  let mvi = p.mviAnalysis
+  if (!Array.isArray(mvi)) {
+    mvi = []
+  } else {
+    mvi = mvi.filter(item => item && typeof item === 'object').map(item => ({
+      bet: item.bet ?? '',
+      modelProb: item.modelProb ?? 0,
+      marketProb: item.marketProb ?? 0,
+      mvi: item.mvi ?? 0,
+      rating: item.rating || '未评估',
+    }))
+  }
+
+  // 4. riskWarnings: always string[]
+  let rw = p.riskWarnings
+  if (!Array.isArray(rw)) {
+    rw = []
+  } else {
+    rw = rw.filter(w => w != null).map(w => String(w))
+  }
+
+  // 5. appliedLearnings: always string[]
+  let al = p.appliedLearnings
+  if (!Array.isArray(al)) {
+    al = []
+  } else {
+    al = al.filter(l => l != null).map(l => String(l))
+  }
+
+  // 6. factorBreakdown: ensure object or undefined (never null/array)
+  let fb = p.factorBreakdown
+  if (fb === null || Array.isArray(fb)) {
+    fb = undefined
+  }
+
+  // 7. goalTimeline: ensure array or undefined
+  let gt = p.goalTimeline
+  if (gt !== undefined && !Array.isArray(gt)) {
+    gt = undefined
+  }
+
+  // 8. bankroll: ensure valid structure
+  let br = p.bankroll
+  if (br && typeof br === 'object') {
+    const plans = ['conservative', 'balanced', 'aggressive']
+    const normalizedBr = {}
+    for (const plan of plans) {
+      const pl = br[plan]
+      if (pl && typeof pl === 'object') {
+        normalizedBr[plan] = {
+          allocations: (pl.allocations && typeof pl.allocations === 'object') ? pl.allocations : {},
+          expectedReturn: typeof pl.expectedReturn === 'number' ? pl.expectedReturn : 0,
+        }
+      } else {
+        normalizedBr[plan] = { allocations: {}, expectedReturn: 0 }
+      }
+    }
+    br = normalizedBr
+  } else {
+    br = undefined
+  }
+
+  // 9. eloChanges: ensure array or undefined
+  let ec = p.eloChanges
+  if (ec !== undefined && !Array.isArray(ec)) {
+    ec = undefined
+  }
+
+  return {
+    ...p,
+    top5Scores: top5,
+    parlayRecommendations: parlay,
+    mviAnalysis: mvi,
+    riskWarnings: rw,
+    appliedLearnings: al,
+    ...(fb !== undefined && { factorBreakdown: fb }),
+    ...(gt !== undefined && { goalTimeline: gt }),
+    ...(br !== undefined && { bankroll: br }),
+    ...(ec !== undefined && { eloChanges: ec }),
+  }
+}
+
+/**
+ * Normalize predictions: full structural standardization for every prediction
  */
 function normalizePredictions(preds) {
   if (!preds || typeof preds !== 'object') return {}
   const result = {}
   for (const [id, p] of Object.entries(preds)) {
-    result[id] = {
-      ...p,
-      parlayRecommendations: normalizeParlayRecommendations(p.parlayRecommendations || []),
-    }
+    result[id] = normalizeSinglePrediction(p)
   }
   return result
 }
