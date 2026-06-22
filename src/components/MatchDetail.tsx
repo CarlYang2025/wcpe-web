@@ -168,7 +168,13 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
       )}
 
       {/* ====== 历史教训应用 ====== */}
-      {prediction.appliedLearnings && prediction.appliedLearnings.length > 0 && (
+      {prediction.appliedLearnings && prediction.appliedLearnings.length > 0 && (() => {
+        // Only show if at least one item has meaningful lesson content (>4 chars)
+        const hasRealContent = prediction.appliedLearnings.some(
+          (al: any) => al?.lesson && al.lesson.length > 4 && al.lesson !== '历史经验'
+        )
+        return hasRealContent
+      })() && (
         <section className="bg-[#141937] border border-[#1a1f3a] rounded-xl p-5">
           <M num="6" label="历史教训应用" />
           <p className="text-[10px] text-[#555555] mb-3">本场比赛借鉴了以下从已完赛中积累的经验：</p>

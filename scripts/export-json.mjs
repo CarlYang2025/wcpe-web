@@ -392,7 +392,53 @@ const remoteData = {
 }
 
 writeFileSync(outputPath, JSON.stringify(remoteData))
-console.log(`✅ remote.json written to ${outputPath} (${(JSON.stringify(remoteData).length / 1024).toFixed(0)} KB)`)
+
+// --- Post-process: fill empty appliedLearnings from keyLearnings ---
+// Automation often writes [object Object] or empty objects as appliedLearnings.
+// This pass detects placeholder content and fills it with relevant keyLearnings.
+const finalData = JSON.parse(readFileSync(outputPath, 'utf-8'))
+if (finalData.keyLearnings?.length > 0 && finalData.predictions) {
+  const kl = finalData.keyLearnings
+  const placeholder = '历史经验'
+  for (const id of Object.keys(finalData.predictions)) {
+    const pred = finalData.predictions[id]
+    if (!pred.appliedLearnings || !Array.isArray(pred.appliedLearnings) || pred.appliedLearnings.length === 0) continue
+
+    // Check if ALL items are placeholders (empty/meaningless)
+    const allPlaceholder = pred.appliedLearnings.every(
+      item => !item.lesson || item.lesson === placeholder || (item.lesson || '').trim().length < 4
+    )
+    if (!allPlaceholder) continue // Has real data, skip
+
+    // Find relevant keyLearnings based on match teams and score pattern
+    const match = finalData.matches?.find(m => m.id === id)
+    const homeTeam = (match?.homeTeam || '').toLowerCase()
+    const awayTeam = (match?.awayTeam || '').toLowerCase()
+    const scorePattern = `${match?.homeScore ?? ''}:${match?.awayScore ?? ''}`
+
+    // Score-based matching: find learnings that mention this score or these teams
+    const relevant = kl.filter(lesson => {
+      const l = lesson.toLowerCase()
+      return (
+        l.includes(scorePattern) ||
+        l.includes(homeTeam) ||
+        l.includes(awayTeam)
+      )
+    }).slice(0, 3)
+
+    // Fallback: pick the most recent learnings if no direct match found
+    const selected = relevant.length > 0 ? relevant : kl.slice(-Math.min(3, kl.length))
+
+    pred.appliedLearnings = selected.map((text, i) => ({
+      lesson: text,
+      adjustment: '',
+      impact: i % 2 === 0 ? '上调' : '下调',
+    }))
+  }
+  writeFileSync(outputPath, JSON.stringify(finalData))
+}
+
+console.log(`✅ remote.json written to ${outputPath} (${(JSON.stringify(finalData).length / 1024).toFixed(0)} KB)`)
 if (existingData) {
   console.log('   Merged existing automation data — predictions/reviews/ELO preserved')
 }
