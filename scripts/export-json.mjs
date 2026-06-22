@@ -228,20 +228,21 @@ function computeModelState(matches, predictions, existingModelState) {
   let scoreTop3Correct = 0
   let scoreTop1Correct = 0
   let totalPredicted = 0
-  let drawCount = 0
+  let drawCountPredicted = 0   // draws among matches with predictions
+  let drawCountAll = 0         // draws among ALL finished matches
 
   for (const m of finished) {
+    const isDraw = m.homeScore === m.awayScore
+    if (isDraw) drawCountAll++
+
     const pred = predictions[m.id]
     if (!pred) continue
     totalPredicted++
 
     const actualScore = `${m.homeScore}:${m.awayScore}`
-    const totalGoals = m.homeScore + m.awayScore
-
-    // Direction accuracy — fallback to probability-based direction if predictedDirection missing
     const actualDir = m.homeScore > m.awayScore ? 'home_win'
       : m.homeScore < m.awayScore ? 'away_win' : 'draw'
-    if (actualDir === 'draw') drawCount++
+    if (actualDir === 'draw') drawCountPredicted++
 
     let predDir = pred.predictedDirection
     if (!predDir && typeof pred.homeWinProb === 'number' && typeof pred.awayWinProb === 'number') {
@@ -274,9 +275,10 @@ function computeModelState(matches, predictions, existingModelState) {
     directionCorrect,
     scoreTop3Correct,
     scoreTop1Correct,
-    overallDrawRate: totalPredicted > 0 ? drawCount / totalPredicted : 0,
-    /** Number of actual draws among finished matches with predictions */
-    overallDrawCount: drawCount,
+    /** 平局率 = 所有已完赛中平局场次 / 总已完赛场次 */
+    overallDrawRate: finished.length > 0 ? drawCountAll / finished.length : 0,
+    /** 所有已完赛中的平局场次 */
+    overallDrawCount: drawCountAll,
     overallTotalMatches: finished.length,
     totalReviews: Object.keys(existingModelState?.totalReviews ? {} : {}).length || existingModelState?.totalReviews || 0,
   }
