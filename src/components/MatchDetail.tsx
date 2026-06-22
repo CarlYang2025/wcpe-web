@@ -107,48 +107,105 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
         {ra?.tactics ? (
           <p className="text-xs text-[#a0a0a0] leading-relaxed">{ra.tactics}</p>
         ) : (
-          <div className="text-xs text-[#a0a0a0] space-y-2">
+          <p className="text-xs text-[#a0a0a0] leading-relaxed">
             {(() => {
-              // Dynamic tactical summary based on available prediction data
-              const { predictedDirection, predictedScore, homeWinProb, drawProb, awayWinProb, over25Prob, factorBreakdown, riskLevel } = prediction
+              const { predictedDirection, predictedScore, homeWinProb, drawProb, awayWinProb, over25Prob, factorBreakdown, confidence, riskLevel, riskWarnings, top5Scores, mviAnalysis } = prediction
               const ft = factorBreakdown
-              
-              // Line 1: Style matchup based on predicted direction & probabilities
-              const styleLine = (() => {
-                if (predictedDirection === 'home_win') {
-                  if (homeWinProb > 0.55) return `🎯 ${homeName}主导控球压制，${homeWinProb > 0.65 ? '大概率' : '有望'}通过${ft?.tacticalScore && ft.tacticalScore > 0.6 ? '战术克制' : '进攻端优势'}拿下比赛`
-                  return `🎯 ${homeName}稍占上风，但${awayName}的${ft?.tacticalScore && ft.tacticalScore > 0.45 ? '战术纪律' : '防守韧性'}可能制造麻烦`
-                } else if (predictedDirection === 'away_win') {
-                  if (awayWinProb > 0.55) return `🎯 ${awayName}反客为主，${awayWinProb > 0.65 ? '大概率' : '有望'}通过${ft?.tacticalScore && ft.tacticalScore > 0.6 ? '战术克制' : '进攻端优势'}拿下比赛`
-                  return `🎯 ${awayName}稍占上风，但${homeName}主场${ft?.tacticalScore && ft.tacticalScore > 0.45 ? '战术纪律' : '防守韧性'}可能制造麻烦`
-                } else {
-                  return `🎯 双方势均力敌（主${Math.round(homeWinProb*100)}%/平${Math.round(drawProb*100)}%/客${Math.round(awayWinProb*100)}%），预计慢节奏拉锯战`
+              const isFinished = match.status === 'finished'
+              const actualScore = isFinished && match.homeScore !== undefined && match.awayScore !== undefined
+                ? `${match.homeScore}:${match.awayScore}` : null
+              const predCorrect = actualScore && predictedScore === actualScore
+
+              // Build a natural-language paragraph from all available data
+              const parts: string[] = []
+
+              // Opening: direction & key insight from top5Scores reason
+              const topReason = top5Scores?.[0]?.reason || ''
+              const secondReason = top5Scores?.[1]?.reason || ''
+              if (predictedDirection === 'home_win') {
+                const edge = ft?.eloDiffScore != null
+                  ? (ft.eloDiffScore > 0.7 ? '实力碾压' : ft.eloDiffScore > 0.45 ? '明显占优' : '稍占优势')
+                  : (homeWinProb > 0.65 ? '实力碾压' : homeWinProb > 0.5 ? '明显占优' : '稍占优势')
+                const reason = topReason || `${homeName}预计占据主动`
+                parts.push(`${homeName}${edge}。${reason}。`)
+              } else if (predictedDirection === 'away_win') {
+                const edge = ft?.eloDiffScore != null
+                  ? (ft.eloDiffScore < -0.7 ? '客队实力碾压' : ft.eloDiffScore < -0.45 ? '客队明显占优' : '客队稍占优势')
+                  : (awayWinProb > 0.65 ? '客队实力碾压' : awayWinProb > 0.5 ? '客队明显占优' : '客队稍占优势')
+                const reason = topReason || `${awayName}预计反客为主`
+                parts.push(`${awayName}${edge}。${reason}。`)
+              } else {
+                const h = Math.round(homeWinProb * 100)
+                const d = Math.round(drawProb * 100)
+                parts.push(`双方势均力敌（主胜${h}%/平${d}%/客胜${Math.round(awayWinProb*100)}%）。${secondReason || '预计进入慢节奏拉锯战。'}`)
+              }
+
+              // Middle: use riskWarnings as the most match-specific insight
+              if (riskWarnings && Array.isArray(riskWarnings) && riskWarnings.length > 0) {
+                // Pick the most concrete warning (not generic) - look for specific player names or stats
+                const concrete = riskWarnings.find(w => /[→]/.test(w)) || riskWarnings[0]
+                // Clean up the warning format: remove "→ 结论：" prefix if present, ensure trailing period
+                let cleaned = concrete
+                  .replace(/\s*→\s*结论[：:]?\s*/g, '：')
+                  .replace(/^\s*[-•]\s*/, '')
+                  .trim()
+                if (cleaned.length > 15) {
+                  if (!/[.!?。！？]$/.test(cleaned)) cleaned += '。'
+                  parts.push(cleaned)
                 }
-              })()
+              }
 
-              // Line 2: Goal expectation
-              const goalLine = (() => {
-                const score = predictedScore || ''
-                const [h, a] = score.split(':').map(Number)
-                const total = isNaN(h) || isNaN(a) ? null : h + a
-                if (total === null) {
-                  return over25Prob > 0.5 ? '⚽ 大球概率较高，预计进球偏多' : '⚽ 小球倾向明显，预计进球偏少'
+              // Goal context: use MVI if available for added nuance
+              const over25MVI = mviAnalysis?.find((m: any) => m.bet?.includes('2.5'))
+              const goalBet = over25MVI?.rating === '高价值' || over25MVI?.rating === '超级价值'
+                ? (over25MVI.bet?.startsWith('大') ? '大球价值偏高' : '小球价值偏高')
+                : null
+
+              const score = predictedScore || ''
+              const [h, a] = score.split(':').map(Number)
+              const total = isNaN(h) || isNaN(a) ? null : h + a
+              if (total && actualScore) {
+                // Finished match: compare prediction to actual
+                parts.push(`预测比分${predictedScore}${predCorrect ? '✓命中' : '，实际' + actualScore}。`)
+              } else if (total) {
+                const goalDesc = total >= 3 ? '偏向大球' : total <= 1 ? '偏向小球' : '攻守平衡'
+                const mviNote = goalBet ? `，${goalBet}` : ''
+                parts.push(`预计比分${predictedScore}，${goalDesc}（大球概率${Math.round(over25Prob*100)}%${mviNote}）。`)
+              }
+
+              // Closing: confidence + key factor insight
+              if (ft) {
+                // Find the highest and lowest factor scores to highlight
+                const factors = [
+                  { label: 'ELO差', val: ft.eloDiffScore },
+                  { label: '近期状态', val: ft.recentFormScore },
+                  { label: '交锋记录', val: ft.h2hScore },
+                  { label: '战术克制', val: ft.tacticalScore },
+                  { label: '阵容深度', val: ft.squadScore },
+                  { label: '市场预期', val: ft.marketScore },
+                  { label: '赛程压力', val: ft.pressureScore },
+                  { label: '心理因素', val: ft.psychologyScore },
+                ].filter(f => f.val != null && !isNaN(f.val))
+                if (factors.length >= 2) {
+                  const highest = factors.reduce((a, b) => a.val > b.val ? a : b)
+                  const lowest = factors.reduce((a, b) => a.val < b.val ? a : b)
+                  if (highest.val > 0.7) {
+                    parts.push(`关键驱动：${highest.label}(${Math.round(highest.val*100)}分)${highest.val > 0.85 ? '显著' : '较'}强。`)
+                  }
+                  if (lowest.val < 0.45) {
+                    parts.push(`风险因子：${lowest.label}(${Math.round(lowest.val*100)}分)偏低。`)
+                  }
                 }
-                if (total >= 3) return `⚽ 预计总进球≥${total}（大球概率${Math.round(over25Prob*100)}%），进攻端有望主导`
-                if (total <= 1) return `⚽ 预计总进球≤${total}（小球概率${Math.round((1-over25Prob)*100)}%），防守大战在即`
-                return `⚽ 预计总进球约${total}个，攻守平衡态势`
-              })()
+              }
 
-              // Line 3: Risk context
-              const riskLine = (() => {
-                if (riskLevel === 'Low') return `🛡️ 低风险比赛，${predictedDirection === 'draw' ? '平局概率偏高需注意' : '预测方向置信度较高'}`
-                if (riskLevel === 'High') return `⚠️ 高风险比赛，${ft?.psychologyScore && ft.psychologyScore < 0.4 ? '心理因素' : '不确定性'}较大，建议谨慎`
-                return `🛡️ 中等风险，${ft?.marketScore && ft.marketScore > 0.5 ? '市场数据与模型一致' : '需关注临场变化'}`
-              })()
+              // If we couldn't build anything meaningful, show simple data
+              if (parts.length === 0) {
+                return `预测方向${predictedDirection === 'home_win' ? homeName + '胜' : predictedDirection === 'away_win' ? awayName + '胜' : '平'}，预计比分${predictedScore}，置信度${Math.round(confidence*100)}%。`
+              }
 
-              return <>{[styleLine, goalLine, riskLine].map((line, i) => <p key={i}>{line}</p>)}</>
+              return parts.join('')
             })()}
-          </div>
+          </p>
         )}
       </section>
 
