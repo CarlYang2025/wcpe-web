@@ -80,7 +80,9 @@ export default function BankrollBreakdown({ bankroll, match, prediction }: Props
                     </div>
                     <div className="flex items-center gap-3">
                       <span className="text-[10px] text-[#555555]">投<span className="text-white">{l.alloc}%</span>
-                        {l.returns > 0 ? ` → 回<span className="text-[#ffd700]">${l.returns}%</span>` : ''}
+                        {l.returns > 0 ? (
+                          <> → 回<span className="text-[#ffd700]">{l.returns}%</span></>
+                        ) : null}
                       </span>
                     </div>
                   </div>

@@ -278,10 +278,10 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
               <div className="bg-[#1a1f3a] rounded-lg p-3 mb-3">
                 <h4 className="text-[10px] text-[#a0a0a0] font-bold mb-2">📊 比赛数据</h4>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-1 text-[10px]">
-                  <StatRow label="控球率" h={`${review.matchStats.possession.home}%`} a={`${review.matchStats.possession.away}%`} />
-                  <StatRow label="射门" h={String(review.matchStats.shots.home)} a={String(review.matchStats.shots.away)} />
-                  <StatRow label="射正" h={String(review.matchStats.shotsOnTarget.home)} a={String(review.matchStats.shotsOnTarget.away)} />
-                  <StatRow label="xG" h={review.matchStats.xg.home > 0 ? review.matchStats.xg.home.toFixed(1) : '-'} a={review.matchStats.xg.away > 0 ? review.matchStats.xg.away.toFixed(1) : '-'} />
+                  {review.matchStats.possession && <StatRow label="控球率" h={`${review.matchStats.possession.home}%`} a={`${review.matchStats.possession.away}%`} />}
+                  {review.matchStats.shots && <StatRow label="射门" h={String(review.matchStats.shots.home)} a={String(review.matchStats.shots.away)} />}
+                  {review.matchStats.shotsOnTarget && <StatRow label="射正" h={String(review.matchStats.shotsOnTarget.home)} a={String(review.matchStats.shotsOnTarget.away)} />}
+                  {review.matchStats.xg && <StatRow label="xG" h={review.matchStats.xg.home > 0 ? review.matchStats.xg.home.toFixed(1) : '-'} a={review.matchStats.xg.away > 0 ? review.matchStats.xg.away.toFixed(1) : '-'} />}
                   {review.matchStats.corners && <StatRow label="角球" h={String(review.matchStats.corners.home)} a={String(review.matchStats.corners.away)} />}
                   {review.matchStats.fouls && <StatRow label="犯规" h={String(review.matchStats.fouls.home)} a={String(review.matchStats.fouls.away)} />}
                   {review.matchStats.cards && (review.matchStats.cards.home.yellow > 0 || review.matchStats.cards.away.yellow > 0) && <StatRow label="黄牌" h={String(review.matchStats.cards.home.yellow)} a={String(review.matchStats.cards.away.yellow)} />}
@@ -297,19 +297,19 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
                 )}
               </div>
             )}
-            {review.hitItems.length > 0 && (
+            {review.hitItems?.length > 0 && (
               <div className="bg-[#00ff88]/5 border border-[#00ff88]/20 rounded-lg p-3">
                 <h4 className="text-xs text-[#00ff88] font-bold mb-1">✅ 命中项</h4>
                 <ul className="space-y-0.5">{review.hitItems.map((h, i) => <li key={i} className="text-[10px] text-[#a0a0a0]">• {h}</li>)}</ul>
               </div>
             )}
-            {review.missItems.length > 0 && (
+            {review.missItems?.length > 0 && (
               <div className="bg-[#ff4757]/5 border border-[#ff4757]/20 rounded-lg p-3">
                 <h4 className="text-xs text-[#ff4757] font-bold mb-1">❌ 失误项</h4>
                 <ul className="space-y-0.5">{review.missItems.map((m, i) => <li key={i} className="text-[10px] text-[#a0a0a0]">• {m}</li>)}</ul>
               </div>
             )}
-            {review.errorReasons.length > 0 && (
+            {review.errorReasons?.length > 0 && (
               <div className="bg-[#ffa502]/5 border border-[#ffa502]/20 rounded-lg p-3">
                 <h4 className="text-xs text-[#ffa502] font-bold mb-1">🔎 原因分析</h4>
                 <ul className="space-y-0.5">{review.errorReasons.map((e, i) => <li key={i} className="text-[10px] text-[#a0a0a0]">• {e}</li>)}</ul>
