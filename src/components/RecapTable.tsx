@@ -52,9 +52,10 @@ export default function RecapTable({ matches, predictions, reviews, onSelect }: 
             if (hasPrediction && hasResult) {
               const actualScore = `${match.homeScore}:${match.awayScore}`
               const top5 = pred!.top5Scores
-              if (top5?.length) {
-                scoreHitTop3 = top5.slice(0, 3).some(s => (typeof s === 'object' ? (s as any).score : s) === actualScore)
-                scoreHitTop1 = (typeof top5[0] === 'object' ? (top5[0] as any).score : top5[0]) === actualScore
+              if (Array.isArray(top5) && top5.length > 0) {
+                scoreHitTop3 = top5.slice(0, 3).some(s => (typeof s === 'object' && s !== null ? (s as any).score : s) === actualScore)
+                const first = top5[0]
+                scoreHitTop1 = (typeof first === 'object' && first !== null ? (first as any).score : first) === actualScore
               }
             }
 
@@ -116,7 +117,7 @@ export default function RecapTable({ matches, predictions, reviews, onSelect }: 
                 </td>
                 <td className="py-2.5 px-3 hidden md:table-cell">
                   <span className="text-[#a0a0a0] text-[10px] line-clamp-2 leading-relaxed">
-                    {review ? (review.errorReasons[0] || review.hitItems[0] || '—') : (hasPrediction ? '—' : '未预测')}
+                    {review ? ((Array.isArray(review.errorReasons) ? review.errorReasons[0] : undefined) || (Array.isArray(review.hitItems) ? review.hitItems[0] : undefined) || '—') : (hasPrediction ? '—' : '未预测')}
                   </span>
                 </td>
               </tr>
