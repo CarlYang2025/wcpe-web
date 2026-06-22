@@ -177,6 +177,83 @@ function normalizePredictions(preds) {
 }
 
 /**
+ * Recalculate modelState from actual match results + predictions.
+ * Runs on every build, so accuracy stats are ALWAYS fresh.
+ */
+function computeModelState(matches, predictions, existingModelState) {
+  const finished = matches.filter(m =>
+    m.status === 'finished' &&
+    m.homeScore !== undefined &&
+    m.awayScore !== undefined
+  )
+
+  let directionCorrect = 0
+  let scoreTop3Correct = 0
+  let scoreTop1Correct = 0
+  let totalPredicted = 0
+  let drawCount = 0
+
+  for (const m of finished) {
+    const pred = predictions[m.id]
+    if (!pred) continue
+    totalPredicted++
+
+    const actualScore = `${m.homeScore}:${m.awayScore}`
+    const totalGoals = m.homeScore + m.awayScore
+
+    // Direction accuracy
+    const actualDir = m.homeScore > m.awayScore ? 'home_win'
+      : m.homeScore < m.awayScore ? 'away_win' : 'draw'
+    if (actualDir === 'draw') drawCount++
+    if (pred.predictedDirection === actualDir) {
+      directionCorrect++
+    }
+
+    // Score accuracy
+    const top5 = pred.top5Scores
+    if (Array.isArray(top5) && top5.length > 0) {
+      const scores = top5.slice(0, 5).map(s =>
+        typeof s === 'object' && s !== null ? s.score : s
+      )
+      if (scores[0] === actualScore) scoreTop1Correct++
+      if (scores.slice(0, 3).includes(actualScore)) scoreTop3Correct++
+    }
+  }
+
+  const base = {
+    directionAccuracy: totalPredicted > 0 ? directionCorrect / totalPredicted : 0,
+    scoreTop3Accuracy: totalPredicted > 0 ? scoreTop3Correct / totalPredicted : 0,
+    scoreTop1Accuracy: totalPredicted > 0 ? scoreTop1Correct / totalPredicted : 0,
+    totalPredictions: totalPredicted,
+    completedPredictions: totalPredicted,
+    directionCorrect,
+    scoreTop3Correct,
+    scoreTop1Correct,
+    overallDrawRate: totalPredicted > 0 ? drawCount / totalPredicted : 0,
+    overallTotalMatches: finished.length,
+    totalReviews: Object.keys(existingModelState?.totalReviews ? {} : {}).length || existingModelState?.totalReviews || 0,
+  }
+
+  // Preserve automation-learned fields: factorWeights, totalLearnings, lastReviewDate
+  if (existingModelState) {
+    return {
+      ...base,
+      factorWeights: existingModelState.factorWeights || {},
+      totalLearnings: existingModelState.totalLearnings || 0,
+      lastReviewDate: existingModelState.lastReviewDate || new Date().toISOString(),
+      totalReviews: existingModelState.totalReviews || base.totalReviews,
+    }
+  }
+
+  return {
+    ...base,
+    factorWeights: {},
+    totalLearnings: 0,
+    lastReviewDate: new Date().toISOString(),
+  }
+}
+
+/**
  * Deep merge predictions: hardcoded provides complete structural baseline,
  * existing provides runtime updates. Hardcoded never loses fields to incomplete existing data.
  */
@@ -226,21 +303,6 @@ function mergePredictionFields(hc, ex) {
 
 // --- Build remote data ---
 
-// Start with hardcoded data as the base (always authoritative for match definitions)
-const hardcodedData = {
-  version: '2.1',
-  lastUpdated: new Date().toISOString(),
-  matches,
-  predictions: normalizePredictions(staticPreds),
-  reviews: staticReviews,
-  modelState: staticModelState,
-  keyLearnings: staticKeyLearnings,
-  eloRatings: teamRatings,
-  factorWeights: staticFactorWeights,
-  predictionRichData,
-  reviewRichData,
-}
-
 // Read existing remote.json (if any) to preserve automation outputs
 const outputPath = resolve(__dirname, '../src/data/remote.json')
 let existingData = null
@@ -252,26 +314,32 @@ if (existsSync(outputPath)) {
   }
 }
 
-// Merge strategy: existing automation data takes priority over hardcoded
+// Build merged matches and predictions first (needed for modelState computation)
+const mergedMatches = mergeMatches(matches, existingData?.matches)
+const mergedPredictions = deepMergePredictions(
+  normalizePredictions(staticPreds),
+  normalizePredictions(existingData?.predictions)
+)
+
+// Compute modelState FRESH from actual match data (not incremental patching)
+const computedModelState = computeModelState(mergedMatches, mergedPredictions, existingData?.modelState)
+
+// Build final remote data
 const remoteData = {
-  ...hardcodedData,
-  // Merge matches: hardcoded is base, existing adds/overrides scores
-  matches: mergeMatches(hardcodedData.matches, existingData?.matches),
-  // Merge predictions: hardcoded as base, existing overlays (deep per-prediction merge)
-  predictions: deepMergePredictions(hardcodedData.predictions, normalizePredictions(existingData?.predictions)),
-  // Merge reviews: existing automation reviews win
+  version: '2.1',
+  lastUpdated: new Date().toISOString(),
+  matches: mergedMatches,
+  predictions: mergedPredictions,
   reviews: {
-    ...hardcodedData.reviews,
+    ...staticReviews,
     ...(existingData?.reviews || {}),
   },
-  // Automation-driven fields: always take from existing if present
-  modelState: existingData?.modelState || hardcodedData.modelState,
-  keyLearnings: existingData?.keyLearnings || hardcodedData.keyLearnings,
-  eloRatings: existingData?.eloRatings || hardcodedData.eloRatings,
-  factorWeights: existingData?.factorWeights || hardcodedData.factorWeights,
-  // Rich data: existing wins (automation may add more)
-  predictionRichData: { ...hardcodedData.predictionRichData, ...(existingData?.predictionRichData || {}) },
-  reviewRichData: { ...hardcodedData.reviewRichData, ...(existingData?.reviewRichData || {}) },
+  modelState: computedModelState,
+  keyLearnings: existingData?.keyLearnings || staticKeyLearnings,
+  eloRatings: existingData?.eloRatings || teamRatings,
+  factorWeights: existingData?.factorWeights || staticFactorWeights,
+  predictionRichData: { ...predictionRichData, ...(existingData?.predictionRichData || {}) },
+  reviewRichData: { ...reviewRichData, ...(existingData?.reviewRichData || {}) },
 }
 
 writeFileSync(outputPath, JSON.stringify(remoteData))
