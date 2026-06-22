@@ -20,8 +20,9 @@ export function useRemoteData(): { data: RemoteData | null; loading: boolean } {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Try fetch but don't depend on it - static data has everything now
-    fetch(DATA_URL)
+    // Cache-bust: append timestamp to force fresh fetch every load
+    const url = `${DATA_URL}?t=${Date.now()}`
+    fetch(url)
       .then(r => r.json())
       .then(d => { setData(d); setLoading(false) })
       .catch(() => setLoading(false))
