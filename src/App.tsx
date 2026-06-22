@@ -281,13 +281,42 @@ function ensureSafePrediction(p: Record<string, unknown>): Record<string, unknow
     result.parlayRecommendations = []
   }
 
-  // appliedLearnings: allow undefined (guarded by && check), but ensure array if present
-  if (result.appliedLearnings !== undefined && !Array.isArray(result.appliedLearnings)) {
+  // appliedLearnings: normalize items; handle automation's "[object Object]" strings
+  if (Array.isArray(result.appliedLearnings)) {
+    result.appliedLearnings = (result.appliedLearnings as unknown[])
+      .filter(item => item != null)
+      .map(item => {
+        if (typeof item === 'string') {
+          // Automation wrote "[object Object]" — treat as flat lesson string
+          return { lesson: item.replace(/^\[object Object\]$/i, '历史经验'), adjustment: '', impact: '中性' }
+        }
+        if (typeof item === 'object' && item !== null) {
+          const obj = item as Record<string, unknown>
+          return {
+            lesson: String(obj.lesson || ''),
+            adjustment: String(obj.adjustment || ''),
+            impact: (obj.impact === '上调' || obj.impact === '下调' || obj.impact === '中性') ? obj.impact : '中性',
+          }
+        }
+        return { lesson: '', adjustment: '', impact: '中性' }
+      })
+  } else if (result.appliedLearnings !== undefined) {
     result.appliedLearnings = undefined
   }
 
-  // factorBreakdown: allow undefined, but ensure object if present
-  if (result.factorBreakdown !== undefined && (typeof result.factorBreakdown !== 'object' || result.factorBreakdown === null || Array.isArray(result.factorBreakdown))) {
+  // factorBreakdown: ensure all 8 sub-fields are valid numbers (defend against NaN)
+  if (result.factorBreakdown && typeof result.factorBreakdown === 'object' && !Array.isArray(result.factorBreakdown)) {
+    const fb = result.factorBreakdown as Record<string, unknown>
+    const fields = ['eloDiffScore', 'recentFormScore', 'h2hScore', 'marketScore', 'tacticalScore', 'squadScore', 'pressureScore', 'psychologyScore']
+    let hasAny = false
+    const safe: Record<string, number> = {}
+    for (const f of fields) {
+      const v = Number(fb[f])
+      safe[f] = Number.isFinite(v) ? v : 0
+      if (fb[f] !== undefined) hasAny = true
+    }
+    result.factorBreakdown = hasAny ? safe : undefined
+  } else if (result.factorBreakdown !== undefined) {
     result.factorBreakdown = undefined
   }
 

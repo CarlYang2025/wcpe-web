@@ -103,17 +103,39 @@ function normalizeSinglePrediction(p) {
     rw = rw.filter(w => w != null).map(w => String(w))
   }
 
-  // 5. appliedLearnings: always string[]
+  // 5. appliedLearnings: always array of objects with lesson/adjustment/impact
   let al = p.appliedLearnings
   if (!Array.isArray(al)) {
     al = []
   } else {
-    al = al.filter(l => l != null).map(l => String(l))
+    al = al.filter(l => l != null).map(l => {
+      if (typeof l === 'object' && l !== null && !Array.isArray(l)) {
+        // Already an object — preserve structure, ensure fields
+        return {
+          lesson: String(l.lesson ?? ''),
+          adjustment: String(l.adjustment ?? ''),
+          impact: (l.impact === '上调' || l.impact === '下调' || l.impact === '中性') ? l.impact : '中性',
+        }
+      }
+      // String or other primitive — wrap in lesson field
+      const raw = String(l).replace(/^\[object Object\]$/i, '历史经验')
+      return { lesson: raw, adjustment: '', impact: '中性' }
+    })
   }
 
-  // 6. factorBreakdown: ensure object or undefined (never null/array)
+  // 6. factorBreakdown: ensure object with all 8 sub-fields, or undefined
   let fb = p.factorBreakdown
-  if (fb === null || Array.isArray(fb)) {
+  if (fb && typeof fb === 'object' && !Array.isArray(fb) && fb !== null) {
+    const fields = ['eloDiffScore', 'recentFormScore', 'h2hScore', 'marketScore', 'tacticalScore', 'squadScore', 'pressureScore', 'psychologyScore']
+    const safe = {}
+    let hasAny = false
+    for (const f of fields) {
+      const v = Number(fb[f])
+      safe[f] = Number.isFinite(v) ? v : 0
+      if (fb[f] !== undefined && fb[f] !== null) hasAny = true
+    }
+    fb = hasAny ? safe : undefined
+  } else if (fb !== undefined) {
     fb = undefined
   }
 
@@ -253,6 +275,8 @@ function computeModelState(matches, predictions, existingModelState) {
     scoreTop3Correct,
     scoreTop1Correct,
     overallDrawRate: totalPredicted > 0 ? drawCount / totalPredicted : 0,
+    /** Number of actual draws among finished matches with predictions */
+    overallDrawCount: drawCount,
     overallTotalMatches: finished.length,
     totalReviews: Object.keys(existingModelState?.totalReviews ? {} : {}).length || existingModelState?.totalReviews || 0,
   }

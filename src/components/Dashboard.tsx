@@ -100,7 +100,7 @@ export default function Dashboard({
           <MetricBox label="方向命中" value={`${Math.round(modelState.directionAccuracy * 100)}`} unit="%" color="#00ff88" detail={`${modelState.directionCorrect}/${modelState.completedPredictions}`} />
           <MetricBox label="TOP3比分" value={`${Math.round(modelState.scoreTop3Accuracy * 100)}`} unit="%" color="#ffa502" detail={`${modelState.scoreTop3Correct}/${modelState.completedPredictions}`} />
           <MetricBox label="TOP1比分" value={`${Math.round(modelState.scoreTop1Accuracy * 100)}`} unit="%" color="#54a0ff" detail={`${modelState.scoreTop1Correct}/${modelState.completedPredictions}`} />
-          <MetricBox label="赛事平局率" value={`${Math.round(modelState.overallDrawRate * 100)}`} unit="%" color="#a0a0a0" detail={`${modelState.overallTotalMatches}场`} />
+          <MetricBox label="赛事平局率" value={`${Math.round(modelState.overallDrawRate * 100)}`} unit="%" color="#a0a0a0" detail={`${(modelState as any).overallDrawCount ?? 0}平/${modelState.totalPredictions}场`} />
         </div>
       </section>
 
