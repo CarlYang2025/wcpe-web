@@ -376,7 +376,7 @@ function generateAllocExamples(
   } else if (label === '比分') {
     sorted.slice(0, 2).forEach(m => {
       const p = predictions[m.id]
-      if (!p) return
+      if (!p || !p.top5Scores?.length) return
       const piece = Math.floor(amount / 4)
       const s1 = p.top5Scores[0], s2 = p.top5Scores[1]
       if (s1) { const o1 = scoreOdds(p, 0); examples.push(`${cn(m.homeTeam)} vs ${cn(m.awayTeam)} → ${s1.score} @${o1.toFixed(2)} 投${piece}% → 回${Math.round(piece * o1)}%`) }
@@ -451,7 +451,9 @@ function RemainingOptimization({
       reason: `方向预测${isHome ? '主' : isAway ? '客' : '平'}，信${Math.round(p.confidence*100)}%` })
 
     // TOP2 score bets
-    const s1 = p.top5Scores[0], s2 = p.top5Scores[1]
+    const top5 = p.top5Scores
+    if (!top5?.length) return
+    const s1 = top5[0], s2 = top5[1]
     if (s1) { const o1 = scoreOdds(p, 0); suggestions.push({ match: name, bet: `${s1.score} @${o1.toFixed(2)}`, odds: o1, alloc: 6,
       reason: `TOP1比分，概率${Math.round(s1.probability*100)}%` }) }
     if (s2) { const o2 = scoreOdds(p, 1); suggestions.push({ match: name, bet: `${s2.score} @${o2.toFixed(2)}`, odds: o2, alloc: 4,

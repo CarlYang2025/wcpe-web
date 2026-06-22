@@ -32,7 +32,7 @@ export default function MatchCard({ match, prediction, onClick }: Props) {
     )
   }
 
-  const quadrantColor = QUADRANT_COLORS[prediction.top5Scores[0]?.quadrant] || '#ffffff'
+  const quadrantColor = QUADRANT_COLORS[prediction.top5Scores?.[0]?.quadrant] || '#ffffff'
   const riskColor = RISK_COLORS[prediction.riskLevel]
 
   return (
@@ -97,7 +97,7 @@ export default function MatchCard({ match, prediction, onClick }: Props) {
         <span className="text-[10px] px-2 py-0.5 rounded" style={{
           backgroundColor: quadrantColor + '20', color: quadrantColor,
         }}>
-          {QUADRANT_NAMES[prediction.top5Scores[0]?.quadrant]}
+          {QUADRANT_NAMES[prediction.top5Scores?.[0]?.quadrant]}
         </span>
         <div className="flex items-center gap-2">
           <span className="text-[10px] text-[#a0a0a0]">

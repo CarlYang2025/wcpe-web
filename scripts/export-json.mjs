@@ -51,6 +51,54 @@ function normalizePredictions(preds) {
   return result
 }
 
+/**
+ * Deep merge predictions: hardcoded provides complete structural baseline,
+ * existing provides runtime updates. Hardcoded never loses fields to incomplete existing data.
+ */
+function deepMergePredictions(hardcoded, existing) {
+  if (!existing || typeof existing !== 'object') return hardcoded
+  const result = { ...hardcoded }
+  for (const [id, exPred] of Object.entries(existing)) {
+    const hcPred = hardcoded[id]
+    if (hcPred) {
+      // Per-prediction merge: hardcoded as base, existing overrides
+      // EXCEPT: don't let existing empty/null arrays override hardcoded non-empty arrays
+      result[id] = mergePredictionFields(hcPred, exPred)
+    } else {
+      // New prediction from automation — keep as-is
+      result[id] = exPred
+    }
+  }
+  return result
+}
+
+/**
+ * Merge two prediction objects: hardcoded base + existing overrides.
+ * Structural arrays (top5Scores, mviAnalysis, parlayRecommendations) from
+ * hardcoded are preserved when existing provides an empty/null version.
+ */
+function mergePredictionFields(hc, ex) {
+  const merged = {}
+  // Start with all hardcoded fields
+  for (const key of Object.keys(hc)) {
+    const exVal = ex[key]
+    const hcVal = hc[key]
+    // Preserve hardcoded non-empty arrays when existing provides empty/null
+    if (Array.isArray(hcVal) && hcVal.length > 0 && (!Array.isArray(exVal) || exVal.length === 0)) {
+      merged[key] = hcVal
+    } else {
+      merged[key] = exVal !== undefined ? exVal : hcVal
+    }
+  }
+  // Add any new fields from existing that hardcoded doesn't have
+  for (const key of Object.keys(ex)) {
+    if (!(key in merged)) {
+      merged[key] = ex[key]
+    }
+  }
+  return merged
+}
+
 // --- Build remote data ---
 
 // Start with hardcoded data as the base (always authoritative for match definitions)
@@ -84,11 +132,8 @@ const remoteData = {
   ...hardcodedData,
   // Merge matches: hardcoded is base, existing adds/overrides scores
   matches: mergeMatches(hardcodedData.matches, existingData?.matches),
-  // Merge predictions: normalize existing, then overlay on hardcoded (existing wins)
-  predictions: {
-    ...hardcodedData.predictions,
-    ...normalizePredictions(existingData?.predictions),
-  },
+  // Merge predictions: hardcoded as base, existing overlays (deep per-prediction merge)
+  predictions: deepMergePredictions(hardcodedData.predictions, normalizePredictions(existingData?.predictions)),
   // Merge reviews: existing automation reviews win
   reviews: {
     ...hardcodedData.reviews,
