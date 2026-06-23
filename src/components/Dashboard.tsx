@@ -136,6 +136,7 @@ export default function Dashboard({
                   { key: 'tacticalMatchup', label: '战术匹配' },
                 ]).map(f => {
                   const fw = modelState.factorWeights![f.key]
+                  if (!fw) return null // 静态 modelState 加载前可能缺因子数据
                   const hitColor = fw.hitRate > 0.5 ? '#00ff88' : fw.hitRate > 0.35 ? '#ffa502' : '#ff4757'
                   const weightPct = Math.round(fw.weight * 100)
                   return (
