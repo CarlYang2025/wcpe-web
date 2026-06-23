@@ -4,10 +4,10 @@ import { cn, flag, teamRatings } from '../data/matches'
 import DailyReturns from './DailyReturns'
 
 // 赔率 = 1/模型预测概率 × 博彩边际（模拟真实盘口抽水）
-const _d = (n: number) => +(1 / n).toFixed(2)
-const MARGIN_DIR = 0.93   // 胜平负 ~7%
-const MARGIN_OU = 0.93    // 大小球  ~7%
-const MARGIN_SCORE = 0.75 // 比分    ~25%（比分盘抽水远超其他盘口）
+const _d = (n: number) => (n > 0 && Number.isFinite(n) ? +(1 / n).toFixed(2) : 0)
+const MARGIN_DIR = 0.93
+const MARGIN_OU = 0.93
+const MARGIN_SCORE = 0.75
 const dirOdds = (p: Prediction) => +(p.predictedDirection === 'home_win' ? _d(p.homeWinProb) * MARGIN_DIR : p.predictedDirection === 'away_win' ? _d(p.awayWinProb) * MARGIN_DIR : _d(p.drawProb) * MARGIN_DIR).toFixed(2)
 const ouOdds = (p: Prediction, over: boolean) => +(_d(over ? p.over25Prob : p.under25Prob) * MARGIN_OU).toFixed(2)
 const scoreOdds = (p: Prediction, pos: number) => {

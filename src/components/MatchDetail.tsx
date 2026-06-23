@@ -170,7 +170,8 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
               } else if (total) {
                 const goalDesc = total >= 3 ? '偏向大球' : total <= 1 ? '偏向小球' : '攻守平衡'
                 const mviNote = goalBet ? `，${goalBet}` : ''
-                parts.push(`预计比分${predictedScore}，${goalDesc}（大球概率${Math.round(over25Prob*100)}%${mviNote}）。`)
+                const ouPct = typeof over25Prob === 'number' && !isNaN(over25Prob) ? Math.round(over25Prob * 100) : 0
+                parts.push(`预计比分${predictedScore}，${goalDesc}（大球概率${ouPct}%${mviNote}）。`)
               }
 
               // Closing: confidence + key factor insight
@@ -219,8 +220,8 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
           <div className="bg-[#1a1f3a] rounded-lg p-3"><div className="text-xl font-black text-[#ff4757]">{Math.round(prediction.awayWinProb * 100)}%</div><div className="text-[10px] text-[#a0a0a0]">客胜</div></div>
         </div>
         <div className="flex justify-center gap-4 text-[10px] text-[#a0a0a0]">
-          <span>O 2.5: <b className="text-[#ffa502]">{Math.round(prediction.over25Prob * 100)}%</b></span>
-          <span>U 2.5: <b className="text-[#54a0ff]">{Math.round(prediction.under25Prob * 100)}%</b></span>
+          <span>O 2.5: <b className="text-[#ffa502]">{typeof prediction.over25Prob === 'number' && !isNaN(prediction.over25Prob) ? Math.round(prediction.over25Prob * 100) + '%' : '—'}</b></span>
+          <span>U 2.5: <b className="text-[#54a0ff]">{typeof prediction.under25Prob === 'number' && !isNaN(prediction.under25Prob) ? Math.round(prediction.under25Prob * 100) + '%' : '—'}</b></span>
         </div>
       </section>
 
@@ -424,22 +425,35 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
               </div>
             )}
             {/* 因子评估 */}
-            {review.factorEvaluation && (
+            {review.factorEvaluation && typeof review.factorEvaluation === 'object' && (
               <div className="bg-[#ffd700]/5 border border-[#ffd700]/20 rounded-lg p-3">
                 <h4 className="text-xs text-[#ffd700] font-bold mb-1">🎯 因子表现评估</h4>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10px]">
                   {([
-                    { label: 'ELO预测', val: review.factorEvaluation.eloPrediction },
-                    { label: '近期状态', val: review.factorEvaluation.recentFormPrediction },
-                    { label: '历史交锋', val: review.factorEvaluation.h2hPrediction },
-                    { label: '市场赔率', val: review.factorEvaluation.marketOddsPrediction },
-                    { label: '战术匹配', val: review.factorEvaluation.tacticalMatchupPrediction },
-                  ]).map(f => (
-                    <div key={f.label} className="flex justify-between">
-                      <span className="text-[#a0a0a0]">{f.label}</span>
-                      <span className="font-mono font-bold" style={{ color: f.val === '准确' ? '#00ff88' : f.val === '偏高' ? '#ff4757' : '#ffa502' }}>{f.val}</span>
-                    </div>
-                  ))}
+                    { label: 'ELO差值', key: 'eloDiff' },
+                    { label: '近期状态', key: 'recentForm' },
+                    { label: '历史交锋', key: 'h2h' },
+                    { label: '市场共识', key: 'marketConsensus' },
+                    { label: '战术匹配', key: 'tacticalMatchup' },
+                  ]).map(f => {
+                    const factorData = (review.factorEvaluation as any)[f.key]
+                    // factorData may be { accuracy: number } or a number directly
+                    const accuracy = typeof factorData === 'object' && factorData !== null
+                      ? factorData.accuracy
+                      : (typeof factorData === 'number' ? factorData : undefined)
+                    const pct = typeof accuracy === 'number' ? Math.round(accuracy * 100) : null
+                    const color = pct !== null
+                      ? (accuracy as number > 0.5 ? '#00ff88' : accuracy as number > 0.35 ? '#ffa502' : '#ff4757')
+                      : '#555555'
+                    return (
+                      <div key={f.key} className="flex justify-between items-center">
+                        <span className="text-[#a0a0a0]">{f.label}</span>
+                        <span className="font-mono font-bold text-xs" style={{ color }}>
+                          {pct !== null ? `${pct}%` : '—'}
+                        </span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             )}

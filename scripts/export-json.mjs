@@ -21,6 +21,166 @@ const staticFactorWeights = {
 }
 
 /**
+ * 数据一致性验证（V2.2 硬性门禁版）
+ * 
+ * 返回值: { passed: boolean, criticals: string[], warnings: string[] }
+ * - criticals: 必须修复的致命错误 → 拒绝写入, 保留上次有效数据
+ * - warnings:  需要关注但不阻止部署的问题
+ */
+function validateDataConsistency(data, existingData) {
+  const criticals = []
+  const warnings = []
+
+  // ================ 致命错误 (BLOCKING) ================
+
+  // 0. 基本结构
+  if (!data || typeof data !== 'object') {
+    criticals.push('❌ data 不是有效对象')
+    return { passed: false, criticals, warnings }
+  }
+  if (!Array.isArray(data.matches) || data.matches.length === 0) {
+    criticals.push('❌ matches 数组为空或无效')
+  }
+  if (!data.predictions || typeof data.predictions !== 'object') {
+    criticals.push('❌ predictions 对象无效')
+  }
+
+  // 1. 逐 prediction 结构校验 (hard-gate)
+  if (data.predictions) {
+    const requiredFields = ['top5Scores', 'riskWarnings', 'mviAnalysis', 'appliedLearnings', 'parlayRecommendations']
+    const arrayFields = ['top5Scores', 'riskWarnings', 'mviAnalysis', 'appliedLearnings', 'parlayRecommendations']
+    for (const [id, p] of Object.entries(data.predictions)) {
+      if (!p || typeof p !== 'object') {
+        criticals.push(`❌ prediction ${id} 不是有效对象`)
+        continue
+      }
+      for (const f of arrayFields) {
+        if (p[f] !== undefined && !Array.isArray(p[f])) {
+          criticals.push(`❌ prediction ${id}.${f} 不是数组 (实际类型: ${typeof p[f]})`)
+        }
+      }
+      // top5Scores 元素类型检查
+      if (Array.isArray(p.top5Scores) && p.top5Scores.length > 0) {
+        const badItem = p.top5Scores.find(s => s && typeof s === 'object' && s !== null && typeof s.score !== 'string')
+        if (badItem) {
+          criticals.push(`❌ prediction ${id}.top5Scores 包含无 score 字段的对象`)
+        }
+      }
+      // predictedDirection 合法性
+      if (p.predictedDirection !== undefined && !['home_win', 'draw', 'away_win'].includes(p.predictedDirection)) {
+        criticals.push(`❌ prediction ${id}.predictedDirection 非法值: "${p.predictedDirection}"`)
+      }
+      // factorBreakdown 字段类型 (如果存在)
+      if (p.factorBreakdown && typeof p.factorBreakdown === 'object' && !Array.isArray(p.factorBreakdown)) {
+        for (const [fk, fv] of Object.entries(p.factorBreakdown)) {
+          if (typeof fv !== 'number' || !Number.isFinite(fv)) {
+            criticals.push(`❌ prediction ${id}.factorBreakdown.${fk} 不是有效数字: ${JSON.stringify(fv)}`)
+          }
+        }
+      }
+    }
+  }
+
+  // 2. keyLearnings 元素类型检查 (防止 React error #31)
+  if (Array.isArray(data.keyLearnings)) {
+    const nonString = data.keyLearnings.find(l => typeof l !== 'string')
+    if (nonString) {
+      criticals.push(`❌ keyLearnings 包含非字符串元素 (类型: ${typeof nonString}) — 这会触发 React error #31 白屏`)
+    }
+  } else if (data.keyLearnings !== undefined) {
+    criticals.push(`❌ keyLearnings 不是数组 (类型: ${typeof data.keyLearnings}) — 这会触发 React error #31 白屏`)
+  }
+
+  // 3. modelState 一致性
+  if (data.modelState) {
+    const ms = data.modelState
+    if (typeof ms.totalPredictions !== 'number' || ms.totalPredictions < 0) {
+      criticals.push(`❌ modelState.totalPredictions 无效: ${ms.totalPredictions}`)
+    }
+    if (ms.totalPredictions > 0 && typeof ms.directionCorrect !== 'number') {
+      criticals.push(`❌ modelState.directionCorrect 缺失`)
+    }
+    if (ms.totalPredictions < (ms.completedPredictions || 0)) {
+      criticals.push(`❌ modelState.totalPredictions(${ms.totalPredictions}) < completedPredictions(${ms.completedPredictions})`)
+    }
+    if (typeof ms.directionAccuracy === 'number' && (ms.directionAccuracy < 0 || ms.directionAccuracy > 1)) {
+      criticals.push(`❌ modelState.directionAccuracy 超出范围: ${ms.directionAccuracy}`)
+    }
+    if (ms.totalPredictions > 0 && ms.directionCorrect > ms.totalPredictions) {
+      criticals.push(`❌ directionCorrect(${ms.directionCorrect}) > totalPredictions(${ms.totalPredictions})`)
+    }
+  }
+
+  // 4. review factorEvaluation 结构
+  if (data.reviews && typeof data.reviews === 'object') {
+    for (const [id, r] of Object.entries(data.reviews)) {
+      if (!r || typeof r !== 'object') continue
+      const fe = r.factorEvaluation
+      if (fe === undefined || fe === null) {
+        criticals.push(`❌ review ${id} 缺少 factorEvaluation`)
+      } else if (typeof fe === 'object' && !Array.isArray(fe)) {
+        for (const [fk, fv] of Object.entries(fe)) {
+          if (fv && typeof fv === 'object' && typeof fv.accuracy !== 'number') {
+            criticals.push(`❌ review ${id}.factorEvaluation.${fk} 缺少 accuracy 字段`)
+          }
+        }
+      } else if (typeof fe !== 'object') {
+        criticals.push(`❌ review ${id}.factorEvaluation 类型错误: ${typeof fe}`)
+      }
+    }
+  }
+
+  // ================ 警告 (NON-BLOCKING) ================
+
+  // Predictions 数量变化
+  const existingPredCount = Object.keys(existingData?.predictions || {}).length
+  const newPredCount = Object.keys(data.predictions || {}).length
+  if (existingPredCount > 0 && newPredCount < existingPredCount) {
+    warnings.push(`⚠️ predictions 减少: ${existingPredCount} → ${newPredCount} (减少 ${existingPredCount - newPredCount})`)
+  }
+
+  // 已完赛但无预测
+  const finishedWithoutPred = data.matches?.filter(m => 
+    m.status === 'finished' && !data.predictions?.[m.id]
+  ) || []
+  if (finishedWithoutPred.length > 10) {
+    warnings.push(`⚠️ ${finishedWithoutPred.length} 场完赛比赛缺预测`)
+  }
+
+  // Reviews vs 已完赛
+  const reviewCount = Object.keys(data.reviews || {}).length
+  const finishedCount = data.matches?.filter(m => m.status === 'finished').length || 0
+  if (reviewCount < finishedCount * 0.5) {
+    warnings.push(`⚠️ reviews(${reviewCount}) 远少于已完赛(${finishedCount})`)
+  }
+
+  // 数据时效
+  if (existingData?.lastUpdated) {
+    const hoursSince = (Date.now() - new Date(existingData.lastUpdated).getTime()) / 3600000
+    if (hoursSince > 24 && newPredCount === existingPredCount) {
+      warnings.push(`⚠️ 上次更新 ${hoursSince.toFixed(1)}h 前，预测未变化`)
+    }
+  }
+
+  // 输出
+  if (criticals.length > 0) {
+    console.log('\n🔴 致命错误 (将阻止写入):')
+    criticals.forEach(e => console.log('  ' + e))
+  }
+  if (warnings.length > 0) {
+    console.log('\n🟡 警告 (不阻止部署):')
+    warnings.forEach(w => console.log('  ' + w))
+  }
+  if (criticals.length === 0 && warnings.length === 0) {
+    console.log('✅ 数据一致性检查全部通过')
+  } else if (criticals.length === 0) {
+    console.log('✅ 无致命错误 (警告项见上)')
+  }
+
+  return { passed: criticals.length === 0, criticals, warnings }
+}
+
+/**
  * Normalize parlayRecommendations to use 'selections' field consistently.
  */
 function normalizeParlayRecommendations(pr) {
@@ -33,6 +193,68 @@ function normalizeParlayRecommendations(pr) {
     probability: p.probability ?? p.hitProb ?? 0,
     risk: p.risk || 'Medium',
   }))
+}
+
+/**
+ * Normalize reviews: ensure factorEvaluation is { accuracy: number } dict.
+ * Automation variants we've seen:
+ *   - "accuracy=0.5" (string)
+ *   - { hitRate: 0.4 } (wrong field name)
+ *   - { accuracy: 0.5 } (correct)
+ *   - undefined / null (missing entirely)
+ */
+function normalizeReviews(reviews) {
+  if (!reviews || typeof reviews !== 'object') return {}
+  const result = {}
+  const factors = ['eloDiff', 'recentForm', 'h2h', 'marketConsensus', 'tacticalMatchup', 'overall']
+  for (const [id, review] of Object.entries(reviews)) {
+    if (!review || typeof review !== 'object') {
+      result[id] = review
+      continue
+    }
+    const normalized = { ...review }
+    let fe = review.factorEvaluation
+    if (fe === undefined || fe === null) {
+      // Missing entirely — create a minimal valid structure
+      const evalObj = {}
+      for (const f of factors) evalObj[f] = { accuracy: 0.5 }
+      normalized.factorEvaluation = evalObj
+    } else if (typeof fe === 'string') {
+      // String format like "accuracy=0.5" — parse and convert
+      const parsed = {}
+      fe.split(/[,;]/).forEach(pair => {
+        const m = pair.match(/(\w+)\s*[=:]\s*([\d.]+)/)
+        if (m) parsed[m[1].trim()] = { accuracy: parseFloat(m[2]) || 0.5 }
+      })
+      if (Object.keys(parsed).length === 0) {
+        for (const f of factors) parsed[f] = { accuracy: 0.5 }
+      }
+      normalized.factorEvaluation = parsed
+    } else if (typeof fe === 'object' && !Array.isArray(fe) && fe !== null) {
+      // Object format — ensure each factor has { accuracy: number }
+      const evalObj = {}
+      for (const [factorName, factorData] of Object.entries(fe)) {
+        if (typeof factorData === 'number') {
+          evalObj[factorName] = { accuracy: factorData }
+        } else if (typeof factorData === 'object' && factorData !== null) {
+          const acc = typeof factorData.accuracy === 'number' ? factorData.accuracy
+            : (typeof factorData.hitRate === 'number' ? factorData.hitRate
+            : (typeof factorData.correctRate === 'number' ? factorData.correctRate : 0.5))
+          evalObj[factorName] = { ...factorData, accuracy: acc }
+        } else {
+          evalObj[factorName] = { accuracy: 0.5 }
+        }
+      }
+      normalized.factorEvaluation = evalObj
+    } else {
+      // Unknown format — create default
+      const evalObj = {}
+      for (const f of factors) evalObj[f] = { accuracy: 0.5 }
+      normalized.factorEvaluation = evalObj
+    }
+    result[id] = normalized
+  }
+  return result
 }
 
 /**
@@ -124,15 +346,59 @@ function normalizeSinglePrediction(p) {
   }
 
   // 6. factorBreakdown: ensure object with all 8 sub-fields, or undefined
+  // CRITICAL: 自动化产出使用不同字段名 (eloDiff, recentForm, marketConsensus 等)
+  // 这里做二阶段检测：先尝试标准名，再用自动化别名映射。两种都失败才算无效。
   let fb = p.factorBreakdown
   if (fb && typeof fb === 'object' && !Array.isArray(fb) && fb !== null) {
-    const fields = ['eloDiffScore', 'recentFormScore', 'h2hScore', 'marketScore', 'tacticalScore', 'squadScore', 'pressureScore', 'psychologyScore']
+    const standardFields = ['eloDiffScore', 'recentFormScore', 'h2hScore', 'marketScore', 'tacticalScore', 'squadScore', 'pressureScore', 'psychologyScore']
+    // 自动化别名映射表：不区分大小写
+    const aliasMap = {
+      eloDiff: 'eloDiffScore',
+      elodiff: 'eloDiffScore',
+      elo_diff: 'eloDiffScore',
+      recentForm: 'recentFormScore',
+      recentform: 'recentFormScore',
+      recent_form: 'recentFormScore',
+      h2h: 'h2hScore',
+      H2H: 'h2hScore',
+      headToHead: 'h2hScore',
+      'head-to-head': 'h2hScore',
+      marketConsensus: 'marketScore',
+      marketconsensus: 'marketScore',
+      market: 'marketScore',
+      oddsConsensus: 'marketScore',
+      tacticalMatchup: 'tacticalScore',
+      tacticalmatchup: 'tacticalScore',
+      tactical: 'tacticalScore',
+      matchup: 'tacticalScore',
+      squad: 'squadScore',
+      squadStrength: 'squadScore',
+      benchDepth: 'squadScore',
+      benchdepth: 'squadScore',
+      roster: 'squadScore',
+      pressure: 'pressureScore',
+      pressureIndex: 'pressureScore',
+      psychological: 'psychologyScore',
+      psychology: 'psychologyScore',
+      mentality: 'psychologyScore',
+    }
     const safe = {}
     let hasAny = false
-    for (const f of fields) {
-      const v = Number(fb[f])
+    for (const f of standardFields) {
+      // 一阶段：直接用标准字段名读取
+      let raw = fb[f]
+      // 二阶段：遍历别名映射表查找
+      if (raw === undefined || raw === null) {
+        for (const [alias, target] of Object.entries(aliasMap)) {
+          if (target === f && fb[alias] !== undefined && fb[alias] !== null) {
+            raw = fb[alias]
+            break
+          }
+        }
+      }
+      const v = Number(raw)
       safe[f] = Number.isFinite(v) ? v : 0
-      if (fb[f] !== undefined && fb[f] !== null) hasAny = true
+      if (raw !== undefined && raw !== null) hasAny = true
     }
     fb = hasAny ? safe : undefined
   } else if (fb !== undefined) {
@@ -379,10 +645,10 @@ const remoteData = {
   lastUpdated: new Date().toISOString(),
   matches: mergedMatches,
   predictions: mergedPredictions,
-  reviews: {
+  reviews: normalizeReviews({
     ...staticReviews,
     ...(existingData?.reviews || {}),
-  },
+  }),
   modelState: computedModelState,
   keyLearnings: existingData?.keyLearnings || staticKeyLearnings,
   eloRatings: existingData?.eloRatings || teamRatings,
@@ -391,17 +657,33 @@ const remoteData = {
   reviewRichData: { ...reviewRichData, ...(existingData?.reviewRichData || {}) },
 }
 
+// --- 写入前验证：硬性门禁 ---
+// 先做预写验证（在 normalize 之后、写入之前）
+const preValidation = validateDataConsistency(remoteData, existingData)
+
+if (!preValidation.passed) {
+  console.log('\n⛔ 硬性门禁拦截：数据包含致命错误，拒绝写入！')
+  console.log('   保留上次有效 remote.json，不更新文件。')
+  console.log(`   致命错误数: ${preValidation.criticals.length}`)
+  
+  // 保留上次有效版本
+  if (existingData) {
+    writeFileSync(outputPath, JSON.stringify(existingData))
+    console.log('✅ 已回退到上次有效 remote.json')
+  }
+  process.exit(1)
+}
+
 writeFileSync(outputPath, JSON.stringify(remoteData))
 
 // --- Post-process: fill empty appliedLearnings from keyLearnings ---
 // Automation often writes [object Object] or empty objects as appliedLearnings.
 // This pass detects placeholder content and fills it with relevant keyLearnings.
-const finalData = JSON.parse(readFileSync(outputPath, 'utf-8'))
-if (finalData.keyLearnings?.length > 0 && finalData.predictions) {
-  const kl = finalData.keyLearnings
+if (remoteData.keyLearnings?.length > 0 && remoteData.predictions) {
+  const kl = remoteData.keyLearnings
   const placeholder = '历史经验'
-  for (const id of Object.keys(finalData.predictions)) {
-    const pred = finalData.predictions[id]
+  for (const id of Object.keys(remoteData.predictions)) {
+    const pred = remoteData.predictions[id]
     if (!pred.appliedLearnings || !Array.isArray(pred.appliedLearnings) || pred.appliedLearnings.length === 0) continue
 
     // Check if ALL items are placeholders (empty/meaningless)
@@ -411,7 +693,7 @@ if (finalData.keyLearnings?.length > 0 && finalData.predictions) {
     if (!allPlaceholder) continue // Has real data, skip
 
     // Find relevant keyLearnings based on match teams and score pattern
-    const match = finalData.matches?.find(m => m.id === id)
+    const match = remoteData.matches?.find(m => m.id === id)
     const homeTeam = (match?.homeTeam || '').toLowerCase()
     const awayTeam = (match?.awayTeam || '').toLowerCase()
     const scorePattern = `${match?.homeScore ?? ''}:${match?.awayScore ?? ''}`
@@ -435,12 +717,20 @@ if (finalData.keyLearnings?.length > 0 && finalData.predictions) {
       impact: i % 2 === 0 ? '上调' : '下调',
     }))
   }
-  writeFileSync(outputPath, JSON.stringify(finalData))
+  // Re-write after post-processing
+  writeFileSync(outputPath, JSON.stringify(remoteData))
 }
 
-console.log(`✅ remote.json written to ${outputPath} (${(JSON.stringify(finalData).length / 1024).toFixed(0)} KB)`)
+console.log(`✅ remote.json written to ${outputPath} (${(JSON.stringify(remoteData).length / 1024).toFixed(0)} KB)`)
 if (existingData) {
   console.log('   Merged existing automation data — predictions/reviews/ELO preserved')
+}
+
+// --- 数据一致性验证 (写入后) ---
+console.log('\n📋 数据一致性验证...')
+const postValidation = validateDataConsistency(remoteData, existingData)
+if (!postValidation.passed) {
+  console.log('\n⛔ 写入后验证未通过，但文件已写入（预写门禁已通过，这里列出的是边缘警告）')
 }
 
 /**
@@ -477,3 +767,5 @@ function mergeMatches(hardcoded, existing) {
 
   return merged
 }
+
+

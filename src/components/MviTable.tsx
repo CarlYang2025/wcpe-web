@@ -34,10 +34,10 @@ export default function MviTable({ items }: Props) {
             return (
               <tr key={i} className="border-b border-[#1a1f3a]">
                 <td className="py-1.5 text-white">{item.bet}</td>
-                <td className="text-center py-1.5 font-mono text-[#54a0ff]">{Math.round(item.modelProb * 100)}%</td>
-                <td className="text-center py-1.5 font-mono text-[#a0a0a0]">{Math.round(item.marketProb * 100)}%</td>
+                <td className="text-center py-1.5 font-mono text-[#54a0ff]">{typeof item.modelProb === 'number' && !isNaN(item.modelProb) ? Math.round(item.modelProb * 100) + '%' : '—'}</td>
+                <td className="text-center py-1.5 font-mono text-[#a0a0a0]">{typeof item.marketProb === 'number' && !isNaN(item.marketProb) ? Math.round(item.marketProb * 100) + '%' : '—'}</td>
                 <td className="text-center py-1.5 font-mono font-bold" style={{ color: ratingColor }}>
-                  {item.mvi.toFixed(2)}
+                  {typeof item.mvi === 'number' && !isNaN(item.mvi) ? item.mvi.toFixed(2) : '—'}
                 </td>
                 <td className="text-center py-1.5">
                   <span className="px-1.5 py-0.5 rounded text-[9px]" style={{

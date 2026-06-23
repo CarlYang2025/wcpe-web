@@ -43,24 +43,22 @@ export function cn(name: string): string { return teamNames[name] || name; }
 export function flag(name: string): string { return teamFlags[name] || ''; }
 
 // ========== 模型状态 ==========
-export const modelState: ModelState = {
-  directionAccuracy: 0.54,
-  scoreTop3Accuracy: 0.29,
-  scoreTop1Accuracy: 0.17,
-  totalPredictions: 28,
-  completedPredictions: 36,
-  directionCorrect: 13,
-  scoreTop3Correct: 7,
-  scoreTop1Correct: 4,
-  overallDrawRate: 0.306,
-  overallTotalMatches: 36,
-  factorWeights: {
-    eloDiff: { hitRate: 0.55, weight: 0.35, samples: 24 },
-    recentForm: { hitRate: 0.30, weight: 0.12, samples: 24 },
-    h2h: { hitRate: 0.56, weight: 0.21, samples: 24 },
-    marketConsensus: { hitRate: 0.55, weight: 0.29, samples: 24 },
-    tacticalMatchup: { hitRate: 0.35, weight: 0.03, samples: 24 },
-  },
+// ⚠️ 静态 modelState 已弃用（2026-06-23）
+// 原因：export-json.mjs 会从实际比赛数据动态计算 modelState
+// static modelState 与动态计算结果冲突，导致数据不一致
+// 当前 modelState 由 export-json.mjs 的 computeModelState() 动态生成
+export const modelState = {
+  directionAccuracy: 0,
+  scoreTop3Accuracy: 0,
+  scoreTop1Accuracy: 0,
+  totalPredictions: 0,
+  completedPredictions: 0,
+  directionCorrect: 0,
+  scoreTop3Correct: 0,
+  scoreTop1Correct: 0,
+  overallDrawRate: 0,
+  overallTotalMatches: 0,
+  factorWeights: {},
 };
 
 // ========== 球队评分 ==========

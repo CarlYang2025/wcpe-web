@@ -35,3 +35,37 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           force_orphan: true
+
+      - name: Smoke Test (wait for propagation)
+        run: |
+          echo "Waiting 15s for GitHub Pages propagation..."
+          sleep 15
+          
+          URL="https://carlyang2025.github.io/wcpe-web/"
+          echo "Testing: $URL"
+          
+          HTTP_CODE=$(curl -s -o /tmp/smoke.html -w "%{http_code}" "$URL" || echo "000")
+          
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ SMOKE TEST FAILED: HTTP $HTTP_CODE"
+            cat /tmp/smoke.html | head -20
+            exit 1
+          fi
+          
+          # Check for React error indicators
+          if grep -q 'Minified React error' /tmp/smoke.html; then
+            echo "❌ SMOKE TEST FAILED: React error detected in page"
+            grep -o 'Minified React error[^<]*' /tmp/smoke.html | head -5
+            exit 1
+          fi
+          
+          # Check for key elements
+          if grep -q '<div id="root"' /tmp/smoke.html; then
+            echo "✅ Smoke test passed: root element found, no React errors"
+          else
+            echo "⚠️  Warning: root element not found (may be SPA)"
+          fi
+          
+          # Log page size for monitoring
+          PAGE_SIZE=$(wc -c < /tmp/smoke.html)
+          echo "Page size: ${PAGE_SIZE} bytes"
