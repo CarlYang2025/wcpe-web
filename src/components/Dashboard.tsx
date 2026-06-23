@@ -109,11 +109,10 @@ export default function Dashboard({
         <h3 className="text-xs font-bold text-[#a0a0a0] mb-4 uppercase tracking-wider">模型进化</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <h4 className="text-[10px] text-[#54a0ff] font-bold mb-2">📈 ELO 排行榜 (32队)</h4>
+            <h4 className="text-[10px] text-[#54a0ff] font-bold mb-2">📈 ELO 排行榜 ({Object.keys(teamRatings).length}队)</h4>
             <div className="space-y-1 max-h-[420px] overflow-y-auto pr-1 custom-scrollbar">
               {Object.entries(teamRatings)
                 .sort(([, a], [, b]) => b.elo - a.elo)
-                .slice(0, 32)
                 .map(([name, rating], i) => (
                   <div key={name} className="flex items-center gap-2 text-[10px]">
                     <span className="w-4 text-[#555555] text-right">{i + 1}</span>

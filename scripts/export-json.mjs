@@ -452,8 +452,59 @@ function normalizeSinglePrediction(p) {
     pd = undefined
   }
 
+  // 11. over25Prob / under25Prob: cross-fill missing values (automation often omits one)
+  // Also round to 2dp to avoid IEEE 754 artifacts
+  let over = typeof p.over25Prob === 'number' && !isNaN(p.over25Prob) ? p.over25Prob : undefined
+  let under = typeof p.under25Prob === 'number' && !isNaN(p.under25Prob) ? p.under25Prob : undefined
+  if (over !== undefined && under === undefined) under = 1 - over
+  if (under !== undefined && over === undefined) over = 1 - under
+  if (over !== undefined) over = Math.round(over * 100) / 100
+  if (under !== undefined) under = Math.round(under * 100) / 100
+
+  // 12. bankroll: infer allocations from prediction data when all empty
+  let resolvedBr = br
+  if (resolvedBr && typeof resolvedBr === 'object') {
+    const planOrder = ['conservative', 'balanced', 'aggressive']
+    // Default allocation templates keyed by plan
+    const defaultAllocs = {
+      conservative: { '胜平负': 100 },
+      balanced: { '胜平负': 50, '大小球': 30, '比分': 20 },
+      aggressive: { '胜平负': 30, '大小球': 20, '比分': 25, '串关': 25 },
+    }
+    // Default expected returns ~= parlayRecommendations[planIndex].odds * 100 (roughly)
+    const planEreturns = parlay.filter(pr => pr.odds && pr.odds > 0).map(pr => Math.round(pr.odds * 100))
+    const defaultReturns = planEreturns.length >= 3 ? planEreturns : [105, 150, 210] // fallback
+
+    for (let pi = 0; pi < planOrder.length; pi++) {
+      const plan = planOrder[pi]
+      const pl = resolvedBr[plan]
+      if (pl && typeof pl === 'object') {
+        const allocs = pl.allocations
+        const totalAlloc = (allocs && typeof allocs === 'object')
+          ? Object.values(allocs).reduce((s, v) => s + (typeof v === 'number' ? v : 0), 0)
+          : 0
+        if (totalAlloc === 0) {
+          // All empty — use inferred defaults
+          resolvedBr[plan] = {
+            allocations: { ...defaultAllocs[plan] },
+            expectedReturn: typeof pl.expectedReturn === 'number' && pl.expectedReturn > 0
+              ? pl.expectedReturn
+              : (defaultReturns[pi] ?? 100),
+          }
+        } else {
+          resolvedBr[plan] = {
+            allocations: allocs,
+            expectedReturn: typeof pl.expectedReturn === 'number' ? pl.expectedReturn : 0,
+          }
+        }
+      }
+    }
+  }
+
   return {
     ...p,
+    ...(over !== undefined && { over25Prob: over }),
+    ...(under !== undefined && { under25Prob: under }),
     top5Scores: top5,
     parlayRecommendations: parlay,
     mviAnalysis: mvi,
@@ -461,7 +512,7 @@ function normalizeSinglePrediction(p) {
     appliedLearnings: al,
     ...(fb !== undefined && { factorBreakdown: fb }),
     ...(gt !== undefined && { goalTimeline: gt }),
-    ...(br !== undefined && { bankroll: br }),
+    ...(resolvedBr !== undefined && { bankroll: resolvedBr }),
     ...(ec !== undefined && { eloChanges: ec }),
     ...(pd !== undefined && { predictedDirection: pd }),
   }
