@@ -384,6 +384,40 @@ export const matches: Match[] = [
   { id: 'col-cod-2', date: '2026-06-23', tournament: '2026 FIFA World Cup', group: 'K组', round: '第二轮', matchday: 12, homeTeam: 'Colombia', awayTeam: 'DR Congo', venue: 'Estadio Akron, Guadalajara', kickoff: '6/24 09:00', localKickoff: '6/23 20:00', localTZ: 'CT', status: 'finished',
     homeScore: 1,
     awayScore: 0 },
+
+  // ========== 第三轮小组赛 (6/24-6/27) ==========
+
+  // ---- 6月24日 (周三) 第13比赛日 ----
+  { id: 'can-sui-3', date: '2026-06-24', tournament: '2026 FIFA World Cup', group: 'B组', round: '第三轮', matchday: 13, homeTeam: 'Canada', awayTeam: 'Switzerland', venue: 'BC Place, Vancouver', kickoff: '6/25 03:00', localKickoff: '6/24 15:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'qat-bih-3', date: '2026-06-24', tournament: '2026 FIFA World Cup', group: 'B组', round: '第三轮', matchday: 13, homeTeam: 'Qatar', awayTeam: 'Bosnia', venue: 'MetLife Stadium, New Jersey', kickoff: '6/25 03:00', localKickoff: '6/24 15:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'sco-bra-3', date: '2026-06-24', tournament: '2026 FIFA World Cup', group: 'C组', round: '第三轮', matchday: 13, homeTeam: 'Scotland', awayTeam: 'Brazil', venue: 'AT&T Stadium, Dallas', kickoff: '6/25 06:00', localKickoff: '6/24 18:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'mar-hai-3', date: '2026-06-24', tournament: '2026 FIFA World Cup', group: 'C组', round: '第三轮', matchday: 13, homeTeam: 'Morocco', awayTeam: 'Haiti', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '6/25 06:00', localKickoff: '6/24 18:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'mex-cze-3', date: '2026-06-24', tournament: '2026 FIFA World Cup', group: 'A组', round: '第三轮', matchday: 13, homeTeam: 'Mexico', awayTeam: 'Czechia', venue: 'Estadio Azteca, Mexico City', kickoff: '6/25 09:00', localKickoff: '6/24 21:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'kor-rsa-3', date: '2026-06-24', tournament: '2026 FIFA World Cup', group: 'A组', round: '第三轮', matchday: 13, homeTeam: 'South Korea', awayTeam: 'South Africa', venue: 'SoFi Stadium, Los Angeles', kickoff: '6/25 09:00', localKickoff: '6/24 21:00', localTZ: 'ET', status: 'upcoming' },
+
+  // ---- 6月25日 (周四) 第14比赛日 ----
+  { id: 'ecu-ger-3', date: '2026-06-25', tournament: '2026 FIFA World Cup', group: 'E组', round: '第三轮', matchday: 14, homeTeam: 'Ecuador', awayTeam: 'Germany', venue: 'NRG Stadium, Houston', kickoff: '6/26 04:00', localKickoff: '6/25 16:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'cuw-civ-3', date: '2026-06-25', tournament: '2026 FIFA World Cup', group: 'E组', round: '第三轮', matchday: 14, homeTeam: 'Curacao', awayTeam: 'Ivory Coast', venue: 'Hard Rock Stadium, Miami', kickoff: '6/26 04:00', localKickoff: '6/25 16:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'tun-ned-3', date: '2026-06-25', tournament: '2026 FIFA World Cup', group: 'F组', round: '第三轮', matchday: 14, homeTeam: 'Tunisia', awayTeam: 'Netherlands', venue: 'Lincoln Financial Field, Philadelphia', kickoff: '6/26 07:00', localKickoff: '6/25 19:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'jpn-swe-3', date: '2026-06-25', tournament: '2026 FIFA World Cup', group: 'F组', round: '第三轮', matchday: 14, homeTeam: 'Japan', awayTeam: 'Sweden', venue: 'Gillette Stadium, Foxborough', kickoff: '6/26 07:00', localKickoff: '6/25 19:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'usa-tur-3', date: '2026-06-25', tournament: '2026 FIFA World Cup', group: 'D组', round: '第三轮', matchday: 14, homeTeam: 'USA', awayTeam: 'Turkiye', venue: 'Levi\'s Stadium, Santa Clara', kickoff: '6/26 10:00', localKickoff: '6/25 22:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'par-aus-3', date: '2026-06-25', tournament: '2026 FIFA World Cup', group: 'D组', round: '第三轮', matchday: 14, homeTeam: 'Paraguay', awayTeam: 'Australia', venue: 'Lumen Field, Seattle', kickoff: '6/26 10:00', localKickoff: '6/25 22:00', localTZ: 'ET', status: 'upcoming' },
+
+  // ---- 6月26日 (周五) 第15比赛日 ----
+  { id: 'nor-fra-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'I组', round: '第三轮', matchday: 15, homeTeam: 'Norway', awayTeam: 'France', venue: 'MetLife Stadium, New Jersey', kickoff: '6/27 03:00', localKickoff: '6/26 15:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'sen-irq-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'I组', round: '第三轮', matchday: 15, homeTeam: 'Senegal', awayTeam: 'Iraq', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '6/27 03:00', localKickoff: '6/26 15:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'uru-esp-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'H组', round: '第三轮', matchday: 15, homeTeam: 'Uruguay', awayTeam: 'Spain', venue: 'AT&T Stadium, Dallas', kickoff: '6/27 08:00', localKickoff: '6/26 20:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'cpv-ksa-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'H组', round: '第三轮', matchday: 15, homeTeam: 'Cape Verde', awayTeam: 'Saudi Arabia', venue: 'Hard Rock Stadium, Miami', kickoff: '6/27 08:00', localKickoff: '6/26 20:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'nzl-bel-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'G组', round: '第三轮', matchday: 15, homeTeam: 'New Zealand', awayTeam: 'Belgium', venue: 'Levi\'s Stadium, Santa Clara', kickoff: '6/27 11:00', localKickoff: '6/26 23:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'egy-irn-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'G组', round: '第三轮', matchday: 15, homeTeam: 'Egypt', awayTeam: 'Iran', venue: 'Lumen Field, Seattle', kickoff: '6/27 11:00', localKickoff: '6/26 23:00', localTZ: 'ET', status: 'upcoming' },
+
+  // ---- 6月27日 (周六) 第16比赛日 ----
+  { id: 'pan-eng-3', date: '2026-06-27', tournament: '2026 FIFA World Cup', group: 'L组', round: '第三轮', matchday: 16, homeTeam: 'Panama', awayTeam: 'England', venue: 'NRG Stadium, Houston', kickoff: '6/28 05:00', localKickoff: '6/27 17:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'cro-gha-3', date: '2026-06-27', tournament: '2026 FIFA World Cup', group: 'L组', round: '第三轮', matchday: 16, homeTeam: 'Croatia', awayTeam: 'Ghana', venue: 'Gillette Stadium, Foxborough', kickoff: '6/28 05:00', localKickoff: '6/27 17:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'col-por-3', date: '2026-06-27', tournament: '2026 FIFA World Cup', group: 'K组', round: '第三轮', matchday: 16, homeTeam: 'Colombia', awayTeam: 'Portugal', venue: 'BC Place, Vancouver', kickoff: '6/28 07:30', localKickoff: '6/27 19:30', localTZ: 'ET', status: 'upcoming' },
+  { id: 'uzb-cod-3', date: '2026-06-27', tournament: '2026 FIFA World Cup', group: 'K组', round: '第三轮', matchday: 16, homeTeam: 'Uzbekistan', awayTeam: 'DR Congo', venue: 'Estadio Akron, Guadalajara', kickoff: '6/28 07:30', localKickoff: '6/27 19:30', localTZ: 'ET', status: 'upcoming' },
+  { id: 'jor-arg-3', date: '2026-06-27', tournament: '2026 FIFA World Cup', group: 'J组', round: '第三轮', matchday: 16, homeTeam: 'Jordan', awayTeam: 'Argentina', venue: 'MetLife Stadium, New Jersey', kickoff: '6/28 10:00', localKickoff: '6/27 22:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'alg-aut-3', date: '2026-06-27', tournament: '2026 FIFA World Cup', group: 'J组', round: '第三轮', matchday: 16, homeTeam: 'Algeria', awayTeam: 'Austria', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '6/28 10:00', localKickoff: '6/27 22:00', localTZ: 'ET', status: 'upcoming' },
 ];
 
 // ========== 预测数据 ==========
