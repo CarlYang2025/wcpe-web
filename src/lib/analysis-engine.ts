@@ -121,8 +121,10 @@ export function classifyQuadrant(score: string, homeWinProb: number, awayWinProb
   const a = parseInt(parts[1]);
   if (isNaN(h) || isNaN(a)) return 'Q2';
 
-  const homeStrong = homeWinProb > 0.55;
-  const awayStrong = awayWinProb > 0.55;
+  // 强队判定：胜率 > 45% 且领先对手 >= 15个百分点
+  // 不用硬阈值 > 0.55（会把 52% vs 20%、55% vs 28% 漏掉）
+  const homeStrong = homeWinProb > 0.45 && (homeWinProb - awayWinProb) >= 0.15;
+  const awayStrong = awayWinProb > 0.45 && (awayWinProb - homeWinProb) >= 0.15;
   const diff = Math.abs(h - a);
   const total = h + a;
 

@@ -271,8 +271,8 @@ function reclassifyQuadrant(score, homeWinProb, awayWinProb) {
   const a = parseInt(parts[1])
   if (isNaN(h) || isNaN(a)) return 'Q2'
 
-  const homeStrong = (homeWinProb ?? 0) > 0.55
-  const awayStrong = (awayWinProb ?? 0) > 0.55
+  const homeStrong = (homeWinProb ?? 0) > 0.45 && (homeWinProb - awayWinProb) >= 0.15
+  const awayStrong = (awayWinProb ?? 0) > 0.45 && (awayWinProb - homeWinProb) >= 0.15
   const diff = Math.abs(h - a)
   const total = h + a
 
