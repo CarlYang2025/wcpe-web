@@ -3,30 +3,40 @@ import { QUADRANT_COLORS } from '../lib/types'
 
 interface Props {
   top5Scores: Top5Score[]
+  homeWinProb: number
+  awayWinProb: number
 }
 
 /**
- * Reclassify a score into quadrant based purely on the score itself.
+ * Reclassify score into quadrant with pre-match strength context.
  * Mirrors classifyQuadrant() in analysis-engine.ts.
- * Safety net: corrects quadrant values even if automation used old buggy logic.
  */
-function reclassifyQuadrant(score: string): string {
+function reclassifyQuadrant(score: string, homeWinProb: number, awayWinProb: number): string {
   const parts = score.split(/[:-]/);
   if (parts.length !== 2) return 'Q2';
   const h = parseInt(parts[0]);
   const a = parseInt(parts[1]);
   if (isNaN(h) || isNaN(a)) return 'Q2';
 
-  const total = h + a;
+  const homeStrong = homeWinProb > 0.55;
+  const awayStrong = awayWinProb > 0.55;
   const diff = Math.abs(h - a);
+  const total = h + a;
 
-  if (total >= 3) return diff >= 3 ? 'Q1' : 'Q4';
-  if (h > a) return 'Q2';
-  if (h < a) return 'Q3';
+  if (homeStrong && h < a) return 'Q3';
+  if (awayStrong && h > a) return 'Q3';
+
+  if (homeStrong && h > a && diff >= 2) return 'Q1';
+  if (awayStrong && h < a && diff >= 2) return 'Q1';
+
+  if (total >= 4 && h >= 2 && a >= 2) return 'Q4';
+
+  if (diff >= 3) return 'Q1';
+
   return 'Q2';
 }
 
-export default function QuadrantChart({ top5Scores }: Props) {
+export default function QuadrantChart({ top5Scores, homeWinProb, awayWinProb }: Props) {
   const size = 240
   const half = size / 2
   const pad = 24
@@ -42,7 +52,7 @@ export default function QuadrantChart({ top5Scores }: Props) {
   // Group scores by quadrant, reclassifying on the fly (safety net)
   const grouped = new Map<string, Top5Score[]>()
   for (const s of top5Scores) {
-    const quadrant = reclassifyQuadrant(s.score)
+    const quadrant = reclassifyQuadrant(s.score, homeWinProb, awayWinProb)
     if (!grouped.has(quadrant)) grouped.set(quadrant, [])
     grouped.get(quadrant)!.push(s)
   }

@@ -263,7 +263,7 @@ function normalizeReviews(reviews) {
  * This ensures automation-generated quadrant values (which used the old
  * buggy match-level-probability logic) are corrected during normalization.
  */
-function reclassifyQuadrant(score) {
+function reclassifyQuadrant(score, homeWinProb, awayWinProb) {
   if (typeof score !== 'string') return 'Q2'
   const parts = score.split(/[:-]/)
   if (parts.length !== 2) return 'Q2'
@@ -271,18 +271,26 @@ function reclassifyQuadrant(score) {
   const a = parseInt(parts[1])
   if (isNaN(h) || isNaN(a)) return 'Q2'
 
-  const total = h + a
+  const homeStrong = (homeWinProb ?? 0) > 0.55
+  const awayStrong = (awayWinProb ?? 0) > 0.55
   const diff = Math.abs(h - a)
+  const total = h + a
 
-  // 上半区：高比分（total >= 3）
-  //   diff >= 3 → 碾压（3:0, 4:1, 5:2, 0:3, 1:4）
-  //   diff <= 2 → 对攻（2:2, 3:2, 2:1, 3:1, 2:3）
-  if (total >= 3) return diff >= 3 ? 'Q1' : 'Q4'
+  // 冷门：强队输球
+  if (homeStrong && h < a) return 'Q3'
+  if (awayStrong && h > a) return 'Q3'
 
-  // 下半区：低比分（total < 3）
-  if (h > a) return 'Q2'  // 主场小胜 → 均势
-  if (h < a) return 'Q3'  // 客胜 → 冷门
-  return 'Q2'              // 平局 → 均势
+  // 碾压：强队赢球且净胜 >= 2
+  if (homeStrong && h > a && diff >= 2) return 'Q1'
+  if (awayStrong && h < a && diff >= 2) return 'Q1'
+
+  // 对攻：双方都进 2+ 且总进球 >= 4
+  if (total >= 4 && h >= 2 && a >= 2) return 'Q4'
+
+  // 均势碾压：diff >= 3
+  if (diff >= 3) return 'Q1'
+
+  return 'Q2'
 }
 
 /**
@@ -308,11 +316,13 @@ function normalizeSinglePrediction(p) {
     top5 = []
   } else {
     top5 = top5.map((s, i) => {
+      const hwp = p.homeWinProb ?? 0
+      const awp = p.awayWinProb ?? 0
       if (typeof s === 'string') {
         return {
           score: s,
           probability: 0.10 + i * 0.03,
-          quadrant: reclassifyQuadrant(s),
+          quadrant: reclassifyQuadrant(s, hwp, awp),
           reason: '自动化生成预测（字符串格式已标准化）',
         }
       }
@@ -321,7 +331,7 @@ function normalizeSinglePrediction(p) {
         return {
           score: scoreStr,
           probability: s.probability ?? (0.10 + i * 0.03),
-          quadrant: reclassifyQuadrant(scoreStr),  // overrides automation's old buggy quadrant
+          quadrant: reclassifyQuadrant(scoreStr, hwp, awp),
           reason: s.reason || '预测生成',
         }
       }

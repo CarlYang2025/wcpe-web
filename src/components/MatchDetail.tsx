@@ -11,19 +11,28 @@ import BankrollBreakdown from './BankrollBreakdown'
  * Mirrors classifyQuadrant() in analysis-engine.ts.
  * Corrects stale quadrant values from old automation data.
  */
-function reclassifyQuadrant(score: string): string {
+function reclassifyQuadrant(score: string, homeWinProb: number, awayWinProb: number): string {
   const parts = score.split(/[:-]/);
   if (parts.length !== 2) return 'Q2';
   const h = parseInt(parts[0]);
   const a = parseInt(parts[1]);
   if (isNaN(h) || isNaN(a)) return 'Q2';
 
-  const total = h + a;
+  const homeStrong = homeWinProb > 0.55;
+  const awayStrong = awayWinProb > 0.55;
   const diff = Math.abs(h - a);
+  const total = h + a;
 
-  if (total >= 3) return diff >= 3 ? 'Q1' : 'Q4';
-  if (h > a) return 'Q2';
-  if (h < a) return 'Q3';
+  if (homeStrong && h < a) return 'Q3';
+  if (awayStrong && h > a) return 'Q3';
+
+  if (homeStrong && h > a && diff >= 2) return 'Q1';
+  if (awayStrong && h < a && diff >= 2) return 'Q1';
+
+  if (total >= 4 && h >= 2 && a >= 2) return 'Q4';
+
+  if (diff >= 3) return 'Q1';
+
   return 'Q2';
 }
 
@@ -318,7 +327,7 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
         <M num="7" label="TOP5 比分预测" />
         <div className="space-y-2 mb-3">
           {(prediction.top5Scores || []).map((s: any, i: number) => {
-            const quadrant = reclassifyQuadrant(s.score)
+            const quadrant = reclassifyQuadrant(s.score, prediction.homeWinProb, prediction.awayWinProb)
             const c = QUADRANT_COLORS[quadrant]
             return (
               <div key={i} className="flex items-center gap-2 text-xs">
@@ -337,11 +346,11 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
       <section className="bg-[#141937] border border-[#1a1f3a] rounded-xl p-5">
         <M num="8" label="比分象限分类" />
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <div className="w-64 h-64 flex-shrink-0"><QuadrantChart top5Scores={prediction.top5Scores} /></div>
+          <div className="w-64 h-64 flex-shrink-0"><QuadrantChart top5Scores={prediction.top5Scores} homeWinProb={prediction.homeWinProb} awayWinProb={prediction.awayWinProb} /></div>
           <div className="flex-1 text-xs text-[#a0a0a0] space-y-2">
             <p>主推 <span className="text-[#ffd700] font-mono font-bold text-base">{prediction.predictedScore}</span></p>
             {(() => {
-              const topQuadrant = reclassifyQuadrant(prediction.top5Scores[0]?.score || '0:0')
+              const topQuadrant = reclassifyQuadrant(prediction.top5Scores[0]?.score || '0:0', prediction.homeWinProb, prediction.awayWinProb)
               return (
                 <>
                   <p className="text-sm font-bold" style={{ color: QUADRANT_COLORS[topQuadrant] }}>{QUADRANT_NAMES[topQuadrant]}</p>

@@ -101,41 +101,47 @@ export function rateMVI(mvi: number): string {
 }
 
 /**
- * Classify a score into one of four quadrants based purely on the score itself.
+ * Classify a score into quadrant using BOTH score + pre-match strength context.
  *
- * SVG 象限布局（轴标签）：
- *   Y轴: 高进球（上，total >= 3） vs 低进球（下，total < 3）
- *   X轴: 弱（左，客队赢） vs 强（右，主队赢）
+ * 核心逻辑：先定位强队是谁，再看比分与预期是否一致。
  *
- * 上半区判断：看净胜差，>=3 才是碾压，<=2 是对攻
- *   3:0 / 4:1 / 5:1 / 0:3 / 0:4 → Q1 强队碾压（diff >= 3）
- *   2:2 / 3:2 / 2:1 / 2:3 / 3:1 → Q4 对攻大战（diff <= 2）
+ * Q1 强队碾压: 强队赢球且净胜 >= 2
+ * Q3 冷门爆冷: 强队输球（无论比分）
+ * Q4 对攻大战: 双方都进 >= 2 球、总进球 >= 4（真正的对轰）
+ * Q2 均势博弈: 除上述以外的所有情况（小胜、平局、均势互有攻守）
  *
- * 下半区判断：客队赢为冷门，主队赢或平局为均势
- *   0:1 / 0:2 / 1:2 → Q3 冷门爆冷
- *   1:0 / 2:0 / 1:1 / 0:0 → Q2 均势博弈
+ * @param score       比分字符串 "2:1"
+ * @param homeWinProb 模型预测主胜概率
+ * @param awayWinProb 模型预测客胜概率
  */
-export function classifyQuadrant(score: string): string {
+export function classifyQuadrant(score: string, homeWinProb: number, awayWinProb: number): string {
   const parts = score.split(/[:-]/);
   if (parts.length !== 2) return 'Q2';
   const h = parseInt(parts[0]);
   const a = parseInt(parts[1]);
   if (isNaN(h) || isNaN(a)) return 'Q2';
 
-  const total = h + a;
+  const homeStrong = homeWinProb > 0.55;
+  const awayStrong = awayWinProb > 0.55;
   const diff = Math.abs(h - a);
+  const total = h + a;
 
-  // 上半区：高比分（total >= 3）
-  if (total >= 3) {
-    // 净胜差 >= 3 → 一方碾压（3:0, 4:1, 5:2, 0:3, 1:4...）
-    // 净胜差 <= 2 → 双方对攻（2:2, 3:2, 2:1, 3:1, 2:3...）
-    return diff >= 3 ? 'Q1' : 'Q4';
-  }
+  // ═══ Q3 冷门爆冷：强队输球 ═══
+  if (homeStrong && h < a) return 'Q3';  // 主场被看好却输了
+  if (awayStrong && h > a) return 'Q3';  // 客场被看好却输了
 
-  // 下半区：低比分（total < 3）
-  if (h > a) return 'Q2';  // 主队小胜 → 均势博弈
-  if (h < a) return 'Q3';  // 客队赢球 → 冷门爆冷
-  return 'Q2';              // 平局 → 均势博弈
+  // ═══ Q1 强队碾压：强队赢球且净胜 >= 2 ═══
+  if (homeStrong && h > a && diff >= 2) return 'Q1';
+  if (awayStrong && h < a && diff >= 2) return 'Q1';
+
+  // ═══ Q4 对攻大战：双方都进 2+ 球且总进球 >= 4（真正对轰） ═══
+  if (total >= 4 && h >= 2 && a >= 2) return 'Q4';
+
+  // ═══ 均势比赛中的碾压（diff >= 3）→ Q1 ═══
+  if (diff >= 3) return 'Q1';
+
+  // ═══ 兜底：均势博弈 ═══
+  return 'Q2';
 }
 
 /**
@@ -199,7 +205,7 @@ export function generateTop5Scores(
   return candidates.map((c, i) => ({
     score: c.score,
     probability: c.base,
-    quadrant: classifyQuadrant(c.score) as 'Q1' | 'Q2' | 'Q3' | 'Q4',
+    quadrant: classifyQuadrant(c.score, homeWinProb, awayWinProb) as 'Q1' | 'Q2' | 'Q3' | 'Q4',
     reason: c.reason,
   }));
 }
