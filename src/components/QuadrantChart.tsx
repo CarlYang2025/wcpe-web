@@ -5,6 +5,25 @@ interface Props {
   top5Scores: Top5Score[]
 }
 
+/**
+ * Reclassify a score into quadrant based purely on the score itself.
+ * Mirrors classifyQuadrant() in analysis-engine.ts.
+ * Safety net: corrects quadrant values even if automation used old buggy logic.
+ */
+function reclassifyQuadrant(score: string): string {
+  const parts = score.split(/[:-]/);
+  if (parts.length !== 2) return 'Q2';
+  const h = parseInt(parts[0]);
+  const a = parseInt(parts[1]);
+  if (isNaN(h) || isNaN(a)) return 'Q2';
+
+  const total = h + a;
+  if (total >= 3) return h > a ? 'Q4' : 'Q1';
+  if (h > a) return 'Q2';
+  if (h < a) return 'Q3';
+  return 'Q2';
+}
+
 export default function QuadrantChart({ top5Scores }: Props) {
   const size = 240
   const half = size / 2
@@ -18,11 +37,12 @@ export default function QuadrantChart({ top5Scores }: Props) {
     { id: 'Q3', x: half, y: half, w: half - pad, h: half - pad, color: QUADRANT_COLORS.Q3, label: '冷门爆冷' },
   ]
 
-  // Group scores by quadrant, maintaining rank order
+  // Group scores by quadrant, reclassifying on the fly (safety net)
   const grouped = new Map<string, Top5Score[]>()
   for (const s of top5Scores) {
-    if (!grouped.has(s.quadrant)) grouped.set(s.quadrant, [])
-    grouped.get(s.quadrant)!.push(s)
+    const quadrant = reclassifyQuadrant(s.score)
+    if (!grouped.has(quadrant)) grouped.set(quadrant, [])
+    grouped.get(quadrant)!.push(s)
   }
 
   // Stick each quadrant's scores centered vertically within that quadrant

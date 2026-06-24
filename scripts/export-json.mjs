@@ -258,6 +258,33 @@ function normalizeReviews(reviews) {
 }
 
 /**
+ * Reclassify a score into quadrant based purely on the score string.
+ * Mirrors the classifyQuadrant() logic in analysis-engine.ts.
+ * This ensures automation-generated quadrant values (which used the old
+ * buggy match-level-probability logic) are corrected during normalization.
+ */
+function reclassifyQuadrant(score) {
+  if (typeof score !== 'string') return 'Q2'
+  const parts = score.split(/[:-]/)
+  if (parts.length !== 2) return 'Q2'
+  const h = parseInt(parts[0])
+  const a = parseInt(parts[1])
+  if (isNaN(h) || isNaN(a)) return 'Q2'
+
+  const total = h + a
+
+  // High scoring (top half): total >= 3
+  if (total >= 3) {
+    return h > a ? 'Q4' : 'Q1'
+  }
+
+  // Low scoring (bottom half): total < 3
+  if (h > a) return 'Q2'  // 均势博弈
+  if (h < a) return 'Q3'  // 冷门爆冷
+  return 'Q2'              // draw → 均势博弈
+}
+
+/**
  * Normalize a single prediction to standard format.
  * This is the single choke point — no matter what format the automation
  * produces, this function ensures every field meets the expected contract.
@@ -284,15 +311,16 @@ function normalizeSinglePrediction(p) {
         return {
           score: s,
           probability: 0.10 + i * 0.03,
-          quadrant: 'Q2',
+          quadrant: reclassifyQuadrant(s),
           reason: '自动化生成预测（字符串格式已标准化）',
         }
       }
       if (typeof s === 'object' && s !== null) {
+        const scoreStr = s.score ?? String(s)
         return {
-          score: s.score ?? String(s),
+          score: scoreStr,
           probability: s.probability ?? (0.10 + i * 0.03),
-          quadrant: s.quadrant || 'Q2',
+          quadrant: reclassifyQuadrant(scoreStr),  // overrides automation's old buggy quadrant
           reason: s.reason || '预测生成',
         }
       }

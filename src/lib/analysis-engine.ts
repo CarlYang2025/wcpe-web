@@ -101,22 +101,39 @@ export function rateMVI(mvi: number): string {
 }
 
 /**
- * Classify score into quadrant
+ * Classify a score into one of four quadrants based purely on the score itself.
+ *
+ * SVG 象限布局（轴标签）：
+ *   Y轴: 高进球（上） vs 低进球（下）
+ *   X轴: 弱（左, 主队输） vs 强（右, 主队赢）
+ *
+ * 分类规则：
+ *   Q1 (top-left,  弱+高进球): away wins with total>=3  → 强队碾压
+ *   Q4 (top-right, 强+高进球): home wins with total>=3  → 对攻大战
+ *   Q3 (bot-left,  弱+低进球): away wins with total<3   → 冷门爆冷
+ *   Q2 (bot-right, 强+低进球): home wins with total<3 或平局 → 均势博弈
+ *
+ * 不再使用比赛级别概率（homeWinProb/over25Prob），避免同一场比赛
+ * 所有比分因概率相同而被归入同一象限。
  */
-export function classifyQuadrant(score: string, homeWinProb: number, over25Prob: number): string {
+export function classifyQuadrant(score: string): string {
   const parts = score.split(/[:-]/);
-  if (parts.length !== 2) return 'Q1';
+  if (parts.length !== 2) return 'Q2';
   const h = parseInt(parts[0]);
   const a = parseInt(parts[1]);
+  if (isNaN(h) || isNaN(a)) return 'Q2';
 
-  if (homeWinProb > 0.55 && h > a) {
-    return 'Q1';
-  } else if (over25Prob > 0.55 && h + a >= 4) {
-    return 'Q4';
-  } else if (homeWinProb < 0.45 && a > h) {
-    return 'Q3';
+  const total = h + a;
+
+  // Top half: high-scoring (total >= 3)
+  if (total >= 3) {
+    return h > a ? 'Q4' : 'Q1';  // Q4=对攻大战, Q1=强队碾压
   }
-  return 'Q2';
+
+  // Bottom half: low-scoring (total < 3)
+  if (h > a) return 'Q2';  // 均势博弈（主队小胜）
+  if (h < a) return 'Q3';  // 冷门爆冷（客队偷走胜利）
+  return 'Q2';              // 平局 → 均势博弈
 }
 
 /**
@@ -180,7 +197,7 @@ export function generateTop5Scores(
   return candidates.map((c, i) => ({
     score: c.score,
     probability: c.base,
-    quadrant: classifyQuadrant(c.score, homeWinProb, over25Prob) as 'Q1' | 'Q2' | 'Q3' | 'Q4',
+    quadrant: classifyQuadrant(c.score) as 'Q1' | 'Q2' | 'Q3' | 'Q4',
     reason: c.reason,
   }));
 }

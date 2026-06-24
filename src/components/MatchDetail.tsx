@@ -6,6 +6,25 @@ import QuadrantChart from './QuadrantChart'
 import MviTable from './MviTable'
 import BankrollBreakdown from './BankrollBreakdown'
 
+/**
+ * Reclassify a score into quadrant based purely on the score itself.
+ * Mirrors classifyQuadrant() in analysis-engine.ts.
+ * Corrects stale quadrant values from old automation data.
+ */
+function reclassifyQuadrant(score: string): string {
+  const parts = score.split(/[:-]/);
+  if (parts.length !== 2) return 'Q2';
+  const h = parseInt(parts[0]);
+  const a = parseInt(parts[1]);
+  if (isNaN(h) || isNaN(a)) return 'Q2';
+
+  const total = h + a;
+  if (total >= 3) return h > a ? 'Q4' : 'Q1';
+  if (h > a) return 'Q2';
+  if (h < a) return 'Q3';
+  return 'Q2';
+}
+
 interface Props {
   match: Match
   prediction?: Prediction
@@ -297,14 +316,15 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
         <M num="7" label="TOP5 比分预测" />
         <div className="space-y-2 mb-3">
           {(prediction.top5Scores || []).map((s: any, i: number) => {
-            const c = QUADRANT_COLORS[s.quadrant]
+            const quadrant = reclassifyQuadrant(s.score)
+            const c = QUADRANT_COLORS[quadrant]
             return (
               <div key={i} className="flex items-center gap-2 text-xs">
                 <span className="w-5 text-[#ffd700] font-bold">#{i + 1}</span>
                 <span className="w-10 text-white font-mono font-bold">{s.score}</span>
                 <div className="flex-1 h-6 rounded bg-[#1a1f3a] relative"><div className="absolute inset-0 flex items-center px-2"><span className="text-[10px] text-[#a0a0a0] truncate">{s.reason}</span></div><div className="h-full rounded" style={{ width: `${Math.min(s.probability * 5 * 100, 100)}%`, backgroundColor: c, opacity: 0.15 }} /></div>
                 <span className="w-10 text-right font-mono font-bold" style={{ color: c }}>{Math.round(s.probability * 100)}%</span>
-                <span className="w-16 text-right text-[9px] px-1.5 py-0.5 rounded" style={{ backgroundColor: c + '20', color: c }}>{QUADRANT_NAMES[s.quadrant]}</span>
+                <span className="w-16 text-right text-[9px] px-1.5 py-0.5 rounded" style={{ backgroundColor: c + '20', color: c }}>{QUADRANT_NAMES[quadrant]}</span>
               </div>
             )
           })}
@@ -318,8 +338,15 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
           <div className="w-64 h-64 flex-shrink-0"><QuadrantChart top5Scores={prediction.top5Scores} /></div>
           <div className="flex-1 text-xs text-[#a0a0a0] space-y-2">
             <p>主推 <span className="text-[#ffd700] font-mono font-bold text-base">{prediction.predictedScore}</span></p>
-            <p className="text-sm font-bold" style={{ color: QUADRANT_COLORS[prediction.top5Scores[0]?.quadrant] }}>{QUADRANT_NAMES[prediction.top5Scores[0]?.quadrant]}</p>
-            <p className="leading-relaxed">{qd(prediction.top5Scores[0]?.quadrant)}</p>
+            {(() => {
+              const topQuadrant = reclassifyQuadrant(prediction.top5Scores[0]?.score || '0:0')
+              return (
+                <>
+                  <p className="text-sm font-bold" style={{ color: QUADRANT_COLORS[topQuadrant] }}>{QUADRANT_NAMES[topQuadrant]}</p>
+                  <p className="leading-relaxed">{qd(topQuadrant)}</p>
+                </>
+              )
+            })()}
           </div>
         </div>
       </section>
