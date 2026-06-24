@@ -104,17 +104,16 @@ export function rateMVI(mvi: number): string {
  * Classify a score into one of four quadrants based purely on the score itself.
  *
  * SVG 象限布局（轴标签）：
- *   Y轴: 高进球（上） vs 低进球（下）
- *   X轴: 弱（左, 主队输） vs 强（右, 主队赢）
+ *   Y轴: 高进球（上，total >= 3） vs 低进球（下，total < 3）
+ *   X轴: 弱（左，客队赢） vs 强（右，主队赢）
  *
- * 分类规则：
- *   Q1 (top-left,  弱+高进球): away wins with total>=3  → 强队碾压
- *   Q4 (top-right, 强+高进球): home wins with total>=3  → 对攻大战
- *   Q3 (bot-left,  弱+低进球): away wins with total<3   → 冷门爆冷
- *   Q2 (bot-right, 强+低进球): home wins with total<3 或平局 → 均势博弈
+ * 上半区判断：看净胜差，>=3 才是碾压，<=2 是对攻
+ *   3:0 / 4:1 / 5:1 / 0:3 / 0:4 → Q1 强队碾压（diff >= 3）
+ *   2:2 / 3:2 / 2:1 / 2:3 / 3:1 → Q4 对攻大战（diff <= 2）
  *
- * 不再使用比赛级别概率（homeWinProb/over25Prob），避免同一场比赛
- * 所有比分因概率相同而被归入同一象限。
+ * 下半区判断：客队赢为冷门，主队赢或平局为均势
+ *   0:1 / 0:2 / 1:2 → Q3 冷门爆冷
+ *   1:0 / 2:0 / 1:1 / 0:0 → Q2 均势博弈
  */
 export function classifyQuadrant(score: string): string {
   const parts = score.split(/[:-]/);
@@ -124,15 +123,18 @@ export function classifyQuadrant(score: string): string {
   if (isNaN(h) || isNaN(a)) return 'Q2';
 
   const total = h + a;
+  const diff = Math.abs(h - a);
 
-  // Top half: high-scoring (total >= 3)
+  // 上半区：高比分（total >= 3）
   if (total >= 3) {
-    return h > a ? 'Q4' : 'Q1';  // Q4=对攻大战, Q1=强队碾压
+    // 净胜差 >= 3 → 一方碾压（3:0, 4:1, 5:2, 0:3, 1:4...）
+    // 净胜差 <= 2 → 双方对攻（2:2, 3:2, 2:1, 3:1, 2:3...）
+    return diff >= 3 ? 'Q1' : 'Q4';
   }
 
-  // Bottom half: low-scoring (total < 3)
-  if (h > a) return 'Q2';  // 均势博弈（主队小胜）
-  if (h < a) return 'Q3';  // 冷门爆冷（客队偷走胜利）
+  // 下半区：低比分（total < 3）
+  if (h > a) return 'Q2';  // 主队小胜 → 均势博弈
+  if (h < a) return 'Q3';  // 客队赢球 → 冷门爆冷
   return 'Q2';              // 平局 → 均势博弈
 }
 

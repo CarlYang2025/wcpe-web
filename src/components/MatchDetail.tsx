@@ -19,7 +19,9 @@ function reclassifyQuadrant(score: string): string {
   if (isNaN(h) || isNaN(a)) return 'Q2';
 
   const total = h + a;
-  if (total >= 3) return h > a ? 'Q4' : 'Q1';
+  const diff = Math.abs(h - a);
+
+  if (total >= 3) return diff >= 3 ? 'Q1' : 'Q4';
   if (h > a) return 'Q2';
   if (h < a) return 'Q3';
   return 'Q2';

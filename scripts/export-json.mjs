@@ -272,16 +272,17 @@ function reclassifyQuadrant(score) {
   if (isNaN(h) || isNaN(a)) return 'Q2'
 
   const total = h + a
+  const diff = Math.abs(h - a)
 
-  // High scoring (top half): total >= 3
-  if (total >= 3) {
-    return h > a ? 'Q4' : 'Q1'
-  }
+  // 上半区：高比分（total >= 3）
+  //   diff >= 3 → 碾压（3:0, 4:1, 5:2, 0:3, 1:4）
+  //   diff <= 2 → 对攻（2:2, 3:2, 2:1, 3:1, 2:3）
+  if (total >= 3) return diff >= 3 ? 'Q1' : 'Q4'
 
-  // Low scoring (bottom half): total < 3
-  if (h > a) return 'Q2'  // 均势博弈
-  if (h < a) return 'Q3'  // 冷门爆冷
-  return 'Q2'              // draw → 均势博弈
+  // 下半区：低比分（total < 3）
+  if (h > a) return 'Q2'  // 主场小胜 → 均势
+  if (h < a) return 'Q3'  // 客胜 → 冷门
+  return 'Q2'              // 平局 → 均势
 }
 
 /**
