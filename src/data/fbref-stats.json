@@ -1,187 +1,1187 @@
 {
   "mex-rsa": {
-    "possession": { "home": 61, "away": 40 },
-    "shots": { "home": 16, "away": 3 },
-    "shotsOnTarget": { "home": 4, "away": 2 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 3, "away": 1 },
-    "fouls": { "home": 12, "away": 11 },
-    "cards": { "home": { "yellow": 2, "red": 0 }, "away": { "yellow": 4, "red": 0 } },
-    "offsides": { "home": 1, "away": 1 },
-    "crosses": { "home": 12, "away": 8 },
-    "interceptions": { "home": 8, "away": 7 },
-    "saves": { "home": 2, "away": 2 },
+    "possession": {
+      "home": 61,
+      "away": 40
+    },
+    "shots": {
+      "home": 16,
+      "away": 3
+    },
+    "shotsOnTarget": {
+      "home": 4,
+      "away": 2
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 3,
+      "away": 1
+    },
+    "fouls": {
+      "home": 12,
+      "away": 11
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 4,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 1,
+      "away": 1
+    },
+    "crosses": {
+      "home": 12,
+      "away": 8
+    },
+    "interceptions": {
+      "home": 8,
+      "away": 7
+    },
+    "saves": {
+      "home": 2,
+      "away": 2
+    },
     "_source": "fbref.com"
   },
   "kor-cze": {
-    "possession": { "home": 62, "away": 38 },
-    "shots": { "home": 15, "away": 7 },
-    "shotsOnTarget": { "home": 6, "away": 4 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 4, "away": 5 },
-    "fouls": { "home": 9, "away": 16 },
-    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 0, "red": 0 } },
-    "offsides": { "home": 2, "away": 2 },
-    "crosses": { "home": 12, "away": 15 },
-    "interceptions": { "home": 11, "away": 7 },
-    "saves": { "home": 3, "away": 4 },
+    "possession": {
+      "home": 62,
+      "away": 38
+    },
+    "shots": {
+      "home": 15,
+      "away": 7
+    },
+    "shotsOnTarget": {
+      "home": 6,
+      "away": 4
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 4,
+      "away": 5
+    },
+    "fouls": {
+      "home": 9,
+      "away": 16
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 0,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 2
+    },
+    "crosses": {
+      "home": 12,
+      "away": 15
+    },
+    "interceptions": {
+      "home": 11,
+      "away": 7
+    },
+    "saves": {
+      "home": 3,
+      "away": 4
+    },
     "_source": "fbref.com"
   },
   "can-bih": {
-    "possession": { "home": 61, "away": 39 },
-    "shots": { "home": 13, "away": 8 },
-    "shotsOnTarget": { "home": 4, "away": 3 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 9, "away": 4 },
-    "fouls": { "home": 10, "away": 20 },
-    "cards": { "home": { "yellow": 2, "red": 0 }, "away": { "yellow": 3, "red": 0 } },
-    "offsides": { "home": 1, "away": 0 },
-    "crosses": { "home": 24, "away": 10 },
-    "interceptions": { "home": 4, "away": 10 },
-    "saves": { "home": 2, "away": 1 },
+    "possession": {
+      "home": 61,
+      "away": 39
+    },
+    "shots": {
+      "home": 13,
+      "away": 8
+    },
+    "shotsOnTarget": {
+      "home": 4,
+      "away": 3
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 9,
+      "away": 4
+    },
+    "fouls": {
+      "home": 10,
+      "away": 20
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 3,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 1,
+      "away": 0
+    },
+    "crosses": {
+      "home": 24,
+      "away": 10
+    },
+    "interceptions": {
+      "home": 4,
+      "away": 10
+    },
+    "saves": {
+      "home": 2,
+      "away": 1
+    },
     "_source": "fbref.com"
   },
   "usa-par": {
-    "possession": { "home": 65, "away": 35 },
-    "shots": { "home": 16, "away": 9 },
-    "shotsOnTarget": { "home": 6, "away": 1 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 3, "away": 1 },
-    "fouls": { "home": 13, "away": 17 },
-    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 4, "red": 0 } },
-    "offsides": { "home": 2, "away": 1 },
-    "crosses": { "home": 17, "away": 5 },
-    "interceptions": { "home": 11, "away": 9 },
-    "saves": { "home": 0, "away": 3 },
+    "possession": {
+      "home": 65,
+      "away": 35
+    },
+    "shots": {
+      "home": 16,
+      "away": 9
+    },
+    "shotsOnTarget": {
+      "home": 6,
+      "away": 1
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 3,
+      "away": 1
+    },
+    "fouls": {
+      "home": 13,
+      "away": 17
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 4,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 1
+    },
+    "crosses": {
+      "home": 17,
+      "away": 5
+    },
+    "interceptions": {
+      "home": 11,
+      "away": 9
+    },
+    "saves": {
+      "home": 0,
+      "away": 3
+    },
     "_source": "fbref.com"
   },
   "qat-sui": {
-    "possession": { "home": 32, "away": 68 },
-    "shots": { "home": 7, "away": 26 },
-    "shotsOnTarget": { "home": 4, "away": 7 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 3, "away": 10 },
-    "fouls": { "home": 12, "away": 11 },
-    "cards": { "home": { "yellow": 2, "red": 0 }, "away": { "yellow": 1, "red": 0 } },
-    "offsides": { "home": 0, "away": 1 },
-    "crosses": { "home": 8, "away": 35 },
-    "interceptions": { "home": 10, "away": 7 },
-    "saves": { "home": 5, "away": 3 },
+    "possession": {
+      "home": 32,
+      "away": 68
+    },
+    "shots": {
+      "home": 7,
+      "away": 26
+    },
+    "shotsOnTarget": {
+      "home": 4,
+      "away": 7
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 3,
+      "away": 10
+    },
+    "fouls": {
+      "home": 12,
+      "away": 11
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 1
+    },
+    "crosses": {
+      "home": 8,
+      "away": 35
+    },
+    "interceptions": {
+      "home": 10,
+      "away": 7
+    },
+    "saves": {
+      "home": 5,
+      "away": 3
+    },
     "_source": "fbref.com"
   },
   "bra-mar": {
-    "possession": { "home": 51, "away": 49 },
-    "shots": { "home": 12, "away": 14 },
-    "shotsOnTarget": { "home": 5, "away": 3 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 6, "away": 2 },
-    "fouls": { "home": 16, "away": 14 },
-    "cards": { "home": { "yellow": 2, "red": 0 }, "away": { "yellow": 0, "red": 0 } },
-    "offsides": { "home": 0, "away": 1 },
-    "crosses": { "home": 16, "away": 15 },
-    "interceptions": { "home": 5, "away": 4 },
-    "saves": { "home": 2, "away": 4 },
+    "possession": {
+      "home": 51,
+      "away": 49
+    },
+    "shots": {
+      "home": 12,
+      "away": 14
+    },
+    "shotsOnTarget": {
+      "home": 5,
+      "away": 3
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 6,
+      "away": 2
+    },
+    "fouls": {
+      "home": 16,
+      "away": 14
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 0,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 1
+    },
+    "crosses": {
+      "home": 16,
+      "away": 15
+    },
+    "interceptions": {
+      "home": 5,
+      "away": 4
+    },
+    "saves": {
+      "home": 2,
+      "away": 4
+    },
     "_source": "fbref.com"
   },
   "tun-jpn-2": {
-    "possession": { "home": 38, "away": 62 },
-    "shots": { "home": 2, "away": 11 },
-    "shotsOnTarget": { "home": 0, "away": 5 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 3, "away": 5 },
-    "fouls": { "home": 8, "away": 15 },
-    "cards": { "home": { "yellow": 0, "red": 0 }, "away": { "yellow": 0, "red": 0 } },
-    "offsides": { "home": 1, "away": 1 },
-    "crosses": { "home": 10, "away": 11 },
-    "interceptions": { "home": 14, "away": 6 },
-    "saves": { "home": 1, "away": 0 },
+    "possession": {
+      "home": 38,
+      "away": 62
+    },
+    "shots": {
+      "home": 2,
+      "away": 11
+    },
+    "shotsOnTarget": {
+      "home": 0,
+      "away": 5
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 3,
+      "away": 5
+    },
+    "fouls": {
+      "home": 8,
+      "away": 15
+    },
+    "cards": {
+      "home": {
+        "yellow": 0,
+        "red": 0
+      },
+      "away": {
+        "yellow": 0,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 1,
+      "away": 1
+    },
+    "crosses": {
+      "home": 10,
+      "away": 11
+    },
+    "interceptions": {
+      "home": 14,
+      "away": 6
+    },
+    "saves": {
+      "home": 1,
+      "away": 0
+    },
     "_source": "fbref.com"
   },
   "ned-swe-2": {
-    "possession": { "home": 51, "away": 49 },
-    "shots": { "home": 10, "away": 16 },
-    "shotsOnTarget": { "home": 7, "away": 8 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 2, "away": 5 },
-    "fouls": { "home": 9, "away": 12 },
-    "cards": { "home": { "yellow": 0, "red": 0 }, "away": { "yellow": 3, "red": 0 } },
-    "offsides": { "home": 3, "away": 3 },
-    "crosses": { "home": 15, "away": 21 },
-    "interceptions": { "home": 8, "away": 6 },
-    "saves": { "home": 7, "away": 2 },
+    "possession": {
+      "home": 51,
+      "away": 49
+    },
+    "shots": {
+      "home": 10,
+      "away": 16
+    },
+    "shotsOnTarget": {
+      "home": 7,
+      "away": 8
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 2,
+      "away": 5
+    },
+    "fouls": {
+      "home": 9,
+      "away": 12
+    },
+    "cards": {
+      "home": {
+        "yellow": 0,
+        "red": 0
+      },
+      "away": {
+        "yellow": 3,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 3,
+      "away": 3
+    },
+    "crosses": {
+      "home": 15,
+      "away": 21
+    },
+    "interceptions": {
+      "home": 8,
+      "away": 6
+    },
+    "saves": {
+      "home": 7,
+      "away": 2
+    },
     "_source": "fbref.com"
   },
   "ger-civ-2": {
-    "possession": { "home": 59, "away": 41 },
-    "shots": { "home": 16, "away": 9 },
-    "shotsOnTarget": { "home": 7, "away": 2 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 8, "away": 3 },
-    "fouls": { "home": 5, "away": 7 },
-    "cards": { "home": { "yellow": 0, "red": 0 }, "away": { "yellow": 0, "red": 0 } },
-    "offsides": { "home": 0, "away": 1 },
-    "crosses": { "home": 21, "away": 9 },
-    "interceptions": { "home": 7, "away": 13 },
-    "saves": { "home": 1, "away": 5 },
+    "possession": {
+      "home": 59,
+      "away": 41
+    },
+    "shots": {
+      "home": 16,
+      "away": 9
+    },
+    "shotsOnTarget": {
+      "home": 7,
+      "away": 2
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 8,
+      "away": 3
+    },
+    "fouls": {
+      "home": 5,
+      "away": 7
+    },
+    "cards": {
+      "home": {
+        "yellow": 0,
+        "red": 0
+      },
+      "away": {
+        "yellow": 0,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 1
+    },
+    "crosses": {
+      "home": 21,
+      "away": 9
+    },
+    "interceptions": {
+      "home": 7,
+      "away": 13
+    },
+    "saves": {
+      "home": 1,
+      "away": 5
+    },
     "_source": "fbref.com"
   },
   "ecu-cuw-2": {
-    "possession": { "home": 75, "away": 25 },
-    "shots": { "home": 27, "away": 10 },
-    "shotsOnTarget": { "home": 15, "away": 3 },
-    "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 9, "away": 0 },
-    "fouls": { "home": 7, "away": 10 },
-    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 5, "red": 0 } },
-    "offsides": { "home": 1, "away": 2 },
-    "crosses": { "home": 32, "away": 1 },
-    "interceptions": { "home": 7, "away": 8 },
-    "saves": { "home": 3, "away": 15 },
+    "possession": {
+      "home": 75,
+      "away": 25
+    },
+    "shots": {
+      "home": 27,
+      "away": 10
+    },
+    "shotsOnTarget": {
+      "home": 15,
+      "away": 3
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 9,
+      "away": 0
+    },
+    "fouls": {
+      "home": 7,
+      "away": 10
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 5,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 1,
+      "away": 2
+    },
+    "crosses": {
+      "home": 32,
+      "away": 1
+    },
+    "interceptions": {
+      "home": 7,
+      "away": 8
+    },
+    "saves": {
+      "home": 3,
+      "away": 15
+    },
     "_source": "fbref.com"
   },
   "usa-aus-2": {
-    "possession": { "home": 62, "away": 38 }, "shots": { "home": 10, "away": 5 },
-    "shotsOnTarget": { "home": 2, "away": 2 }, "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 7, "away": 4 }, "fouls": { "home": 12, "away": 16 },
-    "cards": { "home": { "yellow": 3, "red": 0 }, "away": { "yellow": 4, "red": 0 } },
-    "offsides": { "home": 1, "away": 0 }, "crosses": { "home": 14, "away": 19 },
-    "interceptions": { "home": 21, "away": 7 }, "saves": { "home": 2, "away": 1 },
+    "possession": {
+      "home": 62,
+      "away": 38
+    },
+    "shots": {
+      "home": 10,
+      "away": 5
+    },
+    "shotsOnTarget": {
+      "home": 2,
+      "away": 2
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 7,
+      "away": 4
+    },
+    "fouls": {
+      "home": 12,
+      "away": 16
+    },
+    "cards": {
+      "home": {
+        "yellow": 3,
+        "red": 0
+      },
+      "away": {
+        "yellow": 4,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 1,
+      "away": 0
+    },
+    "crosses": {
+      "home": 14,
+      "away": 19
+    },
+    "interceptions": {
+      "home": 21,
+      "away": 7
+    },
+    "saves": {
+      "home": 2,
+      "away": 1
+    },
     "_source": "fbref.com"
   },
   "sco-mar-2": {
-    "possession": { "home": 41, "away": 59 }, "shots": { "home": 6, "away": 12 },
-    "shotsOnTarget": { "home": 0, "away": 2 }, "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 2, "away": 5 }, "fouls": { "home": 11, "away": 8 },
-    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 1, "red": 0 } },
-    "offsides": { "home": 1, "away": 0 }, "crosses": { "home": 13, "away": 10 },
-    "interceptions": { "home": 9, "away": 5 }, "saves": { "home": 1, "away": 0 },
+    "possession": {
+      "home": 41,
+      "away": 59
+    },
+    "shots": {
+      "home": 6,
+      "away": 12
+    },
+    "shotsOnTarget": {
+      "home": 0,
+      "away": 2
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 2,
+      "away": 5
+    },
+    "fouls": {
+      "home": 11,
+      "away": 8
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 1,
+      "away": 0
+    },
+    "crosses": {
+      "home": 13,
+      "away": 10
+    },
+    "interceptions": {
+      "home": 9,
+      "away": 5
+    },
+    "saves": {
+      "home": 1,
+      "away": 0
+    },
     "_source": "fbref.com"
   },
   "bra-hai-2": {
-    "possession": { "home": 57, "away": 43 }, "shots": { "home": 8, "away": 7 },
-    "shotsOnTarget": { "home": 5, "away": 3 }, "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 4, "away": 4 }, "fouls": { "home": 13, "away": 14 },
-    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 3, "red": 0 } },
-    "offsides": { "home": 8, "away": 4 }, "crosses": { "home": 9, "away": 11 },
-    "interceptions": { "home": 10, "away": 9 }, "saves": { "home": 3, "away": 2 },
+    "possession": {
+      "home": 57,
+      "away": 43
+    },
+    "shots": {
+      "home": 8,
+      "away": 7
+    },
+    "shotsOnTarget": {
+      "home": 5,
+      "away": 3
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 4,
+      "away": 4
+    },
+    "fouls": {
+      "home": 13,
+      "away": 14
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 3,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 8,
+      "away": 4
+    },
+    "crosses": {
+      "home": 9,
+      "away": 11
+    },
+    "interceptions": {
+      "home": 10,
+      "away": 9
+    },
+    "saves": {
+      "home": 3,
+      "away": 2
+    },
     "_source": "fbref.com"
   },
   "tur-par-2": {
-    "possession": { "home": 79, "away": 22 }, "shots": { "home": 32, "away": 7 },
-    "shotsOnTarget": { "home": 5, "away": 2 }, "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 12, "away": 0 }, "fouls": { "home": 14, "away": 15 },
-    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 2, "red": 0 } },
-    "offsides": { "home": 2, "away": 3 }, "crosses": { "home": 42, "away": 6 },
-    "interceptions": { "home": 6, "away": 9 }, "saves": { "home": 1, "away": 5 },
+    "possession": {
+      "home": 79,
+      "away": 22
+    },
+    "shots": {
+      "home": 32,
+      "away": 7
+    },
+    "shotsOnTarget": {
+      "home": 5,
+      "away": 2
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 12,
+      "away": 0
+    },
+    "fouls": {
+      "home": 14,
+      "away": 15
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 2,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 3
+    },
+    "crosses": {
+      "home": 42,
+      "away": 6
+    },
+    "interceptions": {
+      "home": 6,
+      "away": 9
+    },
+    "saves": {
+      "home": 1,
+      "away": 5
+    },
     "_source": "fbref.com"
   },
   "can-qat-2": {
-    "possession": { "home": 79, "away": 21 }, "shots": { "home": 32, "away": 2 },
-    "shotsOnTarget": { "home": 10, "away": 0 }, "xg": { "home": 0, "away": 0 },
-    "corners": { "home": 19, "away": 1 }, "fouls": { "home": 9, "away": 10 },
-    "cards": { "home": { "yellow": 1, "red": 0 }, "away": { "yellow": 3, "red": 0 } },
-    "offsides": { "home": 1, "away": 1 }, "crosses": { "home": 55, "away": 3 },
-    "interceptions": { "home": 6, "away": 11 }, "saves": { "home": 0, "away": 4 },
+    "possession": {
+      "home": 79,
+      "away": 21
+    },
+    "shots": {
+      "home": 32,
+      "away": 2
+    },
+    "shotsOnTarget": {
+      "home": 10,
+      "away": 0
+    },
+    "xg": {
+      "home": 0,
+      "away": 0
+    },
+    "corners": {
+      "home": 19,
+      "away": 1
+    },
+    "fouls": {
+      "home": 9,
+      "away": 10
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 3,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 1,
+      "away": 1
+    },
+    "crosses": {
+      "home": 55,
+      "away": 3
+    },
+    "interceptions": {
+      "home": 6,
+      "away": 11
+    },
+    "saves": {
+      "home": 0,
+      "away": 4
+    },
     "_source": "fbref.com"
+  },
+  "can-sui-3": {
+    "possession": {
+      "home": 45,
+      "away": 55
+    },
+    "shots": {
+      "home": 13,
+      "away": 6
+    },
+    "shotsOnTarget": {
+      "home": 7,
+      "away": 4
+    },
+    "xg": {
+      "home": 1.56,
+      "away": 0.5
+    },
+    "corners": {
+      "home": 7,
+      "away": 2
+    },
+    "fouls": {
+      "home": 13,
+      "away": 19
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 3,
+      "away": 1
+    },
+    "crosses": {
+      "home": 27,
+      "away": 9
+    },
+    "interceptions": {
+      "home": 11,
+      "away": 5
+    },
+    "saves": {
+      "home": 1,
+      "away": 6
+    },
+    "tackles": {
+      "home": 10,
+      "away": 8
+    },
+    "clearances": {
+      "home": 24,
+      "away": 52
+    },
+    "blocks": {
+      "home": 1,
+      "away": 1
+    },
+    "_source": "foxsports.com"
+  },
+  "qat-bih-3": {
+    "possession": {
+      "home": 45,
+      "away": 55
+    },
+    "shots": {
+      "home": 9,
+      "away": 15
+    },
+    "shotsOnTarget": {
+      "home": 3,
+      "away": 5
+    },
+    "xg": {
+      "home": 0.84,
+      "away": 0.84
+    },
+    "corners": {
+      "home": 5,
+      "away": 5
+    },
+    "fouls": {
+      "home": 14,
+      "away": 9
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 3,
+      "away": 1
+    },
+    "crosses": {
+      "home": 17,
+      "away": 25
+    },
+    "interceptions": {
+      "home": 5,
+      "away": 5
+    },
+    "saves": {
+      "home": 3,
+      "away": 2
+    },
+    "tackles": {
+      "home": 4,
+      "away": 7
+    },
+    "clearances": {
+      "home": 24,
+      "away": 32
+    },
+    "blocks": {
+      "home": 4,
+      "away": 0
+    },
+    "_source": "foxsports.com"
+  },
+  "sco-bra-3": {
+    "possession": {
+      "home": 46,
+      "away": 54
+    },
+    "shots": {
+      "home": 11,
+      "away": 21
+    },
+    "shotsOnTarget": {
+      "home": 5,
+      "away": 8
+    },
+    "xg": {
+      "home": 0.89,
+      "away": 3.12
+    },
+    "corners": {
+      "home": 7,
+      "away": 6
+    },
+    "fouls": {
+      "home": 10,
+      "away": 11
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 2,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 1
+    },
+    "crosses": {
+      "home": 26,
+      "away": 15
+    },
+    "interceptions": {
+      "home": 3,
+      "away": 7
+    },
+    "saves": {
+      "home": 5,
+      "away": 4
+    },
+    "tackles": {
+      "home": 3,
+      "away": 13
+    },
+    "clearances": {
+      "home": 21,
+      "away": 23
+    },
+    "blocks": {
+      "home": 7,
+      "away": 3
+    },
+    "_source": "foxsports.com"
+  },
+  "mar-hai-3": {
+    "possession": {
+      "home": 69,
+      "away": 31
+    },
+    "shots": {
+      "home": 19,
+      "away": 7
+    },
+    "shotsOnTarget": {
+      "home": 12,
+      "away": 2
+    },
+    "xg": {
+      "home": 2.13,
+      "away": 0.33
+    },
+    "corners": {
+      "home": 9,
+      "away": 1
+    },
+    "fouls": {
+      "home": 10,
+      "away": 18
+    },
+    "cards": {
+      "home": {
+        "yellow": 0,
+        "red": 0
+      },
+      "away": {
+        "yellow": 3,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 5,
+      "away": 0
+    },
+    "crosses": {
+      "home": 34,
+      "away": 4
+    },
+    "interceptions": {
+      "home": 6,
+      "away": 8
+    },
+    "saves": {
+      "home": 1,
+      "away": 7
+    },
+    "tackles": {
+      "home": 12,
+      "away": 11
+    },
+    "clearances": {
+      "home": 19,
+      "away": 42
+    },
+    "blocks": {
+      "home": 2,
+      "away": 4
+    },
+    "_source": "foxsports.com"
+  },
+  "mex-cze-3": {
+    "possession": {
+      "home": 49,
+      "away": 51
+    },
+    "shots": {
+      "home": 11,
+      "away": 12
+    },
+    "shotsOnTarget": {
+      "home": 5,
+      "away": 1
+    },
+    "xg": {
+      "home": 1.62,
+      "away": 0.74
+    },
+    "corners": {
+      "home": 1,
+      "away": 5
+    },
+    "fouls": {
+      "home": 13,
+      "away": 9
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 0,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 1
+    },
+    "crosses": {
+      "home": 14,
+      "away": 22
+    },
+    "interceptions": {
+      "home": 9,
+      "away": 7
+    },
+    "saves": {
+      "home": 1,
+      "away": 2
+    },
+    "tackles": {
+      "home": 7,
+      "away": 8
+    },
+    "clearances": {
+      "home": 44,
+      "away": 27
+    },
+    "blocks": {
+      "home": 4,
+      "away": 2
+    },
+    "_source": "foxsports.com"
+  },
+  "kor-rsa-3": {
+    "possession": {
+      "home": 69,
+      "away": 31
+    },
+    "shots": {
+      "home": 7,
+      "away": 14
+    },
+    "shotsOnTarget": {
+      "home": 2,
+      "away": 4
+    },
+    "xg": {
+      "home": 0.84,
+      "away": 0.92
+    },
+    "corners": {
+      "home": 6,
+      "away": 4
+    },
+    "fouls": {
+      "home": 9,
+      "away": 7
+    },
+    "cards": {
+      "home": {
+        "yellow": 1,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 3
+    },
+    "crosses": {
+      "home": 45,
+      "away": 11
+    },
+    "interceptions": {
+      "home": 4,
+      "away": 9
+    },
+    "saves": {
+      "home": 3,
+      "away": 2
+    },
+    "tackles": {
+      "home": 11,
+      "away": 8
+    },
+    "clearances": {
+      "home": 26,
+      "away": 44
+    },
+    "blocks": {
+      "home": 4,
+      "away": 2
+    },
+    "_source": "foxsports.com"
   }
 }
