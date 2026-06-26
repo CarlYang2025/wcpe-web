@@ -26,7 +26,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const OUTPUT_PATH = resolve(__dirname, '../src/data/market-odds.json')
-const API_SOURCE = process.env.ODDS_API_SOURCE || 'sample'
+const API_SOURCE = process.env.ODDS_API_SOURCE || (process.env.ODDS_API_KEY ? 'oddsapi' : 'sample')
 const API_KEY = process.env.ODDS_API_KEY || ''
 
 // ============================================================

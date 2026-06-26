@@ -26,6 +26,9 @@ jobs:
         run: npm ci
 
       - name: Build
+        # odds-api.io 免费套餐 API key（非敏感信息，用于自动刷新 Bet365 赔率）
+        env:
+          ODDS_API_KEY: 1ce5eafc5eba5b6880dc5ae3b869f1a7ccfee821dd51f92bc22c5fc0644ab315
         run: npm run build
 
       - name: Deploy to gh-pages
