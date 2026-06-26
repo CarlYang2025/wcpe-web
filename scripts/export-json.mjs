@@ -790,33 +790,6 @@ function enrichTop5WithPoisson(top5Scores, homeWinProb, drawProb, awayWinProb, o
 }
 
 /**
- * ★ V4.4: 从 top5Scores 中选取与 predictedDirection 一致的最高概率比分
- * 避免 predictedScore=1:1(draw) vs predictedDirection=home_win 的矛盾
- *
- * @param {Array} top5Scores - 已按概率降序排列的比分数组
- * @param {string} direction - 'home_win' | 'draw' | 'away_win'
- * @returns {string} 比分字符串 e.g. "2:1"
- */
-function pickConsistentScore(top5Scores, direction) {
-  if (!Array.isArray(top5Scores) || top5Scores.length === 0) return '?:?'
-  if (!direction) return top5Scores[0]?.score || '?:?'
-
-  for (const s of top5Scores) {
-    const scoreStr = typeof s === 'string' ? s : (s?.score || '')
-    const parts = scoreStr.split(/[:-]/)
-    if (parts.length !== 2) continue
-    const h = parseInt(parts[0]), a = parseInt(parts[1])
-    if (isNaN(h) || isNaN(a)) continue
-
-    const scoreDir = h > a ? 'home_win' : a > h ? 'away_win' : 'draw'
-    if (scoreDir === direction) return scoreStr
-  }
-
-  // 兜底: 如果 top5 中没有匹配方向的比分 (极罕见), 返回概率最高的
-  return top5Scores[0]?.score || '?:?'
-}
-
-/**
  * 用市场比分赔率校准 top5Scores
  * 将市场隐含的比分概率与模型概率混合 (30% market + 70% model)
  */
@@ -933,10 +906,11 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
       // 市场校准后重新排序
       pred.top5Scores.sort((a, b) => (b.probability || 0) - (a.probability || 0))
     }
-    // ★ V4.4: 从 top5 中选择与 predictedDirection 一致的最高概率比分
-    // 避免 e.g. score=1:1(draw) vs direction=home_win 的矛盾
+    // 同步 predictedScore：取 Poisson 全空间搜索后的单比分最高概率
+    // 注意：predictedScore 和 predictedDirection 可以不一致
+    // （如 direction=home_win 但单比分 1:1 最可能，两者不矛盾）
     if (pred.top5Scores.length > 0) {
-      pred.predictedScore = pickConsistentScore(pred.top5Scores, pred.predictedDirection)
+      pred.predictedScore = pred.top5Scores[0].score
     }
 
     // 附上完整市场赔率数据（前端展示用，compact 格式）
@@ -1148,7 +1122,7 @@ for (const [matchId, pred] of Object.entries(mergedPredictions)) {
     const o25p = typeof pred.over25Prob === 'number' ? pred.over25Prob : 0.5
     pred.top5Scores = enrichTop5WithPoisson(top5, hwp, dp, awp, o25p)
     if (pred.top5Scores.length > 0) {
-      // ★ V4.4: 确保 predictedDirection 存在
+      // 如果 predictedDirection 缺失，从概率推导
       if (!pred.predictedDirection) {
         const EPS = 0.005
         if (hwp > awp + EPS && hwp > dp + EPS) pred.predictedDirection = 'home_win'
@@ -1156,7 +1130,8 @@ for (const [matchId, pred] of Object.entries(mergedPredictions)) {
         else if (dp > hwp + EPS && dp > awp + EPS) pred.predictedDirection = 'draw'
         else pred.predictedDirection = hwp >= awp ? 'home_win' : 'away_win'
       }
-      pred.predictedScore = pickConsistentScore(pred.top5Scores, pred.predictedDirection)
+      // predictedScore = 单比分最高概率（可能与 direction 不同，不矛盾）
+      pred.predictedScore = pred.top5Scores[0].score
     }
   }
 }
