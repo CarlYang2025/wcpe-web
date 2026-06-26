@@ -335,51 +335,68 @@ function generatePortfolios(pool, targetN = 2500) {
 }
 
 // ============================================================
-// STEP 7: Portfolio Scoring
+// STEP 7: Portfolio Scoring (V4 — 10维评分)
 // ============================================================
 function scorePortfolio(legs) {
   const n = legs.length
-  if (n < 2) return 0
+  if (n < 1) return { score: 0, compOdds: 0, compProb: 0, compEV: 0, avgMVI: 0, hitPct: 0, n: 0, markets: [], breakdown: {} }
   
   const compOdds = legs.reduce((p, c) => p * c.odds, 1)
   const compProb = legs.reduce((p, c) => p * c.prob, 1)
   const compEV = compProb * compOdds - 1
-  
-  const avgMVI = legs.reduce((s, c) => s + c.mvi, 0) / n
-  const mviScore = Math.min(avgMVI * 20, 20)
-  
-  const evScore = Math.min(Math.max(compEV * 15, 0), 25)
-  
   const hitPct = compProb * 100
-  let hitScore = 20
-  if (hitPct < 1) hitScore = 2
-  else if (hitPct < 5) hitScore = 8
-  else if (hitPct < 10) hitScore = 14
-  else if (hitPct > 60) hitScore = 8
   
-  // Diversity
-  const markets = new Set(legs.map(c => c.market))
+  // 1. EV得分 (0-15分) — 正EV越高越好，负EV直接0分
+  const evScore = compEV > 0 ? Math.min(compEV * 10 + 5, 15) : 0
+  
+  // 2. MVI得分 (0-15分) — 错价信号强度
+  const avgMVI = legs.reduce((s, c) => s + c.mvi, 0) / n
+  const mviScore = Math.min(avgMVI * 12, 15)
+  
+  // 3. 命中率得分 (0-15分) — 确定性优先，15-40%区间最优
+  let hitScore = 0
+  if (hitPct >= 15 && hitPct <= 40) hitScore = 15
+  else if (hitPct >= 8 && hitPct < 15) hitScore = 10
+  else if (hitPct >= 5 && hitPct < 8) hitScore = 6
+  else if (hitPct > 40) hitScore = 8
+  
+  // 4. 风险得分 (0-10分) — 低风险优于高风险
+  const riskMap = { Low: 1, Medium: 2, High: 3 }
+  const avgRisk = legs.reduce((s, c) => s + (riskMap[c.risk] || 2), 0) / n
+  const riskScore = Math.max(12 - avgRisk * 3, 0)
+  
+  // 5. 赔率效率得分 (0-10分) — 单位风险的赔率产出
+  const oddsEfficiency = compOdds / (n * (1 + avgRisk * 0.5))
+  const effScore = Math.min(oddsEfficiency * 2, 10)
+  
+  // 6. 事件独立性 (0-10分) — 不同比赛、不同市场
   const matches = new Set(legs.map(c => c.mid))
-  const groups = new Set(legs.map(c => c.group))
-  const divScore = (markets.size / n * 10) + (matches.size / n * 10) + Math.min(groups.size / Math.max(n/2, 1) * 5, 5)
+  const matchIndScore = (matches.size / n) * 10
   
-  // Correlation penalty
+  // 7. 市场分散度 (0-10分) — 不同投注市场类型
+  const markets = new Set(legs.map(c => c.market))
+  const marketDivScore = (markets.size / Math.max(n, 1)) * 10
+  
+  // 8. 相关性罚分 (0-10分扣减) — 强相关投注项扣分
   let corrPenalty = 0
   for (let i = 0; i < n; i++) {
     for (let j = i + 1; j < n; j++) {
-      if (legs[i].mid === legs[j].mid) corrPenalty += 10
-      if (legs[i].market === legs[j].market && legs[i].group === legs[j].group) corrPenalty += 2
+      if (legs[i].mid === legs[j].mid) corrPenalty += 8        // 同场比赛 → 强相关
+      if (legs[i].market === legs[j].market && legs[i].group === legs[j].group) corrPenalty += 3 // 同市场+同组
+      // 大小球 + 胜平负同场 = 弱相关
+      if (legs[i].mid === legs[j].mid && legs[i].type !== legs[j].type) corrPenalty += 2
     }
   }
   
-  const riskMap = { Low: 1, Medium: 2, High: 3 }
-  const avgRisk = legs.reduce((s, c) => s + (riskMap[c.risk] || 2), 0) / n
-  const riskScore = Math.max(20 - avgRisk * 5, 0)
+  // 9. 赛程特殊风险 (0-5分) — 第三轮/淘汰赛等特殊阶段
+  const has3rdRound = legs.some(c => c.group && c.group.includes('组'))
+  const specialRiskPenalty = has3rdRound ? 2 : 0
   
-  const avgConf = legs.reduce((s, c) => s + c.conf, 0) / n
-  const confScore = Math.min(avgConf * 15, 15)
+  // 10. 盘口稳定性 (0-5分) — 基于赔率合理性（简化版：MVI标准差作为稳定性指标）
+  const mviStd = Math.sqrt(legs.reduce((s, c) => s + Math.pow(c.mvi - avgMVI, 2), 0) / n)
+  const stabilityScore = Math.max(5 - mviStd * 8, 0)
   
-  let total = mviScore + evScore + hitScore + divScore + riskScore + confScore - corrPenalty
+  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore - corrPenalty - specialRiskPenalty
   total = Math.max(0, Math.min(100, total))
   
   return {
@@ -392,13 +409,16 @@ function scorePortfolio(legs) {
     n,
     markets: [...markets],
     breakdown: {
-      mvi: Math.round(mviScore * 10) / 10,
-      ev: Math.round(evScore * 10) / 10,
-      hit: Math.round(hitScore * 10) / 10,
-      div: Math.round(divScore * 10) / 10,
-      risk: Math.round(riskScore * 10) / 10,
-      conf: Math.round(confScore * 10) / 10,
-      corr: -Math.round(corrPenalty * 10) / 10,
+      ev:    Math.round(evScore * 10) / 10,
+      mvi:   Math.round(mviScore * 10) / 10,
+      hit:   Math.round(hitScore * 10) / 10,
+      risk:  Math.round(riskScore * 10) / 10,
+      eff:   Math.round(effScore * 10) / 10,
+      indep: Math.round(matchIndScore * 10) / 10,
+      div:   Math.round(marketDivScore * 10) / 10,
+      corr:  -Math.round(corrPenalty * 10) / 10,
+      sRisk: -Math.round(specialRiskPenalty * 10) / 10,
+      stab:  Math.round(stabilityScore * 10) / 10,
     }
   }
 }
@@ -409,6 +429,32 @@ function classifyTier(odds) {
   if (odds <= 25) return '价值收益型'
   if (odds <= 80) return '高赔率冲击型'
   return '超级大奖型'
+}
+
+// V4 辅助函数
+function generateRationale(p) {
+  const markets = [...new Set(p.legs.map(l => l.market))]
+  const topLeg = p.legs.sort((a, b) => b.mvi - a.mvi)[0]
+  return `${p.legs.length}场组合，${markets.join('+')}混合。最强信号：${topLeg?.bet?.replace(/【.*?】/g,'')?.slice(0,30)||''}(MVI ${topLeg?.mvi?.toFixed(2)||'N/A'})。命中率${p.hitPct}%，评分${p.score}/100。`
+}
+
+function buildFinalVerdict(scored, accepted, yesterday) {
+  if (!scored.length || accepted.length < 5) {
+    return { verdict: '今日建议空仓，不投注', reason: `可投注项仅${accepted.length}个，正EV机会不足。保留资金等待下一比赛日。`, bestPortfolio: null }
+  }
+  const best = scored[0]
+  const tier = classifyTier(best.compOdds)
+  const bestLegsDesc = best.legs.map(l => l.bet.replace(/【.*?】/g,'').slice(0,25)).join(' + ')
+  
+  return {
+    verdict: `今日最佳：${tier}组合 ${best.compOdds}x`,
+    reason: `${bestLegsDesc}。Portfolio Score=${best.score}/100，EV=${best.compEV > 0 ? '+' : ''}${(best.compEV*100).toFixed(1)}%，命中率${best.hitPct}%。${
+      best.compEV > 0.15 ? '正期望值显著，优先配置。' : 
+      best.compEV > 0.05 ? '正期望值可接受，建议适量配置。' : 
+      '边际正期望值，降低仓位。'
+    }`,
+    bestPortfolio: { score: best.score, odds: best.compOdds, legs: best.legs },
+  }
 }
 
 // ============================================================
@@ -494,7 +540,7 @@ function main() {
   const mviHighlight = topMviBet ? `${topMviBet.bet.replace('【胜平负】','').replace('【大小球】','').replace('【波胆】','').replace('【双重机会】','')} 为本日最强MVI信号(${topMviBet.mvi.toFixed(2)})` : '暂无高MVI信号'
   
   const output = {
-    version: '2.0',
+    version: '4.0',
     generatedAt: new Date().toISOString(),
     targetDate: TOMORROW_BJT,
     targetDateDisplay,
@@ -502,97 +548,94 @@ function main() {
     oddsFreshness: market.fetchedAt || 'unknown',
     oddsSource: market.source || 'sample',
     
-    marketJudgment: {
-      rating: '🟡 中性偏谨慎',
-      summary: `今日共有${tomorrowIds.length}场比赛，其中${accepted.filter(c => c.mvi >= 1.05).length}个高MVI投注项。建议保留20%现金。`,
+    // ① 今日市场评级
+    marketRating: {
+      verdict: accepted.length >= 30 ? '✅ 值得下注' : accepted.length >= 15 ? '🟡 机会有限' : '⚠️ 机会稀缺',
+      investableCount: accepted.length,
+      highMviCount: accepted.filter(c => c.mvi >= 1.05).length,
+      positiveEvCount: accepted.filter(c => c.ev > 0).length,
+      suggestedExposure: accepted.length >= 30 ? '70-80%' : accepted.length >= 15 ? '50-70%' : '30-50%或建议空仓',
+      summary: `${tomorrowIds.length}场比赛，${accepted.length}个可投注项（${accepted.filter(c => c.ev > 0).length}个正EV），${accepted.filter(c => c.mvi >= 1.05).length}个高MVI信号。`,
       highlights: [
         mviHighlight,
-        '昨日复盘显示第三轮方向准确率降至33%，建议降低胜平负权重',
-        '已自动排除EV为负或MVI过低的投注项',
-      ],
+        `昨日${yesterday.summary.dirRate < 0.4 ? '方向准确率低' : '方向准确率正常'}(${Math.round(yesterday.summary.dirRate*100)}%)，${yesterday.summary.over25Rate > 0.7 ? '大2.5球策略表现优异' : ''}`,
+        `已自动排除${rejected.length}个${rejected.filter(r => r.reasons?.some(rs => rs.includes('EV'))).length > 0 ? 'EV为负或' : ''}MVI过低的投注项`,
+      ].filter(Boolean),
     },
     
+    // ② 今日最佳投资池（按Portfolio Score排序的全部值得投资的投注项）
+    investmentPool: accepted
+      .sort((a, b) => b.mvi - a.mvi)
+      .filter(c => c.ev > -0.03 || c.mvi >= 1.05)
+      .map(c => ({
+        match: c.match,
+        market: c.market,
+        bet: c.bet,
+        odds: c.odds,
+        ev: Math.round(c.ev * 1000) / 1000,
+        mvi: c.mvi,
+        prob: c.prob,
+        reason: c.mvi >= 1.15 ? '高错价信号' : c.ev > 0.05 ? '正EV' : c.mvi >= 1.05 ? 'MVI达标' : '边际价值',
+        type: c.type,
+      })),
+
+    // ③ Portfolio搜索结果（Top 10，按Portfolio Score排序）
+    portfolios: scored.slice(0, 10).map((p, i) => ({
+      rank: i + 1,
+      score: p.score,
+      odds: p.compOdds,
+      hitPct: p.hitPct,
+      ev: p.compEV,
+      mvi: p.avgMVI,
+      legs: p.legs,
+      breakdown: p.breakdown,
+      tier: classifyTier(p.compOdds),
+      rationale: generateRationale(p),
+    })),
+
+    // ④ 今日资金配置
+    capitalAllocation: allocations,
+
+    // ⑤ 今日最终结论
+    finalVerdict: buildFinalVerdict(scored, accepted, yesterday),
+
+    // 保留旧结构兼容
     yesterdayReview: {
       date: getTodayBJTString(),
       summary: yesterday.summary,
       keyInsights: [
-        '第三轮ELO偏差：方向准确率从历史56%降至33%',
-        `大2.5球超高命中${Math.round(yesterday.summary.over25Rate*100)}% → 大小球应作为核心策略`,
-        `平局率${Math.round(yesterday.summary.draws/yesterday.summary.n*100)}%${yesterday.summary.draws/yesterday.summary.n > 0.3 ? ' > 历史27%' : ''}：第三轮保平争胜逻辑成立`,
-        yesterday.summary.upsets > 0 ? `${yesterday.summary.upsets}场高置信度预测翻车：已出线轮换效应被忽略` : '无重大翻车',
+        `方向准确率${Math.round(yesterday.summary.dirRate*100)}%`,
+        `大2.5球命中${Math.round(yesterday.summary.over25Rate*100)}%`,
+        `平局率${Math.round(yesterday.summary.draws/yesterday.summary.n*100)}%`,
       ],
     },
-    
-    wcpeValidation: validations,
-    
     candidatePool: {
       total: accepted.length + rejected.length,
       accepted: accepted.length,
       rejected: rejected.length,
-      topPicks: accepted.filter(c => c.mvi >= 1.05).sort((a, b) => b.mvi - a.mvi).slice(0, 10).map(c => ({
-        bet: c.bet, odds: c.odds, prob: c.prob, mvi: c.mvi, ev: Math.round(c.ev * 1000) / 1000, market: c.market,
-      })),
-      rejectedHighlights: rejected.slice(0, 8).map(c => ({
-        bet: c.bet, reasons: c.reasons, ev: Math.round(c.ev * 1000) / 1000,
-      })),
     },
-    
-    portfolios: tiers.flatMap(tier => 
-      (byTier[tier] || []).map((p, i) => ({
-        tier,
-        rank: i + 1,
-        score: p.score,
-        odds: p.compOdds,
-        hitPct: p.hitPct,
-        ev: p.compEV,
-        mvi: p.avgMVI,
-        legs: p.legs,
-        breakdown: p.breakdown,
-        riskLevel: p.compOdds <= 5 ? '🟢低' : p.compOdds <= 12 ? '🟡中低' : p.compOdds <= 25 ? '🟠中高' : p.compOdds <= 80 ? '🔴高' : '⚫极高',
-      }))
-    ),
-    
-    bestPortfolio: {
-      tier: classifyTier(best.compOdds),
-      score: best.score,
-      odds: best.compOdds,
-      hitPct: best.hitPct,
-      ev: best.compEV,
-      mvi: best.avgMVI,
-      legs: best.legs,
-      breakdown: best.breakdown,
-      rationale: `综合质量最高：${best.legs[0]?.bet?.replace(/【.*?】/g,'')||''} + ${best.legs[1]?.bet?.replace(/【.*?】/g,'')||''}${best.n_legs >= 3 ? ` + ${best.legs[2]?.bet?.replace(/【.*?】/g,'')||''}` : ''}。EV+${(best.compEV*100).toFixed(1)}%，评分${best.score}/100，风险收益比最优。`,
-    },
-    
-    capitalAllocation: allocations,
-    
-    risks: [
-      '第三轮系统性风险：小组赛末轮存在出线轮换/荣誉战/保平争胜三重效应叠加',
-      `赔率数据来源：${market.source || '样本估算'}（建议投注前核实实时赔率）`,
-      '模型准确率限制：WCPE方向准确率约56%，约44%的比赛方向预测可能错误',
-      '串关放大效应：多场组合会将单一比赛的预测误差成倍放大',
-      '数据时效性：数据存在数小时延迟，临场首发/伤停变化可能未纳入',
-    ],
-    
-    learnings: [
-      '第三轮比赛应下调ELO权重，上调大小球策略权重',
-      yesterday.summary.over25Rate > 0.7 ? `昨日大2.5球命中率${Math.round(yesterday.summary.over25Rate*100)}%，今日继续作为核心策略` : '大小球需谨慎，关注比赛强度变化',
-      '已出线球队增加轮换折扣(-10%~-15%)',
-      '第三轮平局溢价值得主动纳入串关考量',
-      '避免已淘汰球队的Dead Rubber比赛高权重配置',
-    ],
-    
+    bestPortfolio: scored[0] ? {
+      tier: classifyTier(scored[0].compOdds),
+      score: scored[0].score,
+      odds: scored[0].compOdds,
+      hitPct: scored[0].hitPct,
+      ev: scored[0].compEV,
+      mvi: scored[0].avgMVI,
+      legs: scored[0].legs,
+      breakdown: scored[0].breakdown,
+      rationale: generateRationale(scored[0]),
+    } : null,
+
+    // Stats
     stats: {
       totalCombinations: portfolios.length,
-      score80plus: scored.filter(s => s.score >= 80).length,
       topScore: scored[0]?.score || 0,
-      modelState: remote.modelState || {},
     }
   }
-  
+
   writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), 'utf-8')
   console.log(`\n✅ 已写入 ${OUTPUT_PATH}`)
-  console.log(`   组合数: ${portfolios.length} | 最高分: ${best?.score}/100 | 最佳方案: ${classifyTier(best?.compOdds)} ${best?.compOdds}x`)
+  console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(scored[0]?.compOdds)} ${scored[0]?.compOdds}x`)
 }
 
 main()
