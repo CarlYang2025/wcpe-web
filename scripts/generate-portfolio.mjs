@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 /**
- * generate-portfolio.mjs — WCPE Portfolio Optimizer V5.0
+ * generate-portfolio.mjs — WCPE Portfolio Optimizer V5.1
  * 
  * 读取 remote.json + market-odds.json，运行投资委员会审查 + 组合优化引擎，
  * 生成 portfolio.json 供网站展示。
  * 
+ * V5.1 改进:
+ *   - 历史教训上下文感知匹配（只对实际场景应用相关教训）
+ *   - 状态细节提取（从riskWarnings提取具体状态问题）
+ *   - 因子短板精简显示（最多2个）
+ * 
  * V5.0 核心理念:
- *   - 「投资委员会」：定量 + 定性深度融合，不只做数学计算器
+ *   - 「投资委员会」：定量 + 定性深度融合
  *   - 定性分析层: 伤病/淘汰动态/心理因素/因子短板/历史教训/盘口压力
  *   - 方向一致性检查: 投注方向 vs WCPE预测 → 矛盾即降权/踢出
  *   - 3日滑动平均 + 对数EV衰减 + Poisson区间
@@ -888,17 +893,32 @@ function buildCandidatePool(remote, market) {
     }
 
     // ── 5. 从历史教训匹配当前场景 ──
+    // V5.1: 上下文感知匹配 — 只对实际匹配场景应用相关教训
     const keyLearnings = remote.keyLearnings || []
-    for (const lesson of keyLearnings) {
-      if (typeof lesson !== 'string') continue
-      if (/已出线.*轮换|轮换.*已出线/.test(lesson)) {
-        profile.adjustments.lessonsApplied = (profile.adjustments.lessonsApplied || [])
-        profile.adjustments.lessonsApplied.push('rotation_risk_known')
-      }
-      if (/淘汰.*荣誉战|荣誉战.*淘汰/.test(lesson)) {
-        profile.adjustments.lessonsApplied = (profile.adjustments.lessonsApplied || [])
-        profile.adjustments.lessonsApplied.push('honor_match_boost')
-      }
+    profile.adjustments.lessonsApplied = profile.adjustments.lessonsApplied || []
+
+    // 仅当该场比赛确实存在轮换风险时，引用轮换历史教训
+    if (profile.flags.includes('team_qualified_rotation_risk')) {
+      const hasRotationLesson = keyLearnings.some(l =>
+        typeof l === 'string' && /已出线.*轮换|轮换.*已出线|轮换.*影响|轮换.*低估/.test(l)
+      )
+      if (hasRotationLesson) profile.adjustments.lessonsApplied.push('rotation_risk_known')
+    }
+
+    // 仅当该场比赛存在已淘汰球队时，引用荣誉战历史教训
+    if (profile.flags.includes('both_eliminated_open_game') || profile.flags.includes('must_win_surge')) {
+      const hasHonorLesson = keyLearnings.some(l =>
+        typeof l === 'string' && /淘汰.*荣誉战|荣誉战.*淘汰|最后一场/.test(l)
+      )
+      if (hasHonorLesson) profile.adjustments.lessonsApplied.push('honor_match_boost')
+    }
+
+    // 因子短板显著时，引用相关历史教训
+    if (weakFactors.length >= 2) {
+      const hasFactorLesson = keyLearnings.some(l =>
+        typeof l === 'string' && /ELO.*偏差|ELO.*系统|因子.*失效|模型.*低估/.test(l)
+      )
+      if (hasFactorLesson) profile.adjustments.lessonsApplied.push('factor_breakdown_historical')
     }
 
     // ── 6. 综合定性置信度 ──
@@ -921,17 +941,19 @@ function buildCandidatePool(remote, market) {
     if (profile.flags.includes('must_win_surge')) thesisParts.push('背水一战意愿加成')
     if (profile.flags.includes('draw_sufficient_conservative')) thesisParts.push('平局足够→保守倾向')
     if (profile.flags.includes('injury_concern')) thesisParts.push('伤病缺阵影响阵容')
+    if (profile.flags.includes('form_concern')) {
+      // 提取具体的状态问题
+      const formWarnings = (pred.riskWarnings || []).filter(w => /哑火|状态|进球|进攻|防守|崩溃|低迷/.test(w))
+      if (formWarnings.length > 0) thesisParts.push(`状态隐患: ${formWarnings[0].substring(0, 25)}`)
+      else thesisParts.push('近期状态存疑')
+    }
     if (profile.flags.includes('factor_weakness')) {
-      const wfNames = weakFactors.map(k => factorNames[k] || k).join('、')
+      const wfNames = weakFactors.map(k => factorNames[k] || k).slice(0, 2).join('、')
       thesisParts.push(`因子短板: ${wfNames}`)
     }
     if (profile.flags.includes('high_confidence_high_risk')) thesisParts.push('⚠ 高置信+高风险=历史陷阱')
-    if (profile.adjustments.lessonsApplied) {
-      for (const l of profile.adjustments.lessonsApplied) {
-        if (l === 'rotation_risk_known') thesisParts.push('历史教训: 已出线轮换被严重低估')
-        if (l === 'honor_match_boost') thesisParts.push('历史反馈: 淘汰队荣誉战有溢价')
-      }
-    }
+    if (profile.adjustments.lessonsApplied?.includes('rotation_risk_known')) thesisParts.push('历史教训: 已出线轮换被严重低估')
+    if (profile.adjustments.lessonsApplied?.includes('honor_match_boost')) thesisParts.push('历史反馈: 淘汰队荣誉战有溢价')
     profile.thesis = thesisParts.join('；')
 
     qualitativeProfiles[mid] = profile
