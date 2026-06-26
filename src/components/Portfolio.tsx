@@ -285,20 +285,21 @@ function PortfolioCard({ portfolio, isBest }: { portfolio: PortfolioItem; isBest
 // ===== ④ Capital Allocation =====
 function CapitalAllocation({ allocations }: { allocations: AllocationItem[] }) {
   if (!allocations?.length) return null
+  const realAllocations = allocations.filter(a => !a.isCash)
+  if (!realAllocations.length) return null
   return (
     <div className="bg-[#1a1f3a] border border-[#141937] rounded-xl p-5">
-      <h2 className="text-sm font-bold text-white mb-4">④ 资金配置（预算 100 单位）</h2>
+      <h2 className="text-sm font-bold text-white mb-4">④ 资金配置（100% 分配）</h2>
       <div className="space-y-2">
-        {allocations.map((a, i) => (
-          <div key={i} className={`flex items-center justify-between p-3 rounded-lg ${a.isCash ? 'bg-[#00ff88]/5 border border-[#00ff88]/20' : a.isCore ? 'bg-[#ffd700]/5 border border-[#ffd700]/20' : 'bg-[#141937]'}`}>
+        {realAllocations.map((a, i) => (
+          <div key={i} className={`flex items-center justify-between p-3 rounded-lg ${a.isCore ? 'bg-[#ffd700]/5 border border-[#ffd700]/20' : 'bg-[#141937]'}`}>
             <div className="flex items-center gap-3 min-w-0">
               <span className="text-xs font-bold text-white truncate">{a.tier}</span>
               {a.portfolio && <span className="text-[10px] text-[#a0a0a0] shrink-0">{a.portfolio.odds}x · {a.portfolio.hitPct}%命中</span>}
-              {a.isCash && <span className="text-[10px] text-[#00ff88]">保留灵活资金</span>}
             </div>
             <div className="flex items-center gap-3 shrink-0">
               <div className="w-20 h-2 bg-[#0a0e27] rounded-full overflow-hidden">
-                <div className={`h-full rounded-full ${a.isCash ? 'bg-[#00ff88]' : a.isCore ? 'bg-[#ffd700]' : 'bg-[#54a0ff]'}`} style={{ width: `${a.pct}%` }} />
+                <div className={`h-full rounded-full ${a.isCore ? 'bg-[#ffd700]' : 'bg-[#54a0ff]'}`} style={{ width: `${a.pct}%` }} />
               </div>
               <span className="text-xs text-[#ffd700] font-bold w-14 text-right">{a.amount} 单位</span>
               <span className="text-[10px] text-[#555555] w-8 text-right">{a.pct}%</span>

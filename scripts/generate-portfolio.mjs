@@ -953,9 +953,14 @@ function buildCapitalAllocation(scored, accepted) {
     })
   }
 
+  // Normalize to 100%
   const totalAlloc = allocations.reduce((s, a) => s + a.pct, 0)
-  const cashPct = Math.max(10, 100 - totalAlloc)
-  allocations.push({ tier: '现金保留', portfolio: null, pct: cashPct, amount: Math.round(BUDGET * cashPct / 100 * 100) / 100, isCash: true })
+  if (totalAlloc > 0) {
+    for (const a of allocations) {
+      a.pct = Math.round(a.pct / totalAlloc * 100)
+      a.amount = Math.round(BUDGET * a.pct / 100 * 100) / 100
+    }
+  }
 
   return allocations
 }
