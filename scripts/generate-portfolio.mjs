@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 /**
- * generate-portfolio.mjs — WCPE Portfolio Optimizer V4.0
+ * generate-portfolio.mjs — WCPE Portfolio Optimizer V4.3
  * 
  * 读取 remote.json + market-odds.json，运行组合优化引擎，
  * 生成 portfolio.json 供网站展示。
  * 
- * V4 核心理念：
- *   你是 Investment Portfolio Manager，不是竞彩推荐员。
- *   优化目标是 Portfolio Score（组合综合质量），不是赔率。
+ * V4.3 核心理念:
+ *   - 投资组合管理视角，非竞彩推荐
+ *   - 3日滑动平均权重，防单日震荡
+ *   - 对数EV衰减，降权高赔低概率
+ *   - Poisson区间估算，替代粗糙Logistic
+ *   - 强制资金分散，核心≤70%
+ *   - 波胆MVI分级，保留原始信号
+ *   - 去集中化v2，检测同场高相关腿
  * 
  * 用法:
  *   node scripts/generate-portfolio.mjs          # 生成 portfolio.json
@@ -100,17 +105,133 @@ function dewateredProb(odds, allOdds) {
 // ===================================================================
 // STEP 1: Yesterday Review + 策略权重学习
 // ===================================================================
+
+/**
+ * V4.3: 获取指定日期偏移的北京时间日期字符串
+ * @param {number} dayOffset - 0=今天, -1=昨天, -2=前天 ...
+ */
+function getBJTDateWithOffset(dayOffset = 0) {
+  const now = Date.now()
+  const bjtNow = now + 8 * 3600 * 1000
+  const date = new Date(bjtNow + dayOffset * 24 * 3600 * 1000)
+  return `${date.getUTCMonth() + 1}/${date.getUTCDate()}`
+}
+
 function analyzeYesterday(remote) {
-  const todayBJT = getTodayBJTString()
+  const todayBJT = getBJTDateWithOffset(0)
+  const yesterdayBJT = getBJTDateWithOffset(-1)
+  const day2BJT = getBJTDateWithOffset(-2)
+  const day3BJT = getBJTDateWithOffset(-3)
+
   let matches = (remote.matches || []).filter(m => {
     return kickoffBJTDate(m.kickoff) === todayBJT && m.status === 'finished'
   })
   if (matches.length === 0) {
     matches = (remote.matches || []).filter(m => {
-      return kickoffBJTDate(m.kickoff) === getYesterdayBJTString() && m.status === 'finished'
+      return kickoffBJTDate(m.kickoff) === yesterdayBJT && m.status === 'finished'
     })
   }
-  return analyzeBJTDate(remote, matches)
+
+  // V4.3: 3日滑动平均 — 加权合并多日数据
+  // 权重: 最近日50%, 前日30%, 前前日20%
+  const allResults = analyzeBJTDate(remote, matches)
+
+  // 如果昨日比赛不足3场，尝试纳入前2-3天数据
+  if (matches.length < 3) {
+    const day2Matches = (remote.matches || []).filter(m => {
+      return kickoffBJTDate(m.kickoff) === day2BJT && m.status === 'finished'
+    })
+    const day3Matches = (remote.matches || []).filter(m => {
+      return kickoffBJTDate(m.kickoff) === day3BJT && m.status === 'finished'
+    })
+
+    if (day2Matches.length > 0 || day3Matches.length > 0) {
+      // 合并多日数据并计算加权平均
+      const d2Result = day2Matches.length > 0 ? analyzeBJTDate(remote, day2Matches) : null
+      const d3Result = day3Matches.length > 0 ? analyzeBJTDate(remote, day3Matches) : null
+
+      return mergeMultiDayStrategyWeights(allResults, d2Result, d3Result)
+    }
+  }
+
+  return allResults
+}
+
+/**
+ * V4.3: 合并多日复盘数据，计算加权滑动平均
+ * 权重: 最近日50%, 前日30%, 前前日20%
+ */
+function mergeMultiDayStrategyWeights(d1, d2, d3) {
+  const weights = []
+  const results = []
+
+  // d1: 50%
+  if (d1 && d1.summary.n > 0) {
+    weights.push(0.5)
+    results.push(d1)
+  }
+  // d2: 30%
+  if (d2 && d2.summary.n > 0) {
+    weights.push(0.3)
+    results.push(d2)
+  }
+  // d3: 20%
+  if (d3 && d3.summary.n > 0) {
+    weights.push(0.2)
+    results.push(d3)
+  }
+
+  // 归一化权重
+  const totalW = weights.reduce((s, w) => s + w, 0)
+  const normW = weights.map(w => w / totalW)
+
+  // 加权平均各指标
+  const wDirRate = results.reduce((s, r, i) => s + r.summary.dirRate * normW[i], 0)
+  const wOver25Rate = results.reduce((s, r, i) => s + r.summary.over25Rate * normW[i], 0)
+  const wBttsRate = results.reduce((s, r, i) => s + r.summary.bttsRate * normW[i], 0)
+  const wTop3Rate = results.reduce((s, r, i) => s + r.summary.top3Rate * normW[i], 0)
+
+  // 合并所有比赛结果
+  const allMatches = []
+  for (const r of results) allMatches.push(...r.matches)
+
+  const totalN = allMatches.length
+
+  // 使用加权后的准确率生成策略权重
+  // V4.3: 加入平滑系数，防止单日剧烈震荡（新权重 × 0.6 + 1.0 × 0.4）
+  const SMOOTH = 0.6
+
+  const strategyWeights = {
+    direction: Math.max(0.6, Math.min(1.2, (wDirRate * 2) * SMOOTH + 1.0 * (1 - SMOOTH))),
+    goals: Math.max(0.6, Math.min(1.2, (wOver25Rate * 1.5) * SMOOTH + 1.0 * (1 - SMOOTH))),
+    btts: Math.max(0.6, Math.min(1.2, (wBttsRate * 1.5) * SMOOTH + 1.0 * (1 - SMOOTH))),
+    score: Math.max(0.5, Math.min(1.0, (wTop3Rate * 1.2) * SMOOTH + 0.75 * (1 - SMOOTH))),
+    safety: wDirRate > 0.55 ? 1.05 : 0.95,
+    goals_range: Math.max(0.6, Math.min(1.1, (wOver25Rate * 1.3) * SMOOTH + 0.9 * (1 - SMOOTH))),
+  }
+
+  return {
+    matches: allMatches,
+    summary: {
+      n: totalN,
+      dirHits: Math.round(wDirRate * totalN),
+      dirRate: wDirRate,
+      over25Hits: Math.round(wOver25Rate * totalN),
+      over25Rate: wOver25Rate,
+      bttsHits: Math.round(wBttsRate * totalN),
+      bttsRate: wBttsRate,
+      top3Hits: Math.round(wTop3Rate * totalN),
+      top3Rate: wTop3Rate,
+      top1Hits: results.reduce((s, r) => s + r.summary.top1Hits, 0),
+      top1Rate: results.reduce((s, r) => s + r.summary.top1Rate * normW[results.indexOf(r)], 0),
+      draws: results.reduce((s, r) => s + r.summary.draws, 0),
+      upsets: results.reduce((s, r) => s + r.summary.upsets, 0),
+      _multiDay: true,
+      _dayCount: results.length,
+      _weightStr: normW.map((w, i) => `${results[i].summary.n}场×${(w * 100).toFixed(0)}%`).join(' + '),
+    },
+    strategyWeights,
+  }
 }
 
 function analyzeBJTDate(remote, matches) {
@@ -148,14 +269,23 @@ function analyzeBJTDate(remote, matches) {
   const bttsRate = results.filter(r => r.bttsCorrect).length / n
   const top3Rate = results.filter(r => r.top3Hit).length / n
 
-  // V4: 动态策略权重 — 基于昨日各市场准确率
+  // V4.3: 动态策略权重 — 基于复盘准确率 + 平滑防止单日震荡
+  // 单日数据：新权重 × 0.6 + 1.0 × 0.4（防过拟合）
+  const SMOOTH_SINGLE_DAY = n <= 6 ? 0.6 : 0.8  // 6场以下加强平滑
+  const rawDirW = Math.max(0.6, Math.min(1.2, dirRate * 2))
+  const rawGoalsW = Math.max(0.6, Math.min(1.2, over25Rate * 1.5))
+  const rawBttsW = Math.max(0.6, Math.min(1.2, bttsRate * 1.5))
+  const rawScoreW = Math.max(0.5, Math.min(1.0, top3Rate * 1.2))
+  const rawGoalsRangeW = Math.max(0.6, Math.min(1.1, over25Rate * 1.3))
+  const rawSafetyW = dirRate > 0.6 ? 1.1 : 0.9
+
   const strategyWeights = {
-    direction: Math.max(0.6, Math.min(1.2, dirRate * 2)),       // 方向权重 (0.6-1.2)
-    goals: Math.max(0.6, Math.min(1.2, over25Rate * 1.5)),       // 大小球权重 (0.6-1.2)
-    btts: Math.max(0.6, Math.min(1.2, bttsRate * 1.5)),          // BTTS权重 (0.6-1.2)
-    score: Math.max(0.5, Math.min(1.0, top3Rate * 1.2)),         // 比分权重 (0.5-1.0)
-    safety: dirRate > 0.6 ? 1.1 : 0.9,                            // 双重机会/平局退款权重
-    goals_range: Math.max(0.6, Math.min(1.1, over25Rate * 1.3)),  // 比分区间权重
+    direction: rawDirW * SMOOTH_SINGLE_DAY + 1.0 * (1 - SMOOTH_SINGLE_DAY),
+    goals: rawGoalsW * SMOOTH_SINGLE_DAY + 1.0 * (1 - SMOOTH_SINGLE_DAY),
+    btts: rawBttsW * SMOOTH_SINGLE_DAY + 1.0 * (1 - SMOOTH_SINGLE_DAY),
+    score: rawScoreW * SMOOTH_SINGLE_DAY + 0.75 * (1 - SMOOTH_SINGLE_DAY),
+    safety: rawSafetyW * SMOOTH_SINGLE_DAY + 1.0 * (1 - SMOOTH_SINGLE_DAY),
+    goals_range: rawGoalsRangeW * SMOOTH_SINGLE_DAY + 0.9 * (1 - SMOOTH_SINGLE_DAY),
   }
 
   return {
@@ -226,11 +356,61 @@ function validateWCPE(matchId, remote, market) {
 // STEP 3-4: Candidate Pool（候选池构建）+ 独立二次校验
 // ===================================================================
 // ========== 辅助：从比分分布估算总进球概率 ==========
-/** 基于 over25Prob 和比分分布，用 S 曲线估算 P(Over hdp) */
+/**
+ * V4.3: 用 Poisson CDF 替代粗糙 Logistic S 曲线。
+ * 复用 estimateScoreProbabilities 中的 Poisson 实现,
+ * 计算 P(总进球 > hdp) 和 P(总进球 < hdp)，精度显著高于 Logistic 近似。
+ *
+ * @param {number} over25p - 模型大2.5球概率
+ * @param {number} hdp - 目标盘口线 (如 2.0, 3.0, 3.5)
+ * @param {number} homeWinProb - 主胜概率（用于推导 totalLambda）
+ * @param {number} drawProb - 平局概率
+ * @param {number} awayWinProb - 客胜概率
+ * @returns {number} P(总进球 > hdp) — 即大hdp球的概率
+ */
+function estimateOverHdpProbPoisson(over25p, hdp, homeWinProb = 0.33, drawProb = 0.33, awayWinProb = 0.33) {
+  // 从 over25Prob 反推总期望进球 λ（与 estimateScoreProbabilities 相同的二分法）
+  const targetUnder25 = 1 - over25p
+  let lo = 0.3, hi = 8.0
+  for (let iter = 0; iter < 60; iter++) {
+    const mid = (lo + hi) / 2
+    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
+    if (pUnder25 > targetUnder25) lo = mid
+    else hi = mid
+  }
+  const totalLambda = (lo + hi) / 2
+
+  // Poisson PMF
+  function poissonPMF(k, lambda) {
+    if (lambda <= 0) return k === 0 ? 1 : 0
+    let logP = -lambda + k * Math.log(lambda)
+    let logFact = 0
+    for (let i = 2; i <= k; i++) logFact += Math.log(i)
+    return Math.exp(logP - logFact)
+  }
+
+  // P(总进球 > hdp) = 1 - P(总进球 ≤ floor(hdp))
+  // 但 hdp 可能是 2.0 → ≤2, 3.5 → ≤3
+  const maxGoals = Math.floor(hdp)
+  let pUnder = 0
+  for (let g = 0; g <= maxGoals; g++) {
+    // P(总进球 = g) = Σ P(home=k) × P(away=g-k)
+    let pEq = 0
+    for (let h = 0; h <= g; h++) {
+      const a = g - h
+      pEq += poissonPMF(h, totalLambda * 0.5) * poissonPMF(a, totalLambda * 0.5)
+    }
+    pUnder += pEq
+  }
+
+  return 1 - pUnder
+}
+
+// 保留旧函数作为兼容（标记为 deprecated）
 function estimateOverHdpProb(over25p, top5Scores, hdp) {
-  // 基础映射：over25p → expected goals（粗糙）
+  // V4.3: 不再使用旧的 Logistic 方法，此函数仅作向后兼容
+  // 实际调用点已改为 estimateOverHdpProbPoisson
   const expGoals = 2.5 + (over25p - 0.5) * 2.5
-  // Logistic 曲线
   return 1 / (1 + Math.exp(-(expGoals - hdp) / 0.8))
 }
 
@@ -500,14 +680,19 @@ function buildCandidatePool(remote, market) {
       const csOdd = csOdds[scoreHyphen] || csOdds[score] || 0
       if (csOdd && csOdd > 0 && csOdd < 50) {
         const ev = calcEV(rawProb, csOdd)
-        let mvi = calcMVI(rawProb, csOdd)
-        // Poisson估算的MVI天然偏高（未含庄家 margin），硬限制避免波胆过度占优
-        mvi = Math.min(mvi, 1.12)
+        const rawMvi = calcMVI(rawProb, csOdd)
+        // V4.3: 保留原始MVI用于评分排序，不做一刀切截断
+        // Poisson估算的MVI天然偏高（未含庄家margin），加标签供展示层风险提示
+        const isEstimated = csSource === 'Poisson估算'
+        // Bet365真实赔率的波胆MVI不做任何限制，让错价信号充分体现
+        // Poisson估算的波胆MVI轻微衰减（×0.85），因为Poisson概率偏高
+        const mvi = isEstimated ? Math.min(rawMvi * 0.85, 1.25) : rawMvi
         pool.push({
           id: `${mid}_cs_${scoreHyphen}`, mid, match: matchDisplay, group, kickoff,
           bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆',
           odds: csOdd, prob: rawProb, mvi, ev, conf: confidence, risk: 'High',
           type: 'score', wcpeIssues, _source: csSource,
+          _rawMvi: rawMvi, _estimated: isEstimated,
         })
       }
     }
@@ -519,7 +704,8 @@ function buildCandidatePool(remote, market) {
       for (const target of targetLines) {
         const line = odds.altGoalLines.find(l => Math.abs(l.hdp - target) < 0.01)
         if (!line || !line.over || !line.under) continue
-        const lineOverP = estimateOverHdpProb(o25p, top5Scores, target)
+        // V4.3: 用 Poisson CDF 替代 Logistic 估算
+        const lineOverP = estimateOverHdpProbPoisson(o25p, target, hwp, dp, awp)
         const lineUnderP = 1 - lineOverP
         const allLineOdds = [line.over, line.under]
         // Over 方向
@@ -686,8 +872,20 @@ function scorePortfolio(legs, strategyWeights = {}) {
   const wSafety = strategyWeights.safety || 1.0
   const wGoalsRange = strategyWeights.goals_range || 1.0
 
-  // 1. EV得分 (0-15分) — 正EV越高越好
-  const evScore = compEV > 0 ? Math.min(compEV * 8 + 5, 15) : compEV > -0.05 ? 3 : 0
+  // 1. EV得分 (0-15分) — V4.3: 引入对数赔率衰减，降权极低概率高赔腿的EV放大
+  // 原理：高赔腿的EV被prob×odds公式放大，但极低概率意味着实现路径极窄
+  // 对数衰减：当单腿赔率>5且概率<0.4时，该腿的EV贡献乘以衰减因子
+  let adjustedCompEV = compEV
+  let evDecayApplied = false
+  for (const leg of legs) {
+    if (leg.odds > 5 && leg.prob < 0.4 && leg.ev > 0) {
+      // 衰减因子 = log(prob×20) / log(odds/2)，将EV拉回现实范围
+      const decay = Math.max(0.3, Math.log(leg.prob * 20 + 1) / Math.log(leg.odds / 2 + 1))
+      adjustedCompEV = adjustedCompEV - leg.ev * (1 - decay) * 0.3 // 最多衰减30%
+      evDecayApplied = true
+    }
+  }
+  const evScore = adjustedCompEV > 0 ? Math.min(adjustedCompEV * 8 + 5, 15) : adjustedCompEV > -0.05 ? 3 : 0
 
   // 2. MVI得分 (0-15分) — 错价信号
   const mviScore = Math.min(avgMVI * 12, 15)
@@ -837,12 +1035,25 @@ function generateComparisonRationale(best, second) {
 
 // ========== 去集中：确保 Top N 中没有单个投注项过度出现 ==========
 /**
- * 从已排序的组合中选择 Top N，限制同一腿最多出现 maxPerLeg 次。
- * 这防止了"塞内加尔小2球出现在6/10组合"的集中度风险。
- * 
- * 同场比赛相关约束：如果同场比赛多个不同方向（如小2球+小3球）出现频繁，
- * 也会增加额外限制（因为一场比赛的进球数无论如何，都会同时影响这些投注）。
+ * V4.3: 增强去集中化 — 检测同场比赛的高相关腿
+ * 同一场比赛的"小2球"和"小3球"虽然leg ID不同，但高度相关（进球总数决定两者结果）。
+ * 相关性≥0.85的腿组合视为"实质上重复"。
  */
+function areLegsHighlyCorrelated(legA, legB) {
+  // 必须是同一场比赛
+  if (legA.match !== legB.match) return false
+  // 必须是同类市场（goals/goals_range 互检）
+  const goalsTypes = new Set(['goals', 'goals_range'])
+  if (!goalsTypes.has(legA.type) || !goalsTypes.has(legB.type)) return false
+  // 同方向（都是Over，或都是Under，或都是BTTS）→ 高度相关
+  const dirA = legA.bet.includes('大') ? 'over' : legA.bet.includes('小') ? 'under' : legA.bet.includes('进球=是') ? 'btts_y' : ''
+  const dirB = legB.bet.includes('大') ? 'over' : legB.bet.includes('小') ? 'under' : legB.bet.includes('进球=是') ? 'btts_y' : ''
+  if (dirA === dirB) return true
+  // 不同方向（Over vs Under）→ 负相关，但也算"重复"（同一比赛同类型不可兼得）
+  if (dirA && dirB && dirA !== dirB) return true
+  return false
+}
+
 function selectDiversifiedTop(scored, n = 10, maxPerLeg = 1, maxPerMatch = 4) {
   const selected = []
   const legCount = new Map()   // leg id → count
@@ -854,7 +1065,29 @@ function selectDiversifiedTop(scored, n = 10, maxPerLeg = 1, maxPerMatch = 4) {
     // 检查同场比赛投注项是否过度集中
     const matchExceeds = pf.legs.some(l => (matchCount.get(l.match || '') || 0) >= maxPerMatch)
     
-    if (!legExceeds && !matchExceeds) {
+    // V4.3: 额外检查——该组合是否与已选组合中的任何组合"实质上相同"
+    // （类似的相关腿组合共享>60%的相关腿则视为重复）
+    let duplicative = false
+    if (!legExceeds && !matchExceeds && selected.length > 0) {
+      for (const existing of selected) {
+        let correlatedScore = 0
+        for (const newLeg of pf.legs) {
+          for (const existingLeg of existing.legs) {
+            if (newLeg.id === existingLeg.id) correlatedScore += 2
+            else if (areLegsHighlyCorrelated(newLeg, existingLeg)) correlatedScore += 1.5
+            else if (newLeg.match === existingLeg.match) correlatedScore += 0.5
+          }
+        }
+        // 相似度 > 60% 视为重复
+        const maxPossible = pf.legs.length * existing.legs.length
+        if (maxPossible > 0 && correlatedScore / maxPossible > 0.6) {
+          duplicative = true
+          break
+        }
+      }
+    }
+    
+    if (!legExceeds && !matchExceeds && !duplicative) {
       for (const l of pf.legs) {
         legCount.set(l.id, (legCount.get(l.id) || 0) + 1)
         matchCount.set(l.match || '', (matchCount.get(l.match || '') || 0) + 1)
@@ -935,9 +1168,10 @@ function buildFinalVerdict(scored, accepted, yesterday) {
 // MAIN
 // ===================================================================
 function main() {
-  console.log('🏆 WCPE Portfolio Optimizer V4.0')
+  console.log('🏆 WCPE Portfolio Optimizer V4.3')
   console.log('   身份: Investment Portfolio Manager（世界杯投资组合经理）')
   console.log('   目标: 最大化 Portfolio Score（组合综合质量），非赔率')
+  console.log('   新特性: 3日滑动平均 | 对数EV衰减 | Poisson区间 | 资金分散 | MVI分级 | 去集中化v2')
   console.log('')
 
   const remote = loadJSON(REMOTE_PATH)
@@ -946,10 +1180,13 @@ function main() {
   const market = loadJSON(ODDS_PATH) || { odds: {} }
 
   // Step 1: Yesterday Review + 策略权重学习
-  console.log('[Step 1] 复盘昨日 + 策略权重学习...')
+  console.log('[Step 1] 复盘昨日 + 策略权重学习（V4.3 3日滑动平均）...')
   const yesterday = analyzeYesterday(remote)
   const sw = yesterday.strategyWeights
-  console.log(`  方向:${(yesterday.summary.dirRate * 100).toFixed(0)}% | Over2.5:${(yesterday.summary.over25Rate * 100).toFixed(0)}% | BTTS:${(yesterday.summary.bttsRate * 100).toFixed(0)}% | Top3:${(yesterday.summary.top3Rate * 100).toFixed(0)}%`)
+  if (yesterday.summary._multiDay) {
+    console.log(`  多日加权: ${yesterday.summary._weightStr || ''}`)
+  }
+  console.log(`  ${yesterday.summary.n}场复盘 → 方向:${(yesterday.summary.dirRate * 100).toFixed(0)}% | Over2.5:${(yesterday.summary.over25Rate * 100).toFixed(0)}% | BTTS:${(yesterday.summary.bttsRate * 100).toFixed(0)}% | Top3:${(yesterday.summary.top3Rate * 100).toFixed(0)}%`)
   console.log(`  策略权重 → 方向:${sw.direction.toFixed(2)} 大小球:${sw.goals.toFixed(2)} BTTS:${sw.btts.toFixed(2)} 比分:${sw.score.toFixed(2)} 安全:${sw.safety.toFixed(2)}`)
 
   // Step 2: WCPE独立校验
@@ -1074,7 +1311,7 @@ function main() {
 
   // --- 最终输出 ---
   const output = {
-    version: '4.0',
+    version: '4.3',
     generatedAt: new Date().toISOString(),
     targetDate: TOMORROW_BJT,
     targetDateDisplay,
@@ -1195,50 +1432,76 @@ function main() {
   console.log(`\n✅ 已写入 ${OUTPUT_PATH}`)
   console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(topSelected[0]?.compOdds)} ${topSelected[0]?.compOdds}x`)
   console.log(`   主动放弃: ${rejected.length}投注项 + ${abandonedMatches.length}场`)
-  console.log('   V4.2特性: 12维评分 | 动态权重 | 波胆Poisson估算 | 去集中化(leg≤1/match≤4) | 主动放弃分析')
+  console.log('   V4.3特性: 12维评分 | 3日滑动平均 | 对数衰减EV | Poisson区间估算 | 去集中化v2 | 资金分散 | MVI分级')
 }
 
-// V4: 资金配置
+// V4.3: 资金配置（分散风险 — 核心≤70%，辅助≥20%，现金5-10%）
 function buildCapitalAllocation(scored, accepted) {
   const BUDGET = 100
   if (!scored.length || accepted.length < 5) {
     return [{ tier: '现金保留（空仓）', portfolio: null, pct: 100, amount: BUDGET, isCash: true }]
   }
 
-  // 按组合腿数动态分配（多腿组合降低每腿仓位）
   const best = scored[0]
   const nLegs = best.n
-  const basePct = Math.min(60, Math.max(15, 80 / nLegs)) // 2腿→40%, 3腿→27%, 4腿→20%, 5腿→16%
 
-  const allocations = [
-    {
-      tier: `核心仓位（${classifyTier(best.compOdds)}·${best.n}腿）`,
-      portfolio: { id: 'best', score: best.score, odds: best.compOdds, ev: best.compEV, hitPct: best.hitPct, legs: best.legs },
-      pct: Math.round(basePct),
-      amount: Math.round(BUDGET * basePct / 100 * 100) / 100,
-      isCore: true,
-    },
-  ]
+  // V4.3: 多腿组合降低每腿仓位，但核心+辅助覆盖率应≥85%
+  const basePct = Math.min(70, Math.max(20, 100 / (nLegs + 1)))
 
-  // 如果存在2号不同风格组合，分配辅助仓位
-  if (scored[1] && scored[1].n !== scored[0].n) {
-    const altPct = Math.round(basePct * 0.5)
+  const allocations = []
+
+  // 核心仓位
+  allocations.push({
+    tier: `核心仓位（${classifyTier(best.compOdds)}·${best.n}腿）`,
+    portfolio: { id: 'best', score: best.score, odds: best.compOdds, ev: best.compEV, hitPct: best.hitPct, legs: best.legs },
+    pct: Math.round(basePct),
+    amount: Math.round(BUDGET * basePct / 100 * 100) / 100,
+    isCore: true,
+  })
+
+  // 辅助仓位 — 只要存在#2就分配（不再要求不同腿数）
+  let alt = null
+  if (scored[1]) {
+    alt = scored[1]
+  }
+  if (alt && best.legs && alt.legs) {
+    const bestIds = new Set(best.legs.map(l => l.id))
+    const sameCount = alt.legs.filter(l => bestIds.has(l.id)).length
+    if (sameCount === alt.legs.length && scored[2]) alt = scored[2]
+  }
+
+  if (alt) {
+    const altPct = Math.max(15, Math.round(basePct * 0.6))
     allocations.push({
-      tier: `辅助仓位（${classifyTier(scored[1].compOdds)}·${scored[1].n}腿）`,
-      portfolio: { id: 'alt', score: scored[1].score, odds: scored[1].compOdds, ev: scored[1].compEV, hitPct: scored[1].hitPct, legs: scored[1].legs },
+      tier: `辅助仓位（${classifyTier(alt.compOdds)}·${alt.n}腿）`,
+      portfolio: { id: 'alt', score: alt.score, odds: alt.compOdds, ev: alt.compEV, hitPct: alt.hitPct, legs: alt.legs },
       pct: altPct,
       amount: Math.round(BUDGET * altPct / 100 * 100) / 100,
     })
   }
 
-  // Normalize to 100%
-  const totalAlloc = allocations.reduce((s, a) => s + a.pct, 0)
-  if (totalAlloc > 0) {
+  // V4.3: 现金保留 — 固定10%风险缓冲
+  // 核心+辅助归一化到90%，现金固定10%
+  const CASH_PCT = 10
+  const investablePct = 100 - CASH_PCT
+  const allocTotal = allocations.reduce((s, a) => s + a.pct, 0)
+
+  // 归一化核心+辅助到 investablePct%
+  if (allocTotal > 0) {
     for (const a of allocations) {
-      a.pct = Math.round(a.pct / totalAlloc * 100)
+      a.pct = Math.round(a.pct / allocTotal * investablePct)
       a.amount = Math.round(BUDGET * a.pct / 100 * 100) / 100
     }
   }
+
+  // 添加现金
+  allocations.push({
+    tier: '现金保留（风险缓冲）',
+    portfolio: null,
+    pct: CASH_PCT,
+    amount: Math.round(BUDGET * CASH_PCT / 100 * 100) / 100,
+    isCash: true,
+  })
 
   return allocations
 }

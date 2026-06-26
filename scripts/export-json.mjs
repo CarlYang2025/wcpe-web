@@ -749,12 +749,25 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
     blendedCount++
 
     // 更新 predictedDirection
-    if (blended.home > blended.away && blended.home > blended.draw) {
+    // V4.3 修复: 当主胜/客胜概率相等且都高于平局时，不应默认平局
+    const EPS = 0.005
+    if (blended.home > blended.away + EPS && blended.home > blended.draw + EPS) {
       pred.predictedDirection = 'home_win'
-    } else if (blended.away > blended.home && blended.away > blended.draw) {
+    } else if (blended.away > blended.home + EPS && blended.away > blended.draw + EPS) {
       pred.predictedDirection = 'away_win'
-    } else {
+    } else if (blended.draw > blended.home + EPS && blended.draw > blended.away + EPS) {
       pred.predictedDirection = 'draw'
+    } else {
+      // 势均力敌：取最高概率方向，平局作为最低优先级
+      // 因为势均力敌时平局概率往往被低估，但应尊重数据
+      const maxProb = Math.max(blended.home, blended.away, blended.draw)
+      if (Math.abs(blended.home - maxProb) <= EPS) {
+        pred.predictedDirection = 'home_win'
+      } else if (Math.abs(blended.away - maxProb) <= EPS) {
+        pred.predictedDirection = 'away_win'
+      } else {
+        pred.predictedDirection = 'draw'
+      }
     }
 
     // 生成 MVI 分析
