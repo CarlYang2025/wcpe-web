@@ -610,8 +610,8 @@ function buildCandidatePool(remote, market) {
 
     // ─── 大小球 ───
     const goalAllOdds = [oOdd, uOdd].filter(Boolean)
-    if (oOdd) pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 大2.5球`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev: dewateredEV(o25p, oOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues, _o25p: o25p })
-    if (uOdd) pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 小2.5球`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev: dewateredEV(u25p, uOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues, _o25p: o25p })
+    if (oOdd) pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, kickoff, bet: `【大2.5球】${home} vs ${away}`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev: dewateredEV(o25p, oOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues, _o25p: o25p })
+    if (uOdd) pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, kickoff, bet: `【小2.5球】${home} vs ${away}`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev: dewateredEV(u25p, uOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues, _o25p: o25p })
 
     // ─── BTTS ───
     if (bYesOdd && bYesOdd > 0 && bYesOdd < 10) {
@@ -735,10 +735,10 @@ function buildCandidatePool(remote, market) {
 
         // Over 方向
         if (target !== 2.5 || !oOdd) { // 2.5的已在大小球中产生，避免重复
-          pool.push({ id: `${mid}_ov${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 大${target}球`, market: '比分区间', odds: line.over, prob: lineOverP, mvi: calcMVI(lineOverP, line.over), ev: dewateredEV(lineOverP, line.over, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues, _predictedScore: pred.predictedScore, _o25p: o25p })
+          pool.push({ id: `${mid}_ov${target}`, mid, match: matchDisplay, group, kickoff, bet: `【大${target}球】${home} vs ${away}`, market: '比分区间', odds: line.over, prob: lineOverP, mvi: calcMVI(lineOverP, line.over), ev: dewateredEV(lineOverP, line.over, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues, _predictedScore: pred.predictedScore, _o25p: o25p })
         }
         // Under 方向
-        pool.push({ id: `${mid}_un${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 小${target}球`, market: '比分区间', odds: line.under, prob: lineUnderP, mvi: calcMVI(lineUnderP, line.under), ev: dewateredEV(lineUnderP, line.under, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues, _predictedScore: pred.predictedScore, _o25p: o25p })
+        pool.push({ id: `${mid}_un${target}`, mid, match: matchDisplay, group, kickoff, bet: `【小${target}球】${home} vs ${away}`, market: '比分区间', odds: line.under, prob: lineUnderP, mvi: calcMVI(lineUnderP, line.under), ev: dewateredEV(lineUnderP, line.under, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues, _predictedScore: pred.predictedScore, _o25p: o25p })
       }
     }
   }
