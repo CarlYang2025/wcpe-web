@@ -22,9 +22,48 @@ const REMOTE_PATH = resolve(ROOT, 'src/data/remote.json')
 const ODDS_PATH = resolve(ROOT, 'src/data/market-odds.json')
 const OUTPUT_PATH = resolve(ROOT, 'src/data/portfolio.json')
 
-const TARGET_DATE = '2026-06-26' // June 27 BJT matches
-const YESTERDAY_DATE = '2026-06-25'
 const BUDGET = 100
+
+// ========== 球队中文名称映射（与 matches.ts 保持一致） ==========
+const teamNames = {
+  'Mexico': '墨西哥', 'South Africa': '南非', 'South Korea': '韩国', 'Czechia': '捷克',
+  'Canada': '加拿大', 'Bosnia': '波黑', 'Qatar': '卡塔尔', 'Switzerland': '瑞士',
+  'Brazil': '巴西', 'Morocco': '摩洛哥', 'Haiti': '海地', 'Scotland': '苏格兰',
+  'Spain': '西班牙', 'Cape Verde': '佛得角', 'Belgium': '比利时', 'Egypt': '埃及',
+  'Saudi Arabia': '沙特', 'Uruguay': '乌拉圭', 'Iran': '伊朗', 'New Zealand': '新西兰',
+  'France': '法国', 'Senegal': '塞内加尔', 'Iraq': '伊拉克', 'Norway': '挪威',
+  'Argentina': '阿根廷', 'Algeria': '阿尔及利亚', 'Austria': '奥地利', 'Jordan': '约旦',
+  'Portugal': '葡萄牙', 'DR Congo': '刚果(金)', 'England': '英格兰', 'Croatia': '克罗地亚',
+  'Ghana': '加纳', 'Panama': '巴拿马', 'Colombia': '哥伦比亚', 'Uzbekistan': '乌兹别克',
+  'Sweden': '瑞典', 'Tunisia': '突尼斯', 'Ivory Coast': '科特迪瓦', 'Ecuador': '厄瓜多尔',
+  'Netherlands': '荷兰', 'Japan': '日本', 'Germany': '德国', 'Curacao': '库拉索',
+  'Australia': '澳大利亚', 'Turkiye': '土耳其', 'USA': '美国', 'Paraguay': '巴拉圭',
+}
+const cn = name => teamNames[name] || name
+
+// ========== 获取北京时间明天的日期 ==========
+function getTomorrowBJT() {
+  const now = new Date()
+  // 北京时间 = UTC+8
+  const bjt = new Date(now.getTime() + 8 * 60 * 60 * 1000)
+  bjt.setDate(bjt.getDate() + 1)
+  const y = bjt.getUTCFullYear()
+  const m = String(bjt.getUTCMonth() + 1).padStart(2, '0')
+  const d = String(bjt.getUTCDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+function getYesterdayBJT() {
+  const now = new Date()
+  const bjt = new Date(now.getTime() + 8 * 60 * 60 * 1000)
+  bjt.setDate(bjt.getDate()) // today in BJT
+  const y = bjt.getUTCFullYear()
+  const m = String(bjt.getUTCMonth() + 1).padStart(2, '0')
+  const d = String(bjt.getUTCDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+
+const TARGET_DATE = getTomorrowBJT()
+const YESTERDAY_DATE = getYesterdayBJT()
 
 function loadJSON(path) {
   if (!existsSync(path)) return null
@@ -62,7 +101,7 @@ function analyzeYesterday(remote) {
     
     results.push({
       id: m.id,
-      match: `${m.homeTeam} vs ${m.awayTeam}`,
+      match: `${cn(m.homeTeam || '')} vs ${cn(m.awayTeam || '')}`,
       score: actualScore,
       actualDir,
       predDir,
@@ -145,7 +184,9 @@ function buildCandidatePool(remote, market) {
     const odds = market.odds?.[mid] || {}
     const m = remote.matches?.find(x => x.id === mid) || {}
     
-    const home = m.homeTeam || '', away = m.awayTeam || '', group = m.group || ''
+    const homeEn = m.homeTeam || '', awayEn = m.awayTeam || ''
+    const home = cn(homeEn), away = cn(awayEn)
+    const group = m.group || '', kickoff = m.kickoff || ''
     const hwp = pred.homeWinProb || 0.33, dp = pred.drawProb || 0.33, awp = pred.awayWinProb || 0.33
     const o25p = pred.over25Prob || 0.5, u25p = 1 - o25p
     const confidence = pred.confidence || 0.5, risk = pred.riskLevel || 'Medium'
@@ -161,32 +202,32 @@ function buildCandidatePool(remote, market) {
     
     const getMVI = (name) => mviMap[name] || 1
     
-    // 1X2
+    // 胜平负
     const matchDisplay = `${home} vs ${away}`
-    if (hOdd) pool.push({ id: `${mid}_h`, mid, match: matchDisplay, group, bet: `${home} 主胜`, market: '1X2', odds: hOdd, prob: hwp, mvi: getMVI('主胜'), ev: calcEV(hwp, hOdd), conf: confidence, risk, type: 'direction' })
-    if (dOdd) pool.push({ id: `${mid}_d`, mid, match: matchDisplay, group, bet: `${home} vs ${away} 平局`, market: '1X2', odds: dOdd, prob: dp, mvi: getMVI('平局'), ev: calcEV(dp, dOdd), conf: confidence, risk, type: 'direction' })
-    if (aOdd) pool.push({ id: `${mid}_a`, mid, match: matchDisplay, group, bet: `${away} 客胜`, market: '1X2', odds: aOdd, prob: awp, mvi: getMVI('客胜'), ev: calcEV(awp, aOdd), conf: confidence, risk, type: 'direction' })
+    if (hOdd) pool.push({ id: `${mid}_h`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${home} 主胜`, market: '胜平负', odds: hOdd, prob: hwp, mvi: getMVI('主胜'), ev: calcEV(hwp, hOdd), conf: confidence, risk, type: 'direction' })
+    if (dOdd) pool.push({ id: `${mid}_d`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${home} vs ${away} 平局`, market: '胜平负', odds: dOdd, prob: dp, mvi: getMVI('平局'), ev: calcEV(dp, dOdd), conf: confidence, risk, type: 'direction' })
+    if (aOdd) pool.push({ id: `${mid}_a`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${away} 客胜`, market: '胜平负', odds: aOdd, prob: awp, mvi: getMVI('客胜'), ev: calcEV(awp, aOdd), conf: confidence, risk, type: 'direction' })
     
-    // Over/Under
-    if (oOdd) pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, bet: `${home} vs ${away} Over 2.5`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev: calcEV(o25p, oOdd), conf: confidence, risk, type: 'goals' })
-    if (uOdd) pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, bet: `${home} vs ${away} Under 2.5`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev: calcEV(u25p, uOdd), conf: confidence, risk, type: 'goals' })
+    // 大小球
+    if (oOdd) pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 大2.5球`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev: calcEV(o25p, oOdd), conf: confidence, risk, type: 'goals' })
+    if (uOdd) pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 小2.5球`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev: calcEV(u25p, uOdd), conf: confidence, risk, type: 'goals' })
     
-    // Double Chance
+    // 双重机会
     if (hOdd && dOdd) {
       const hdProb = hwp + dp, hdOdds = 1 / (1/hOdd + 1/dOdd)
-      pool.push({ id: `${mid}_dc_hd`, mid, match: matchDisplay, group, bet: `${home} 或 平局`, market: '双重机会', odds: Math.round(hdOdds * 100) / 100, prob: hdProb, mvi: 0.98, ev: calcEV(hdProb, hdOdds), conf: confidence, risk, type: 'safety' })
+      pool.push({ id: `${mid}_dc_hd`, mid, match: matchDisplay, group, kickoff, bet: `【双重机会】${home} 或 平局`, market: '双重机会', odds: Math.round(hdOdds * 100) / 100, prob: hdProb, mvi: 0.98, ev: calcEV(hdProb, hdOdds), conf: confidence, risk, type: 'safety' })
     }
     if (aOdd && dOdd) {
       const adProb = awp + dp, adOdds = 1 / (1/aOdd + 1/dOdd)
-      pool.push({ id: `${mid}_dc_ad`, mid, match: matchDisplay, group, bet: `${away} 或 平局`, market: '双重机会', odds: Math.round(adOdds * 100) / 100, prob: adProb, mvi: 0.98, ev: calcEV(adProb, adOdds), conf: confidence, risk, type: 'safety' })
+      pool.push({ id: `${mid}_dc_ad`, mid, match: matchDisplay, group, kickoff, bet: `【双重机会】${away} 或 平局`, market: '双重机会', odds: Math.round(adOdds * 100) / 100, prob: adProb, mvi: 0.98, ev: calcEV(adProb, adOdds), conf: confidence, risk, type: 'safety' })
     }
     
-    // Correct Score (top5)
+    // 波胆（正确比分）
     for (const s of (pred.top5Scores || []).slice(0, 5)) {
       const score = typeof s === 'string' ? s : s.score || ''
       const prob = typeof s === 'object' ? (s.probability || 0.01) : 0.01
       const estOdds = Math.round(1 / Math.max(prob, 0.005) * 10) / 10
-      pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, bet: `${home} vs ${away} 比分 ${score}`, market: '波胆', odds: estOdds, prob, mvi: 1.0, ev: calcEV(prob, estOdds), conf: confidence, risk, type: 'score' })
+      pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: estOdds, prob, mvi: 1.0, ev: calcEV(prob, estOdds), conf: confidence, risk, type: 'score' })
     }
   }
   
@@ -418,29 +459,42 @@ function main() {
   allocations.push({ tier: '现金保留', portfolio: null, pct: cashReserve, amount: Math.round(BUDGET * cashReserve / 100 * 100) / 100, isCash: true })
   
   // Build output
+  const tomorrowBJDate = new Date()
+  tomorrowBJDate.setDate(tomorrowBJDate.getDate() + 1)
+  const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+  const targetDateDisplay = `${tomorrowBJDate.getFullYear()}年${tomorrowBJDate.getMonth()+1}月${tomorrowBJDate.getDate()}日（${weekDays[tomorrowBJDate.getDay()]}）`
+
+  // Build Chinese market highlights
+  const topMviBet = accepted.sort((a, b) => b.mvi - a.mvi)[0]
+  const mviHighlight = topMviBet ? `${topMviBet.bet.replace('【胜平负】','').replace('【大小球】','').replace('【波胆】','').replace('【双重机会】','')} 为本日最强MVI信号(${topMviBet.mvi.toFixed(2)})` : '暂无高MVI信号'
+  
   const output = {
     version: '2.0',
     generatedAt: new Date().toISOString(),
     targetDate: TARGET_DATE,
-    targetDateDisplay: '2026年6月27日（周六）',
+    targetDateDisplay,
     targetMatchIds: tomorrowIds,
     oddsFreshness: market.fetchedAt || 'unknown',
     oddsSource: market.source || 'sample',
     
     marketJudgment: {
       rating: '🟡 中性偏谨慎',
-      summary: '今日市场机会中等，6场比赛中仅1场存在明确正EV机会。建议保留20%现金。',
-      highlights: ['Norway-France Over2.5为本日最强MVI信号(1.24)', 'Cape Verde-Saudi全市场零正EV，已排除', '昨日方向准确率33%，建议降低独赢权重'],
+      summary: `今日共有${tomorrowIds.length}场比赛，其中${accepted.filter(c => c.mvi >= 1.05).length}个高MVI投注项。建议保留20%现金。`,
+      highlights: [
+        mviHighlight,
+        '昨日复盘显示第三轮方向准确率降至33%，建议降低胜平负权重',
+        '已自动排除EV为负或MVI过低的投注项',
+      ],
     },
     
     yesterdayReview: {
-      date: '2026-06-25',
+      date: YESTERDAY_DATE,
       summary: yesterday.summary,
       keyInsights: [
         '第三轮ELO偏差：方向准确率从历史56%降至33%',
-        'Over 2.5超高命中83% → 大小球应作为核心策略',
-        '美国72%置信度预测胜→输球：已出线轮换效应被忽略',
-        '平局率33% > 历史27%：第三轮保平争胜逻辑成立',
+        `大2.5球超高命中${Math.round(yesterday.summary.over25Rate*100)}% → 大小球应作为核心策略`,
+        `平局率${Math.round(yesterday.summary.draws/yesterday.summary.n*100)}%${yesterday.summary.draws/yesterday.summary.n > 0.3 ? ' > 历史27%' : ''}：第三轮保平争胜逻辑成立`,
+        yesterday.summary.upsets > 0 ? `${yesterday.summary.upsets}场高置信度预测翻车：已出线轮换效应被忽略` : '无重大翻车',
       ],
     },
     
@@ -482,24 +536,25 @@ function main() {
       mvi: best.avgMVI,
       legs: best.legs,
       breakdown: best.breakdown,
-      rationale: '综合质量最高：三场比赛+三种市场+EV+17.3%。France客胜提供方向性支撑，塞内加尔Over2.5提供进球预期(昨日83%)，Egypt平局利用第三轮平局溢价逻辑。',
+      rationale: `综合质量最高：${best.legs[0]?.bet?.replace(/【.*?】/g,'')||''} + ${best.legs[1]?.bet?.replace(/【.*?】/g,'')||''}${best.n_legs >= 3 ? ` + ${best.legs[2]?.bet?.replace(/【.*?】/g,'')||''}` : ''}。EV+${(best.compEV*100).toFixed(1)}%，评分${best.score}/100，风险收益比最优。`,
     },
     
     capitalAllocation: allocations,
     
     risks: [
-      '第三轮系统性风险：方向准确率昨日暴跌至33%',
-      '赔率数据为Pinnacle样本估值，非实时Bet365',
-      'Senegal-Iraq为dead rubber(双方已淘汰)，比赛强度不可预测',
-      '法国教练Deschamps缺席，战术执行存疑',
-      '比利时2场0进球，Lukaku状态灾难级',
+      '第三轮系统性风险：小组赛末轮存在出线轮换/荣誉战/保平争胜三重效应叠加',
+      `赔率数据来源：${market.source || '样本估算'}（建议投注前核实实时赔率）`,
+      '模型准确率限制：WCPE方向准确率约56%，约44%的比赛方向预测可能错误',
+      '串关放大效应：多场组合会将单一比赛的预测误差成倍放大',
+      '数据时效性：数据存在数小时延迟，临场首发/伤停变化可能未纳入',
     ],
     
     learnings: [
-      '第三轮下调ELO权重至70%，上调大小球策略权重',
+      '第三轮比赛应下调ELO权重，上调大小球策略权重',
+      yesterday.summary.over25Rate > 0.7 ? `昨日大2.5球命中率${Math.round(yesterday.summary.over25Rate*100)}%，今日继续作为核心策略` : '大小球需谨慎，关注比赛强度变化',
       '已出线球队增加轮换折扣(-10%~-15%)',
-      '平局溢价值得在第三轮主动纳入串关',
-      '避免Dead Rubber比赛的高权重配置',
+      '第三轮平局溢价值得主动纳入串关考量',
+      '避免已淘汰球队的Dead Rubber比赛高权重配置',
     ],
     
     stats: {

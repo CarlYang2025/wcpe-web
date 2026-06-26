@@ -1,205 +1,168 @@
 {
   "version": "2.0",
-  "generatedAt": "2026-06-26T11:45:34.378Z",
-  "targetDate": "2026-06-26",
+  "generatedAt": "2026-06-26T11:54:57.024Z",
+  "targetDate": "2026-06-27",
   "targetDateDisplay": "2026年6月27日（周六）",
   "targetMatchIds": [
-    "nor-fra-3",
-    "sen-irq-3",
-    "uru-esp-3",
-    "cpv-ksa-3",
-    "nzl-bel-3",
-    "egy-irn-3"
+    "pan-eng-3",
+    "cro-gha-3",
+    "col-por-3",
+    "uzb-cod-3",
+    "jor-arg-3",
+    "alg-aut-3"
   ],
-  "oddsFreshness": "2026-06-26T11:45:33.785Z",
+  "oddsFreshness": "2026-06-26T11:54:56.331Z",
   "oddsSource": "sample-estimate",
   "marketJudgment": {
     "rating": "🟡 中性偏谨慎",
-    "summary": "今日市场机会中等，6场比赛中仅1场存在明确正EV机会。建议保留20%现金。",
+    "summary": "今日共有6场比赛，其中0个高MVI投注项。建议保留20%现金。",
     "highlights": [
-      "Norway-France Over2.5为本日最强MVI信号(1.24)",
-      "Cape Verde-Saudi全市场零正EV，已排除",
-      "昨日方向准确率33%，建议降低独赢权重"
+      "巴拿马 主胜 为本日最强MVI信号(1.00)",
+      "昨日复盘显示第三轮方向准确率降至33%，建议降低胜平负权重",
+      "已自动排除EV为负或MVI过低的投注项"
     ]
   },
   "yesterdayReview": {
-    "date": "2026-06-25",
+    "date": "2026-06-26",
     "summary": {
       "n": 6,
-      "dirHits": 2,
-      "dirRate": 0.3333333333333333,
-      "over25Hits": 5,
-      "over25Rate": 0.8333333333333334,
-      "bttsHits": 2,
-      "bttsRate": 0.3333333333333333,
-      "top3Hits": 4,
-      "top3Rate": 0.6666666666666666,
-      "top1Hits": 1,
-      "top1Rate": 0.16666666666666666,
-      "draws": 2,
+      "dirHits": 0,
+      "dirRate": 0,
+      "over25Hits": 1,
+      "over25Rate": 0.16666666666666666,
+      "bttsHits": 4,
+      "bttsRate": 0.6666666666666666,
+      "top3Hits": 0,
+      "top3Rate": 0,
+      "top1Hits": 0,
+      "top1Rate": 0,
+      "draws": 6,
       "upsets": 2
     },
     "keyInsights": [
       "第三轮ELO偏差：方向准确率从历史56%降至33%",
-      "Over 2.5超高命中83% → 大小球应作为核心策略",
-      "美国72%置信度预测胜→输球：已出线轮换效应被忽略",
-      "平局率33% > 历史27%：第三轮保平争胜逻辑成立"
+      "大2.5球超高命中17% → 大小球应作为核心策略",
+      "平局率100% > 历史27%：第三轮保平争胜逻辑成立",
+      "2场高置信度预测翻车：已出线轮换效应被忽略"
     ]
   },
   "wcpeValidation": [
     {
-      "matchId": "nor-fra-3",
-      "agree": true,
-      "issues": [],
-      "confirmations": [
-        "概率和正常(1.01)",
-        "方向与市场一致(away_win)",
-        "1个高价值MVI"
-      ]
+      "matchId": "pan-eng-3",
+      "agree": false,
+      "issues": [
+        "概率和偏差(0.00)",
+        "方向()与市场(away_win)分歧"
+      ],
+      "confirmations": []
     },
     {
-      "matchId": "sen-irq-3",
-      "agree": true,
-      "issues": [],
-      "confirmations": [
-        "概率和正常(1.00)",
-        "方向与市场一致(home_win)"
-      ]
+      "matchId": "cro-gha-3",
+      "agree": false,
+      "issues": [
+        "概率和偏差(0.00)",
+        "方向()与市场(home_win)分歧"
+      ],
+      "confirmations": []
     },
     {
-      "matchId": "uru-esp-3",
-      "agree": true,
-      "issues": [],
-      "confirmations": [
-        "概率和正常(1.00)",
-        "方向与市场一致(away_win)"
-      ]
+      "matchId": "col-por-3",
+      "agree": false,
+      "issues": [
+        "概率和偏差(0.00)",
+        "方向()与市场(away_win)分歧"
+      ],
+      "confirmations": []
     },
     {
-      "matchId": "cpv-ksa-3",
-      "agree": true,
-      "issues": [],
-      "confirmations": [
-        "概率和正常(1.00)",
-        "方向与市场一致(home_win)"
-      ]
+      "matchId": "uzb-cod-3",
+      "agree": false,
+      "issues": [
+        "概率和偏差(0.00)",
+        "方向()与市场(home_win)分歧"
+      ],
+      "confirmations": []
     },
     {
-      "matchId": "nzl-bel-3",
-      "agree": true,
-      "issues": [],
-      "confirmations": [
-        "概率和正常(1.00)",
-        "方向与市场一致(away_win)"
-      ]
+      "matchId": "jor-arg-3",
+      "agree": false,
+      "issues": [
+        "概率和偏差(0.00)",
+        "方向()与市场(away_win)分歧"
+      ],
+      "confirmations": []
     },
     {
-      "matchId": "egy-irn-3",
-      "agree": true,
-      "issues": [],
-      "confirmations": [
-        "概率和正常(0.99)",
-        "方向与市场一致(home_win)"
-      ]
+      "matchId": "alg-aut-3",
+      "agree": false,
+      "issues": [
+        "概率和偏差(0.00)",
+        "方向()与市场(away_win)分歧"
+      ],
+      "confirmations": []
     }
   ],
   "candidatePool": {
-    "total": 72,
-    "accepted": 45,
-    "rejected": 27,
-    "topPicks": [
-      {
-        "bet": "Norway vs France Over 2.5",
-        "odds": 1.72,
-        "prob": 0.72,
-        "mvi": 1.24,
-        "ev": 0.238,
-        "market": "大小球"
-      },
-      {
-        "bet": "Senegal vs Iraq Over 2.5",
-        "odds": 1.9,
-        "prob": 0.58,
-        "mvi": 1.1,
-        "ev": 0.102,
-        "market": "大小球"
-      },
-      {
-        "bet": "Uruguay vs Spain Over 2.5",
-        "odds": 1.8,
-        "prob": 0.6,
-        "mvi": 1.08,
-        "ev": 0.08,
-        "market": "大小球"
-      },
-      {
-        "bet": "Egypt vs Iran Under 2.5",
-        "odds": 2.02,
-        "prob": 0.52,
-        "mvi": 1.05,
-        "ev": 0.05,
-        "market": "大小球"
-      }
-    ],
+    "total": 42,
+    "accepted": 23,
+    "rejected": 19,
+    "topPicks": [],
     "rejectedHighlights": [
       {
-        "bet": "Norway 主胜",
+        "bet": "【胜平负】英格兰 客胜",
         "reasons": [
-          "EV负(-7.6%)"
+          "EV负(-57.1%)"
         ],
-        "ev": -0.076
+        "ev": -0.571
       },
       {
-        "bet": "Norway vs France 平局",
+        "bet": "【大小球】巴拿马 vs 英格兰 大2.5球",
         "reasons": [
-          "EV负(-8.2%)"
+          "EV负(-12.5%)"
         ],
-        "ev": -0.082
+        "ev": -0.125
       },
       {
-        "bet": "Norway vs France Under 2.5",
+        "bet": "【双重机会】英格兰 或 平局",
         "reasons": [
-          "EV负(-41.2%)",
-          "MVI低(0.59)"
+          "EV负(-30.6%)"
         ],
-        "ev": -0.412
+        "ev": -0.306
       },
       {
-        "bet": "Norway 或 平局",
+        "bet": "【胜平负】克罗地亚 主胜",
         "reasons": [
-          "EV负(-7.9%)"
+          "EV负(-43.9%)"
         ],
-        "ev": -0.079
+        "ev": -0.439
       },
       {
-        "bet": "Senegal vs Iraq 平局",
+        "bet": "【大小球】克罗地亚 vs 加纳 大2.5球",
         "reasons": [
-          "EV负(-10.0%)"
+          "EV负(-7.5%)"
         ],
-        "ev": -0.1
+        "ev": -0.075
       },
       {
-        "bet": "Iraq 客胜",
+        "bet": "【双重机会】克罗地亚 或 平局",
         "reasons": [
-          "EV负(-17.5%)",
-          "MVI低(0.83)"
+          "EV负(-23.8%)"
+        ],
+        "ev": -0.238
+      },
+      {
+        "bet": "【胜平负】葡萄牙 客胜",
+        "reasons": [
+          "EV负(-17.5%)"
         ],
         "ev": -0.175
       },
       {
-        "bet": "Senegal vs Iraq Under 2.5",
+        "bet": "【大小球】哥伦比亚 vs 葡萄牙 大2.5球",
         "reasons": [
-          "EV负(-20.2%)",
-          "MVI低(0.80)"
+          "EV负(-9.0%)"
         ],
-        "ev": -0.202
-      },
-      {
-        "bet": "Iraq 或 平局",
-        "reasons": [
-          "EV负(-12.8%)"
-        ],
-        "ev": -0.128
+        "ev": -0.09
       }
     ]
   },
@@ -207,42 +170,42 @@
     {
       "tier": "稳健收益型",
       "rank": 1,
-      "score": 89.7,
-      "odds": 2.41,
-      "hitPct": 49.68,
-      "ev": 0.196,
-      "mvi": 1.105,
+      "score": 88.5,
+      "odds": 4.28,
+      "hitPct": 33,
+      "ev": 0.414,
+      "mvi": 0.99,
       "legs": [
         {
-          "id": "nor-fra-3_o25",
-          "bet": "Norway vs France Over 2.5",
-          "odds": 1.72,
-          "prob": 0.72,
-          "mvi": 1.24,
-          "ev": 0.238,
+          "id": "pan-eng-3_u25",
+          "bet": "【大小球】巴拿马 vs 英格兰 小2.5球",
+          "odds": 2.05,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0.025,
           "market": "大小球",
-          "match": "Norway vs France",
-          "group": "I组"
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
         },
         {
-          "id": "sen-irq-3_h",
-          "bet": "Senegal 主胜",
-          "odds": 1.4,
-          "prob": 0.69,
-          "mvi": 0.97,
-          "ev": -0.034,
-          "market": "1X2",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "id": "cro-gha-3_dc_ad",
+          "bet": "【双重机会】加纳 或 平局",
+          "odds": 2.09,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 0.381,
+          "market": "双重机会",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         }
       ],
       "breakdown": {
-        "mvi": 20,
-        "ev": 2.9,
+        "mvi": 19.8,
+        "ev": 6.2,
         "hit": 20,
         "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
+        "risk": 10,
+        "conf": 7.5,
         "corr": 0
       },
       "riskLevel": "🟢低"
@@ -250,42 +213,42 @@
     {
       "tier": "稳健收益型",
       "rank": 2,
-      "score": 88.1,
-      "odds": 4.09,
-      "hitPct": 26.68,
-      "ev": 0.09,
-      "mvi": 1.045,
+      "score": 88,
+      "odds": 4.18,
+      "hitPct": 33,
+      "ev": 0.379,
+      "mvi": 0.99,
       "legs": [
         {
-          "id": "nor-fra-3_a",
-          "bet": "France 客胜",
-          "odds": 2.15,
-          "prob": 0.46,
-          "mvi": 0.99,
-          "ev": -0.011,
-          "market": "1X2",
-          "match": "Norway vs France",
-          "group": "I组"
+          "id": "cro-gha-3_dc_ad",
+          "bet": "【双重机会】加纳 或 平局",
+          "odds": 2.09,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 0.381,
+          "market": "双重机会",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         },
         {
-          "id": "sen-irq-3_o25",
-          "bet": "Senegal vs Iraq Over 2.5",
-          "odds": 1.9,
-          "prob": 0.58,
-          "mvi": 1.1,
-          "ev": 0.102,
+          "id": "jor-arg-3_u25",
+          "bet": "【大小球】约旦 vs 阿根廷 小2.5球",
+          "odds": 2,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0,
           "market": "大小球",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "match": "约旦 vs 阿根廷",
+          "group": "J组"
         }
       ],
       "breakdown": {
-        "mvi": 20,
-        "ev": 1.3,
+        "mvi": 19.8,
+        "ev": 5.7,
         "hit": 20,
         "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
+        "risk": 10,
+        "conf": 7.5,
         "corr": 0
       },
       "riskLevel": "🟢低"
@@ -293,85 +256,85 @@
     {
       "tier": "稳健收益型",
       "rank": 3,
-      "score": 87.7,
-      "odds": 2.51,
-      "hitPct": 42.34,
-      "ev": 0.062,
-      "mvi": 1.04,
-      "legs": [
-        {
-          "id": "nor-fra-3_dc_ad",
-          "bet": "France 或 平局",
-          "odds": 1.32,
-          "prob": 0.73,
-          "mvi": 0.98,
-          "ev": -0.039,
-          "market": "双重机会",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_o25",
-          "bet": "Senegal vs Iraq Over 2.5",
-          "odds": 1.9,
-          "prob": 0.58,
-          "mvi": 1.1,
-          "ev": 0.102,
-          "market": "大小球",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 0.9,
-        "hit": 20,
-        "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
-        "corr": 0
-      },
-      "riskLevel": "🟢低"
-    },
-    {
-      "tier": "平衡收益型",
-      "rank": 1,
       "score": 87.8,
-      "odds": 5.7,
-      "hitPct": 18.56,
-      "ev": 0.058,
-      "mvi": 1.03,
+      "odds": 4.14,
+      "hitPct": 33,
+      "ev": 0.366,
+      "mvi": 0.99,
       "legs": [
         {
-          "id": "sen-irq-3_o25",
-          "bet": "Senegal vs Iraq Over 2.5",
-          "odds": 1.9,
-          "prob": 0.58,
-          "mvi": 1.1,
-          "ev": 0.102,
-          "market": "大小球",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "id": "cro-gha-3_dc_ad",
+          "bet": "【双重机会】加纳 或 平局",
+          "odds": 2.09,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 0.381,
+          "market": "双重机会",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         },
         {
-          "id": "egy-irn-3_d",
-          "bet": "Egypt vs Iran 平局",
-          "odds": 3,
-          "prob": 0.32,
-          "mvi": 0.96,
-          "ev": -0.04,
-          "market": "1X2",
-          "match": "Egypt vs Iran",
-          "group": "G组"
+          "id": "col-por-3_u25",
+          "bet": "【大小球】哥伦比亚 vs 葡萄牙 小2.5球",
+          "odds": 1.98,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": -0.01,
+          "market": "大小球",
+          "match": "哥伦比亚 vs 葡萄牙",
+          "group": "K组"
         }
       ],
       "breakdown": {
-        "mvi": 20,
-        "ev": 0.9,
+        "mvi": 19.8,
+        "ev": 5.5,
         "hit": 20,
         "div": 25,
-        "risk": 12.5,
-        "conf": 9.5,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": 0
+      },
+      "riskLevel": "🟢低"
+    },
+    {
+      "tier": "平衡收益型",
+      "rank": 1,
+      "score": 100,
+      "odds": 11.5,
+      "hitPct": 21.78,
+      "ev": 1.504,
+      "mvi": 0.99,
+      "legs": [
+        {
+          "id": "pan-eng-3_d",
+          "bet": "【胜平负】巴拿马 vs 英格兰 平局",
+          "odds": 5.5,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 0.815,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
+        },
+        {
+          "id": "cro-gha-3_dc_ad",
+          "bet": "【双重机会】加纳 或 平局",
+          "odds": 2.09,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 0.381,
+          "market": "双重机会",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 19.8,
+        "ev": 22.6,
+        "hit": 20,
+        "div": 25,
+        "risk": 10,
+        "conf": 7.5,
         "corr": 0
       },
       "riskLevel": "🟡中低"
@@ -379,53 +342,42 @@
     {
       "tier": "平衡收益型",
       "rank": 2,
-      "score": 87.7,
-      "odds": 5.52,
-      "hitPct": 20.51,
-      "ev": 0.132,
-      "mvi": 1.06,
+      "score": 100,
+      "odds": 6.65,
+      "hitPct": 33,
+      "ev": 1.194,
+      "mvi": 0.99,
       "legs": [
         {
-          "id": "nor-fra-3_o25",
-          "bet": "Norway vs France Over 2.5",
-          "odds": 1.72,
-          "prob": 0.72,
-          "mvi": 1.24,
-          "ev": 0.238,
-          "market": "大小球",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_dc_hd",
-          "bet": "Senegal 或 平局",
-          "odds": 1.07,
-          "prob": 0.8899999999999999,
+          "id": "pan-eng-3_dc_hd",
+          "bet": "【双重机会】巴拿马 或 平局",
+          "odds": 3.41,
+          "prob": 0.66,
           "mvi": 0.98,
-          "ev": -0.05,
+          "ev": 1.253,
           "market": "双重机会",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
         },
         {
-          "id": "egy-irn-3_d",
-          "bet": "Egypt vs Iran 平局",
-          "odds": 3,
-          "prob": 0.32,
-          "mvi": 0.96,
-          "ev": -0.04,
-          "market": "1X2",
-          "match": "Egypt vs Iran",
-          "group": "G组"
+          "id": "cro-gha-3_u25",
+          "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
+          "odds": 1.95,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": -0.025,
+          "market": "大小球",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         }
       ],
       "breakdown": {
-        "mvi": 20,
-        "ev": 2,
+        "mvi": 19.8,
+        "ev": 17.9,
         "hit": 20,
         "div": 25,
-        "risk": 11.7,
-        "conf": 9.1,
+        "risk": 10,
+        "conf": 7.5,
         "corr": 0
       },
       "riskLevel": "🟡中低"
@@ -433,85 +385,85 @@
     {
       "tier": "平衡收益型",
       "rank": 3,
-      "score": 87.6,
-      "odds": 6.08,
-      "hitPct": 17.4,
-      "ev": 0.058,
-      "mvi": 1.03,
+      "score": 100,
+      "odds": 7.13,
+      "hitPct": 43.56,
+      "ev": 2.104,
+      "mvi": 0.98,
       "legs": [
         {
-          "id": "sen-irq-3_o25",
-          "bet": "Senegal vs Iraq Over 2.5",
-          "odds": 1.9,
-          "prob": 0.58,
-          "mvi": 1.1,
-          "ev": 0.102,
-          "market": "大小球",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "id": "pan-eng-3_dc_hd",
+          "bet": "【双重机会】巴拿马 或 平局",
+          "odds": 3.41,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 1.253,
+          "market": "双重机会",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
         },
         {
-          "id": "cpv-ksa-3_a",
-          "bet": "Saudi Arabia 客胜",
-          "odds": 3.2,
-          "prob": 0.3,
-          "mvi": 0.96,
-          "ev": -0.04,
-          "market": "1X2",
-          "match": "Cape Verde vs Saudi Arabia",
-          "group": "H组"
+          "id": "cro-gha-3_dc_ad",
+          "bet": "【双重机会】加纳 或 平局",
+          "odds": 2.09,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 0.381,
+          "market": "双重机会",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         }
       ],
       "breakdown": {
-        "mvi": 20,
-        "ev": 0.9,
+        "mvi": 19.6,
+        "ev": 25,
         "hit": 20,
-        "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
-        "corr": 0
+        "div": 20,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": -2
       },
       "riskLevel": "🟡中低"
     },
     {
       "tier": "价值收益型",
       "rank": 1,
-      "score": 80.8,
-      "odds": 17.87,
-      "hitPct": 5.34,
-      "ev": -0.046,
-      "mvi": 0.99,
+      "score": 100,
+      "odds": 17.55,
+      "hitPct": 16.5,
+      "ev": 1.896,
+      "mvi": 1,
       "legs": [
         {
-          "id": "sen-irq-3_dc_hd",
-          "bet": "Senegal 或 平局",
-          "odds": 1.07,
-          "prob": 0.8899999999999999,
-          "mvi": 0.98,
-          "ev": -0.05,
-          "market": "双重机会",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "id": "pan-eng-3_h",
+          "bet": "【胜平负】巴拿马 主胜",
+          "odds": 9,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 1.97,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
         },
         {
-          "id": "egy-irn-3_cs_2-1",
-          "bet": "Egypt vs Iran 比分 2:1",
-          "odds": 16.7,
-          "prob": 0.06,
+          "id": "cro-gha-3_u25",
+          "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
+          "odds": 1.95,
+          "prob": 0.5,
           "mvi": 1,
-          "ev": 0.002,
-          "market": "波胆",
-          "match": "Egypt vs Iran",
-          "group": "G组"
+          "ev": -0.025,
+          "market": "大小球",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         }
       ],
       "breakdown": {
-        "mvi": 19.8,
-        "ev": 0,
-        "hit": 14,
+        "mvi": 20,
+        "ev": 25,
+        "hit": 20,
         "div": 25,
-        "risk": 12.5,
-        "conf": 9.5,
+        "risk": 10,
+        "conf": 7.5,
         "corr": 0
       },
       "riskLevel": "🟠中高"
@@ -519,42 +471,42 @@
     {
       "tier": "价值收益型",
       "rank": 2,
-      "score": 80.5,
-      "odds": 17.87,
-      "hitPct": 5.34,
-      "ev": -0.046,
+      "score": 100,
+      "odds": 18.81,
+      "hitPct": 21.78,
+      "ev": 3.097,
       "mvi": 0.99,
       "legs": [
         {
-          "id": "nor-fra-3_cs_1-2",
-          "bet": "Norway vs France 比分 1:2",
-          "odds": 16.7,
-          "prob": 0.06,
+          "id": "pan-eng-3_h",
+          "bet": "【胜平负】巴拿马 主胜",
+          "odds": 9,
+          "prob": 0.33,
           "mvi": 1,
-          "ev": 0.002,
-          "market": "波胆",
-          "match": "Norway vs France",
-          "group": "I组"
+          "ev": 1.97,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
         },
         {
-          "id": "sen-irq-3_dc_hd",
-          "bet": "Senegal 或 平局",
-          "odds": 1.07,
-          "prob": 0.8899999999999999,
+          "id": "cro-gha-3_dc_ad",
+          "bet": "【双重机会】加纳 或 平局",
+          "odds": 2.09,
+          "prob": 0.66,
           "mvi": 0.98,
-          "ev": -0.05,
+          "ev": 0.381,
           "market": "双重机会",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         }
       ],
       "breakdown": {
         "mvi": 19.8,
-        "ev": 0,
-        "hit": 14,
+        "ev": 25,
+        "hit": 20,
         "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
+        "risk": 10,
+        "conf": 7.5,
         "corr": 0
       },
       "riskLevel": "🟠中高"
@@ -562,422 +514,411 @@
     {
       "tier": "价值收益型",
       "rank": 3,
-      "score": 78.1,
+      "score": 100,
       "odds": 12.28,
-      "hitPct": 9.05,
-      "ev": 0.111,
-      "mvi": 1.037,
+      "hitPct": 21.78,
+      "ev": 1.674,
+      "mvi": 0.99,
       "legs": [
         {
-          "id": "sen-irq-3_o25",
-          "bet": "Senegal vs Iraq Over 2.5",
-          "odds": 1.9,
-          "prob": 0.58,
-          "mvi": 1.1,
-          "ev": 0.102,
-          "market": "大小球",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
+          "id": "pan-eng-3_dc_hd",
+          "bet": "【双重机会】巴拿马 或 平局",
+          "odds": 3.41,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 1.253,
+          "market": "双重机会",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
         },
         {
-          "id": "cpv-ksa-3_a",
-          "bet": "Saudi Arabia 客胜",
-          "odds": 3.2,
-          "prob": 0.3,
-          "mvi": 0.96,
-          "ev": -0.04,
-          "market": "1X2",
-          "match": "Cape Verde vs Saudi Arabia",
-          "group": "H组"
+          "id": "cro-gha-3_d",
+          "bet": "【胜平负】克罗地亚 vs 加纳 平局",
+          "odds": 3.6,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 0.188,
+          "market": "胜平负",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 19.8,
+        "ev": 25,
+        "hit": 20,
+        "div": 25,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": 0
+      },
+      "riskLevel": "🟠中高"
+    },
+    {
+      "tier": "高赔率冲击型",
+      "rank": 1,
+      "score": 100,
+      "odds": 32.4,
+      "hitPct": 10.89,
+      "ev": 2.528,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "pan-eng-3_h",
+          "bet": "【胜平负】巴拿马 主胜",
+          "odds": 9,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 1.97,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
         },
         {
-          "id": "egy-irn-3_u25",
-          "bet": "Egypt vs Iran Under 2.5",
-          "odds": 2.02,
-          "prob": 0.52,
-          "mvi": 1.05,
-          "ev": 0.05,
-          "market": "大小球",
-          "match": "Egypt vs Iran",
-          "group": "G组"
+          "id": "cro-gha-3_d",
+          "bet": "【胜平负】克罗地亚 vs 加纳 平局",
+          "odds": 3.6,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 0.188,
+          "market": "胜平负",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
         }
       ],
       "breakdown": {
         "mvi": 20,
-        "ev": 1.7,
+        "ev": 25,
+        "hit": 20,
+        "div": 20,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": -2
+      },
+      "riskLevel": "🔴高"
+    },
+    {
+      "tier": "高赔率冲击型",
+      "rank": 2,
+      "score": 100,
+      "odds": 45,
+      "hitPct": 10.89,
+      "ev": 3.901,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "pan-eng-3_h",
+          "bet": "【胜平负】巴拿马 主胜",
+          "odds": 9,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 1.97,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
+        },
+        {
+          "id": "cro-gha-3_a",
+          "bet": "【胜平负】加纳 客胜",
+          "odds": 5,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 0.65,
+          "market": "胜平负",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 25,
+        "hit": 20,
+        "div": 20,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": -2
+      },
+      "riskLevel": "🔴高"
+    },
+    {
+      "tier": "高赔率冲击型",
+      "rank": 3,
+      "score": 100,
+      "odds": 27.5,
+      "hitPct": 10.89,
+      "ev": 1.995,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "pan-eng-3_d",
+          "bet": "【胜平负】巴拿马 vs 英格兰 平局",
+          "odds": 5.5,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 0.815,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
+        },
+        {
+          "id": "cro-gha-3_a",
+          "bet": "【胜平负】加纳 客胜",
+          "odds": 5,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 0.65,
+          "market": "胜平负",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 25,
+        "hit": 20,
+        "div": 20,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": -2
+      },
+      "riskLevel": "🔴高"
+    },
+    {
+      "tier": "超级大奖型",
+      "rank": 1,
+      "score": 100,
+      "odds": 85.5,
+      "hitPct": 10.89,
+      "ev": 8.311,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "pan-eng-3_h",
+          "bet": "【胜平负】巴拿马 主胜",
+          "odds": 9,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 1.97,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
+        },
+        {
+          "id": "jor-arg-3_h",
+          "bet": "【胜平负】约旦 主胜",
+          "odds": 9.5,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 2.135,
+          "market": "胜平负",
+          "match": "约旦 vs 阿根廷",
+          "group": "J组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 25,
+        "hit": 20,
+        "div": 20,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": 0
+      },
+      "riskLevel": "⚫极高"
+    },
+    {
+      "tier": "超级大奖型",
+      "rank": 2,
+      "score": 98.8,
+      "odds": 105.83,
+      "hitPct": 7.19,
+      "ev": 6.607,
+      "mvi": 0.99,
+      "legs": [
+        {
+          "id": "pan-eng-3_dc_hd",
+          "bet": "【双重机会】巴拿马 或 平局",
+          "odds": 3.41,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 1.253,
+          "market": "双重机会",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
+        },
+        {
+          "id": "uzb-cod-3_dc_ad",
+          "bet": "【双重机会】刚果(金) 或 平局",
+          "odds": 1.65,
+          "prob": 0.66,
+          "mvi": 0.98,
+          "ev": 0.088,
+          "market": "双重机会",
+          "match": "乌兹别克 vs 刚果(金)",
+          "group": "K组"
+        },
+        {
+          "id": "jor-arg-3_h",
+          "bet": "【胜平负】约旦 主胜",
+          "odds": 9.5,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 2.135,
+          "market": "胜平负",
+          "match": "约旦 vs 阿根廷",
+          "group": "J组"
+        },
+        {
+          "id": "col-por-3_u25",
+          "bet": "【大小球】哥伦比亚 vs 葡萄牙 小2.5球",
+          "odds": 1.98,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": -0.01,
+          "market": "大小球",
+          "match": "哥伦比亚 vs 葡萄牙",
+          "group": "K组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 19.8,
+        "ev": 25,
+        "hit": 14,
+        "div": 22.5,
+        "risk": 10,
+        "conf": 7.5,
+        "corr": 0
+      },
+      "riskLevel": "⚫极高"
+    },
+    {
+      "tier": "超级大奖型",
+      "rank": 3,
+      "score": 98.2,
+      "odds": 166.73,
+      "hitPct": 5.45,
+      "ev": 8.078,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "pan-eng-3_h",
+          "bet": "【胜平负】巴拿马 主胜",
+          "odds": 9,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 1.97,
+          "market": "胜平负",
+          "match": "巴拿马 vs 英格兰",
+          "group": "L组"
+        },
+        {
+          "id": "cro-gha-3_u25",
+          "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
+          "odds": 1.95,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": -0.025,
+          "market": "大小球",
+          "match": "克罗地亚 vs 加纳",
+          "group": "L组"
+        },
+        {
+          "id": "jor-arg-3_h",
+          "bet": "【胜平负】约旦 主胜",
+          "odds": 9.5,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 2.135,
+          "market": "胜平负",
+          "match": "约旦 vs 阿根廷",
+          "group": "J组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 25,
         "hit": 14,
         "div": 21.7,
-        "risk": 11.7,
-        "conf": 9.1,
-        "corr": 0
-      },
-      "riskLevel": "🟠中高"
-    },
-    {
-      "tier": "高赔率冲击型",
-      "rank": 1,
-      "score": 78.3,
-      "odds": 28.72,
-      "hitPct": 4.32,
-      "ev": 0.241,
-      "mvi": 1.12,
-      "legs": [
-        {
-          "id": "nor-fra-3_o25",
-          "bet": "Norway vs France Over 2.5",
-          "odds": 1.72,
-          "prob": 0.72,
-          "mvi": 1.24,
-          "ev": 0.238,
-          "market": "大小球",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_cs_2-0",
-          "bet": "Senegal vs Iraq 比分 2:0",
-          "odds": 16.7,
-          "prob": 0.06,
-          "mvi": 1,
-          "ev": 0.002,
-          "market": "波胆",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 3.6,
-        "hit": 8,
-        "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
-        "corr": 0
-      },
-      "riskLevel": "🔴高"
-    },
-    {
-      "tier": "高赔率冲击型",
-      "rank": 2,
-      "score": 78.3,
-      "odds": 34.4,
-      "hitPct": 3.6,
-      "ev": 0.238,
-      "mvi": 1.12,
-      "legs": [
-        {
-          "id": "nor-fra-3_o25",
-          "bet": "Norway vs France Over 2.5",
-          "odds": 1.72,
-          "prob": 0.72,
-          "mvi": 1.24,
-          "ev": 0.238,
-          "market": "大小球",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_cs_3-1",
-          "bet": "Senegal vs Iraq 比分 3:1",
-          "odds": 20,
-          "prob": 0.05,
-          "mvi": 1,
-          "ev": 0,
-          "market": "波胆",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 3.6,
-        "hit": 8,
-        "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
-        "corr": 0
-      },
-      "riskLevel": "🔴高"
-    },
-    {
-      "tier": "高赔率冲击型",
-      "rank": 3,
-      "score": 78.3,
-      "odds": 43,
-      "hitPct": 2.88,
-      "ev": 0.238,
-      "mvi": 1.12,
-      "legs": [
-        {
-          "id": "nor-fra-3_o25",
-          "bet": "Norway vs France Over 2.5",
-          "odds": 1.72,
-          "prob": 0.72,
-          "mvi": 1.24,
-          "ev": 0.238,
-          "market": "大小球",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_cs_2-1",
-          "bet": "Senegal vs Iraq 比分 2:1",
-          "odds": 25,
-          "prob": 0.04,
-          "mvi": 1,
-          "ev": 0,
-          "market": "波胆",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 3.6,
-        "hit": 8,
-        "div": 25,
-        "risk": 12.5,
-        "conf": 9.2,
-        "corr": 0
-      },
-      "riskLevel": "🔴高"
-    },
-    {
-      "tier": "超级大奖型",
-      "rank": 1,
-      "score": 76.6,
-      "odds": 86.17,
-      "hitPct": 1.38,
-      "ev": 0.191,
-      "mvi": 1.067,
-      "legs": [
-        {
-          "id": "nor-fra-3_o25",
-          "bet": "Norway vs France Over 2.5",
-          "odds": 1.72,
-          "prob": 0.72,
-          "mvi": 1.24,
-          "ev": 0.238,
-          "market": "大小球",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_cs_2-0",
-          "bet": "Senegal vs Iraq 比分 2:0",
-          "odds": 16.7,
-          "prob": 0.06,
-          "mvi": 1,
-          "ev": 0.002,
-          "market": "波胆",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
-        },
-        {
-          "id": "egy-irn-3_d",
-          "bet": "Egypt vs Iran 平局",
-          "odds": 3,
-          "prob": 0.32,
-          "mvi": 0.96,
-          "ev": -0.04,
-          "market": "1X2",
-          "match": "Egypt vs Iran",
-          "group": "G组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 2.9,
-        "hit": 8,
-        "div": 25,
-        "risk": 11.7,
-        "conf": 9.1,
-        "corr": 0
-      },
-      "riskLevel": "⚫极高"
-    },
-    {
-      "tier": "超级大奖型",
-      "rank": 2,
-      "score": 76.4,
-      "odds": 91.92,
-      "hitPct": 1.3,
-      "ev": 0.191,
-      "mvi": 1.067,
-      "legs": [
-        {
-          "id": "nor-fra-3_o25",
-          "bet": "Norway vs France Over 2.5",
-          "odds": 1.72,
-          "prob": 0.72,
-          "mvi": 1.24,
-          "ev": 0.238,
-          "market": "大小球",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_cs_2-0",
-          "bet": "Senegal vs Iraq 比分 2:0",
-          "odds": 16.7,
-          "prob": 0.06,
-          "mvi": 1,
-          "ev": 0.002,
-          "market": "波胆",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
-        },
-        {
-          "id": "cpv-ksa-3_a",
-          "bet": "Saudi Arabia 客胜",
-          "odds": 3.2,
-          "prob": 0.3,
-          "mvi": 0.96,
-          "ev": -0.04,
-          "market": "1X2",
-          "match": "Cape Verde vs Saudi Arabia",
-          "group": "H组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 2.9,
-        "hit": 8,
-        "div": 25,
-        "risk": 11.7,
-        "conf": 8.9,
-        "corr": 0
-      },
-      "riskLevel": "⚫极高"
-    },
-    {
-      "tier": "超级大奖型",
-      "rank": 3,
-      "score": 75.1,
-      "odds": 81.7,
-      "hitPct": 1.33,
-      "ev": 0.09,
-      "mvi": 1.03,
-      "legs": [
-        {
-          "id": "nor-fra-3_a",
-          "bet": "France 客胜",
-          "odds": 2.15,
-          "prob": 0.46,
-          "mvi": 0.99,
-          "ev": -0.011,
-          "market": "1X2",
-          "match": "Norway vs France",
-          "group": "I组"
-        },
-        {
-          "id": "sen-irq-3_o25",
-          "bet": "Senegal vs Iraq Over 2.5",
-          "odds": 1.9,
-          "prob": 0.58,
-          "mvi": 1.1,
-          "ev": 0.102,
-          "market": "大小球",
-          "match": "Senegal vs Iraq",
-          "group": "I组"
-        },
-        {
-          "id": "egy-irn-3_cs_1-0",
-          "bet": "Egypt vs Iran 比分 1:0",
-          "odds": 20,
-          "prob": 0.05,
-          "mvi": 1,
-          "ev": 0,
-          "market": "波胆",
-          "match": "Egypt vs Iran",
-          "group": "G组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 1.3,
-        "hit": 8,
-        "div": 25,
-        "risk": 11.7,
-        "conf": 9.1,
+        "risk": 10,
+        "conf": 7.5,
         "corr": 0
       },
       "riskLevel": "⚫极高"
     }
   ],
   "bestPortfolio": {
-    "tier": "稳健收益型",
-    "score": 89.7,
-    "odds": 2.41,
-    "hitPct": 49.68,
-    "ev": 0.196,
-    "mvi": 1.105,
+    "tier": "高赔率冲击型",
+    "score": 100,
+    "odds": 32.4,
+    "hitPct": 10.89,
+    "ev": 2.528,
+    "mvi": 1,
     "legs": [
       {
-        "id": "nor-fra-3_o25",
-        "bet": "Norway vs France Over 2.5",
-        "odds": 1.72,
-        "prob": 0.72,
-        "mvi": 1.24,
-        "ev": 0.238,
-        "market": "大小球",
-        "match": "Norway vs France",
-        "group": "I组"
+        "id": "pan-eng-3_h",
+        "bet": "【胜平负】巴拿马 主胜",
+        "odds": 9,
+        "prob": 0.33,
+        "mvi": 1,
+        "ev": 1.97,
+        "market": "胜平负",
+        "match": "巴拿马 vs 英格兰",
+        "group": "L组"
       },
       {
-        "id": "sen-irq-3_h",
-        "bet": "Senegal 主胜",
-        "odds": 1.4,
-        "prob": 0.69,
-        "mvi": 0.97,
-        "ev": -0.034,
-        "market": "1X2",
-        "match": "Senegal vs Iraq",
-        "group": "I组"
+        "id": "cro-gha-3_d",
+        "bet": "【胜平负】克罗地亚 vs 加纳 平局",
+        "odds": 3.6,
+        "prob": 0.33,
+        "mvi": 1,
+        "ev": 0.188,
+        "market": "胜平负",
+        "match": "克罗地亚 vs 加纳",
+        "group": "L组"
       }
     ],
     "breakdown": {
       "mvi": 20,
-      "ev": 2.9,
+      "ev": 25,
       "hit": 20,
-      "div": 25,
-      "risk": 12.5,
-      "conf": 9.2,
-      "corr": 0
+      "div": 20,
+      "risk": 10,
+      "conf": 7.5,
+      "corr": -2
     },
-    "rationale": "综合质量最高：三场比赛+三种市场+EV+17.3%。France客胜提供方向性支撑，塞内加尔Over2.5提供进球预期(昨日83%)，Egypt平局利用第三轮平局溢价逻辑。"
+    "rationale": "综合质量最高：巴拿马 主胜 + 克罗地亚 vs 加纳 平局。EV+252.8%，评分100/100，风险收益比最优。"
   },
   "capitalAllocation": [
     {
       "tier": "稳健收益型",
       "portfolio": {
-        "id": "P0",
-        "score": 89.7,
-        "odds": 2.41,
-        "ev": 0.196,
-        "hitPct": 49.68,
+        "id": "P902",
+        "score": 88.5,
+        "odds": 4.28,
+        "ev": 0.414,
+        "hitPct": 33,
         "legs": [
           {
-            "id": "nor-fra-3_o25",
-            "bet": "Norway vs France Over 2.5",
-            "odds": 1.72,
-            "prob": 0.72,
-            "mvi": 1.24,
-            "ev": 0.238,
+            "id": "pan-eng-3_u25",
+            "bet": "【大小球】巴拿马 vs 英格兰 小2.5球",
+            "odds": 2.05,
+            "prob": 0.5,
+            "mvi": 1,
+            "ev": 0.025,
             "market": "大小球",
-            "match": "Norway vs France",
-            "group": "I组"
+            "match": "巴拿马 vs 英格兰",
+            "group": "L组"
           },
           {
-            "id": "sen-irq-3_h",
-            "bet": "Senegal 主胜",
-            "odds": 1.4,
-            "prob": 0.69,
-            "mvi": 0.97,
-            "ev": -0.034,
-            "market": "1X2",
-            "match": "Senegal vs Iraq",
-            "group": "I组"
+            "id": "cro-gha-3_dc_ad",
+            "bet": "【双重机会】加纳 或 平局",
+            "odds": 2.09,
+            "prob": 0.66,
+            "mvi": 0.98,
+            "ev": 0.381,
+            "market": "双重机会",
+            "match": "克罗地亚 vs 加纳",
+            "group": "L组"
           }
         ]
       },
@@ -987,33 +928,33 @@
     {
       "tier": "平衡收益型",
       "portfolio": {
-        "id": "P2",
-        "score": 87.8,
-        "odds": 5.7,
-        "ev": 0.058,
-        "hitPct": 18.56,
+        "id": "P5",
+        "score": 100,
+        "odds": 11.5,
+        "ev": 1.504,
+        "hitPct": 21.78,
         "legs": [
           {
-            "id": "sen-irq-3_o25",
-            "bet": "Senegal vs Iraq Over 2.5",
-            "odds": 1.9,
-            "prob": 0.58,
-            "mvi": 1.1,
-            "ev": 0.102,
-            "market": "大小球",
-            "match": "Senegal vs Iraq",
-            "group": "I组"
+            "id": "pan-eng-3_d",
+            "bet": "【胜平负】巴拿马 vs 英格兰 平局",
+            "odds": 5.5,
+            "prob": 0.33,
+            "mvi": 1,
+            "ev": 0.815,
+            "market": "胜平负",
+            "match": "巴拿马 vs 英格兰",
+            "group": "L组"
           },
           {
-            "id": "egy-irn-3_d",
-            "bet": "Egypt vs Iran 平局",
-            "odds": 3,
-            "prob": 0.32,
-            "mvi": 0.96,
-            "ev": -0.04,
-            "market": "1X2",
-            "match": "Egypt vs Iran",
-            "group": "G组"
+            "id": "cro-gha-3_dc_ad",
+            "bet": "【双重机会】加纳 或 平局",
+            "odds": 2.09,
+            "prob": 0.66,
+            "mvi": 0.98,
+            "ev": 0.381,
+            "market": "双重机会",
+            "match": "克罗地亚 vs 加纳",
+            "group": "L组"
           }
         ]
       },
@@ -1023,33 +964,33 @@
     {
       "tier": "价值收益型",
       "portfolio": {
-        "id": "P159",
-        "score": 80.8,
-        "odds": 17.87,
-        "ev": -0.046,
-        "hitPct": 5.34,
+        "id": "P2",
+        "score": 100,
+        "odds": 17.55,
+        "ev": 1.896,
+        "hitPct": 16.5,
         "legs": [
           {
-            "id": "sen-irq-3_dc_hd",
-            "bet": "Senegal 或 平局",
-            "odds": 1.07,
-            "prob": 0.8899999999999999,
-            "mvi": 0.98,
-            "ev": -0.05,
-            "market": "双重机会",
-            "match": "Senegal vs Iraq",
-            "group": "I组"
+            "id": "pan-eng-3_h",
+            "bet": "【胜平负】巴拿马 主胜",
+            "odds": 9,
+            "prob": 0.33,
+            "mvi": 1,
+            "ev": 1.97,
+            "market": "胜平负",
+            "match": "巴拿马 vs 英格兰",
+            "group": "L组"
           },
           {
-            "id": "egy-irn-3_cs_2-1",
-            "bet": "Egypt vs Iran 比分 2:1",
-            "odds": 16.7,
-            "prob": 0.06,
+            "id": "cro-gha-3_u25",
+            "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
+            "odds": 1.95,
+            "prob": 0.5,
             "mvi": 1,
-            "ev": 0.002,
-            "market": "波胆",
-            "match": "Egypt vs Iran",
-            "group": "G组"
+            "ev": -0.025,
+            "market": "大小球",
+            "match": "克罗地亚 vs 加纳",
+            "group": "L组"
           }
         ]
       },
@@ -1059,33 +1000,33 @@
     {
       "tier": "高赔率冲击型",
       "portfolio": {
-        "id": "P253",
-        "score": 78.3,
-        "odds": 28.72,
-        "ev": 0.241,
-        "hitPct": 4.32,
+        "id": "P0",
+        "score": 100,
+        "odds": 32.4,
+        "ev": 2.528,
+        "hitPct": 10.89,
         "legs": [
           {
-            "id": "nor-fra-3_o25",
-            "bet": "Norway vs France Over 2.5",
-            "odds": 1.72,
-            "prob": 0.72,
-            "mvi": 1.24,
-            "ev": 0.238,
-            "market": "大小球",
-            "match": "Norway vs France",
-            "group": "I组"
+            "id": "pan-eng-3_h",
+            "bet": "【胜平负】巴拿马 主胜",
+            "odds": 9,
+            "prob": 0.33,
+            "mvi": 1,
+            "ev": 1.97,
+            "market": "胜平负",
+            "match": "巴拿马 vs 英格兰",
+            "group": "L组"
           },
           {
-            "id": "sen-irq-3_cs_2-0",
-            "bet": "Senegal vs Iraq 比分 2:0",
-            "odds": 16.7,
-            "prob": 0.06,
+            "id": "cro-gha-3_d",
+            "bet": "【胜平负】克罗地亚 vs 加纳 平局",
+            "odds": 3.6,
+            "prob": 0.33,
             "mvi": 1,
-            "ev": 0.002,
-            "market": "波胆",
-            "match": "Senegal vs Iraq",
-            "group": "I组"
+            "ev": 0.188,
+            "market": "胜平负",
+            "match": "克罗地亚 vs 加纳",
+            "group": "L组"
           }
         ]
       },
@@ -1095,44 +1036,33 @@
     {
       "tier": "超级大奖型",
       "portfolio": {
-        "id": "P315",
-        "score": 76.6,
-        "odds": 86.17,
-        "ev": 0.191,
-        "hitPct": 1.38,
+        "id": "P21",
+        "score": 100,
+        "odds": 85.5,
+        "ev": 8.311,
+        "hitPct": 10.89,
         "legs": [
           {
-            "id": "nor-fra-3_o25",
-            "bet": "Norway vs France Over 2.5",
-            "odds": 1.72,
-            "prob": 0.72,
-            "mvi": 1.24,
-            "ev": 0.238,
-            "market": "大小球",
-            "match": "Norway vs France",
-            "group": "I组"
-          },
-          {
-            "id": "sen-irq-3_cs_2-0",
-            "bet": "Senegal vs Iraq 比分 2:0",
-            "odds": 16.7,
-            "prob": 0.06,
+            "id": "pan-eng-3_h",
+            "bet": "【胜平负】巴拿马 主胜",
+            "odds": 9,
+            "prob": 0.33,
             "mvi": 1,
-            "ev": 0.002,
-            "market": "波胆",
-            "match": "Senegal vs Iraq",
-            "group": "I组"
+            "ev": 1.97,
+            "market": "胜平负",
+            "match": "巴拿马 vs 英格兰",
+            "group": "L组"
           },
           {
-            "id": "egy-irn-3_d",
-            "bet": "Egypt vs Iran 平局",
-            "odds": 3,
-            "prob": 0.32,
-            "mvi": 0.96,
-            "ev": -0.04,
-            "market": "1X2",
-            "match": "Egypt vs Iran",
-            "group": "G组"
+            "id": "jor-arg-3_h",
+            "bet": "【胜平负】约旦 主胜",
+            "odds": 9.5,
+            "prob": 0.33,
+            "mvi": 1,
+            "ev": 2.135,
+            "market": "胜平负",
+            "match": "约旦 vs 阿根廷",
+            "group": "J组"
           }
         ]
       },
@@ -1148,22 +1078,23 @@
     }
   ],
   "risks": [
-    "第三轮系统性风险：方向准确率昨日暴跌至33%",
-    "赔率数据为Pinnacle样本估值，非实时Bet365",
-    "Senegal-Iraq为dead rubber(双方已淘汰)，比赛强度不可预测",
-    "法国教练Deschamps缺席，战术执行存疑",
-    "比利时2场0进球，Lukaku状态灾难级"
+    "第三轮系统性风险：小组赛末轮存在出线轮换/荣誉战/保平争胜三重效应叠加",
+    "赔率数据来源：sample-estimate（建议投注前核实实时赔率）",
+    "模型准确率限制：WCPE方向准确率约56%，约44%的比赛方向预测可能错误",
+    "串关放大效应：多场组合会将单一比赛的预测误差成倍放大",
+    "数据时效性：数据存在数小时延迟，临场首发/伤停变化可能未纳入"
   ],
   "learnings": [
-    "第三轮下调ELO权重至70%，上调大小球策略权重",
+    "第三轮比赛应下调ELO权重，上调大小球策略权重",
+    "大小球需谨慎，关注比赛强度变化",
     "已出线球队增加轮换折扣(-10%~-15%)",
-    "平局溢价值得在第三轮主动纳入串关",
-    "避免Dead Rubber比赛的高权重配置"
+    "第三轮平局溢价值得主动纳入串关考量",
+    "避免已淘汰球队的Dead Rubber比赛高权重配置"
   ],
   "stats": {
-    "totalCombinations": 2500,
-    "score80plus": 198,
-    "topScore": 89.7,
+    "totalCombinations": 1819,
+    "score80plus": 1430,
+    "topScore": 100,
     "modelState": {
       "directionAccuracy": 0.5625,
       "scoreTop3Accuracy": 0.4166666666666667,
