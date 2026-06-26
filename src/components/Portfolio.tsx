@@ -182,6 +182,8 @@ function YesterdayReview({ review }: { review: NonNullable<PortfolioData['yester
 }
 
 // ===== ② Investment Pool =====
+const marketColors: Record<string, string> = { '胜平负': '#54a0ff', '大小球': '#00ff88', 'BTTS': '#a855f7', '双重机会': '#ffa502', '波胆': '#ff6b6b', '平局退款': '#22d3ee', '比分区间': '#f59e0b' }
+
 function InvestmentPool({ pool, candidatePool }: { pool: PortfolioData['investmentPool']; candidatePool?: PortfolioData['candidatePool'] }) {
   const [expanded, setExpanded] = useState(false)
   return (
@@ -191,18 +193,27 @@ function InvestmentPool({ pool, candidatePool }: { pool: PortfolioData['investme
         <span className="text-[10px] text-[#555555]">{expanded ? '收起 ▲' : `展开全部 ${pool?.length || 0} 项 ▼`}</span>
       </div>
       <div className="grid grid-cols-2 gap-1.5">
-        {(pool || []).slice(0, expanded ? 100 : 8).map((item, i) => (
+        {(pool || []).slice(0, expanded ? 100 : 8).map((item, i) => {
+          const marketColor = marketColors[item.market] || '#555555'
+          // 从 bet 中提取【】内的投注选项，剩余部分为对阵/比分
+          const betOptionMatch = item.bet?.match(/【(.+?)】/)
+          const betOption = betOptionMatch ? betOptionMatch[1] : ''
+          const matchText = item.bet?.replace(/【.*?】/g, '').trim()
+          return (
           <div key={i} className="flex items-center justify-between bg-[#0a0e27] rounded-lg px-3 py-2">
-            <div className="flex items-center gap-2 min-w-0">
-              <span className="text-[8px] text-[#ffd700] w-5">#{i + 1}</span>
-              <span className="text-[10px] text-white truncate">{item.bet?.replace(/【.*?】/g, '')}</span>
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className="text-[8px] text-[#ffd700] w-4 shrink-0">#{i + 1}</span>
+              <span className="text-[8px] px-1 rounded shrink-0" style={{ backgroundColor: marketColor + '20', color: marketColor }}>{item.market}</span>
+              {betOption && <span className="text-[9px] text-[#ffa502] shrink-0 font-medium">{betOption}</span>}
+              <span className="text-[10px] text-white truncate">{matchText}</span>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <span className="text-[10px] text-[#ffd700] font-bold">@{item.odds}</span>
               <Badge label={item.reason} mvi={item.mvi} />
             </div>
           </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
@@ -377,7 +388,6 @@ function EmptyState({ message, hint }: { message: string; hint?: string }) {
 
 function LegRow({ leg, index, compact }: { leg: PortfolioLeg; index: number; compact?: boolean }) {
   const mviColor = leg.mvi >= 1.15 ? '#00ff88' : leg.mvi >= 1.05 ? '#ffa502' : '#a0a0a0'
-  const marketColors: Record<string, string> = { '胜平负': '#54a0ff', '大小球': '#00ff88', 'BTTS': '#a855f7', '双重机会': '#ffa502', '波胆': '#ff6b6b', '平局退款': '#22d3ee', '比分区间': '#f59e0b' }
   const marketColor = marketColors[leg.market] || '#555555'
   return (
     <div className={`flex items-center justify-between ${compact ? 'py-1' : 'py-2'} px-3 bg-[#0a0e27] rounded-lg`}>
