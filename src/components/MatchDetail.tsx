@@ -249,6 +249,13 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
           <div className="bg-[#1a1f3a] rounded-lg p-3"><div className="text-xl font-black text-[#54a0ff]">{Math.round(prediction.drawProb * 100)}%</div><div className="text-[10px] text-[#a0a0a0]">平局</div></div>
           <div className="bg-[#1a1f3a] rounded-lg p-3"><div className="text-xl font-black text-[#ff4757]">{Math.round(prediction.awayWinProb * 100)}%</div><div className="text-[10px] text-[#a0a0a0]">客胜</div></div>
         </div>
+        {(prediction as any)._blended && (
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <span className="text-[10px] px-2 py-0.5 rounded bg-[#ffa50220] text-[#ffa502] border border-[#ffa50233]">
+              市场混合 · 40%模型 + 60%庄家赔率
+            </span>
+          </div>
+        )}
         <div className="flex justify-center gap-4 text-[10px] text-[#a0a0a0]">
           <span>O 2.5: <b className="text-[#ffa502]">{typeof prediction.over25Prob === 'number' && !isNaN(prediction.over25Prob) ? Math.round(prediction.over25Prob * 100) + '%' : '—'}</b></span>
           <span>U 2.5: <b className="text-[#54a0ff]">{typeof prediction.under25Prob === 'number' && !isNaN(prediction.under25Prob) ? Math.round(prediction.under25Prob * 100) + '%' : '—'}</b></span>

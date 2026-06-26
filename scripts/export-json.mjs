@@ -569,6 +569,171 @@ function normalizePredictions(preds) {
   return result
 }
 
+// ============================================================
+// 市场赔率混合引擎
+// 将真实庄家赔率与 ELO 模型概率混合，生成 MVI 分析
+// ============================================================
+
+/** 读取 market-odds.json */
+function readMarketOdds() {
+  const marketOddsPath = resolve(__dirname, '../src/data/market-odds.json')
+  if (!existsSync(marketOddsPath)) return { odds: {} }
+  try {
+    const raw = JSON.parse(readFileSync(marketOddsPath, 'utf-8'))
+    return { odds: raw.odds || {}, source: raw.source, fetchedAt: raw.fetchedAt }
+  } catch {
+    return { odds: {} }
+  }
+}
+
+/**
+ * 从庄家赔率去水计算市场隐含概率
+ * 使用 additive method（与 Pinnacle 去水一致）
+ */
+function devigOdds(homeWin, draw, awayWin) {
+  const overround = 1 / homeWin + 1 / draw + 1 / awayWin
+  return {
+    home: Math.round((1 / homeWin) / overround * 100) / 100,
+    draw: Math.round((1 / draw) / overround * 100) / 100,
+    away: Math.round((1 / awayWin) / overround * 100) / 100,
+    overround: Math.round((overround - 1) * 1000) / 10, // 抽水百分比
+  }
+}
+
+/**
+ * 混合 ELO 概率与市场概率: 40% ELO + 60% 市场
+ */
+function blendWithMarket(eloProbs, marketOdds) {
+  const { home: mHome, draw: mDraw, away: mAway } = devigOdds(
+    marketOdds.homeWin, marketOdds.draw, marketOdds.awayWin
+  )
+  return {
+    home: Math.round((eloProbs.home * 0.4 + mHome * 0.6) * 100) / 100,
+    draw: Math.round((eloProbs.draw * 0.4 + mDraw * 0.6) * 100) / 100,
+    away: Math.round((eloProbs.away * 0.4 + mAway * 0.6) * 100) / 100,
+  }
+}
+
+/**
+ * 计算 MVI（市场价值指数）= 模型概率 / 市场隐含概率
+ */
+function calcMVI(modelProb, marketOdds) {
+  const marketProb = 1 / marketOdds
+  return Math.round((modelProb / marketProb) * 100) / 100
+}
+
+/**
+ * MVI 评级
+ */
+function rateMviValue(mvi) {
+  if (mvi > 1.30) return '超级价值'
+  if (mvi >= 1.15) return '高价值'
+  if (mvi >= 1.00) return '一般价值'
+  return '无价值'
+}
+
+/**
+ * 生成 MVI 分析数组（5个投注方向）
+ */
+function generateMviAnalysis(homeWinProb, drawProb, awayWinProb, over25Prob, under25Prob, odds) {
+  const items = [
+    { bet: '主胜', modelProb: homeWinProb, marketProb: Math.round((1 / odds.homeWin) * 100) / 100,
+      mvi: calcMVI(homeWinProb, odds.homeWin),
+      rating: rateMviValue(calcMVI(homeWinProb, odds.homeWin)) },
+    { bet: '平局', modelProb: drawProb, marketProb: Math.round((1 / odds.draw) * 100) / 100,
+      mvi: calcMVI(drawProb, odds.draw),
+      rating: rateMviValue(calcMVI(drawProb, odds.draw)) },
+    { bet: '客胜', modelProb: awayWinProb, marketProb: Math.round((1 / odds.awayWin) * 100) / 100,
+      mvi: calcMVI(awayWinProb, odds.awayWin),
+      rating: rateMviValue(calcMVI(awayWinProb, odds.awayWin)) },
+    { bet: 'Over 2.5', modelProb: over25Prob, marketProb: Math.round((1 / odds.over25) * 100) / 100,
+      mvi: calcMVI(over25Prob, odds.over25),
+      rating: rateMviValue(calcMVI(over25Prob, odds.over25)) },
+    { bet: 'Under 2.5', modelProb: under25Prob, marketProb: Math.round((1 / odds.under25) * 100) / 100,
+      mvi: calcMVI(under25Prob, odds.under25),
+      rating: rateMviValue(calcMVI(under25Prob, odds.under25)) },
+  ]
+  return items.sort((a, b) => b.mvi - a.mvi)
+}
+
+/**
+ * 将市场赔率应用到 predictions
+ * - upcoming 比赛: 混合概率 + 生成 MVI
+ * - finished 比赛: 保留原始概率（不做混合，结果已定）
+ */
+function applyMarketOdds(predictions, matches, marketOddsData) {
+  if (!marketOddsData?.odds || Object.keys(marketOddsData.odds).length === 0) {
+    return predictions // 无市场赔率，跳过
+  }
+
+  const mOdds = marketOddsData.odds
+  const matchMap = new Map(matches.map(m => [m.id, m]))
+  let blendedCount = 0
+  let mviCount = 0
+
+  for (const [matchId, pred] of Object.entries(predictions)) {
+    const match = matchMap.get(matchId)
+    const market = mOdds[matchId]
+
+    // 只处理 upcoming 且有市场赔率的比赛
+    if (!market || !match || match.status === 'finished') continue
+
+    const hwp = typeof pred.homeWinProb === 'number' ? pred.homeWinProb : 0.33
+    const dp  = typeof pred.drawProb === 'number' ? pred.drawProb : 0.34
+    const awp = typeof pred.awayWinProb === 'number' ? pred.awayWinProb : 0.33
+    const o25p = typeof pred.over25Prob === 'number' ? pred.over25Prob : 0.5
+    const u25p = typeof pred.under25Prob === 'number' ? pred.under25Prob : 0.5
+
+    // 保存原始纯模型概率
+    pred._modelHomeWinProb = hwp
+    pred._modelDrawProb = dp
+    pred._modelAwayWinProb = awp
+    pred._modelOver25Prob = o25p
+    pred._modelUnder25Prob = u25p
+
+    // 混合概率
+    const blended = blendWithMarket(
+      { home: hwp, draw: dp, away: awp },
+      market
+    )
+    pred.homeWinProb = blended.home
+    pred.drawProb = blended.draw
+    pred.awayWinProb = blended.away
+    pred._blended = true // 标记已混合
+    blendedCount++
+
+    // 更新 predictedDirection
+    if (blended.home > blended.away && blended.home > blended.draw) {
+      pred.predictedDirection = 'home_win'
+    } else if (blended.away > blended.home && blended.away > blended.draw) {
+      pred.predictedDirection = 'away_win'
+    } else {
+      pred.predictedDirection = 'draw'
+    }
+
+    // 生成 MVI 分析
+    pred.mviAnalysis = generateMviAnalysis(blended.home, blended.draw, blended.away, o25p, u25p, market)
+    mviCount++
+
+    // 更新 marketScore（因子评分）
+    if (pred.factorBreakdown && typeof pred.factorBreakdown === 'object') {
+      // marketScore = 1.0 表示模型与市场完全一致，偏差越大分数越低
+      const marketProbs = devigOdds(market.homeWin, market.draw, market.awayWin)
+      const consensusDiff = Math.abs(blended.home - marketProbs.home) +
+                           Math.abs(blended.draw - marketProbs.draw) +
+                           Math.abs(blended.away - marketProbs.away)
+      const consensusScore = Math.max(0, Math.round((1 - consensusDiff) * 100) / 100)
+      pred.factorBreakdown.marketScore = consensusScore
+    }
+  }
+
+  if (blendedCount > 0) {
+    console.log(`  📊 市场赔率混合: ${blendedCount} 场比赛 (${marketOddsData.source || 'unknown'})`)
+    console.log(`  🎯 MVI 分析生成: ${mviCount} 场比赛`)
+  }
+  return predictions
+}
+
 /**
  * Recalculate modelState from actual match results + predictions.
  * Runs on every build, so accuracy stats are ALWAYS fresh.
@@ -721,17 +886,21 @@ if (existsSync(outputPath)) {
 
 // Build merged matches and predictions first (needed for modelState computation)
 const mergedMatches = mergeMatches(matches, existingData?.matches)
-const mergedPredictions = deepMergePredictions(
+let mergedPredictions = deepMergePredictions(
   normalizePredictions(staticPreds),
   normalizePredictions(existingData?.predictions)
 )
+
+// Apply market odds: blend probabilities + generate MVI for upcoming matches
+const marketOddsData = readMarketOdds()
+mergedPredictions = applyMarketOdds(mergedPredictions, mergedMatches, marketOddsData)
 
 // Compute modelState FRESH from actual match data (not incremental patching)
 const computedModelState = computeModelState(mergedMatches, mergedPredictions, existingData?.modelState)
 
 // Build final remote data
 const remoteData = {
-  version: '2.1',
+  version: '2.2',
   lastUpdated: new Date().toISOString(),
   matches: mergedMatches,
   predictions: mergedPredictions,
@@ -745,6 +914,12 @@ const remoteData = {
   factorWeights: existingData?.factorWeights || staticFactorWeights,
   predictionRichData: { ...predictionRichData, ...(existingData?.predictionRichData || {}) },
   reviewRichData: { ...reviewRichData, ...(existingData?.reviewRichData || {}) },
+  // 市场赔率数据 (供前端展示)
+  marketOdds: {
+    source: marketOddsData?.source || 'none',
+    fetchedAt: marketOddsData?.fetchedAt || null,
+    availableMatches: Object.keys(marketOddsData?.odds || {}),
+  },
 }
 
 // --- 写入前验证：硬性门禁 ---
