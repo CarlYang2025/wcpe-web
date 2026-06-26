@@ -739,6 +739,9 @@ function enrichTop5WithPoisson(top5Scores, homeWinProb, drawProb, awayWinProb, o
     return { score: s, probability: prob > 0 ? prob : 0.01, _poissonEnriched: true }
   })
 
+  // Step 6: 按概率降序排序，确保 #1 就是真正概率最高的比分
+  enriched.sort((a, b) => (b.probability || 0) - (a.probability || 0))
+
   return enriched
 }
 
@@ -856,6 +859,12 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
     pred.top5Scores = enrichTop5WithPoisson(pred.top5Scores, blended.home, blended.draw, blended.away, o25p)
     if (market.correctScore && Object.keys(market.correctScore).length > 0) {
       pred.top5Scores = calibrateScoresWithMarket(pred.top5Scores, market.correctScore, blended.home, blended.away)
+      // 市场校准后重新排序
+      pred.top5Scores.sort((a, b) => (b.probability || 0) - (a.probability || 0))
+    }
+    // 同步 predictedScore：拆掉 LLM 与 Poisson 之间的墙
+    if (pred.top5Scores.length > 0) {
+      pred.predictedScore = pred.top5Scores[0].score
     }
 
     // 附上完整市场赔率数据（前端展示用，compact 格式）
@@ -1068,6 +1077,9 @@ for (const [matchId, pred] of Object.entries(mergedPredictions)) {
     const awp = typeof pred.awayWinProb === 'number' ? pred.awayWinProb : 0.33
     const o25p = typeof pred.over25Prob === 'number' ? pred.over25Prob : 0.5
     pred.top5Scores = enrichTop5WithPoisson(top5, hwp, dp, awp, o25p)
+    if (pred.top5Scores.length > 0) {
+      pred.predictedScore = pred.top5Scores[0].score
+    }
   }
 }
 
