@@ -82,12 +82,12 @@ export default function Dashboard({
             </button>
           </div>
         )}
-        <div className="mt-3 flex flex-wrap gap-2">
-          {keyLearnings.map((l, i) => (
-            <span key={i} className="text-[10px] px-2.5 py-1 rounded-full bg-[#141937] border border-[#1a1f3a] text-[#a0a0a0] max-w-full truncate">
-              💡 {l.length > 50 ? l.slice(0, 50) + '...' : l}
-            </span>
-          ))}
+        {/* 历史经验滚动条 */}
+        <div className="mt-3">
+          <h3 className="text-[10px] font-bold text-[#ffd700] mb-2 flex items-center gap-1.5">
+            🧠 历史经验 <span className="text-[#555555] font-normal">({keyLearnings.length}条 · 最新优先)</span>
+          </h3>
+          <LiveTicker items={keyLearnings} />
         </div>
       </section>
 
@@ -171,6 +171,46 @@ function MetricBox({ label, value, unit, color = '#ffffff', detail }: {
       </div>
       <div className="text-[10px] text-[#a0a0a0] mt-1">{label}</div>
       {detail && <div className="text-[9px] text-[#555555] mt-0.5">{detail}</div>}
+    </div>
+  )
+}
+
+/**
+ * 历史经验 LiveTicker — 水平无限滚动，最新优先
+ * 使用 CSS animation 驱动，60fps 平滑滚动；hover 暂停
+ */
+function LiveTicker({ items }: { items: string[] }) {
+  // 最新排前面
+  const reversed = [...items].reverse()
+  // 为避免空列表闪烁，至少渲染一个占位
+  if (reversed.length === 0) return null
+
+  // 拼接 2 份实现无缝循环（CSS infinite scroll 需要内容 ≥ 2× 容器宽度）
+  const tickerItems = [...reversed, ...reversed]
+
+  return (
+    <div className="group relative overflow-hidden rounded-xl border border-[#1a1f3a] bg-[#141937] h-11 flex items-center">
+      {/* 左渐变遮罩 */}
+      <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(90deg, #141937 0%, transparent 100%)' }} />
+      {/* 右渐变遮罩 */}
+      <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(270deg, #141937 0%, transparent 100%)' }} />
+
+      {/* 滚动轨道 */}
+      <div className="flex items-center gap-3 animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap px-4"
+        style={{ animationDuration: `${Math.max(reversed.length * 2, 18)}s`, willChange: 'transform' }}>
+        {tickerItems.map((item, i) => (
+          <span
+            key={i}
+            className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full border border-[#1e2545] bg-[#1a1f3a] text-[#c0c0c0] hover:border-[#ffd700]/40 hover:text-[#ffd700] hover:bg-[#ffd700]/5 transition-colors duration-200 cursor-default shrink-0"
+            title={item}
+          >
+            <span className="text-[#ffd700]/60 text-[9px]">💡</span>
+            <span className="max-w-[280px] truncate">{item}</span>
+          </span>
+        ))}
+      </div>
     </div>
   )
 }
