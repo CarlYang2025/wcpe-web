@@ -1,19 +1,16 @@
 #!/usr/bin/env node
 /**
- * generate-portfolio.mjs — WCPE Portfolio Optimizer V4.4
+ * generate-portfolio.mjs — WCPE Portfolio Optimizer V5.0
  * 
- * 读取 remote.json + market-odds.json，运行组合优化引擎，
+ * 读取 remote.json + market-odds.json，运行投资委员会审查 + 组合优化引擎，
  * 生成 portfolio.json 供网站展示。
  * 
- * V4.4 核心理念:
- *   - 投资组合经理必须有自己的独立判断，不能盲从数学公式
- *   - 投注方向 vs WCPE预测比分一致性检查（矛盾即降权/踢出）
- *   - 3日滑动平均权重，防单日震荡
- *   - 对数EV衰减，降权高赔低概率
- *   - Poisson区间估算
- *   - 强制资金分散，核心≤70%
- *   - 波胆MVI分级，保留原始信号
- *   - 去集中化v2，检测同场高相关腿
+ * V5.0 核心理念:
+ *   - 「投资委员会」：定量 + 定性深度融合，不只做数学计算器
+ *   - 定性分析层: 伤病/淘汰动态/心理因素/因子短板/历史教训/盘口压力
+ *   - 方向一致性检查: 投注方向 vs WCPE预测 → 矛盾即降权/踢出
+ *   - 3日滑动平均 + 对数EV衰减 + Poisson区间
+ *   - 资金分散 + 波胆MVI分级 + 去集中化v2
  * 
  * 用法:
  *   node scripts/generate-portfolio.mjs          # 生成 portfolio.json
@@ -786,7 +783,208 @@ function buildCandidatePool(remote, market) {
     }
   }
 
-  // ─── V4增强过滤（含V4.4一致性检查） ───
+  // ═══════════════════════════════════════════════════════════
+  // V5.0: 投资委员会审查 — 定性分析层
+  // ═══════════════════════════════════════════════════════════
+  const qualitativeProfiles = {}
+  const tomorrowIdsSet = new Set(tomorrowIds)
+  
+  for (const mid of tomorrowIds) {
+    const pred = remote.predictions?.[mid] || {}
+    const m = remote.matches?.find(x => x.id === mid) || {}
+    const homeEn = m.homeTeam || '', awayEn = m.awayTeam || ''
+    const hwp = pred.homeWinProb || 0.33, o25p = pred.over25Prob || 0.5
+    const confidence = pred.confidence || 0.5, riskLevel = pred.riskLevel || 'Medium'
+    const riskWarnings = pred.riskWarnings || []
+    const fb = pred.factorBreakdown || {}
+    const appliedLearnings = pred.appliedLearnings || []
+
+    const profile = {
+      matchId: mid,
+      matchDisplay: `${cn(homeEn)} vs ${cn(awayEn)}`,
+      // 基础量化
+      confidence, riskLevel, hwp, o25p,
+      // 定性信号
+      flags: [],
+      adjustments: {},
+      qualitativeConfidence: 1.0,
+      thesis: '',
+    }
+
+    // ── 1. 风险警告分析 ──
+    const warningCategories = {
+      injury: riskWarnings.filter(w => /伤|缺阵|缺席|停赛|红牌|训练/.test(w)),
+      elimination: riskWarnings.filter(w => /淘汰|出线|出局|已确定|保头名|保平|轮换/.test(w)),
+      form: riskWarnings.filter(w => /哑火|状态|进球|进攻|防守|崩溃|低迷/.test(w)),
+      tactical: riskWarnings.filter(w => /主帅|教练|战术|阵型|打法|轮换/.test(w)),
+    }
+
+    // 伤病/停赛影响
+    if (warningCategories.injury.length > 0) {
+      profile.flags.push('injury_concern')
+      profile.adjustments.injuryPenalty = Math.min(0.15, warningCategories.injury.length * 0.05)
+    }
+    // 第三轮出线/淘汰动态 — 是最关键的非数据信号
+    if (warningCategories.elimination.length > 0) {
+      const eliminationText = warningCategories.elimination.join(' ')
+      // 双方均已淘汰 → 比赛开放，倾向于大球
+      if (/双方均.*淘汰/.test(eliminationText) || /均.*已淘汰/.test(eliminationText) || /表演赛/.test(eliminationText)) {
+        profile.flags.push('both_eliminated_open_game')
+        // 定性判断：无压力 = 更多进球的倾向
+        profile.adjustments.goalsBias = 'over'  // 倾向于大球
+        profile.adjustments.goalsBiasStrength = 0.15  // 大球概率上调15%
+      }
+      // 一方已出线 → 可能轮换，降低对其获胜的置信度
+      if (/已出线|保头名|确保|锁定.*第一/.test(eliminationText)) {
+        profile.flags.push('team_qualified_rotation_risk')
+        profile.adjustments.rotationRisk = true
+      }
+      // 一方必须赢才能出线 → 背水一战溢价
+      if (/必须赢|背水一战|不胜.*出局/.test(eliminationText)) {
+        profile.flags.push('must_win_surge')
+        profile.adjustments.mustWinBonus = 0.10
+      }
+      // 保平争胜 → 保守倾向，小球概率上升
+      if (/保平|平局.*足够|平局.*可/.test(eliminationText)) {
+        profile.flags.push('draw_sufficient_conservative')
+        profile.adjustments.goalsBias = 'under'
+        profile.adjustments.goalsBiasStrength = 0.10
+      }
+    }
+    // 状态/心理因素
+    if (warningCategories.form.length > 0) {
+      profile.flags.push('form_concern')
+    }
+
+    // ── 2. 因子分解分析 ──
+    const factorNames = { eloDiffScore: 'ELO差', recentFormScore: '近期状态', h2hScore: '历史交锋', marketScore: '市场共识', tacticalScore: '战术匹配', squadScore: '阵容完整', pressureScore: '赛程压力', psychologyScore: '心理因素' }
+    const weakFactors = []
+    const strongFactors = []
+    for (const [key, val] of Object.entries(fb)) {
+      if (typeof val === 'number' && val < 0.5) weakFactors.push(key)
+      if (typeof val === 'number' && val >= 0.75) strongFactors.push(key)
+    }
+    if (weakFactors.length > 0) {
+      profile.flags.push('factor_weakness')
+      profile.adjustments.weakFactors = weakFactors
+      // 特别是 pressureScore 极低 → 高压比赛 → 降低置信
+      if (fb.pressureScore !== undefined && fb.pressureScore < 0.4) {
+        profile.adjustments.pressureDiscount = (0.4 - fb.pressureScore) * 0.5
+      }
+    }
+
+    // ── 3. 高置信+高风险 = 红旗 ──
+    if (confidence >= 0.65 && riskLevel === 'High') {
+      profile.flags.push('high_confidence_high_risk')
+      // 昨天美国72%信心+高风险预测完全错误，这是已知的系统性陷阱
+      profile.adjustments.highConfRiskDiscount = 0.15
+    }
+
+    // ── 4. 市场-模型严重分歧 ──
+    if (o25p > 0.60) {
+      profile.adjustments.marketGoalsLean = 'over'
+    } else if (o25p < 0.40) {
+      profile.adjustments.marketGoalsLean = 'under'
+    }
+
+    // ── 5. 从历史教训匹配当前场景 ──
+    const keyLearnings = remote.keyLearnings || []
+    for (const lesson of keyLearnings) {
+      if (typeof lesson !== 'string') continue
+      if (/已出线.*轮换|轮换.*已出线/.test(lesson)) {
+        profile.adjustments.lessonsApplied = (profile.adjustments.lessonsApplied || [])
+        profile.adjustments.lessonsApplied.push('rotation_risk_known')
+      }
+      if (/淘汰.*荣誉战|荣誉战.*淘汰/.test(lesson)) {
+        profile.adjustments.lessonsApplied = (profile.adjustments.lessonsApplied || [])
+        profile.adjustments.lessonsApplied.push('honor_match_boost')
+      }
+    }
+
+    // ── 6. 综合定性置信度 ──
+    let qualConf = 1.0
+    if (profile.adjustments.injuryPenalty) qualConf -= profile.adjustments.injuryPenalty
+    if (profile.adjustments.pressureDiscount) qualConf -= profile.adjustments.pressureDiscount
+    if (profile.adjustments.highConfRiskDiscount) qualConf -= profile.adjustments.highConfRiskDiscount
+    if (profile.adjustments.mustWinBonus) qualConf += profile.adjustments.mustWinBonus
+    // 已淘汰双方开放比赛 → 进球预期上调但不一定影响胜负置信
+    if (profile.flags.includes('both_eliminated_open_game')) {
+      // 不对胜负置信度调降（双方平等），但标记大球倾向
+      qualConf = Math.max(0.7, qualConf)  // 下限保护
+    }
+    profile.qualitativeConfidence = Math.max(0.5, Math.min(1.2, qualConf))
+
+    // ── 7. 生成投资论点 ──
+    const thesisParts = []
+    if (profile.flags.includes('both_eliminated_open_game')) thesisParts.push('双方已淘汰，无压力开放对攻')
+    if (profile.flags.includes('team_qualified_rotation_risk')) thesisParts.push('已出线方可能轮换')
+    if (profile.flags.includes('must_win_surge')) thesisParts.push('背水一战意愿加成')
+    if (profile.flags.includes('draw_sufficient_conservative')) thesisParts.push('平局足够→保守倾向')
+    if (profile.flags.includes('injury_concern')) thesisParts.push('伤病缺阵影响阵容')
+    if (profile.flags.includes('factor_weakness')) {
+      const wfNames = weakFactors.map(k => factorNames[k] || k).join('、')
+      thesisParts.push(`因子短板: ${wfNames}`)
+    }
+    if (profile.flags.includes('high_confidence_high_risk')) thesisParts.push('⚠ 高置信+高风险=历史陷阱')
+    if (profile.adjustments.lessonsApplied) {
+      for (const l of profile.adjustments.lessonsApplied) {
+        if (l === 'rotation_risk_known') thesisParts.push('历史教训: 已出线轮换被严重低估')
+        if (l === 'honor_match_boost') thesisParts.push('历史反馈: 淘汰队荣誉战有溢价')
+      }
+    }
+    profile.thesis = thesisParts.join('；')
+
+    qualitativeProfiles[mid] = profile
+  }
+
+  // ── 将定性分析应用到候选池 ──
+  for (const c of pool) {
+    const profile = qualitativeProfiles[c.mid]
+    if (!profile) continue
+
+    // 将定性配置挂到投注项上
+    c._qualProfile = profile
+    c._qualConfidence = profile.qualitativeConfidence
+
+    // 定性方向检查：当比赛存在明确的进球方向倾向时
+    if (profile.adjustments.goalsBias === 'over') {
+      if (c.bet.includes('小') && (c.type === 'goals' || c.type === 'goals_range')) {
+        // 投注小球方向但定性分析认为大球更可能 → 标记
+        c._qualFlag = 'qualitative_goals_contradiction'
+        c._qualNote = `定性分析: ${profile.thesis} → 倾向大球，该选项与定性判断矛盾`
+        // 如果矛盾严重(read: 双方已淘汰开放比赛 + 小2球) → 降权
+        if (c._contradictionSeverity === undefined || c._contradictionSeverity < 2) {
+          // 只对未被定量层踢出的项施加额外降权
+          c.mvi = Math.min(c.mvi, 0.90)
+        }
+      }
+    }
+    if (profile.adjustments.goalsBias === 'under') {
+      if (c.bet.includes('大') && (c.type === 'goals' || c.type === 'goals_range')) {
+        c._qualFlag = 'qualitative_goals_contradiction'
+        c._qualNote = `定性分析: ${profile.thesis} → 倾向小球，该选项与定性判断矛盾`
+        if (c._contradictionSeverity === undefined || c._contradictionSeverity < 2) {
+          c.mvi = Math.min(c.mvi, 0.90)
+        }
+      }
+    }
+
+    // 轮换风险下，对该队获胜方向降置信
+    if (profile.adjustments.rotationRisk && c.type === 'direction') {
+      // 判断该投注是否针对已出线方
+      const isHomeQualified = c.bet.includes('主胜') || c.bet.includes('或') && c.bet.includes(cn(m?.homeTeam || ''))
+      if (isHomeQualified) {
+        c._qualNote = (c._qualNote || '') + '已出线队可能轮换→方向风险'
+        c.conf = Math.min(c.conf, 0.55)  // 降低置信度上限
+      }
+    }
+  }
+
+  // 将定性分析档案挂到 pool 上供后续使用
+  pool._qualitativeProfiles = qualitativeProfiles
+  // ═══════════════════════════════════════════════════════════
+
+  // ─── V4增强过滤（含V4.4一致性检查 + V5.0定性分析） ───
   const accepted = [], rejected = []
   for (const c of pool) {
     const reasons = []
@@ -825,7 +1023,7 @@ function buildCandidatePool(remote, market) {
     match: pr.match, reasons: [pr.reason], type: '整场放弃',
   }))
 
-  return { accepted, rejected, matchIds: [...new Set(pool.map(c => c.mid))], validationResults, abandonedMatches }
+  return { accepted, rejected, matchIds: [...new Set(pool.map(c => c.mid))], validationResults, abandonedMatches, qualitativeProfiles }
 }
 
 // ===================================================================
@@ -1059,7 +1257,26 @@ function scorePortfolio(legs, strategyWeights = {}) {
   }
   valueCaptureBonus = Math.min(valueCaptureBonus, 1.5)  // 硬上限：最多加1.5分
 
-  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus - corrPenalty - specialRisk - externalRiskPenalty
+  // 14. V5.0新增: 定性分析得分 (0-5分)
+  // 投资委员会审查结论：各leg的定性置信度加权平均
+  let qualitativeScore = 0
+  let qualNotes = []
+  for (const leg of legs) {
+    if (leg._qualConfidence !== undefined) {
+      qualitativeScore += leg._qualConfidence
+    }
+    if (leg._qualNote) qualNotes.push(leg._qualNote)
+  }
+  // 归一化：平均定性置信度映射到0-5分
+  // qualConf 1.0 = 满分, qualConf 0.7 = 0分
+  const avgQualConf = legs.length > 0 ? qualitativeScore / legs.length : 1.0
+  qualitativeScore = Math.max(0, Math.min(5, (avgQualConf - 0.7) / 0.3 * 5))
+
+  // 如果存在定性矛盾标记，额外扣分
+  const qualContradictions = legs.filter(l => l._qualFlag === 'qualitative_goals_contradiction').length
+  if (qualContradictions > 0) qualitativeScore = Math.max(0, qualitativeScore - qualContradictions * 1.5)
+
+  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus + qualitativeScore - corrPenalty - specialRisk - externalRiskPenalty
   total = Math.max(0, Math.min(100, total))
 
   return {
@@ -1086,6 +1303,7 @@ function scorePortfolio(legs, strategyWeights = {}) {
       consist: Math.round(dataConsistencyScore * 10) / 10,
       strat: Math.round(strategyBonus * 10) / 10,
       valCap: Math.round(valueCaptureBonus * 10) / 10,
+      qual: Math.round(qualitativeScore * 10) / 10,
     },
   }
 }
@@ -1104,7 +1322,14 @@ function generateRationale(p) {
   const topLeg = p.legs.sort((a, b) => b.mvi - a.mvi)[0]
   const legDescs = p.legs.map(l => l.bet.replace(/【.*?】/g, '').slice(0, 20)).join(' + ')
   const evDesc = p.compEV > 0.15 ? '强正EV' : p.compEV > 0.05 ? '正EV' : p.compEV > 0 ? '边际正EV' : 'EV偏低'
-  return `${p.legs.length}场组合[${markets.join('+')}]：${legDescs}。${evDesc}，命中${p.hitPct}%，评分${p.score}/100。`
+  
+  // V5.0: 加入定性分析洞察
+  const qualLegs = p.legs.filter(l => l._qualNote)
+  const qualInsight = qualLegs.length > 0 
+    ? `定性提示: ${qualLegs.map(l => l._qualNote).join(' | ')}` 
+    : ''
+  
+  return `${p.legs.length}场组合[${markets.join('+')}]：${legDescs}。${evDesc}，命中${p.hitPct}%，评分${p.score}/100。${qualInsight}`.trim()
 }
 
 // V4: 为什么#1优于#2
@@ -1253,10 +1478,10 @@ function buildFinalVerdict(scored, accepted, yesterday) {
 // MAIN
 // ===================================================================
 function main() {
-  console.log('🏆 WCPE Portfolio Optimizer V4.4')
-  console.log('   身份: Investment Portfolio Manager（世界杯投资组合经理）')
-  console.log('   目标: 最大化 Portfolio Score（组合综合质量），非赔率')
-  console.log('   新特性: 独立矛盾检查 | 3日滑动平均 | 对数EV衰减 | Poisson区间 | 资金分散 | MVI分级')
+  console.log('🏆 WCPE Portfolio Optimizer V5.0')
+  console.log('   角色: Investment Committee（投资委员会）')
+  console.log('   目标: 定量×定性深度融合，不只做数学计算器')
+  console.log('   新特性: 投资委员会审查 | 独立矛盾检查 | 3日滑动平均 | 对数EV衰减 | 资金分散')
   console.log('')
 
   const remote = loadJSON(REMOTE_PATH)
@@ -1285,7 +1510,7 @@ function main() {
 
   // Step 3-4: Candidate Pool
   console.log('[Step 3-4] 构建候选池 + 独立筛选...')
-  const { accepted, rejected, matchIds, abandonedMatches } = buildCandidatePool(remote, market)
+  const { accepted, rejected, matchIds, abandonedMatches, qualitativeProfiles } = buildCandidatePool(remote, market)
   console.log(`  入选: ${accepted.length}, 淘汰: ${rejected.length}, 整场放弃: ${abandonedMatches.length}`)
 
   // 按市场统计入选
@@ -1395,8 +1620,18 @@ function main() {
   }
 
   // --- 最终输出 ---
+  // 生成投资委员会定性档案
+  const qualitativeReport = Object.entries(qualitativeProfiles || {}).map(([mid, prof]) => ({
+    matchId: mid,
+    matchDisplay: prof.matchDisplay,
+    flags: prof.flags,
+    thesis: prof.thesis,
+    qualitativeConfidence: prof.qualitativeConfidence,
+    adjustments: prof.adjustments,
+  }))
+
   const output = {
-    version: '4.3',
+    version: '5.0',
     generatedAt: new Date().toISOString(),
     targetDate: TOMORROW_BJT,
     targetDateDisplay,
@@ -1419,6 +1654,9 @@ function main() {
         Object.keys(byMarket).length >= 4 ? `多市场覆盖：${Object.keys(byMarket).join('、')}` : null,
       ].filter(Boolean),
     },
+
+    // ①.① 投资委员会定性审查报告 V5.0
+    qualitativeReport,
 
     // ② 今日最佳投资池（按MVI排序）
     investmentPool: accepted
@@ -1517,7 +1755,7 @@ function main() {
   console.log(`\n✅ 已写入 ${OUTPUT_PATH}`)
   console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(topSelected[0]?.compOdds)} ${topSelected[0]?.compOdds}x`)
   console.log(`   主动放弃: ${rejected.length}投注项 + ${abandonedMatches.length}场`)
-  console.log('   V4.4特性: 独立矛盾检查 | 3日滑动平均 | 对数EV衰减 | Poisson区间估算 | 去集中化v2 | 资金分散 | MVI分级')
+  console.log('   V5.0特性: 投资委员会审查(定性+定量) | 矛盾检查 | 3日滑动平均 | 对数EV衰减 | 去集中化v2 | 资金分散')
 }
 
 // V4.3: 资金配置（分散风险 — 核心≤70%，辅助≥20%，现金5-10%）
