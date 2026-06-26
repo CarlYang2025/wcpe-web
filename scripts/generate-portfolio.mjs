@@ -500,7 +500,9 @@ function buildCandidatePool(remote, market) {
       const csOdd = csOdds[scoreHyphen] || csOdds[score] || 0
       if (csOdd && csOdd > 0 && csOdd < 50) {
         const ev = calcEV(rawProb, csOdd)
-        const mvi = calcMVI(rawProb, csOdd)
+        let mvi = calcMVI(rawProb, csOdd)
+        // Poisson估算的MVI天然偏高（未含庄家 margin），硬限制避免波胆过度占优
+        mvi = Math.min(mvi, 1.12)
         pool.push({
           id: `${mid}_cs_${scoreHyphen}`, mid, match: matchDisplay, group, kickoff,
           bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆',
@@ -769,10 +771,10 @@ function scorePortfolio(legs, strategyWeights = {}) {
   // 波胆本命中率极低(5-15%)，加分保守（避免过度推高波胆占比）
   let valueCaptureBonus = 0
   for (const leg of scoreLegs) {
-    if (leg.mvi >= 1.30) valueCaptureBonus += 1.5  // 强错价，微量加分
-    else if (leg.mvi >= 1.15) valueCaptureBonus += 0.8  // 中等错价
+    if (leg.mvi >= 1.30) valueCaptureBonus += 1.0  // 强错价，极微量加分
+    else if (leg.mvi >= 1.15) valueCaptureBonus += 0.5  // 中等错价
   }
-  valueCaptureBonus = Math.min(valueCaptureBonus, 2.5)  // 硬上限：最多加2.5分
+  valueCaptureBonus = Math.min(valueCaptureBonus, 1.5)  // 硬上限：最多加1.5分
 
   let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus - corrPenalty - specialRisk - externalRiskPenalty
   total = Math.max(0, Math.min(100, total))
