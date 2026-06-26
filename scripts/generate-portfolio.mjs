@@ -41,29 +41,40 @@ const teamNames = {
 }
 const cn = name => teamNames[name] || name
 
-// ========== 获取北京时间明天的日期 ==========
-function getTomorrowBJT() {
-  const now = new Date()
-  // 北京时间 = UTC+8
-  const bjt = new Date(now.getTime() + 8 * 60 * 60 * 1000)
-  bjt.setDate(bjt.getDate() + 1)
-  const y = bjt.getUTCFullYear()
-  const m = String(bjt.getUTCMonth() + 1).padStart(2, '0')
-  const d = String(bjt.getUTCDate()).padStart(2, '0')
-  return `${y}-${m}-${d}`
+// ========== 北京时间日期工具（基于 kickoff 字段匹配） ==========
+// remote.json 中 date 字段是 UTC 日期，kickoff 如 "6/27 03:00" 才是北京时间
+// 必须使用 getUTC*() 方法避免本地时区二次偏移
+function getTomorrowBJTString() {
+  const now = Date.now()
+  const bjtNow = now + 8 * 3600 * 1000 // 当前北京时间戳
+  const tomorrow = new Date(bjtNow + 24 * 3600 * 1000)
+  return `${tomorrow.getUTCMonth() + 1}/${tomorrow.getUTCDate()}`
 }
-function getYesterdayBJT() {
-  const now = new Date()
-  const bjt = new Date(now.getTime() + 8 * 60 * 60 * 1000)
-  bjt.setDate(bjt.getDate()) // today in BJT
-  const y = bjt.getUTCFullYear()
-  const m = String(bjt.getUTCMonth() + 1).padStart(2, '0')
-  const d = String(bjt.getUTCDate()).padStart(2, '0')
-  return `${y}-${m}-${d}`
+function getTodayBJTString() {
+  const now = Date.now()
+  const bjtNow = now + 8 * 3600 * 1000
+  const today = new Date(bjtNow)
+  return `${today.getUTCMonth() + 1}/${today.getUTCDate()}`
+}
+function getYesterdayBJTString() {
+  const now = Date.now()
+  const bjtNow = now + 8 * 3600 * 1000
+  const yesterday = new Date(bjtNow - 24 * 3600 * 1000)
+  return `${yesterday.getUTCMonth() + 1}/${yesterday.getUTCDate()}`
+}
+// 解析 kickoff "MM/DD HH:MM" → 北京时间日期 "M/D"
+function kickoffBJTDate(kickoff) {
+  if (!kickoff) return ''
+  const m = kickoff.match(/(\d+)\/(\d+)/)
+  return m ? `${parseInt(m[1])}/${parseInt(m[2])}` : ''
+}
+// 从 matches 中筛选 kickoff 在指定北京时间日期的比赛
+function matchesByBJTDate(matches, bjtDateStr) {
+  return matches.filter(m => kickoffBJTDate(m.kickoff) === bjtDateStr && m.status !== 'finished')
 }
 
-const TARGET_DATE = getTomorrowBJT()
-const YESTERDAY_DATE = getYesterdayBJT()
+const TOMORROW_BJT = getTomorrowBJTString()
+const YESTERDAY_BJT = getYesterdayBJTString()
 
 function loadJSON(path) {
   if (!existsSync(path)) return null
@@ -83,7 +94,23 @@ function impliedProb(odds) {
 // STEP 2: Yesterday Review
 // ============================================================
 function analyzeYesterday(remote) {
-  const matches = (remote.matches || []).filter(m => m.date === YESTERDAY_DATE)
+  // 22:00复盘：使用今天（北京时间）已结束的比赛（最新鲜的数据）
+  const todayBJT = getTodayBJTString()
+  const matches = (remote.matches || []).filter(m => {
+    return kickoffBJTDate(m.kickoff) === todayBJT && m.status === 'finished'
+  })
+  // 如果今天没有已结束比赛（比如第一天运行），回退到昨天
+  if (matches.length === 0) {
+    const yesterdayBJT = getYesterdayBJTString()
+    return analyzeBJTDate(remote, yesterdayBJT)
+  }
+  return analyzeBJTDate(remote, todayBJT)
+}
+
+function analyzeBJTDate(remote, bjtDateStr) {
+  const matches = (remote.matches || []).filter(m => {
+    return kickoffBJTDate(m.kickoff) === bjtDateStr && m.status === 'finished'
+  })
   const results = []
   
   for (const m of matches) {
@@ -173,9 +200,7 @@ function validateWCPE(matchId, remote, market) {
 // STEP 4-5: Candidate Pool
 // ============================================================
 function buildCandidatePool(remote, market) {
-  const tomorrowIds = (remote.matches || [])
-    .filter(m => m.date === TARGET_DATE && m.status === 'upcoming')
-    .map(m => m.id)
+  const tomorrowIds = matchesByBJTDate(remote.matches || [], TOMORROW_BJT).map(m => m.id)
   
   const pool = []
   
@@ -405,7 +430,7 @@ function main() {
   
   // Step 3
   console.log('[Step 3] 校验WCPE预测...')
-  const tomorrowIds = (remote.matches || []).filter(m => m.date === TARGET_DATE && m.status === 'upcoming').map(m => m.id)
+  const tomorrowIds = matchesByBJTDate(remote.matches || [], TOMORROW_BJT).map(m => m.id)
   const validations = tomorrowIds.map(id => validateWCPE(id, remote, market))
   
   // Step 4-5
@@ -471,7 +496,7 @@ function main() {
   const output = {
     version: '2.0',
     generatedAt: new Date().toISOString(),
-    targetDate: TARGET_DATE,
+    targetDate: TOMORROW_BJT,
     targetDateDisplay,
     targetMatchIds: tomorrowIds,
     oddsFreshness: market.fetchedAt || 'unknown',
@@ -488,7 +513,7 @@ function main() {
     },
     
     yesterdayReview: {
-      date: YESTERDAY_DATE,
+      date: getTodayBJTString(),
       summary: yesterday.summary,
       keyInsights: [
         '第三轮ELO偏差：方向准确率从历史56%降至33%',

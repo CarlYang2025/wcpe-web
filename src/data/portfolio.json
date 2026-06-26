@@ -1,168 +1,204 @@
 {
   "version": "2.0",
-  "generatedAt": "2026-06-26T11:54:57.024Z",
-  "targetDate": "2026-06-27",
+  "generatedAt": "2026-06-26T12:02:19.832Z",
+  "targetDate": "6/27",
   "targetDateDisplay": "2026年6月27日（周六）",
   "targetMatchIds": [
-    "pan-eng-3",
-    "cro-gha-3",
-    "col-por-3",
-    "uzb-cod-3",
-    "jor-arg-3",
-    "alg-aut-3"
+    "nor-fra-3",
+    "sen-irq-3",
+    "uru-esp-3",
+    "cpv-ksa-3",
+    "nzl-bel-3",
+    "egy-irn-3"
   ],
-  "oddsFreshness": "2026-06-26T11:54:56.331Z",
+  "oddsFreshness": "2026-06-26T12:02:18.917Z",
   "oddsSource": "sample-estimate",
   "marketJudgment": {
     "rating": "🟡 中性偏谨慎",
-    "summary": "今日共有6场比赛，其中0个高MVI投注项。建议保留20%现金。",
+    "summary": "今日共有6场比赛，其中4个高MVI投注项。建议保留20%现金。",
     "highlights": [
-      "巴拿马 主胜 为本日最强MVI信号(1.00)",
+      "挪威 vs 法国 大2.5球 为本日最强MVI信号(1.24)",
       "昨日复盘显示第三轮方向准确率降至33%，建议降低胜平负权重",
       "已自动排除EV为负或MVI过低的投注项"
     ]
   },
   "yesterdayReview": {
-    "date": "2026-06-26",
+    "date": "6/26",
     "summary": {
       "n": 6,
-      "dirHits": 0,
-      "dirRate": 0,
-      "over25Hits": 1,
-      "over25Rate": 0.16666666666666666,
-      "bttsHits": 4,
-      "bttsRate": 0.6666666666666666,
-      "top3Hits": 0,
-      "top3Rate": 0,
-      "top1Hits": 0,
-      "top1Rate": 0,
-      "draws": 6,
+      "dirHits": 2,
+      "dirRate": 0.3333333333333333,
+      "over25Hits": 5,
+      "over25Rate": 0.8333333333333334,
+      "bttsHits": 2,
+      "bttsRate": 0.3333333333333333,
+      "top3Hits": 4,
+      "top3Rate": 0.6666666666666666,
+      "top1Hits": 1,
+      "top1Rate": 0.16666666666666666,
+      "draws": 2,
       "upsets": 2
     },
     "keyInsights": [
       "第三轮ELO偏差：方向准确率从历史56%降至33%",
-      "大2.5球超高命中17% → 大小球应作为核心策略",
-      "平局率100% > 历史27%：第三轮保平争胜逻辑成立",
+      "大2.5球超高命中83% → 大小球应作为核心策略",
+      "平局率33% > 历史27%：第三轮保平争胜逻辑成立",
       "2场高置信度预测翻车：已出线轮换效应被忽略"
     ]
   },
   "wcpeValidation": [
     {
-      "matchId": "pan-eng-3",
-      "agree": false,
-      "issues": [
-        "概率和偏差(0.00)",
-        "方向()与市场(away_win)分歧"
-      ],
-      "confirmations": []
+      "matchId": "nor-fra-3",
+      "agree": true,
+      "issues": [],
+      "confirmations": [
+        "概率和正常(1.01)",
+        "方向与市场一致(away_win)",
+        "1个高价值MVI"
+      ]
     },
     {
-      "matchId": "cro-gha-3",
-      "agree": false,
-      "issues": [
-        "概率和偏差(0.00)",
-        "方向()与市场(home_win)分歧"
-      ],
-      "confirmations": []
+      "matchId": "sen-irq-3",
+      "agree": true,
+      "issues": [],
+      "confirmations": [
+        "概率和正常(1.00)",
+        "方向与市场一致(home_win)"
+      ]
     },
     {
-      "matchId": "col-por-3",
-      "agree": false,
-      "issues": [
-        "概率和偏差(0.00)",
-        "方向()与市场(away_win)分歧"
-      ],
-      "confirmations": []
+      "matchId": "uru-esp-3",
+      "agree": true,
+      "issues": [],
+      "confirmations": [
+        "概率和正常(1.00)",
+        "方向与市场一致(away_win)"
+      ]
     },
     {
-      "matchId": "uzb-cod-3",
-      "agree": false,
-      "issues": [
-        "概率和偏差(0.00)",
-        "方向()与市场(home_win)分歧"
-      ],
-      "confirmations": []
+      "matchId": "cpv-ksa-3",
+      "agree": true,
+      "issues": [],
+      "confirmations": [
+        "概率和正常(1.00)",
+        "方向与市场一致(home_win)"
+      ]
     },
     {
-      "matchId": "jor-arg-3",
-      "agree": false,
-      "issues": [
-        "概率和偏差(0.00)",
-        "方向()与市场(away_win)分歧"
-      ],
-      "confirmations": []
+      "matchId": "nzl-bel-3",
+      "agree": true,
+      "issues": [],
+      "confirmations": [
+        "概率和正常(1.00)",
+        "方向与市场一致(away_win)"
+      ]
     },
     {
-      "matchId": "alg-aut-3",
-      "agree": false,
-      "issues": [
-        "概率和偏差(0.00)",
-        "方向()与市场(away_win)分歧"
-      ],
-      "confirmations": []
+      "matchId": "egy-irn-3",
+      "agree": true,
+      "issues": [],
+      "confirmations": [
+        "概率和正常(0.99)",
+        "方向与市场一致(home_win)"
+      ]
     }
   ],
   "candidatePool": {
-    "total": 42,
-    "accepted": 23,
-    "rejected": 19,
-    "topPicks": [],
+    "total": 72,
+    "accepted": 40,
+    "rejected": 32,
+    "topPicks": [
+      {
+        "bet": "【大小球】挪威 vs 法国 大2.5球",
+        "odds": 1.72,
+        "prob": 0.72,
+        "mvi": 1.24,
+        "ev": 0.238,
+        "market": "大小球"
+      },
+      {
+        "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+        "odds": 1.9,
+        "prob": 0.58,
+        "mvi": 1.1,
+        "ev": 0.102,
+        "market": "大小球"
+      },
+      {
+        "bet": "【大小球】乌拉圭 vs 西班牙 大2.5球",
+        "odds": 1.8,
+        "prob": 0.6,
+        "mvi": 1.08,
+        "ev": 0.08,
+        "market": "大小球"
+      },
+      {
+        "bet": "【大小球】埃及 vs 伊朗 小2.5球",
+        "odds": 2.02,
+        "prob": 0.52,
+        "mvi": 1.05,
+        "ev": 0.05,
+        "market": "大小球"
+      }
+    ],
     "rejectedHighlights": [
       {
-        "bet": "【胜平负】英格兰 客胜",
+        "bet": "【胜平负】法国 客胜",
         "reasons": [
-          "EV负(-57.1%)"
+          "EV负(-5.4%)"
         ],
-        "ev": -0.571
+        "ev": -0.054
       },
       {
-        "bet": "【大小球】巴拿马 vs 英格兰 大2.5球",
+        "bet": "【大小球】挪威 vs 法国 小2.5球",
         "reasons": [
-          "EV负(-12.5%)"
+          "EV负(-41.2%)",
+          "MVI低(0.59)"
         ],
-        "ev": -0.125
+        "ev": -0.412
       },
       {
-        "bet": "【双重机会】英格兰 或 平局",
+        "bet": "【双重机会】法国 或 平局",
         "reasons": [
-          "EV负(-30.6%)"
+          "EV负(-5.2%)"
         ],
-        "ev": -0.306
+        "ev": -0.052
       },
       {
-        "bet": "【胜平负】克罗地亚 主胜",
+        "bet": "【胜平负】塞内加尔 主胜",
         "reasons": [
-          "EV负(-43.9%)"
+          "EV负(-6.2%)"
         ],
-        "ev": -0.439
+        "ev": -0.062
       },
       {
-        "bet": "【大小球】克罗地亚 vs 加纳 大2.5球",
+        "bet": "【胜平负】塞内加尔 vs 伊拉克 平局",
         "reasons": [
-          "EV负(-7.5%)"
+          "EV负(-5.5%)"
         ],
-        "ev": -0.075
+        "ev": -0.055
       },
       {
-        "bet": "【双重机会】克罗地亚 或 平局",
+        "bet": "【胜平负】伊拉克 客胜",
         "reasons": [
-          "EV负(-23.8%)"
+          "EV负(-10.0%)"
         ],
-        "ev": -0.238
+        "ev": -0.1
       },
       {
-        "bet": "【胜平负】葡萄牙 客胜",
+        "bet": "【大小球】塞内加尔 vs 伊拉克 小2.5球",
         "reasons": [
-          "EV负(-17.5%)"
+          "EV负(-20.2%)",
+          "MVI低(0.80)"
         ],
-        "ev": -0.175
+        "ev": -0.202
       },
       {
-        "bet": "【大小球】哥伦比亚 vs 葡萄牙 大2.5球",
+        "bet": "【双重机会】塞内加尔 或 平局",
         "reasons": [
-          "EV负(-9.0%)"
+          "EV负(-6.0%)"
         ],
-        "ev": -0.09
+        "ev": -0.06
       }
     ]
   },
@@ -170,42 +206,42 @@
     {
       "tier": "稳健收益型",
       "rank": 1,
-      "score": 88.5,
-      "odds": 4.28,
-      "hitPct": 33,
-      "ev": 0.414,
-      "mvi": 0.99,
+      "score": 87.5,
+      "odds": 3.17,
+      "hitPct": 33.06,
+      "ev": 0.049,
+      "mvi": 1.04,
       "legs": [
         {
-          "id": "pan-eng-3_u25",
-          "bet": "【大小球】巴拿马 vs 英格兰 小2.5球",
-          "odds": 2.05,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.025,
-          "market": "大小球",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
+          "id": "nor-fra-3_dc_hd",
+          "bet": "【双重机会】挪威 或 平局",
+          "odds": 1.67,
+          "prob": 0.5700000000000001,
+          "mvi": 0.98,
+          "ev": -0.045,
+          "market": "双重机会",
+          "match": "挪威 vs 法国",
+          "group": "I组"
         },
         {
-          "id": "cro-gha-3_dc_ad",
-          "bet": "【双重机会】加纳 或 平局",
-          "odds": 2.09,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 0.381,
-          "market": "双重机会",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
         }
       ],
       "breakdown": {
-        "mvi": 19.8,
-        "ev": 6.2,
+        "mvi": 20,
+        "ev": 0.7,
         "hit": 20,
         "div": 25,
-        "risk": 10,
-        "conf": 7.5,
+        "risk": 12.5,
+        "conf": 9.2,
         "corr": 0
       },
       "riskLevel": "🟢低"
@@ -213,85 +249,85 @@
     {
       "tier": "稳健收益型",
       "rank": 2,
-      "score": 88,
-      "odds": 4.18,
-      "hitPct": 33,
-      "ev": 0.379,
-      "mvi": 0.99,
+      "score": 85.2,
+      "odds": 3.27,
+      "hitPct": 41.76,
+      "ev": 0.365,
+      "mvi": 1.17,
       "legs": [
         {
-          "id": "cro-gha-3_dc_ad",
-          "bet": "【双重机会】加纳 或 平局",
-          "odds": 2.09,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 0.381,
-          "market": "双重机会",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
+          "id": "nor-fra-3_o25",
+          "bet": "【大小球】挪威 vs 法国 大2.5球",
+          "odds": 1.72,
+          "prob": 0.72,
+          "mvi": 1.24,
+          "ev": 0.238,
+          "market": "大小球",
+          "match": "挪威 vs 法国",
+          "group": "I组"
         },
         {
-          "id": "jor-arg-3_u25",
-          "bet": "【大小球】约旦 vs 阿根廷 小2.5球",
-          "odds": 2,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0,
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
           "market": "大小球",
-          "match": "约旦 vs 阿根廷",
-          "group": "J组"
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
         }
       ],
       "breakdown": {
-        "mvi": 19.8,
-        "ev": 5.7,
+        "mvi": 20,
+        "ev": 5.5,
         "hit": 20,
-        "div": 25,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": 0
+        "div": 20,
+        "risk": 12.5,
+        "conf": 9.2,
+        "corr": -2
       },
       "riskLevel": "🟢低"
     },
     {
       "tier": "稳健收益型",
       "rank": 3,
-      "score": 87.8,
-      "odds": 4.14,
-      "hitPct": 33,
-      "ev": 0.366,
-      "mvi": 0.99,
+      "score": 84.3,
+      "odds": 3.84,
+      "hitPct": 30.16,
+      "ev": 0.158,
+      "mvi": 1.075,
       "legs": [
         {
-          "id": "cro-gha-3_dc_ad",
-          "bet": "【双重机会】加纳 或 平局",
-          "odds": 2.09,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 0.381,
-          "market": "双重机会",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
         },
         {
-          "id": "col-por-3_u25",
-          "bet": "【大小球】哥伦比亚 vs 葡萄牙 小2.5球",
-          "odds": 1.98,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": -0.01,
+          "id": "egy-irn-3_u25",
+          "bet": "【大小球】埃及 vs 伊朗 小2.5球",
+          "odds": 2.02,
+          "prob": 0.52,
+          "mvi": 1.05,
+          "ev": 0.05,
           "market": "大小球",
-          "match": "哥伦比亚 vs 葡萄牙",
-          "group": "K组"
+          "match": "埃及 vs 伊朗",
+          "group": "G组"
         }
       ],
       "breakdown": {
-        "mvi": 19.8,
-        "ev": 5.5,
+        "mvi": 20,
+        "ev": 2.4,
         "hit": 20,
-        "div": 25,
-        "risk": 10,
-        "conf": 7.5,
+        "div": 20,
+        "risk": 12.5,
+        "conf": 9.5,
         "corr": 0
       },
       "riskLevel": "🟢低"
@@ -299,42 +335,42 @@
     {
       "tier": "平衡收益型",
       "rank": 1,
-      "score": 100,
-      "odds": 11.5,
-      "hitPct": 21.78,
-      "ev": 1.504,
-      "mvi": 0.99,
+      "score": 87.5,
+      "odds": 6.27,
+      "hitPct": 16.82,
+      "ev": 0.055,
+      "mvi": 1.03,
       "legs": [
         {
-          "id": "pan-eng-3_d",
-          "bet": "【胜平负】巴拿马 vs 英格兰 平局",
-          "odds": 5.5,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 0.815,
+          "id": "nor-fra-3_h",
+          "bet": "【胜平负】挪威 主胜",
+          "odds": 3.3,
+          "prob": 0.29,
+          "mvi": 0.96,
+          "ev": -0.043,
           "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
+          "match": "挪威 vs 法国",
+          "group": "I组"
         },
         {
-          "id": "cro-gha-3_dc_ad",
-          "bet": "【双重机会】加纳 或 平局",
-          "odds": 2.09,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 0.381,
-          "market": "双重机会",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
         }
       ],
       "breakdown": {
-        "mvi": 19.8,
-        "ev": 22.6,
+        "mvi": 20,
+        "ev": 0.8,
         "hit": 20,
         "div": 25,
-        "risk": 10,
-        "conf": 7.5,
+        "risk": 12.5,
+        "conf": 9.2,
         "corr": 0
       },
       "riskLevel": "🟡中低"
@@ -342,42 +378,42 @@
     {
       "tier": "平衡收益型",
       "rank": 2,
-      "score": 100,
-      "odds": 6.65,
-      "hitPct": 33,
-      "ev": 1.194,
-      "mvi": 0.99,
+      "score": 87.5,
+      "odds": 6.46,
+      "hitPct": 16.24,
+      "ev": 0.049,
+      "mvi": 1.025,
       "legs": [
         {
-          "id": "pan-eng-3_dc_hd",
-          "bet": "【双重机会】巴拿马 或 平局",
-          "odds": 3.41,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 1.253,
-          "market": "双重机会",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
+          "id": "nor-fra-3_d",
+          "bet": "【胜平负】挪威 vs 法国 平局",
+          "odds": 3.4,
+          "prob": 0.28,
+          "mvi": 0.95,
+          "ev": -0.048,
+          "market": "胜平负",
+          "match": "挪威 vs 法国",
+          "group": "I组"
         },
         {
-          "id": "cro-gha-3_u25",
-          "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
-          "odds": 1.95,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": -0.025,
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
           "market": "大小球",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
         }
       ],
       "breakdown": {
-        "mvi": 19.8,
-        "ev": 17.9,
+        "mvi": 20,
+        "ev": 0.7,
         "hit": 20,
         "div": 25,
-        "risk": 10,
-        "conf": 7.5,
+        "risk": 12.5,
+        "conf": 9.2,
         "corr": 0
       },
       "riskLevel": "🟡中低"
@@ -385,540 +421,562 @@
     {
       "tier": "平衡收益型",
       "rank": 3,
-      "score": 100,
-      "odds": 7.13,
-      "hitPct": 43.56,
-      "ev": 2.104,
+      "score": 83.9,
+      "odds": 6.41,
+      "hitPct": 17.19,
+      "ev": 0.102,
+      "mvi": 1.043,
+      "legs": [
+        {
+          "id": "nor-fra-3_dc_hd",
+          "bet": "【双重机会】挪威 或 平局",
+          "odds": 1.67,
+          "prob": 0.5700000000000001,
+          "mvi": 0.98,
+          "ev": -0.045,
+          "market": "双重机会",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        },
+        {
+          "id": "egy-irn-3_u25",
+          "bet": "【大小球】埃及 vs 伊朗 小2.5球",
+          "odds": 2.02,
+          "prob": 0.52,
+          "mvi": 1.05,
+          "ev": 0.05,
+          "market": "大小球",
+          "match": "埃及 vs 伊朗",
+          "group": "G组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 1.5,
+        "hit": 20,
+        "div": 21.7,
+        "risk": 11.7,
+        "conf": 9.1,
+        "corr": 0
+      },
+      "riskLevel": "🟡中低"
+    },
+    {
+      "tier": "价值收益型",
+      "rank": 1,
+      "score": 78.9,
+      "odds": 15.2,
+      "hitPct": 6.96,
+      "ev": 0.058,
+      "mvi": 1.03,
+      "legs": [
+        {
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        },
+        {
+          "id": "nzl-bel-3_h",
+          "bet": "【胜平负】新西兰 主胜",
+          "odds": 8,
+          "prob": 0.12,
+          "mvi": 0.96,
+          "ev": -0.04,
+          "market": "胜平负",
+          "match": "新西兰 vs 比利时",
+          "group": "G组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 0.9,
+        "hit": 14,
+        "div": 25,
+        "risk": 10,
+        "conf": 9,
+        "corr": 0
+      },
+      "riskLevel": "🟠中高"
+    },
+    {
+      "tier": "价值收益型",
+      "rank": 2,
+      "score": 78,
+      "odds": 12.67,
+      "hitPct": 8.75,
+      "ev": 0.108,
+      "mvi": 1.037,
+      "legs": [
+        {
+          "id": "nor-fra-3_h",
+          "bet": "【胜平负】挪威 主胜",
+          "odds": 3.3,
+          "prob": 0.29,
+          "mvi": 0.96,
+          "ev": -0.043,
+          "market": "胜平负",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        },
+        {
+          "id": "egy-irn-3_u25",
+          "bet": "【大小球】埃及 vs 伊朗 小2.5球",
+          "odds": 2.02,
+          "prob": 0.52,
+          "mvi": 1.05,
+          "ev": 0.05,
+          "market": "大小球",
+          "match": "埃及 vs 伊朗",
+          "group": "G组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 1.6,
+        "hit": 14,
+        "div": 21.7,
+        "risk": 11.7,
+        "conf": 9.1,
+        "corr": 0
+      },
+      "riskLevel": "🟠中高"
+    },
+    {
+      "tier": "价值收益型",
+      "rank": 3,
+      "score": 77.9,
+      "odds": 13.05,
+      "hitPct": 8.44,
+      "ev": 0.102,
+      "mvi": 1.033,
+      "legs": [
+        {
+          "id": "nor-fra-3_d",
+          "bet": "【胜平负】挪威 vs 法国 平局",
+          "odds": 3.4,
+          "prob": 0.28,
+          "mvi": 0.95,
+          "ev": -0.048,
+          "market": "胜平负",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        },
+        {
+          "id": "egy-irn-3_u25",
+          "bet": "【大小球】埃及 vs 伊朗 小2.5球",
+          "odds": 2.02,
+          "prob": 0.52,
+          "mvi": 1.05,
+          "ev": 0.05,
+          "market": "大小球",
+          "match": "埃及 vs 伊朗",
+          "group": "G组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 1.5,
+        "hit": 14,
+        "div": 21.7,
+        "risk": 11.7,
+        "conf": 9.1,
+        "corr": 0
+      },
+      "riskLevel": "🟠中高"
+    },
+    {
+      "tier": "高赔率冲击型",
+      "rank": 1,
+      "score": 78.3,
+      "odds": 28.72,
+      "hitPct": 4.32,
+      "ev": 0.241,
+      "mvi": 1.12,
+      "legs": [
+        {
+          "id": "nor-fra-3_o25",
+          "bet": "【大小球】挪威 vs 法国 大2.5球",
+          "odds": 1.72,
+          "prob": 0.72,
+          "mvi": 1.24,
+          "ev": 0.238,
+          "market": "大小球",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_cs_2-0",
+          "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:0",
+          "odds": 16.7,
+          "prob": 0.06,
+          "mvi": 1,
+          "ev": 0.002,
+          "market": "波胆",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 3.6,
+        "hit": 8,
+        "div": 25,
+        "risk": 12.5,
+        "conf": 9.2,
+        "corr": 0
+      },
+      "riskLevel": "🔴高"
+    },
+    {
+      "tier": "高赔率冲击型",
+      "rank": 2,
+      "score": 78.3,
+      "odds": 34.4,
+      "hitPct": 3.6,
+      "ev": 0.238,
+      "mvi": 1.12,
+      "legs": [
+        {
+          "id": "nor-fra-3_o25",
+          "bet": "【大小球】挪威 vs 法国 大2.5球",
+          "odds": 1.72,
+          "prob": 0.72,
+          "mvi": 1.24,
+          "ev": 0.238,
+          "market": "大小球",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_cs_3-1",
+          "bet": "【波胆】塞内加尔 vs 伊拉克 比分 3:1",
+          "odds": 20,
+          "prob": 0.05,
+          "mvi": 1,
+          "ev": 0,
+          "market": "波胆",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 3.6,
+        "hit": 8,
+        "div": 25,
+        "risk": 12.5,
+        "conf": 9.2,
+        "corr": 0
+      },
+      "riskLevel": "🔴高"
+    },
+    {
+      "tier": "高赔率冲击型",
+      "rank": 3,
+      "score": 78.3,
+      "odds": 43,
+      "hitPct": 2.88,
+      "ev": 0.238,
+      "mvi": 1.12,
+      "legs": [
+        {
+          "id": "nor-fra-3_o25",
+          "bet": "【大小球】挪威 vs 法国 大2.5球",
+          "odds": 1.72,
+          "prob": 0.72,
+          "mvi": 1.24,
+          "ev": 0.238,
+          "market": "大小球",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_cs_2-1",
+          "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:1",
+          "odds": 25,
+          "prob": 0.04,
+          "mvi": 1,
+          "ev": 0,
+          "market": "波胆",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 3.6,
+        "hit": 8,
+        "div": 25,
+        "risk": 12.5,
+        "conf": 9.2,
+        "corr": 0
+      },
+      "riskLevel": "🔴高"
+    },
+    {
+      "tier": "超级大奖型",
+      "rank": 1,
+      "score": 74.9,
+      "odds": 86.86,
+      "hitPct": 1.5,
+      "ev": 0.301,
+      "mvi": 1.097,
+      "legs": [
+        {
+          "id": "nor-fra-3_o25",
+          "bet": "【大小球】挪威 vs 法国 大2.5球",
+          "odds": 1.72,
+          "prob": 0.72,
+          "mvi": 1.24,
+          "ev": 0.238,
+          "market": "大小球",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_cs_2-1",
+          "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:1",
+          "odds": 25,
+          "prob": 0.04,
+          "mvi": 1,
+          "ev": 0,
+          "market": "波胆",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        },
+        {
+          "id": "egy-irn-3_u25",
+          "bet": "【大小球】埃及 vs 伊朗 小2.5球",
+          "odds": 2.02,
+          "prob": 0.52,
+          "mvi": 1.05,
+          "ev": 0.05,
+          "market": "大小球",
+          "match": "埃及 vs 伊朗",
+          "group": "G组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 4.5,
+        "hit": 8,
+        "div": 21.7,
+        "risk": 11.7,
+        "conf": 9.1,
+        "corr": 0
+      },
+      "riskLevel": "⚫极高"
+    },
+    {
+      "tier": "超级大奖型",
+      "rank": 2,
+      "score": 74.6,
+      "odds": 104.71,
+      "hitPct": 1.01,
+      "ev": 0.057,
+      "mvi": 1.02,
+      "legs": [
+        {
+          "id": "nor-fra-3_h",
+          "bet": "【胜平负】挪威 主胜",
+          "odds": 3.3,
+          "prob": 0.29,
+          "mvi": 0.96,
+          "ev": -0.043,
+          "market": "胜平负",
+          "match": "挪威 vs 法国",
+          "group": "I组"
+        },
+        {
+          "id": "sen-irq-3_o25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+          "odds": 1.9,
+          "prob": 0.58,
+          "mvi": 1.1,
+          "ev": 0.102,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
+        },
+        {
+          "id": "egy-irn-3_cs_2-1",
+          "bet": "【波胆】埃及 vs 伊朗 比分 2:1",
+          "odds": 16.7,
+          "prob": 0.06,
+          "mvi": 1,
+          "ev": 0.002,
+          "market": "波胆",
+          "match": "埃及 vs 伊朗",
+          "group": "G组"
+        }
+      ],
+      "breakdown": {
+        "mvi": 20,
+        "ev": 0.9,
+        "hit": 8,
+        "div": 25,
+        "risk": 11.7,
+        "conf": 9.1,
+        "corr": 0
+      },
+      "riskLevel": "⚫极高"
+    },
+    {
+      "tier": "超级大奖型",
+      "rank": 3,
+      "score": 74.3,
+      "odds": 82.5,
+      "hitPct": 1.16,
+      "ev": -0.043,
       "mvi": 0.98,
       "legs": [
         {
-          "id": "pan-eng-3_dc_hd",
-          "bet": "【双重机会】巴拿马 或 平局",
-          "odds": 3.41,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 1.253,
-          "market": "双重机会",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
+          "id": "nor-fra-3_h",
+          "bet": "【胜平负】挪威 主胜",
+          "odds": 3.3,
+          "prob": 0.29,
+          "mvi": 0.96,
+          "ev": -0.043,
+          "market": "胜平负",
+          "match": "挪威 vs 法国",
+          "group": "I组"
         },
         {
-          "id": "cro-gha-3_dc_ad",
-          "bet": "【双重机会】加纳 或 平局",
-          "odds": 2.09,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 0.381,
-          "market": "双重机会",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
+          "id": "sen-irq-3_cs_2-1",
+          "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:1",
+          "odds": 25,
+          "prob": 0.04,
+          "mvi": 1,
+          "ev": 0,
+          "market": "波胆",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组"
         }
       ],
       "breakdown": {
         "mvi": 19.6,
-        "ev": 25,
-        "hit": 20,
-        "div": 20,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": -2
-      },
-      "riskLevel": "🟡中低"
-    },
-    {
-      "tier": "价值收益型",
-      "rank": 1,
-      "score": 100,
-      "odds": 17.55,
-      "hitPct": 16.5,
-      "ev": 1.896,
-      "mvi": 1,
-      "legs": [
-        {
-          "id": "pan-eng-3_h",
-          "bet": "【胜平负】巴拿马 主胜",
-          "odds": 9,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 1.97,
-          "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "cro-gha-3_u25",
-          "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
-          "odds": 1.95,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": -0.025,
-          "market": "大小球",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 25,
-        "hit": 20,
+        "ev": 0,
+        "hit": 8,
         "div": 25,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": 0
-      },
-      "riskLevel": "🟠中高"
-    },
-    {
-      "tier": "价值收益型",
-      "rank": 2,
-      "score": 100,
-      "odds": 18.81,
-      "hitPct": 21.78,
-      "ev": 3.097,
-      "mvi": 0.99,
-      "legs": [
-        {
-          "id": "pan-eng-3_h",
-          "bet": "【胜平负】巴拿马 主胜",
-          "odds": 9,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 1.97,
-          "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "cro-gha-3_dc_ad",
-          "bet": "【双重机会】加纳 或 平局",
-          "odds": 2.09,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 0.381,
-          "market": "双重机会",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 19.8,
-        "ev": 25,
-        "hit": 20,
-        "div": 25,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": 0
-      },
-      "riskLevel": "🟠中高"
-    },
-    {
-      "tier": "价值收益型",
-      "rank": 3,
-      "score": 100,
-      "odds": 12.28,
-      "hitPct": 21.78,
-      "ev": 1.674,
-      "mvi": 0.99,
-      "legs": [
-        {
-          "id": "pan-eng-3_dc_hd",
-          "bet": "【双重机会】巴拿马 或 平局",
-          "odds": 3.41,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 1.253,
-          "market": "双重机会",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "cro-gha-3_d",
-          "bet": "【胜平负】克罗地亚 vs 加纳 平局",
-          "odds": 3.6,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 0.188,
-          "market": "胜平负",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 19.8,
-        "ev": 25,
-        "hit": 20,
-        "div": 25,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": 0
-      },
-      "riskLevel": "🟠中高"
-    },
-    {
-      "tier": "高赔率冲击型",
-      "rank": 1,
-      "score": 100,
-      "odds": 32.4,
-      "hitPct": 10.89,
-      "ev": 2.528,
-      "mvi": 1,
-      "legs": [
-        {
-          "id": "pan-eng-3_h",
-          "bet": "【胜平负】巴拿马 主胜",
-          "odds": 9,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 1.97,
-          "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "cro-gha-3_d",
-          "bet": "【胜平负】克罗地亚 vs 加纳 平局",
-          "odds": 3.6,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 0.188,
-          "market": "胜平负",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 25,
-        "hit": 20,
-        "div": 20,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": -2
-      },
-      "riskLevel": "🔴高"
-    },
-    {
-      "tier": "高赔率冲击型",
-      "rank": 2,
-      "score": 100,
-      "odds": 45,
-      "hitPct": 10.89,
-      "ev": 3.901,
-      "mvi": 1,
-      "legs": [
-        {
-          "id": "pan-eng-3_h",
-          "bet": "【胜平负】巴拿马 主胜",
-          "odds": 9,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 1.97,
-          "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "cro-gha-3_a",
-          "bet": "【胜平负】加纳 客胜",
-          "odds": 5,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 0.65,
-          "market": "胜平负",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 25,
-        "hit": 20,
-        "div": 20,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": -2
-      },
-      "riskLevel": "🔴高"
-    },
-    {
-      "tier": "高赔率冲击型",
-      "rank": 3,
-      "score": 100,
-      "odds": 27.5,
-      "hitPct": 10.89,
-      "ev": 1.995,
-      "mvi": 1,
-      "legs": [
-        {
-          "id": "pan-eng-3_d",
-          "bet": "【胜平负】巴拿马 vs 英格兰 平局",
-          "odds": 5.5,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 0.815,
-          "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "cro-gha-3_a",
-          "bet": "【胜平负】加纳 客胜",
-          "odds": 5,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 0.65,
-          "market": "胜平负",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 25,
-        "hit": 20,
-        "div": 20,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": -2
-      },
-      "riskLevel": "🔴高"
-    },
-    {
-      "tier": "超级大奖型",
-      "rank": 1,
-      "score": 100,
-      "odds": 85.5,
-      "hitPct": 10.89,
-      "ev": 8.311,
-      "mvi": 1,
-      "legs": [
-        {
-          "id": "pan-eng-3_h",
-          "bet": "【胜平负】巴拿马 主胜",
-          "odds": 9,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 1.97,
-          "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "jor-arg-3_h",
-          "bet": "【胜平负】约旦 主胜",
-          "odds": 9.5,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 2.135,
-          "market": "胜平负",
-          "match": "约旦 vs 阿根廷",
-          "group": "J组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 25,
-        "hit": 20,
-        "div": 20,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": 0
-      },
-      "riskLevel": "⚫极高"
-    },
-    {
-      "tier": "超级大奖型",
-      "rank": 2,
-      "score": 98.8,
-      "odds": 105.83,
-      "hitPct": 7.19,
-      "ev": 6.607,
-      "mvi": 0.99,
-      "legs": [
-        {
-          "id": "pan-eng-3_dc_hd",
-          "bet": "【双重机会】巴拿马 或 平局",
-          "odds": 3.41,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 1.253,
-          "market": "双重机会",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "uzb-cod-3_dc_ad",
-          "bet": "【双重机会】刚果(金) 或 平局",
-          "odds": 1.65,
-          "prob": 0.66,
-          "mvi": 0.98,
-          "ev": 0.088,
-          "market": "双重机会",
-          "match": "乌兹别克 vs 刚果(金)",
-          "group": "K组"
-        },
-        {
-          "id": "jor-arg-3_h",
-          "bet": "【胜平负】约旦 主胜",
-          "odds": 9.5,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 2.135,
-          "market": "胜平负",
-          "match": "约旦 vs 阿根廷",
-          "group": "J组"
-        },
-        {
-          "id": "col-por-3_u25",
-          "bet": "【大小球】哥伦比亚 vs 葡萄牙 小2.5球",
-          "odds": 1.98,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": -0.01,
-          "market": "大小球",
-          "match": "哥伦比亚 vs 葡萄牙",
-          "group": "K组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 19.8,
-        "ev": 25,
-        "hit": 14,
-        "div": 22.5,
-        "risk": 10,
-        "conf": 7.5,
-        "corr": 0
-      },
-      "riskLevel": "⚫极高"
-    },
-    {
-      "tier": "超级大奖型",
-      "rank": 3,
-      "score": 98.2,
-      "odds": 166.73,
-      "hitPct": 5.45,
-      "ev": 8.078,
-      "mvi": 1,
-      "legs": [
-        {
-          "id": "pan-eng-3_h",
-          "bet": "【胜平负】巴拿马 主胜",
-          "odds": 9,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 1.97,
-          "market": "胜平负",
-          "match": "巴拿马 vs 英格兰",
-          "group": "L组"
-        },
-        {
-          "id": "cro-gha-3_u25",
-          "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
-          "odds": 1.95,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": -0.025,
-          "market": "大小球",
-          "match": "克罗地亚 vs 加纳",
-          "group": "L组"
-        },
-        {
-          "id": "jor-arg-3_h",
-          "bet": "【胜平负】约旦 主胜",
-          "odds": 9.5,
-          "prob": 0.33,
-          "mvi": 1,
-          "ev": 2.135,
-          "market": "胜平负",
-          "match": "约旦 vs 阿根廷",
-          "group": "J组"
-        }
-      ],
-      "breakdown": {
-        "mvi": 20,
-        "ev": 25,
-        "hit": 14,
-        "div": 21.7,
-        "risk": 10,
-        "conf": 7.5,
+        "risk": 12.5,
+        "conf": 9.2,
         "corr": 0
       },
       "riskLevel": "⚫极高"
     }
   ],
   "bestPortfolio": {
-    "tier": "高赔率冲击型",
-    "score": 100,
-    "odds": 32.4,
-    "hitPct": 10.89,
-    "ev": 2.528,
-    "mvi": 1,
+    "tier": "平衡收益型",
+    "score": 87.5,
+    "odds": 6.27,
+    "hitPct": 16.82,
+    "ev": 0.055,
+    "mvi": 1.03,
     "legs": [
       {
-        "id": "pan-eng-3_h",
-        "bet": "【胜平负】巴拿马 主胜",
-        "odds": 9,
-        "prob": 0.33,
-        "mvi": 1,
-        "ev": 1.97,
+        "id": "nor-fra-3_h",
+        "bet": "【胜平负】挪威 主胜",
+        "odds": 3.3,
+        "prob": 0.29,
+        "mvi": 0.96,
+        "ev": -0.043,
         "market": "胜平负",
-        "match": "巴拿马 vs 英格兰",
-        "group": "L组"
+        "match": "挪威 vs 法国",
+        "group": "I组"
       },
       {
-        "id": "cro-gha-3_d",
-        "bet": "【胜平负】克罗地亚 vs 加纳 平局",
-        "odds": 3.6,
-        "prob": 0.33,
-        "mvi": 1,
-        "ev": 0.188,
-        "market": "胜平负",
-        "match": "克罗地亚 vs 加纳",
-        "group": "L组"
+        "id": "sen-irq-3_o25",
+        "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+        "odds": 1.9,
+        "prob": 0.58,
+        "mvi": 1.1,
+        "ev": 0.102,
+        "market": "大小球",
+        "match": "塞内加尔 vs 伊拉克",
+        "group": "I组"
       }
     ],
     "breakdown": {
       "mvi": 20,
-      "ev": 25,
+      "ev": 0.8,
       "hit": 20,
-      "div": 20,
-      "risk": 10,
-      "conf": 7.5,
-      "corr": -2
+      "div": 25,
+      "risk": 12.5,
+      "conf": 9.2,
+      "corr": 0
     },
-    "rationale": "综合质量最高：巴拿马 主胜 + 克罗地亚 vs 加纳 平局。EV+252.8%，评分100/100，风险收益比最优。"
+    "rationale": "综合质量最高：挪威 主胜 + 塞内加尔 vs 伊拉克 大2.5球。EV+5.5%，评分87.5/100，风险收益比最优。"
   },
   "capitalAllocation": [
     {
       "tier": "稳健收益型",
       "portfolio": {
-        "id": "P902",
-        "score": 88.5,
-        "odds": 4.28,
-        "ev": 0.414,
-        "hitPct": 33,
+        "id": "P2",
+        "score": 87.5,
+        "odds": 3.17,
+        "ev": 0.049,
+        "hitPct": 33.06,
         "legs": [
           {
-            "id": "pan-eng-3_u25",
-            "bet": "【大小球】巴拿马 vs 英格兰 小2.5球",
-            "odds": 2.05,
-            "prob": 0.5,
-            "mvi": 1,
-            "ev": 0.025,
-            "market": "大小球",
-            "match": "巴拿马 vs 英格兰",
-            "group": "L组"
+            "id": "nor-fra-3_dc_hd",
+            "bet": "【双重机会】挪威 或 平局",
+            "odds": 1.67,
+            "prob": 0.5700000000000001,
+            "mvi": 0.98,
+            "ev": -0.045,
+            "market": "双重机会",
+            "match": "挪威 vs 法国",
+            "group": "I组"
           },
           {
-            "id": "cro-gha-3_dc_ad",
-            "bet": "【双重机会】加纳 或 平局",
-            "odds": 2.09,
-            "prob": 0.66,
-            "mvi": 0.98,
-            "ev": 0.381,
-            "market": "双重机会",
-            "match": "克罗地亚 vs 加纳",
-            "group": "L组"
+            "id": "sen-irq-3_o25",
+            "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+            "odds": 1.9,
+            "prob": 0.58,
+            "mvi": 1.1,
+            "ev": 0.102,
+            "market": "大小球",
+            "match": "塞内加尔 vs 伊拉克",
+            "group": "I组"
           }
         ]
       },
@@ -928,33 +986,33 @@
     {
       "tier": "平衡收益型",
       "portfolio": {
-        "id": "P5",
-        "score": 100,
-        "odds": 11.5,
-        "ev": 1.504,
-        "hitPct": 21.78,
+        "id": "P0",
+        "score": 87.5,
+        "odds": 6.27,
+        "ev": 0.055,
+        "hitPct": 16.82,
         "legs": [
           {
-            "id": "pan-eng-3_d",
-            "bet": "【胜平负】巴拿马 vs 英格兰 平局",
-            "odds": 5.5,
-            "prob": 0.33,
-            "mvi": 1,
-            "ev": 0.815,
+            "id": "nor-fra-3_h",
+            "bet": "【胜平负】挪威 主胜",
+            "odds": 3.3,
+            "prob": 0.29,
+            "mvi": 0.96,
+            "ev": -0.043,
             "market": "胜平负",
-            "match": "巴拿马 vs 英格兰",
-            "group": "L组"
+            "match": "挪威 vs 法国",
+            "group": "I组"
           },
           {
-            "id": "cro-gha-3_dc_ad",
-            "bet": "【双重机会】加纳 或 平局",
-            "odds": 2.09,
-            "prob": 0.66,
-            "mvi": 0.98,
-            "ev": 0.381,
-            "market": "双重机会",
-            "match": "克罗地亚 vs 加纳",
-            "group": "L组"
+            "id": "sen-irq-3_o25",
+            "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+            "odds": 1.9,
+            "prob": 0.58,
+            "mvi": 1.1,
+            "ev": 0.102,
+            "market": "大小球",
+            "match": "塞内加尔 vs 伊拉克",
+            "group": "I组"
           }
         ]
       },
@@ -964,33 +1022,33 @@
     {
       "tier": "价值收益型",
       "portfolio": {
-        "id": "P2",
-        "score": 100,
-        "odds": 17.55,
-        "ev": 1.896,
-        "hitPct": 16.5,
+        "id": "P38",
+        "score": 78.9,
+        "odds": 15.2,
+        "ev": 0.058,
+        "hitPct": 6.96,
         "legs": [
           {
-            "id": "pan-eng-3_h",
-            "bet": "【胜平负】巴拿马 主胜",
-            "odds": 9,
-            "prob": 0.33,
-            "mvi": 1,
-            "ev": 1.97,
-            "market": "胜平负",
-            "match": "巴拿马 vs 英格兰",
-            "group": "L组"
+            "id": "sen-irq-3_o25",
+            "bet": "【大小球】塞内加尔 vs 伊拉克 大2.5球",
+            "odds": 1.9,
+            "prob": 0.58,
+            "mvi": 1.1,
+            "ev": 0.102,
+            "market": "大小球",
+            "match": "塞内加尔 vs 伊拉克",
+            "group": "I组"
           },
           {
-            "id": "cro-gha-3_u25",
-            "bet": "【大小球】克罗地亚 vs 加纳 小2.5球",
-            "odds": 1.95,
-            "prob": 0.5,
-            "mvi": 1,
-            "ev": -0.025,
-            "market": "大小球",
-            "match": "克罗地亚 vs 加纳",
-            "group": "L组"
+            "id": "nzl-bel-3_h",
+            "bet": "【胜平负】新西兰 主胜",
+            "odds": 8,
+            "prob": 0.12,
+            "mvi": 0.96,
+            "ev": -0.04,
+            "market": "胜平负",
+            "match": "新西兰 vs 比利时",
+            "group": "G组"
           }
         ]
       },
@@ -1000,33 +1058,33 @@
     {
       "tier": "高赔率冲击型",
       "portfolio": {
-        "id": "P0",
-        "score": 100,
-        "odds": 32.4,
-        "ev": 2.528,
-        "hitPct": 10.89,
+        "id": "P40",
+        "score": 78.3,
+        "odds": 28.72,
+        "ev": 0.241,
+        "hitPct": 4.32,
         "legs": [
           {
-            "id": "pan-eng-3_h",
-            "bet": "【胜平负】巴拿马 主胜",
-            "odds": 9,
-            "prob": 0.33,
-            "mvi": 1,
-            "ev": 1.97,
-            "market": "胜平负",
-            "match": "巴拿马 vs 英格兰",
-            "group": "L组"
+            "id": "nor-fra-3_o25",
+            "bet": "【大小球】挪威 vs 法国 大2.5球",
+            "odds": 1.72,
+            "prob": 0.72,
+            "mvi": 1.24,
+            "ev": 0.238,
+            "market": "大小球",
+            "match": "挪威 vs 法国",
+            "group": "I组"
           },
           {
-            "id": "cro-gha-3_d",
-            "bet": "【胜平负】克罗地亚 vs 加纳 平局",
-            "odds": 3.6,
-            "prob": 0.33,
+            "id": "sen-irq-3_cs_2-0",
+            "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:0",
+            "odds": 16.7,
+            "prob": 0.06,
             "mvi": 1,
-            "ev": 0.188,
-            "market": "胜平负",
-            "match": "克罗地亚 vs 加纳",
-            "group": "L组"
+            "ev": 0.002,
+            "market": "波胆",
+            "match": "塞内加尔 vs 伊拉克",
+            "group": "I组"
           }
         ]
       },
@@ -1036,33 +1094,44 @@
     {
       "tier": "超级大奖型",
       "portfolio": {
-        "id": "P21",
-        "score": 100,
-        "odds": 85.5,
-        "ev": 8.311,
-        "hitPct": 10.89,
+        "id": "P94",
+        "score": 74.9,
+        "odds": 86.86,
+        "ev": 0.301,
+        "hitPct": 1.5,
         "legs": [
           {
-            "id": "pan-eng-3_h",
-            "bet": "【胜平负】巴拿马 主胜",
-            "odds": 9,
-            "prob": 0.33,
-            "mvi": 1,
-            "ev": 1.97,
-            "market": "胜平负",
-            "match": "巴拿马 vs 英格兰",
-            "group": "L组"
+            "id": "nor-fra-3_o25",
+            "bet": "【大小球】挪威 vs 法国 大2.5球",
+            "odds": 1.72,
+            "prob": 0.72,
+            "mvi": 1.24,
+            "ev": 0.238,
+            "market": "大小球",
+            "match": "挪威 vs 法国",
+            "group": "I组"
           },
           {
-            "id": "jor-arg-3_h",
-            "bet": "【胜平负】约旦 主胜",
-            "odds": 9.5,
-            "prob": 0.33,
+            "id": "sen-irq-3_cs_2-1",
+            "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:1",
+            "odds": 25,
+            "prob": 0.04,
             "mvi": 1,
-            "ev": 2.135,
-            "market": "胜平负",
-            "match": "约旦 vs 阿根廷",
-            "group": "J组"
+            "ev": 0,
+            "market": "波胆",
+            "match": "塞内加尔 vs 伊拉克",
+            "group": "I组"
+          },
+          {
+            "id": "egy-irn-3_u25",
+            "bet": "【大小球】埃及 vs 伊朗 小2.5球",
+            "odds": 2.02,
+            "prob": 0.52,
+            "mvi": 1.05,
+            "ev": 0.05,
+            "market": "大小球",
+            "match": "埃及 vs 伊朗",
+            "group": "G组"
           }
         ]
       },
@@ -1086,15 +1155,15 @@
   ],
   "learnings": [
     "第三轮比赛应下调ELO权重，上调大小球策略权重",
-    "大小球需谨慎，关注比赛强度变化",
+    "昨日大2.5球命中率83%，今日继续作为核心策略",
     "已出线球队增加轮换折扣(-10%~-15%)",
     "第三轮平局溢价值得主动纳入串关考量",
     "避免已淘汰球队的Dead Rubber比赛高权重配置"
   ],
   "stats": {
-    "totalCombinations": 1819,
-    "score80plus": 1430,
-    "topScore": 100,
+    "totalCombinations": 2439,
+    "score80plus": 32,
+    "topScore": 87.5,
     "modelState": {
       "directionAccuracy": 0.5625,
       "scoreTop3Accuracy": 0.4166666666666667,
