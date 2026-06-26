@@ -1,6 +1,6 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-06-26T16:38:26.031Z",
+  "generatedAt": "2026-06-26T16:42:55.376Z",
   "targetDate": "6/27",
   "targetDateDisplay": "2026年6月28日（周日）",
   "targetMatchIds": [
@@ -11,7 +11,7 @@
     "nzl-bel-3",
     "egy-irn-3"
   ],
-  "oddsFreshness": "2026-06-26T16:37:53.327Z",
+  "oddsFreshness": "2026-06-26T16:42:54.605Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "✅ 值得下注",
@@ -286,6 +286,18 @@
       "source": "Bet365"
     },
     {
+      "match": "挪威 vs 法国",
+      "market": "波胆",
+      "bet": "【波胆】挪威 vs 法国 比分 0:3",
+      "odds": 15,
+      "ev": 0.209,
+      "mvi": 1.209,
+      "prob": 0.0806,
+      "reason": "高错价信号",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
       "match": "乌拉圭 vs 西班牙",
       "market": "BTTS",
       "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
@@ -296,18 +308,6 @@
       "reason": "高错价信号",
       "type": "btts",
       "source": ""
-    },
-    {
-      "match": "挪威 vs 法国",
-      "market": "波胆",
-      "bet": "【波胆】挪威 vs 法国 比分 0:3",
-      "odds": 15,
-      "ev": 0.194,
-      "mvi": 1.1940000000000002,
-      "prob": 0.0796,
-      "reason": "高错价信号",
-      "type": "score",
-      "source": "Bet365"
     },
     {
       "match": "塞内加尔 vs 伊拉克",
@@ -518,9 +518,9 @@
       "market": "波胆",
       "bet": "【波胆】挪威 vs 法国 比分 1:3",
       "odds": 12,
-      "ev": -0.008,
-      "mvi": 0.9924,
-      "prob": 0.0827,
+      "ev": -0.006,
+      "mvi": 0.9936,
+      "prob": 0.0828,
       "reason": "边际价值",
       "type": "score",
       "source": "Bet365"
@@ -562,6 +562,18 @@
       "source": ""
     },
     {
+      "match": "挪威 vs 法国",
+      "market": "平局退款",
+      "bet": "【平局退款】法国 不败",
+      "odds": 1.285,
+      "ev": -0.016,
+      "mvi": 0.9835802469135801,
+      "prob": 0.7654320987654321,
+      "reason": "边际价值",
+      "type": "safety",
+      "source": ""
+    },
+    {
       "match": "塞内加尔 vs 伊拉克",
       "market": "胜平负",
       "bet": "【胜平负】塞内加尔 vs 伊拉克 平局",
@@ -571,18 +583,6 @@
       "prob": 0.14,
       "reason": "边际价值",
       "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "挪威 vs 法国",
-      "market": "平局退款",
-      "bet": "【平局退款】法国 不败",
-      "odds": 1.285,
-      "ev": -0.02,
-      "mvi": 0.9798125,
-      "prob": 0.7625,
-      "reason": "边际价值",
-      "type": "safety",
       "source": ""
     },
     {
@@ -1031,19 +1031,19 @@
     },
     {
       "rank": 8,
-      "score": 74,
+      "score": 74.2,
       "odds": 29.25,
-      "hitPct": 4.14,
-      "ev": 0.211,
-      "mvi": 1.097,
+      "hitPct": 4.19,
+      "ev": 0.226,
+      "mvi": 1.105,
       "legs": [
         {
           "id": "nor-fra-3_cs_0-3",
           "bet": "【波胆】挪威 vs 法国 比分 0:3",
           "odds": 15,
-          "prob": 0.0796,
-          "mvi": 1.1940000000000002,
-          "ev": 0.194,
+          "prob": 0.0806,
+          "mvi": 1.209,
+          "ev": 0.209,
           "market": "波胆",
           "match": "挪威 vs 法国",
           "group": "I组",
@@ -1065,8 +1065,8 @@
         }
       ],
       "breakdown": {
-        "ev": 6.4,
-        "mvi": 13.2,
+        "ev": 6.5,
+        "mvi": 13.3,
         "hit": 10,
         "risk": 3.3,
         "eff": 10,
@@ -1082,7 +1082,7 @@
         "qual": 3.8
       },
       "tier": "高赔率冲击型",
-      "rationale": "2场组合[波胆+BTTS]：挪威 vs 法国 比分 0:3 + 佛得角 vs 沙特 双方进球=否。强正EV，命中4.14%，评分74/100。",
+      "rationale": "2场组合[波胆+BTTS]：挪威 vs 法国 比分 0:3 + 佛得角 vs 沙特 双方进球=否。强正EV，命中4.19%，评分74.2/100。",
       "comparisonNote": ""
     },
     {
@@ -1391,64 +1391,57 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-16.9%)",
+      "reason": "EV显著负(-17.9%)",
       "count": 1,
       "examples": [
         {
           "match": "挪威 vs 法国",
           "bet": "挪威 不败",
           "odds": 3.5,
-          "ev": -0.169,
-          "mvi": 0.83125
+          "ev": -0.179,
+          "mvi": 0.8209876543209876
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-17.1%)",
-      "count": 2,
+      "reason": "EV显著负(-17.3%)",
+      "count": 1,
       "examples": [
         {
           "match": "挪威 vs 法国",
           "bet": "挪威 vs 法国 比分 1:2",
           "odds": 9,
-          "ev": -0.171,
-          "mvi": 0.8289000000000001
-        },
-        {
-          "match": "佛得角 vs 沙特",
-          "bet": "佛得角 vs 沙特",
-          "odds": 1.727,
-          "ev": -0.171,
-          "mvi": 0.83
+          "ev": -0.173,
+          "mvi": 0.8271000000000001
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-11.3%)",
+      "reason": "EV显著负(-10.6%)",
       "count": 1,
       "examples": [
         {
           "match": "挪威 vs 法国",
           "bet": "挪威 vs 法国 比分 0:2",
           "odds": 10,
-          "ev": -0.113,
-          "mvi": 0.887
+          "ev": -0.106,
+          "mvi": 0.8939999999999999
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-38.4%)",
+      "reason": "EV显著负(-38.8%)",
       "count": 1,
       "examples": [
         {
           "match": "挪威 vs 法国",
           "bet": "挪威 vs 法国 比分 1:1",
           "odds": 9,
-          "ev": -0.384,
-          "mvi": 0.6156
+          "ev": -0.388,
+          "mvi": 0.6120000000000001
         }
       ]
     },
@@ -1834,6 +1827,20 @@
           "odds": 1.24,
           "ev": -0.227,
           "mvi": 0.7733098603533828
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-17.1%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "佛得角 vs 沙特",
+          "bet": "佛得角 vs 沙特",
+          "odds": 1.727,
+          "ev": -0.171,
+          "mvi": 0.83
         }
       ]
     },
@@ -2299,9 +2306,9 @@
     "abandonedMatches": 0
   },
   "stats": {
-    "totalCombinations": 5109,
+    "totalCombinations": 5100,
     "topScore": 90.8,
-    "scoredCount": 5109,
+    "scoredCount": 5100,
     "byMarket": {
       "胜平负": 15,
       "大小球": 6,
@@ -2314,9 +2321,9 @@
     "byLegs": {
       "2腿": 1802,
       "3腿": 2500,
-      "4腿": 215,
-      "5腿": 303,
-      "6腿": 289
+      "4腿": 212,
+      "5腿": 288,
+      "6腿": 298
     }
   },
   "wcpeValidations": {

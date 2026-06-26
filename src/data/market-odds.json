@@ -1,7 +1,13 @@
 {
-  "fetchedAt": "2026-06-26T16:37:53.327Z",
+  "fetchedAt": "2026-06-26T16:42:54.605Z",
   "source": "odds-api.io (Bet365)",
   "updatedMatchIds": [
+    "ecu-ger-3",
+    "cuw-civ-3",
+    "tun-ned-3",
+    "jpn-swe-3",
+    "usa-tur-3",
+    "par-aus-3",
     "nor-fra-3",
     "sen-irq-3",
     "uru-esp-3",
@@ -11,11 +17,9 @@
     "pan-eng-3",
     "cro-gha-3",
     "col-por-3",
-    "cod-uzb-3",
+    "uzb-cod-3",
     "jor-arg-3",
-    "alg-aut-3",
-    "rsa-can-3",
-    "bra-jpn-3"
+    "alg-aut-3"
   ],
   "totalMatches": 23,
   "odds": {

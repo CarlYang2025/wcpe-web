@@ -176,39 +176,52 @@ function MetricBox({ label, value, unit, color = '#ffffff', detail }: {
 }
 
 /**
- * 历史经验 LiveTicker — 水平无限滚动，最新优先
- * 使用 CSS animation 驱动，60fps 平滑滚动；hover 暂停
+ * 历史经验 LiveTicker — 三行错速水平滚动，最新优先
+ * 每条独立 track 以不同速度 CSS animation 驱动，hover 全部暂停
  */
 function LiveTicker({ items }: { items: string[] }) {
-  // 最新排前面
   const reversed = [...items].reverse()
-  // 为避免空列表闪烁，至少渲染一个占位
   if (reversed.length === 0) return null
 
-  // 拼接 2 份实现无缝循环（CSS infinite scroll 需要内容 ≥ 2× 容器宽度）
-  const tickerItems = [...reversed, ...reversed]
+  // 按轮次分 3 行：每行 content = reversed + reversed（无缝循环）
+  const rowSize = Math.ceil(reversed.length / 3)
+  const rows = [0, 1, 2].map(rowIdx => {
+    const slice = reversed.slice(rowIdx * rowSize, (rowIdx + 1) * rowSize)
+    return [...slice, ...slice] // 双份拼接实现无缝循环
+  })
+
+  // 三行速度略有差异：基础速度 4s/条，各行 ±20% 错开节奏
+  const baseSpeed = Math.max(rowSize * 4, 20) // 每行 ~100s 完半圈
+  const speeds = [baseSpeed, Math.round(baseSpeed * 1.2), Math.round(baseSpeed * 0.85)]
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-[#1a1f3a] bg-[#141937] h-11 flex items-center">
-      {/* 左渐变遮罩 */}
-      <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+    <div className="group relative overflow-hidden rounded-xl border border-[#1a1f3a] bg-[#141937]">
+      {/* 左右渐变遮罩（跨所有行） */}
+      <div className="absolute left-0 top-0 bottom-0 w-14 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(90deg, #141937 0%, transparent 100%)' }} />
-      {/* 右渐变遮罩 */}
-      <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none"
+      <div className="absolute right-0 top-0 bottom-0 w-14 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(270deg, #141937 0%, transparent 100%)' }} />
 
-      {/* 滚动轨道 */}
-      <div className="flex items-center gap-3 animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap px-4"
-        style={{ animationDuration: `${Math.max(reversed.length * 2, 18)}s`, willChange: 'transform' }}>
-        {tickerItems.map((item, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full border border-[#1e2545] bg-[#1a1f3a] text-[#c0c0c0] hover:border-[#ffd700]/40 hover:text-[#ffd700] hover:bg-[#ffd700]/5 transition-colors duration-200 cursor-default shrink-0"
-            title={item}
-          >
-            <span className="text-[#ffd700]/60 text-[9px]">💡</span>
-            <span className="max-w-[280px] truncate">{item}</span>
-          </span>
+      <div className="py-2 space-y-1.5">
+        {rows.map((track, rowIdx) => (
+          <div key={rowIdx} className="flex items-center gap-3 animate-marquee group-hover:[animation-play-state:paused] whitespace-nowrap px-4 h-7"
+            style={{
+              animationDuration: `${speeds[rowIdx]}s`,
+              willChange: 'transform',
+              // 第 2、3 行反向滚动增加视觉层次
+              animationDirection: rowIdx % 2 === 0 ? 'normal' : 'reverse',
+            }}>
+            {track.map((item, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-full border border-[#1e2545] bg-[#1a1f3a] text-[#c0c0c0] hover:border-[#ffd700]/40 hover:text-[#ffd700] hover:bg-[#ffd700]/5 transition-colors duration-200 cursor-default shrink-0"
+                title={item}
+              >
+                <span className="text-[#ffd700]/60 text-[9px]">💡</span>
+                <span className="max-w-[260px] truncate">{item}</span>
+              </span>
+            ))}
+          </div>
         ))}
       </div>
     </div>
