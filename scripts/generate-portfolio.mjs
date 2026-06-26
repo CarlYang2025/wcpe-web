@@ -60,6 +60,20 @@ function getTomorrowBJTString() {
   const tomorrow = new Date(bjtNow + 24 * 3600 * 1000)
   return `${tomorrow.getUTCMonth() + 1}/${tomorrow.getUTCDate()}`
 }
+/**
+ * 找到下一个有 upcoming 比赛的北京时间日期。
+ * 如果今天还有 upcoming 比赛（比如凌晨比赛还没开踢），返回今天；
+ * 否则返回明天。避免跨天后跳到错误日期。
+ */
+function getNextUpcomingBJTDate(matches) {
+  const now = Date.now()
+  const bjtNow = now + 8 * 3600 * 1000
+  const todayStr = `${new Date(bjtNow).getUTCMonth() + 1}/${new Date(bjtNow).getUTCDate()}`
+  // 今天有 upcoming 比赛吗？
+  const todayUpcoming = (matches || []).filter(m => m.status === 'upcoming' && kickoffBJTDate(m.kickoff) === todayStr)
+  if (todayUpcoming.length > 0) return todayStr
+  return getTomorrowBJTString()
+}
 function getTodayBJTString() {
   const now = Date.now()
   const bjtNow = now + 8 * 3600 * 1000
@@ -81,7 +95,7 @@ function matchesByBJTDate(matches, bjtDateStr) {
   return matches.filter(m => kickoffBJTDate(m.kickoff) === bjtDateStr && m.status !== 'finished')
 }
 
-const TOMORROW_BJT = getTomorrowBJTString()
+let TOMORROW_BJT = getTomorrowBJTString() // 占位，main() 中动态修正
 
 function loadJSON(path) {
   if (!existsSync(path)) return null
@@ -1508,6 +1522,10 @@ function main() {
 
   const remote = loadJSON(REMOTE_PATH)
   if (!remote) { console.error('❌ remote.json 未找到'); process.exit(1) }
+
+  // V5.1: 动态修正目标日期 — 凌晨时今天比赛还没开踢，不应跳到明天
+  TOMORROW_BJT = getNextUpcomingBJTDate(remote.matches || [])
+  console.log(`  📅 目标日期: ${TOMORROW_BJT}`)
 
   const market = loadJSON(ODDS_PATH) || { odds: {} }
 
