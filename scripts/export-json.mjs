@@ -633,7 +633,7 @@ function rateMviValue(mvi) {
 }
 
 /**
- * 生成 MVI 分析数组（5个投注方向）
+ * 生成 MVI 分析数组（5个基础方向 + BTTS + 比分校准）
  */
 function generateMviAnalysis(homeWinProb, drawProb, awayWinProb, over25Prob, under25Prob, odds) {
   const items = [
@@ -653,7 +653,53 @@ function generateMviAnalysis(homeWinProb, drawProb, awayWinProb, over25Prob, und
       mvi: calcMVI(under25Prob, odds.under25),
       rating: rateMviValue(calcMVI(under25Prob, odds.under25)) },
   ]
+  // BTTS: 从 O/U 隐含估算模型 BTTS 概率 (有过2.5球 ≈ 双方都有进球的趋势)
+  const impliedBttsProb = Math.min(over25Prob * 1.1, 0.95)
+  if (odds.bttsYes && odds.bttsNo) {
+    items.push({
+      bet: 'BTTS Yes', modelProb: Math.round(impliedBttsProb * 100) / 100,
+      marketProb: Math.round((1 / odds.bttsYes) * 100) / 100,
+      mvi: calcMVI(impliedBttsProb, odds.bttsYes),
+      rating: rateMviValue(calcMVI(impliedBttsProb, odds.bttsYes)),
+    })
+  }
   return items.sort((a, b) => b.mvi - a.mvi)
+}
+
+/**
+ * 用市场比分赔率校准 top5Scores
+ * 将市场隐含的比分概率与模型概率混合 (30% market + 70% model)
+ */
+function calibrateScoresWithMarket(top5Scores, correctScoreOdds, homeWinProb, awayWinProb) {
+  if (!correctScoreOdds || Object.keys(correctScoreOdds).length === 0) return top5Scores
+  if (!Array.isArray(top5Scores) || top5Scores.length === 0) return top5Scores
+
+  // 从比分赔率计算市场隐含概率
+  const scoreProbs = {}
+  let totalImp = 0
+  for (const [score, odds] of Object.entries(correctScoreOdds)) {
+    const prob = 1 / (odds || 100)
+    scoreProbs[score] = prob
+    totalImp += prob
+  }
+
+  // 去水
+  for (const score of Object.keys(scoreProbs)) {
+    scoreProbs[score] = Math.round(scoreProbs[score] / totalImp * 1000) / 1000
+  }
+
+  // 混合: 70% 模型 + 30% 市场
+  return top5Scores.map((s, i) => {
+    const scoreStr = typeof s.score === 'string' ? s.score : String(s)
+    const marketProb = scoreProbs[scoreStr] || 0
+    const modelProb = s.probability || 0.10
+    const blended = Math.round((modelProb * 0.7 + marketProb * 0.3) * 100) / 100
+    return {
+      ...s,
+      probability: blended > 0 ? blended : modelProb,
+      _marketScoreProb: marketProb > 0 ? marketProb : undefined,
+    }
+  })
 }
 
 /**
@@ -714,6 +760,25 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
     // 生成 MVI 分析
     pred.mviAnalysis = generateMviAnalysis(blended.home, blended.draw, blended.away, o25p, u25p, market)
     mviCount++
+
+    // 比分校准：用市场 Correct Score 赔率修正 top5Scores
+    if (market.correctScore && Object.keys(market.correctScore).length > 0) {
+      pred.top5Scores = calibrateScoresWithMarket(pred.top5Scores, market.correctScore, blended.home, blended.away)
+    }
+
+    // 附上完整市场赔率数据（前端展示用，compact 格式）
+    pred._marketOdds = {
+      btts: market.bttsYes ? { yes: market.bttsYes, no: market.bttsNo } : undefined,
+      drawNoBet: market.drawNoBet,
+      doubleChance: market.doubleChance,
+      spread: market.spread,
+      altGoalLines: market.altGoalLines,
+      halfTime: market.halfTime,
+    }
+    // 清理 undefined 值
+    for (const [k, v] of Object.entries(pred._marketOdds)) {
+      if (v === undefined) delete pred._marketOdds[k]
+    }
 
     // 更新 marketScore（因子评分）
     if (pred.factorBreakdown && typeof pred.factorBreakdown === 'object') {

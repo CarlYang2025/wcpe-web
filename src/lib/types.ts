@@ -19,13 +19,38 @@ export interface Match {
 }
 
 export interface Odds {
+  // === 核心胜负 ===
   homeWin: number;
   draw: number;
   awayWin: number;
+  // === 大小球 ===
   over25: number;
   under25: number;
+  // === 双方进球 ===
   bttsYes?: number;
   bttsNo?: number;
+  // === 正确比分 (score → odds) ===
+  correctScore?: Record<string, number>;
+  // === 平局退款 ===
+  drawNoBet?: { home: number; away: number };
+  // === 双重机会 ===
+  doubleChance?: { homeOrDraw: number; drawOrAway: number; homeOrAway: number };
+  // === 让球盘 ===
+  spread?: { hdp: number; home: number; away: number };
+  // === 多线 O/U (hdp → {over, under}) ===
+  altGoalLines?: Array<{ hdp: number; over: number; under: number }>;
+  // === 欧洲让球 ===
+  europeanHandicap?: Array<{ hdp: number; home?: number; draw?: number; away?: number }>;
+  // === 半场 ===
+  halfTime?: {
+    result?: { home: number; draw: number; away: number };
+    btts?: { yes: number; no: number };
+    spread?: { hdp: number; home: number; away: number };
+    totals?: { hdp: number; over: number; under: number };
+  };
+  // === 元数据 ===
+  _source?: string;
+  _updatedAt?: string;
 }
 
 export interface Top5Score {
