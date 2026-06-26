@@ -698,12 +698,9 @@ function scorePortfolio(legs, strategyWeights = {}) {
   else if (hitPct > 35) hitScore = 9
   else if (hitPct >= 1) hitScore = 3
 
-  // 波胆价值补偿：包含高MVI波胆时，低命中率可接受（价值 > 频率）
+  // 波胆组合：命中率低是本质特征，不补偿（避免过度推波胆）
   const scoreLegs = legs.filter(c => c.market === '波胆')
   const highMviScoreLegs = scoreLegs.filter(c => c.mvi >= 1.15)
-  if (highMviScoreLegs.length > 0 && hitScore < 10) {
-    hitScore = Math.min(hitScore + 4, 10) // 最多补到10分
-  }
 
   // 4. 风险得分 (0-10分)
   const riskScore = Math.max(12 - avgRisk * 3.5, 0)
@@ -744,10 +741,10 @@ function scorePortfolio(legs, strategyWeights = {}) {
 
   // 11. V4新增: 外部风险评分 (0-5分扣减)
   let externalRiskPenalty = 0
-  // 赔率过高（>80x）且命中率<3% → 额外风险（有高MVI波胆时豁免）
-  if (compOdds > 80 && hitPct < 3 && highMviScoreLegs.length === 0) externalRiskPenalty += 2
-  // 包含4+个波胆 → 极不稳定（3个可接受）
-  if (scoreLegs.length >= 4) externalRiskPenalty += 3
+  // 赔率过高（>80x）且命中率<3% → 额外风险
+  if (compOdds > 80 && hitPct < 3) externalRiskPenalty += 2
+  // 包含2+个波胆 → 增加不稳定性惩罚（波胆本命中率极低）
+  if (scoreLegs.length >= 2) externalRiskPenalty += 2
   // 全部来自同一市场类型 → 缺乏多样性风险
   if (markets.size === 1) externalRiskPenalty += 2
 
@@ -768,14 +765,14 @@ function scorePortfolio(legs, strategyWeights = {}) {
   }
   strategyBonus = Math.min(strategyBonus, 5)
 
-  // 13. V4.1新增: 价值捕获奖励 — 包含高MVI波胆的组合获得额外加分
-  // 反映模型在正确比分上发现的价值信号（波胆是最高赔率市场，错价机会最大）
+  // 13. V4.1新增: 价值捕获奖励 — 包含高MVI波胆的组合获得微量加分
+  // 波胆本命中率极低(5-15%)，加分保守（避免过度推高波胆占比）
   let valueCaptureBonus = 0
   for (const leg of scoreLegs) {
-    if (leg.mvi >= 1.30) valueCaptureBonus += 4  // 强错价信号
-    else if (leg.mvi >= 1.15) valueCaptureBonus += 2.5  // 中等错价
+    if (leg.mvi >= 1.30) valueCaptureBonus += 1.5  // 强错价，微量加分
+    else if (leg.mvi >= 1.15) valueCaptureBonus += 0.8  // 中等错价
   }
-  valueCaptureBonus = Math.min(valueCaptureBonus, 8)
+  valueCaptureBonus = Math.min(valueCaptureBonus, 2.5)  // 硬上限：最多加2.5分
 
   let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus - corrPenalty - specialRisk - externalRiskPenalty
   total = Math.max(0, Math.min(100, total))

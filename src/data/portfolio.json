@@ -1,6 +1,6 @@
 {
   "version": "4.0",
-  "generatedAt": "2026-06-26T14:00:45.440Z",
+  "generatedAt": "2026-06-26T14:12:28.235Z",
   "targetDate": "6/27",
   "targetDateDisplay": "2026年6月27日（周六）",
   "targetMatchIds": [
@@ -11,19 +11,19 @@
     "nzl-bel-3",
     "egy-irn-3"
   ],
-  "oddsFreshness": "2026-06-26T14:00:44.899Z",
-  "oddsSource": "sample-estimate",
+  "oddsFreshness": "2026-06-26T14:11:57.801Z",
+  "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "✅ 值得下注",
     "investableCount": 71,
-    "highMviCount": 32,
+    "highMviCount": 30,
     "positiveEvCount": 34,
     "suggestedExposure": "70-80%",
-    "summary": "6场比赛，71个可投注项（34个正EV），32个高MVI信号。涵盖7种市场类型。",
+    "summary": "6场比赛，71个可投注项（34个正EV），30个高MVI信号。涵盖7种市场类型。",
     "highlights": [
-      "新西兰 vs 比利时 小2球 为本日最强MVI信号(2.34)",
+      "新西兰 vs 比利时 小2球 为本日最强MVI信号(2.28)",
       "昨日方向准确率低(33%)，已动态调整策略权重",
-      "已自动排除61个低质量投注项+0场高风险比赛",
+      "已自动排除63个低质量投注项+0场高风险比赛",
       "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆、比分区间"
     ]
   },
@@ -32,9 +32,9 @@
       "match": "新西兰 vs 比利时",
       "market": "比分区间",
       "bet": "【比分区间】新西兰 vs 比利时 小2球",
-      "odds": 7,
-      "ev": 1.342,
-      "mvi": 2.3421260887723023,
+      "odds": 6.8,
+      "ev": 1.275,
+      "mvi": 2.2752082005216647,
       "prob": 0.334589441253186,
       "reason": "高错价信号",
       "type": "goals_range",
@@ -45,9 +45,9 @@
       "market": "波胆",
       "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
       "odds": 13,
-      "ev": 0.971,
-      "mvi": 1.9708,
-      "prob": 0.1516,
+      "ev": 0.981,
+      "mvi": 1.9812,
+      "prob": 0.1524,
       "reason": "高错价信号",
       "type": "score",
       "source": "Bet365"
@@ -68,9 +68,9 @@
       "match": "新西兰 vs 比利时",
       "market": "比分区间",
       "bet": "【比分区间】新西兰 vs 比利时 小3球",
-      "odds": 2.85,
-      "ev": 0.816,
-      "mvi": 1.8155377642690924,
+      "odds": 2.75,
+      "ev": 0.752,
+      "mvi": 1.751834684821054,
       "prob": 0.6370307944803832,
       "reason": "高错价信号",
       "type": "goals_range",
@@ -105,9 +105,9 @@
       "market": "波胆",
       "bet": "【波胆】新西兰 vs 比利时 比分 0:2",
       "odds": 9,
-      "ev": 0.627,
-      "mvi": 1.6272,
-      "prob": 0.1808,
+      "ev": 0.644,
+      "mvi": 1.6443,
+      "prob": 0.1827,
       "reason": "高错价信号",
       "type": "score",
       "source": "Bet365"
@@ -149,6 +149,30 @@
       "source": ""
     },
     {
+      "match": "乌拉圭 vs 西班牙",
+      "market": "比分区间",
+      "bet": "【比分区间】乌拉圭 vs 西班牙 大3球",
+      "odds": 3.3,
+      "ev": 0.394,
+      "mvi": 1.3942652948868215,
+      "prob": 0.4225046348141883,
+      "reason": "高错价信号",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "塞内加尔 vs 伊拉克",
+      "market": "比分区间",
+      "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
+      "odds": 4.5,
+      "ev": 0.324,
+      "mvi": 1.32396737473345,
+      "prob": 0.29421497216298886,
+      "reason": "高错价信号",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
       "match": "埃及 vs 伊朗",
       "market": "比分区间",
       "bet": "【比分区间】埃及 vs 伊朗 大2球",
@@ -173,25 +197,13 @@
       "source": ""
     },
     {
-      "match": "乌拉圭 vs 西班牙",
-      "market": "比分区间",
-      "bet": "【比分区间】乌拉圭 vs 西班牙 大3球",
-      "odds": 3.1,
-      "ev": 0.31,
-      "mvi": 1.3097643679239839,
-      "prob": 0.4225046348141883,
-      "reason": "高错价信号",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
       "match": "塞内加尔 vs 伊拉克",
       "market": "比分区间",
-      "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
-      "odds": 4.25,
-      "ev": 0.25,
-      "mvi": 1.2504136316927026,
-      "prob": 0.29421497216298886,
+      "bet": "【比分区间】塞内加尔 vs 伊拉克 小3球",
+      "odds": 2.075,
+      "ev": 0.23,
+      "mvi": 1.2297831949046951,
+      "prob": 0.5926665999540699,
       "reason": "高错价信号",
       "type": "goals_range",
       "source": ""
@@ -209,6 +221,18 @@
       "source": ""
     },
     {
+      "match": "塞内加尔 vs 伊拉克",
+      "market": "比分区间",
+      "bet": "【比分区间】塞内加尔 vs 伊拉克 小3.5球",
+      "odds": 1.65,
+      "ev": 0.206,
+      "mvi": 1.2062466547395083,
+      "prob": 0.731058578630005,
+      "reason": "高错价信号",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
       "match": "乌拉圭 vs 西班牙",
       "market": "BTTS",
       "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
@@ -221,25 +245,25 @@
       "source": ""
     },
     {
-      "match": "塞内加尔 vs 伊拉克",
+      "match": "乌拉圭 vs 西班牙",
       "market": "比分区间",
-      "bet": "【比分区间】塞内加尔 vs 伊拉克 小3.5球",
+      "bet": "【比分区间】乌拉圭 vs 西班牙 大2球",
       "odds": 1.625,
-      "ev": 0.188,
-      "mvi": 1.187970190273758,
-      "prob": 0.731058578630005,
+      "ev": 0.168,
+      "mvi": 1.167715887927641,
+      "prob": 0.7185943925708561,
       "reason": "高错价信号",
       "type": "goals_range",
       "source": ""
     },
     {
-      "match": "乌拉圭 vs 西班牙",
+      "match": "塞内加尔 vs 伊拉克",
       "market": "比分区间",
-      "bet": "【比分区间】乌拉圭 vs 西班牙 大2球",
-      "odds": 1.6,
-      "ev": 0.15,
-      "mvi": 1.1497510281133698,
-      "prob": 0.7185943925708561,
+      "bet": "【比分区间】塞内加尔 vs 伊拉克 小2.5球",
+      "odds": 2.6,
+      "ev": 0.138,
+      "mvi": 1.138341097696925,
+      "prob": 0.43782349911420193,
       "reason": "正EV",
       "type": "goals_range",
       "source": ""
@@ -249,9 +273,21 @@
       "market": "波胆",
       "bet": "【波胆】塞内加尔 vs 伊拉克 比分 1:0",
       "odds": 9,
-      "ev": 0.129,
-      "mvi": 1.1286000000000003,
-      "prob": 0.1254,
+      "ev": 0.136,
+      "mvi": 1.1358000000000001,
+      "prob": 0.1262,
+      "reason": "正EV",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "塞内加尔 vs 伊拉克",
+      "market": "波胆",
+      "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:0",
+      "odds": 7,
+      "ev": 0.135,
+      "mvi": 1.1354000000000002,
+      "prob": 0.1622,
       "reason": "正EV",
       "type": "score",
       "source": "Bet365"
@@ -267,18 +303,6 @@
       "reason": "正EV",
       "type": "goals_range",
       "source": ""
-    },
-    {
-      "match": "塞内加尔 vs 伊拉克",
-      "market": "波胆",
-      "bet": "【波胆】塞内加尔 vs 伊拉克 比分 2:0",
-      "odds": 7,
-      "ev": 0.121,
-      "mvi": 1.1214000000000002,
-      "prob": 0.1602,
-      "reason": "正EV",
-      "type": "score",
-      "source": "Bet365"
     },
     {
       "match": "埃及 vs 伊朗",
@@ -317,18 +341,6 @@
       "source": ""
     },
     {
-      "match": "塞内加尔 vs 伊拉克",
-      "market": "比分区间",
-      "bet": "【比分区间】塞内加尔 vs 伊拉克 小2.5球",
-      "odds": 2.5,
-      "ev": 0.095,
-      "mvi": 1.0945587477855048,
-      "prob": 0.43782349911420193,
-      "reason": "正EV",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
       "match": "佛得角 vs 沙特",
       "market": "大小球",
       "bet": "【大小球】佛得角 vs 沙特 大2.5球",
@@ -339,18 +351,6 @@
       "reason": "正EV",
       "type": "goals",
       "source": ""
-    },
-    {
-      "match": "塞内加尔 vs 伊拉克",
-      "market": "波胆",
-      "bet": "【波胆】塞内加尔 vs 伊拉克 比分 3:0",
-      "odds": 8,
-      "ev": 0.091,
-      "mvi": 1.0912,
-      "prob": 0.1364,
-      "reason": "正EV",
-      "type": "score",
-      "source": "Bet365"
     },
     {
       "match": "挪威 vs 法国",
@@ -401,28 +401,16 @@
       "source": ""
     },
     {
-      "match": "乌拉圭 vs 西班牙",
-      "market": "平局退款",
-      "bet": "【平局退款】乌拉圭 不败",
-      "odds": 4.333,
-      "ev": 0.054,
-      "mvi": 1.053972972972973,
-      "prob": 0.24324324324324323,
-      "reason": "正EV",
-      "type": "safety",
-      "source": ""
-    },
-    {
       "match": "塞内加尔 vs 伊拉克",
-      "market": "胜平负",
-      "bet": "【胜平负】塞内加尔 vs 伊拉克 平局",
-      "odds": 7,
-      "ev": 0.05,
-      "mvi": 1.05,
-      "prob": 0.15,
-      "reason": "正EV",
-      "type": "direction",
-      "source": ""
+      "market": "波胆",
+      "bet": "【波胆】塞内加尔 vs 伊拉克 比分 3:0",
+      "odds": 7.5,
+      "ev": 0.042,
+      "mvi": 1.0425000000000002,
+      "prob": 0.139,
+      "reason": "边际价值",
+      "type": "score",
+      "source": "Bet365"
     },
     {
       "match": "挪威 vs 法国",
@@ -440,8 +428,8 @@
       "match": "佛得角 vs 沙特",
       "market": "BTTS",
       "bet": "【BTTS】佛得角 vs 沙特 双方进球=否",
-      "odds": 1.909,
-      "ev": -0.007,
+      "odds": 1.95,
+      "ev": 0.014,
       "mvi": 1,
       "prob": 0.52,
       "reason": "边际价值",
@@ -449,51 +437,15 @@
       "source": ""
     },
     {
-      "match": "挪威 vs 法国",
-      "market": "双重机会",
-      "bet": "【双重机会】挪威 或 平局",
-      "odds": 2.25,
-      "ev": -0.01,
-      "mvi": 0.9900000000000001,
-      "prob": 0.44,
+      "match": "乌拉圭 vs 西班牙",
+      "market": "平局退款",
+      "bet": "【平局退款】乌拉圭 不败",
+      "odds": 4.333,
+      "ev": -0.005,
+      "mvi": 0.9954189189189191,
+      "prob": 0.22972972972972974,
       "reason": "边际价值",
       "type": "safety",
-      "source": ""
-    },
-    {
-      "match": "挪威 vs 法国",
-      "market": "胜平负",
-      "bet": "【胜平负】挪威 主胜",
-      "odds": 4.5,
-      "ev": -0.01,
-      "mvi": 0.99,
-      "prob": 0.22,
-      "reason": "边际价值",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "挪威 vs 法国",
-      "market": "胜平负",
-      "bet": "【胜平负】挪威 vs 法国 平局",
-      "odds": 4.5,
-      "ev": -0.01,
-      "mvi": 0.99,
-      "prob": 0.22,
-      "reason": "边际价值",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "乌拉圭 vs 西班牙",
-      "market": "胜平负",
-      "bet": "【胜平负】乌拉圭 主胜",
-      "odds": 5.5,
-      "ev": -0.01,
-      "mvi": 0.99,
-      "prob": 0.18,
-      "reason": "边际价值",
-      "type": "direction",
       "source": ""
     },
     {
@@ -533,9 +485,9 @@
       "source": ""
     },
     {
-      "match": "新西兰 vs 比利时",
+      "match": "塞内加尔 vs 伊拉克",
       "market": "胜平负",
-      "bet": "【胜平负】新西兰 vs 比利时 平局",
+      "bet": "【胜平负】塞内加尔 vs 伊拉克 平局",
       "odds": 7,
       "ev": -0.02,
       "mvi": 0.98,
@@ -543,60 +495,228 @@
       "reason": "边际价值",
       "type": "direction",
       "source": ""
-    },
-    {
-      "match": "挪威 vs 法国",
-      "market": "平局退款",
-      "bet": "【平局退款】挪威 不败",
-      "odds": 3.5,
-      "ev": -0.025,
-      "mvi": 0.9746835443037977,
-      "prob": 0.2784810126582279,
-      "reason": "边际价值",
-      "type": "safety",
-      "source": ""
-    },
-    {
-      "match": "塞内加尔 vs 伊拉克",
-      "market": "平局退款",
-      "bet": "【平局退款】塞内加尔 不败",
-      "odds": 1.062,
-      "ev": -0.025,
-      "mvi": 0.9745411764705882,
-      "prob": 0.9176470588235294,
-      "reason": "边际价值",
-      "type": "safety",
-      "source": ""
-    },
-    {
-      "match": "挪威 vs 法国",
-      "market": "波胆",
-      "bet": "【波胆】挪威 vs 法国 比分 2:3",
-      "odds": 21,
-      "ev": -0.03,
-      "mvi": 0.9702000000000001,
-      "prob": 0.0462,
-      "reason": "边际价值",
-      "type": "score",
-      "source": "Bet365"
     }
   ],
   "portfolios": [
     {
       "rank": 1,
-      "score": 89.5,
+      "score": 88.8,
+      "odds": 27.67,
+      "hitPct": 8.19,
+      "ev": 1.267,
+      "mvi": 1.371,
+      "legs": [
+        {
+          "id": "egy-irn-3_o25",
+          "bet": "【大小球】埃及 vs 伊朗 大2.5球",
+          "odds": 3,
+          "prob": 0.48,
+          "mvi": 1.44,
+          "ev": 0.44,
+          "market": "大小球",
+          "match": "埃及 vs 伊朗",
+          "group": "G组",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "uru-esp-3_btts_y",
+          "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
+          "odds": 2.05,
+          "prob": 0.58,
+          "mvi": 1.35,
+          "ev": 0.189,
+          "market": "BTTS",
+          "match": "乌拉圭 vs 西班牙",
+          "group": "H组",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "sen-irq-3_un2",
+          "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
+          "odds": 4.5,
+          "prob": 0.29421497216298886,
+          "mvi": 1.32396737473345,
+          "ev": 0.324,
+          "market": "比分区间",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals_range",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 15,
+        "mvi": 15,
+        "hit": 15,
+        "risk": 6.2,
+        "eff": 10,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": -2.5,
+        "stab": 4.7,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.4,
+        "valCap": 0
+      },
+      "tier": "高赔率冲击型",
+      "rationale": "3场组合[比分区间+BTTS+大小球]：埃及 vs 伊朗 大2.5球 + 乌拉圭 vs 西班牙 双方进球=是 + 塞内加尔 vs 伊拉克 小2球。强正EV，命中8.19%，评分88.8/100。",
+      "comparisonNote": "优于#2的理由：综合评分领先1.6分；MVI信号更强(1.37 vs 1.36)"
+    },
+    {
+      "rank": 2,
+      "score": 87.2,
+      "odds": 29.7,
+      "hitPct": 8.47,
+      "ev": 1.517,
+      "mvi": 1.361,
+      "legs": [
+        {
+          "id": "egy-irn-3_o25",
+          "bet": "【大小球】埃及 vs 伊朗 大2.5球",
+          "odds": 3,
+          "prob": 0.48,
+          "mvi": 1.44,
+          "ev": 0.44,
+          "market": "大小球",
+          "match": "埃及 vs 伊朗",
+          "group": "G组",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "sen-irq-3_un2",
+          "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
+          "odds": 4.5,
+          "prob": 0.29421497216298886,
+          "mvi": 1.32396737473345,
+          "ev": 0.324,
+          "market": "比分区间",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "uru-esp-3_o25",
+          "bet": "【大小球】乌拉圭 vs 西班牙 大2.5球",
+          "odds": 2.2,
+          "prob": 0.6,
+          "mvi": 1.32,
+          "ev": 0.32,
+          "market": "大小球",
+          "match": "乌拉圭 vs 西班牙",
+          "group": "H组",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 15,
+        "mvi": 15,
+        "hit": 15,
+        "risk": 5,
+        "eff": 10,
+        "indep": 10,
+        "div": 9.3,
+        "corr": 0,
+        "sRisk": -2.5,
+        "stab": 4.7,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.7,
+        "valCap": 0
+      },
+      "tier": "高赔率冲击型",
+      "rationale": "3场组合[比分区间+大小球]：埃及 vs 伊朗 大2.5球 + 塞内加尔 vs 伊拉克 小2球 + 乌拉圭 vs 西班牙 大2.5球。强正EV，命中8.47%，评分87.2/100。",
+      "comparisonNote": "落后#1的理由：综合评分差1.6分"
+    },
+    {
+      "rank": 3,
+      "score": 87,
+      "odds": 32.17,
+      "hitPct": 8.02,
+      "ev": 1.581,
+      "mvi": 1.422,
+      "legs": [
+        {
+          "id": "nzl-bel-3_cs_0-1",
+          "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
+          "odds": 13,
+          "prob": 0.1524,
+          "mvi": 1.9812,
+          "ev": 0.981,
+          "market": "波胆",
+          "match": "新西兰 vs 比利时",
+          "group": "G组",
+          "type": "score",
+          "source": "Bet365"
+        },
+        {
+          "id": "sen-irq-3_un3.5",
+          "bet": "【比分区间】塞内加尔 vs 伊拉克 小3.5球",
+          "odds": 1.65,
+          "prob": 0.731058578630005,
+          "mvi": 1.2062466547395083,
+          "ev": 0.206,
+          "market": "比分区间",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "nor-fra-3_o25",
+          "bet": "【大小球】挪威 vs 法国 大2.5球",
+          "odds": 1.5,
+          "prob": 0.72,
+          "mvi": 1.08,
+          "ev": 0.08,
+          "market": "大小球",
+          "match": "挪威 vs 法国",
+          "group": "I组",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 15,
+        "mvi": 15,
+        "hit": 15,
+        "risk": 5,
+        "eff": 10,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": -2.5,
+        "stab": 2.6,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.4,
+        "valCap": 1.5
+      },
+      "tier": "高赔率冲击型",
+      "rationale": "3场组合[大小球+比分区间+波胆]：新西兰 vs 比利时 比分 0:1 + 塞内加尔 vs 伊拉克 小3.5球 + 挪威 vs 法国 大2.5球。强正EV，命中8.02%，评分87/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 4,
+      "score": 86.9,
       "odds": 27,
-      "hitPct": 8.68,
-      "ev": 1.343,
-      "mvi": 1.534,
+      "hitPct": 8.77,
+      "ev": 1.368,
+      "mvi": 1.542,
       "legs": [
         {
           "id": "nzl-bel-3_cs_0-2",
           "bet": "【波胆】新西兰 vs 比利时 比分 0:2",
           "odds": 9,
-          "prob": 0.1808,
-          "mvi": 1.6272,
-          "ev": 0.627,
+          "prob": 0.1827,
+          "mvi": 1.6443,
+          "ev": 0.644,
           "market": "波胆",
           "match": "新西兰 vs 比利时",
           "group": "G组",
@@ -631,375 +751,19 @@
         "extRisk": 0,
         "consist": 5,
         "strat": 0.3,
-        "valCap": 4
+        "valCap": 1.5
       },
       "tier": "高赔率冲击型",
-      "rationale": "2场组合[波胆+大小球]：新西兰 vs 比利时 比分 0:2 + 埃及 vs 伊朗 大2.5球。强正EV，命中8.68%，评分89.5/100。",
-      "comparisonNote": "优于#2的理由：综合评分领先0.3分；EV更高(+0.2%)"
-    },
-    {
-      "rank": 2,
-      "score": 89.2,
-      "odds": 21.13,
-      "hitPct": 11.08,
-      "ev": 1.341,
-      "mvi": 1.579,
-      "legs": [
-        {
-          "id": "nzl-bel-3_cs_0-1",
-          "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
-          "odds": 13,
-          "prob": 0.1516,
-          "mvi": 1.9708,
-          "ev": 0.971,
-          "market": "波胆",
-          "match": "新西兰 vs 比利时",
-          "group": "G组",
-          "type": "score",
-          "source": "Bet365"
-        },
-        {
-          "id": "sen-irq-3_un3.5",
-          "bet": "【比分区间】塞内加尔 vs 伊拉克 小3.5球",
-          "odds": 1.625,
-          "prob": 0.731058578630005,
-          "mvi": 1.187970190273758,
-          "ev": 0.188,
-          "market": "比分区间",
-          "match": "塞内加尔 vs 伊拉克",
-          "group": "I组",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 15,
-        "mvi": 15,
-        "hit": 15,
-        "risk": 5,
-        "eff": 10,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": -2.5,
-        "stab": 2.7,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 4
-      },
-      "tier": "价值收益型",
-      "rationale": "2场组合[比分区间+波胆]：新西兰 vs 比利时 比分 0:1 + 塞内加尔 vs 伊拉克 小3.5球。强正EV，命中11.08%，评分89.2/100。",
-      "comparisonNote": "落后#1的理由：综合评分差0.3分"
-    },
-    {
-      "rank": 3,
-      "score": 87.9,
-      "odds": 26.65,
-      "hitPct": 8.79,
-      "ev": 1.343,
-      "mvi": 1.66,
-      "legs": [
-        {
-          "id": "nzl-bel-3_cs_0-1",
-          "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
-          "odds": 13,
-          "prob": 0.1516,
-          "mvi": 1.9708,
-          "ev": 0.971,
-          "market": "波胆",
-          "match": "新西兰 vs 比利时",
-          "group": "G组",
-          "type": "score",
-          "source": "Bet365"
-        },
-        {
-          "id": "uru-esp-3_btts_y",
-          "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
-          "odds": 2.05,
-          "prob": 0.58,
-          "mvi": 1.35,
-          "ev": 0.189,
-          "market": "BTTS",
-          "match": "乌拉圭 vs 西班牙",
-          "group": "H组",
-          "type": "btts",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 15,
-        "mvi": 15,
-        "hit": 15,
-        "risk": 3.3,
-        "eff": 10,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": -2.5,
-        "stab": 3.1,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0,
-        "valCap": 4
-      },
-      "tier": "高赔率冲击型",
-      "rationale": "2场组合[BTTS+波胆]：新西兰 vs 比利时 比分 0:1 + 乌拉圭 vs 西班牙 双方进球=是。强正EV，命中8.79%，评分87.9/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 4,
-      "score": 87.9,
-      "odds": 26.98,
-      "hitPct": 9.66,
-      "ev": 1.605,
-      "mvi": 1.646,
-      "legs": [
-        {
-          "id": "nzl-bel-3_cs_0-1",
-          "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
-          "odds": 13,
-          "prob": 0.1516,
-          "mvi": 1.9708,
-          "ev": 0.971,
-          "market": "波胆",
-          "match": "新西兰 vs 比利时",
-          "group": "G组",
-          "type": "score",
-          "source": "Bet365"
-        },
-        {
-          "id": "egy-irn-3_ov2",
-          "bet": "【比分区间】埃及 vs 伊朗 大2球",
-          "odds": 2.075,
-          "prob": 0.6370307944803832,
-          "mvi": 1.3218388985467955,
-          "ev": 0.322,
-          "market": "比分区间",
-          "match": "埃及 vs 伊朗",
-          "group": "G组",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 15,
-        "mvi": 15,
-        "hit": 15,
-        "risk": 3.3,
-        "eff": 10,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": -2.5,
-        "stab": 3.1,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 4
-      },
-      "tier": "高赔率冲击型",
-      "rationale": "2场组合[波胆+比分区间]：新西兰 vs 比利时 比分 0:1 + 埃及 vs 伊朗 大2球。强正EV，命中9.66%，评分87.9/100。",
+      "rationale": "2场组合[波胆+大小球]：新西兰 vs 比利时 比分 0:2 + 埃及 vs 伊朗 大2.5球。强正EV，命中8.77%，评分86.9/100。",
       "comparisonNote": ""
     },
     {
       "rank": 5,
-      "score": 87.7,
-      "odds": 26.14,
+      "score": 86.9,
+      "odds": 32.29,
       "hitPct": 8.19,
-      "ev": 1.141,
-      "mvi": 1.347,
-      "legs": [
-        {
-          "id": "egy-irn-3_o25",
-          "bet": "【大小球】埃及 vs 伊朗 大2.5球",
-          "odds": 3,
-          "prob": 0.48,
-          "mvi": 1.44,
-          "ev": 0.44,
-          "market": "大小球",
-          "match": "埃及 vs 伊朗",
-          "group": "G组",
-          "type": "goals",
-          "source": ""
-        },
-        {
-          "id": "uru-esp-3_btts_y",
-          "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
-          "odds": 2.05,
-          "prob": 0.58,
-          "mvi": 1.35,
-          "ev": 0.189,
-          "market": "BTTS",
-          "match": "乌拉圭 vs 西班牙",
-          "group": "H组",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "sen-irq-3_un2",
-          "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
-          "odds": 4.25,
-          "prob": 0.29421497216298886,
-          "mvi": 1.2504136316927026,
-          "ev": 0.25,
-          "market": "比分区间",
-          "match": "塞内加尔 vs 伊拉克",
-          "group": "I组",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 14.1,
-        "mvi": 15,
-        "hit": 15,
-        "risk": 6.2,
-        "eff": 10,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": -2.5,
-        "stab": 4.5,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.4,
-        "valCap": 0
-      },
-      "tier": "高赔率冲击型",
-      "rationale": "3场组合[比分区间+BTTS+大小球]：埃及 vs 伊朗 大2.5球 + 乌拉圭 vs 西班牙 双方进球=是 + 塞内加尔 vs 伊拉克 小2球。强正EV，命中8.19%，评分87.7/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 6,
-      "score": 87.5,
-      "odds": 18.68,
-      "hitPct": 11.52,
-      "ev": 1.151,
-      "mvi": 1.475,
-      "legs": [
-        {
-          "id": "nzl-bel-3_cs_0-2",
-          "bet": "【波胆】新西兰 vs 比利时 比分 0:2",
-          "odds": 9,
-          "prob": 0.1808,
-          "mvi": 1.6272,
-          "ev": 0.627,
-          "market": "波胆",
-          "match": "新西兰 vs 比利时",
-          "group": "G组",
-          "type": "score",
-          "source": "Bet365"
-        },
-        {
-          "id": "egy-irn-3_ov2",
-          "bet": "【比分区间】埃及 vs 伊朗 大2球",
-          "odds": 2.075,
-          "prob": 0.6370307944803832,
-          "mvi": 1.3218388985467955,
-          "ev": 0.322,
-          "market": "比分区间",
-          "match": "埃及 vs 伊朗",
-          "group": "G组",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 14.2,
-        "mvi": 15,
-        "hit": 15,
-        "risk": 3.3,
-        "eff": 9.3,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": -2.5,
-        "stab": 4.1,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 4
-      },
-      "tier": "价值收益型",
-      "rationale": "2场组合[波胆+比分区间]：新西兰 vs 比利时 比分 0:2 + 埃及 vs 伊朗 大2球。强正EV，命中11.52%，评分87.5/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 7,
-      "score": 87,
-      "odds": 28.05,
-      "hitPct": 8.47,
-      "ev": 1.377,
-      "mvi": 1.337,
-      "legs": [
-        {
-          "id": "egy-irn-3_o25",
-          "bet": "【大小球】埃及 vs 伊朗 大2.5球",
-          "odds": 3,
-          "prob": 0.48,
-          "mvi": 1.44,
-          "ev": 0.44,
-          "market": "大小球",
-          "match": "埃及 vs 伊朗",
-          "group": "G组",
-          "type": "goals",
-          "source": ""
-        },
-        {
-          "id": "uru-esp-3_o25",
-          "bet": "【大小球】乌拉圭 vs 西班牙 大2.5球",
-          "odds": 2.2,
-          "prob": 0.6,
-          "mvi": 1.32,
-          "ev": 0.32,
-          "market": "大小球",
-          "match": "乌拉圭 vs 西班牙",
-          "group": "H组",
-          "type": "goals",
-          "source": ""
-        },
-        {
-          "id": "sen-irq-3_un2",
-          "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
-          "odds": 4.25,
-          "prob": 0.29421497216298886,
-          "mvi": 1.2504136316927026,
-          "ev": 0.25,
-          "market": "比分区间",
-          "match": "塞内加尔 vs 伊拉克",
-          "group": "I组",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 15,
-        "mvi": 15,
-        "hit": 15,
-        "risk": 5,
-        "eff": 10,
-        "indep": 10,
-        "div": 9.3,
-        "corr": 0,
-        "sRisk": -2.5,
-        "stab": 4.5,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.7,
-        "valCap": 0
-      },
-      "tier": "高赔率冲击型",
-      "rationale": "3场组合[比分区间+大小球]：埃及 vs 伊朗 大2.5球 + 乌拉圭 vs 西班牙 大2.5球 + 塞内加尔 vs 伊拉克 小2球。强正EV，命中8.47%，评分87/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 8,
-      "score": 86.8,
-      "odds": 30.49,
-      "hitPct": 8.19,
-      "ev": 1.498,
-      "mvi": 1.427,
+      "ev": 1.645,
+      "mvi": 1.451,
       "legs": [
         {
           "id": "nzl-bel-3_u25",
@@ -1030,10 +794,10 @@
         {
           "id": "sen-irq-3_un2",
           "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
-          "odds": 4.25,
+          "odds": 4.5,
           "prob": 0.29421497216298886,
-          "mvi": 1.2504136316927026,
-          "ev": 0.25,
+          "mvi": 1.32396737473345,
+          "ev": 0.324,
           "market": "比分区间",
           "match": "塞内加尔 vs 伊拉克",
           "group": "I组",
@@ -1051,31 +815,86 @@
         "div": 10,
         "corr": 0,
         "sRisk": -2.5,
-        "stab": 3.9,
+        "stab": 4,
         "extRisk": 0,
         "consist": 5,
         "strat": 0.4,
         "valCap": 0
       },
       "tier": "高赔率冲击型",
-      "rationale": "3场组合[比分区间+BTTS+大小球]：新西兰 vs 比利时 小2.5球 + 乌拉圭 vs 西班牙 双方进球=是 + 塞内加尔 vs 伊拉克 小2球。强正EV，命中8.19%，评分86.8/100。",
+      "rationale": "3场组合[比分区间+BTTS+大小球]：新西兰 vs 比利时 小2.5球 + 乌拉圭 vs 西班牙 双方进球=是 + 塞内加尔 vs 伊拉克 小2球。强正EV，命中8.19%，评分86.9/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 9,
-      "score": 86.5,
-      "odds": 26.41,
-      "hitPct": 8.49,
-      "ev": 1.243,
-      "mvi": 1.372,
+      "rank": 6,
+      "score": 86.8,
+      "odds": 26.98,
+      "hitPct": 9.03,
+      "ev": 1.436,
+      "mvi": 1.605,
       "legs": [
         {
           "id": "nzl-bel-3_cs_0-1",
           "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
           "odds": 13,
-          "prob": 0.1516,
-          "mvi": 1.9708,
-          "ev": 0.971,
+          "prob": 0.1524,
+          "mvi": 1.9812,
+          "ev": 0.981,
+          "market": "波胆",
+          "match": "新西兰 vs 比利时",
+          "group": "G组",
+          "type": "score",
+          "source": "Bet365"
+        },
+        {
+          "id": "sen-irq-3_un3",
+          "bet": "【比分区间】塞内加尔 vs 伊拉克 小3球",
+          "odds": 2.075,
+          "prob": 0.5926665999540699,
+          "mvi": 1.2297831949046951,
+          "ev": 0.23,
+          "market": "比分区间",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals_range",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 15,
+        "mvi": 15,
+        "hit": 15,
+        "risk": 5,
+        "eff": 10,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": -2.5,
+        "stab": 2.7,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.1,
+        "valCap": 1.5
+      },
+      "tier": "高赔率冲击型",
+      "rationale": "2场组合[比分区间+波胆]：新西兰 vs 比利时 比分 0:1 + 塞内加尔 vs 伊拉克 小3球。强正EV，命中9.03%，评分86.8/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 7,
+      "score": 86.8,
+      "odds": 21.45,
+      "hitPct": 11.14,
+      "ev": 1.39,
+      "mvi": 1.594,
+      "legs": [
+        {
+          "id": "nzl-bel-3_cs_0-1",
+          "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
+          "odds": 13,
+          "prob": 0.1524,
+          "mvi": 1.9812,
+          "ev": 0.981,
           "market": "波胆",
           "match": "新西兰 vs 比利时",
           "group": "G组",
@@ -1085,10 +904,78 @@
         {
           "id": "sen-irq-3_un3.5",
           "bet": "【比分区间】塞内加尔 vs 伊拉克 小3.5球",
-          "odds": 1.625,
+          "odds": 1.65,
           "prob": 0.731058578630005,
-          "mvi": 1.187970190273758,
-          "ev": 0.188,
+          "mvi": 1.2062466547395083,
+          "ev": 0.206,
+          "market": "比分区间",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals_range",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 15,
+        "mvi": 15,
+        "hit": 15,
+        "risk": 5,
+        "eff": 10,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": -2.5,
+        "stab": 2.7,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.1,
+        "valCap": 1.5
+      },
+      "tier": "价值收益型",
+      "rationale": "2场组合[比分区间+波胆]：新西兰 vs 比利时 比分 0:1 + 塞内加尔 vs 伊拉克 小3.5球。强正EV，命中11.14%，评分86.8/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 8,
+      "score": 86.5,
+      "odds": 29.67,
+      "hitPct": 8.28,
+      "ev": 1.457,
+      "mvi": 1.304,
+      "legs": [
+        {
+          "id": "egy-irn-3_ov3",
+          "bet": "【比分区间】埃及 vs 伊朗 大3球",
+          "odds": 4.65,
+          "prob": 0.334589441253186,
+          "mvi": 1.5558409018273152,
+          "ev": 0.556,
+          "market": "比分区间",
+          "match": "埃及 vs 伊朗",
+          "group": "G组",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "uru-esp-3_btts_y",
+          "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
+          "odds": 2.05,
+          "prob": 0.58,
+          "mvi": 1.35,
+          "ev": 0.189,
+          "market": "BTTS",
+          "match": "乌拉圭 vs 西班牙",
+          "group": "H组",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "sen-irq-3_un3",
+          "bet": "【比分区间】塞内加尔 vs 伊拉克 小3球",
+          "odds": 2.075,
+          "prob": 0.5926665999540699,
+          "mvi": 1.2297831949046951,
+          "ev": 0.23,
           "market": "比分区间",
           "match": "塞内加尔 vs 伊拉克",
           "group": "I组",
@@ -1096,118 +983,186 @@
           "source": ""
         },
         {
-          "id": "cpv-ksa-3_un3.5",
-          "bet": "【比分区间】佛得角 vs 沙特 小3.5球",
-          "odds": 1.25,
-          "prob": 0.7662936430859597,
-          "mvi": 0.9578670538574496,
-          "ev": -0.042,
+          "id": "nor-fra-3_o25",
+          "bet": "【大小球】挪威 vs 法国 大2.5球",
+          "odds": 1.5,
+          "prob": 0.72,
+          "mvi": 1.08,
+          "ev": 0.08,
+          "market": "大小球",
+          "match": "挪威 vs 法国",
+          "group": "I组",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 15,
+        "mvi": 15,
+        "hit": 15,
+        "risk": 5.9,
+        "eff": 8.7,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": -2.5,
+        "stab": 4,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.5,
+        "valCap": 0
+      },
+      "tier": "高赔率冲击型",
+      "rationale": "4场组合[大小球+比分区间+BTTS]：埃及 vs 伊朗 大3球 + 乌拉圭 vs 西班牙 双方进球=是 + 塞内加尔 vs 伊拉克 小3球 + 挪威 vs 法国 大2.5球。强正EV，命中8.28%，评分86.5/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 9,
+      "score": 86.3,
+      "odds": 26.85,
+      "hitPct": 8.43,
+      "ev": 1.264,
+      "mvi": 1.325,
+      "legs": [
+        {
+          "id": "egy-irn-3_ov3",
+          "bet": "【比分区间】埃及 vs 伊朗 大3球",
+          "odds": 4.65,
+          "prob": 0.334589441253186,
+          "mvi": 1.5558409018273152,
+          "ev": 0.556,
           "market": "比分区间",
-          "match": "佛得角 vs 沙特",
+          "match": "埃及 vs 伊朗",
+          "group": "G组",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "uru-esp-3_o25",
+          "bet": "【大小球】乌拉圭 vs 西班牙 大2.5球",
+          "odds": 2.2,
+          "prob": 0.6,
+          "mvi": 1.32,
+          "ev": 0.32,
+          "market": "大小球",
+          "match": "乌拉圭 vs 西班牙",
           "group": "H组",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "sen-irq-3_u25",
+          "bet": "【大小球】塞内加尔 vs 伊拉克 小2.5球",
+          "odds": 2.625,
+          "prob": 0.42000000000000004,
+          "mvi": 1.1,
+          "ev": 0.103,
+          "market": "大小球",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 15,
+        "mvi": 15,
+        "hit": 15,
+        "risk": 5,
+        "eff": 9.9,
+        "indep": 10,
+        "div": 9.3,
+        "corr": 0,
+        "sRisk": -2.5,
+        "stab": 3.9,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.7,
+        "valCap": 0
+      },
+      "tier": "高赔率冲击型",
+      "rationale": "3场组合[大小球+比分区间]：埃及 vs 伊朗 大3球 + 乌拉圭 vs 西班牙 大2.5球 + 塞内加尔 vs 伊拉克 小2.5球。强正EV，命中8.43%，评分86.3/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 10,
+      "score": 86.3,
+      "odds": 32.68,
+      "hitPct": 9,
+      "ev": 1.94,
+      "mvi": 1.442,
+      "legs": [
+        {
+          "id": "nzl-bel-3_u25",
+          "bet": "【大小球】新西兰 vs 比利时 小2.5球",
+          "odds": 3.5,
+          "prob": 0.48,
+          "mvi": 1.68,
+          "ev": 0.68,
+          "market": "大小球",
+          "match": "新西兰 vs 比利时",
+          "group": "G组",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "sen-irq-3_un2",
+          "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
+          "odds": 4.5,
+          "prob": 0.29421497216298886,
+          "mvi": 1.32396737473345,
+          "ev": 0.324,
+          "market": "比分区间",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "egy-irn-3_ov2",
+          "bet": "【比分区间】埃及 vs 伊朗 大2球",
+          "odds": 2.075,
+          "prob": 0.6370307944803832,
+          "mvi": 1.3218388985467955,
+          "ev": 0.322,
+          "market": "比分区间",
+          "match": "埃及 vs 伊朗",
+          "group": "G组",
           "type": "goals_range",
           "source": ""
         }
       ],
       "breakdown": {
-        "ev": 14.9,
+        "ev": 15,
         "mvi": 15,
         "hit": 15,
         "risk": 5,
-        "eff": 9.8,
+        "eff": 10,
         "indep": 10,
         "div": 9.3,
         "corr": 0,
         "sRisk": -2.5,
-        "stab": 2.4,
-        "extRisk": 0,
-        "consist": 3.3,
-        "strat": 0.2,
-        "valCap": 4
-      },
-      "tier": "高赔率冲击型",
-      "rationale": "3场组合[比分区间+波胆]：新西兰 vs 比利时 比分 0:1 + 塞内加尔 vs 伊拉克 小3.5球 + 佛得角 vs 沙特 小3.5球。强正EV，命中8.49%，评分86.5/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 10,
-      "score": 86.4,
-      "odds": 20.42,
-      "hitPct": 10.31,
-      "ev": 1.105,
-      "mvi": 1.605,
-      "legs": [
-        {
-          "id": "nzl-bel-3_cs_0-1",
-          "bet": "【波胆】新西兰 vs 比利时 比分 0:1",
-          "odds": 13,
-          "prob": 0.1516,
-          "mvi": 1.9708,
-          "ev": 0.971,
-          "market": "波胆",
-          "match": "新西兰 vs 比利时",
-          "group": "G组",
-          "type": "score",
-          "source": "Bet365"
-        },
-        {
-          "id": "nor-fra-3_btts_y",
-          "bet": "【BTTS】挪威 vs 法国 双方进球=是",
-          "odds": 1.571,
-          "prob": 0.68,
-          "mvi": 1.24,
-          "ev": 0.068,
-          "market": "BTTS",
-          "match": "挪威 vs 法国",
-          "group": "I组",
-          "type": "btts",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13.8,
-        "mvi": 15,
-        "hit": 15,
-        "risk": 3.3,
-        "eff": 10,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": -2.5,
-        "stab": 2.8,
+        "stab": 4,
         "extRisk": 0,
         "consist": 5,
-        "strat": 0,
-        "valCap": 4
+        "strat": 0.5,
+        "valCap": 0
       },
-      "tier": "价值收益型",
-      "rationale": "2场组合[BTTS+波胆]：新西兰 vs 比利时 比分 0:1 + 挪威 vs 法国 双方进球=是。强正EV，命中10.31%，评分86.4/100。",
+      "tier": "高赔率冲击型",
+      "rationale": "3场组合[比分区间+大小球]：新西兰 vs 比利时 小2.5球 + 塞内加尔 vs 伊拉克 小2球 + 埃及 vs 伊朗 大2球。强正EV，命中9%，评分86.3/100。",
       "comparisonNote": ""
     }
   ],
   "capitalAllocation": [
     {
-      "tier": "核心仓位（高赔率冲击型·2腿）",
+      "tier": "核心仓位（高赔率冲击型·3腿）",
       "portfolio": {
         "id": "best",
-        "score": 89.5,
-        "odds": 27,
-        "ev": 1.343,
-        "hitPct": 8.68,
+        "score": 88.8,
+        "odds": 27.67,
+        "ev": 1.267,
+        "hitPct": 8.19,
         "legs": [
-          {
-            "id": "nzl-bel-3_cs_0-2",
-            "bet": "【波胆】新西兰 vs 比利时 比分 0:2",
-            "odds": 9,
-            "prob": 0.1808,
-            "mvi": 1.6272,
-            "ev": 0.627,
-            "market": "波胆",
-            "match": "新西兰 vs 比利时",
-            "group": "G组",
-            "type": "score",
-            "source": "Bet365"
-          },
           {
             "id": "egy-irn-3_o25",
             "bet": "【大小球】埃及 vs 伊朗 大2.5球",
@@ -1220,6 +1175,32 @@
             "group": "G组",
             "type": "goals",
             "source": ""
+          },
+          {
+            "id": "uru-esp-3_btts_y",
+            "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
+            "odds": 2.05,
+            "prob": 0.58,
+            "mvi": 1.35,
+            "ev": 0.189,
+            "market": "BTTS",
+            "match": "乌拉圭 vs 西班牙",
+            "group": "H组",
+            "type": "btts",
+            "source": ""
+          },
+          {
+            "id": "sen-irq-3_un2",
+            "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
+            "odds": 4.5,
+            "prob": 0.29421497216298886,
+            "mvi": 1.32396737473345,
+            "ev": 0.324,
+            "market": "比分区间",
+            "match": "塞内加尔 vs 伊拉克",
+            "group": "I组",
+            "type": "goals_range",
+            "source": ""
           }
         ]
       },
@@ -1230,25 +1211,12 @@
   ],
   "bestPortfolio": {
     "tier": "高赔率冲击型",
-    "score": 89.5,
-    "odds": 27,
-    "hitPct": 8.68,
-    "ev": 1.343,
-    "mvi": 1.534,
+    "score": 88.8,
+    "odds": 27.67,
+    "hitPct": 8.19,
+    "ev": 1.267,
+    "mvi": 1.371,
     "legs": [
-      {
-        "id": "nzl-bel-3_cs_0-2",
-        "bet": "【波胆】新西兰 vs 比利时 比分 0:2",
-        "odds": 9,
-        "prob": 0.1808,
-        "mvi": 1.6272,
-        "ev": 0.627,
-        "market": "波胆",
-        "match": "新西兰 vs 比利时",
-        "group": "G组",
-        "type": "score",
-        "source": "Bet365"
-      },
       {
         "id": "egy-irn-3_o25",
         "bet": "【大小球】埃及 vs 伊朗 大2.5球",
@@ -1261,35 +1229,61 @@
         "group": "G组",
         "type": "goals",
         "source": ""
+      },
+      {
+        "id": "uru-esp-3_btts_y",
+        "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
+        "odds": 2.05,
+        "prob": 0.58,
+        "mvi": 1.35,
+        "ev": 0.189,
+        "market": "BTTS",
+        "match": "乌拉圭 vs 西班牙",
+        "group": "H组",
+        "type": "btts",
+        "source": ""
+      },
+      {
+        "id": "sen-irq-3_un2",
+        "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
+        "odds": 4.5,
+        "prob": 0.29421497216298886,
+        "mvi": 1.32396737473345,
+        "ev": 0.324,
+        "market": "比分区间",
+        "match": "塞内加尔 vs 伊拉克",
+        "group": "I组",
+        "type": "goals_range",
+        "source": ""
       }
     ],
     "breakdown": {
       "ev": 15,
       "mvi": 15,
       "hit": 15,
-      "risk": 3.3,
+      "risk": 6.2,
       "eff": 10,
       "indep": 10,
       "div": 10,
       "corr": 0,
       "sRisk": -2.5,
-      "stab": 4.4,
+      "stab": 4.7,
       "extRisk": 0,
       "consist": 5,
-      "strat": 0.3,
-      "valCap": 4
+      "strat": 0.4,
+      "valCap": 0
     },
-    "rationale": "2场组合[波胆+大小球]：新西兰 vs 比利时 比分 0:2 + 埃及 vs 伊朗 大2.5球。强正EV，命中8.68%，评分89.5/100。",
+    "rationale": "3场组合[大小球+BTTS+比分区间]：埃及 vs 伊朗 大2.5球 + 乌拉圭 vs 西班牙 双方进球=是 + 塞内加尔 vs 伊拉克 小2球。强正EV，命中8.19%，评分88.8/100。",
     "decisionLogic": {
-      "whyBest": "综合评分领先0.3分；EV更高(+0.2%)",
-      "keyDifferentiator": "更高的期望值"
+      "whyBest": "综合评分领先1.6分；MVI信号更强(1.37 vs 1.36)",
+      "keyDifferentiator": "更好的EV/风险/命中率综合平衡"
     }
   },
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
       "reason": "EV显著负(-26.5%)",
-      "count": 1,
+      "count": 2,
       "examples": [
         {
           "match": "挪威 vs 法国",
@@ -1297,6 +1291,13 @@
           "odds": 2.625,
           "ev": -0.265,
           "mvi": 0.74
+        },
+        {
+          "match": "新西兰 vs 比利时",
+          "bet": "新西兰 vs 比利时 大2球",
+          "odds": 1.105,
+          "ev": -0.265,
+          "mvi": 0.7352786674152294
         }
       ]
     },
@@ -1316,43 +1317,50 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-17.2%)",
+      "reason": "EV显著负(-17.5%)",
       "count": 1,
       "examples": [
         {
           "match": "挪威 vs 法国",
           "bet": "挪威 vs 法国 比分 1:2",
           "odds": 9,
-          "ev": -0.172,
-          "mvi": 0.8280000000000001
+          "ev": -0.175,
+          "mvi": 0.8253
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-18.7%)",
-      "count": 1,
+      "reason": "EV显著负(-21.9%)",
+      "count": 2,
       "examples": [
         {
           "match": "挪威 vs 法国",
           "bet": "挪威 vs 法国 比分 2:2",
           "odds": 15,
-          "ev": -0.187,
-          "mvi": 0.813
+          "ev": -0.219,
+          "mvi": 0.7815
+        },
+        {
+          "match": "埃及 vs 伊朗",
+          "bet": "埃及 vs 伊朗 比分 2:0",
+          "odds": 10,
+          "ev": -0.219,
+          "mvi": 0.781
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-31.5%)",
+      "reason": "EV显著负(-32.9%)",
       "count": 1,
       "examples": [
         {
           "match": "挪威 vs 法国",
           "bet": "挪威 vs 法国 比分 1:1",
           "odds": 9.5,
-          "ev": -0.315,
-          "mvi": 0.6849500000000001
+          "ev": -0.329,
+          "mvi": 0.6707
         }
       ]
     },
@@ -1401,7 +1409,7 @@
     {
       "category": "投注项淘汰",
       "reason": "EV显著负(-18.3%)",
-      "count": 1,
+      "count": 2,
       "examples": [
         {
           "match": "挪威 vs 法国",
@@ -1409,13 +1417,20 @@
           "odds": 2.25,
           "ev": -0.183,
           "mvi": 0.8166807124191378
+        },
+        {
+          "match": "新西兰 vs 比利时",
+          "bet": "新西兰 vs 比利时 比分 1:1",
+          "odds": 15,
+          "ev": -0.182,
+          "mvi": 0.8175
         }
       ]
     },
     {
       "category": "投注项淘汰",
       "reason": "EV显著负(-9.0%)",
-      "count": 2,
+      "count": 3,
       "examples": [
         {
           "match": "塞内加尔 vs 伊拉克",
@@ -1428,6 +1443,13 @@
           "match": "新西兰 vs 比利时",
           "bet": "新西兰 主胜",
           "odds": 13,
+          "ev": -0.09,
+          "mvi": 0.91
+        },
+        {
+          "match": "新西兰 vs 比利时",
+          "bet": "新西兰 vs 比利时 平局",
+          "odds": 7,
           "ev": -0.09,
           "mvi": 0.91
         }
@@ -1463,71 +1485,99 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-17.6%)",
-      "count": 1,
+      "reason": "EV显著负(-10.5%)",
+      "count": 2,
       "examples": [
         {
           "match": "塞内加尔 vs 伊拉克",
           "bet": "伊拉克 不败",
-          "odds": 10,
-          "ev": -0.176,
-          "mvi": 0.8235294117647058
+          "odds": 11,
+          "ev": -0.105,
+          "mvi": 0.8953488372093023
+        },
+        {
+          "match": "新西兰 vs 比利时",
+          "bet": "新西兰 不败",
+          "odds": 11,
+          "ev": -0.105,
+          "mvi": 0.8953488372093023
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-31.0%)",
+      "reason": "EV显著负(-32.2%)",
       "count": 1,
       "examples": [
         {
           "match": "塞内加尔 vs 伊拉克",
           "bet": "塞内加尔 vs 伊拉克 比分 3:1",
           "odds": 11,
-          "ev": -0.31,
-          "mvi": 0.6897000000000001
+          "ev": -0.322,
+          "mvi": 0.6776
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-26.4%)",
-      "count": 1,
+      "reason": "EV显著负(-28.1%)",
+      "count": 2,
       "examples": [
         {
           "match": "塞内加尔 vs 伊拉克",
           "bet": "塞内加尔 vs 伊拉克 比分 2:1",
           "odds": 10,
-          "ev": -0.264,
-          "mvi": 0.736
+          "ev": -0.281,
+          "mvi": 0.719
+        },
+        {
+          "match": "新西兰 vs 比利时",
+          "bet": "新西兰 vs 比利时 比分 1:2",
+          "odds": 11,
+          "ev": -0.281,
+          "mvi": 0.7193999999999999
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-14.6%)",
+      "reason": "EV显著负(-16.0%)",
       "count": 1,
       "examples": [
         {
           "match": "塞内加尔 vs 伊拉克",
           "bet": "塞内加尔 vs 伊拉克 大2球",
-          "odds": 1.21,
-          "ev": -0.146,
-          "mvi": 0.8539998836827835
+          "odds": 1.19,
+          "ev": -0.16,
+          "mvi": 0.8398841831260433
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-39.5%)",
+      "reason": "EV显著负(-29.7%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "塞内加尔 vs 伊拉克",
+          "bet": "塞内加尔 vs 伊拉克 大3球",
+          "odds": 1.725,
+          "ev": -0.297,
+          "mvi": 0.7026501150792295
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-40.8%)",
       "count": 1,
       "examples": [
         {
           "match": "塞内加尔 vs 伊拉克",
           "bet": "塞内加尔 vs 伊拉克 大3.5球",
-          "odds": 2.25,
-          "ev": -0.395,
-          "mvi": 0.6051181980824889
+          "odds": 2.2,
+          "ev": -0.408,
+          "mvi": 0.5916711270139892
         }
       ]
     },
@@ -1561,120 +1611,127 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-9.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "乌拉圭 vs 西班牙",
-          "bet": "西班牙 不败",
-          "odds": 1.2,
-          "ev": -0.092,
-          "mvi": 0.9081081081081082
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-11.3%)",
+      "reason": "EV显著负(-11.9%)",
       "count": 1,
       "examples": [
         {
           "match": "乌拉圭 vs 西班牙",
           "bet": "乌拉圭 vs 西班牙 比分 1:2",
           "odds": 9,
-          "ev": -0.113,
-          "mvi": 0.8865000000000001
+          "ev": -0.119,
+          "mvi": 0.8811000000000001
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-32.4%)",
-      "count": 2,
+      "reason": "EV显著负(-33.7%)",
+      "count": 1,
       "examples": [
         {
           "match": "乌拉圭 vs 西班牙",
           "bet": "乌拉圭 vs 西班牙 比分 1:1",
           "odds": 7.5,
-          "ev": -0.323,
-          "mvi": 0.6765
-        },
-        {
-          "match": "新西兰 vs 比利时",
-          "bet": "新西兰 vs 比利时 大2.5球",
-          "odds": 1.3,
-          "ev": -0.324,
-          "mvi": 0.68
+          "ev": -0.337,
+          "mvi": 0.663
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-25.2%)",
+      "reason": "EV显著负(-23.1%)",
       "count": 1,
       "examples": [
         {
           "match": "乌拉圭 vs 西班牙",
           "bet": "乌拉圭 vs 西班牙 比分 0:2",
           "odds": 7,
-          "ev": -0.252,
-          "mvi": 0.7476
+          "ev": -0.231,
+          "mvi": 0.7686000000000001
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-12.6%)",
+      "reason": "EV显著负(-17.3%)",
       "count": 1,
       "examples": [
         {
           "match": "乌拉圭 vs 西班牙",
           "bet": "乌拉圭 vs 西班牙 比分 2:1",
           "odds": 21,
-          "ev": -0.126,
-          "mvi": 0.8736
+          "ev": -0.173,
+          "mvi": 0.8274
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-35.3%)",
+      "reason": "EV显著负(-8.4%)",
+      "count": 3,
+      "examples": [
+        {
+          "match": "乌拉圭 vs 西班牙",
+          "bet": "乌拉圭 vs 西班牙 比分 2:2",
+          "odds": 21,
+          "ev": -0.084,
+          "mvi": 0.9156000000000001
+        },
+        {
+          "match": "佛得角 vs 沙特",
+          "bet": "佛得角 不败",
+          "odds": 1.833,
+          "ev": -0.084,
+          "mvi": 0.9165
+        },
+        {
+          "match": "佛得角 vs 沙特",
+          "bet": "沙特 不败",
+          "odds": 1.833,
+          "ev": -0.084,
+          "mvi": 0.9165
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-36.7%)",
       "count": 1,
       "examples": [
         {
           "match": "乌拉圭 vs 西班牙",
           "bet": "乌拉圭 vs 西班牙 小2球",
-          "odds": 2.3,
-          "ev": -0.353,
-          "mvi": 0.6472328970870309
+          "odds": 2.25,
+          "ev": -0.367,
+          "mvi": 0.6331626167155738
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-29.2%)",
+      "reason": "EV显著负(-30.3%)",
       "count": 1,
       "examples": [
         {
           "match": "乌拉圭 vs 西班牙",
           "bet": "乌拉圭 vs 西班牙 小2.5球",
-          "odds": 1.675,
-          "ev": -0.292,
-          "mvi": 0.7076952633137653
+          "odds": 1.65,
+          "ev": -0.303,
+          "mvi": 0.6971326474434105
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-22.0%)",
+      "reason": "EV显著负(-23.5%)",
       "count": 1,
       "examples": [
         {
           "match": "乌拉圭 vs 西班牙",
           "bet": "乌拉圭 vs 西班牙 小3球",
-          "odds": 1.35,
-          "ev": -0.22,
-          "mvi": 0.7796187430008458
+          "odds": 1.325,
+          "ev": -0.235,
+          "mvi": 0.7651813588712004
         }
       ]
     },
@@ -1694,20 +1751,6 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-8.1%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "佛得角 vs 沙特",
-          "bet": "沙特 客胜",
-          "odds": 2.625,
-          "ev": -0.081,
-          "mvi": 0.92
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
       "reason": "EV显著负(-17.1%)",
       "count": 1,
       "examples": [
@@ -1722,64 +1765,50 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-8.4%)",
+      "reason": "EV显著负(-13.6%)",
       "count": 1,
       "examples": [
         {
           "match": "佛得角 vs 沙特",
           "bet": "佛得角 vs 沙特 双方进球=是",
-          "odds": 1.909,
-          "ev": -0.084,
-          "mvi": 1.09
+          "odds": 1.8,
+          "ev": -0.136,
+          "mvi": 1.03
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-9.6%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "佛得角 vs 沙特",
-          "bet": "沙特 不败",
-          "odds": 1.833,
-          "ev": -0.096,
-          "mvi": 0.9035915492957747
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-10.2%)",
+      "reason": "EV显著负(-11.2%)",
       "count": 2,
       "examples": [
         {
           "match": "佛得角 vs 沙特",
           "bet": "佛得角 vs 沙特 比分 2:1",
           "odds": 11,
-          "ev": -0.102,
-          "mvi": 0.8976000000000001
+          "ev": -0.112,
+          "mvi": 0.8876999999999999
         },
         {
-          "match": "埃及 vs 伊朗",
-          "bet": "埃及 vs 伊朗 小3.5球",
-          "odds": 1.14,
-          "ev": -0.102,
-          "mvi": 0.8982415630328998
+          "match": "佛得角 vs 沙特",
+          "bet": "佛得角 vs 沙特 大3.5球",
+          "odds": 3.8,
+          "ev": -0.112,
+          "mvi": 0.8880841562733529
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-31.2%)",
+      "reason": "EV显著负(-31.9%)",
       "count": 1,
       "examples": [
         {
           "match": "佛得角 vs 沙特",
           "bet": "佛得角 vs 沙特 比分 1:0",
           "odds": 8,
-          "ev": -0.312,
-          "mvi": 0.688
+          "ev": -0.319,
+          "mvi": 0.6808
         }
       ]
     },
@@ -1813,15 +1842,15 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-24.3%)",
+      "reason": "EV显著负(-25.9%)",
       "count": 1,
       "examples": [
         {
           "match": "佛得角 vs 沙特",
           "bet": "佛得角 vs 沙特 比分 2:0",
           "odds": 13,
-          "ev": -0.243,
-          "mvi": 0.7565999999999999
+          "ev": -0.259,
+          "mvi": 0.741
         }
       ]
     },
@@ -1869,15 +1898,15 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-11.2%)",
+      "reason": "EV显著负(-32.4%)",
       "count": 1,
       "examples": [
         {
-          "match": "佛得角 vs 沙特",
-          "bet": "佛得角 vs 沙特 大3.5球",
-          "odds": 3.8,
-          "ev": -0.112,
-          "mvi": 0.8880841562733529
+          "match": "新西兰 vs 比利时",
+          "bet": "新西兰 vs 比利时 大2.5球",
+          "odds": 1.3,
+          "ev": -0.324,
+          "mvi": 0.68
         }
       ]
     },
@@ -1897,71 +1926,15 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-9.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "新西兰 vs 比利时",
-          "bet": "新西兰 不败",
-          "odds": 11,
-          "ev": -0.094,
-          "mvi": 0.9058823529411765
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-15.9%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "新西兰 vs 比利时",
-          "bet": "新西兰 vs 比利时 比分 1:1",
-          "odds": 15,
-          "ev": -0.159,
-          "mvi": 0.8414999999999999
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-26.3%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "新西兰 vs 比利时",
-          "bet": "新西兰 vs 比利时 比分 1:2",
-          "odds": 11,
-          "ev": -0.263,
-          "mvi": 0.737
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-26.8%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "新西兰 vs 比利时",
-          "bet": "新西兰 vs 比利时 大2球",
-          "odds": 1.1,
-          "ev": -0.268,
-          "mvi": 0.7319516146214954
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-49.2%)",
+      "reason": "EV显著负(-48.3%)",
       "count": 1,
       "examples": [
         {
           "match": "新西兰 vs 比利时",
           "bet": "新西兰 vs 比利时 大3球",
-          "odds": 1.4,
-          "ev": -0.492,
-          "mvi": 0.5081568877274635
+          "odds": 1.425,
+          "ev": -0.483,
+          "mvi": 0.517231117865454
         }
       ]
     },
@@ -2051,20 +2024,6 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-14.1%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "埃及 vs 伊朗",
-          "bet": "埃及 vs 伊朗 比分 2:0",
-          "odds": 11,
-          "ev": -0.141,
-          "mvi": 0.8591
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
       "reason": "EV显著负(-58.9%)",
       "count": 1,
       "examples": [
@@ -2118,28 +2077,29 @@
           "mvi": 0.7851844593212405
         }
       ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-10.2%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "埃及 vs 伊朗",
+          "bet": "埃及 vs 伊朗 小3.5球",
+          "odds": 1.14,
+          "ev": -0.102,
+          "mvi": 0.8982415630328998
+        }
+      ]
     }
   ],
   "finalVerdict": {
-    "verdict": "今日最佳：高赔率冲击型组合 27x",
-    "reason": "新西兰 vs 比利时 比分 0:2 + 埃及 vs 伊朗 大2.5球。Portfolio Score=89.5/100，EV=+134.3%，命中率8.68%。正期望值显著，优先配置。 ✅ 处于15-50倍推荐区间。",
+    "verdict": "今日最佳：高赔率冲击型组合 27.67x",
+    "reason": "埃及 vs 伊朗 大2.5球 + 乌拉圭 vs 西班牙 双方进球=是 + 塞内加尔 vs 伊拉克 小2球。Portfolio Score=88.8/100，EV=+126.7%，命中率8.19%。正期望值显著，优先配置。 ✅ 处于15-50倍推荐区间。",
     "bestPortfolio": {
-      "score": 89.5,
-      "odds": 27,
+      "score": 88.8,
+      "odds": 27.67,
       "legs": [
-        {
-          "id": "nzl-bel-3_cs_0-2",
-          "bet": "【波胆】新西兰 vs 比利时 比分 0:2",
-          "odds": 9,
-          "prob": 0.1808,
-          "mvi": 1.6272,
-          "ev": 0.627,
-          "market": "波胆",
-          "match": "新西兰 vs 比利时",
-          "group": "G组",
-          "type": "score",
-          "source": "Bet365"
-        },
         {
           "id": "egy-irn-3_o25",
           "bet": "【大小球】埃及 vs 伊朗 大2.5球",
@@ -2151,6 +2111,32 @@
           "match": "埃及 vs 伊朗",
           "group": "G组",
           "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "uru-esp-3_btts_y",
+          "bet": "【BTTS】乌拉圭 vs 西班牙 双方进球=是",
+          "odds": 2.05,
+          "prob": 0.58,
+          "mvi": 1.35,
+          "ev": 0.189,
+          "market": "BTTS",
+          "match": "乌拉圭 vs 西班牙",
+          "group": "H组",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "sen-irq-3_un2",
+          "bet": "【比分区间】塞内加尔 vs 伊拉克 小2球",
+          "odds": 4.5,
+          "prob": 0.29421497216298886,
+          "mvi": 1.32396737473345,
+          "ev": 0.324,
+          "market": "比分区间",
+          "match": "塞内加尔 vs 伊拉克",
+          "group": "I组",
+          "type": "goals_range",
           "source": ""
         }
       ]
@@ -2190,30 +2176,30 @@
     }
   },
   "candidatePool": {
-    "total": 132,
+    "total": 134,
     "accepted": 71,
-    "rejected": 61,
+    "rejected": 63,
     "abandonedMatches": 0
   },
   "stats": {
-    "totalCombinations": 5381,
-    "topScore": 89.5,
-    "scoredCount": 5381,
+    "totalCombinations": 5385,
+    "topScore": 88.8,
+    "scoredCount": 5385,
     "byMarket": {
       "胜平负": 15,
       "大小球": 6,
       "BTTS": 6,
       "双重机会": 8,
       "平局退款": 7,
-      "波胆": 10,
-      "比分区间": 19
+      "波胆": 9,
+      "比分区间": 20
     },
     "byLegs": {
-      "2腿": 2090,
       "3腿": 2500,
-      "4腿": 213,
-      "5腿": 281,
-      "6腿": 297
+      "2腿": 2090,
+      "4腿": 210,
+      "5腿": 287,
+      "6腿": 298
     }
   },
   "wcpeValidations": {
