@@ -509,18 +509,22 @@ async function main() {
 
   // 如果当前是样本数据但已有真实Bet365数据，保留真实数据（仅更新ML/O/U/BTTS维度）
   const isSample = (result?.source || '').includes('sample')
-  const hasRealData = existingSource.includes('Bet365')
+  const hasRealData = existingSource.includes('Bet365') ||
+    Object.values(existingOdds).some(o => o.correctScore && Object.keys(o.correctScore).length > 0)
   
   let mergedOdds
+  let mergedSource
   if (isSample && hasRealData) {
     // 样本数据不覆盖已有真实Bet365数据
     mergedOdds = { ...existingOdds }
+    mergedSource = existingSource || 'Bet365 (preserved)'
   } else {
     mergedOdds = { ...existingOdds, ...(result?.odds || {}) }
+    mergedSource = result?.source || 'sample-estimate'
   }
   const output = {
     fetchedAt: result?.fetchedAt || new Date().toISOString(),
-    source: result?.source || 'sample-estimate',
+    source: mergedSource,
     updatedMatchIds: Object.keys(result?.odds || {}),
     totalMatches: Object.keys(mergedOdds).length,
     odds: mergedOdds,

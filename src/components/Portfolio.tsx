@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 interface PortfolioLeg {
   id: string; bet: string; odds: number; prob: number; mvi: number; ev: number
-  market: string; match: string; group: string; type?: string
+  market: string; match: string; group: string; type?: string; source?: string
 }
 interface PortfolioItem {
   rank: number; score: number; odds: number; hitPct: number; ev: number; mvi: number
@@ -26,7 +26,7 @@ interface PortfolioData {
     verdict: string; investableCount: number; highMviCount: number
     positiveEvCount: number; suggestedExposure: string; summary: string; highlights: string[]
   }
-  investmentPool: { match: string; market: string; bet: string; odds: number; ev: number; mvi: number; reason: string; type?: string }[]
+  investmentPool: { match: string; market: string; bet: string; odds: number; ev: number; mvi: number; reason: string; type?: string; source?: string }[]
   portfolios: PortfolioItem[]
   capitalAllocation: AllocationItem[]
   finalVerdict: { verdict: string; reason: string; oddsAssessment?: string; bestPortfolio?: { score: number; odds: number; legs: PortfolioLeg[] } | null }
@@ -388,6 +388,9 @@ function LegRow({ leg, index, compact }: { leg: PortfolioLeg; index: number; com
       </div>
       <div className="flex items-center gap-3 shrink-0">
         <span className="text-[11px] text-[#ffd700] font-bold">@{leg.odds}</span>
+        {leg.market === '波胆' && leg.source && (
+          <span className="text-[7px] text-[#555555]">{leg.source === 'Bet365' ? 'B365' : '估'}</span>
+        )}
         <span style={{ color: mviColor, fontSize: '10px' }}>MVI {leg.mvi?.toFixed(2)}</span>
         <span className={`text-[9px] ${leg.ev > 0 ? 'text-[#00ff88]' : 'text-[#ff6b6b]'}`}>{leg.ev > 0 ? '+' : ''}{(leg.ev * 100).toFixed(1)}%</span>
       </div>

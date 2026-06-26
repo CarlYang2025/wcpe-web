@@ -234,6 +234,133 @@ function estimateOverHdpProb(over25p, top5Scores, hdp) {
   return 1 / (1 + Math.exp(-(expGoals - hdp) / 0.8))
 }
 
+// ========== Poisson 波胆赔率估算器 ==========
+/**
+ * 当 Bet365 correctScore 赔率不可用时，用 Poisson 模型从 ML + O/U 赔率推导。
+ * 行业标准方法：从 O/U 2.5 推导总期望进球 λ，从 ML 分配主客队 λ，Poisson 生成比分概率。
+ *
+ * @param {number} homeWinProb - 模型主胜概率
+ * @param {number} drawProb - 模型平局概率
+ * @param {number} awayWinProb - 模型客胜概率
+ * @param {number} over25Prob - 模型大2.5球概率
+ * @param {Array} top5Scores - WCPE top5 比分列表 [{score, probability, ...}]
+ * @returns {Object} { "2-1": 8.5, "1-1": 6.0, ... } Bet365 格式（横杠）
+ */
+function estimateCorrectScoreOdds(homeWinProb, drawProb, awayWinProb, over25Prob, top5Scores) {
+  // Step 1: 从 over25Prob 反推总期望进球 λ（二分法求解 Poisson CDF）
+  // P(≤2 goals) = e^-λ × (1 + λ + λ²/2) = 1 - over25Prob
+  const targetUnder25 = 1 - over25Prob
+  let lo = 0.3, hi = 8.0
+  for (let iter = 0; iter < 60; iter++) {
+    const mid = (lo + hi) / 2
+    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
+    if (pUnder25 > targetUnder25) lo = mid
+    else hi = mid
+  }
+  const totalLambda = (lo + hi) / 2
+
+  // Step 2: 用 ML 概率分配主客队 λ
+  // 主胜概率高 → 主队进球多；用 logit 变换使分配更平滑
+  const homeShare = homeWinProb + drawProb * 0.45 // 平局贡献部分给主队
+  const awayShare = awayWinProb + drawProb * 0.55
+  const shareSum = homeShare + awayShare
+  const homeLambda = totalLambda * (homeShare / shareSum)
+  const awayLambda = totalLambda * (awayShare / shareSum)
+
+  // Step 3: Poisson PMF
+  function poissonPMF(k, lambda) {
+    if (lambda <= 0) return k === 0 ? 1 : 0
+    let logP = -lambda + k * Math.log(lambda)
+    // log(k!) via Stirling for large k, exact for small
+    let logFact = 0
+    for (let i = 2; i <= k; i++) logFact += Math.log(i)
+    return Math.exp(logP - logFact)
+  }
+
+  // Step 4: 为 top5Scores 中的每个比分计算赔率
+  const MARGIN = 0.25 // 25% bookmaker margin (Bet365 correct score 典型值)
+  const result = {}
+
+  for (const s of top5Scores) {
+    const score = typeof s === 'string' ? s : s.score || ''
+    const [h, a] = score.split(':').map(Number)
+    if (isNaN(h) || isNaN(a)) continue
+
+    // Poisson 概率
+    const poissonProb = poissonPMF(h, homeLambda) * poissonPMF(a, awayLambda)
+
+    // 混合：60% WCPE模型概率 + 40% Poisson（模型概率更精准，Poisson提供市场视角）
+    const modelProb = typeof s === 'object' ? (s.probability || 0) : 0
+    const blendedProb = modelProb > 0 ? (modelProb * 0.6 + poissonProb * 0.4) : poissonProb
+
+    if (blendedProb > 0.001) {
+      // 市场赔率 = (1/概率) / (1+margin)，模拟 bookmaker 定价
+      const fairOdds = 1 / blendedProb
+      const marketOdds = fairOdds / (1 + MARGIN)
+      result[score.replace(':', '-')] = Math.round(marketOdds * 100) / 100
+    }
+  }
+
+  return result
+}
+
+/**
+ * 用 Poisson 模型为 top5Scores 中的每个比分估算概率（WCPE 格式 "2:1"）。
+ * 当 WCPE 模型概率未校准（全为 0.01）时使用此函数替代。
+ *
+ * @returns {Object} { "2:1": 0.12, "1:1": 0.08, ... } WCPE 格式（冒号）
+ */
+function estimateScoreProbabilities(homeWinProb, drawProb, awayWinProb, over25Prob, top5Scores) {
+  // Step 1: 从 over25Prob 反推总期望进球 λ
+  const targetUnder25 = 1 - over25Prob
+  let lo = 0.3, hi = 8.0
+  for (let iter = 0; iter < 60; iter++) {
+    const mid = (lo + hi) / 2
+    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
+    if (pUnder25 > targetUnder25) lo = mid
+    else hi = mid
+  }
+  const totalLambda = (lo + hi) / 2
+
+  // Step 2: 用 ML 概率分配主客队 λ
+  const homeShare = homeWinProb + drawProb * 0.45
+  const awayShare = awayWinProb + drawProb * 0.55
+  const shareSum = homeShare + awayShare
+  const homeLambda = totalLambda * (homeShare / shareSum)
+  const awayLambda = totalLambda * (awayShare / shareSum)
+
+  // Step 3: Poisson PMF
+  function poissonPMF(k, lambda) {
+    if (lambda <= 0) return k === 0 ? 1 : 0
+    let logP = -lambda + k * Math.log(lambda)
+    let logFact = 0
+    for (let i = 2; i <= k; i++) logFact += Math.log(i)
+    return Math.exp(logP - logFact)
+  }
+
+  // Step 4: 计算每个比分的 Poisson 概率
+  const result = {}
+  let totalRaw = 0
+  for (const s of top5Scores) {
+    const score = typeof s === 'string' ? s : s.score || ''
+    const [h, a] = score.split(':').map(Number)
+    if (isNaN(h) || isNaN(a)) continue
+    const prob = poissonPMF(h, homeLambda) * poissonPMF(a, awayLambda)
+    result[score] = prob
+    totalRaw += prob
+  }
+
+  // 归一化：让 top5 概率和 = min(sum, 0.8)（top5 通常覆盖 60-80% 的概率质量）
+  const target = Math.min(totalRaw, 0.75)
+  if (totalRaw > 0) {
+    for (const k of Object.keys(result)) {
+      result[k] = Math.round(result[k] / totalRaw * target * 10000) / 10000
+    }
+  }
+
+  return result
+}
+
 function buildCandidatePool(remote, market) {
   const tomorrowMatches = matchesByBJTDate(remote.matches || [], TOMORROW_BJT)
   const tomorrowIds = tomorrowMatches.map(m => m.id)
@@ -343,27 +470,43 @@ function buildCandidatePool(remote, market) {
       }
     }
 
-    // ─── 波胆（正确比分）— 使用Bet365真实correctScore赔率 ───
+    // ─── 波胆（正确比分）— 优先Bet365真实赔率，Poisson提供概率 ───
     const realCS = odds.correctScore || {}
-    // 检测 WCPE 是否给了差异化概率（全相同=模型无边际信息，跳过波胆）
-    const scoreProbs = top5Scores.slice(0, 5).map(s => typeof s === 'object' ? (s.probability || 0) : 0)
-    const hasDiffProbs = new Set(scoreProbs).size > 1
+    const hasRealCS = Object.keys(realCS).length > 0
+    // 无真实赔率时，用 Poisson 模型从 ML+O/U 估算赔率
+    const estimatedCS = !hasRealCS
+      ? estimateCorrectScoreOdds(hwp, dp, awp, o25p, top5Scores)
+      : {}
+    const csSource = hasRealCS ? 'Bet365' : 'Poisson估算'
+    const csOdds = hasRealCS ? realCS : estimatedCS
+
+    // 检测模型概率是否未校准（全相同=0.01）→ 用 Poisson 重新估算
+    const modelProbs = top5Scores.slice(0, 5).map(s => typeof s === 'object' ? (s.probability || 0) : 0)
+    const modelUncalibrated = new Set(modelProbs).size <= 1 // 全相同=未校准
+    const poissonProbs = (hasRealCS && modelUncalibrated)
+      ? estimateScoreProbabilities(hwp, dp, awp, o25p, top5Scores)
+      : null
+
     for (const s of top5Scores.slice(0, 5)) {
       const score = typeof s === 'string' ? s : s.score || ''
-      const rawProb = typeof s === 'object' ? (s.probability || 0) : 0
+      let rawProb = typeof s === 'object' ? (s.probability || 0) : 0
+      // 模型未校准时用 Poisson 概率替代
+      if (poissonProbs) {
+        rawProb = poissonProbs[score] || rawProb
+      }
+      if (rawProb <= 0) continue
       // Bet365 格式 "2-1"（横杠），WCPE 格式 "2:1"（冒号）
       const scoreHyphen = score.replace(':', '-')
-      const realOdd = realCS[scoreHyphen] || realCS[score] || 0
-      if (realOdd && realOdd > 0) {
-        // 仅有真实赔率且差异化概率时才纳入
-        if (hasDiffProbs && rawProb > 0) {
-          const ev = calcEV(rawProb, realOdd)
-          const mvi = calcMVI(rawProb, realOdd)
-          pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: realOdd, prob: rawProb, mvi, ev, conf: confidence, risk: 'High', type: 'score', wcpeIssues, _source: 'Bet365' })
-        } else {
-          // 概率无差异化 → 记录为放弃项但不入池
-          // （在 rejected 中单独记录）
-        }
+      const csOdd = csOdds[scoreHyphen] || csOdds[score] || 0
+      if (csOdd && csOdd > 0 && csOdd < 50) {
+        const ev = calcEV(rawProb, csOdd)
+        const mvi = calcMVI(rawProb, csOdd)
+        pool.push({
+          id: `${mid}_cs_${scoreHyphen}`, mid, match: matchDisplay, group, kickoff,
+          bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆',
+          odds: csOdd, prob: rawProb, mvi, ev, conf: confidence, risk: 'High',
+          type: 'score', wcpeIssues, _source: csSource,
+        })
       }
     }
 
@@ -555,6 +698,13 @@ function scorePortfolio(legs, strategyWeights = {}) {
   else if (hitPct > 35) hitScore = 9
   else if (hitPct >= 1) hitScore = 3
 
+  // 波胆价值补偿：包含高MVI波胆时，低命中率可接受（价值 > 频率）
+  const scoreLegs = legs.filter(c => c.market === '波胆')
+  const highMviScoreLegs = scoreLegs.filter(c => c.mvi >= 1.15)
+  if (highMviScoreLegs.length > 0 && hitScore < 10) {
+    hitScore = Math.min(hitScore + 4, 10) // 最多补到10分
+  }
+
   // 4. 风险得分 (0-10分)
   const riskScore = Math.max(12 - avgRisk * 3.5, 0)
 
@@ -594,11 +744,10 @@ function scorePortfolio(legs, strategyWeights = {}) {
 
   // 11. V4新增: 外部风险评分 (0-5分扣减)
   let externalRiskPenalty = 0
-  // 赔率过高（>80x）且命中率<3% → 额外风险
-  if (compOdds > 80 && hitPct < 3) externalRiskPenalty += 2
-  // 包含3+个波胆 → 极不稳定
-  const scoreLegs = legs.filter(c => c.market === '波胆')
-  if (scoreLegs.length >= 3) externalRiskPenalty += 3
+  // 赔率过高（>80x）且命中率<3% → 额外风险（有高MVI波胆时豁免）
+  if (compOdds > 80 && hitPct < 3 && highMviScoreLegs.length === 0) externalRiskPenalty += 2
+  // 包含4+个波胆 → 极不稳定（3个可接受）
+  if (scoreLegs.length >= 4) externalRiskPenalty += 3
   // 全部来自同一市场类型 → 缺乏多样性风险
   if (markets.size === 1) externalRiskPenalty += 2
 
@@ -619,7 +768,16 @@ function scorePortfolio(legs, strategyWeights = {}) {
   }
   strategyBonus = Math.min(strategyBonus, 5)
 
-  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus - corrPenalty - specialRisk - externalRiskPenalty
+  // 13. V4.1新增: 价值捕获奖励 — 包含高MVI波胆的组合获得额外加分
+  // 反映模型在正确比分上发现的价值信号（波胆是最高赔率市场，错价机会最大）
+  let valueCaptureBonus = 0
+  for (const leg of scoreLegs) {
+    if (leg.mvi >= 1.30) valueCaptureBonus += 4  // 强错价信号
+    else if (leg.mvi >= 1.15) valueCaptureBonus += 2.5  // 中等错价
+  }
+  valueCaptureBonus = Math.min(valueCaptureBonus, 8)
+
+  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus - corrPenalty - specialRisk - externalRiskPenalty
   total = Math.max(0, Math.min(100, total))
 
   return {
@@ -645,6 +803,7 @@ function scorePortfolio(legs, strategyWeights = {}) {
       extRisk: -Math.round(externalRiskPenalty * 10) / 10,
       consist: Math.round(dataConsistencyScore * 10) / 10,
       strat: Math.round(strategyBonus * 10) / 10,
+      valCap: Math.round(valueCaptureBonus * 10) / 10,
     },
   }
 }
@@ -745,6 +904,11 @@ function main() {
   for (const c of accepted) { byMarket[c.market] = (byMarket[c.market] || 0) + 1 }
   console.log('  市场分布:', Object.entries(byMarket).map(([k, v]) => `${k}×${v}`).join(', '))
 
+  // 波胆来源统计
+  const csAccepted = accepted.filter(c => c.market === '波胆')
+  const csSource = csAccepted.length > 0 ? (csAccepted[0]._source || '?') : '无'
+  console.log(`  波胆: ${csAccepted.length}个入选 (来源: ${csSource})`)
+
   // Step 5: Portfolio search
   console.log('[Step 5] 搜索全部合理Portfolio...')
   const portfolios = generatePortfolios(accepted)
@@ -759,6 +923,7 @@ function main() {
       legs: pf.map(c => ({
         id: c.id, bet: c.bet, odds: c.odds, prob: c.prob, mvi: c.mvi,
         ev: Math.round(c.ev * 1000) / 1000, market: c.market, match: c.match, group: c.group, type: c.type,
+        source: c._source || '',
       })),
       index: i,
     }
@@ -880,6 +1045,7 @@ function main() {
         prob: c.prob,
         reason: c.mvi >= 1.15 ? '高错价信号' : c.ev > 0.05 ? '正EV' : c.mvi >= 1.05 ? 'MVI达标' : '边际价值',
         type: c.type,
+        source: c._source || '',
       })),
 
     // ③ Portfolio搜索结果（按Portfolio Score排序）
