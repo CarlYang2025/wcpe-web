@@ -835,6 +835,74 @@ function generateComparisonRationale(best, second) {
   return reasons.join('；') || '综合评分最优。'
 }
 
+// ========== 去集中：确保 Top N 中没有单个投注项过度出现 ==========
+/**
+ * 从已排序的组合中选择 Top N，限制同一腿最多出现 maxPerLeg 次。
+ * 这防止了"塞内加尔小2球出现在6/10组合"的集中度风险。
+ * 
+ * 同场比赛相关约束：如果同场比赛多个不同方向（如小2球+小3球）出现频繁，
+ * 也会增加额外限制（因为一场比赛的进球数无论如何，都会同时影响这些投注）。
+ */
+function selectDiversifiedTop(scored, n = 10, maxPerLeg = 1, maxPerMatch = 4) {
+  const selected = []
+  const legCount = new Map()   // leg id → count
+  const matchCount = new Map()  // match id → count
+  
+  for (const pf of scored) {
+    // 检查是否有腿超过限制
+    const legExceeds = pf.legs.some(l => (legCount.get(l.id) || 0) >= maxPerLeg)
+    // 检查同场比赛投注项是否过度集中
+    const matchExceeds = pf.legs.some(l => (matchCount.get(l.match || '') || 0) >= maxPerMatch)
+    
+    if (!legExceeds && !matchExceeds) {
+      for (const l of pf.legs) {
+        legCount.set(l.id, (legCount.get(l.id) || 0) + 1)
+        matchCount.set(l.match || '', (matchCount.get(l.match || '') || 0) + 1)
+      }
+      selected.push(pf)
+    }
+    
+    if (selected.length >= n) break
+  }
+  
+  // 如果还不够 N 个，逐步放开限制
+  if (selected.length < n) {
+    let relaxed = maxPerLeg + 1
+    while (selected.length < n && relaxed <= 5) {
+      for (const pf of scored) {
+        if (selected.includes(pf)) continue
+        const legExceeds = pf.legs.some(l => (legCount.get(l.id) || 0) >= relaxed)
+        const matchExceeds = pf.legs.some(l => (matchCount.get(l.match || '') || 0) >= relaxed + 1)
+        if (!legExceeds && !matchExceeds) {
+          for (const l of pf.legs) {
+            legCount.set(l.id, (legCount.get(l.id) || 0) + 1)
+            matchCount.set(l.match || '', (matchCount.get(l.match || '') || 0) + 1)
+          }
+          selected.push(pf)
+        }
+        if (selected.length >= n) break
+      }
+      relaxed++
+    }
+  }
+  
+  // 兜底：如果仍不够，直接取剩余最高分（去重后）
+  for (const pf of scored) {
+    if (selected.includes(pf)) continue
+    if (selected.length >= n) break
+    for (const l of pf.legs) {
+      legCount.set(l.id, (legCount.get(l.id) || 0) + 1)
+      matchCount.set(l.match || '', (matchCount.get(l.match || '') || 0) + 1)
+    }
+    selected.push(pf)
+  }
+  
+  // 重新按分数降序排列
+  selected.sort((a, b) => b.score - a.score)
+  
+  return selected
+}
+
 // V4: 构建最终结论
 function buildFinalVerdict(scored, accepted, yesterday) {
   if (!scored.length || accepted.length < 4) {
@@ -937,10 +1005,10 @@ function main() {
 
   // --- 构建输出 ---
 
-  // Top 10 (或更少如果优秀组合不足)
-  const topN = scored.filter(s => s.score >= 45).slice(0, 10)
-  // 如果不足10个且所有得分>30，补齐到实际数量
-  const displayCount = topN.length >= 10 ? 10 : (scored.filter(s => s.score >= 35).length || 3)
+  // V4.2: 去集中选择 — 同一投注项最多 1 次，同一比赛最多 4 次
+  const topSelected = selectDiversifiedTop(scored, 10, 1, 4)
+  const displayCount = topSelected.length
+  console.log(`  去集中后: ${displayCount} 组 (原 Top ${scored.slice(0, 10).length} 组)`)
 
   const tomorrowBJDate = new Date()
   tomorrowBJDate.setDate(tomorrowBJDate.getDate() + 1)
@@ -1047,8 +1115,8 @@ function main() {
         source: c._source || '',
       })),
 
-    // ③ Portfolio搜索结果（按Portfolio Score排序）
-    portfolios: scored.slice(0, displayCount).map((p, i) => ({
+    // ③ Portfolio搜索结果（按Portfolio Score排序，去集中后）
+    portfolios: topSelected.map((p, i) => ({
       rank: i + 1,
       score: p.score,
       odds: p.compOdds,
@@ -1068,23 +1136,23 @@ function main() {
     })),
 
     // ④ 今日最佳Portfolio + 资金配置
-    capitalAllocation: buildCapitalAllocation(scored, accepted),
-    bestPortfolio: scored[0] ? {
-      tier: classifyTier(scored[0].compOdds),
-      score: scored[0].score,
-      odds: scored[0].compOdds,
-      hitPct: scored[0].hitPct,
-      ev: scored[0].compEV,
-      mvi: scored[0].avgMVI,
-      legs: scored[0].legs,
-      breakdown: scored[0].breakdown,
-      rationale: generateRationale(scored[0]),
+    capitalAllocation: buildCapitalAllocation(topSelected, accepted),
+    bestPortfolio: topSelected[0] ? {
+      tier: classifyTier(topSelected[0].compOdds),
+      score: topSelected[0].score,
+      odds: topSelected[0].compOdds,
+      hitPct: topSelected[0].hitPct,
+      ev: topSelected[0].compEV,
+      mvi: topSelected[0].avgMVI,
+      legs: topSelected[0].legs,
+      breakdown: topSelected[0].breakdown,
+      rationale: generateRationale(topSelected[0]),
       // V4: 决策逻辑说明
-      decisionLogic: scored[1] ? {
-        whyBest: generateComparisonRationale(scored[0], scored[1]),
-        keyDifferentiator: scored[0].legs.length > scored[1].legs.length
-          ? `更多事件(${scored[0].legs.length} vs ${scored[1].legs.length})，分散风险提高确定性`
-          : scored[0].compEV > scored[1].compEV
+      decisionLogic: topSelected[1] ? {
+        whyBest: generateComparisonRationale(topSelected[0], topSelected[1]),
+        keyDifferentiator: topSelected[0].legs.length > topSelected[1].legs.length
+          ? `更多事件(${topSelected[0].legs.length} vs ${topSelected[1].legs.length})，分散风险提高确定性`
+          : topSelected[0].compEV > topSelected[1].compEV
             ? '更高的期望值'
             : '更好的EV/风险/命中率综合平衡',
       } : { whyBest: '唯一优秀组合', keyDifferentiator: '无竞争对手' },
@@ -1094,7 +1162,7 @@ function main() {
     abandonedOpportunities,
 
     // ⑤ 今日最终结论
-    finalVerdict: buildFinalVerdict(scored, accepted, yesterday),
+    finalVerdict: buildFinalVerdict(topSelected, accepted, yesterday),
 
     // 兼容旧结构
     yesterdayReview: {
@@ -1111,7 +1179,7 @@ function main() {
     },
     stats: {
       totalCombinations: portfolios.length,
-      topScore: scored[0]?.score || 0,
+      topScore: topSelected[0]?.score || 0,
       scoredCount: scored.length,
       byMarket,
       byLegs: distByLegs,
@@ -1125,9 +1193,9 @@ function main() {
 
   writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), 'utf-8')
   console.log(`\n✅ 已写入 ${OUTPUT_PATH}`)
-  console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(scored[0]?.compOdds)} ${scored[0]?.compOdds}x`)
+  console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(topSelected[0]?.compOdds)} ${topSelected[0]?.compOdds}x`)
   console.log(`   主动放弃: ${rejected.length}投注项 + ${abandonedMatches.length}场`)
-  console.log('   V4特性: 12维评分 | 动态权重 | BTTS市场 | 去水EV | 独立校验 | 主动放弃分析')
+  console.log('   V4.2特性: 12维评分 | 动态权重 | 波胆Poisson估算 | 去集中化(leg≤1/match≤4) | 主动放弃分析')
 }
 
 // V4: 资金配置
