@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 /**
- * generate-portfolio.mjs — WCPE Portfolio Optimizer V4.3
+ * generate-portfolio.mjs — WCPE Portfolio Optimizer V4.4
  * 
  * 读取 remote.json + market-odds.json，运行组合优化引擎，
  * 生成 portfolio.json 供网站展示。
  * 
- * V4.3 核心理念:
- *   - 投资组合管理视角，非竞彩推荐
+ * V4.4 核心理念:
+ *   - 投资组合经理必须有自己的独立判断，不能盲从数学公式
+ *   - 投注方向 vs WCPE预测比分一致性检查（矛盾即降权/踢出）
  *   - 3日滑动平均权重，防单日震荡
  *   - 对数EV衰减，降权高赔低概率
- *   - Poisson区间估算，替代粗糙Logistic
+ *   - Poisson区间估算
  *   - 强制资金分散，核心≤70%
  *   - 波胆MVI分级，保留原始信号
  *   - 去集中化v2，检测同场高相关腿
@@ -607,8 +608,8 @@ function buildCandidatePool(remote, market) {
 
     // ─── 大小球 ───
     const goalAllOdds = [oOdd, uOdd].filter(Boolean)
-    if (oOdd) pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 大2.5球`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev: dewateredEV(o25p, oOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues })
-    if (uOdd) pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 小2.5球`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev: dewateredEV(u25p, uOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues })
+    if (oOdd) pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 大2.5球`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev: dewateredEV(o25p, oOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues, _o25p: o25p })
+    if (uOdd) pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 小2.5球`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev: dewateredEV(u25p, uOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues, _o25p: o25p })
 
     // ─── BTTS ───
     if (bYesOdd && bYesOdd > 0 && bYesOdd < 10) {
@@ -708,17 +709,84 @@ function buildCandidatePool(remote, market) {
         const lineOverP = estimateOverHdpProbPoisson(o25p, target, hwp, dp, awp)
         const lineUnderP = 1 - lineOverP
         const allLineOdds = [line.over, line.under]
+
+        // ═══ V4.4 独立分析层：投注方向与WCPE预测一致性检查 ═══
+        // 模型预测的比分隐含了总进球数，如果投注方向与之矛盾，标记为可疑
+        let contradictsModel = false
+        let contradictionReason = ''
+        const predictedGoalTotal = (() => {
+          try {
+            const ps = pred.predictedScore || ''
+            const [ph, pa] = ps.split(':').map(Number)
+            return isNaN(ph) || isNaN(pa) ? null : ph + pa
+          } catch { return null }
+        })()
+        if (predictedGoalTotal !== null) {
+          // 投注"小X球"但模型预测比分总进球 ≥ X → 矛盾
+          if (target <= predictedGoalTotal) {
+            const underBet = pool.find(b => b.id === `${mid}_un${target}`) || {}
+            // 仅在推出 Under 方向时标记
+          }
+        }
+        // 实际检查在加入pool后统一进行（见下方 consistencyCheck）
+        // ════════════════════════════════════════════════════════
+
         // Over 方向
         if (target !== 2.5 || !oOdd) { // 2.5的已在大小球中产生，避免重复
-          pool.push({ id: `${mid}_ov${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 大${target}球`, market: '比分区间', odds: line.over, prob: lineOverP, mvi: calcMVI(lineOverP, line.over), ev: dewateredEV(lineOverP, line.over, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues })
+          pool.push({ id: `${mid}_ov${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 大${target}球`, market: '比分区间', odds: line.over, prob: lineOverP, mvi: calcMVI(lineOverP, line.over), ev: dewateredEV(lineOverP, line.over, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues, _predictedScore: pred.predictedScore, _o25p: o25p })
         }
         // Under 方向
-        pool.push({ id: `${mid}_un${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 小${target}球`, market: '比分区间', odds: line.under, prob: lineUnderP, mvi: calcMVI(lineUnderP, line.under), ev: dewateredEV(lineUnderP, line.under, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues })
+        pool.push({ id: `${mid}_un${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 小${target}球`, market: '比分区间', odds: line.under, prob: lineUnderP, mvi: calcMVI(lineUnderP, line.under), ev: dewateredEV(lineUnderP, line.under, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues, _predictedScore: pred.predictedScore, _o25p: o25p })
       }
     }
   }
 
-  // ─── V4增强过滤 ───
+  // ─── V4.4 独立分析：方向一致性检查 ───
+  // 作为 Portfolio Manager，必须对每个投注项做独立的足球合理性判断
+  // 而不是盲目相信 Poisson/赔率数学公式
+  for (const c of pool) {
+    // 检查1: 比分区间 vs 模型预测比分
+    if (c.type === 'goals_range' && c._predictedScore) {
+      try {
+        const [ph, pa] = c._predictedScore.split(':').map(Number)
+        const modelTotal = ph + pa
+        // 提取盘口线: "小2球" → 2, "大3.5球" → 3.5
+        const isUnder = c.bet.includes('小')
+        const isOver = c.bet.includes('大')
+        const targetMatch = c.bet.match(/[大小]([\d.]+)球/)
+        const target = targetMatch ? parseFloat(targetMatch[1]) : 0
+
+        // 逻辑核心：模型预测总进球数 vs 投注盘口线
+        if (isUnder && modelTotal >= target) {
+          // 例如：模型预测 3:1（4球），投注"小2球"→矛盾！即使赔率好也不行
+          c._contradiction = true
+          c._contradictionReason = `模型预测${c._predictedScore}(${modelTotal}球)，但推荐${c.bet.match(/【.*?】\s*/)?.[0]?.replace(/[【】]/g,'') || ''}小${target}球——方向矛盾`
+          c._contradictionSeverity = modelTotal - target + 1 // 差距越大越严重
+        } else if (isOver && modelTotal <= target) {
+          // 例如：模型预测 1:0（1球），投注"大3球"→不合理
+          c._contradiction = true
+          c._contradictionReason = `模型预测${c._predictedScore}(${modelTotal}球)，但推荐大${target}球——模型不支撑此方向`
+          c._contradictionSeverity = target - modelTotal + 1
+        }
+      } catch { /* 解析失败，跳过 */ }
+    }
+
+    // 检查2: Over 2.5/Under 2.5 vs 模型 o25p
+    if (c.type === 'goals' && c._o25p !== undefined) {
+      if (c.bet.includes('大2.5') && c._o25p < 0.45) {
+        c._contradiction = true
+        c._contradictionReason = `模型大2.5球概率仅${(c._o25p*100).toFixed(0)}%，推荐大2.5缺乏模型支撑`
+        c._contradictionSeverity = Math.round((0.5 - c._o25p) * 10)
+      }
+      if (c.bet.includes('小2.5') && c._o25p > 0.55) {
+        c._contradiction = true
+        c._contradictionReason = `模型大2.5球概率${(c._o25p*100).toFixed(0)}%（倾向于大球），推荐小2.5与模型方向矛盾`
+        c._contradictionSeverity = Math.round((c._o25p - 0.5) * 10)
+      }
+    }
+  }
+
+  // ─── V4增强过滤（含V4.4一致性检查） ───
   const accepted = [], rejected = []
   for (const c of pool) {
     const reasons = []
@@ -726,6 +794,23 @@ function buildCandidatePool(remote, market) {
     if (c.ev < -0.08) reasons.push(`EV显著负(${(c.ev * 100).toFixed(1)}%)`)
     if (c.mvi < 0.80 && !['波胆', '双重机会', '平局退款'].includes(c.market)) reasons.push(`MVI过低(${c.mvi.toFixed(2)})`)
     if (c.conf < 0.40 && c.risk === 'High') reasons.push('极低置信+高风险')
+
+    // V4.4: 独立分析 — 投注方向与WCPE模型预测矛盾的一律降权或踢出
+    if (c._contradiction) {
+      if (c._contradictionSeverity >= 3) {
+        // 严重矛盾：如模型3:1却推荐小2球 → 直接踢出候选池
+        reasons.push(`⚡方向矛盾(S${c._contradictionSeverity}): ${c._contradictionReason}`)
+      } else if (c._contradictionSeverity >= 2) {
+        // 中等矛盾：标记但不踢出，在评分环节严惩
+        reasons.push(`方向存疑(S${c._contradictionSeverity}): ${c._contradictionReason}`)
+        // 对中等矛盾，降低MVI分值来削弱其竞争力
+        c.mvi = Math.min(c.mvi, 0.85)
+      } else {
+        // 轻微矛盾：仅标注
+        c._contradictionNote = c._contradictionReason
+      }
+    }
+
     if (c.wcpeIssues >= 3 && c.type === 'direction') reasons.push('WCPE方向预测不可靠')
     if (c.market === '波胆' && c.prob < 0.008) reasons.push('比分概率极低(<0.8%)')
     if (c.market === '波胆' && c.prob < 0.015 && c.mvi < 0.85) reasons.push('低概率波胆无MVI支撑')
@@ -1168,10 +1253,10 @@ function buildFinalVerdict(scored, accepted, yesterday) {
 // MAIN
 // ===================================================================
 function main() {
-  console.log('🏆 WCPE Portfolio Optimizer V4.3')
+  console.log('🏆 WCPE Portfolio Optimizer V4.4')
   console.log('   身份: Investment Portfolio Manager（世界杯投资组合经理）')
   console.log('   目标: 最大化 Portfolio Score（组合综合质量），非赔率')
-  console.log('   新特性: 3日滑动平均 | 对数EV衰减 | Poisson区间 | 资金分散 | MVI分级 | 去集中化v2')
+  console.log('   新特性: 独立矛盾检查 | 3日滑动平均 | 对数EV衰减 | Poisson区间 | 资金分散 | MVI分级')
   console.log('')
 
   const remote = loadJSON(REMOTE_PATH)
@@ -1432,7 +1517,7 @@ function main() {
   console.log(`\n✅ 已写入 ${OUTPUT_PATH}`)
   console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(topSelected[0]?.compOdds)} ${topSelected[0]?.compOdds}x`)
   console.log(`   主动放弃: ${rejected.length}投注项 + ${abandonedMatches.length}场`)
-  console.log('   V4.3特性: 12维评分 | 3日滑动平均 | 对数衰减EV | Poisson区间估算 | 去集中化v2 | 资金分散 | MVI分级')
+  console.log('   V4.4特性: 独立矛盾检查 | 3日滑动平均 | 对数EV衰减 | Poisson区间估算 | 去集中化v2 | 资金分散 | MVI分级')
 }
 
 // V4.3: 资金配置（分散风险 — 核心≤70%，辅助≥20%，现金5-10%）
