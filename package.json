@@ -4,9 +4,9 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/fetch-odds.mjs && node --import tsx scripts/export-json.mjs",
+    "prebuild": "node scripts/fetch-odds.mjs && node --import tsx scripts/export-json.mjs && node scripts/generate-portfolio.mjs",
     "dev": "vite",
-    "build": "vite build && cp src/data/remote.json dist/",
+    "build": "vite build && cp src/data/remote.json dist/ && cp src/data/portfolio.json dist/",
     "preview": "vite preview"
   },
   "dependencies": {

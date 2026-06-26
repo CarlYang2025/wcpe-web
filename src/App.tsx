@@ -6,9 +6,11 @@ import { useRemoteData } from './lib/useRemoteData'
 import Dashboard from './components/Dashboard'
 import MatchDetail from './components/MatchDetail'
 import MatchdaySummary from './components/MatchdaySummary'
+import Portfolio from './components/Portfolio'
+import portfolioData from './data/portfolio.json'
 import type { Match } from './lib/types'
 
-type Tab = 'dashboard' | 'matchday' | 'match'
+type Tab = 'dashboard' | 'matchday' | 'portfolio' | 'match'
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('dashboard')
@@ -157,6 +159,7 @@ export default function App() {
           <div className="flex items-center gap-1 bg-[#0a0e27] rounded-lg p-0.5">
             <TabBtn active={tab === 'dashboard'} onClick={() => goTab('dashboard')} label="📊 首页" />
             <TabBtn active={tab === 'matchday'} onClick={() => goTab('matchday')} label="🎯 比赛日方案" />
+            <TabBtn active={tab === 'portfolio'} onClick={() => goTab('portfolio')} label="📊 投资组合" />
           </div>
 
           <div className="flex items-center gap-3 text-[10px] text-[#a0a0a0]">
@@ -203,6 +206,9 @@ export default function App() {
             historicalMatches={historicalMatches}
             onSelectMatch={handleSelectMatch}
           />
+        )}
+        {tab === 'portfolio' && (
+          <Portfolio data={portfolioData} />
         )}
         {tab === 'match' && selectedMatch && (
           <MatchDetail
