@@ -667,6 +667,82 @@ function generateMviAnalysis(homeWinProb, drawProb, awayWinProb, over25Prob, und
 }
 
 /**
+ * Poisson 估算 top5 比分概率 — 当模型概率未校准时（全 0.01）替代硬编码占位值。
+ * 从 over25Prob 反推 λ → 按 ML 概率分配主客队 λ → Poisson PMF 计算各比分概率 → 归一化。
+ * 与 generate-portfolio.mjs 的 estimateScoreProbabilities() 逻辑一致。
+ */
+function enrichTop5WithPoisson(top5Scores, homeWinProb, drawProb, awayWinProb, over25Prob) {
+  if (!Array.isArray(top5Scores) || top5Scores.length === 0) return top5Scores
+
+  // 检测是否需要 enrichment：所有概率都一样（或都为 0.01）
+  const probs = top5Scores.map(s => (typeof s === 'object' ? s.probability : undefined))
+  const uniqueProbs = new Set(probs)
+  const needsEnrichment = uniqueProbs.size <= 1 || (uniqueProbs.size === 2 && uniqueProbs.has(undefined))
+
+  if (!needsEnrichment) return top5Scores
+
+  const hwp = typeof homeWinProb === 'number' ? homeWinProb : 0.33
+  const dp  = typeof drawProb === 'number' ? drawProb : 0.34
+  const awp = typeof awayWinProb === 'number' ? awayWinProb : 0.33
+  const o25p = typeof over25Prob === 'number' ? over25Prob : 0.5
+
+  // Step 1: 从 over25Prob 反推总期望进球 λ（二分法求解 Poisson CDF）
+  const targetUnder25 = 1 - o25p
+  let lo = 0.3, hi = 8.0
+  for (let iter = 0; iter < 60; iter++) {
+    const mid = (lo + hi) / 2
+    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
+    if (pUnder25 > targetUnder25) lo = mid
+    else hi = mid
+  }
+  const totalLambda = (lo + hi) / 2
+
+  // Step 2: 用 ML 概率分配主客队 λ
+  const homeShare = hwp + dp * 0.45
+  const awayShare = awp + dp * 0.55
+  const shareSum = homeShare + awayShare
+  const homeLambda = shareSum > 0 ? totalLambda * (homeShare / shareSum) : totalLambda * 0.5
+  const awayLambda = shareSum > 0 ? totalLambda * (awayShare / shareSum) : totalLambda * 0.5
+
+  // Step 3: Poisson PMF
+  function poissonPMF(k, lambda) {
+    if (lambda <= 0) return k === 0 ? 1 : 0
+    let logP = -lambda + k * Math.log(lambda)
+    let logFact = 0
+    for (let i = 2; i <= k; i++) logFact += Math.log(i)
+    return Math.exp(logP - logFact)
+  }
+
+  // Step 4: 计算每个比分的 Poisson 概率
+  const rawProbs = {}
+  let totalRaw = 0
+  for (const s of top5Scores) {
+    const scoreStr = typeof s === 'string' ? s : s.score || ''
+    const parts = scoreStr.split(/[:-]/)
+    if (parts.length !== 2) continue
+    const h = parseInt(parts[0]), a = parseInt(parts[1])
+    if (isNaN(h) || isNaN(a)) continue
+    const prob = poissonPMF(h, homeLambda) * poissonPMF(a, awayLambda)
+    rawProbs[scoreStr] = prob
+    totalRaw += prob
+  }
+
+  // Step 5: 归一化 → top5 概率和 = min(totalRaw, 0.75)
+  const target = Math.min(totalRaw, 0.75)
+  const enriched = top5Scores.map(s => {
+    const scoreStr = typeof s === 'string' ? s : s.score || ''
+    const rawProb = totalRaw > 0 ? (rawProbs[scoreStr] || 0) / totalRaw * target : 0.01
+    const prob = Math.round(rawProb * 10000) / 10000
+    if (typeof s === 'object') {
+      return { ...s, probability: prob > 0 ? prob : 0.01, _poissonEnriched: true }
+    }
+    return { score: s, probability: prob > 0 ? prob : 0.01, _poissonEnriched: true }
+  })
+
+  return enriched
+}
+
+/**
  * 用市场比分赔率校准 top5Scores
  * 将市场隐含的比分概率与模型概率混合 (30% market + 70% model)
  */
@@ -774,7 +850,8 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
     pred.mviAnalysis = generateMviAnalysis(blended.home, blended.draw, blended.away, o25p, u25p, market)
     mviCount++
 
-    // 比分校准：用市场 Correct Score 赔率修正 top5Scores
+    // 比分校准：先用 Poisson 修复 0.01 占位概率，再用市场 Correct Score 混合
+    pred.top5Scores = enrichTop5WithPoisson(pred.top5Scores, blended.home, blended.draw, blended.away, o25p)
     if (market.correctScore && Object.keys(market.correctScore).length > 0) {
       pred.top5Scores = calibrateScoresWithMarket(pred.top5Scores, market.correctScore, blended.home, blended.away)
     }
@@ -972,6 +1049,25 @@ let mergedPredictions = deepMergePredictions(
 // Apply market odds: blend probabilities + generate MVI for upcoming matches
 const marketOddsData = readMarketOdds()
 mergedPredictions = applyMarketOdds(mergedPredictions, mergedMatches, marketOddsData)
+
+// Poisson enrichment fallback: 处理没有市场赔率的 upcoming 比赛
+// 即使 market-odds.json 缺失，也要修复 0.01 占位概率
+for (const [matchId, pred] of Object.entries(mergedPredictions)) {
+  const match = mergedMatches.find(m => m.id === matchId)
+  if (!match || match.status === 'finished') continue
+  const top5 = pred.top5Scores
+  if (!Array.isArray(top5) || top5.length === 0) continue
+  // 检查是否需要 enrichment（概率是否已经多样化）
+  const probs = top5.map(s => (typeof s === 'object' ? s.probability : undefined))
+  const uniqueProbs = new Set(probs)
+  if (uniqueProbs.size <= 1 || (uniqueProbs.size === 2 && uniqueProbs.has(undefined))) {
+    const hwp = typeof pred.homeWinProb === 'number' ? pred.homeWinProb : 0.33
+    const dp  = typeof pred.drawProb === 'number' ? pred.drawProb : 0.34
+    const awp = typeof pred.awayWinProb === 'number' ? pred.awayWinProb : 0.33
+    const o25p = typeof pred.over25Prob === 'number' ? pred.over25Prob : 0.5
+    pred.top5Scores = enrichTop5WithPoisson(top5, hwp, dp, awp, o25p)
+  }
+}
 
 // Compute modelState FRESH from actual match data (not incremental patching)
 const computedModelState = computeModelState(mergedMatches, mergedPredictions, existingData?.modelState)

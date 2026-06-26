@@ -357,7 +357,7 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
           <div className="flex-1 text-xs text-[#a0a0a0] space-y-2">
             <p>主推 <span className="text-[#ffd700] font-mono font-bold text-base">{prediction.predictedScore}</span></p>
             {(() => {
-              const topQuadrant = reclassifyQuadrant(prediction.top5Scores[0]?.score || '0:0', prediction.homeWinProb, prediction.awayWinProb)
+              const topQuadrant = reclassifyQuadrant(prediction.predictedScore || prediction.top5Scores[0]?.score || '0:0', prediction.homeWinProb, prediction.awayWinProb)
               return (
                 <>
                   <p className="text-sm font-bold" style={{ color: QUADRANT_COLORS[topQuadrant] }}>{QUADRANT_NAMES[topQuadrant]}</p>
