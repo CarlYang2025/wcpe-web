@@ -3,6 +3,23 @@ import { QUADRANT_NAMES, QUADRANT_COLORS, RISK_COLORS } from '../lib/types'
 import { cn, flag } from '../data/matches'
 import { formatCountdown, useLiveMinute } from '../lib/useMatchTimer'
 
+function reclassifyQuadrant(score: string, homeWinProb: number, awayWinProb: number): string {
+  const parts = score.split(/[:-]/)
+  if (parts.length !== 2) return 'Q2'
+  const h = parseInt(parts[0]), a = parseInt(parts[1])
+  if (isNaN(h) || isNaN(a)) return 'Q2'
+  const homeStrong = homeWinProb > 0.45 && (homeWinProb - awayWinProb) >= 0.15
+  const awayStrong = awayWinProb > 0.45 && (awayWinProb - homeWinProb) >= 0.15
+  const diff = Math.abs(h - a), total = h + a
+  if (homeStrong && h < a) return 'Q3'
+  if (awayStrong && h > a) return 'Q3'
+  if (homeStrong && h > a && diff >= 2) return 'Q1'
+  if (awayStrong && h < a && diff >= 2) return 'Q1'
+  if (total >= 4 && h >= 2 && a >= 2) return 'Q4'
+  if (diff >= 3) return 'Q1'
+  return 'Q2'
+}
+
 interface Props {
   match: Match
   prediction?: Prediction
@@ -32,7 +49,12 @@ export default function MatchCard({ match, prediction, onClick }: Props) {
     )
   }
 
-  const quadrantColor = QUADRANT_COLORS[prediction.top5Scores?.[0]?.quadrant] || '#ffffff'
+  const scoreQuadrant = reclassifyQuadrant(
+    prediction.predictedScore || prediction.top5Scores?.[0]?.score || '0:0',
+    prediction.homeWinProb,
+    prediction.awayWinProb
+  )
+  const quadrantColor = QUADRANT_COLORS[scoreQuadrant] || '#ffffff'
   const riskColor = RISK_COLORS[prediction.riskLevel]
 
   return (
@@ -97,7 +119,7 @@ export default function MatchCard({ match, prediction, onClick }: Props) {
         <span className="text-[10px] px-2 py-0.5 rounded" style={{
           backgroundColor: quadrantColor + '20', color: quadrantColor,
         }}>
-          {QUADRANT_NAMES[prediction.top5Scores?.[0]?.quadrant]}
+          {QUADRANT_NAMES[scoreQuadrant]}
         </span>
         <div className="flex items-center gap-2">
           <span className="text-[10px] text-[#a0a0a0]">
