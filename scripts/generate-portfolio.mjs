@@ -345,20 +345,25 @@ function buildCandidatePool(remote, market) {
 
     // ─── 波胆（正确比分）— 使用Bet365真实correctScore赔率 ───
     const realCS = odds.correctScore || {}
+    // 检测 WCPE 是否给了差异化概率（全相同=模型无边际信息，跳过波胆）
+    const scoreProbs = top5Scores.slice(0, 5).map(s => typeof s === 'object' ? (s.probability || 0) : 0)
+    const hasDiffProbs = new Set(scoreProbs).size > 1
     for (const s of top5Scores.slice(0, 5)) {
       const score = typeof s === 'string' ? s : s.score || ''
-      const prob = typeof s === 'object' ? (s.probability || 0.01) : 0.015
-      // 查找Bet365真实赔率
-      const realOdd = realCS[score] || 0
+      const rawProb = typeof s === 'object' ? (s.probability || 0) : 0
+      // Bet365 格式 "2-1"（横杠），WCPE 格式 "2:1"（冒号）
+      const scoreHyphen = score.replace(':', '-')
+      const realOdd = realCS[scoreHyphen] || realCS[score] || 0
       if (realOdd && realOdd > 0) {
-        // 有真实赔率 → 真实EV + 真实MVI
-        const ev = calcEV(prob, realOdd)
-        const mvi = calcMVI(prob, realOdd)
-        pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: realOdd, prob, mvi, ev, conf: confidence, risk: 'High', type: 'score', wcpeIssues, _source: 'Bet365' })
-      } else {
-        // 无真实赔率 → 用估算（标记为低质量）
-        const estOdds = Math.round(1 / Math.max(prob, 0.003) * 10) / 10
-        pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: estOdds, prob, mvi: 1.0, ev: calcEV(prob, estOdds), conf: confidence, risk: 'High', type: 'score', wcpeIssues, _source: 'estimated' })
+        // 仅有真实赔率且差异化概率时才纳入
+        if (hasDiffProbs && rawProb > 0) {
+          const ev = calcEV(rawProb, realOdd)
+          const mvi = calcMVI(rawProb, realOdd)
+          pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: realOdd, prob: rawProb, mvi, ev, conf: confidence, risk: 'High', type: 'score', wcpeIssues, _source: 'Bet365' })
+        } else {
+          // 概率无差异化 → 记录为放弃项但不入池
+          // （在 rejected 中单独记录）
+        }
       }
     }
 
