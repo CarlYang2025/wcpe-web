@@ -764,12 +764,14 @@ function calibrateScoresWithMarket(top5Scores, correctScoreOdds, homeWinProb, aw
     scoreProbs[score] = Math.round(scoreProbs[score] / totalImp * 1000) / 1000
   }
 
-  // 混合: 70% 模型 + 30% 市场
+  // 混合: 70% 模型 + 30% 市场（仅当市场有该比分数据时才混合）
   return top5Scores.map((s, i) => {
     const scoreStr = typeof s.score === 'string' ? s.score : String(s)
     const marketProb = scoreProbs[scoreStr] || 0
     const modelProb = s.probability || 0.10
-    const blended = Math.round((modelProb * 0.7 + marketProb * 0.3) * 100) / 100
+    const blended = marketProb > 0
+      ? Math.round((modelProb * 0.7 + marketProb * 0.3) * 100) / 100
+      : modelProb
     return {
       ...s,
       probability: blended > 0 ? blended : modelProb,
