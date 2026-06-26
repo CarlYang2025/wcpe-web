@@ -333,6 +333,9 @@ function normalizeSinglePrediction(p) {
           probability: s.probability ?? (0.10 + i * 0.03),
           quadrant: reclassifyQuadrant(scoreStr, hwp, awp),
           reason: s.reason || '预测生成',
+          // ★ V4.4: 保留 enrichment 版本标记，用于触发全空间搜索迁移
+          ...(s._poissonEnriched ? { _poissonEnriched: true } : {}),
+          ...(s._v44Enriched ? { _v44Enriched: true } : {}),
         }
       }
       return { score: String(s), probability: 0.08, quadrant: 'Q2', reason: '标准化兜底' }
@@ -671,15 +674,26 @@ function generateMviAnalysis(homeWinProb, drawProb, awayWinProb, over25Prob, und
  * 从 over25Prob 反推 λ → 按 ML 概率分配主客队 λ → Poisson PMF 计算各比分概率 → 归一化。
  * 与 generate-portfolio.mjs 的 estimateScoreProbabilities() 逻辑一致。
  */
+/**
+ * V4.4 重写: 全比分空间 Poisson 搜索 + 方向一致性保证
+ *
+ * 旧版问题:
+ *   1. 只在 LLM 生成的 5 个比分上计算 Poisson 概率 → 可能遗漏真正高概率的比分
+ *      (e.g. 挪威vs法国 True Poisson #2=0:2 8.2% 但不在 LLM top5 中)
+ *   2. predictedScore = top5[0].score 可能和 predictedDirection 矛盾
+ *      (e.g. 佛得角vs沙特: score=1:1(draw) 但 direction=home_win)
+ *
+ * 新版:
+ *   1. 在 0:0 ~ 6:6 全空间搜索 Poisson 概率最高的 5 个比分
+ *   2. 自动添加象限和理由说明
+ *   3. 保留 LLM 生成的 reason (如果该比分在 LLM top5 中)
+ */
 function enrichTop5WithPoisson(top5Scores, homeWinProb, drawProb, awayWinProb, over25Prob) {
   if (!Array.isArray(top5Scores) || top5Scores.length === 0) return top5Scores
 
-  // 检测是否需要 enrichment：所有概率都一样（或都为 0.01）
-  const probs = top5Scores.map(s => (typeof s === 'object' ? s.probability : undefined))
-  const uniqueProbs = new Set(probs)
-  const needsEnrichment = uniqueProbs.size <= 1 || (uniqueProbs.size === 2 && uniqueProbs.has(undefined))
-
-  if (!needsEnrichment) return top5Scores
+  // ★ V4.4: 全空间 Poisson 搜索始终运行
+  // 旧版只在 LLM 生成全部 0.01 概率时才触发 → 导致错失高概率比分
+  // 新版在 0:0~6:6 全空间搜索真正的 Top5，同时保留 LLM reason
 
   const hwp = typeof homeWinProb === 'number' ? homeWinProb : 0.33
   const dp  = typeof drawProb === 'number' ? drawProb : 0.34
@@ -713,36 +727,93 @@ function enrichTop5WithPoisson(top5Scores, homeWinProb, drawProb, awayWinProb, o
     return Math.exp(logP - logFact)
   }
 
-  // Step 4: 计算每个比分的 Poisson 概率
-  const rawProbs = {}
-  let totalRaw = 0
+  // Step 4: 从 LLM top5 中提取已有 reason（用于保留人类可读的解释）
+  const llmReasons = {}
   for (const s of top5Scores) {
-    const scoreStr = typeof s === 'string' ? s : s.score || ''
+    const scoreStr = typeof s === 'string' ? s : (s?.score || '')
+    const reason = typeof s === 'object' && s?.reason ? s.reason : ''
+    if (scoreStr && reason) llmReasons[scoreStr] = reason
+  }
+
+  // Step 5: ★V4.4★ 全比分空间搜索 (0:0 ~ 6:6)
+  const allScores = []
+  let totalProb = 0
+  for (let h = 0; h <= 6; h++) {
+    for (let a = 0; a <= 6; a++) {
+      const p = poissonPMF(h, homeLambda) * poissonPMF(a, awayLambda)
+      allScores.push({ h, a, prob: p })
+      totalProb += p
+    }
+  }
+
+  // 归一化
+  allScores.forEach(s => { s.prob = s.prob / totalProb })
+
+  // 按概率降序排序
+  allScores.sort((a, b) => b.prob - a.prob)
+
+  // Step 6: ★V4.4★ 生成 top5 对象数组 (取概率最高的 5 个)
+  const enriched = allScores.slice(0, 5).map((s, i) => {
+    const scoreStr = `${s.h}:${s.a}`
+    const prob = Math.round(s.prob * 10000) / 10000
+
+    // Determine direction for quadrant
+    let quadrant = 'Q2' // default: 低分平局/小球
+    if (s.h > s.a) {
+      quadrant = s.h >= 3 ? 'Q1' : 'Q1' // home_win
+    } else if (s.a > s.h) {
+      quadrant = s.a >= 3 ? 'Q1' : 'Q1' // away_win
+    } else {
+      quadrant = 'Q2' // draw
+    }
+
+    // Use LLM reason if available, otherwise generate Poisson-based reason
+    let reason = llmReasons[scoreStr] || ''
+    if (!reason) {
+      const dir = s.h > s.a ? `主胜` : s.a > s.h ? `客胜` : `平局`
+      const total = s.h + s.a
+      const goals = total <= 2 ? '低进球' : total <= 3 ? '中等进球' : '高进球'
+      reason = `Poisson #${i+1}: ${scoreStr} ${dir}(${goals}局)`
+    }
+
+    return {
+      score: scoreStr,
+      probability: prob > 0 ? prob : 0.01,
+      quadrant,
+      reason,
+      _poissonEnriched: true,
+      _v44Enriched: true,  // ★ V4.4 标记：全空间搜索版本
+    }
+  })
+
+  return enriched
+}
+
+/**
+ * ★ V4.4: 从 top5Scores 中选取与 predictedDirection 一致的最高概率比分
+ * 避免 predictedScore=1:1(draw) vs predictedDirection=home_win 的矛盾
+ *
+ * @param {Array} top5Scores - 已按概率降序排列的比分数组
+ * @param {string} direction - 'home_win' | 'draw' | 'away_win'
+ * @returns {string} 比分字符串 e.g. "2:1"
+ */
+function pickConsistentScore(top5Scores, direction) {
+  if (!Array.isArray(top5Scores) || top5Scores.length === 0) return '?:?'
+  if (!direction) return top5Scores[0]?.score || '?:?'
+
+  for (const s of top5Scores) {
+    const scoreStr = typeof s === 'string' ? s : (s?.score || '')
     const parts = scoreStr.split(/[:-]/)
     if (parts.length !== 2) continue
     const h = parseInt(parts[0]), a = parseInt(parts[1])
     if (isNaN(h) || isNaN(a)) continue
-    const prob = poissonPMF(h, homeLambda) * poissonPMF(a, awayLambda)
-    rawProbs[scoreStr] = prob
-    totalRaw += prob
+
+    const scoreDir = h > a ? 'home_win' : a > h ? 'away_win' : 'draw'
+    if (scoreDir === direction) return scoreStr
   }
 
-  // Step 5: 归一化 → top5 概率和 = min(totalRaw, 0.75)
-  const target = Math.min(totalRaw, 0.75)
-  const enriched = top5Scores.map(s => {
-    const scoreStr = typeof s === 'string' ? s : s.score || ''
-    const rawProb = totalRaw > 0 ? (rawProbs[scoreStr] || 0) / totalRaw * target : 0.01
-    const prob = Math.round(rawProb * 10000) / 10000
-    if (typeof s === 'object') {
-      return { ...s, probability: prob > 0 ? prob : 0.01, _poissonEnriched: true }
-    }
-    return { score: s, probability: prob > 0 ? prob : 0.01, _poissonEnriched: true }
-  })
-
-  // Step 6: 按概率降序排序，确保 #1 就是真正概率最高的比分
-  enriched.sort((a, b) => (b.probability || 0) - (a.probability || 0))
-
-  return enriched
+  // 兜底: 如果 top5 中没有匹配方向的比分 (极罕见), 返回概率最高的
+  return top5Scores[0]?.score || '?:?'
 }
 
 /**
@@ -862,9 +933,10 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
       // 市场校准后重新排序
       pred.top5Scores.sort((a, b) => (b.probability || 0) - (a.probability || 0))
     }
-    // 同步 predictedScore：拆掉 LLM 与 Poisson 之间的墙
+    // ★ V4.4: 从 top5 中选择与 predictedDirection 一致的最高概率比分
+    // 避免 e.g. score=1:1(draw) vs direction=home_win 的矛盾
     if (pred.top5Scores.length > 0) {
-      pred.predictedScore = pred.top5Scores[0].score
+      pred.predictedScore = pickConsistentScore(pred.top5Scores, pred.predictedDirection)
     }
 
     // 附上完整市场赔率数据（前端展示用，compact 格式）
@@ -1068,17 +1140,23 @@ for (const [matchId, pred] of Object.entries(mergedPredictions)) {
   if (!match || match.status === 'finished') continue
   const top5 = pred.top5Scores
   if (!Array.isArray(top5) || top5.length === 0) continue
-  // 检查是否需要 enrichment（概率是否已经多样化）
-  const probs = top5.map(s => (typeof s === 'object' ? s.probability : undefined))
-  const uniqueProbs = new Set(probs)
-  if (uniqueProbs.size <= 1 || (uniqueProbs.size === 2 && uniqueProbs.has(undefined))) {
+  // V4.4: 始终对 upcoming 比赛运行全空间 Poisson 搜索（不限于 0.01 占位情况）
+  {
     const hwp = typeof pred.homeWinProb === 'number' ? pred.homeWinProb : 0.33
     const dp  = typeof pred.drawProb === 'number' ? pred.drawProb : 0.34
     const awp = typeof pred.awayWinProb === 'number' ? pred.awayWinProb : 0.33
     const o25p = typeof pred.over25Prob === 'number' ? pred.over25Prob : 0.5
     pred.top5Scores = enrichTop5WithPoisson(top5, hwp, dp, awp, o25p)
     if (pred.top5Scores.length > 0) {
-      pred.predictedScore = pred.top5Scores[0].score
+      // ★ V4.4: 确保 predictedDirection 存在
+      if (!pred.predictedDirection) {
+        const EPS = 0.005
+        if (hwp > awp + EPS && hwp > dp + EPS) pred.predictedDirection = 'home_win'
+        else if (awp > hwp + EPS && awp > dp + EPS) pred.predictedDirection = 'away_win'
+        else if (dp > hwp + EPS && dp > awp + EPS) pred.predictedDirection = 'draw'
+        else pred.predictedDirection = hwp >= awp ? 'home_win' : 'away_win'
+      }
+      pred.predictedScore = pickConsistentScore(pred.top5Scores, pred.predictedDirection)
     }
   }
 }
