@@ -154,7 +154,8 @@ function analyzeBJTDate(remote, matches) {
     goals: Math.max(0.6, Math.min(1.2, over25Rate * 1.5)),       // 大小球权重 (0.6-1.2)
     btts: Math.max(0.6, Math.min(1.2, bttsRate * 1.5)),          // BTTS权重 (0.6-1.2)
     score: Math.max(0.5, Math.min(1.0, top3Rate * 1.2)),         // 比分权重 (0.5-1.0)
-    safety: dirRate > 0.6 ? 1.1 : 0.9,                            // 双重机会权重
+    safety: dirRate > 0.6 ? 1.1 : 0.9,                            // 双重机会/平局退款权重
+    goals_range: Math.max(0.6, Math.min(1.1, over25Rate * 1.3)),  // 比分区间权重
   }
 
   return {
@@ -224,6 +225,15 @@ function validateWCPE(matchId, remote, market) {
 // ===================================================================
 // STEP 3-4: Candidate Pool（候选池构建）+ 独立二次校验
 // ===================================================================
+// ========== 辅助：从比分分布估算总进球概率 ==========
+/** 基于 over25Prob 和比分分布，用 S 曲线估算 P(Over hdp) */
+function estimateOverHdpProb(over25p, top5Scores, hdp) {
+  // 基础映射：over25p → expected goals（粗糙）
+  const expGoals = 2.5 + (over25p - 0.5) * 2.5
+  // Logistic 曲线
+  return 1 / (1 + Math.exp(-(expGoals - hdp) / 0.8))
+}
+
 function buildCandidatePool(remote, market) {
   const tomorrowMatches = matchesByBJTDate(remote.matches || [], TOMORROW_BJT)
   const tomorrowIds = tomorrowMatches.map(m => m.id)
@@ -232,7 +242,7 @@ function buildCandidatePool(remote, market) {
   const validationResults = tomorrowIds.map(id => validateWCPE(id, remote, market))
 
   const pool = []
-  const preRejected = [] // 赛前就被判死刑的比赛
+  const preRejected = []
 
   for (const mid of tomorrowIds) {
     const pred = remote.predictions?.[mid] || {}
@@ -240,13 +250,11 @@ function buildCandidatePool(remote, market) {
     const m = remote.matches?.find(x => x.id === mid) || {}
     const validation = validationResults.find(v => v.matchId === mid)
 
-    // 如果WCPE校验完全失败（3+个问题），整场比赛标记为高风险
     if (validation && validation.issues.length >= 3) {
       preRejected.push({
         mid, match: `${cn(m.homeTeam || '')} vs ${cn(m.awayTeam || '')}`,
         reason: `WCPE校验失败：${validation.issues.join('; ')}`,
       })
-      // 仍然构建候选池，但添加高风险标记
     }
 
     const homeEn = m.homeTeam || '', awayEn = m.awayTeam || ''
@@ -257,12 +265,13 @@ function buildCandidatePool(remote, market) {
     const bttsP = pred.bttsProb || 0.5, nbttsP = 1 - bttsP
     const confidence = pred.confidence || 0.5, risk = pred.riskLevel || 'Medium'
     const wcpeIssues = (validation?.issues || []).length
+    const top5Scores = pred.top5Scores || []
 
     const hOdd = odds.homeWin || 0, dOdd = odds.draw || 0, aOdd = odds.awayWin || 0
     const oOdd = odds.over25 || 0, uOdd = odds.under25 || 0
     const bYesOdd = odds.bttsYes || 0, bNoOdd = odds.bttsNo || 0
 
-    // MVI map
+    // MVI map from WCPE
     const mviMap = {}
     for (const mvi of (pred.mviAnalysis || [])) {
       mviMap[mvi.bet || ''] = mvi.mvi || 1
@@ -271,101 +280,128 @@ function buildCandidatePool(remote, market) {
 
     const matchDisplay = `${home} vs ${away}`
 
-    // V4: 去水EV计算
+    // 去水EV计算
     function dewateredEV(modelProb, oddsVal, allOddsArr) {
       if (!oddsVal || oddsVal <= 0) return { ev: 0, marketProb: 0 }
       const marketProb = dewateredProb(oddsVal, allOddsArr)
       return { ev: modelProb * oddsVal - 1, marketProb }
     }
+    // 单市场MVI：模型概率 / 市场隐含概率（无去水，因为去水对两方等价）
+    function calcMVI(modelProb, oddsVal) {
+      if (!oddsVal || oddsVal <= 0) return 1.0
+      return modelProb / (1 / oddsVal)
+    }
 
-    // --- 胜平负 ---
+    // ─── 胜平负 ───
     const dirAllOdds = [hOdd, dOdd, aOdd].filter(Boolean)
-    if (hOdd) {
-      const { ev } = dewateredEV(hwp, hOdd, dirAllOdds)
-      pool.push({ id: `${mid}_h`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${home} 主胜`, market: '胜平负', odds: hOdd, prob: hwp, mvi: getMVI('主胜'), ev, conf: confidence, risk, type: 'direction', wcpeIssues })
-    }
-    if (dOdd) {
-      const { ev } = dewateredEV(dp, dOdd, dirAllOdds)
-      pool.push({ id: `${mid}_d`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${home} vs ${away} 平局`, market: '胜平负', odds: dOdd, prob: dp, mvi: getMVI('平局'), ev, conf: confidence, risk, type: 'direction', wcpeIssues })
-    }
-    if (aOdd) {
-      const { ev } = dewateredEV(awp, aOdd, dirAllOdds)
-      pool.push({ id: `${mid}_a`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${away} 客胜`, market: '胜平负', odds: aOdd, prob: awp, mvi: getMVI('客胜'), ev, conf: confidence, risk, type: 'direction', wcpeIssues })
-    }
+    if (hOdd) pool.push({ id: `${mid}_h`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${home} 主胜`, market: '胜平负', odds: hOdd, prob: hwp, mvi: getMVI('主胜'), ev: dewateredEV(hwp, hOdd, dirAllOdds).ev, conf: confidence, risk, type: 'direction', wcpeIssues })
+    if (dOdd) pool.push({ id: `${mid}_d`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${home} vs ${away} 平局`, market: '胜平负', odds: dOdd, prob: dp, mvi: getMVI('平局'), ev: dewateredEV(dp, dOdd, dirAllOdds).ev, conf: confidence, risk, type: 'direction', wcpeIssues })
+    if (aOdd) pool.push({ id: `${mid}_a`, mid, match: matchDisplay, group, kickoff, bet: `【胜平负】${away} 客胜`, market: '胜平负', odds: aOdd, prob: awp, mvi: getMVI('客胜'), ev: dewateredEV(awp, aOdd, dirAllOdds).ev, conf: confidence, risk, type: 'direction', wcpeIssues })
 
-    // --- 大小球 ---
+    // ─── 大小球 ───
     const goalAllOdds = [oOdd, uOdd].filter(Boolean)
-    if (oOdd) {
-      const { ev } = dewateredEV(o25p, oOdd, goalAllOdds)
-      pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 大2.5球`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev, conf: confidence, risk, type: 'goals', wcpeIssues })
-    }
-    if (uOdd) {
-      const { ev } = dewateredEV(u25p, uOdd, goalAllOdds)
-      pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 小2.5球`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev, conf: confidence, risk, type: 'goals', wcpeIssues })
-    }
+    if (oOdd) pool.push({ id: `${mid}_o25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 大2.5球`, market: '大小球', odds: oOdd, prob: o25p, mvi: getMVI('Over 2.5'), ev: dewateredEV(o25p, oOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues })
+    if (uOdd) pool.push({ id: `${mid}_u25`, mid, match: matchDisplay, group, kickoff, bet: `【大小球】${home} vs ${away} 小2.5球`, market: '大小球', odds: uOdd, prob: u25p, mvi: getMVI('Under 2.5'), ev: dewateredEV(u25p, uOdd, goalAllOdds).ev, conf: confidence, risk, type: 'goals', wcpeIssues })
 
-    // --- BTTS（V4新增市场）---
+    // ─── BTTS ───
     if (bYesOdd && bYesOdd > 0 && bYesOdd < 10) {
-      const { ev } = dewateredEV(bttsP, bYesOdd, [bYesOdd, bNoOdd].filter(Boolean))
-      pool.push({ id: `${mid}_btts_y`, mid, match: matchDisplay, group, kickoff, bet: `【BTTS】${home} vs ${away} 双方进球=是`, market: 'BTTS', odds: bYesOdd, prob: bttsP, mvi: getMVI('BTTS Yes'), ev, conf: confidence, risk: risk === 'High' ? 'Medium' : risk, type: 'btts', wcpeIssues })
+      pool.push({ id: `${mid}_btts_y`, mid, match: matchDisplay, group, kickoff, bet: `【BTTS】${home} vs ${away} 双方进球=是`, market: 'BTTS', odds: bYesOdd, prob: bttsP, mvi: getMVI('BTTS Yes'), ev: dewateredEV(bttsP, bYesOdd, [bYesOdd, bNoOdd].filter(Boolean)).ev, conf: confidence, risk: risk === 'High' ? 'Medium' : risk, type: 'btts', wcpeIssues })
     }
     if (bNoOdd && bNoOdd > 0 && bNoOdd < 10) {
-      const { ev } = dewateredEV(nbttsP, bNoOdd, [bYesOdd, bNoOdd].filter(Boolean))
-      pool.push({ id: `${mid}_btts_n`, mid, match: matchDisplay, group, kickoff, bet: `【BTTS】${home} vs ${away} 双方进球=否`, market: 'BTTS', odds: bNoOdd, prob: nbttsP, mvi: getMVI('BTTS No'), ev, conf: confidence, risk: risk === 'High' ? 'Medium' : risk, type: 'btts', wcpeIssues })
+      pool.push({ id: `${mid}_btts_n`, mid, match: matchDisplay, group, kickoff, bet: `【BTTS】${home} vs ${away} 双方进球=否`, market: 'BTTS', odds: bNoOdd, prob: nbttsP, mvi: getMVI('BTTS No'), ev: dewateredEV(nbttsP, bNoOdd, [bYesOdd, bNoOdd].filter(Boolean)).ev, conf: confidence, risk: risk === 'High' ? 'Medium' : risk, type: 'btts', wcpeIssues })
     }
 
-    // --- 双重机会 ---
-    if (hOdd && dOdd) {
-      const hdProb = hwp + dp, hdOdds = 1 / (1 / hOdd + 1 / dOdd)
-      const ev = calcEV(hdProb, hdOdds)
-      pool.push({ id: `${mid}_dc_hd`, mid, match: matchDisplay, group, kickoff, bet: `【双重机会】${home} 或 平局`, market: '双重机会', odds: Math.round(hdOdds * 100) / 100, prob: hdProb, mvi: 0.98, ev, conf: confidence, risk: 'Low', type: 'safety', wcpeIssues })
-    }
-    if (aOdd && dOdd) {
-      const adProb = awp + dp, adOdds = 1 / (1 / aOdd + 1 / dOdd)
-      const ev = calcEV(adProb, adOdds)
-      pool.push({ id: `${mid}_dc_ad`, mid, match: matchDisplay, group, kickoff, bet: `【双重机会】${away} 或 平局`, market: '双重机会', odds: Math.round(adOdds * 100) / 100, prob: adProb, mvi: 0.98, ev, conf: confidence, risk: 'Low', type: 'safety', wcpeIssues })
+    // ─── 双重机会（用Bet365真实盘口替代自算） ───
+    if (odds.doubleChance) {
+      const dc = odds.doubleChance
+      if (dc.homeOrDraw && dc.homeOrDraw > 0) {
+        const prob = hwp + dp
+        pool.push({ id: `${mid}_dc_hd`, mid, match: matchDisplay, group, kickoff, bet: `【双重机会】${home} 或 平局`, market: '双重机会', odds: dc.homeOrDraw, prob, mvi: calcMVI(prob, dc.homeOrDraw), ev: calcEV(prob, dc.homeOrDraw), conf: confidence, risk: 'Low', type: 'safety', wcpeIssues })
+      }
+      if (dc.drawOrAway && dc.drawOrAway > 0) {
+        const prob = dp + awp
+        pool.push({ id: `${mid}_dc_da`, mid, match: matchDisplay, group, kickoff, bet: `【双重机会】${away} 或 平局`, market: '双重机会', odds: dc.drawOrAway, prob, mvi: calcMVI(prob, dc.drawOrAway), ev: calcEV(prob, dc.drawOrAway), conf: confidence, risk: 'Low', type: 'safety', wcpeIssues })
+      }
+      if (dc.homeOrAway && dc.homeOrAway > 0) {
+        const prob = hwp + awp
+        pool.push({ id: `${mid}_dc_ha`, mid, match: matchDisplay, group, kickoff, bet: `【双重机会】${home} 或 ${away}`, market: '双重机会', odds: dc.homeOrAway, prob, mvi: calcMVI(prob, dc.homeOrAway), ev: calcEV(prob, dc.homeOrAway), conf: confidence, risk: 'Low', type: 'safety', wcpeIssues })
+      }
     }
 
-    // --- 波胆（正确比分）---
-    for (const s of (pred.top5Scores || []).slice(0, 5)) {
+    // ─── 平局退款 Draw No Bet（新市场） ───
+    if (odds.drawNoBet) {
+      const dnb = odds.drawNoBet
+      // 模型的 DNB 概率 = 排除平局后的胜率比值
+      const totalNoDraw = hwp + awp
+      if (totalNoDraw > 0 && dnb.home > 0) {
+        const probH = hwp / totalNoDraw
+        pool.push({ id: `${mid}_dnb_h`, mid, match: matchDisplay, group, kickoff, bet: `【平局退款】${home} 不败`, market: '平局退款', odds: dnb.home, prob: probH, mvi: calcMVI(probH, dnb.home), ev: calcEV(probH, dnb.home), conf: confidence, risk: 'Low', type: 'safety', wcpeIssues })
+      }
+      if (totalNoDraw > 0 && dnb.away > 0) {
+        const probA = awp / totalNoDraw
+        pool.push({ id: `${mid}_dnb_a`, mid, match: matchDisplay, group, kickoff, bet: `【平局退款】${away} 不败`, market: '平局退款', odds: dnb.away, prob: probA, mvi: calcMVI(probA, dnb.away), ev: calcEV(probA, dnb.away), conf: confidence, risk: 'Low', type: 'safety', wcpeIssues })
+      }
+    }
+
+    // ─── 波胆（正确比分）— 使用Bet365真实correctScore赔率 ───
+    const realCS = odds.correctScore || {}
+    for (const s of top5Scores.slice(0, 5)) {
       const score = typeof s === 'string' ? s : s.score || ''
       const prob = typeof s === 'object' ? (s.probability || 0.01) : 0.015
-      const estOdds = Math.round(1 / Math.max(prob, 0.003) * 10) / 10
-      pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: estOdds, prob, mvi: 1.0, ev: calcEV(prob, estOdds), conf: confidence, risk: 'High', type: 'score', wcpeIssues })
+      // 查找Bet365真实赔率
+      const realOdd = realCS[score] || 0
+      if (realOdd && realOdd > 0) {
+        // 有真实赔率 → 真实EV + 真实MVI
+        const ev = calcEV(prob, realOdd)
+        const mvi = calcMVI(prob, realOdd)
+        pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: realOdd, prob, mvi, ev, conf: confidence, risk: 'High', type: 'score', wcpeIssues, _source: 'Bet365' })
+      } else {
+        // 无真实赔率 → 用估算（标记为低质量）
+        const estOdds = Math.round(1 / Math.max(prob, 0.003) * 10) / 10
+        pool.push({ id: `${mid}_cs_${score.replace(':', '-')}`, mid, match: matchDisplay, group, kickoff, bet: `【波胆】${home} vs ${away} 比分 ${score}`, market: '波胆', odds: estOdds, prob, mvi: 1.0, ev: calcEV(prob, estOdds), conf: confidence, risk: 'High', type: 'score', wcpeIssues, _source: 'estimated' })
+      }
+    }
+
+    // ─── 比分区间 (altGoalLines) ───
+    if (odds.altGoalLines && odds.altGoalLines.length > 0) {
+      // 选择流动性最好的几条线：2.0, 2.5, 3.0, 3.5
+      const targetLines = [2.0, 2.5, 3.0, 3.5]
+      for (const target of targetLines) {
+        const line = odds.altGoalLines.find(l => Math.abs(l.hdp - target) < 0.01)
+        if (!line || !line.over || !line.under) continue
+        const lineOverP = estimateOverHdpProb(o25p, top5Scores, target)
+        const lineUnderP = 1 - lineOverP
+        const allLineOdds = [line.over, line.under]
+        // Over 方向
+        if (target !== 2.5 || !oOdd) { // 2.5的已在大小球中产生，避免重复
+          pool.push({ id: `${mid}_ov${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 大${target}球`, market: '比分区间', odds: line.over, prob: lineOverP, mvi: calcMVI(lineOverP, line.over), ev: dewateredEV(lineOverP, line.over, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues })
+        }
+        // Under 方向
+        pool.push({ id: `${mid}_un${target}`, mid, match: matchDisplay, group, kickoff, bet: `【比分区间】${home} vs ${away} 小${target}球`, market: '比分区间', odds: line.under, prob: lineUnderP, mvi: calcMVI(lineUnderP, line.under), ev: dewateredEV(lineUnderP, line.under, allLineOdds).ev, conf: confidence * 0.85, risk, type: 'goals_range', wcpeIssues })
+      }
     }
   }
 
-  // --- V4 增强过滤 ---
+  // ─── V4增强过滤 ───
   const accepted = [], rejected = []
   for (const c of pool) {
     const reasons = []
 
-    // 1. EV过滤 — EV < -0.08 直接淘汰
     if (c.ev < -0.08) reasons.push(`EV显著负(${(c.ev * 100).toFixed(1)}%)`)
-
-    // 2. MVI过滤 — MVI < 0.80 且非波胆淘汰
-    if (c.mvi < 0.80 && c.market !== '波胆' && c.market !== '双重机会') reasons.push(`MVI过低(${c.mvi.toFixed(2)})`)
-
-    // 3. 置信度 + 风险过滤
+    if (c.mvi < 0.80 && !['波胆', '双重机会', '平局退款'].includes(c.market)) reasons.push(`MVI过低(${c.mvi.toFixed(2)})`)
     if (c.conf < 0.40 && c.risk === 'High') reasons.push('极低置信+高风险')
     if (c.wcpeIssues >= 3 && c.type === 'direction') reasons.push('WCPE方向预测不可靠')
-
-    // 4. 波胆特殊过滤
     if (c.market === '波胆' && c.prob < 0.008) reasons.push('比分概率极低(<0.8%)')
-    if (c.market === '波胆' && c.prob < 0.015 && c.mvi < 1.0) reasons.push('低概率波胆无MVI支撑')
-
-    // 5. 盘口异常（赔率 > 100 且无EV）
+    if (c.market === '波胆' && c.prob < 0.015 && c.mvi < 0.85) reasons.push('低概率波胆无MVI支撑')
+    if (c.market === '比分区间' && c.conf < 0.40) reasons.push('比分区间置信度不足')
     if (c.odds > 100 && c.ev < 0.2 && c.market !== '波胆') reasons.push('超高赔率无EV支撑')
 
     if (reasons.length) rejected.push({ ...c, reasons })
     else accepted.push(c)
   }
 
-  // V4: 淘汰的比赛也需要记录（用于⑤主动放弃）
   const abandonedMatches = preRejected.map(pr => ({
-    match: pr.match,
-    reasons: [pr.reason],
-    type: '整场放弃',
+    match: pr.match, reasons: [pr.reason], type: '整场放弃',
   }))
 
   return { accepted, rejected, matchIds: [...new Set(pool.map(c => c.mid))], validationResults, abandonedMatches }
@@ -497,6 +533,8 @@ function scorePortfolio(legs, strategyWeights = {}) {
   const wGoals = strategyWeights.goals || 1.0
   const wBtts = strategyWeights.btts || 1.0
   const wScore = strategyWeights.score || 1.0
+  const wSafety = strategyWeights.safety || 1.0
+  const wGoalsRange = strategyWeights.goals_range || 1.0
 
   // 1. EV得分 (0-15分) — 正EV越高越好
   const evScore = compEV > 0 ? Math.min(compEV * 8 + 5, 15) : compEV > -0.05 ? 3 : 0
@@ -571,6 +609,8 @@ function scorePortfolio(legs, strategyWeights = {}) {
     if (leg.type === 'goals' && wGoals > 1.0) strategyBonus += (wGoals - 1) * 1.5
     if (leg.type === 'btts' && wBtts > 1.0) strategyBonus += (wBtts - 1) * 1.5
     if (leg.type === 'score' && wScore > 1.0) strategyBonus += (wScore - 1) * 0.5
+    if (leg.type === 'safety' && wSafety > 1.0) strategyBonus += (wSafety - 1) * 1.0
+    if (leg.type === 'goals_range' && wGoalsRange > 1.0) strategyBonus += (wGoalsRange - 1) * 1.0
   }
   strategyBonus = Math.min(strategyBonus, 5)
 

@@ -496,17 +496,28 @@ async function main() {
     result = generateSampleOdds()
   }
 
-  // 合并已有 market-odds.json（如果有）
+  // 合并已有 market-odds.json（如果有）— 新数据覆盖旧数据，但保留已存在的完整数据不被样本覆盖
   let existingOdds = {}
+  let existingSource = ''
   if (existsSync(OUTPUT_PATH)) {
     try {
       const existing = JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8'))
       existingOdds = existing.odds || {}
+      existingSource = existing.source || ''
     } catch { /* ignore */ }
   }
 
-  // 合并：新数据覆盖旧数据
-  const mergedOdds = { ...existingOdds, ...(result?.odds || {}) }
+  // 如果当前是样本数据但已有真实Bet365数据，保留真实数据（仅更新ML/O/U/BTTS维度）
+  const isSample = (result?.source || '').includes('sample')
+  const hasRealData = existingSource.includes('Bet365')
+  
+  let mergedOdds
+  if (isSample && hasRealData) {
+    // 样本数据不覆盖已有真实Bet365数据
+    mergedOdds = { ...existingOdds }
+  } else {
+    mergedOdds = { ...existingOdds, ...(result?.odds || {}) }
+  }
   const output = {
     fetchedAt: result?.fetchedAt || new Date().toISOString(),
     source: result?.source || 'sample-estimate',

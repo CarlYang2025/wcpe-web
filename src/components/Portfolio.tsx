@@ -377,7 +377,7 @@ function EmptyState({ message, hint }: { message: string; hint?: string }) {
 
 function LegRow({ leg, index, compact }: { leg: PortfolioLeg; index: number; compact?: boolean }) {
   const mviColor = leg.mvi >= 1.15 ? '#00ff88' : leg.mvi >= 1.05 ? '#ffa502' : '#a0a0a0'
-  const marketColors: Record<string, string> = { '胜平负': '#54a0ff', '大小球': '#00ff88', 'BTTS': '#a855f7', '双重机会': '#ffa502', '波胆': '#ff6b6b' }
+  const marketColors: Record<string, string> = { '胜平负': '#54a0ff', '大小球': '#00ff88', 'BTTS': '#a855f7', '双重机会': '#ffa502', '波胆': '#ff6b6b', '平局退款': '#22d3ee', '比分区间': '#f59e0b' }
   const marketColor = marketColors[leg.market] || '#555555'
   return (
     <div className={`flex items-center justify-between ${compact ? 'py-1' : 'py-2'} px-3 bg-[#0a0e27] rounded-lg`}>
