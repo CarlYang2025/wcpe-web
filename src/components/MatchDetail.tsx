@@ -387,6 +387,78 @@ export default function MatchDetail({ match, prediction, review, onBack }: Props
         <MviTable items={prediction.mviAnalysis} />
       </section>
 
+      {/* ====== 7b. Bet365 市场赔率 ====== */}
+      {(prediction as any)._marketOdds && (
+        <section className="bg-[#141937] border border-[#1a1f3a] rounded-xl p-5">
+          <M num={91} label="Bet365 市场赔率" />
+          <div className="grid grid-cols-2 gap-3 text-xs">
+            {/* BTTS */}
+            {(prediction as any)._marketOdds.btts && (
+              <div className="bg-[#1a1f3a] rounded-lg p-3">
+                <div className="text-[#a0a0a0] mb-1">双方进球 (BTTS)</div>
+                <div className="flex justify-between"><span className="text-[#54a0ff]">Yes</span><span className="text-white font-mono">{(prediction as any)._marketOdds.btts.yes}</span></div>
+                <div className="flex justify-between"><span className="text-[#ff4757]">No</span><span className="text-white font-mono">{(prediction as any)._marketOdds.btts.no}</span></div>
+              </div>
+            )}
+            {/* Draw No Bet */}
+            {(prediction as any)._marketOdds.drawNoBet && (
+              <div className="bg-[#1a1f3a] rounded-lg p-3">
+                <div className="text-[#a0a0a0] mb-1">平局退款</div>
+                <div className="flex justify-between"><span className="text-[#54a0a0]">主</span><span className="text-white font-mono">{(prediction as any)._marketOdds.drawNoBet.home}</span></div>
+                <div className="flex justify-between"><span className="text-[#ffa502]">客</span><span className="text-white font-mono">{(prediction as any)._marketOdds.drawNoBet.away}</span></div>
+              </div>
+            )}
+            {/* Double Chance */}
+            {(prediction as any)._marketOdds.doubleChance && (
+              <div className="bg-[#1a1f3a] rounded-lg p-3 col-span-2">
+                <div className="text-[#a0a0a0] mb-1">双重机会</div>
+                <div className="flex gap-4">
+                  <span className="text-white font-mono text-[10px]">1X: {(prediction as any)._marketOdds.doubleChance.homeOrDraw}</span>
+                  <span className="text-white font-mono text-[10px]">12: {(prediction as any)._marketOdds.doubleChance.homeOrAway}</span>
+                  <span className="text-white font-mono text-[10px]">X2: {(prediction as any)._marketOdds.doubleChance.drawOrAway}</span>
+                </div>
+              </div>
+            )}
+            {/* Spread */}
+            {(prediction as any)._marketOdds.spread && (
+              <div className="bg-[#1a1f3a] rounded-lg p-3">
+                <div className="text-[#a0a0a0] mb-1">让球盘 ({(prediction as any)._marketOdds.spread.hdp > 0 ? '+' : ''}{(prediction as any)._marketOdds.spread.hdp})</div>
+                <div className="flex justify-between"><span className="text-[#00ff88]">主</span><span className="text-white font-mono">{(prediction as any)._marketOdds.spread.home}</span></div>
+                <div className="flex justify-between"><span className="text-[#ffa502]">客</span><span className="text-white font-mono">{(prediction as any)._marketOdds.spread.away}</span></div>
+              </div>
+            )}
+            {/* Half Time */}
+            {(prediction as any)._marketOdds.halfTime && (
+              <div className="bg-[#1a1f3a] rounded-lg p-3">
+                <div className="text-[#a0a0a0] mb-1">半场数据</div>
+                {(prediction as any)._marketOdds.halfTime.result && (
+                  <div className="text-[10px] text-white font-mono mb-1">
+                    1: {(prediction as any)._marketOdds.halfTime.result.home} / X: {(prediction as any)._marketOdds.halfTime.result.draw} / 2: {(prediction as any)._marketOdds.halfTime.result.away}
+                  </div>
+                )}
+                {(prediction as any)._marketOdds.halfTime.btts && (
+                  <div className="text-[10px] text-[#a0a0a0]">BTTS: <span className="text-white">{(prediction as any)._marketOdds.halfTime.btts.yes}</span>/<span className="text-white">{(prediction as any)._marketOdds.halfTime.btts.no}</span></div>
+                )}
+              </div>
+            )}
+            {/* Alt Goal Lines (compact) */}
+            {(prediction as any)._marketOdds.altGoalLines?.length > 3 && (
+              <div className="bg-[#1a1f3a] rounded-lg p-3 col-span-2">
+                <div className="text-[#a0a0a0] mb-1">多线 O/U (Bet365)</div>
+                <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[10px]">
+                  {(prediction as any)._marketOdds.altGoalLines.slice(0, 8).map((l: any) => (
+                    <span key={l.hdp} className="text-white font-mono">O{l.hdp}:<span className="text-[#ffa502]">{l.over}</span>/<span className="text-[#54a0ff]">{l.under}</span></span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          <p className="mt-3 text-[9px] text-[#555555]">
+            数据来源：Bet365 via odds-api.io（免费套餐）。赔率为小数制。每次构建自动从 API 刷新。
+          </p>
+        </section>
+      )}
+
       {/* ====== 资金 ====== */}
       {prediction.bankroll ? (
         <section className="bg-[#141937] border border-[#1a1f3a] rounded-xl p-5">
