@@ -53,22 +53,25 @@ export default function BankrollBreakdown({ bankroll, match, prediction }: Props
     return lines
   }
 
+  const hasBankroll = bankroll && typeof bankroll === 'object' && !Array.isArray(bankroll)
+  const defaultPlan: BankrollPlan = { allocations: { '胜平负': 100 }, expectedReturn: 100 }
   const plans = [
-    { key: 'conservative', name: '保守', plan: bankroll.conservative, color: '#00ff88' },
-    { key: 'balanced', name: '平衡', plan: bankroll.balanced, color: '#ffa502' },
-    { key: 'aggressive', name: '激进', plan: bankroll.aggressive, color: '#ff4757' },
+    { key: 'conservative', name: '保守', plan: hasBankroll ? bankroll.conservative : undefined, color: '#00ff88' },
+    { key: 'balanced', name: '平衡', plan: hasBankroll ? bankroll.balanced : undefined, color: '#ffa502' },
+    { key: 'aggressive', name: '激进', plan: hasBankroll ? bankroll.aggressive : undefined, color: '#ff4757' },
   ]
 
   return (
     <div className="space-y-5">
       {plans.map(({ name, plan, color }) => {
-        const lines = planLines(plan.allocations)
+        const actualPlan = (plan && typeof plan === 'object' && plan.allocations) ? plan : defaultPlan
+        const lines = planLines(actualPlan.allocations)
 
         return (
           <div key={name} className="border border-[#1a1f3a] rounded-lg overflow-hidden">
             <div className="flex items-center justify-between px-4 py-2.5" style={{ backgroundColor: color + '10' }}>
               <span className="text-sm font-black" style={{ color }}>{name}方案</span>
-              <span className="text-[10px] text-[#a0a0a0]">100%预算 · 预期回报 <span style={{ color }}>+{plan.expectedReturn}%</span></span>
+              <span className="text-[10px] text-[#a0a0a0]">100%预算 · 预期回报 <span style={{ color }}>+{actualPlan.expectedReturn}%</span></span>
             </div>
             <div className="p-4">
               <div className="divide-y divide-[#1a1f3a]">
@@ -89,7 +92,7 @@ export default function BankrollBreakdown({ bankroll, match, prediction }: Props
                 ))}
               </div>
               <div className="mt-2 pt-2 border-t border-[#1a1f3a] text-[9px] text-[#555555]">
-                总计 {lines.reduce((s, l) => s + l.alloc, 0)}% → 预期回收 ~{100 + plan.expectedReturn}%
+                总计 {lines.reduce((s, l) => s + l.alloc, 0)}% → 预期回收 ~{100 + actualPlan.expectedReturn}%
               </div>
             </div>
           </div>

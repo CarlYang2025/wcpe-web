@@ -347,7 +347,7 @@ function validateWCPE(matchId, remote, market) {
   }
 
   // 3. MVI信号质量
-  const mviList = pred.mviAnalysis || []
+  const mviList = Array.isArray(pred.mviAnalysis) ? pred.mviAnalysis : []
   const highMVI = mviList.filter(m => (m.mvi || 0) >= 1.15)
   if (highMVI.length) confirmations.push(`${highMVI.length}个高价值MVI信号`)
   const lowMVI = mviList.filter(m => (m.mvi || 0) < 0.85)
@@ -597,7 +597,7 @@ function buildCandidatePool(remote, market) {
 
     // MVI map from WCPE
     const mviMap = {}
-    for (const mvi of (pred.mviAnalysis || [])) {
+    for (const mvi of (Array.isArray(pred.mviAnalysis) ? pred.mviAnalysis : [])) {
       mviMap[mvi.bet || ''] = mvi.mvi || 1
     }
     const getMVI = (name) => mviMap[name] || 1
