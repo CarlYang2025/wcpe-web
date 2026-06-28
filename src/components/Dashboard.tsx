@@ -17,7 +17,17 @@ interface Props {
 export default function Dashboard({
   historicalMatches, todayMatches, predictions, postMatchReviews, modelState, keyLearnings, onSelectMatch,
 }: Props) {
-  const todayTitle = todayMatches.length > 0 ? `${todayMatches[0].date} 比赛日` : '预测'
+  // Derive Beijing date from kickoff times (date field is local venue date)
+  const todayBeijingDate = useMemo(() => {
+    if (todayMatches.length === 0) return ''
+    // Parse kickoff string like "6/29 03:00" → extract month/day
+    const ko = todayMatches[0].kickoff?.match(/(\d+)\/(\d+)/)
+    if (!ko) return ''
+    const [_, month, day] = ko
+    return `2026-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+  }, [todayMatches])
+
+  const todayTitle = todayBeijingDate ? `北京时间${todayBeijingDate} 比赛日` : '预测'
   const [historyPage, setHistoryPage] = useState(1)
   const perPage = 10
   const totalPages = Math.ceil(historicalMatches.length / perPage)
@@ -40,7 +50,7 @@ export default function Dashboard({
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-bold text-[#ffd700]">🔮 {todayTitle}</h2>
           <span className="text-[10px] text-[#a0a0a0]">
-            {todayMatches.length} 场 · {todayMatches[0]?.date || '--'} 北京时间
+            {todayMatches.length} 场 · {todayBeijingDate || todayMatches[0]?.date || '--'} 北京时间
           </span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
