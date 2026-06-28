@@ -33,6 +33,15 @@ export default function MatchdaySummary(props: Props) {
   const validMatches = matches.filter(m => predictions[m.id])
   const matchCount = validMatches.length
 
+  // Derive Beijing date from kickoff times (date field is local venue date)
+  const matchdayBeijingDate = useMemo(() => {
+    if (validMatches.length === 0) return ''
+    const ko = validMatches[0].kickoff?.match(/(\d+)\/(\d+)/)
+    if (!ko) return ''
+    const [_, month, day] = ko
+    return `2026-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+  }, [validMatches])
+
   if (matchCount === 0) {
     return (
       <div className="text-center py-20 space-y-3">
@@ -130,10 +139,10 @@ export default function MatchdaySummary(props: Props) {
       {/* Header */}
       <div className="text-center py-4">
         <h2 className="text-xl font-black tracking-wide">
-          <span className="text-[#ffd700]">{validMatches[0].date}</span>
+          <span className="text-[#ffd700]">北京时间{matchdayBeijingDate || validMatches[0].date}</span>
           <span className="text-[#a0a0a0] text-sm font-normal ml-2">比赛日投注方案</span>
         </h2>
-        <p className="text-[10px] text-[#555555] mt-1">{matchCount} 场比赛 · {validMatches[0].date} 比赛日数据 · 北京时间</p>
+        <p className="text-[10px] text-[#555555] mt-1">{matchCount} 场比赛 · 北京时间{matchdayBeijingDate || validMatches[0].date} 比赛日数据</p>
       </div>
 
       {/* Risk Card */}
