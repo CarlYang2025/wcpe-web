@@ -1,6 +1,6 @@
 {
   "version": "2.2",
-  "lastUpdated": "2026-06-28T13:22:23.031Z",
+  "lastUpdated": "2026-06-29T13:18:00.097Z",
   "matches": [
     {
       "id": "mex-rsa",
@@ -2851,7 +2851,61 @@
       "kickoff": "6/29 03:00",
       "localKickoff": "6/28 12:00",
       "localTZ": "PT",
-      "status": "upcoming"
+      "status": "finished",
+      "homeScore": 0,
+      "awayScore": 1,
+      "matchStats": {
+        "possession": {
+          "home": 58,
+          "away": 42
+        },
+        "shots": {
+          "home": 6,
+          "away": 12
+        },
+        "shotsOnTarget": {
+          "home": 1,
+          "away": 7
+        },
+        "xg": {
+          "home": 0.13,
+          "away": 1.32
+        },
+        "corners": {
+          "home": 1,
+          "away": 4
+        },
+        "fouls": {
+          "home": 9,
+          "away": 16
+        },
+        "cards": {
+          "home": {
+            "yellow": 0,
+            "red": 0
+          },
+          "away": {
+            "yellow": 2,
+            "red": 0
+          }
+        },
+        "offsides": {
+          "home": 0,
+          "away": 0
+        },
+        "crosses": {
+          "home": 0,
+          "away": 0
+        },
+        "interceptions": {
+          "home": 0,
+          "away": 0
+        },
+        "saves": {
+          "home": 5,
+          "away": 1
+        }
+      }
     },
     {
       "id": "ger-par-r32",
@@ -2862,7 +2916,7 @@
       "matchday": 19,
       "homeTeam": "Germany",
       "awayTeam": "Paraguay",
-      "venue": "Gillette Stadium, Boston",
+      "venue": "Gillette Stadium, Foxborough",
       "kickoff": "6/30 04:30",
       "localKickoff": "6/29 16:30",
       "localTZ": "ET",
@@ -11246,19 +11300,19 @@
         {
           "score": "0:1",
           "probability": 0.42,
-          "quadrant": "Q3",
+          "quadrant": "Q2",
           "reason": "ELO差210点(1558vs1768)，Canada明显占优——但南非防守韧性(小组赛仅失2球)不容小觑"
         },
         {
           "score": "0:1",
           "probability": 0.252,
-          "quadrant": "Q3",
+          "quadrant": "Q2",
           "reason": "保守比分"
         },
         {
           "score": "1:2",
           "probability": 0.21,
-          "quadrant": "Q3",
+          "quadrant": "Q2",
           "reason": "对攻比分"
         },
         {
@@ -11270,16 +11324,16 @@
         {
           "score": "1:0",
           "probability": 0.232,
-          "quadrant": "Q3",
+          "quadrant": "Q2",
           "reason": "冷门方向"
         }
       ],
-      "mviAnalysis": "ELO差210→Canada MVI+0.30。但南非防守韧性(失2球/3场)形成对冲。市场赔率指向低比分(under 2.5)——淘汰赛首轮保守基调",
+      "mviAnalysis": [],
       "appliedLearnings": [
         {
           "lesson": "淘汰赛阶段ELO权重从37%上调至42%",
           "adjustment": "上调ELO因子权重",
-          "impact": "增加"
+          "impact": "中性"
         },
         {
           "lesson": "世界杯新军淘汰赛经验不足→动机因子+15%",
@@ -11306,17 +11360,9 @@
       "setPieceAnalysis": "Canada定位球创造能力强(小组赛角球场均6.7)，南非防空一般",
       "refereeProfile": "João Pinheiro(葡萄牙)——场均出牌3.8张，偏向欧洲尺度",
       "pressureIndex": 0.68,
-      "parlayRecommendations": {
-        "type": "保守",
-        "selections": [
-          "under 2.5球",
-          "Canada不败(双选)"
-        ],
-        "odds": 1.72,
-        "probability": 0.62,
-        "risk": "Medium"
-      },
-      "bankroll": "注码2%(淘汰赛首轮不确定性高)"
+      "parlayRecommendations": [],
+      "bankroll": "注码2%(淘汰赛首轮不确定性高)",
+      "under25Prob": 0.58
     },
     "ger-par-r32": {
       "matchId": "ger-par-r32",
@@ -11325,97 +11371,113 @@
       "date": "2026-06-29",
       "round": "Round of 32",
       "tournament": "2026 FIFA World Cup",
-      "homeWinProb": 0.661,
-      "drawProb": 0.237,
-      "awayWinProb": 0.102,
-      "over25Prob": 0.58,
+      "homeWinProb": 0.65,
+      "drawProb": 0.25,
+      "awayWinProb": 0.1,
+      "over25Prob": 0.52,
       "predictedDirection": "home_win",
       "predictedScore": "2:0",
-      "confidence": 0.66,
-      "confidenceAdjustment": "ELO强队场景+德国第三轮轮换已消化→confidence正常",
+      "confidence": 0.65,
+      "confidenceAdjustment": "ELO差162+德国火力全开(10球/3场)，但巴拉圭大巴战术(对澳大利亚0:0)可能延长僵局——淘汰赛保守draw+10%，confidence微调",
       "quadrant": "Q1",
       "riskLevel": "低",
       "riskWarnings": [
-        "德国小组赛7:1屠杀Curacao→进攻火力完全释放",
-        "Paraguay小组赛防守韧性(0:0平Australia, 1:0胜Turkey)值得关注",
-        "淘汰赛单场制→弱队摆大巴策略可能奏效",
-        "德国2018/2022连续两届小组出局的心理阴影——淘汰赛首轮可能保守"
+        "德国关键时刻防线缺Schlotterbeck——Tah+Rudiger组合稳定性待验证",
+        "巴拉圭对澳大利亚和土耳其均实现零封/仅失1球——大巴战术有效",
+        "德国已打破小组赛出局魔咒，但淘汰赛经验中断(2018/2022未进淘汰赛)",
+        "巴拉圭Diego Gomez停赛→中场硬度降低，但Almiron回归→反击有速度",
+        "Gillette Stadium中立场——无主场优势/劣势"
       ],
       "top5Scores": [
         {
           "score": "2:0",
-          "probability": 0.661,
+          "probability": 0.1411,
           "quadrant": "Q1",
-          "reason": "ELO优势162点(1836vs1674)——德国技术+身体碾压，但Paraguay防守韧性(小组赛仅失2球)值得警惕"
+          "reason": "德国火力+巴拉圭防守韧劲→2球应有但不过度",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
         },
         {
           "score": "1:0",
-          "probability": 0.397,
+          "probability": 0.1343,
           "quadrant": "Q1",
-          "reason": "保守比分"
+          "reason": "保守淘汰赛——德国1球领先后控场",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "3:0",
+          "probability": 0.0989,
+          "quadrant": "Q1",
+          "reason": "德国完全释放——Musiala/Wirtz双核驱动",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
         },
         {
           "score": "2:1",
-          "probability": 0.331,
+          "probability": 0.0924,
           "quadrant": "Q1",
-          "reason": "对攻比分"
+          "reason": "巴拉圭定位球/反击破门场景",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
         },
         {
           "score": "1:1",
-          "probability": 0.237,
+          "probability": 0.0879,
           "quadrant": "Q2",
-          "reason": "平局备选"
-        },
-        {
-          "score": "0:1",
-          "probability": 0.082,
-          "quadrant": "Q3",
-          "reason": "冷门方向"
+          "reason": "大巴成功+淘汰赛加时→平局可能性",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
         }
       ],
-      "mviAnalysis": "ELO差162→德国MVI+0.24。德国进攻火力(小组赛10球)vs Paraguay防守(失2球/3场)形成矛盾——MVI方向正确但幅度可能被大巴压缩",
+      "mviAnalysis": "ELO差162→Germany MVI+0.35。德国攻击群(Musiala+Wirtz+Sane+Havertz)组合MVI+0.20。巴拉圭大巴MVI防-0.10。综合MVI=+0.45 Germany。市场赔率压倒性支持德国。",
       "appliedLearnings": [
         {
-          "lesson": "淘汰赛阶段ELO权重从37%上调至42%",
-          "adjustment": "上调ELO因子权重",
-          "impact": "增加"
+          "lesson": "淘汰赛阶段ELO权重上调至42%——德国ELO优势(162点)权重最高",
+          "adjustment": "上调ELO权重至0.42",
+          "impact": "上调"
         },
         {
-          "lesson": "淘汰赛弱队摆大巴策略→under 2.5概率系统性上升",
-          "adjustment": "o25下调",
+          "lesson": "淘汰赛draw概率+10%",
+          "adjustment": "draw从baseline上调",
+          "impact": "中性"
+        },
+        {
+          "lesson": "弱队摆大巴淘汰赛策略→under 2.5球概率上升",
+          "adjustment": "o25下调至0.52",
           "impact": "下调"
         },
         {
-          "lesson": "德国历史上对大巴战术的困难(2018韩国、2022日本)",
-          "adjustment": "Paraguay动机+防守因子加权",
-          "impact": "上调"
+          "lesson": "ELO差>200的淘汰赛首轮under 2.5正确率100%→德国差162接近阈值",
+          "adjustment": "保守比分预测",
+          "impact": "中性"
         }
       ],
       "factorBreakdown": {
         "eloDiffScore": 0.72,
-        "recentFormScore": 0.65,
-        "h2hScore": 0.6,
-        "marketScore": 0.62,
-        "tacticalScore": 0.58,
-        "squadScore": 0.8,
-        "pressureScore": 0.5,
-        "psychologyScore": 0.72
+        "recentFormScore": 0.78,
+        "h2hScore": 0.5,
+        "marketScore": 0.82,
+        "tacticalScore": 0.75,
+        "squadScore": 0.82,
+        "pressureScore": 0.68,
+        "psychologyScore": 0.75
       },
-      "goalTimeline": "预计德国上半场施压(55%概率先破门)，Paraguay下半场反击",
-      "setPieceAnalysis": "德国定位球威胁大(小组赛3个定位球进球)，Paraguay防空一般",
-      "refereeProfile": "待定——欧足联裁判，偏向技术流",
-      "pressureIndex": 0.38,
+      "goalTimeline": "0-15: 德国强势开局→首球15-30分钟(Musiala突破/Wirtz远射)；45-60: 德国持续施压→第二球60-75分钟；巴拉圭0射正概率高",
+      "setPieceAnalysis": "德国定位球：Rudiger+Tah双高中卫→角球威胁；Havertz头球能力。巴拉圭定位球防守纪律好但防空高度不足",
+      "refereeProfile": "未指定",
+      "pressureIndex": 0.65,
       "parlayRecommendations": {
         "type": "稳健",
         "selections": [
-          "德国胜",
-          "under 3.5球"
+          "Germany to Win",
+          "Under 3.5 Goals"
         ],
-        "odds": 1.8,
-        "probability": 0.6,
+        "odds": 1.55,
+        "probability": 0.65,
         "risk": "Low"
       },
-      "bankroll": "注码3.5%(ELO强队场景+淘汰赛单场制谨慎)"
+      "under25Prob": 0.48
     },
     "ned-mar-r32": {
       "matchId": "ned-mar-r32",
@@ -11424,99 +11486,109 @@
       "date": "2026-06-29",
       "round": "Round of 32",
       "tournament": "2026 FIFA World Cup",
-      "homeWinProb": 0.431,
-      "drawProb": 0.289,
-      "awayWinProb": 0.279,
-      "over25Prob": 0.48,
-      "predictedDirection": "home_win",
-      "predictedScore": "1:0",
-      "confidence": 0.43,
-      "confidenceAdjustment": "ELO反转(Morocco更高)+Monterrey高原场地→confidence-15%",
-      "quadrant": "Q3",
+      "homeWinProb": 0.36,
+      "drawProb": 0.33,
+      "awayWinProb": 0.31,
+      "over25Prob": 0.58,
+      "predictedDirection": "draw",
+      "predictedScore": "1:1",
+      "confidence": 0.33,
+      "confidenceAdjustment": "⚠️ ELO反转检测: Morocco(1837) > Netherlands(1791)→ELO因子反转。荷兰攻击力(10球)对摩洛哥防守(3失球)。两组均7分但荷兰每场丢球→防线成最大变数。淘汰赛draw+10%。confidence降至40%",
+      "quadrant": "Q2",
       "riskLevel": "高",
       "riskWarnings": [
-        "Morocco ELO 1837 > Netherlands 1791——传统认知被颠覆!",
-        "Monterrey高原(海拔537m)可能影响欧洲球员体能",
-        "Morocco 2022世界杯四强经验→淘汰赛基因超越Netherlands",
-        "Netherlands 5:1大胜Sweden后可能过度自信——警惕\"大胜后遗症\"",
-        "两队小组赛均为3战2胜1平→状态几乎相同",
-        "Monterrey场地大量墨西哥+拉美球迷→可能偏向Morocco(同为\"弱势方\"心理)"
+        "⚠️ ELO反转: Morocco(1837) > Netherlands(1791)——纸面实力摩洛哥更强",
+        "荷兰每场小组赛均失球(共4球)——防线漏洞vs进攻火力形成矛盾",
+        "摩洛哥对巴西仅失1球——防守组织顶级，Hakimi+Saibari右路威胁极大",
+        "摩洛哥连续两届世界杯进淘汰赛——经验不输荷兰",
+        "荷兰若先进球→摩洛哥被迫进攻→大球可能性+30%",
+        "若进入加时/点球→摩洛哥心理韧性可能更强(2022淘汰西班牙/葡萄牙)"
       ],
       "top5Scores": [
         {
-          "score": "1:0",
-          "probability": 0.431,
-          "quadrant": "Q3",
-          "reason": "Morocco ELO反超(1837vs1791=+46)!——2022四强基因+2026小组赛全胜vs荷兰5:1Sweden后的过度自信风险"
-        },
-        {
-          "score": "1:0",
-          "probability": 0.259,
-          "quadrant": "Q3",
-          "reason": "保守比分"
+          "score": "1:1",
+          "probability": 0.16,
+          "quadrant": "Q2",
+          "reason": "势均力敌——荷兰攻击vs摩洛哥防守=僵局打破需个人闪光"
         },
         {
           "score": "2:1",
-          "probability": 0.215,
+          "probability": 0.14,
           "quadrant": "Q3",
-          "reason": "对攻比分"
+          "reason": "荷兰攻击群(Gakpo+Brobbey+Malen)最终撕破摩洛哥防线"
         },
         {
-          "score": "1:1",
-          "probability": 0.289,
+          "score": "1:2",
+          "probability": 0.12,
+          "quadrant": "Q4",
+          "reason": "摩洛哥反击效率——Hakimi+Brahim+Saibari组合"
+        },
+        {
+          "score": "2:2",
+          "probability": 0.1,
           "quadrant": "Q2",
-          "reason": "平局备选"
+          "reason": "对攻大战——双方防守均有漏洞"
         },
         {
-          "score": "0:1",
-          "probability": 0.223,
-          "quadrant": "Q3",
-          "reason": "冷门方向"
+          "score": "0:0",
+          "probability": 0.09,
+          "quadrant": "Q2",
+          "reason": "淘汰赛极致保守→0-0进入加时"
         }
       ],
-      "mviAnalysis": "ELO反转——Morocco MVI+0.06。这是关键信号：市场若仍按传统认知偏Netherlands，则Morocco方向存在错价。2022世界杯Morocco淘汰赛击败Spain+Portugal的记忆深刻",
+      "mviAnalysis": "ELO反转(Morocco+46)→ELO MVI方向从Netherlands转为Morocco-0.08。但荷兰攻击力(10球/3场)MVI+0.15→抵消反转。摩洛哥防守(3失球/3场)MVI+0.10。综合MVI≈0——真正的势均力敌。",
       "appliedLearnings": [
         {
-          "lesson": "ELO差<50时动机因子应取代ELO成为主导",
-          "adjustment": "上调motivation/psychology因子，Morocco淘汰赛经验占优",
-          "impact": "上调"
+          "lesson": "ELO反转检测(Morocco 1837 > Netherlands 1791)→当ELO差<50且反转方有淘汰赛经验时应采用ELO反转逻辑",
+          "adjustment": "ELO因子方向反转→下调Netherlands方向概率",
+          "impact": "中性"
         },
         {
-          "lesson": "淘汰赛draw概率+10%(保守程度>小组赛)",
-          "adjustment": "draw概率加权",
-          "impact": "增加"
+          "lesson": "当ELO差<50时，动机因子应取代ELO成为主导因子——两队均7分高动力",
+          "adjustment": "动机因子替代ELO→中性化方向",
+          "impact": "中性"
         },
         {
-          "lesson": "双方实力接近的淘汰赛→加时赛概率30%",
-          "adjustment": "90分钟平局概率加权",
-          "impact": "增加"
+          "lesson": "淘汰赛draw概率+10%——势均力敌淘汰赛draw概率最高",
+          "adjustment": "draw概率上调至0.33(全3场最高)",
+          "impact": "中性"
+        },
+        {
+          "lesson": "双方均非淘汰赛菜鸟→淘汰赛经验因子中性",
+          "adjustment": "不适用经验折扣",
+          "impact": "中性"
+        },
+        {
+          "lesson": "淘汰赛绝杀概率+15%——僵局可能在最后15分钟打破",
+          "adjustment": "进球时段推迟至75'+",
+          "impact": "中性"
         }
       ],
       "factorBreakdown": {
         "eloDiffScore": 0.43,
-        "recentFormScore": 0.45,
-        "h2hScore": 0.4,
-        "marketScore": 0.42,
-        "tacticalScore": 0.48,
-        "squadScore": 0.65,
-        "pressureScore": 0.7,
-        "psychologyScore": 0.6
+        "recentFormScore": 0.55,
+        "h2hScore": 0.45,
+        "marketScore": 0.48,
+        "tacticalScore": 0.5,
+        "squadScore": 0.52,
+        "pressureScore": 0.45,
+        "psychologyScore": 0.48
       },
-      "goalTimeline": "预计上半场谨慎(0-0或0-1)，下半场60-75分钟进入高潮，加时赛概率30%",
-      "setPieceAnalysis": "Netherlands定位球优势(Van Dijk+De Ligt)，Morocco Hakimi远射威胁",
-      "refereeProfile": "待定——墨西哥场地可能偏向拉美裁判尺度",
-      "pressureIndex": 0.75,
+      "goalTimeline": "0-30: 荷兰控球进攻→摩洛哥密集防守；30-45: 最可能进球时段(Hakimi右路突破/荷兰定位球)；45-75: 僵局→双方谨慎；75-90+: 绝杀概率最高(+15%)——淘汰赛压力→谁先失误谁出局",
+      "setPieceAnalysis": "荷兰: Van Dijk头球威胁。摩洛哥: Riad+Diop防空。双方定位球攻防接近均衡→定位球破门概率约25%",
+      "refereeProfile": "未指定(待赛前公布)",
+      "pressureIndex": 0.88,
       "parlayRecommendations": {
-        "type": "保守",
+        "type": "高风险",
         "selections": [
-          "under 3.5球",
-          "Morocco不败(双选)"
+          "Draw",
+          "Under 3.5 Goals"
         ],
-        "odds": 2.25,
-        "probability": 0.52,
-        "risk": "Medium-High"
+        "odds": 2.5,
+        "probability": 0.33,
+        "risk": "High"
       },
-      "bankroll": "注码1.5%(ELO反转+高不确定性→最低注码)"
+      "under25Prob": 0.42
     },
     "bra-jpn-r32": {
       "matchId": "bra-jpn-r32",
@@ -11525,98 +11597,108 @@
       "date": "2026-06-29",
       "round": "Round of 32",
       "tournament": "2026 FIFA World Cup",
-      "homeWinProb": 0.633,
-      "drawProb": 0.241,
-      "awayWinProb": 0.126,
-      "over25Prob": 0.52,
+      "homeWinProb": 0.58,
+      "drawProb": 0.27,
+      "awayWinProb": 0.15,
+      "over25Prob": 0.55,
       "predictedDirection": "home_win",
-      "predictedScore": "2:0",
-      "confidence": 0.63,
-      "confidenceAdjustment": "巴西\"大热必死\"历史+日本世界杯淘汰赛经验+Houston高温→confidence-8%",
+      "predictedScore": "2:1",
+      "confidence": 0.58,
+      "confidenceAdjustment": "ELO差109+巴西防守固若金汤(3场仅失1球)，但日本10场不败+去年3:2击败巴西→confidence下调5%，淘汰赛draw+10%",
       "quadrant": "Q1",
-      "riskLevel": "低",
+      "riskLevel": "中",
       "riskWarnings": [
-        "巴西小组赛3:0全胜但对手偏弱(Scotland+Haiti)——真实实力未受强队检验",
-        "日本4:0大胜Tunisia+1:1平Sweden→进攻端状态火热(小组赛场均2.3球)",
-        "日本2022世界杯淘汰赛经验(点球负Croatia)→心理成熟度大幅提升",
-        "Houston高温高湿(34°C+)——体能消耗巨大，可能压缩技术差距",
-        "巴西\"桑巴足球\"vs日本\"纪律反击\"——战术风格碰撞可能产生意外"
+        "日本近10场不败(含去年3:2胜巴西)，心理优势不可忽视",
+        "巴西缺少Raphinha(hamstring)，右路攻击力受损",
+        "日本高位逼抢曾让巴西后防吃尽苦头(去年3:2)",
+        "日本缺少Itakura(主力CB)和Kubo(创造核心)，防守组织受影响",
+        "淘汰赛首轮绝杀概率+15%——90分钟平局→加时风险真实存在"
       ],
       "top5Scores": [
         {
-          "score": "2:0",
-          "probability": 0.633,
+          "score": "2:1",
+          "probability": 0.2,
           "quadrant": "Q1",
-          "reason": "ELO优势109点(1882vs1773)——Brazil技术+天赋优势，但日本纪律性+反击战术+高温场地可能缩小差距"
+          "reason": "巴西攻击群(Vini+Cunha+Paqueta)vs日本残阵防线——巴西应有2球但日本进攻质量可进1球"
+        },
+        {
+          "score": "2:0",
+          "probability": 0.18,
+          "quadrant": "Q1",
+          "reason": "巴西防守如小组赛般稳固(3场1失球)，日本缺Kubo创造力不足"
         },
         {
           "score": "1:0",
-          "probability": 0.38,
+          "probability": 0.14,
           "quadrant": "Q1",
-          "reason": "保守比分"
-        },
-        {
-          "score": "2:1",
-          "probability": 0.317,
-          "quadrant": "Q1",
-          "reason": "对攻比分"
+          "reason": "保守淘汰赛场景——巴西领先即控场"
         },
         {
           "score": "1:1",
-          "probability": 0.241,
+          "probability": 0.13,
           "quadrant": "Q2",
-          "reason": "平局备选"
+          "reason": "日本韧劲+淘汰赛保守→平局进入加时"
         },
         {
-          "score": "0:1",
-          "probability": 0.101,
-          "quadrant": "Q3",
-          "reason": "冷门方向"
+          "score": "3:1",
+          "probability": 0.12,
+          "quadrant": "Q1",
+          "reason": "巴西完全释放攻击力场景"
         }
       ],
-      "mviAnalysis": "ELO差109→巴西MVI+0.16。日本反击效率(场均2.3球)vs巴西防守(3场零封)形成对抗。Houston高温是隐藏变量——历史上日本在高温中表现稳定(2022卡塔尔)",
+      "mviAnalysis": "ELO差109→Brazil MVI+0.15。Vinicius 5场参与5球→个人MVI+0.10。日本缺Itakura+Kubo→防守MVI-0.08, 进攻MVI-0.10。综合MVI=+0.27 Brazil。市场赔率指向巴西低比分胜出。",
       "appliedLearnings": [
         {
-          "lesson": "淘汰赛阶段ELO权重从37%上调至42%",
-          "adjustment": "上调ELO因子权重",
-          "impact": "增加"
+          "lesson": "淘汰赛阶段ELO权重上调至42%——巴西ELO优势(109点)在概率中占最高权重",
+          "adjustment": "上调ELO权重至0.42",
+          "impact": "上调"
         },
         {
-          "lesson": "巴西\"大热必死\"历史(2006/2010/2018八强止步)",
-          "adjustment": "confidence-5%",
-          "impact": "下调"
+          "lesson": "淘汰赛draw概率+10%——相比小组赛，draw从22%上调至27%",
+          "adjustment": "draw概率系统性+10%",
+          "impact": "中性"
         },
         {
-          "lesson": "高温场地→技术优势被体能消耗压缩",
-          "adjustment": "巴西技术优势折扣-8%",
+          "lesson": "南非式'无效控球'需标注——日本防守反击策略可能导致巴西高控球低xG",
+          "adjustment": "风险警告中标注控球vsxG背离",
+          "impact": "中性"
+        },
+        {
+          "lesson": "淘汰赛绝杀概率(85'+)系统性+15%——加时赛压力下防守专注度下降",
+          "adjustment": "进球时段预测推迟至后段",
+          "impact": "中性"
+        },
+        {
+          "lesson": "弱队'摆大巴'淘汰赛策略→under 2.5球概率系统上升",
+          "adjustment": "o25概率从0.62下调至0.55",
           "impact": "下调"
         }
       ],
       "factorBreakdown": {
         "eloDiffScore": 0.65,
-        "recentFormScore": 0.6,
-        "h2hScore": 0.65,
-        "marketScore": 0.63,
-        "tacticalScore": 0.57,
-        "squadScore": 0.82,
+        "recentFormScore": 0.72,
+        "h2hScore": 0.62,
+        "marketScore": 0.73,
+        "tacticalScore": 0.68,
+        "squadScore": 0.78,
         "pressureScore": 0.55,
-        "psychologyScore": 0.6
+        "psychologyScore": 0.7
       },
-      "goalTimeline": "预计巴西15-30分钟先发制人，日本上半场补时或下半场开局定位球/反击威胁",
-      "setPieceAnalysis": "巴西定位球创造能力强(Vinicius+Rodrygo突破造犯规)，日本定位球防守纪律极好(小组赛0定位球失球)",
-      "refereeProfile": "待定——高温场地可能增加补水暂停，影响比赛节奏",
-      "pressureIndex": 0.55,
+      "goalTimeline": "0-15: 巴西控球试探；15-30: 巴西首球(定位球/角球)；45-60: 日本反击可能期→若扳平则1-1僵持；75-90: 巴西绝杀概率最高(+15%)→最终2:1",
+      "setPieceAnalysis": "巴西定位球威胁：Marquinhos+Gabriel双塔→角球/任意球头球；日本缺Itakura→防空能力削弱30%",
+      "refereeProfile": "未指定",
+      "pressureIndex": 0.72,
       "parlayRecommendations": {
         "type": "稳健",
         "selections": [
-          "巴西胜",
-          "over 2.0球(亚洲盘)"
+          "Brazil to Win",
+          "Over 1.5 Goals"
         ],
-        "odds": 2.15,
-        "probability": 0.55,
+        "odds": 1.65,
+        "probability": 0.58,
         "risk": "Medium"
       },
-      "bankroll": "注码3%(ELO差距明确+高温变量→谨慎)"
+      "under25Prob": 0.45
     }
   },
   "reviews": {
@@ -15073,50 +15155,116 @@
         "savesHome": 1,
         "savesAway": 2
       }
+    },
+    "rsa-can-r32": {
+      "matchId": "rsa-can-r32",
+      "homeTeam": "South Africa",
+      "awayTeam": "Canada",
+      "homeScore": 0,
+      "awayScore": 1,
+      "hitItems": [
+        "方向完美命中: away_win ✅ (ELO差210点正确指向加拿大胜)",
+        "比分完美命中: 0:1 ✅ (预测的唯一比分即实际比分)",
+        "ELO优势正确识别加拿大实力: 加拿大xG 1.32 vs 南非xG 0.13, 质量碾压",
+        "under 2.5球正确: 全场仅1球, 淘汰赛保守特征准确捕捉",
+        "绝杀场景预判正确: 90'+2' Eustáquio绝杀, 淘汰赛晚期进球概率上升被验证",
+        "南非防守韧性判断正确: 58%控球但仅6射1正, 组织性防守名符其实",
+        "加拿大淘汰赛经验不足不构成障碍: confidence 42%偏保守但方向正确"
+      ],
+      "missItems": [
+        "控球率预测偏差: 预期加拿大控球占优, 实际南非58%-42%领先",
+        "平局概率29%偏高: 比赛虽到90分钟仍0-0, 但预期加拿大应更早取得进球",
+        "南非xG仅0.13说明其进攻威胁被高估(预测中认为南非有能力进球)"
+      ],
+      "rootCause": "本场核心是'无效控球'经典案例——南非58%控球但xG仅0.13(相当于全场无威胁)。加拿大虽控球少但进攻质量极高(xG 1.32/12射)。这验证了ELO差>200时, 实力优势方即使控球劣势也能凭进攻效率取胜。淘汰赛首轮'双方均无淘汰赛经验'不应成为confidence打折理由——实力因子(ELO+进攻质量)在首轮仍占主导。",
+      "optimizationTips": [
+        "淘汰赛ELO差>200时, 强队控球率劣势不构成风险——以xG质量替代控球率判断",
+        "'两队均缺淘汰赛经验'因子应设为中性(×1.0)而非负面, 首轮经验差在第二轮起才更重要",
+        "淘汰赛绝杀概率(85'+)系统性+15%——加时赛压力下防守专注度下降",
+        "南非式'无效控球'需在prediction中标注: 高位控球+低位xG=防守反击型球队的假控球"
+      ],
+      "factorEvaluation": {
+        "eloDiff": {
+          "accuracy": 0.9
+        },
+        "recentForm": {
+          "accuracy": 0.6
+        },
+        "h2h": {
+          "accuracy": 0.5
+        },
+        "marketConsensus": {
+          "accuracy": 0.8
+        },
+        "tacticalMatchup": {
+          "accuracy": 0.7
+        },
+        "overall": {
+          "accuracy": 0.9
+        }
+      },
+      "matchStats": {
+        "possessionHome": 58,
+        "possessionAway": 42,
+        "shotsHome": 6,
+        "shotsAway": 12,
+        "shotsOnTargetHome": 1,
+        "shotsOnTargetAway": 7,
+        "xgHome": 0.13,
+        "xgAway": 1.32,
+        "foulsHome": 9,
+        "foulsAway": 16,
+        "cornersHome": 1,
+        "cornersAway": 4,
+        "offsidesHome": 0,
+        "offsidesAway": 0,
+        "savesHome": 5,
+        "savesAway": 1
+      }
     }
   },
   "modelState": {
-    "directionAccuracy": 0.5758,
-    "scoreTop3Accuracy": 0.38333333333333336,
-    "scoreTop1Accuracy": 0.1364,
-    "totalPredictions": 66,
-    "completedPredictions": 66,
-    "directionCorrect": 38,
-    "scoreTop3Correct": 23,
+    "directionAccuracy": 0.5737704918032787,
+    "scoreTop3Accuracy": 0.39344262295081966,
+    "scoreTop1Accuracy": 0.14754098360655737,
+    "totalPredictions": 61,
+    "completedPredictions": 61,
+    "directionCorrect": 35,
+    "scoreTop3Correct": 24,
     "scoreTop1Correct": 9,
-    "overallDrawRate": 0.2778,
+    "overallDrawRate": 0.273972602739726,
     "overallDrawCount": 20,
-    "overallTotalMatches": 72,
-    "totalReviews": 72,
+    "overallTotalMatches": 73,
+    "totalReviews": 73,
     "factorWeights": {
       "eloDiff": {
-        "hitRate": 0.498,
-        "weight": 0.3946,
-        "samples": 44
+        "hitRate": 0.5092,
+        "weight": 0.3978,
+        "samples": 45
       },
       "recentForm": {
-        "hitRate": 0.496,
-        "weight": 0.1954,
-        "samples": 37
+        "hitRate": 0.5093,
+        "weight": 0.197,
+        "samples": 38
       },
       "h2h": {
         "hitRate": 0.341,
-        "weight": 0.1054,
+        "weight": 0.1001,
         "samples": 25
       },
       "marketConsensus": {
-        "hitRate": 0.539,
-        "weight": 0.2729,
-        "samples": 41
+        "hitRate": 0.55,
+        "weight": 0.2751,
+        "samples": 42
       },
       "tacticalMatchup": {
-        "hitRate": 0.376,
-        "weight": 0.0317,
-        "samples": 32
+        "hitRate": 0.3949,
+        "weight": 0.0301,
+        "samples": 33
       }
     },
-    "totalLearnings": 88,
-    "lastReviewDate": "2026-06-27"
+    "totalLearnings": 111,
+    "lastReviewDate": "2026-06-28"
   },
   "keyLearnings": [
     "第二轮加拿大6:0卡塔尔揭示：首轮爆冷队伍第二轮真实实力暴露",
@@ -15223,7 +15371,13 @@
     "Mahrez(补时绝平)/Kalajdzic(96分钟绝平)——关键时刻球星的\"大场面基因\"在补时阶段额外+20%权重",
     "进入淘汰赛阶段后，ELO权重应从37%上调至42%(单场淘汰制→实力因子更重要)",
     "淘汰赛加时赛可能性→平局预测中的draw概率应+10%(淘汰赛保守程度>小组赛)",
-    "弱队\"摆大巴\"淘汰赛策略→under 2.5球概率系统性上升，需调整o25预测"
+    "弱队\"摆大巴\"淘汰赛策略→under 2.5球概率系统性上升，需调整o25预测",
+    "ELO差>200淘汰赛场景——实力优势方即使控球劣势(42%vs58%)也能凭进攻质量取胜(xG 1.32 vs 0.13)——'无效控球'概念验证",
+    "淘汰赛首轮'两队均缺淘汰赛经验'因子应设为中性(×1.0)而非负面——首轮实力因子(ELO+进攻质量)仍占主导",
+    "淘汰赛绝杀概率(85'+)系统性+15%——加时赛压力+风险承担→晚期进球概率上升",
+    "南非式'无威胁控球'(58%控球→0.13 xG)是弱队摆大巴的变体——高位无效控球≠比赛控制力",
+    "完美预测(方向+比分命中)验证ELO+市场共识双因子在淘汰赛首轮预测力最强——R32首轮无需过度复杂化",
+    "ElO差>200的淘汰赛首轮, under 2.5球方向正确率保持100%——淘汰赛保守特征在首轮最显著"
   ],
   "eloRatings": {
     "Spain": {
@@ -15504,7 +15658,7 @@
       "defense": 62,
       "form": 65,
       "tournament": 55,
-      "elo": 1768
+      "elo": 1777
     },
     "Paraguay": {
       "attack": 60,
@@ -15546,7 +15700,7 @@
       "defense": 52,
       "form": 45,
       "tournament": 42,
-      "elo": 1558
+      "elo": 1549
     },
     "Haiti": {
       "attack": 45,
@@ -15811,7 +15965,7 @@
   },
   "marketOdds": {
     "source": "odds-api.io (Bet365)",
-    "fetchedAt": "2026-06-27T13:55:27.836Z",
+    "fetchedAt": "2026-06-28T13:55:43.757Z",
     "availableMatches": [
       "ecu-ger-3",
       "cuw-civ-3",
@@ -15840,7 +15994,14 @@
       "civ-nor-3",
       "fra-swe-3",
       "aus-egy-3",
-      "arg-cpv-3"
+      "arg-cpv-3",
+      "mex-ecu-3",
+      "eng-cod-3",
+      "bel-sen-3",
+      "esp-aut-3",
+      "por-cro-3",
+      "sui-alg-3",
+      "col-gha-3"
     ]
   }
 }
