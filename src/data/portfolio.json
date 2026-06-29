@@ -1,51 +1,103 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-06-28T13:56:20.131Z",
-  "targetDate": "6/29",
-  "targetDateDisplay": "2026年6月29日（周一）",
+  "generatedAt": "2026-06-29T13:56:27.805Z",
+  "targetDate": "6/30",
+  "targetDateDisplay": "2026年6月30日（周二）",
   "targetMatchIds": [
-    "rsa-can-r32"
+    "ger-par-r32",
+    "ned-mar-r32",
+    "bra-jpn-r32"
   ],
-  "oddsFreshness": "2026-06-28T13:55:43.757Z",
+  "oddsFreshness": "2026-06-29T13:55:39.375Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "⚠️ 机会稀缺",
-    "investableCount": 0,
+    "investableCount": 3,
     "highMviCount": 0,
-    "positiveEvCount": 0,
+    "positiveEvCount": 1,
     "suggestedExposure": "30-50%或建议空仓",
-    "summary": "1场比赛，0个可投注项（0个正EV），0个高MVI信号。涵盖0种市场类型。",
+    "summary": "3场比赛，3个可投注项（1个正EV），0个高MVI信号。涵盖1种市场类型。",
     "highlights": [
-      "暂无高MVI信号",
-      "昨日方向准确率正常(50%)，已动态调整策略权重",
-      "已自动排除5个低质量投注项+0场高风险比赛"
+      "巴西 vs 日本 比分 2:1 为本日最强MVI信号(0.85)",
+      "昨日方向准确率正常(77%)，已动态调整策略权重",
+      "已自动排除12个低质量投注项+0场高风险比赛"
     ]
   },
   "qualitativeReport": [
     {
-      "matchId": "rsa-can-r32",
-      "matchDisplay": "南非 vs 加拿大",
+      "matchId": "ger-par-r32",
+      "matchDisplay": "德国 vs 巴拉圭",
+      "flags": [
+        "injury_concern"
+      ],
+      "thesis": "伤病缺阵影响阵容",
+      "qualitativeConfidence": 0.95,
+      "adjustments": {
+        "injuryPenalty": 0.05,
+        "lessonsApplied": []
+      }
+    },
+    {
+      "matchId": "ned-mar-r32",
+      "matchDisplay": "荷兰 vs 摩洛哥",
       "flags": [
         "form_concern",
         "factor_weakness"
       ],
-      "thesis": "状态隐患: 加拿大ELO优势(210点)是纸面实力，南非防守组；因子短板: ELO差、近期状态",
+      "thesis": "状态隐患: 荷兰每场小组赛均失球(共4球)——防线漏洞vs进攻；因子短板: ELO差、历史交锋",
       "qualitativeConfidence": 1,
       "adjustments": {
         "weakFactors": [
           "eloDiffScore",
-          "recentFormScore",
           "h2hScore",
           "marketScore",
-          "tacticalScore"
+          "pressureScore",
+          "psychologyScore"
         ],
         "lessonsApplied": [
           "factor_breakdown_historical"
         ]
       }
+    },
+    {
+      "matchId": "bra-jpn-r32",
+      "matchDisplay": "巴西 vs 日本",
+      "flags": [
+        "form_concern"
+      ],
+      "thesis": "状态隐患: 日本缺少Itakura(主力CB)和Kubo(创造",
+      "qualitativeConfidence": 1,
+      "adjustments": {
+        "lessonsApplied": []
+      }
     }
   ],
-  "investmentPool": [],
+  "investmentPool": [
+    {
+      "match": "巴西 vs 日本",
+      "market": "波胆",
+      "bet": "【波胆】巴西 vs 日本 比分 2:1",
+      "odds": 5.02,
+      "ev": 0.004,
+      "mvi": 0.8533999999999999,
+      "prob": 0.2,
+      "reason": "边际价值",
+      "type": "score",
+      "source": "Poisson估算"
+    },
+    {
+      "match": "巴西 vs 日本",
+      "market": "波胆",
+      "bet": "【波胆】巴西 vs 日本 比分 3:1",
+      "odds": 8.12,
+      "ev": -0.026,
+      "mvi": 0.8282399999999999,
+      "prob": 0.12,
+      "reason": "边际价值",
+      "type": "score",
+      "source": "Poisson估算"
+    }
+  ],
   "portfolios": [],
   "capitalAllocation": [
     {
@@ -60,100 +112,189 @@
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-20.0%)",
-      "count": 4,
+      "reason": "EV显著负(-19.9%)",
+      "count": 1,
       "examples": [
         {
-          "match": "南非 vs 加拿大",
-          "bet": "南非 vs 加拿大 比分 0:1",
-          "odds": 6.19,
-          "ev": -0.2,
-          "mvi": 0.6797858
-        },
-        {
-          "match": "南非 vs 加拿大",
-          "bet": "南非 vs 加拿大 比分 1:1",
-          "odds": 6.24,
-          "ev": -0.2,
-          "mvi": 0.6799728
-        },
-        {
-          "match": "南非 vs 加拿大",
-          "bet": "南非 vs 加拿大 比分 1:0",
-          "odds": 8.54,
-          "ev": -0.2,
-          "mvi": 0.6801683
+          "match": "德国 vs 巴拉圭",
+          "bet": "德国 vs 巴拉圭 比分 2:0",
+          "odds": 5.68,
+          "ev": -0.199,
+          "mvi": 0.6812307999999999
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-19.9%)",
+      "reason": "EV显著负(-19.8%)",
+      "count": 4,
+      "examples": [
+        {
+          "match": "德国 vs 巴拉圭",
+          "bet": "德国 vs 巴拉圭 比分 1:0",
+          "odds": 5.97,
+          "ev": -0.198,
+          "mvi": 0.6815053499999999
+        },
+        {
+          "match": "德国 vs 巴拉圭",
+          "bet": "德国 vs 巴拉圭 比分 3:0",
+          "odds": 8.11,
+          "ev": -0.198,
+          "mvi": 0.68176715
+        },
+        {
+          "match": "德国 vs 巴拉圭",
+          "bet": "德国 vs 巴拉圭 比分 2:1",
+          "odds": 8.68,
+          "ev": -0.198,
+          "mvi": 0.6817272
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-9.0%)",
       "count": 1,
       "examples": [
         {
-          "match": "南非 vs 加拿大",
-          "bet": "南非 vs 加拿大 比分 0:0",
-          "odds": 8.48,
-          "ev": -0.199,
-          "mvi": 0.6804352000000001
+          "match": "荷兰 vs 摩洛哥",
+          "bet": "荷兰 vs 摩洛哥 比分 1:1",
+          "odds": 5.69,
+          "ev": -0.09,
+          "mvi": 0.7738400000000001
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "极低置信+高风险",
+      "count": 3,
+      "examples": [
+        {
+          "match": "荷兰 vs 摩洛哥",
+          "bet": "荷兰 vs 摩洛哥 比分 2:1",
+          "odds": 6.77,
+          "ev": -0.052,
+          "mvi": 0.8056300000000001
+        },
+        {
+          "match": "荷兰 vs 摩洛哥",
+          "bet": "荷兰 vs 摩洛哥 比分 2:2",
+          "odds": 9.38,
+          "ev": -0.062,
+          "mvi": 0.7973
+        },
+        {
+          "match": "荷兰 vs 摩洛哥",
+          "bet": "荷兰 vs 摩洛哥 比分 0:0",
+          "odds": 10.86,
+          "ev": -0.023,
+          "mvi": 0.8307899999999999
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-8.6%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "荷兰 vs 摩洛哥",
+          "bet": "荷兰 vs 摩洛哥 比分 1:2",
+          "odds": 7.62,
+          "ev": -0.086,
+          "mvi": 0.7772399999999999
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-13.3%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "巴西 vs 日本",
+          "bet": "巴西 vs 日本 比分 1:0",
+          "odds": 6.19,
+          "ev": -0.133,
+          "mvi": 0.73661
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-11.1%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "巴西 vs 日本",
+          "bet": "巴西 vs 日本 比分 1:1",
+          "odds": 6.84,
+          "ev": -0.111,
+          "mvi": 0.75582
         }
       ]
     }
   ],
   "finalVerdict": {
     "verdict": "今日建议空仓，不投注",
-    "reason": "可投注项仅0个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
+    "reason": "可投注项仅3个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
     "bestPortfolio": null
   },
   "yesterdayReview": {
-    "date": "6/28",
+    "date": "6/29",
     "summary": {
-      "n": 6,
-      "dirHits": 3,
-      "dirRate": 0.5,
-      "over25Hits": 1,
-      "over25Rate": 0.16666666666666666,
-      "bttsHits": 2,
-      "bttsRate": 0.3333333333333333,
-      "top3Hits": 1,
-      "top3Rate": 0.16666666666666666,
-      "top1Hits": 1,
-      "top1Rate": 0.16666666666666666,
-      "draws": 2,
-      "upsets": 0
+      "n": 13,
+      "dirHits": 10,
+      "dirRate": 0.7666666666666666,
+      "over25Hits": 11,
+      "over25Rate": 0.8666666666666667,
+      "bttsHits": 9,
+      "bttsRate": 0.7166666666666667,
+      "top3Hits": 10,
+      "top3Rate": 0.7333333333333333,
+      "top1Hits": 3,
+      "top1Rate": 0.5833333333333334,
+      "draws": 4,
+      "upsets": 3,
+      "_multiDay": true,
+      "_dayCount": 3,
+      "_weightStr": "1场×50% + 6场×30% + 6场×20%"
     },
     "keyInsights": [
-      "方向准确率50%",
-      "大2.5球命中17%",
-      "BTTS命中33%",
-      "Top3比分命中17%（1/6场）"
+      "方向准确率77%",
+      "大2.5球命中87%（优秀，今日大小球提升权重）",
+      "BTTS命中72%（良好）",
+      "Top3比分命中73%（10/13场）"
     ],
     "strategyWeights": {
-      "direction": 1,
-      "goals": 0.76,
-      "btts": 0.76,
-      "score": 0.6000000000000001,
-      "safety": 0.9400000000000001,
-      "goals_range": 0.72
+      "direction": 1.2,
+      "goals": 1.1800000000000002,
+      "btts": 1.045,
+      "score": 0.828,
+      "safety": 1.05,
+      "goals_range": 1.036
     }
   },
   "candidatePool": {
-    "total": 5,
-    "accepted": 0,
-    "rejected": 5,
+    "total": 15,
+    "accepted": 3,
+    "rejected": 12,
     "abandonedMatches": 0
   },
   "stats": {
     "totalCombinations": 0,
     "topScore": 0,
     "scoredCount": 0,
-    "byMarket": {},
+    "byMarket": {
+      "波胆": 3
+    },
     "byLegs": {}
   },
   "wcpeValidations": {
-    "total": 1,
-    "valid": 1,
+    "total": 3,
+    "valid": 3,
     "withIssues": 0
   }
 }
