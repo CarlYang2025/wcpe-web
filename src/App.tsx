@@ -326,6 +326,28 @@ function ensureSafePrediction(p: Record<string, unknown>): Record<string, unknow
     result.factorBreakdown = undefined
   }
 
+  // bankroll: ensure conservative/balanced/aggressive sub-objects exist with allocations
+  // Prevents "Cannot read properties of undefined (reading 'allocations')" in preciseMatchROI
+  // when Terser minifies b?.conservative.allocations to null==b ? void 0 : b.conservative.allocations
+  if (result.bankroll && typeof result.bankroll === 'object' && !Array.isArray(result.bankroll)) {
+    const br = result.bankroll as Record<string, unknown>
+    const tiers = ['conservative', 'balanced', 'aggressive'] as const
+    for (const tier of tiers) {
+      const plan = br[tier]
+      if (!plan || typeof plan !== 'object' || Array.isArray(plan)) {
+        br[tier] = { allocations: { '胜平负': 100 }, expectedReturn: 5 }
+        continue
+      }
+      const p = plan as Record<string, unknown>
+      if (!p.allocations || typeof p.allocations !== 'object' || Object.keys(p.allocations as object).length === 0) {
+        p.allocations = { '胜平负': 100 }
+      }
+      if (typeof p.expectedReturn !== 'number' || !Number.isFinite(p.expectedReturn)) {
+        p.expectedReturn = 5
+      }
+    }
+  }
+
   return result
 }
 

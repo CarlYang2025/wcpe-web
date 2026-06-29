@@ -185,9 +185,13 @@ export function preciseMatchROI(match: Match, pred: Prediction, matchCount: numb
 
   // 优先使用 prediction.bankroll 的自定义分配，否则用统一 ALLOC
   const b = pred.bankroll
-  const allocCons = notEmpty(b?.conservative.allocations) ? b.conservative.allocations : ALLOC.cons
-  const allocBal = notEmpty(b?.balanced.allocations) ? b.balanced.allocations : ALLOC.bal
-  const allocAgg = notEmpty(b?.aggressive.allocations) ? b.aggressive.allocations : ALLOC.agg
+  // 防御式可选链：b?.conservative?.allocations 确保 b 和 b.conservative 都为非 null 时才访问
+  // Terser 会把 b?.conservative.allocations 编译成 null==v ? void 0 : v.conservative.allocations
+  // 如果 v 存在但 v.conservative 为 undefined，会在传参给 notEmpty 之前就抛出 TypeError
+  // 因此必须在每一层属性访问都使用 ?.
+  const allocCons = notEmpty(b?.conservative?.allocations) ? b.conservative.allocations : ALLOC.cons
+  const allocBal = notEmpty(b?.balanced?.allocations) ? b.balanced.allocations : ALLOC.bal
+  const allocAgg = notEmpty(b?.aggressive?.allocations) ? b.aggressive.allocations : ALLOC.agg
 
   return {
     cons: calc(allocCons),
