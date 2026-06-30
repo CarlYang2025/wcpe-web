@@ -1191,31 +1191,36 @@ function scorePortfolio(legs, strategyWeights = {}) {
   const wSafety = strategyWeights.safety || 1.0
   const wGoalsRange = strategyWeights.goals_range || 1.0
 
-  // 1. EV得分 (0-15分) — V4.3: 引入对数赔率衰减，降权极低概率高赔腿的EV放大
-  // 原理：高赔腿的EV被prob×odds公式放大，但极低概率意味着实现路径极窄
-  // 对数衰减：当单腿赔率>5且概率<0.4时，该腿的EV贡献乘以衰减因子
+  // 1. EV得分 (0-13分) — V5.2: 上限从15降至13，避免EV主宰一切
+  // V4.3: 引入对数赔率衰减，降权极低概率高赔腿的EV放大
   let adjustedCompEV = compEV
   let evDecayApplied = false
   for (const leg of legs) {
     if (leg.odds > 5 && leg.prob < 0.4 && leg.ev > 0) {
-      // 衰减因子 = log(prob×20) / log(odds/2)，将EV拉回现实范围
       const decay = Math.max(0.3, Math.log(leg.prob * 20 + 1) / Math.log(leg.odds / 2 + 1))
-      adjustedCompEV = adjustedCompEV - leg.ev * (1 - decay) * 0.3 // 最多衰减30%
+      adjustedCompEV = adjustedCompEV - leg.ev * (1 - decay) * 0.3
       evDecayApplied = true
     }
   }
-  const evScore = adjustedCompEV > 0 ? Math.min(adjustedCompEV * 8 + 5, 15) : adjustedCompEV > -0.05 ? 3 : 0
+  const evScore = adjustedCompEV > 0 ? Math.min(adjustedCompEV * 8 + 5, 13) : adjustedCompEV > -0.05 ? 3 : 0
 
   // 2. MVI得分 (0-15分) — 错价信号
   const mviScore = Math.min(avgMVI * 12, 15)
 
-  // 3. 命中率得分 (0-15分) — 8-35%最优区间
+  // 3. 命中率得分 (0-15分) — V5.2: 渐进曲线，奖励高确定性，不再惩罚>35%
+  //     核心理念：串关的本质是多重独立事件累乘，高命中率串关（>25%）才是真"投资"，
+  //     低命中率（<8%）本质是刮彩票，不管EV多高都不应得满分。
   let hitScore = 0
-  if (hitPct >= 8 && hitPct <= 35) hitScore = 15
-  else if (hitPct >= 4 && hitPct < 8) hitScore = 10
-  else if (hitPct >= 2 && hitPct < 4) hitScore = 6
-  else if (hitPct > 35) hitScore = 9
-  else if (hitPct >= 1) hitScore = 3
+  if (hitPct >= 40) hitScore = 15       // 极高确定性：如墨西哥不败(71%)×科特迪瓦大2.5(60%)=43%
+  else if (hitPct >= 30) hitScore = 14   // 高确定性
+  else if (hitPct >= 25) hitScore = 13   // 中等偏高确定性
+  else if (hitPct >= 20) hitScore = 12
+  else if (hitPct >= 15) hitScore = 10
+  else if (hitPct >= 10) hitScore = 8
+  else if (hitPct >= 7) hitScore = 6
+  else if (hitPct >= 4) hitScore = 4
+  else if (hitPct >= 2) hitScore = 2
+  else hitScore = 1
 
   // 波胆组合：命中率低是本质特征，不补偿（避免过度推波胆）
   const scoreLegs = legs.filter(c => c.market === '波胆')
@@ -1312,7 +1317,16 @@ function scorePortfolio(legs, strategyWeights = {}) {
   const qualContradictions = legs.filter(l => l._qualFlag === 'qualitative_goals_contradiction').length
   if (qualContradictions > 0) qualitativeScore = Math.max(0, qualitativeScore - qualContradictions * 1.5)
 
-  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus + qualitativeScore - corrPenalty - specialRisk - externalRiskPenalty
+  // 15. V5.2新增: 确定性溢价 (0-5分)
+  // 奖励"赔率合理+命中率合格"的串关。不奖励纯安全低赔（odds<3），也不奖励纯彩票（hitRate<15%）
+  let certaintyPremium = 0
+  if (hitPct >= 25 && compOdds >= 3) certaintyPremium = 5        // 甜点区：高确定性+合理赔率
+  else if (hitPct >= 20 && compOdds >= 4) certaintyPremium = 4
+  else if (hitPct >= 25) certaintyPremium = 3                    // 高确定性但赔率偏低
+  else if (hitPct >= 15 && compOdds >= 6) certaintyPremium = 2
+  else if (hitPct >= 10 && compOdds >= 8) certaintyPremium = 1
+
+  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus + qualitativeScore + certaintyPremium - corrPenalty - specialRisk - externalRiskPenalty
   total = Math.max(0, Math.min(100, total))
 
   return {
@@ -1340,11 +1354,19 @@ function scorePortfolio(legs, strategyWeights = {}) {
       strat: Math.round(strategyBonus * 10) / 10,
       valCap: Math.round(valueCaptureBonus * 10) / 10,
       qual: Math.round(qualitativeScore * 10) / 10,
+      cert: Math.round(certaintyPremium * 10) / 10,
     },
   }
 }
 
-function classifyTier(odds) {
+function classifyTier(odds, hitPct = 0) {
+  // V5.2: 确定性优先 — 当命中率≥25%时升格为"确定性优先"型
+  if (hitPct >= 25) {
+    if (odds <= 5) return '确定性优先（稳健）'
+    if (odds <= 15) return '确定性优先（平衡）'
+    if (odds <= 30) return '确定性优先（进取）'
+    return '确定性优先'
+  }
   if (odds <= 5) return '稳健收益型'
   if (odds <= 12) return '平衡收益型'
   if (odds <= 25) return '价值收益型'
@@ -1492,7 +1514,7 @@ function buildFinalVerdict(scored, accepted, yesterday) {
     }
   }
   const best = scored[0]
-  const tier = classifyTier(best.compOdds)
+  const tier = classifyTier(best.compOdds, best.hitPct)
   const bestLegsDesc = best.legs.map(l => l.bet.replace(/【.*?】/g, '').slice(0, 30)).join(' + ')
   const evDesc = best.compEV > 0.15 ? '正期望值显著，优先配置。' : best.compEV > 0.05 ? '正期望值可接受，建议适量配置。' : '边际正期望值，控制仓位。'
 
@@ -1725,7 +1747,7 @@ function main() {
       mvi: p.avgMVI,
       legs: p.legs,
       breakdown: p.breakdown,
-      tier: classifyTier(p.compOdds),
+      tier: classifyTier(p.compOdds, p.hitPct),
       rationale: generateRationale(p),
       // V4: 前3名输出为什么优于后面的
       comparisonNote: i === 0 && scored[1]
