@@ -1583,16 +1583,19 @@ function extractCorrectScores(remote, market) {
     const pred = remote.predictions?.[mid] || {}
     const odds = market.odds?.[mid] || {}
     const realCS = odds.correctScore || {}
-    if (Object.keys(realCS).length === 0) continue // 无真实赔率则跳过
+    if (Object.keys(realCS).length === 0) continue
     const top5 = pred.top5Scores || []
+    // V5.2: 遍历 ALL Bet365 波胆赔率，不止 WCPE top5，增加分散度
     const scores = []
-    for (const s of top5.slice(0, 5)) {
-      const score = typeof s === 'string' ? s : s.score || ''
-      const scoreHyphen = score.replace(':', '-')
-      const csOdd = realCS[scoreHyphen]
-      const prob = typeof s === 'object' ? (s.probability || 0) : 0
-      if (csOdd && csOdd > 0 && prob >= 0.03) {
-        scores.push({ score, prob, odd: csOdd })
+    for (const [scoreHyphen, csOdd] of Object.entries(realCS)) {
+      if (!csOdd || csOdd <= 0 || csOdd >= 50) continue
+      const score = scoreHyphen.replace('-', ':')
+      // WCPE概率（如果在top5中）
+      const wcpeMatch = top5.find(s => (typeof s === 'string' ? s : s.score || '') === score)
+      const prob = wcpeMatch ? (typeof wcpeMatch === 'object' ? wcpeMatch.probability || 0 : 0) : 0
+      // WCPE概率 > 0.01 直接使用；否则用 Poisson 估算（在调用方处理）
+      if (prob >= 0.03 || (!wcpeMatch && csOdd < 15)) {
+        scores.push({ score, prob, odd: csOdd, _fromWcpe: !!wcpeMatch && prob >= 0.03 })
       }
     }
     if (scores.length > 0) result[mid] = scores
@@ -1609,6 +1612,27 @@ function extractCorrectScores(remote, market) {
 function buildScoreParlays(accepted, remote, market, topN = 10) {
   const csByMatch = extractCorrectScores(remote, market)
   if (Object.keys(csByMatch).length < 2) return []
+
+  // 对缺少 WCPE 概率的波胆用 Poisson 估算
+  const tomorrowMatches = matchesByBJTDate(remote.matches || [], TOMORROW_BJT)
+  for (const m of tomorrowMatches) {
+    const mid = m.id
+    const scores = csByMatch[mid]
+    if (!scores) continue
+    const pred = remote.predictions?.[mid] || {}
+    const needsPoisson = scores.filter(s => s.prob < 0.01).length
+    if (needsPoisson > 0) {
+      const pProbs = estimateScoreProbabilities(pred.homeWinProb || 0.33, pred.drawProb || 0.33, pred.awayWinProb || 0.33, pred.over25Prob || 0.5, (pred.top5Scores || []))
+      for (const s of scores) {
+        if (s.prob < 0.01 && pProbs[s.score]) {
+          s.prob = pProbs[s.score]
+          s._fromPoisson = true
+        }
+      }
+    }
+    // 过滤掉概率仍然太低（< 2%）的
+    csByMatch[mid] = scores.filter(s => s.prob >= 0.02)
+  }
 
   // 锚定腿候选：从 accepted 池中筛选 type !== 'score' 且 prob ≥ 0.38
   const anchors = accepted.filter(c => c.market !== '波胆' && c.prob >= 0.38)
@@ -1633,7 +1657,23 @@ function buildScoreParlays(accepted, remote, market, topN = 10) {
 
   // 按 odds × √(hit%) 排序
   combos.sort((a, b) => (b.combOdds * Math.sqrt(b.combProb * 100)) - (a.combOdds * Math.sqrt(a.combProb * 100)))
-  return combos.slice(0, topN)
+  
+  // V5.2 分散化选择：每个波胆最多出现2次，每个锚定腿最多出现3次
+  const scoreCount = new Map()  // key: "mid:score"
+  const anchorCount = new Map() // key: anchor bet text
+  const selected = []
+  for (const c of combos) {
+    const scoreKey = `${c.score.match}:${c.score.score}`
+    const anchorKey = c.anchor.bet
+    const sc = scoreCount.get(scoreKey) || 0
+    const ac = anchorCount.get(anchorKey) || 0
+    if (sc >= 2 || ac >= 3) continue
+    scoreCount.set(scoreKey, sc + 1)
+    anchorCount.set(anchorKey, ac + 1)
+    selected.push(c)
+    if (selected.length >= topN) break
+  }
+  return selected
 }
 
 // ===================================================================
@@ -1796,8 +1836,9 @@ function main() {
     adjustments: prof.adjustments,
   }))
 
-  // ═══ V5.2: 锚定×波胆串关推荐 ═══
-  const scoreParlays = buildScoreParlays(accepted, remote, market, 10)
+  // ═══ V5.2: 多样化串关推荐 Top 10 ═══
+  const scoreParlays2 = buildScoreParlays(accepted, remote, market, 30) // 多取一些供分散选择
+  const scoreParlays = scoreParlays2 // 已内置分散化选择
 
   const output = {
     version: '5.0',

@@ -1,6 +1,6 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-06-30T14:57:04.000Z",
+  "generatedAt": "2026-06-30T15:19:37.050Z",
   "targetDate": "7/1",
   "targetDateDisplay": "2026年7月1日（周三）",
   "targetMatchIds": [
@@ -1754,82 +1754,6 @@
     },
     {
       "rank": 5,
-      "odds": 27,
-      "hitPct": 4.49,
-      "ev": 0.214,
-      "anchor": {
-        "bet": "墨西哥 vs 厄瓜多尔 双方进球=是",
-        "odds": 2.25,
-        "prob": 50,
-        "market": "BTTS"
-      },
-      "score": {
-        "match": "法国 vs 瑞典",
-        "bet": "1:1",
-        "odds": 12,
-        "prob": 9
-      },
-      "rationale": "锚⚓墨西哥 vs 厄瓜多尔 双方进球=是(50%) × 波胆🎯1:1(9.0%) → 27.0x, 命中4.5%"
-    },
-    {
-      "rank": 6,
-      "odds": 29.3,
-      "hitPct": 3.53,
-      "ev": 0.033,
-      "anchor": {
-        "bet": "墨西哥 主胜",
-        "odds": 2.25,
-        "prob": 50,
-        "market": "胜平负"
-      },
-      "score": {
-        "match": "科特迪瓦 vs 挪威",
-        "bet": "2:1",
-        "odds": 13,
-        "prob": 7.1
-      },
-      "rationale": "锚⚓墨西哥 主胜(50%) × 波胆🎯2:1(7.1%) → 29.3x, 命中3.5%"
-    },
-    {
-      "rank": 7,
-      "odds": 29.3,
-      "hitPct": 3.53,
-      "ev": 0.033,
-      "anchor": {
-        "bet": "墨西哥 vs 厄瓜多尔 双方进球=是",
-        "odds": 2.25,
-        "prob": 50,
-        "market": "BTTS"
-      },
-      "score": {
-        "match": "科特迪瓦 vs 挪威",
-        "bet": "2:1",
-        "odds": 13,
-        "prob": 7.1
-      },
-      "rationale": "锚⚓墨西哥 vs 厄瓜多尔 双方进球=是(50%) × 波胆🎯2:1(7.1%) → 29.3x, 命中3.5%"
-    },
-    {
-      "rank": 8,
-      "odds": 22.9,
-      "hitPct": 5.39,
-      "ev": 0.236,
-      "anchor": {
-        "bet": "科特迪瓦 vs 挪威",
-        "odds": 1.909,
-        "prob": 60,
-        "market": "大小球"
-      },
-      "score": {
-        "match": "法国 vs 瑞典",
-        "bet": "1:1",
-        "odds": 12,
-        "prob": 9
-      },
-      "rationale": "锚⚓科特迪瓦 vs 挪威(60%) × 波胆🎯1:1(9.0%) → 22.9x, 命中5.4%"
-    },
-    {
-      "rank": 9,
       "odds": 26.1,
       "hitPct": 4.14,
       "ev": 0.081,
@@ -1846,6 +1770,101 @@
         "prob": 10.9
       },
       "rationale": "锚⚓法国 vs 瑞典(38%) × 波胆🎯2:0(10.9%) → 26.1x, 命中4.1%"
+    },
+    {
+      "rank": 6,
+      "odds": 20.4,
+      "hitPct": 6.56,
+      "ev": 0.34,
+      "anchor": {
+        "bet": "法国 vs 瑞典",
+        "odds": 2.15,
+        "prob": 60.3,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "墨西哥 vs 厄瓜多尔",
+        "bet": "2:0",
+        "odds": 9.5,
+        "prob": 10.9
+      },
+      "rationale": "锚⚓法国 vs 瑞典(60%) × 波胆🎯2:0(10.9%) → 20.4x, 命中6.6%"
+    },
+    {
+      "rank": 7,
+      "odds": 23.7,
+      "hitPct": 4.27,
+      "ev": 0.009,
+      "anchor": {
+        "bet": "法国 vs 瑞典",
+        "odds": 2.15,
+        "prob": 60.3,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "科特迪瓦 vs 挪威",
+        "bet": "0:2",
+        "odds": 11,
+        "prob": 7.1
+      },
+      "rationale": "锚⚓法国 vs 瑞典(60%) × 波胆🎯0:2(7.1%) → 23.6x, 命中4.3%"
+    },
+    {
+      "rank": 8,
+      "odds": 22.5,
+      "hitPct": 4.54,
+      "ev": 0.022,
+      "anchor": {
+        "bet": "墨西哥 主胜",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "胜平负"
+      },
+      "score": {
+        "match": "法国 vs 瑞典",
+        "bet": "1:0",
+        "odds": 10,
+        "prob": 9.1
+      },
+      "rationale": "锚⚓墨西哥 主胜(50%) × 波胆🎯1:0(9.1%) → 22.5x, 命中4.5%"
+    },
+    {
+      "rank": 9,
+      "odds": 21.4,
+      "hitPct": 4.71,
+      "ev": 0.007,
+      "anchor": {
+        "bet": "墨西哥 主胜",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "胜平负"
+      },
+      "score": {
+        "match": "科特迪瓦 vs 挪威",
+        "bet": "1:2",
+        "odds": 9.5,
+        "prob": 9.4
+      },
+      "rationale": "锚⚓墨西哥 主胜(50%) × 波胆🎯1:2(9.4%) → 21.4x, 命中4.7%"
+    },
+    {
+      "rank": 10,
+      "odds": 21.4,
+      "hitPct": 4.71,
+      "ev": 0.007,
+      "anchor": {
+        "bet": "墨西哥 vs 厄瓜多尔 双方进球=是",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "BTTS"
+      },
+      "score": {
+        "match": "科特迪瓦 vs 挪威",
+        "bet": "1:2",
+        "odds": 9.5,
+        "prob": 9.4
+      },
+      "rationale": "锚⚓墨西哥 vs 厄瓜多尔 双方进球=是(50%) × 波胆🎯1:2(9.4%) → 21.4x, 命中4.7%"
     }
   ],
   "finalVerdict": {
