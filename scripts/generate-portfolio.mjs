@@ -1658,18 +1658,24 @@ function buildScoreParlays(accepted, remote, market, topN = 10) {
   // 按 odds × √(hit%) 排序
   combos.sort((a, b) => (b.combOdds * Math.sqrt(b.combProb * 100)) - (a.combOdds * Math.sqrt(a.combProb * 100)))
   
-  // V5.2 分散化选择：每个波胆最多出现2次，每个锚定腿最多出现3次
-  const scoreCount = new Map()  // key: "mid:score"
-  const anchorCount = new Map() // key: anchor bet text
+  // V5.2 分散化选择：
+  //   单波胆 ≤ 2次 | 单锚定 ≤ 2次 | 单场比赛锚定 ≤ 4次
+  //   防止同一比赛方向集中（如法国小3球+法国小2.5球虽然不同锚定但同方向）
+  const scoreCount = new Map()   // key: "mid:score"
+  const anchorCount = new Map()  // key: anchor bet text
+  const matchAnchorCount = new Map() // key: mid
   const selected = []
   for (const c of combos) {
     const scoreKey = `${c.score.match}:${c.score.score}`
     const anchorKey = c.anchor.bet
+    const anchorMid = c.anchor.match || c.anchor.mid || ''
     const sc = scoreCount.get(scoreKey) || 0
     const ac = anchorCount.get(anchorKey) || 0
-    if (sc >= 2 || ac >= 3) continue
+    const mc = matchAnchorCount.get(anchorMid) || 0
+    if (sc >= 2 || ac >= 2 || mc >= 5) continue
     scoreCount.set(scoreKey, sc + 1)
     anchorCount.set(anchorKey, ac + 1)
+    matchAnchorCount.set(anchorMid, mc + 1)
     selected.push(c)
     if (selected.length >= topN) break
   }
@@ -1941,7 +1947,7 @@ function main() {
       hitPct: Math.round(p.combProb * 10000) / 100,
       ev: Math.round(p.combEV * 1000) / 1000,
       anchor: {
-        bet: p.anchor.bet.replace(/【.*?】/g, ''),
+        bet: p.anchor.bet,
         odds: p.anchor.odds,
         prob: Math.round(p.anchor.prob * 1000) / 10,
         market: p.anchor.market,
