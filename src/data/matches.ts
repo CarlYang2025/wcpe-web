@@ -482,12 +482,90 @@ export const matches: Match[] = [
   { id: 'par-aus-3', date: '2026-06-25', tournament: '2026 FIFA World Cup', group: 'D组', round: '第三轮', matchday: 14, homeTeam: 'Paraguay', awayTeam: 'Australia', venue: 'Lumen Field, Seattle', kickoff: '6/26 10:00', localKickoff: '6/25 22:00', localTZ: 'ET', status: 'finished' },
 
   // ---- 6月26日 (周五) 第15比赛日 ----
-  { id: 'nor-fra-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'I组', round: '第三轮', matchday: 15, homeTeam: 'Norway', awayTeam: 'France', venue: 'MetLife Stadium, New Jersey', kickoff: '6/27 03:00', localKickoff: '6/26 15:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 4 },
-  { id: 'sen-irq-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'I组', round: '第三轮', matchday: 15, homeTeam: 'Senegal', awayTeam: 'Iraq', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '6/27 03:00', localKickoff: '6/26 15:00', localTZ: 'ET', status: 'finished', homeScore: 5, awayScore: 0 },
-  { id: 'uru-esp-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'H组', round: '第三轮', matchday: 15, homeTeam: 'Uruguay', awayTeam: 'Spain', venue: 'AT&T Stadium, Dallas', kickoff: '6/27 08:00', localKickoff: '6/26 20:00', localTZ: 'ET', status: 'finished', homeScore: 0, awayScore: 1 },
-  { id: 'cpv-ksa-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'H组', round: '第三轮', matchday: 15, homeTeam: 'Cape Verde', awayTeam: 'Saudi Arabia', venue: 'Hard Rock Stadium, Miami', kickoff: '6/27 08:00', localKickoff: '6/26 20:00', localTZ: 'ET', status: 'finished', homeScore: 0, awayScore: 0 },
-  { id: 'nzl-bel-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'G组', round: '第三轮', matchday: 15, homeTeam: 'New Zealand', awayTeam: 'Belgium', venue: 'Levi\'s Stadium, Santa Clara', kickoff: '6/27 11:00', localKickoff: '6/26 23:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 5 },
-  { id: 'egy-irn-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'G组', round: '第三轮', matchday: 15, homeTeam: 'Egypt', awayTeam: 'Iran', venue: 'Lumen Field, Seattle', kickoff: '6/27 11:00', localKickoff: '6/26 23:00', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'nor-fra-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'I组', round: '第三轮', matchday: 15, homeTeam: 'Norway', awayTeam: 'France', venue: 'MetLife Stadium, New Jersey', kickoff: '6/27 03:00', localKickoff: '6/26 15:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 38, away: 62 },
+    shots: { home: 8, away: 18 },
+    shotsOnTarget: { home: 3, away: 8 },
+    xg: { home: 0.62, away: 2.78 },
+    corners: { home: 3, away: 6 },
+    fouls: { home: 10, away: 12 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 1, red: 0 } },
+    offsides: { home: 1, away: 2 },
+    crosses: { home: 12, away: 22 },
+    interceptions: { home: 8, away: 6 },
+    saves: { home: 4, away: 2 }
+  }, homeScore: 1, awayScore: 4 },
+  { id: 'sen-irq-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'I组', round: '第三轮', matchday: 15, homeTeam: 'Senegal', awayTeam: 'Iraq', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '6/27 03:00', localKickoff: '6/26 15:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 65, away: 35 },
+    shots: { home: 22, away: 4 },
+    shotsOnTarget: { home: 10, away: 1 },
+    xg: { home: 3.24, away: 0.18 },
+    corners: { home: 8, away: 2 },
+    fouls: { home: 14, away: 9 },
+    cards: { home: { yellow: 0, red: 0 }, away: { yellow: 1, red: 1 } },
+    offsides: { home: 3, away: 1 },
+    crosses: { home: 18, away: 6 },
+    interceptions: { home: 5, away: 12 },
+    saves: { home: 1, away: 5 }
+  }, homeScore: 5, awayScore: 0 },
+  { id: 'uru-esp-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'H组', round: '第三轮', matchday: 15, homeTeam: 'Uruguay', awayTeam: 'Spain', venue: 'AT&T Stadium, Dallas', kickoff: '6/27 08:00', localKickoff: '6/26 20:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 33, away: 67 },
+    shots: { home: 5, away: 6 },
+    shotsOnTarget: { home: 1, away: 1 },
+    xg: { home: 0.2, away: 0.86 },
+    corners: { home: 2, away: 5 },
+    fouls: { home: 14, away: 14 },
+    cards: { home: { yellow: 1, red: 1 }, away: { yellow: 0, red: 0 } },
+    offsides: { home: 1, away: 2 },
+    crosses: { home: 8, away: 16 },
+    interceptions: { home: 12, away: 7 },
+    saves: { home: 0, away: 2 }
+  }, homeScore: 0, awayScore: 1 },
+  { id: 'cpv-ksa-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'H组', round: '第三轮', matchday: 15, homeTeam: 'Cape Verde', awayTeam: 'Saudi Arabia', venue: 'Hard Rock Stadium, Miami', kickoff: '6/27 08:00', localKickoff: '6/26 20:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 47, away: 53 },
+    shots: { home: 9, away: 12 },
+    shotsOnTarget: { home: 3, away: 4 },
+    xg: { home: 0.72, away: 0.88 },
+    corners: { home: 4, away: 5 },
+    fouls: { home: 13, away: 11 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 2, red: 0 } },
+    offsides: { home: 2, away: 3 },
+    crosses: { home: 15, away: 18 },
+    interceptions: { home: 10, away: 8 },
+    saves: { home: 4, away: 3 }
+  }, homeScore: 0, awayScore: 0 },
+  { id: 'nzl-bel-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'G组', round: '第三轮', matchday: 15, homeTeam: 'New Zealand', awayTeam: 'Belgium', venue: 'Levi\'s Stadium, Santa Clara', kickoff: '6/27 11:00', localKickoff: '6/26 23:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 28, away: 72 },
+    shots: { home: 6, away: 35 },
+    shotsOnTarget: { home: 2, away: 10 },
+    xg: { home: 0.24, away: 3.65 },
+    corners: { home: 1, away: 9 },
+    fouls: { home: 8, away: 10 },
+    cards: { home: { yellow: 1, red: 0 }, away: { yellow: 0, red: 0 } },
+    offsides: { home: 2, away: 1 },
+    crosses: { home: 8, away: 28 },
+    interceptions: { home: 14, away: 4 },
+    saves: { home: 5, away: 1 }
+  }, homeScore: 1, awayScore: 5 },
+  { id: 'egy-irn-3', date: '2026-06-26', tournament: '2026 FIFA World Cup', group: 'G组', round: '第三轮', matchday: 15, homeTeam: 'Egypt', awayTeam: 'Iran', venue: 'Lumen Field, Seattle', kickoff: '6/27 11:00', localKickoff: '6/26 23:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 45, away: 55 },
+    shots: { home: 10, away: 13 },
+    shotsOnTarget: { home: 4, away: 5 },
+    xg: { home: 0.88, away: 1.12 },
+    corners: { home: 4, away: 5 },
+    fouls: { home: 15, away: 16 },
+    cards: { home: { yellow: 3, red: 0 }, away: { yellow: 4, red: 0 } },
+    offsides: { home: 2, away: 3 },
+    crosses: { home: 14, away: 18 },
+    interceptions: { home: 9, away: 8 },
+    saves: { home: 4, away: 3 }
+  }, homeScore: 1, awayScore: 1 },
 
   // ---- 6月27日 (周六) 第16比赛日 (已完赛) ----
   { id: 'pan-eng-3', date: '2026-06-27', tournament: '2026 FIFA World Cup', group: 'L组', round: '第三轮', matchday: 16, homeTeam: 'Panama', awayTeam: 'England', venue: 'NRG Stadium, Houston', kickoff: '6/28 05:00', localKickoff: '6/27 17:00', localTZ: 'ET', status: 'finished', homeScore: 0, awayScore: 2 },
@@ -499,9 +577,14 @@ export const matches: Match[] = [
 
   // ---- 6月28日 (周日) Round of 32 第18比赛日 ----
   { id: 'rsa-can-r32', date: '2026-06-28', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 18, homeTeam: 'South Africa', awayTeam: 'Canada', venue: 'SoFi Stadium, Los Angeles', kickoff: '6/29 03:00', localKickoff: '6/28 12:00', localTZ: 'PT', status: 'finished', homeScore: 0, awayScore: 1 },
-  { id: 'ger-par-r32', date: '2026-06-29', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 19, homeTeam: 'Germany', awayTeam: 'Paraguay', venue: 'Gillette Stadium, Foxborough', kickoff: '6/30 04:30', localKickoff: '6/29 16:30', localTZ: 'ET', status: 'upcoming' },
-  { id: 'ned-mar-r32', date: '2026-06-29', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 19, homeTeam: 'Netherlands', awayTeam: 'Morocco', venue: 'Estadio Monterrey, Monterrey', kickoff: '6/30 09:00', localKickoff: '6/29 19:00', localTZ: 'CT', status: 'upcoming' },
-  { id: 'bra-jpn-r32', date: '2026-06-29', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 19, homeTeam: 'Brazil', awayTeam: 'Japan', venue: 'NRG Stadium, Houston', kickoff: '6/30 01:00', localKickoff: '6/29 12:00', localTZ: 'CT', status: 'upcoming' },
+  { id: 'ger-par-r32', date: '2026-06-29', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 19, homeTeam: 'Germany', awayTeam: 'Paraguay', venue: 'Gillette Stadium, Foxborough', kickoff: '6/30 04:30', localKickoff: '6/29 16:30', localTZ: 'ET', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'ned-mar-r32', date: '2026-06-29', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 19, homeTeam: 'Netherlands', awayTeam: 'Morocco', venue: 'Estadio Monterrey, Monterrey', kickoff: '6/30 09:00', localKickoff: '6/29 19:00', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'bra-jpn-r32', date: '2026-06-29', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 19, homeTeam: 'Brazil', awayTeam: 'Japan', venue: 'NRG Stadium, Houston', kickoff: '6/30 01:00', localKickoff: '6/29 12:00', localTZ: 'CT', status: 'finished', homeScore: 2, awayScore: 1 },
+
+  // ---- 6月30日 (周二) Round of 32 第20比赛日 (北京时间7月1日) ----
+  { id: 'civ-nor-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Ivory Coast', awayTeam: 'Norway', venue: 'AT&T Stadium, Dallas', kickoff: '7/1 01:00', localKickoff: '6/30 12:00', localTZ: 'CT', status: 'upcoming' },
+  { id: 'fra-swe-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'France', awayTeam: 'Sweden', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/1 05:00', localKickoff: '6/30 17:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'mex-ecu-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Mexico', awayTeam: 'Ecuador', venue: 'Estadio Azteca, Mexico City', kickoff: '7/1 09:00', localKickoff: '6/30 21:00', localTZ: 'CT', status: 'upcoming' },
 ];
 
 // ========== 预测数据 ==========

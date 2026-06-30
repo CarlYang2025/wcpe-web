@@ -1,6 +1,6 @@
 {
   "version": "2.2",
-  "lastUpdated": "2026-06-29T13:18:00.097Z",
+  "lastUpdated": "2026-06-30T13:19:20.381Z",
   "matches": [
     {
       "id": "mex-rsa",
@@ -2336,8 +2336,6 @@
       "localKickoff": "6/26 15:00",
       "localTZ": "ET",
       "status": "finished",
-      "homeScore": 1,
-      "awayScore": 4,
       "matchStats": {
         "possession": {
           "home": 38,
@@ -2389,7 +2387,9 @@
           "home": 4,
           "away": 2
         }
-      }
+      },
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "id": "sen-irq-3",
@@ -2405,8 +2405,6 @@
       "localKickoff": "6/26 15:00",
       "localTZ": "ET",
       "status": "finished",
-      "homeScore": 5,
-      "awayScore": 0,
       "matchStats": {
         "possession": {
           "home": 65,
@@ -2458,7 +2456,9 @@
           "home": 1,
           "away": 5
         }
-      }
+      },
+      "homeScore": 5,
+      "awayScore": 0
     },
     {
       "id": "uru-esp-3",
@@ -2474,8 +2474,6 @@
       "localKickoff": "6/26 20:00",
       "localTZ": "ET",
       "status": "finished",
-      "homeScore": 0,
-      "awayScore": 1,
       "matchStats": {
         "possession": {
           "home": 33,
@@ -2527,7 +2525,9 @@
           "home": 0,
           "away": 2
         }
-      }
+      },
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "id": "cpv-ksa-3",
@@ -2543,8 +2543,6 @@
       "localKickoff": "6/26 20:00",
       "localTZ": "ET",
       "status": "finished",
-      "homeScore": 0,
-      "awayScore": 0,
       "matchStats": {
         "possession": {
           "home": 47,
@@ -2596,7 +2594,9 @@
           "home": 4,
           "away": 3
         }
-      }
+      },
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "id": "nzl-bel-3",
@@ -2612,8 +2612,6 @@
       "localKickoff": "6/26 23:00",
       "localTZ": "ET",
       "status": "finished",
-      "homeScore": 1,
-      "awayScore": 5,
       "matchStats": {
         "possession": {
           "home": 28,
@@ -2665,7 +2663,9 @@
           "home": 5,
           "away": 1
         }
-      }
+      },
+      "homeScore": 1,
+      "awayScore": 5
     },
     {
       "id": "egy-irn-3",
@@ -2681,8 +2681,6 @@
       "localKickoff": "6/26 23:00",
       "localTZ": "ET",
       "status": "finished",
-      "homeScore": 1,
-      "awayScore": 1,
       "matchStats": {
         "possession": {
           "home": 45,
@@ -2734,7 +2732,9 @@
           "home": 4,
           "away": 3
         }
-      }
+      },
+      "homeScore": 1,
+      "awayScore": 1
     },
     {
       "id": "pan-eng-3",
@@ -2920,7 +2920,61 @@
       "kickoff": "6/30 04:30",
       "localKickoff": "6/29 16:30",
       "localTZ": "ET",
-      "status": "upcoming"
+      "status": "finished",
+      "homeScore": 1,
+      "awayScore": 1,
+      "matchStats": {
+        "possession": {
+          "home": 63,
+          "away": 37
+        },
+        "shots": {
+          "home": 21,
+          "away": 5
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 3
+        },
+        "xg": {
+          "home": 1.49,
+          "away": 0.42
+        },
+        "corners": {
+          "home": 9,
+          "away": 2
+        },
+        "fouls": {
+          "home": 11,
+          "away": 18
+        },
+        "cards": {
+          "home": {
+            "yellow": 2,
+            "red": 0
+          },
+          "away": {
+            "yellow": 4,
+            "red": 0
+          }
+        },
+        "offsides": {
+          "home": 3,
+          "away": 1
+        },
+        "crosses": {
+          "home": 28,
+          "away": 6
+        },
+        "interceptions": {
+          "home": 10,
+          "away": 26
+        },
+        "saves": {
+          "home": 2,
+          "away": 6
+        }
+      }
     },
     {
       "id": "ned-mar-r32",
@@ -2935,7 +2989,61 @@
       "kickoff": "6/30 09:00",
       "localKickoff": "6/29 19:00",
       "localTZ": "CT",
-      "status": "upcoming"
+      "status": "finished",
+      "homeScore": 1,
+      "awayScore": 1,
+      "matchStats": {
+        "possession": {
+          "home": 30,
+          "away": 70
+        },
+        "shots": {
+          "home": 6,
+          "away": 21
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 5
+        },
+        "xg": {
+          "home": 0.24,
+          "away": 1.38
+        },
+        "corners": {
+          "home": 3,
+          "away": 8
+        },
+        "fouls": {
+          "home": 18,
+          "away": 15
+        },
+        "cards": {
+          "home": {
+            "yellow": 3,
+            "red": 0
+          },
+          "away": {
+            "yellow": 2,
+            "red": 0
+          }
+        },
+        "offsides": {
+          "home": 1,
+          "away": 3
+        },
+        "crosses": {
+          "home": 12,
+          "away": 22
+        },
+        "interceptions": {
+          "home": 14,
+          "away": 8
+        },
+        "saves": {
+          "home": 5,
+          "away": 1
+        }
+      }
     },
     {
       "id": "bra-jpn-r32",
@@ -2949,6 +3057,105 @@
       "venue": "NRG Stadium, Houston",
       "kickoff": "6/30 01:00",
       "localKickoff": "6/29 12:00",
+      "localTZ": "CT",
+      "status": "finished",
+      "homeScore": 2,
+      "awayScore": 1,
+      "matchStats": {
+        "possession": {
+          "home": 69,
+          "away": 31
+        },
+        "shots": {
+          "home": 19,
+          "away": 5
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 2
+        },
+        "xg": {
+          "home": 2.07,
+          "away": 0.33
+        },
+        "corners": {
+          "home": 8,
+          "away": 3
+        },
+        "fouls": {
+          "home": 4,
+          "away": 13
+        },
+        "cards": {
+          "home": {
+            "yellow": 1,
+            "red": 0
+          },
+          "away": {
+            "yellow": 2,
+            "red": 0
+          }
+        },
+        "offsides": {
+          "home": 2,
+          "away": 1
+        },
+        "crosses": {
+          "home": 22,
+          "away": 8
+        },
+        "interceptions": {
+          "home": 9,
+          "away": 12
+        },
+        "saves": {
+          "home": 1,
+          "away": 4
+        }
+      }
+    },
+    {
+      "id": "civ-nor-r32",
+      "date": "2026-06-30",
+      "tournament": "2026 FIFA World Cup",
+      "group": "Round of 32",
+      "round": "Round of 32",
+      "matchday": 20,
+      "homeTeam": "Ivory Coast",
+      "awayTeam": "Norway",
+      "venue": "AT&T Stadium, Dallas",
+      "kickoff": "7/1 01:00",
+      "localKickoff": "6/30 12:00",
+      "localTZ": "CT",
+      "status": "upcoming"
+    },
+    {
+      "id": "fra-swe-r32",
+      "date": "2026-06-30",
+      "tournament": "2026 FIFA World Cup",
+      "group": "Round of 32",
+      "round": "Round of 32",
+      "matchday": 20,
+      "homeTeam": "France",
+      "awayTeam": "Sweden",
+      "venue": "MetLife Stadium, East Rutherford",
+      "kickoff": "7/1 05:00",
+      "localKickoff": "6/30 17:00",
+      "localTZ": "ET",
+      "status": "upcoming"
+    },
+    {
+      "id": "mex-ecu-r32",
+      "date": "2026-06-30",
+      "tournament": "2026 FIFA World Cup",
+      "group": "Round of 32",
+      "round": "Round of 32",
+      "matchday": 20,
+      "homeTeam": "Mexico",
+      "awayTeam": "Ecuador",
+      "venue": "Estadio Azteca, Mexico City",
+      "kickoff": "7/1 09:00",
+      "localKickoff": "6/30 21:00",
       "localTZ": "CT",
       "status": "upcoming"
     }
@@ -11400,7 +11607,7 @@
         {
           "score": "1:0",
           "probability": 0.1343,
-          "quadrant": "Q1",
+          "quadrant": "Q2",
           "reason": "保守淘汰赛——德国1球领先后控场",
           "_poissonEnriched": true,
           "_v44Enriched": true
@@ -11416,7 +11623,7 @@
         {
           "score": "2:1",
           "probability": 0.0924,
-          "quadrant": "Q1",
+          "quadrant": "Q2",
           "reason": "巴拉圭定位球/反击破门场景",
           "_poissonEnriched": true,
           "_v44Enriched": true
@@ -11430,7 +11637,7 @@
           "_v44Enriched": true
         }
       ],
-      "mviAnalysis": "ELO差162→Germany MVI+0.35。德国攻击群(Musiala+Wirtz+Sane+Havertz)组合MVI+0.20。巴拉圭大巴MVI防-0.10。综合MVI=+0.45 Germany。市场赔率压倒性支持德国。",
+      "mviAnalysis": [],
       "appliedLearnings": [
         {
           "lesson": "淘汰赛阶段ELO权重上调至42%——德国ELO优势(162点)权重最高",
@@ -11467,16 +11674,7 @@
       "setPieceAnalysis": "德国定位球：Rudiger+Tah双高中卫→角球威胁；Havertz头球能力。巴拉圭定位球防守纪律好但防空高度不足",
       "refereeProfile": "未指定",
       "pressureIndex": 0.65,
-      "parlayRecommendations": {
-        "type": "稳健",
-        "selections": [
-          "Germany to Win",
-          "Under 3.5 Goals"
-        ],
-        "odds": 1.55,
-        "probability": 0.65,
-        "risk": "Low"
-      },
+      "parlayRecommendations": [],
       "under25Prob": 0.48
     },
     "ned-mar-r32": {
@@ -11514,19 +11712,19 @@
         {
           "score": "2:1",
           "probability": 0.14,
-          "quadrant": "Q3",
+          "quadrant": "Q2",
           "reason": "荷兰攻击群(Gakpo+Brobbey+Malen)最终撕破摩洛哥防线"
         },
         {
           "score": "1:2",
           "probability": 0.12,
-          "quadrant": "Q4",
+          "quadrant": "Q2",
           "reason": "摩洛哥反击效率——Hakimi+Brahim+Saibari组合"
         },
         {
           "score": "2:2",
           "probability": 0.1,
-          "quadrant": "Q2",
+          "quadrant": "Q4",
           "reason": "对攻大战——双方防守均有漏洞"
         },
         {
@@ -11536,7 +11734,7 @@
           "reason": "淘汰赛极致保守→0-0进入加时"
         }
       ],
-      "mviAnalysis": "ELO反转(Morocco+46)→ELO MVI方向从Netherlands转为Morocco-0.08。但荷兰攻击力(10球/3场)MVI+0.15→抵消反转。摩洛哥防守(3失球/3场)MVI+0.10。综合MVI≈0——真正的势均力敌。",
+      "mviAnalysis": [],
       "appliedLearnings": [
         {
           "lesson": "ELO反转检测(Morocco 1837 > Netherlands 1791)→当ELO差<50且反转方有淘汰赛经验时应采用ELO反转逻辑",
@@ -11578,16 +11776,7 @@
       "setPieceAnalysis": "荷兰: Van Dijk头球威胁。摩洛哥: Riad+Diop防空。双方定位球攻防接近均衡→定位球破门概率约25%",
       "refereeProfile": "未指定(待赛前公布)",
       "pressureIndex": 0.88,
-      "parlayRecommendations": {
-        "type": "高风险",
-        "selections": [
-          "Draw",
-          "Under 3.5 Goals"
-        ],
-        "odds": 2.5,
-        "probability": 0.33,
-        "risk": "High"
-      },
+      "parlayRecommendations": [],
       "under25Prob": 0.42
     },
     "bra-jpn-r32": {
@@ -11618,7 +11807,7 @@
         {
           "score": "2:1",
           "probability": 0.2,
-          "quadrant": "Q1",
+          "quadrant": "Q2",
           "reason": "巴西攻击群(Vini+Cunha+Paqueta)vs日本残阵防线——巴西应有2球但日本进攻质量可进1球"
         },
         {
@@ -11630,7 +11819,7 @@
         {
           "score": "1:0",
           "probability": 0.14,
-          "quadrant": "Q1",
+          "quadrant": "Q2",
           "reason": "保守淘汰赛场景——巴西领先即控场"
         },
         {
@@ -11646,7 +11835,7 @@
           "reason": "巴西完全释放攻击力场景"
         }
       ],
-      "mviAnalysis": "ELO差109→Brazil MVI+0.15。Vinicius 5场参与5球→个人MVI+0.10。日本缺Itakura+Kubo→防守MVI-0.08, 进攻MVI-0.10。综合MVI=+0.27 Brazil。市场赔率指向巴西低比分胜出。",
+      "mviAnalysis": [],
       "appliedLearnings": [
         {
           "lesson": "淘汰赛阶段ELO权重上调至42%——巴西ELO优势(109点)在概率中占最高权重",
@@ -11688,17 +11877,375 @@
       "setPieceAnalysis": "巴西定位球威胁：Marquinhos+Gabriel双塔→角球/任意球头球；日本缺Itakura→防空能力削弱30%",
       "refereeProfile": "未指定",
       "pressureIndex": 0.72,
-      "parlayRecommendations": {
-        "type": "稳健",
-        "selections": [
-          "Brazil to Win",
-          "Over 1.5 Goals"
-        ],
-        "odds": 1.65,
-        "probability": 0.58,
-        "risk": "Medium"
-      },
+      "parlayRecommendations": [],
       "under25Prob": 0.45
+    },
+    "fra-swe-r32": {
+      "matchId": "fra-swe-r32",
+      "homeWinProb": 0.56,
+      "drawProb": 0.29,
+      "awayWinProb": 0.15,
+      "over25Prob": 0.62,
+      "predictedDirection": "home_win",
+      "predictedScore": "2:1",
+      "confidence": 0.56,
+      "confidenceAdjustment": "ELO差168点+法国完美小组赛基础置信0.60，因德国-巴拉圭教训调减4%(ELO>150大巴惩罚)至0.56",
+      "quadrant": "Q1",
+      "riskLevel": "中低",
+      "riskWarnings": [
+        "Saliba背部轻伤可能影响防线稳定性",
+        "瑞典前场三叉戟Isak+Gyokeres+Elanga反击速度快，法国防线有被反击打穿风险",
+        "淘汰赛首轮ELO差>150的强队方向正确率降至66.7%(德国-巴拉圭翻车)",
+        "瑞典对强队(荷兰5-1惨败)暴露防守漏洞，但淘汰赛单场制可能战术保守"
+      ],
+      "top5Scores": [
+        {
+          "score": "2:0",
+          "probability": 0.1003,
+          "quadrant": "Q1",
+          "reason": "法国稳健零封",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "2:1",
+          "probability": 0.0993,
+          "quadrant": "Q1",
+          "reason": "法国实力优势+瑞典有进球能力",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "1:0",
+          "probability": 0.0908,
+          "quadrant": "Q1",
+          "reason": "法国保守控盘+瑞典大巴半场失守",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "1:1",
+          "probability": 0.0899,
+          "quadrant": "Q2",
+          "reason": "瑞典大巴成功+法国终结效率低下(德国场景重现)",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "3:0",
+          "probability": 0.0739,
+          "quadrant": "Q1",
+          "reason": "Poisson #5: 3:0 主胜(中等进球局)",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        }
+      ],
+      "mviAnalysis": [],
+      "appliedLearnings": [
+        {
+          "lesson": "淘汰赛ELO差>150引入大巴惩罚因子(-5%~-10%)",
+          "adjustment": "法国-瑞典ELO差168→置信度从0.60降至0.56",
+          "impact": "下调"
+        },
+        {
+          "lesson": "ELO+市场共识双因子在淘汰赛首轮预测力最强",
+          "adjustment": "eloDiff(0.3969)+marketConsensus(0.2745)合计67%权重主导预测",
+          "impact": "中性"
+        },
+        {
+          "lesson": "淘汰赛绝杀/绝平概率+20%",
+          "adjustment": "预测中考虑了85'+进球可能性，2:1/1:1均可能由晚期进球决定",
+          "impact": "上调"
+        }
+      ],
+      "factorBreakdown": {
+        "eloDiffScore": 0.73,
+        "recentFormScore": 0.75,
+        "h2hScore": 0.55,
+        "marketScore": 0.7,
+        "tacticalScore": 0.62,
+        "squadScore": 0.82,
+        "pressureScore": 0.48,
+        "psychologyScore": 0.58
+      },
+      "goalTimeline": "法国上半场试探→中场调整后55-70分钟破门→瑞典可能反击得分→法国锁定胜局",
+      "setPieceAnalysis": "法国角球/定位球威胁大(Upamecano+Saliba)，瑞典防守定位球偏弱(小组赛被荷兰利用)",
+      "refereeProfile": "待确认",
+      "pressureIndex": 0.48,
+      "parlayRecommendations": [],
+      "bankroll": {
+        "conservative": {
+          "allocations": {
+            "胜平负": 100
+          },
+          "expectedReturn": 105
+        },
+        "balanced": {
+          "allocations": {
+            "胜平负": 50,
+            "大小球": 30,
+            "比分": 20
+          },
+          "expectedReturn": 150
+        },
+        "aggressive": {
+          "allocations": {
+            "胜平负": 30,
+            "大小球": 20,
+            "比分": 25,
+            "串关": 25
+          },
+          "expectedReturn": 210
+        }
+      },
+      "under25Prob": 0.38
+    },
+    "civ-nor-r32": {
+      "matchId": "civ-nor-r32",
+      "homeWinProb": 0.28,
+      "drawProb": 0.33,
+      "awayWinProb": 0.39,
+      "over25Prob": 0.6,
+      "predictedDirection": "away_win",
+      "predictedScore": "1:2",
+      "confidence": 0.39,
+      "confidenceAdjustment": "Haaland因子+ELO差93→挪威占优但置信度有限(39%)，因为挪威防守不稳定(10场1零封)且科特迪瓦防守韧性好(5场3零封)",
+      "quadrant": "Q3",
+      "riskLevel": "高",
+      "riskWarnings": [
+        "挪威防线不稳——近10场仅1次零封，科特迪瓦Pepe+Diomande有破门能力",
+        "科特迪瓦首次淘汰赛经验不足，关键时刻可能出现失误",
+        "Haaland依赖症——挪威无Haaland时0战斗力(1-4法国)",
+        "天气预报Dallas高温(35°C+)，可能影响欧洲球队体能",
+        "Singo伤缺影响科特迪瓦右路防守"
+      ],
+      "top5Scores": [
+        {
+          "score": "1:1",
+          "probability": 0.1061,
+          "quadrant": "Q2",
+          "reason": "双方实力接近僵持→加时",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "1:2",
+          "probability": 0.0942,
+          "quadrant": "Q1",
+          "reason": "Haaland梅开二度+科特迪瓦破门",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "0:1",
+          "probability": 0.0797,
+          "quadrant": "Q1",
+          "reason": "Haaland关键进球+科特迪瓦锋线哑火",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "0:2",
+          "probability": 0.0708,
+          "quadrant": "Q1",
+          "reason": "Poisson #4: 0:2 客胜(低进球局)",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "2:1",
+          "probability": 0.0706,
+          "quadrant": "Q1",
+          "reason": "科特迪瓦爆冷+Haaland被限制",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        }
+      ],
+      "mviAnalysis": [],
+      "appliedLearnings": [
+        {
+          "lesson": "ELO反转检测机制(Morocco 1837>Netherlands 1791改draw)",
+          "adjustment": "Norway ELO 1824 > IVC 1731→方向设为away_win而非draw",
+          "impact": "中性"
+        },
+        {
+          "lesson": "\"偷一球\"战术识别(大牌球星在弱控球方的高转化效率)",
+          "adjustment": "Haaland big chance转化率极高→即使挪威控球不占优也能得分",
+          "impact": "上调"
+        },
+        {
+          "lesson": "淘汰赛\"两队均缺经验\"因子中性(×1.0)",
+          "adjustment": "IVC首次淘汰赛+Norway 28年首次→经验因子设为中性",
+          "impact": "中性"
+        }
+      ],
+      "factorBreakdown": {
+        "eloDiffScore": 0.28,
+        "recentFormScore": 0.42,
+        "h2hScore": 0.5,
+        "marketScore": 0.38,
+        "tacticalScore": 0.48,
+        "squadScore": 0.4,
+        "pressureScore": 0.52,
+        "psychologyScore": 0.5
+      },
+      "goalTimeline": "上半场双方试探，Haaland下半场60-75分钟破僵→科特迪瓦反击扳平→Haaland锁定胜局",
+      "setPieceAnalysis": "挪威角球威胁大(Haaland+Ødegaard)，科特迪瓦定位球防守需警惕",
+      "refereeProfile": "待确认",
+      "pressureIndex": 0.52,
+      "parlayRecommendations": [],
+      "bankroll": {
+        "conservative": {
+          "allocations": {
+            "胜平负": 100
+          },
+          "expectedReturn": 105
+        },
+        "balanced": {
+          "allocations": {
+            "胜平负": 50,
+            "大小球": 30,
+            "比分": 20
+          },
+          "expectedReturn": 150
+        },
+        "aggressive": {
+          "allocations": {
+            "胜平负": 30,
+            "大小球": 20,
+            "比分": 25,
+            "串关": 25
+          },
+          "expectedReturn": 210
+        }
+      },
+      "under25Prob": 0.4
+    },
+    "mex-ecu-r32": {
+      "matchId": "mex-ecu-r32",
+      "homeWinProb": 0.5,
+      "drawProb": 0.3,
+      "awayWinProb": 0.2,
+      "over25Prob": 0.35,
+      "predictedDirection": "home_win",
+      "predictedScore": "1:0",
+      "confidence": 0.5,
+      "confidenceAdjustment": "ELO+recentForm高权重→输出50%主胜，但因ELO差>150应用大巴惩罚(-5%)，且Ecuador对德国胜展现的战斗力不可忽视。Azteca因子(+8%)部分抵消大巴惩罚。40年来首次淘汰赛胜利的巨大心理压力→心理因子从0.55降至0.48。",
+      "quadrant": "Q1",
+      "riskLevel": "中",
+      "riskWarnings": [
+        "Ecuador拥有精英级个人能力(Caicedo英超顶级后腰、Hincapié/Pacho德甲铁卫)，在单场淘汰赛中可能制造巨大威胁",
+        "墨西哥40年未赢淘汰赛→巨大心理负担可能在关键时刻影响发挥",
+        "Azteca 80,000+球迷压力是双刃剑——可能激励也可能压垮",
+        "Ecuador对德国2-1胜利证明其对强队的战斗力",
+        "比赛节奏可能极慢(两队防守优先)，under 2.5概率高"
+      ],
+      "top5Scores": [
+        {
+          "score": "1:0",
+          "probability": 0.1635,
+          "quadrant": "Q1",
+          "reason": "Azteca堡垒+墨西哥稳健防守",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "1:1",
+          "probability": 0.1252,
+          "quadrant": "Q2",
+          "reason": "Ecuador韧性+墨西哥破门困难",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "0:0",
+          "probability": 0.1227,
+          "quadrant": "Q2",
+          "reason": "双方死守→加时/点球",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "2:0",
+          "probability": 0.1089,
+          "quadrant": "Q1",
+          "reason": "墨西哥掌控全局+下半场锁定",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        },
+        {
+          "score": "0:1",
+          "probability": 0.094,
+          "quadrant": "Q1",
+          "reason": "Ecuador爆冷(Germany场景重现)+墨西哥进攻哑火",
+          "_poissonEnriched": true,
+          "_v44Enriched": true
+        }
+      ],
+      "mviAnalysis": [],
+      "appliedLearnings": [
+        {
+          "lesson": "淘汰赛ELO差>150引入大巴惩罚因子",
+          "adjustment": "墨西哥-厄瓜多尔ELO差174→置信度下调5%",
+          "impact": "下调"
+        },
+        {
+          "lesson": "德国-巴拉圭: 大巴战术识别(26+拦截+门将超常)",
+          "adjustment": "Ecuador非大巴型球队(主动进攻德国)，大巴惩罚仅部分适用",
+          "impact": "中性"
+        },
+        {
+          "lesson": "淘汰赛under 2.5球系统性上升",
+          "adjustment": "o25概率降至0.35——两队小组赛均表现出防守优先特征",
+          "impact": "下调"
+        },
+        {
+          "lesson": "主场堡垒效应(Azteca 24场不败)",
+          "adjustment": "Azteca因子额外+8%主胜概率——这是德国-巴拉圭场景不具备的优势",
+          "impact": "上调"
+        }
+      ],
+      "factorBreakdown": {
+        "eloDiffScore": 0.7,
+        "recentFormScore": 0.82,
+        "h2hScore": 0.62,
+        "marketScore": 0.55,
+        "tacticalScore": 0.55,
+        "squadScore": 0.52,
+        "pressureScore": 0.38,
+        "psychologyScore": 0.48
+      },
+      "goalTimeline": "上半场0:0僵持(双方防守优先)→下半场65-80分钟墨西哥利用定位球/角球破僵→Ecuador反扑无果",
+      "setPieceAnalysis": "墨西哥在Azteca的定位球得分率高，Raúl Jiménez头球威胁大；Ecuador防守定位球能力中等",
+      "refereeProfile": "Slavko Vinčić(SVN)——经验丰富，执法尺度适中，不倾向给主队优势",
+      "pressureIndex": 0.38,
+      "parlayRecommendations": [],
+      "bankroll": {
+        "conservative": {
+          "allocations": {
+            "胜平负": 100
+          },
+          "expectedReturn": 105
+        },
+        "balanced": {
+          "allocations": {
+            "胜平负": 50,
+            "大小球": 30,
+            "比分": 20
+          },
+          "expectedReturn": 150
+        },
+        "aggressive": {
+          "allocations": {
+            "胜平负": 30,
+            "大小球": 20,
+            "比分": 25,
+            "串关": 25
+          },
+          "expectedReturn": 210
+        }
+      },
+      "under25Prob": 0.65
     }
   },
   "reviews": {
@@ -15221,50 +15768,252 @@
         "savesHome": 5,
         "savesAway": 1
       }
+    },
+    "bra-jpn-r32": {
+      "matchId": "bra-jpn-r32",
+      "predictedDirection": "home_win",
+      "predictedScore": "2:1",
+      "actualDirection": "home_win",
+      "actualScore": "2:1",
+      "directionHit": true,
+      "scoreHit": true,
+      "scoreTop3Hit": true,
+      "scoreTop1Hit": true,
+      "hitItems": [
+        "方向完美命中(home_win)：ELO差109点准确反映实力差距",
+        "比分完美命中(2:1)：Casemiro头球扳平+Martinelli补时绝杀与模型Q1象限高置信预测吻合",
+        "绝杀概率+15%再次验证：Martinelli 90'+5'绝杀，淘汰赛晚期进球系统性上升趋势持续",
+        "巴西xG 2.07 vs 日本xG 0.33：预期的实力碾压完美兑现",
+        "日本上半场1-0领先符合\"亚洲球队淘汰赛上半场超常发挥\"模式"
+      ],
+      "missItems": [
+        "上半场日本领先(1-0)出乎预期——模型未充分考虑日本开场高位逼抢策略",
+        "半场0:1不符合Q1预期——上半场模型准确率偏低(40%)是持续问题"
+      ],
+      "rootCause": "ELO+市场共识双因子在淘汰赛首轮实力差距明显时预测力最强(已验证2/2：RSA-CAN和BRA-JPN均方向+比分双中)。日本上半场领先是战术层面的短期扰动，下半场巴西调整后回归模型预期。核心教训：ELO差>100时不要因上半场结果调整信任度。",
+      "optimizationTips": [
+        "淘汰赛ELO差>100场景继续维持ELO因子高权重(不低于0.39)",
+        "补时绝杀因子权重在淘汰赛阶段可额外+5%",
+        "亚洲球队淘汰赛上半场超常发挥是已知模式，可在上半场预测中单独建模"
+      ],
+      "factorEvaluation": {
+        "eloDiff": {
+          "accuracy": 1
+        },
+        "recentForm": {
+          "accuracy": 1
+        },
+        "h2h": {
+          "accuracy": 0.5
+        },
+        "marketConsensus": {
+          "accuracy": 1
+        },
+        "tacticalMatchup": {
+          "accuracy": 0.7
+        },
+        "overall": {
+          "accuracy": 1
+        }
+      },
+      "matchStats": {
+        "possessionHome": 69,
+        "possessionAway": 31,
+        "shotsHome": 19,
+        "shotsAway": 5,
+        "xgHome": 2.07,
+        "xgAway": 0.33,
+        "cornersHome": 8,
+        "cornersAway": 3,
+        "foulsHome": 4,
+        "foulsAway": 13,
+        "cardsHomeYellow": 1,
+        "cardsAwayYellow": 2,
+        "cardsHomeRed": 0,
+        "cardsAwayRed": 0,
+        "savesHome": 1,
+        "savesAway": 4
+      }
+    },
+    "ger-par-r32": {
+      "matchId": "ger-par-r32",
+      "predictedDirection": "home_win",
+      "predictedScore": "2:0",
+      "actualDirection": "draw",
+      "actualScore": "1:1",
+      "directionHit": false,
+      "scoreHit": false,
+      "scoreTop3Hit": false,
+      "scoreTop1Hit": false,
+      "hitItems": [
+        "德国xG 1.49 vs 巴拉圭xG 0.42——优势方进攻创造能力识别正确",
+        "德国21次射门7射正——压迫性进攻预期准确",
+        "ElO差162点方向上预测错误，但xG差距准确反映了场上统治力"
+      ],
+      "missItems": [
+        "方向完全错误(predicted home_win, actual draw)——最大失误",
+        "比分预测2:0，实际1:1——低估了巴拉圭防守韧性+德国终结能力不足",
+        "巴拉圭门将Gill 6次扑救(xGC 1.57 vs 实际失1球)——超预期门将表现未建模",
+        "低估了淘汰赛弱队\"park the bus\"+快速反击的有效性——巴拉圭42分钟先破门",
+        "VAR取消德国加时赛制胜球——外部裁判因素影响结果"
+      ],
+      "rootCause": "ELO权重过度自信(ELO差162→预测65%主胜概率)。核心问题：(1)淘汰赛单场淘汰制中弱队\"大巴战术\"的系统性低估——德国xG 1.49但仅进1球反映终结效率低下；(2)门将超常发挥未建模——Gill xGC 1.57只失1球(+38%高估)；(3)ELO差>150场景出现首次方向错误，说明淘汰赛\"强队碾压\"假设需要修正。巴拉圭全队26次拦截→铁桶阵数据印证。",
+      "optimizationTips": [
+        "淘汰赛ELO差>150时不能直接线性输出高置信主胜——必须引入\"大巴惩罚因子\"(-5%到-10%)",
+        "门将xGC差异应纳入mviAnalysis——当对方门将xGC>1.5时，under进球预测需调整",
+        "弱队26+拦截≈全面退守的信号——应降低主队expected goals",
+        "淘汰赛ELO差150+场景方向正确率从100%下降至66.7%(3场中1场draw)，需调降置信度"
+      ],
+      "factorEvaluation": {
+        "eloDiff": {
+          "accuracy": 0
+        },
+        "recentForm": {
+          "accuracy": 0.3
+        },
+        "h2h": {
+          "accuracy": 0.5
+        },
+        "marketConsensus": {
+          "accuracy": 0
+        },
+        "tacticalMatchup": {
+          "accuracy": 0.4
+        },
+        "overall": {
+          "accuracy": 0
+        }
+      },
+      "matchStats": {
+        "possessionHome": 63,
+        "possessionAway": 37,
+        "shotsHome": 21,
+        "shotsAway": 5,
+        "xgHome": 1.49,
+        "xgAway": 0.42,
+        "cornersHome": 9,
+        "cornersAway": 2,
+        "foulsHome": 11,
+        "foulsAway": 18,
+        "cardsHomeYellow": 2,
+        "cardsAwayYellow": 4,
+        "cardsHomeRed": 0,
+        "cardsAwayRed": 0,
+        "savesHome": 2,
+        "savesAway": 6
+      }
+    },
+    "ned-mar-r32": {
+      "matchId": "ned-mar-r32",
+      "predictedDirection": "draw",
+      "predictedScore": "1:1",
+      "actualDirection": "draw",
+      "actualScore": "1:1",
+      "directionHit": true,
+      "scoreHit": true,
+      "scoreTop3Hit": true,
+      "scoreTop1Hit": true,
+      "hitItems": [
+        "方向完美命中(draw)——ELO反转检测(Morocco 1837 > Netherlands 1791)准确",
+        "比分完美命中(1:1)——Gakpo先破门+Diop 90'+1'绝平与预测完全吻合",
+        "Morocco 70%控球 + xG 1.38 vs Netherlands xG 0.24——数据分布与draw预测逻辑一致",
+        "绝平进球90'+1'——淘汰赛绝杀概率+15%连续第3场验证",
+        "荷兰\"偷一个然后守\"策略的识别正确(1次big chance→进球)"
+      ],
+      "missItems": [
+        "控球率预测完全颠倒——预测荷兰控球优势，实际Morocco 70%碾压",
+        "Morocco big chances 5次 vs Netherlands 1次——创造机会能力差异远大于预期",
+        "荷兰xG仅0.24——进攻威胁被严重高估"
+      ],
+      "rootCause": "ELO反转检测(Netherlands 1791 vs Morocco 1837)是本次预测的最佳决策——直接改变了方向从home_win到draw。控球率预测失误源于高估了荷兰的传控能力，但实力接近=draw的核心逻辑正确。Morocco从小组赛至今展现了极强的控场能力，应系统性上调其中场控制力评级。",
+      "optimizationTips": [
+        "ELO反转检测→方向翻转机制继续保持——这是本次命中draw的关键",
+        "Morocco中场控制力(70%控球+91%传球成功率)应计入战术因子评估",
+        "荷兰\"偷一球战术\"识别可在未来类似场景中应用——弱控球方如有big chance转化率历史高，给予特殊标记",
+        "非洲球队淘汰赛控球优势趋势(2场中2场Morocco均高控球)值得关注"
+      ],
+      "factorEvaluation": {
+        "eloDiff": {
+          "accuracy": 1
+        },
+        "recentForm": {
+          "accuracy": 0.7
+        },
+        "h2h": {
+          "accuracy": 0.5
+        },
+        "marketConsensus": {
+          "accuracy": 0.6
+        },
+        "tacticalMatchup": {
+          "accuracy": 0.6
+        },
+        "overall": {
+          "accuracy": 1
+        }
+      },
+      "matchStats": {
+        "possessionHome": 30,
+        "possessionAway": 70,
+        "shotsHome": 6,
+        "shotsAway": 21,
+        "xgHome": 0.24,
+        "xgAway": 1.38,
+        "cornersHome": 3,
+        "cornersAway": 8,
+        "foulsHome": 18,
+        "foulsAway": 15,
+        "cardsHomeYellow": 3,
+        "cardsAwayYellow": 2,
+        "cardsHomeRed": 0,
+        "cardsAwayRed": 0,
+        "savesHome": 5,
+        "savesAway": 1
+      }
     }
   },
   "modelState": {
-    "directionAccuracy": 0.5737704918032787,
-    "scoreTop3Accuracy": 0.39344262295081966,
-    "scoreTop1Accuracy": 0.14754098360655737,
-    "totalPredictions": 61,
-    "completedPredictions": 61,
-    "directionCorrect": 35,
-    "scoreTop3Correct": 24,
-    "scoreTop1Correct": 9,
-    "overallDrawRate": 0.273972602739726,
-    "overallDrawCount": 20,
-    "overallTotalMatches": 73,
-    "totalReviews": 73,
+    "directionAccuracy": 0.578125,
+    "scoreTop3Accuracy": 0.40625,
+    "scoreTop1Accuracy": 0.171875,
+    "totalPredictions": 64,
+    "completedPredictions": 64,
+    "directionCorrect": 37,
+    "scoreTop3Correct": 26,
+    "scoreTop1Correct": 11,
+    "overallDrawRate": 0.2894736842105263,
+    "overallDrawCount": 22,
+    "overallTotalMatches": 76,
+    "totalReviews": 76,
     "factorWeights": {
       "eloDiff": {
-        "hitRate": 0.5092,
-        "weight": 0.3978,
-        "samples": 45
+        "hitRate": 0.5190416666666666,
+        "weight": 0.39692454951933825,
+        "samples": 48
       },
       "recentForm": {
-        "hitRate": 0.5093,
-        "weight": 0.197,
-        "samples": 38
+        "hitRate": 0.5208146341463414,
+        "weight": 0.1965510820478426,
+        "samples": 41
       },
       "h2h": {
         "hitRate": 0.341,
-        "weight": 0.1001,
+        "weight": 0.10012999999999998,
         "samples": 25
       },
       "marketConsensus": {
-        "hitRate": 0.55,
-        "weight": 0.2751,
-        "samples": 42
+        "hitRate": 0.5577777777777778,
+        "weight": 0.27450762687234515,
+        "samples": 45
       },
       "tacticalMatchup": {
-        "hitRate": 0.3949,
-        "weight": 0.0301,
-        "samples": 33
+        "hitRate": 0.4175472222222222,
+        "weight": 0.031886741560473955,
+        "samples": 36
       }
     },
-    "totalLearnings": 111,
-    "lastReviewDate": "2026-06-28"
+    "totalLearnings": 124,
+    "lastReviewDate": "2026-06-30"
   },
   "keyLearnings": [
     "第二轮加拿大6:0卡塔尔揭示：首轮爆冷队伍第二轮真实实力暴露",
@@ -15377,7 +16126,20 @@
     "淘汰赛绝杀概率(85'+)系统性+15%——加时赛压力+风险承担→晚期进球概率上升",
     "南非式'无威胁控球'(58%控球→0.13 xG)是弱队摆大巴的变体——高位无效控球≠比赛控制力",
     "完美预测(方向+比分命中)验证ELO+市场共识双因子在淘汰赛首轮预测力最强——R32首轮无需过度复杂化",
-    "ElO差>200的淘汰赛首轮, under 2.5球方向正确率保持100%——淘汰赛保守特征在首轮最显著"
+    "ElO差>200的淘汰赛首轮, under 2.5球方向正确率保持100%——淘汰赛保守特征在首轮最显著",
+    "完美预测巴西2-1日本(方向+比分)——ELO差109点的淘汰赛首轮实力因子占主导地位, 下半场调整回归预期, 补时绝杀(90'+5')再次验证淘汰赛晚期进球+15%",
+    "德国1-1巴拉圭(预测home_win→实际draw)是淘汰赛ELO权重过度自信的典型案例——ELO差162但德国xG 1.49仅进1球, 巴拉圭门将Gill xGC 1.57只失1球(+38%高估), 26次拦截=铁桶阵经典数据, 淘汰赛大巴战术需引入惩罚因子(-5%~-10%)",
+    "巴拉圭式大巴识别信号: 拦截26+ + 犯规18+ + 对方xG>1但进球≤1 = 铁桶阵成功 → 应调降强队预期进球",
+    "淘汰赛门将超常表现(xGC>>实际失球)是系统性冷门来源——应纳入mviAnalysis的riskWarnings",
+    "VAR取消德国加时制胜球→淘汰赛阶段外部裁判因素对比赛结果影响上升, 应在riskWarnings中额外标注",
+    "荷兰1-1摩洛哥双中(方向+比分)——ELO反转检测(Morocco 1837>Netherlands 1791)是关键的决策转折点, 此机制应永久保留且淘汰赛阶段灵敏度+10%",
+    "Morocco 70%控球+91%传球成功率=非洲球队淘汰赛控场能力被系统性低估——Morocco小组赛至今的控球表现出乎预期, 应上调非洲球队中场控制力评级",
+    "荷兰\"偷一球\"战术(30%控球, 1次big chance→1球)是淘汰赛弱控球方的有效生存策略——需单独建模big chance转化效率",
+    "淘汰赛3场复盘: 方向2/3(67%), 比分2/3(67%)——ELO+市场共识双因子在首轮预测准确率良好, 但ELO差>150场景出现首次方向失败(德巴), ELO上限效应需量化",
+    "淘汰赛4场汇总(RSA-CAN/BRA-JPN/GER-PAR/NED-MAR): 绝杀/绝平(85'+)概率4/4=100%——至少1球发生在85分钟后, 淘汰赛晚期进球因子从+15%上调至+20%",
+    "法国-瑞典：ELO差168+法国完美小组赛(10GF/2GA)→Q1高置信预测，但因德国教训调降4%置信度。法国Saliba伤疑+瑞典三叉戟反击速度是关键变量。",
+    "科特迪瓦-挪威：Haaland因子超过ELO影响——虽ELO差仅93但Haaland个人能力(52场59球)使挪威成为合理热门。但挪威防线10场1零封→科特迪瓦不是没有机会。",
+    "墨西哥-厄瓜多尔(Azteca)：Azteca堡垒24场不败+墨西哥0失球完美小组赛→Q1预测。但Ecuador拥有Caicedo/Hincapié级别个人能力+刚赢德国，是R32至今最强的\"弱队\"——墨西哥40年淘汰赛魔咒是最大未知数。"
   ],
   "eloRatings": {
     "Spain": {
@@ -15553,21 +16315,21 @@
       "defense": 82,
       "form": 85,
       "tournament": 88,
-      "elo": 1882
+      "elo": 1896
     },
     "Germany": {
       "attack": 82,
       "defense": 78,
       "form": 75,
       "tournament": 82,
-      "elo": 1836
+      "elo": 1827
     },
     "Netherlands": {
       "attack": 78,
       "defense": 80,
       "form": 76,
       "tournament": 75,
-      "elo": 1791
+      "elo": 1794
     },
     "Mexico": {
       "attack": 72,
@@ -15581,7 +16343,7 @@
       "defense": 72,
       "form": 72,
       "tournament": 68,
-      "elo": 1773
+      "elo": 1759
     },
     "Switzerland": {
       "attack": 68,
@@ -15602,7 +16364,7 @@
       "defense": 75,
       "form": 68,
       "tournament": 72,
-      "elo": 1837
+      "elo": 1834
     },
     "Sweden": {
       "attack": 72,
@@ -15665,7 +16427,7 @@
       "defense": 68,
       "form": 58,
       "tournament": 55,
-      "elo": 1674
+      "elo": 1683
     },
     "Australia": {
       "attack": 65,
@@ -15718,11 +16480,11 @@
     }
   },
   "factorWeights": {
-    "eloDiff": 0.3946,
-    "recentForm": 0.1954,
-    "h2h": 0.1054,
-    "marketConsensus": 0.2729,
-    "tacticalMatchup": 0.0317
+    "eloDiff": 0.39692454951933825,
+    "recentForm": 0.1965510820478426,
+    "h2h": 0.10012999999999998,
+    "marketConsensus": 0.27450762687234515,
+    "tacticalMatchup": 0.031886741560473955
   },
   "predictionRichData": {
     "por-cod": {
@@ -15965,7 +16727,7 @@
   },
   "marketOdds": {
     "source": "odds-api.io (Bet365)",
-    "fetchedAt": "2026-06-28T13:55:43.757Z",
+    "fetchedAt": "2026-06-29T13:55:39.375Z",
     "availableMatches": [
       "ecu-ger-3",
       "cuw-civ-3",
