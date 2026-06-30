@@ -1,6 +1,6 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-06-30T14:17:22.242Z",
+  "generatedAt": "2026-06-30T14:57:04.000Z",
   "targetDate": "7/1",
   "targetDateDisplay": "2026年7月1日（周三）",
   "targetMatchIds": [
@@ -347,7 +347,7 @@
   "portfolios": [
     {
       "rank": 1,
-      "score": 87.9,
+      "score": 90.9,
       "odds": 9,
       "hitPct": 20.71,
       "ev": 0.864,
@@ -396,202 +396,33 @@
         "strat": 0.2,
         "valCap": 0,
         "qual": 4.5,
-        "cert": 4
+        "cert": 5,
+        "weak": 0,
+        "struct": 2
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[胜平负+平局退款]：墨西哥 不败 + 法国 vs 瑞典 平局。强正EV，命中20.71%，评分87.9/100。",
-      "comparisonNote": "优于#2的理由：综合评分领先2.9分；EV更高(+47.6%)"
+      "rationale": "2场组合[胜平负+平局退款]：墨西哥 不败 + 法国 vs 瑞典 平局。强正EV，命中20.71%，评分90.9/100。",
+      "comparisonNote": "优于#2的理由：综合评分领先3.2分；命中率更高(20.71% vs 18.85%)"
     },
     {
       "rank": 2,
-      "score": 85,
-      "odds": 3.22,
-      "hitPct": 43.04,
-      "ev": 0.388,
-      "mvi": 1.184,
+      "score": 87.7,
+      "odds": 10.2,
+      "hitPct": 18.85,
+      "ev": 0.923,
+      "mvi": 1.052,
       "legs": [
         {
-          "id": "fra-swe-r32_un3",
-          "bet": "【小3球】法国 vs 瑞典",
-          "odds": 2.15,
-          "prob": 0.6026223931895397,
-          "mvi": 1.2956381453575103,
-          "ev": 0.296,
+          "id": "mex-ecu-r32_un2",
+          "bet": "【小2球】墨西哥 vs 厄瓜多尔",
+          "odds": 1.7,
+          "prob": 0.6499999999999999,
+          "mvi": 1.1049999999999998,
+          "ev": 0.105,
           "market": "比分区间",
-          "match": "法国 vs 瑞典",
+          "match": "墨西哥 vs 厄瓜多尔",
           "group": "Round of 32",
           "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "mex-ecu-r32_dnb_h",
-          "bet": "【平局退款】墨西哥 不败",
-          "odds": 1.5,
-          "prob": 0.7142857142857143,
-          "mvi": 1.0714285714285716,
-          "ev": 0.071,
-          "market": "平局退款",
-          "match": "墨西哥 vs 厄瓜多尔",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 8.1,
-        "mvi": 14.2,
-        "hit": 15,
-        "risk": 6.8,
-        "eff": 2,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.3,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 4.5,
-        "cert": 5
-      },
-      "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[比分区间+平局退款]：法国 vs 瑞典 + 墨西哥 不败。强正EV，命中43.04%，评分85/100。",
-      "comparisonNote": "落后#1的理由：综合评分差2.9分"
-    },
-    {
-      "rank": 3,
-      "score": 84.2,
-      "odds": 15.75,
-      "hitPct": 10.56,
-      "ev": 0.664,
-      "mvi": 1.239,
-      "legs": [
-        {
-          "id": "fra-swe-r32_dnb_a",
-          "bet": "【平局退款】瑞典 不败",
-          "odds": 7,
-          "prob": 0.21126760563380279,
-          "mvi": 1.4788732394366195,
-          "ev": 0.479,
-          "market": "平局退款",
-          "match": "法国 vs 瑞典",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "mex-ecu-r32_h",
-          "bet": "【胜平负】墨西哥 主胜",
-          "odds": 2.25,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.125,
-          "market": "胜平负",
-          "match": "墨西哥 vs 厄瓜多尔",
-          "group": "Round of 32",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 10.4,
-        "mvi": 14.9,
-        "hit": 8,
-        "risk": 6.8,
-        "eff": 9.8,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 3.6,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 4.5,
-        "cert": 1
-      },
-      "tier": "价值收益型",
-      "rationale": "2场组合[平局退款+胜平负]：瑞典 不败 + 墨西哥 主胜。强正EV，命中10.56%，评分84.2/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 4,
-      "score": 84,
-      "odds": 15.75,
-      "hitPct": 10.56,
-      "ev": 0.664,
-      "mvi": 1.239,
-      "legs": [
-        {
-          "id": "fra-swe-r32_dnb_a",
-          "bet": "【平局退款】瑞典 不败",
-          "odds": 7,
-          "prob": 0.21126760563380279,
-          "mvi": 1.4788732394366195,
-          "ev": 0.479,
-          "market": "平局退款",
-          "match": "法国 vs 瑞典",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "mex-ecu-r32_btts_y",
-          "bet": "【BTTS】墨西哥 vs 厄瓜多尔 双方进球=是",
-          "odds": 2.25,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.125,
-          "market": "BTTS",
-          "match": "墨西哥 vs 厄瓜多尔",
-          "group": "Round of 32",
-          "type": "btts",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 10.4,
-        "mvi": 14.9,
-        "hit": 8,
-        "risk": 6.8,
-        "eff": 9.8,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 3.6,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 4.5,
-        "cert": 1
-      },
-      "tier": "价值收益型",
-      "rationale": "2场组合[平局退款+BTTS]：瑞典 不败 + 墨西哥 vs 厄瓜多尔 双方进球=是。强正EV，命中10.56%，评分84/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 5,
-      "score": 83.9,
-      "odds": 15,
-      "hitPct": 12.12,
-      "ev": 0.818,
-      "mvi": 1.022,
-      "legs": [
-        {
-          "id": "civ-nor-r32_dnb_h",
-          "bet": "【平局退款】科特迪瓦 不败",
-          "odds": 2.5,
-          "prob": 0.41791044776119407,
-          "mvi": 1.0447761194029852,
-          "ev": 0.045,
-          "market": "平局退款",
-          "match": "科特迪瓦 vs 挪威",
-          "group": "Round of 32",
-          "type": "safety",
           "source": ""
         },
         {
@@ -609,30 +440,32 @@
         }
       ],
       "breakdown": {
-        "ev": 12.2,
-        "mvi": 12.3,
-        "hit": 8,
-        "risk": 6.8,
-        "eff": 9.4,
+        "ev": 13,
+        "mvi": 12.6,
+        "hit": 10,
+        "risk": 5,
+        "eff": 5.7,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.9,
+        "stab": 4.7,
         "extRisk": 0,
         "consist": 5,
         "strat": 0.2,
         "valCap": 0,
-        "qual": 4.2,
-        "cert": 1
+        "qual": 4.5,
+        "cert": 5,
+        "weak": 0,
+        "struct": 2
       },
-      "tier": "价值收益型",
-      "rationale": "2场组合[平局退款+胜平负]：科特迪瓦 不败 + 法国 vs 瑞典 平局。强正EV，命中12.12%，评分83.9/100。",
-      "comparisonNote": ""
+      "tier": "平衡收益型",
+      "rationale": "2场组合[胜平负+比分区间]：墨西哥 vs 厄瓜多尔 + 法国 vs 瑞典 平局。强正EV，命中18.85%，评分87.7/100。",
+      "comparisonNote": "落后#1的理由：综合评分差3.2分"
     },
     {
-      "rank": 6,
-      "score": 83.5,
+      "rank": 3,
+      "score": 86.5,
       "odds": 5.38,
       "hitPct": 25.18,
       "ev": 0.354,
@@ -681,15 +514,17 @@
         "strat": 0.1,
         "valCap": 0,
         "qual": 4.2,
-        "cert": 5
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
       },
       "tier": "确定性优先（平衡）",
-      "rationale": "2场组合[平局退款+比分区间]：法国 vs 瑞典 + 科特迪瓦 不败。强正EV，命中25.18%，评分83.5/100。",
+      "rationale": "2场组合[平局退款+比分区间]：法国 vs 瑞典 + 科特迪瓦 不败。强正EV，命中25.18%，评分86.5/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 7,
-      "score": 83.5,
+      "rank": 4,
+      "score": 86.5,
       "odds": 6.16,
       "hitPct": 25.83,
       "ev": 0.59,
@@ -751,15 +586,17 @@
         "strat": 0.1,
         "valCap": 0,
         "qual": 4.4,
-        "cert": 5
+        "cert": 5,
+        "weak": 0,
+        "struct": 3
       },
       "tier": "确定性优先（平衡）",
-      "rationale": "3场组合[大小球+比分区间+平局退款]：法国 vs 瑞典 + 墨西哥 不败 + 科特迪瓦 vs 挪威。强正EV，命中25.83%，评分83.5/100。",
+      "rationale": "3场组合[大小球+比分区间+平局退款]：法国 vs 瑞典 + 墨西哥 不败 + 科特迪瓦 vs 挪威。强正EV，命中25.83%，评分86.5/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 8,
-      "score": 83.4,
+      "rank": 5,
+      "score": 86.4,
       "odds": 8.4,
       "hitPct": 20.3,
       "ev": 0.705,
@@ -808,18 +645,20 @@
         "strat": 0.2,
         "valCap": 0,
         "qual": 4.5,
-        "cert": 4
+        "cert": 5,
+        "weak": 0,
+        "struct": 2
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[胜平负+双重机会]：法国 vs 瑞典 平局 + 墨西哥 或 厄瓜多尔。强正EV，命中20.3%，评分83.4/100。",
+      "rationale": "2场组合[胜平负+双重机会]：法国 vs 瑞典 平局 + 墨西哥 或 厄瓜多尔。强正EV，命中20.3%，评分86.4/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 9,
-      "score": 80.2,
-      "odds": 4.3,
-      "hitPct": 30,
-      "ev": 0.289,
+      "rank": 6,
+      "score": 85.7,
+      "odds": 11.45,
+      "hitPct": 17.4,
+      "ev": 0.993,
       "mvi": 1,
       "legs": [
         {
@@ -831,6 +670,255 @@
           "ev": 0.145,
           "market": "大小球",
           "match": "科特迪瓦 vs 挪威",
+          "group": "Round of 32",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "fra-swe-r32_d",
+          "bet": "【胜平负】法国 vs 瑞典 平局",
+          "odds": 6,
+          "prob": 0.29,
+          "mvi": 1,
+          "ev": 0.74,
+          "market": "胜平负",
+          "match": "法国 vs 瑞典",
+          "group": "Round of 32",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 13,
+        "mvi": 12,
+        "hit": 10,
+        "risk": 5,
+        "eff": 6.4,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 5,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 4.2,
+        "cert": 3,
+        "weak": 0,
+        "struct": 2
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[大小球+胜平负]：科特迪瓦 vs 挪威 + 法国 vs 瑞典 平局。强正EV，命中17.4%，评分85.7/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 7,
+      "score": 85.2,
+      "odds": 18.45,
+      "hitPct": 10.36,
+      "ev": 0.911,
+      "mvi": 1.024,
+      "legs": [
+        {
+          "id": "mex-ecu-r32_dnb_h",
+          "bet": "【平局退款】墨西哥 不败",
+          "odds": 1.5,
+          "prob": 0.7142857142857143,
+          "mvi": 1.0714285714285716,
+          "ev": 0.071,
+          "market": "平局退款",
+          "match": "墨西哥 vs 厄瓜多尔",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        },
+        {
+          "id": "civ-nor-r32_btts_n",
+          "bet": "【BTTS】科特迪瓦 vs 挪威 双方进球=否",
+          "odds": 2.05,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0.025,
+          "market": "BTTS",
+          "match": "科特迪瓦 vs 挪威",
+          "group": "Round of 32",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "fra-swe-r32_d",
+          "bet": "【胜平负】法国 vs 瑞典 平局",
+          "odds": 6,
+          "prob": 0.29,
+          "mvi": 1,
+          "ev": 0.74,
+          "market": "胜平负",
+          "match": "法国 vs 瑞典",
+          "group": "Round of 32",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 13,
+        "mvi": 12.3,
+        "hit": 8,
+        "risk": 6.2,
+        "eff": 7.4,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.8,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 4.4,
+        "cert": 0,
+        "weak": 0,
+        "struct": 4
+      },
+      "tier": "价值收益型",
+      "rationale": "3场组合[BTTS+胜平负+平局退款]：墨西哥 不败 + 科特迪瓦 vs 挪威 双方进球=否 + 法国 vs 瑞典 平局。强正EV，命中10.36%，评分85.2/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 8,
+      "score": 82.2,
+      "odds": 15.75,
+      "hitPct": 10.56,
+      "ev": 0.664,
+      "mvi": 1.239,
+      "legs": [
+        {
+          "id": "fra-swe-r32_dnb_a",
+          "bet": "【平局退款】瑞典 不败",
+          "odds": 7,
+          "prob": 0.21126760563380279,
+          "mvi": 1.4788732394366195,
+          "ev": 0.479,
+          "market": "平局退款",
+          "match": "法国 vs 瑞典",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        },
+        {
+          "id": "mex-ecu-r32_h",
+          "bet": "【胜平负】墨西哥 主胜",
+          "odds": 2.25,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0.125,
+          "market": "胜平负",
+          "match": "墨西哥 vs 厄瓜多尔",
+          "group": "Round of 32",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 10.4,
+        "mvi": 14.9,
+        "hit": 8,
+        "risk": 6.8,
+        "eff": 9.8,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 3.6,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 4.5,
+        "cert": 0,
+        "weak": -1,
+        "struct": 0
+      },
+      "tier": "高赔率冲击型（弱腿风险）",
+      "rationale": "2场组合[平局退款+胜平负]：瑞典 不败 + 墨西哥 主胜。强正EV，命中10.56%，评分82.2/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 9,
+      "score": 82.1,
+      "odds": 5.78,
+      "hitPct": 21.45,
+      "ev": 0.24,
+      "mvi": 1.052,
+      "legs": [
+        {
+          "id": "mex-ecu-r32_un2",
+          "bet": "【小2球】墨西哥 vs 厄瓜多尔",
+          "odds": 1.7,
+          "prob": 0.6499999999999999,
+          "mvi": 1.1049999999999998,
+          "ev": 0.105,
+          "market": "比分区间",
+          "match": "墨西哥 vs 厄瓜多尔",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "civ-nor-r32_d",
+          "bet": "【胜平负】科特迪瓦 vs 挪威 平局",
+          "odds": 3.4,
+          "prob": 0.33,
+          "mvi": 1,
+          "ev": 0.122,
+          "market": "胜平负",
+          "match": "科特迪瓦 vs 挪威",
+          "group": "Round of 32",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 6.9,
+        "mvi": 12.6,
+        "hit": 12,
+        "risk": 5,
+        "eff": 3.2,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.7,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 4.5,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[胜平负+比分区间]：墨西哥 vs 厄瓜多尔 + 科特迪瓦 vs 挪威 平局。强正EV，命中21.45%，评分82.1/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 10,
+      "score": 81.3,
+      "odds": 6.19,
+      "hitPct": 19,
+      "ev": 0.176,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "fra-swe-r32_u25",
+          "bet": "【小2.5球】法国 vs 瑞典",
+          "odds": 2.75,
+          "prob": 0.38,
+          "mvi": 1,
+          "ev": 0.045,
+          "market": "大小球",
+          "match": "法国 vs 瑞典",
           "group": "Round of 32",
           "type": "goals",
           "source": ""
@@ -850,11 +938,11 @@
         }
       ],
       "breakdown": {
-        "ev": 7.3,
+        "ev": 6.4,
         "mvi": 12,
-        "hit": 14,
+        "hit": 10,
         "risk": 5,
-        "eff": 2.4,
+        "eff": 3.4,
         "indep": 10,
         "div": 10,
         "corr": 0,
@@ -865,67 +953,12 @@
         "strat": 0,
         "valCap": 0,
         "qual": 4.5,
-        "cert": 5
+        "cert": 5,
+        "weak": 0,
+        "struct": 5
       },
-      "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[大小球+BTTS]：科特迪瓦 vs 挪威 + 墨西哥 vs 厄瓜多尔 双方进球=是。强正EV，命中30%，评分80.2/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 10,
-      "score": 79.2,
-      "odds": 18.7,
-      "hitPct": 9.75,
-      "ev": 0.823,
-      "mvi": 1.052,
-      "legs": [
-        {
-          "id": "mex-ecu-r32_un2",
-          "bet": "【小2球】墨西哥 vs 厄瓜多尔",
-          "odds": 1.7,
-          "prob": 0.6499999999999999,
-          "mvi": 1.1049999999999998,
-          "ev": 0.105,
-          "market": "比分区间",
-          "match": "墨西哥 vs 厄瓜多尔",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "fra-swe-r32_a",
-          "bet": "【胜平负】瑞典 客胜",
-          "odds": 11,
-          "prob": 0.15,
-          "mvi": 1,
-          "ev": 0.65,
-          "market": "胜平负",
-          "match": "法国 vs 瑞典",
-          "group": "Round of 32",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 11.2,
-        "mvi": 12.6,
-        "hit": 6,
-        "risk": 5,
-        "eff": 10,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.7,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 4.5,
-        "cert": 0
-      },
-      "tier": "价值收益型",
-      "rationale": "2场组合[胜平负+比分区间]：墨西哥 vs 厄瓜多尔 + 瑞典 客胜。强正EV，命中9.75%，评分79.2/100。",
+      "tier": "平衡收益型",
+      "rationale": "2场组合[大小球+BTTS]：法国 vs 瑞典 + 墨西哥 vs 厄瓜多尔 双方进球=是。强正EV，命中19%，评分81.3/100。",
       "comparisonNote": ""
     }
   ],
@@ -934,7 +967,7 @@
       "tier": "核心仓位（平衡收益型·2腿）",
       "portfolio": {
         "id": "best",
-        "score": 87.9,
+        "score": 90.9,
         "odds": 9,
         "ev": 0.864,
         "hitPct": 20.71,
@@ -972,38 +1005,38 @@
       "isCore": true
     },
     {
-      "tier": "辅助仓位（稳健收益型·2腿）",
+      "tier": "辅助仓位（平衡收益型·2腿）",
       "portfolio": {
         "id": "alt",
-        "score": 85,
-        "odds": 3.22,
-        "ev": 0.388,
-        "hitPct": 43.04,
+        "score": 87.7,
+        "odds": 10.2,
+        "ev": 0.923,
+        "hitPct": 18.85,
         "legs": [
           {
-            "id": "fra-swe-r32_un3",
-            "bet": "【小3球】法国 vs 瑞典",
-            "odds": 2.15,
-            "prob": 0.6026223931895397,
-            "mvi": 1.2956381453575103,
-            "ev": 0.296,
+            "id": "mex-ecu-r32_un2",
+            "bet": "【小2球】墨西哥 vs 厄瓜多尔",
+            "odds": 1.7,
+            "prob": 0.6499999999999999,
+            "mvi": 1.1049999999999998,
+            "ev": 0.105,
             "market": "比分区间",
-            "match": "法国 vs 瑞典",
+            "match": "墨西哥 vs 厄瓜多尔",
             "group": "Round of 32",
             "type": "goals_range",
             "source": ""
           },
           {
-            "id": "mex-ecu-r32_dnb_h",
-            "bet": "【平局退款】墨西哥 不败",
-            "odds": 1.5,
-            "prob": 0.7142857142857143,
-            "mvi": 1.0714285714285716,
-            "ev": 0.071,
-            "market": "平局退款",
-            "match": "墨西哥 vs 厄瓜多尔",
+            "id": "fra-swe-r32_d",
+            "bet": "【胜平负】法国 vs 瑞典 平局",
+            "odds": 6,
+            "prob": 0.29,
+            "mvi": 1,
+            "ev": 0.74,
+            "market": "胜平负",
+            "match": "法国 vs 瑞典",
             "group": "Round of 32",
-            "type": "safety",
+            "type": "direction",
             "source": ""
           }
         ]
@@ -1021,7 +1054,7 @@
   ],
   "bestPortfolio": {
     "tier": "平衡收益型",
-    "score": 87.9,
+    "score": 90.9,
     "odds": 9,
     "hitPct": 20.71,
     "ev": 0.864,
@@ -1070,12 +1103,14 @@
       "strat": 0.2,
       "valCap": 0,
       "qual": 4.5,
-      "cert": 4
+      "cert": 5,
+      "weak": 0,
+      "struct": 2
     },
-    "rationale": "2场组合[平局退款+胜平负]：墨西哥 不败 + 法国 vs 瑞典 平局。强正EV，命中20.71%，评分87.9/100。",
+    "rationale": "2场组合[平局退款+胜平负]：墨西哥 不败 + 法国 vs 瑞典 平局。强正EV，命中20.71%，评分90.9/100。",
     "decisionLogic": {
-      "whyBest": "综合评分领先2.9分；EV更高(+47.6%)",
-      "keyDifferentiator": "更高的期望值"
+      "whyBest": "综合评分领先3.2分；命中率更高(20.71% vs 18.85%)",
+      "keyDifferentiator": "更好的EV/风险/命中率综合平衡"
     }
   },
   "abandonedOpportunities": [
@@ -1640,11 +1675,184 @@
       ]
     }
   ],
+  "scoreParlays": [
+    {
+      "rank": 1,
+      "odds": 35.8,
+      "hitPct": 2.68,
+      "ev": -0.041,
+      "anchor": {
+        "bet": "法国 vs 瑞典",
+        "odds": 2.75,
+        "prob": 38,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "科特迪瓦 vs 挪威",
+        "bet": "2:1",
+        "odds": 13,
+        "prob": 7.1
+      },
+      "rationale": "锚⚓法国 vs 瑞典(38%) × 波胆🎯2:1(7.1%) → 35.8x, 命中2.7%"
+    },
+    {
+      "rank": 2,
+      "odds": 30,
+      "hitPct": 3.76,
+      "ev": 0.127,
+      "anchor": {
+        "bet": "科特迪瓦 不败",
+        "odds": 2.5,
+        "prob": 41.8,
+        "market": "平局退款"
+      },
+      "score": {
+        "match": "法国 vs 瑞典",
+        "bet": "1:1",
+        "odds": 12,
+        "prob": 9
+      },
+      "rationale": "锚⚓科特迪瓦 不败(42%) × 波胆🎯1:1(9.0%) → 30.0x, 命中3.8%"
+    },
+    {
+      "rank": 3,
+      "odds": 28,
+      "hitPct": 4.25,
+      "ev": 0.189,
+      "anchor": {
+        "bet": "法国 vs 瑞典",
+        "odds": 2.15,
+        "prob": 60.3,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "科特迪瓦 vs 挪威",
+        "bet": "2:1",
+        "odds": 13,
+        "prob": 7.1
+      },
+      "rationale": "锚⚓法国 vs 瑞典(60%) × 波胆🎯2:1(7.1%) → 27.9x, 命中4.3%"
+    },
+    {
+      "rank": 4,
+      "odds": 27,
+      "hitPct": 4.49,
+      "ev": 0.214,
+      "anchor": {
+        "bet": "墨西哥 主胜",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "胜平负"
+      },
+      "score": {
+        "match": "法国 vs 瑞典",
+        "bet": "1:1",
+        "odds": 12,
+        "prob": 9
+      },
+      "rationale": "锚⚓墨西哥 主胜(50%) × 波胆🎯1:1(9.0%) → 27.0x, 命中4.5%"
+    },
+    {
+      "rank": 5,
+      "odds": 27,
+      "hitPct": 4.49,
+      "ev": 0.214,
+      "anchor": {
+        "bet": "墨西哥 vs 厄瓜多尔 双方进球=是",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "BTTS"
+      },
+      "score": {
+        "match": "法国 vs 瑞典",
+        "bet": "1:1",
+        "odds": 12,
+        "prob": 9
+      },
+      "rationale": "锚⚓墨西哥 vs 厄瓜多尔 双方进球=是(50%) × 波胆🎯1:1(9.0%) → 27.0x, 命中4.5%"
+    },
+    {
+      "rank": 6,
+      "odds": 29.3,
+      "hitPct": 3.53,
+      "ev": 0.033,
+      "anchor": {
+        "bet": "墨西哥 主胜",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "胜平负"
+      },
+      "score": {
+        "match": "科特迪瓦 vs 挪威",
+        "bet": "2:1",
+        "odds": 13,
+        "prob": 7.1
+      },
+      "rationale": "锚⚓墨西哥 主胜(50%) × 波胆🎯2:1(7.1%) → 29.3x, 命中3.5%"
+    },
+    {
+      "rank": 7,
+      "odds": 29.3,
+      "hitPct": 3.53,
+      "ev": 0.033,
+      "anchor": {
+        "bet": "墨西哥 vs 厄瓜多尔 双方进球=是",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "BTTS"
+      },
+      "score": {
+        "match": "科特迪瓦 vs 挪威",
+        "bet": "2:1",
+        "odds": 13,
+        "prob": 7.1
+      },
+      "rationale": "锚⚓墨西哥 vs 厄瓜多尔 双方进球=是(50%) × 波胆🎯2:1(7.1%) → 29.3x, 命中3.5%"
+    },
+    {
+      "rank": 8,
+      "odds": 22.9,
+      "hitPct": 5.39,
+      "ev": 0.236,
+      "anchor": {
+        "bet": "科特迪瓦 vs 挪威",
+        "odds": 1.909,
+        "prob": 60,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "法国 vs 瑞典",
+        "bet": "1:1",
+        "odds": 12,
+        "prob": 9
+      },
+      "rationale": "锚⚓科特迪瓦 vs 挪威(60%) × 波胆🎯1:1(9.0%) → 22.9x, 命中5.4%"
+    },
+    {
+      "rank": 9,
+      "odds": 26.1,
+      "hitPct": 4.14,
+      "ev": 0.081,
+      "anchor": {
+        "bet": "法国 vs 瑞典",
+        "odds": 2.75,
+        "prob": 38,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "墨西哥 vs 厄瓜多尔",
+        "bet": "2:0",
+        "odds": 9.5,
+        "prob": 10.9
+      },
+      "rationale": "锚⚓法国 vs 瑞典(38%) × 波胆🎯2:0(10.9%) → 26.1x, 命中4.1%"
+    }
+  ],
   "finalVerdict": {
     "verdict": "今日最佳：平衡收益型组合 9x",
-    "reason": "墨西哥 不败 + 法国 vs 瑞典 平局。Portfolio Score=87.9/100，EV=+86.4%，命中率20.71%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
+    "reason": "墨西哥 不败 + 法国 vs 瑞典 平局。Portfolio Score=90.9/100，EV=+86.4%，命中率20.71%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
     "bestPortfolio": {
-      "score": 87.9,
+      "score": 90.9,
       "odds": 9,
       "legs": [
         {
@@ -1717,7 +1925,7 @@
   },
   "stats": {
     "totalCombinations": 296,
-    "topScore": 87.9,
+    "topScore": 90.9,
     "scoredCount": 296,
     "byMarket": {
       "胜平负": 5,

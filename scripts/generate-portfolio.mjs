@@ -1222,6 +1222,44 @@ function scorePortfolio(legs, strategyWeights = {}) {
   else if (hitPct >= 2) hitScore = 2
   else hitScore = 1
 
+  // 3.5 V5.2: 最弱腿质检 (0-5分扣减)
+  //     核心原则：串关可以有一条"卫星腿"（25-35%）搭一条"锚定腿"（>50%），
+  //     但不能全是弱腿。惩罚的是极端情况（<25%），不是合理的投注结构。
+  const minLegProb = Math.min(...legs.map(l => l.prob))
+  const maxLegProb = Math.max(...legs.map(l => l.prob))
+  const weakLegs = legs.filter(l => l.prob < 0.25).length
+  let weakestLegPenalty = 0
+  if (minLegProb < 0.15) weakestLegPenalty = 6             // 某腿<15%：纯刮彩票
+  else if (minLegProb < 0.20) weakestLegPenalty = 4         // 某腿<20%：严重依赖运气
+  else if (minLegProb < 0.25 && weakLegs >= 2) weakestLegPenalty = 3  // 两条都<25%
+  else if (minLegProb < 0.25) weakestLegPenalty = 1         // 一条25%以下，轻微扣分
+
+  // 3.6 V5.2: 锚定结构奖励 (0-5分)
+  //     "一条锚定腿(≥50%) + 一条价值腿(25-50%)"是经典的串关结构
+  const anchorLegs = legs.filter(l => l.prob >= 0.50).length
+  const valueLegs = legs.filter(l => l.prob >= 0.25 && l.prob < 0.50).length
+  const allProbable = legs.every(l => l.prob >= 0.25) && minLegProb >= 0.30
+  let structureBonus = 0
+  if (anchorLegs >= 1 && valueLegs >= 1 && weakLegs === 0 && allProbable) {
+    structureBonus = 5  // 经典锚定结构：一条稳腿+一条价值腿
+  } else if (anchorLegs >= 2 && valueLegs >= 1) {
+    structureBonus = 4  // 双锚+一价值：非常稳健
+  } else if (allProbable && legs.length >= 3) {
+    structureBonus = 3  // 三条腿都≥30%：均衡三腿
+  } else if (anchorLegs >= 1 && valueLegs >= 1) {
+    structureBonus = 2  // 锚定结构但有弱腿
+  }
+
+  // 3.7 V5.2: 甜点区溢价 (0-5分)
+  let certaintyPremium = 0
+  if (hitPct >= 18 && hitPct <= 40 && compOdds >= 6 && compOdds <= 20 && minLegProb >= 0.25) {
+    certaintyPremium = 5  // 黄金甜点：命中率+赔率+最弱腿都在合理区间
+  } else if (hitPct >= 15 && compOdds >= 5 && minLegProb >= 0.25) {
+    certaintyPremium = 3  // 白银甜点
+  } else if (hitPct >= 25 && compOdds >= 3 && minLegProb >= 0.35) {
+    certaintyPremium = 2  // 高确定性但赔率偏低（如之前的 5-6x）
+  }
+
   // 波胆组合：命中率低是本质特征，不补偿（避免过度推波胆）
   const scoreLegs = legs.filter(c => c.market === '波胆')
   const highMviScoreLegs = scoreLegs.filter(c => c.mvi >= 1.15)
@@ -1317,16 +1355,7 @@ function scorePortfolio(legs, strategyWeights = {}) {
   const qualContradictions = legs.filter(l => l._qualFlag === 'qualitative_goals_contradiction').length
   if (qualContradictions > 0) qualitativeScore = Math.max(0, qualitativeScore - qualContradictions * 1.5)
 
-  // 15. V5.2新增: 确定性溢价 (0-5分)
-  // 奖励"赔率合理+命中率合格"的串关。不奖励纯安全低赔（odds<3），也不奖励纯彩票（hitRate<15%）
-  let certaintyPremium = 0
-  if (hitPct >= 25 && compOdds >= 3) certaintyPremium = 5        // 甜点区：高确定性+合理赔率
-  else if (hitPct >= 20 && compOdds >= 4) certaintyPremium = 4
-  else if (hitPct >= 25) certaintyPremium = 3                    // 高确定性但赔率偏低
-  else if (hitPct >= 15 && compOdds >= 6) certaintyPremium = 2
-  else if (hitPct >= 10 && compOdds >= 8) certaintyPremium = 1
-
-  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus + qualitativeScore + certaintyPremium - corrPenalty - specialRisk - externalRiskPenalty
+  let total = evScore + mviScore + hitScore + riskScore + effScore + matchIndScore + marketDivScore + stabilityScore + dataConsistencyScore + strategyBonus + valueCaptureBonus + qualitativeScore + structureBonus + certaintyPremium - weakestLegPenalty - corrPenalty - specialRisk - externalRiskPenalty
   total = Math.max(0, Math.min(100, total))
 
   return {
@@ -1336,6 +1365,7 @@ function scorePortfolio(legs, strategyWeights = {}) {
     compEV: Math.round(compEV * 1000) / 1000,
     avgMVI: Math.round(avgMVI * 1000) / 1000,
     hitPct: Math.round(hitPct * 100) / 100,
+    minLegProb: Math.round(minLegProb * 1000) / 1000,
     n,
     markets: [...markets],
     breakdown: {
@@ -1355,18 +1385,24 @@ function scorePortfolio(legs, strategyWeights = {}) {
       valCap: Math.round(valueCaptureBonus * 10) / 10,
       qual: Math.round(qualitativeScore * 10) / 10,
       cert: Math.round(certaintyPremium * 10) / 10,
+      weak: -Math.round(weakestLegPenalty * 10) / 10,
+      struct: Math.round(structureBonus * 10) / 10,
     },
   }
 }
 
-function classifyTier(odds, hitPct = 0) {
-  // V5.2: 确定性优先 — 当命中率≥25%时升格为"确定性优先"型
-  if (hitPct >= 25) {
+function classifyTier(odds, hitPct = 0, minLegProb = 0) {
+  // V5.2: 确定性优先 — 命中率≥25%且最弱腿≥30%才算真确定性
+  if (hitPct >= 25 && minLegProb >= 0.35) {
     if (odds <= 5) return '确定性优先（稳健）'
     if (odds <= 15) return '确定性优先（平衡）'
-    if (odds <= 30) return '确定性优先（进取）'
     return '确定性优先'
   }
+  if (hitPct >= 20 && minLegProb >= 0.30) {
+    if (odds <= 8) return '均衡收益型'
+    if (odds <= 20) return '均衡收益型'
+  }
+  if (minLegProb < 0.25) return '高赔率冲击型（弱腿风险）'
   if (odds <= 5) return '稳健收益型'
   if (odds <= 12) return '平衡收益型'
   if (odds <= 25) return '价值收益型'
@@ -1514,7 +1550,7 @@ function buildFinalVerdict(scored, accepted, yesterday) {
     }
   }
   const best = scored[0]
-  const tier = classifyTier(best.compOdds, best.hitPct)
+  const tier = classifyTier(best.compOdds, best.hitPct, best.minLegProb)
   const bestLegsDesc = best.legs.map(l => l.bet.replace(/【.*?】/g, '').slice(0, 30)).join(' + ')
   const evDesc = best.compEV > 0.15 ? '正期望值显著，优先配置。' : best.compEV > 0.05 ? '正期望值可接受，建议适量配置。' : '边际正期望值，控制仓位。'
 
@@ -1530,6 +1566,74 @@ function buildFinalVerdict(scored, accepted, yesterday) {
     bestPortfolio: { score: best.score, odds: best.compOdds, legs: best.legs },
     oddsAssessment: oddsNote,
   }
+}
+
+// ===================================================================
+// V5.2 新增: 锚定×波胆 串关推荐
+// ===================================================================
+/**
+ * 从 remote.json 提取所有 Bet365 真实波胆赔率（不经过 EV 过滤）。
+ * 返回 { [mid]: [{ score, prob, odd }] }
+ */
+function extractCorrectScores(remote, market) {
+  const tomorrowMatches = matchesByBJTDate(remote.matches || [], TOMORROW_BJT)
+  const result = {}
+  for (const m of tomorrowMatches) {
+    const mid = m.id
+    const pred = remote.predictions?.[mid] || {}
+    const odds = market.odds?.[mid] || {}
+    const realCS = odds.correctScore || {}
+    if (Object.keys(realCS).length === 0) continue // 无真实赔率则跳过
+    const top5 = pred.top5Scores || []
+    const scores = []
+    for (const s of top5.slice(0, 5)) {
+      const score = typeof s === 'string' ? s : s.score || ''
+      const scoreHyphen = score.replace(':', '-')
+      const csOdd = realCS[scoreHyphen]
+      const prob = typeof s === 'object' ? (s.probability || 0) : 0
+      if (csOdd && csOdd > 0 && prob >= 0.03) {
+        scores.push({ score, prob, odd: csOdd })
+      }
+    }
+    if (scores.length > 0) result[mid] = scores
+  }
+  return result
+}
+
+/**
+ * 构建「锚定腿 × 波胆」Top N 串关推荐。
+ * 锚定腿来自 accepted 池中 type !== 'score' 的高概率选项（prob ≥ 0.40）。
+ * 波胆来自 Bet365 真实赔率。
+ * 限制：每条腿来自不同比赛。
+ */
+function buildScoreParlays(accepted, remote, market, topN = 10) {
+  const csByMatch = extractCorrectScores(remote, market)
+  if (Object.keys(csByMatch).length < 2) return []
+
+  // 锚定腿候选：从 accepted 池中筛选 type !== 'score' 且 prob ≥ 0.38
+  const anchors = accepted.filter(c => c.market !== '波胆' && c.prob >= 0.38)
+  if (anchors.length === 0) return []
+
+  const combos = []
+  for (const anchor of anchors) {
+    for (const [csMid, scoreList] of Object.entries(csByMatch)) {
+      if (csMid === anchor.mid) continue // 不同比赛
+      for (const s of scoreList) {
+        const combProb = anchor.prob * s.prob
+        const combOdds = anchor.odds * s.odd
+        const combEV = combProb * combOdds - 1
+        combos.push({
+          anchor: { bet: anchor.bet, odds: anchor.odds, prob: anchor.prob, market: anchor.market, match: anchor.match },
+          score: { score: s.score, odds: s.odd, prob: s.prob, match: csMid },
+          combProb, combOdds, combEV,
+        })
+      }
+    }
+  }
+
+  // 按 odds × √(hit%) 排序
+  combos.sort((a, b) => (b.combOdds * Math.sqrt(b.combProb * 100)) - (a.combOdds * Math.sqrt(a.combProb * 100)))
+  return combos.slice(0, topN)
 }
 
 // ===================================================================
@@ -1692,6 +1796,9 @@ function main() {
     adjustments: prof.adjustments,
   }))
 
+  // ═══ V5.2: 锚定×波胆串关推荐 ═══
+  const scoreParlays = buildScoreParlays(accepted, remote, market, 10)
+
   const output = {
     version: '5.0',
     generatedAt: new Date().toISOString(),
@@ -1747,7 +1854,7 @@ function main() {
       mvi: p.avgMVI,
       legs: p.legs,
       breakdown: p.breakdown,
-      tier: classifyTier(p.compOdds, p.hitPct),
+      tier: classifyTier(p.compOdds, p.hitPct, p.minLegProb || 0),
       rationale: generateRationale(p),
       // V4: 前3名输出为什么优于后面的
       comparisonNote: i === 0 && scored[1]
@@ -1760,7 +1867,7 @@ function main() {
     // ④ 今日最佳Portfolio + 资金配置
     capitalAllocation: buildCapitalAllocation(topSelected, accepted),
     bestPortfolio: topSelected[0] ? {
-      tier: classifyTier(topSelected[0].compOdds),
+      tier: classifyTier(topSelected[0].compOdds, topSelected[0].hitPct, topSelected[0].minLegProb || 0),
       score: topSelected[0].score,
       odds: topSelected[0].compOdds,
       hitPct: topSelected[0].hitPct,
@@ -1783,7 +1890,31 @@ function main() {
     // ⑤ 今日主动放弃的机会（V4新增）
     abandonedOpportunities,
 
-    // ⑤ 今日最终结论
+    // ⑤.⑤ V5.2: 锚定×波胆串关推荐
+    scoreParlays: scoreParlays
+      .filter(p => p.combEV > -0.05)  // 只保留 EV ≥ -5%
+      .slice(0, 10)
+      .map((p, i) => ({
+      rank: i + 1,
+      odds: Math.round(p.combOdds * 10) / 10,
+      hitPct: Math.round(p.combProb * 10000) / 100,
+      ev: Math.round(p.combEV * 1000) / 1000,
+      anchor: {
+        bet: p.anchor.bet.replace(/【.*?】/g, ''),
+        odds: p.anchor.odds,
+        prob: Math.round(p.anchor.prob * 1000) / 10,
+        market: p.anchor.market,
+      },
+      score: {
+        match: cn(remote.matches?.find(m => m.id === p.score.match)?.homeTeam || '') + ' vs ' + cn(remote.matches?.find(m => m.id === p.score.match)?.awayTeam || ''),
+        bet: p.score.score,
+        odds: p.score.odds,
+        prob: Math.round(p.score.prob * 1000) / 10,
+      },
+      rationale: `锚⚓${p.anchor.bet.replace(/【.*?】/g, '').slice(0, 18)}(${(p.anchor.prob*100).toFixed(0)}%) × 波胆🎯${p.score.score}(${(p.score.prob*100).toFixed(1)}%) → ${(p.combOdds).toFixed(1)}x, 命中${(p.combProb*100).toFixed(1)}%`,
+    })),
+
+    // ⑥ 今日最终结论
     finalVerdict: buildFinalVerdict(topSelected, accepted, yesterday),
 
     // 兼容旧结构
@@ -1815,7 +1946,7 @@ function main() {
 
   writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2), 'utf-8')
   console.log(`\n✅ 已写入 ${OUTPUT_PATH}`)
-  console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(topSelected[0]?.compOdds)} ${topSelected[0]?.compOdds}x`)
+  console.log(`   组合数: ${portfolios.length} | 最高分: ${scored[0]?.score}/100 | 最佳: ${classifyTier(topSelected[0]?.compOdds, topSelected[0]?.hitPct, topSelected[0]?.minLegProb)} ${topSelected[0]?.compOdds}x`)
   console.log(`   主动放弃: ${rejected.length}投注项 + ${abandonedMatches.length}场`)
   console.log('   V5.0特性: 投资委员会审查(定性+定量) | 矛盾检查 | 3日滑动平均 | 对数EV衰减 | 去集中化v2 | 资金分散')
 }
@@ -1837,7 +1968,7 @@ function buildCapitalAllocation(scored, accepted) {
 
   // 核心仓位
   allocations.push({
-    tier: `核心仓位（${classifyTier(best.compOdds)}·${best.n}腿）`,
+    tier: `核心仓位（${classifyTier(best.compOdds, best.hitPct, best.minLegProb)}·${best.n}腿）`,
     portfolio: { id: 'best', score: best.score, odds: best.compOdds, ev: best.compEV, hitPct: best.hitPct, legs: best.legs },
     pct: Math.round(basePct),
     amount: Math.round(BUDGET * basePct / 100 * 100) / 100,
@@ -1858,7 +1989,7 @@ function buildCapitalAllocation(scored, accepted) {
   if (alt) {
     const altPct = Math.max(15, Math.round(basePct * 0.6))
     allocations.push({
-      tier: `辅助仓位（${classifyTier(alt.compOdds)}·${alt.n}腿）`,
+      tier: `辅助仓位（${classifyTier(alt.compOdds, alt.hitPct, alt.minLegProb)}·${alt.n}腿）`,
       portfolio: { id: 'alt', score: alt.score, odds: alt.compOdds, ev: alt.compEV, hitPct: alt.hitPct, legs: alt.legs },
       pct: altPct,
       amount: Math.round(BUDGET * altPct / 100 * 100) / 100,
