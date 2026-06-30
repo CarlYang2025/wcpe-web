@@ -89,6 +89,22 @@ const TEAM_NAME_MAP = {
   'Colombia': 'Colombia',
 }
 
+/** 缓存 remote.json 的 matchId 列表，用于精确 ID 匹配 */
+let _knownMatchIds = null
+function getKnownMatchIds() {
+  if (_knownMatchIds !== null) return _knownMatchIds
+  try {
+    const remotePath = resolve(__dirname, '../src/data/remote.json')
+    if (existsSync(remotePath)) {
+      const remote = JSON.parse(readFileSync(remotePath, 'utf-8'))
+      _knownMatchIds = (remote.matches || []).map(m => m.id)
+    } else {
+      _knownMatchIds = []
+    }
+  } catch { _knownMatchIds = [] }
+  return _knownMatchIds
+}
+
 /** 已完赛的比赛也需要（用于回测 MVI），先构建完整映射 */
 function normalizeTeam(name) {
   // 直接映射
@@ -389,14 +405,30 @@ function findMatchId(home, away) {
   const awayAbbr = mapping[normalizeTeam(away)]
   if (!homeAbbr || !awayAbbr) return null
 
-  // Try both API order and reversed order (which one is home varies)
-  const candidates = [
-    `${homeAbbr}-${awayAbbr}-3`,
-    `${awayAbbr}-${homeAbbr}-3`,
-    `${homeAbbr}-${awayAbbr}-2`,
-    `${homeAbbr}-${awayAbbr}`,
-  ]
-  return candidates[0] // Use the first candidate matching pattern
+  // 优先：从 remote.json 已知 matchId 中精确匹配（轮次后缀自动正确）
+  const knownIds = getKnownMatchIds()
+  for (const mid of knownIds) {
+    // matchId 格式: teamA-teamB-suffix，检查是否包含双方缩写
+    const prefix = mid.replace(/-r\d+$|-r\d+po$|-\d+po$|-\d+$|-qf$|-sf$|-f$/, '')
+    const teams = prefix.split('-')
+    if (teams.length >= 2) {
+      if ((teams[0] === homeAbbr && teams[1] === awayAbbr) ||
+          (teams[0] === awayAbbr && teams[1] === homeAbbr)) {
+        return mid
+      }
+    }
+  }
+
+  // 回退：生成候选（覆盖小组赛到淘汰赛各阶段）
+  const suffixes = ['-r32', '-r16', '-qf', '-sf', '-f', '-3po', '-3', '-2', '-1', '']
+  for (const suffix of suffixes) {
+    const id1 = `${homeAbbr}-${awayAbbr}${suffix}`
+    if (knownIds.includes(id1)) return id1
+    const id2 = `${awayAbbr}-${homeAbbr}${suffix}`
+    if (knownIds.includes(id2)) return id2
+  }
+  // 真实回退：使用最常见的模式
+  return `${homeAbbr}-${awayAbbr}-3`
 }
 
 // ============================================================
