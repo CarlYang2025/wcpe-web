@@ -1,14 +1,14 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-06-30T15:29:48.755Z",
+  "generatedAt": "2026-07-01T13:56:41.290Z",
   "targetDate": "7/1",
-  "targetDateDisplay": "2026年7月1日（周三）",
+  "targetDateDisplay": "2026年7月2日（周四）",
   "targetMatchIds": [
     "civ-nor-r32",
     "fra-swe-r32",
     "mex-ecu-r32"
   ],
-  "oddsFreshness": "2026-06-30T14:06:49.467Z",
+  "oddsFreshness": "2026-07-01T13:55:57.004Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "🟡 机会有限",
@@ -1905,7 +1905,7 @@
     "oddsAssessment": "⚠️ 综合赔率低于15倍，但组合综合投资价值最高。"
   },
   "yesterdayReview": {
-    "date": "6/30",
+    "date": "7/1",
     "summary": {
       "n": 3,
       "dirHits": 2,
