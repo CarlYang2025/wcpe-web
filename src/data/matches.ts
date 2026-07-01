@@ -582,9 +582,9 @@ export const matches: Match[] = [
   { id: 'bra-jpn-r32', date: '2026-06-29', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 19, homeTeam: 'Brazil', awayTeam: 'Japan', venue: 'NRG Stadium, Houston', kickoff: '6/30 01:00', localKickoff: '6/29 12:00', localTZ: 'CT', status: 'finished', homeScore: 2, awayScore: 1 },
 
   // ---- 6月30日 (周二) Round of 32 第20比赛日 (北京时间7月1日) ----
-  { id: 'civ-nor-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Ivory Coast', awayTeam: 'Norway', venue: 'AT&T Stadium, Dallas', kickoff: '7/1 01:00', localKickoff: '6/30 12:00', localTZ: 'CT', status: 'upcoming' },
-  { id: 'fra-swe-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'France', awayTeam: 'Sweden', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/1 05:00', localKickoff: '6/30 17:00', localTZ: 'ET', status: 'upcoming' },
-  { id: 'mex-ecu-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Mexico', awayTeam: 'Ecuador', venue: 'Estadio Azteca, Mexico City', kickoff: '7/1 09:00', localKickoff: '6/30 21:00', localTZ: 'CT', status: 'upcoming' },
+  { id: 'civ-nor-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Ivory Coast', awayTeam: 'Norway', venue: 'AT&T Stadium, Dallas', kickoff: '7/1 01:00', localKickoff: '6/30 12:00', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 2 },
+  { id: 'fra-swe-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'France', awayTeam: 'Sweden', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/1 05:00', localKickoff: '6/30 17:00', localTZ: 'ET', status: 'finished', homeScore: 3, awayScore: 0 },
+  { id: 'mex-ecu-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Mexico', awayTeam: 'Ecuador', venue: 'Estadio Azteca, Mexico City', kickoff: '7/1 09:00', localKickoff: '6/30 21:00', localTZ: 'CT', status: 'finished', homeScore: 2, awayScore: 0 },
 ];
 
 // ========== 预测数据 ==========
