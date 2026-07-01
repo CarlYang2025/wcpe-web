@@ -585,6 +585,21 @@ export const matches: Match[] = [
   { id: 'civ-nor-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Ivory Coast', awayTeam: 'Norway', venue: 'AT&T Stadium, Dallas', kickoff: '7/1 01:00', localKickoff: '6/30 12:00', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 2 },
   { id: 'fra-swe-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'France', awayTeam: 'Sweden', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/1 05:00', localKickoff: '6/30 17:00', localTZ: 'ET', status: 'finished', homeScore: 3, awayScore: 0 },
   { id: 'mex-ecu-r32', date: '2026-06-30', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 20, homeTeam: 'Mexico', awayTeam: 'Ecuador', venue: 'Estadio Azteca, Mexico City', kickoff: '7/1 09:00', localKickoff: '6/30 21:00', localTZ: 'CT', status: 'finished', homeScore: 2, awayScore: 0 },
+
+  // ---- 7月1日 (周三) Round of 32 第21比赛日 (北京时间7月2日) ----
+  { id: 'eng-cod-r32', date: '2026-07-01', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 21, homeTeam: 'England', awayTeam: 'DR Congo', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '7/2 00:00', localKickoff: '7/1 12:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'bel-sen-r32', date: '2026-07-01', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 21, homeTeam: 'Belgium', awayTeam: 'Senegal', venue: 'Lumen Field, Seattle', kickoff: '7/2 04:00', localKickoff: '7/1 13:00', localTZ: 'PT', status: 'upcoming' },
+  { id: 'usa-bih-r32', date: '2026-07-01', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 21, homeTeam: 'USA', awayTeam: 'Bosnia', venue: "Levi's Stadium, Santa Clara", kickoff: '7/2 08:00', localKickoff: '7/1 17:00', localTZ: 'PT', status: 'upcoming' },
+
+  // ---- 7月2日 (周四) Round of 32 第22比赛日 (北京时间7月3日) ----
+  { id: 'esp-aut-r32', date: '2026-07-02', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 22, homeTeam: 'Spain', awayTeam: 'Austria', venue: 'SoFi Stadium, Los Angeles', kickoff: '7/3 03:00', localKickoff: '7/2 12:00', localTZ: 'PT', status: 'upcoming' },
+  { id: 'por-cro-r32', date: '2026-07-02', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 22, homeTeam: 'Portugal', awayTeam: 'Croatia', venue: 'BMO Field, Toronto', kickoff: '7/3 06:00', localKickoff: '7/2 19:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'sui-alg-r32', date: '2026-07-02', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 22, homeTeam: 'Switzerland', awayTeam: 'Algeria', venue: 'BC Place, Vancouver', kickoff: '7/3 11:00', localKickoff: '7/2 20:00', localTZ: 'PT', status: 'upcoming' },
+
+  // ---- 7月3日 (周五) Round of 32 第23比赛日 (北京时间7月4日) ----
+  { id: 'aus-egy-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Australia', awayTeam: 'Egypt', venue: 'AT&T Stadium, Dallas', kickoff: '7/4 02:00', localKickoff: '7/3 13:00', localTZ: 'CT', status: 'upcoming' },
+  { id: 'arg-cpv-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Argentina', awayTeam: 'Cape Verde', venue: 'Hard Rock Stadium, Miami', kickoff: '7/4 06:00', localKickoff: '7/3 18:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'col-gha-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Colombia', awayTeam: 'Ghana', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/4 09:30', localKickoff: '7/3 20:30', localTZ: 'CT', status: 'upcoming' },
 ];
 
 // ========== 预测数据 ==========
