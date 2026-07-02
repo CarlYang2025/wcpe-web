@@ -1,261 +1,124 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-01T14:43:03.147Z",
-  "targetDate": "7/2",
-  "targetDateDisplay": "2026年7月2日（周四）",
+  "generatedAt": "2026-07-02T13:55:58.669Z",
+  "targetDate": "7/3",
+  "targetDateDisplay": "2026年7月3日（周五）",
   "targetMatchIds": [
-    "eng-cod-r32",
-    "bel-sen-r32",
-    "usa-bih-r32"
+    "esp-aut-r32",
+    "por-cro-r32",
+    "sui-alg-r32"
   ],
-  "oddsFreshness": "2026-07-01T14:42:27.399Z",
+  "oddsFreshness": "2026-07-02T13:55:30.662Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "✅ 值得下注",
-    "investableCount": 25,
-    "highMviCount": 8,
-    "positiveEvCount": 18,
+    "investableCount": 32,
+    "highMviCount": 9,
+    "positiveEvCount": 16,
     "suggestedExposure": "70-80%",
-    "summary": "3场比赛，25个可投注项（18个正EV），8个高MVI信号。涵盖6种市场类型。",
+    "summary": "3场比赛，32个可投注项（16个正EV），9个高MVI信号。涵盖7种市场类型。",
     "highlights": [
-      "美国 vs 波黑 为本日最强MVI信号(2.05)",
+      "奥地利 不败 为本日最强MVI信号(3.00)",
       "昨日方向准确率正常(100%)，已动态调整策略权重",
-      "已自动排除40个低质量投注项+0场高风险比赛",
-      "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、比分区间"
+      "已自动排除34个低质量投注项+0场高风险比赛",
+      "多市场覆盖：胜平负、大小球、BTTS、平局退款、波胆、比分区间、双重机会"
     ]
   },
   "qualitativeReport": [
     {
-      "matchId": "eng-cod-r32",
-      "matchDisplay": "英格兰 vs 刚果(金)",
+      "matchId": "esp-aut-r32",
+      "matchDisplay": "西班牙 vs 奥地利",
       "flags": [
-        "injury_concern",
-        "form_concern"
+        "form_concern",
+        "factor_weakness"
       ],
-      "thesis": "伤病缺阵影响阵容；状态隐患: ⚠️ 英格兰右后卫危机(Livramento伤退/",
-      "qualitativeConfidence": 0.95,
+      "thesis": "状态隐患: ⚠️ 奥地利3-3阿尔及利亚展示强大攻击火力——奥；因子短板: 战术匹配",
+      "qualitativeConfidence": 1,
       "adjustments": {
-        "injuryPenalty": 0.05,
+        "weakFactors": [
+          "tacticalScore"
+        ],
         "lessonsApplied": []
       }
     },
     {
-      "matchId": "bel-sen-r32",
-      "matchDisplay": "比利时 vs 塞内加尔",
-      "flags": [
-        "injury_concern"
-      ],
-      "thesis": "伤病缺阵影响阵容",
-      "qualitativeConfidence": 0.95,
+      "matchId": "por-cro-r32",
+      "matchDisplay": "葡萄牙 vs 克罗地亚",
+      "flags": [],
+      "thesis": "",
+      "qualitativeConfidence": 1,
       "adjustments": {
-        "injuryPenalty": 0.05,
-        "marketGoalsLean": "under",
         "lessonsApplied": []
       }
     },
     {
-      "matchId": "usa-bih-r32",
-      "matchDisplay": "美国 vs 波黑",
+      "matchId": "sui-alg-r32",
+      "matchDisplay": "瑞士 vs 阿尔及利亚",
       "flags": [
-        "injury_concern",
         "form_concern"
       ],
-      "thesis": "伤病缺阵影响阵容；状态隐患: ⚠️ Pulisic小腿伤势恢复后仅出场32分钟—",
-      "qualitativeConfidence": 0.95,
+      "thesis": "状态隐患: ⚠️ 瑞士进攻创造力有限——小组赛仅凭Embolo",
+      "qualitativeConfidence": 1,
       "adjustments": {
-        "injuryPenalty": 0.05,
-        "marketGoalsLean": "under",
         "lessonsApplied": []
       }
     }
   ],
   "investmentPool": [
     {
-      "match": "美国 vs 波黑",
+      "match": "西班牙 vs 奥地利",
+      "market": "平局退款",
+      "bet": "【平局退款】奥地利 不败",
+      "odds": 9,
+      "ev": 2,
+      "mvi": 3,
+      "prob": 0.3333333333333333,
+      "reason": "高错价信号",
+      "type": "safety",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "胜平负",
+      "bet": "【胜平负】奥地利 客胜",
+      "odds": 11,
+      "ev": 1.64,
+      "mvi": 1,
+      "prob": 0.24,
+      "reason": "正EV",
+      "type": "direction",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "波胆",
+      "bet": "【波胆】西班牙 vs 奥地利 比分 2:2",
+      "odds": 23,
+      "ev": 0.656,
+      "mvi": 1.656,
+      "prob": 0.072,
+      "reason": "高错价信号",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "葡萄牙 vs 克罗地亚",
       "market": "比分区间",
-      "bet": "【小2球】美国 vs 波黑",
+      "bet": "【小2球】葡萄牙 vs 克罗地亚",
       "odds": 3.3,
-      "ev": 1.046,
-      "mvi": 2.0460000000000003,
-      "prob": 0.6200000000000001,
+      "ev": 0.584,
+      "mvi": 1.5839999999999999,
+      "prob": 0.48,
       "reason": "高错价信号",
       "type": "goals_range",
       "source": ""
     },
     {
-      "match": "英格兰 vs 刚果(金)",
+      "match": "西班牙 vs 奥地利",
       "market": "胜平负",
-      "bet": "【胜平负】刚果(金) 客胜",
-      "odds": 15,
-      "ev": 0.65,
-      "mvi": 1,
-      "prob": 0.11,
-      "reason": "正EV",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "美国 vs 波黑",
-      "market": "平局退款",
-      "bet": "【平局退款】波黑 不败",
+      "bet": "【胜平负】西班牙 vs 奥地利 平局",
       "odds": 5.5,
-      "ev": 0.393,
-      "mvi": 1.3933333333333333,
-      "prob": 0.25333333333333335,
-      "reason": "高错价信号",
-      "type": "safety",
-      "source": ""
-    },
-    {
-      "match": "英格兰 vs 刚果(金)",
-      "market": "平局退款",
-      "bet": "【平局退款】刚果(金) 不败",
-      "odds": 10,
-      "ev": 0.392,
-      "mvi": 1.3924050632911391,
-      "prob": 0.13924050632911392,
-      "reason": "高错价信号",
-      "type": "safety",
-      "source": ""
-    },
-    {
-      "match": "美国 vs 波黑",
-      "market": "胜平负",
-      "bet": "【胜平负】波黑 客胜",
-      "odds": 7.5,
-      "ev": 0.425,
-      "mvi": 1,
-      "prob": 0.19,
-      "reason": "正EV",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "英格兰 vs 刚果(金)",
-      "market": "比分区间",
-      "bet": "【小2球】英格兰 vs 刚果(金)",
-      "odds": 2.35,
-      "ev": 0.363,
-      "mvi": 1.3630000000000007,
-      "prob": 0.5800000000000003,
-      "reason": "高错价信号",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "美国 vs 波黑",
-      "market": "比分区间",
-      "bet": "【小3球】美国 vs 波黑",
-      "odds": 1.65,
-      "ev": 0.349,
-      "mvi": 1.3486403032253271,
-      "prob": 0.8173577595305013,
-      "reason": "高错价信号",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "英格兰 vs 刚果(金)",
-      "market": "BTTS",
-      "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-      "odds": 2.75,
-      "ev": 0.375,
-      "mvi": 1,
-      "prob": 0.5,
-      "reason": "正EV",
-      "type": "btts",
-      "source": ""
-    },
-    {
-      "match": "美国 vs 波黑",
-      "market": "比分区间",
-      "bet": "【小2.5球】美国 vs 波黑",
-      "odds": 2.1,
-      "ev": 0.302,
-      "mvi": 1.3020000000000003,
-      "prob": 0.6200000000000001,
-      "reason": "高错价信号",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "美国 vs 波黑",
-      "market": "大小球",
-      "bet": "【小2.5球】美国 vs 波黑",
-      "odds": 2.1,
-      "ev": 0.302,
-      "mvi": 1,
-      "prob": 0.62,
-      "reason": "正EV",
-      "type": "goals",
-      "source": ""
-    },
-    {
-      "match": "美国 vs 波黑",
-      "market": "胜平负",
-      "bet": "【胜平负】美国 vs 波黑 平局",
-      "odds": 5,
-      "ev": 0.25,
-      "mvi": 1,
-      "prob": 0.25,
-      "reason": "正EV",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "比利时 vs 塞内加尔",
-      "market": "大小球",
-      "bet": "【小2.5球】比利时 vs 塞内加尔",
-      "odds": 1.909,
-      "ev": 0.241,
-      "mvi": 1,
-      "prob": 0.65,
-      "reason": "正EV",
-      "type": "goals",
-      "source": ""
-    },
-    {
-      "match": "美国 vs 波黑",
-      "market": "比分区间",
-      "bet": "【小3.5球】美国 vs 波黑",
-      "odds": 1.425,
-      "ev": 0.165,
-      "mvi": 1.1647348073309645,
-      "prob": 0.8173577595305013,
-      "reason": "高错价信号",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "英格兰 vs 刚果(金)",
-      "market": "比分区间",
-      "bet": "【小3球】英格兰 vs 刚果(金)",
-      "odds": 1.35,
-      "ev": 0.062,
-      "mvi": 1.0622994702812036,
-      "prob": 0.7868884965045952,
-      "reason": "正EV",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "英格兰 vs 刚果(金)",
-      "market": "胜平负",
-      "bet": "【胜平负】英格兰 vs 刚果(金) 平局",
-      "odds": 5,
-      "ev": 0.05,
-      "mvi": 1,
-      "prob": 0.21,
-      "reason": "正EV",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "比利时 vs 塞内加尔",
-      "market": "胜平负",
-      "bet": "【胜平负】塞内加尔 客胜",
-      "odds": 3.75,
-      "ev": 0.05,
+      "ev": 0.54,
       "mvi": 1,
       "prob": 0.28,
       "reason": "正EV",
@@ -263,35 +126,95 @@
       "source": ""
     },
     {
-      "match": "英格兰 vs 刚果(金)",
-      "market": "大小球",
-      "bet": "【小2.5球】英格兰 vs 刚果(金)",
-      "odds": 1.727,
-      "ev": 0.002,
-      "mvi": 1,
-      "prob": 0.5800000000000001,
-      "reason": "边际价值",
-      "type": "goals",
+      "match": "瑞士 vs 阿尔及利亚",
+      "market": "比分区间",
+      "bet": "【小2球】瑞士 vs 阿尔及利亚",
+      "odds": 2.25,
+      "ev": 0.238,
+      "mvi": 1.2375000000000007,
+      "prob": 0.5500000000000003,
+      "reason": "高错价信号",
+      "type": "goals_range",
       "source": ""
     },
     {
-      "match": "比利时 vs 塞内加尔",
-      "market": "平局退款",
-      "bet": "【平局退款】塞内加尔 不败",
-      "odds": 2.5,
-      "ev": 0,
-      "mvi": 1.0000000000000002,
-      "prob": 0.4000000000000001,
-      "reason": "边际价值",
-      "type": "safety",
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "波胆",
+      "bet": "【波胆】葡萄牙 vs 克罗地亚 比分 2:0",
+      "odds": 9,
+      "ev": 0.215,
+      "mvi": 1.215,
+      "prob": 0.135,
+      "reason": "高错价信号",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "比分区间",
+      "bet": "【小3球】西班牙 vs 奥地利",
+      "odds": 1.725,
+      "ev": 0.162,
+      "mvi": 1.1618115491438266,
+      "prob": 0.6735139415326531,
+      "reason": "高错价信号",
+      "type": "goals_range",
       "source": ""
     },
     {
-      "match": "比利时 vs 塞内加尔",
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "比分区间",
+      "bet": "【小3球】葡萄牙 vs 克罗地亚",
+      "odds": 1.625,
+      "ev": 0.14,
+      "mvi": 1.1402677291489196,
+      "prob": 0.7017032179377968,
+      "reason": "正EV",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "波胆",
+      "bet": "【波胆】西班牙 vs 奥地利 比分 2:1",
+      "odds": 9.5,
+      "ev": 0.121,
+      "mvi": 1.121,
+      "prob": 0.118,
+      "reason": "正EV",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "波胆",
+      "bet": "【波胆】葡萄牙 vs 克罗地亚 比分 3:0",
+      "odds": 15,
+      "ev": 0.08,
+      "mvi": 1.0799999999999998,
+      "prob": 0.072,
+      "reason": "正EV",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "波胆",
+      "bet": "【波胆】西班牙 vs 奥地利 比分 1:1",
+      "odds": 10,
+      "ev": 0.05,
+      "mvi": 1.0499999999999998,
+      "prob": 0.105,
+      "reason": "正EV",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "西班牙 vs 奥地利",
       "market": "BTTS",
-      "bet": "【BTTS】比利时 vs 塞内加尔 双方进球=否",
-      "odds": 2,
-      "ev": 0,
+      "bet": "【BTTS】西班牙 vs 奥地利 双方进球=是",
+      "odds": 2.05,
+      "ev": 0.025,
       "mvi": 1,
       "prob": 0.5,
       "reason": "边际价值",
@@ -299,45 +222,141 @@
       "source": ""
     },
     {
-      "match": "英格兰 vs 刚果(金)",
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "BTTS",
+      "bet": "【BTTS】葡萄牙 vs 克罗地亚 双方进球=否",
+      "odds": 2.05,
+      "ev": 0.025,
+      "mvi": 1,
+      "prob": 0.5,
+      "reason": "边际价值",
+      "type": "btts",
+      "source": ""
+    },
+    {
+      "match": "瑞士 vs 阿尔及利亚",
       "market": "比分区间",
-      "bet": "【小2.5球】英格兰 vs 刚果(金)",
+      "bet": "【小3球】瑞士 vs 阿尔及利亚",
+      "odds": 1.325,
+      "ev": 0.011,
+      "mvi": 1.0105868269763514,
+      "prob": 0.7627070392274351,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "大小球",
+      "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
+      "odds": 2.1,
+      "ev": 0.008,
+      "mvi": 1,
+      "prob": 0.48,
+      "reason": "边际价值",
+      "type": "goals",
+      "source": ""
+    },
+    {
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "比分区间",
+      "bet": "【小3.5球】葡萄牙 vs 克罗地亚",
+      "odds": 1.425,
+      "ev": 0,
+      "mvi": 0.9999270855613605,
+      "prob": 0.7017032179377968,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "比分区间",
+      "bet": "【小3.5球】西班牙 vs 奥地利",
+      "odds": 1.475,
+      "ev": -0.007,
+      "mvi": 0.9934330637606633,
+      "prob": 0.6735139415326531,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "瑞士 vs 阿尔及利亚",
+      "market": "大小球",
+      "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
+      "odds": 2.2,
+      "ev": -0.01,
+      "mvi": 1,
+      "prob": 0.45,
+      "reason": "边际价值",
+      "type": "goals",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "大小球",
+      "bet": "【小2.5球】西班牙 vs 奥地利",
+      "odds": 2.2,
+      "ev": -0.01,
+      "mvi": 1,
+      "prob": 0.44999999999999996,
+      "reason": "边际价值",
+      "type": "goals",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 奥地利",
+      "market": "比分区间",
+      "bet": "【小2.5球】西班牙 vs 奥地利",
+      "odds": 2.2,
+      "ev": -0.01,
+      "mvi": 0.9900000000000002,
+      "prob": 0.45000000000000007,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "胜平负",
+      "bet": "【胜平负】葡萄牙 主胜",
       "odds": 1.7,
       "ev": -0.014,
-      "mvi": 0.9860000000000004,
-      "prob": 0.5800000000000003,
-      "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "英格兰 vs 刚果(金)",
-      "market": "比分区间",
-      "bet": "【小3.5球】英格兰 vs 刚果(金)",
-      "odds": 1.25,
-      "ev": -0.016,
-      "mvi": 0.983610620630744,
-      "prob": 0.7868884965045952,
-      "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "比利时 vs 塞内加尔",
-      "market": "胜平负",
-      "bet": "【胜平负】比利时 vs 塞内加尔 平局",
-      "odds": 3.25,
-      "ev": -0.025,
       "mvi": 1,
-      "prob": 0.3,
+      "prob": 0.58,
       "reason": "边际价值",
       "type": "direction",
       "source": ""
     },
     {
-      "match": "美国 vs 波黑",
+      "match": "葡萄牙 vs 克罗地亚",
+      "market": "比分区间",
+      "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
+      "odds": 2.05,
+      "ev": -0.016,
+      "mvi": 0.9839999999999999,
+      "prob": 0.48,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "瑞士 vs 阿尔及利亚",
+      "market": "胜平负",
+      "bet": "【胜平负】瑞士 主胜",
+      "odds": 1.95,
+      "ev": -0.025,
+      "mvi": 1,
+      "prob": 0.5,
+      "reason": "边际价值",
+      "type": "direction",
+      "source": ""
+    },
+    {
+      "match": "瑞士 vs 阿尔及利亚",
       "market": "BTTS",
-      "bet": "【BTTS】美国 vs 波黑 双方进球=是",
+      "bet": "【BTTS】瑞士 vs 阿尔及利亚 双方进球=是",
       "odds": 1.95,
       "ev": -0.025,
       "mvi": 1,
@@ -345,41 +364,53 @@
       "reason": "边际价值",
       "type": "btts",
       "source": ""
+    },
+    {
+      "match": "瑞士 vs 阿尔及利亚",
+      "market": "平局退款",
+      "bet": "【平局退款】瑞士 不败",
+      "odds": 1.4,
+      "ev": -0.028,
+      "mvi": 0.9722222222222222,
+      "prob": 0.6944444444444444,
+      "reason": "边际价值",
+      "type": "safety",
+      "source": ""
     }
   ],
   "portfolios": [
     {
       "rank": 1,
-      "score": 93,
-      "odds": 8.25,
-      "hitPct": 24.8,
-      "ev": 1.046,
-      "mvi": 1.523,
+      "score": 96,
+      "odds": 14.63,
+      "hitPct": 23.39,
+      "ev": 2.421,
+      "mvi": 2.07,
       "legs": [
         {
-          "id": "usa-bih-r32_un2",
-          "bet": "【小2球】美国 vs 波黑",
-          "odds": 3.3,
-          "prob": 0.6200000000000001,
-          "mvi": 2.0460000000000003,
-          "ev": 1.046,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
+          "id": "esp-aut-r32_dnb_a",
+          "bet": "【平局退款】奥地利 不败",
+          "odds": 9,
+          "prob": 0.3333333333333333,
+          "mvi": 3,
+          "ev": 2,
+          "market": "平局退款",
+          "match": "西班牙 vs 奥地利",
           "group": "Round of 32",
-          "type": "goals_range",
+          "type": "safety",
           "source": ""
         },
         {
-          "id": "bel-sen-r32_dnb_a",
-          "bet": "【平局退款】塞内加尔 不败",
-          "odds": 2.5,
-          "prob": 0.4000000000000001,
-          "mvi": 1.0000000000000002,
-          "ev": 0,
-          "market": "平局退款",
-          "match": "比利时 vs 塞内加尔",
+          "id": "por-cro-r32_un3",
+          "bet": "【小3球】葡萄牙 vs 克罗地亚",
+          "odds": 1.625,
+          "prob": 0.7017032179377968,
+          "mvi": 1.1402677291489196,
+          "ev": 0.14,
+          "market": "比分区间",
+          "match": "葡萄牙 vs 克罗地亚",
           "group": "Round of 32",
-          "type": "safety",
+          "type": "goals_range",
           "source": ""
         }
       ],
@@ -388,606 +419,554 @@
         "mvi": 15,
         "hit": 12,
         "risk": 6.8,
-        "eff": 5.2,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 1.9,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 4.2,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[平局退款+比分区间]：美国 vs 波黑 + 塞内加尔 不败。强正EV，命中24.8%，评分93/100。",
-      "comparisonNote": "优于#2的理由：综合评分领先2.2分；命中率更高(24.8% vs 20.15%)；MVI信号更强(1.52 vs 1.35)"
-    },
-    {
-      "rank": 2,
-      "score": 90.8,
-      "odds": 17.32,
-      "hitPct": 20.15,
-      "ev": 2.491,
-      "mvi": 1.349,
-      "legs": [
-        {
-          "id": "usa-bih-r32_un2",
-          "bet": "【小2球】美国 vs 波黑",
-          "odds": 3.3,
-          "prob": 0.6200000000000001,
-          "mvi": 2.0460000000000003,
-          "ev": 1.046,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "eng-cod-r32_btts_y",
-          "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-          "odds": 2.75,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.375,
-          "market": "BTTS",
-          "match": "英格兰 vs 刚果(金)",
-          "group": "Round of 32",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "bel-sen-r32_u25",
-          "bet": "【小2.5球】比利时 vs 塞内加尔",
-          "odds": 1.909,
-          "prob": 0.65,
-          "mvi": 1,
-          "ev": 0.241,
-          "market": "大小球",
-          "match": "比利时 vs 塞内加尔",
-          "group": "Round of 32",
-          "type": "goals",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 12,
-        "risk": 5,
-        "eff": 6.4,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 2,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 4.2,
-        "cert": 5,
-        "weak": 0,
-        "struct": 3
-      },
-      "tier": "均衡收益型",
-      "rationale": "3场组合[BTTS+大小球+比分区间]：美国 vs 波黑 + 英格兰 vs 刚果(金) 双方进球=是 + 比利时 vs 塞内加尔。强正EV，命中20.15%，评分90.8/100。",
-      "comparisonNote": "落后#1的理由：综合评分差2.2分"
-    },
-    {
-      "rank": 3,
-      "score": 89,
-      "odds": 8.66,
-      "hitPct": 26.56,
-      "ev": 1.301,
-      "mvi": 1.116,
-      "legs": [
-        {
-          "id": "usa-bih-r32_un3",
-          "bet": "【小3球】美国 vs 波黑",
-          "odds": 1.65,
-          "prob": 0.8173577595305013,
-          "mvi": 1.3486403032253271,
-          "ev": 0.349,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "eng-cod-r32_btts_y",
-          "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-          "odds": 2.75,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.375,
-          "market": "BTTS",
-          "match": "英格兰 vs 刚果(金)",
-          "group": "Round of 32",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "bel-sen-r32_u25",
-          "bet": "【小2.5球】比利时 vs 塞内加尔",
-          "odds": 1.909,
-          "prob": 0.65,
-          "mvi": 1,
-          "ev": 0.241,
-          "market": "大小球",
-          "match": "比利时 vs 塞内加尔",
-          "group": "Round of 32",
-          "type": "goals",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 13.4,
-        "hit": 13,
-        "risk": 5,
-        "eff": 3.2,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 4.2,
-        "cert": 5,
-        "weak": 0,
-        "struct": 3
-      },
-      "tier": "确定性优先（平衡）",
-      "rationale": "3场组合[BTTS+大小球+比分区间]：美国 vs 波黑 + 英格兰 vs 刚果(金) 双方进球=是 + 比利时 vs 塞内加尔。强正EV，命中26.56%，评分89/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 4,
-      "score": 88.8,
-      "odds": 11.02,
-      "hitPct": 20.15,
-      "ev": 1.221,
-      "mvi": 1.101,
-      "legs": [
-        {
-          "id": "usa-bih-r32_un2.5",
-          "bet": "【小2.5球】美国 vs 波黑",
-          "odds": 2.1,
-          "prob": 0.6200000000000001,
-          "mvi": 1.3020000000000003,
-          "ev": 0.302,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "eng-cod-r32_btts_y",
-          "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-          "odds": 2.75,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.375,
-          "market": "BTTS",
-          "match": "英格兰 vs 刚果(金)",
-          "group": "Round of 32",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "bel-sen-r32_u25",
-          "bet": "【小2.5球】比利时 vs 塞内加尔",
-          "odds": 1.909,
-          "prob": 0.65,
-          "mvi": 1,
-          "ev": 0.241,
-          "market": "大小球",
-          "match": "比利时 vs 塞内加尔",
-          "group": "Round of 32",
-          "type": "goals",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 13.2,
-        "hit": 12,
-        "risk": 5,
-        "eff": 4.1,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.1,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 4.2,
-        "cert": 5,
-        "weak": 0,
-        "struct": 3
-      },
-      "tier": "均衡收益型",
-      "rationale": "3场组合[BTTS+大小球+比分区间]：美国 vs 波黑 + 英格兰 vs 刚果(金) 双方进球=是 + 比利时 vs 塞内加尔。强正EV，命中20.15%，评分88.8/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 5,
-      "score": 88.1,
-      "odds": 9.07,
-      "hitPct": 31,
-      "ev": 1.813,
-      "mvi": 1.523,
-      "legs": [
-        {
-          "id": "usa-bih-r32_un2",
-          "bet": "【小2球】美国 vs 波黑",
-          "odds": 3.3,
-          "prob": 0.6200000000000001,
-          "mvi": 2.0460000000000003,
-          "ev": 1.046,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "eng-cod-r32_btts_y",
-          "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-          "odds": 2.75,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.375,
-          "market": "BTTS",
-          "match": "英格兰 vs 刚果(金)",
-          "group": "Round of 32",
-          "type": "btts",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 14,
-        "risk": 5,
-        "eff": 5,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 1.9,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0,
-        "valCap": 0,
-        "qual": 4.2,
-        "cert": 5,
-        "weak": 0,
-        "struct": 0
-      },
-      "tier": "确定性优先（平衡）",
-      "rationale": "2场组合[BTTS+比分区间]：美国 vs 波黑 + 英格兰 vs 刚果(金) 双方进球=是。强正EV，命中31%，评分88.1/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 6,
-      "score": 87.6,
-      "odds": 10.73,
-      "hitPct": 18.6,
-      "ev": 0.995,
-      "mvi": 1.523,
-      "legs": [
-        {
-          "id": "usa-bih-r32_un2",
-          "bet": "【小2球】美国 vs 波黑",
-          "odds": 3.3,
-          "prob": 0.6200000000000001,
-          "mvi": 2.0460000000000003,
-          "ev": 1.046,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "bel-sen-r32_d",
-          "bet": "【胜平负】比利时 vs 塞内加尔 平局",
-          "odds": 3.25,
-          "prob": 0.3,
-          "mvi": 1,
-          "ev": -0.025,
-          "market": "胜平负",
-          "match": "比利时 vs 塞内加尔",
-          "group": "Round of 32",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 10,
-        "risk": 5,
-        "eff": 6,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 1.9,
-        "extRisk": 0,
-        "consist": 2.5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 4.2,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[胜平负+比分区间]：美国 vs 波黑 + 比利时 vs 塞内加尔 平局。强正EV，命中18.6%，评分87.6/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 7,
-      "score": 87.5,
-      "odds": 22.69,
-      "hitPct": 12.4,
-      "ev": 1.813,
-      "mvi": 1.349,
-      "legs": [
-        {
-          "id": "usa-bih-r32_un2",
-          "bet": "【小2球】美国 vs 波黑",
-          "odds": 3.3,
-          "prob": 0.6200000000000001,
-          "mvi": 2.0460000000000003,
-          "ev": 1.046,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "bel-sen-r32_dnb_a",
-          "bet": "【平局退款】塞内加尔 不败",
-          "odds": 2.5,
-          "prob": 0.4000000000000001,
-          "mvi": 1.0000000000000002,
-          "ev": 0,
-          "market": "平局退款",
-          "match": "比利时 vs 塞内加尔",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "eng-cod-r32_btts_y",
-          "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-          "odds": 2.75,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.375,
-          "market": "BTTS",
-          "match": "英格兰 vs 刚果(金)",
-          "group": "Round of 32",
-          "type": "btts",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 8,
-        "risk": 6.2,
         "eff": 9.1,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 2,
+        "stab": 0,
         "extRisk": 0,
         "consist": 5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 4.2,
-        "cert": 0,
+        "qual": 5,
+        "cert": 5,
         "weak": 0,
         "struct": 5
       },
-      "tier": "价值收益型",
-      "rationale": "3场组合[BTTS+平局退款+比分区间]：美国 vs 波黑 + 塞内加尔 不败 + 英格兰 vs 刚果(金) 双方进球=是。强正EV，命中12.4%，评分87.5/100。",
-      "comparisonNote": ""
+      "tier": "均衡收益型",
+      "rationale": "2场组合[平局退款+比分区间]：奥地利 不败 + 葡萄牙 vs 克罗地亚。强正EV，命中23.39%，评分96/100。",
+      "comparisonNote": "优于#2的理由：综合评分领先0.7分；EV更高(+38.9%)；MVI信号更强(2.07 vs 2.00)"
     },
     {
-      "rank": 8,
-      "score": 86.5,
-      "odds": 12.93,
-      "hitPct": 14.69,
-      "ev": 0.899,
-      "mvi": 1.378,
+      "rank": 2,
+      "score": 95.3,
+      "odds": 11.93,
+      "hitPct": 25.42,
+      "ev": 2.032,
+      "mvi": 2.005,
       "legs": [
         {
-          "id": "usa-bih-r32_dnb_a",
-          "bet": "【平局退款】波黑 不败",
-          "odds": 5.5,
-          "prob": 0.25333333333333335,
-          "mvi": 1.3933333333333333,
-          "ev": 0.393,
+          "id": "esp-aut-r32_dnb_a",
+          "bet": "【平局退款】奥地利 不败",
+          "odds": 9,
+          "prob": 0.3333333333333333,
+          "mvi": 3,
+          "ev": 2,
           "market": "平局退款",
-          "match": "美国 vs 波黑",
+          "match": "西班牙 vs 奥地利",
           "group": "Round of 32",
           "type": "safety",
           "source": ""
         },
         {
-          "id": "eng-cod-r32_un2",
-          "bet": "【小2球】英格兰 vs 刚果(金)",
-          "odds": 2.35,
-          "prob": 0.5800000000000003,
-          "mvi": 1.3630000000000007,
-          "ev": 0.363,
+          "id": "sui-alg-r32_un3",
+          "bet": "【小3球】瑞士 vs 阿尔及利亚",
+          "odds": 1.325,
+          "prob": 0.7627070392274351,
+          "mvi": 1.0105868269763514,
+          "ev": 0.011,
           "market": "比分区间",
-          "match": "英格兰 vs 刚果(金)",
+          "match": "瑞士 vs 阿尔及利亚",
           "group": "Round of 32",
           "type": "goals_range",
           "source": ""
         }
       ],
       "breakdown": {
-        "ev": 12.5,
+        "ev": 13,
         "mvi": 15,
-        "hit": 8,
+        "hit": 13,
         "risk": 6.8,
-        "eff": 8.1,
+        "eff": 7.5,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.9,
+        "stab": 0,
         "extRisk": 0,
         "consist": 5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 4.2,
-        "cert": 0,
+        "qual": 5,
+        "cert": 5,
         "weak": 0,
-        "struct": 2
+        "struct": 5
       },
-      "tier": "价值收益型",
-      "rationale": "2场组合[比分区间+平局退款]：波黑 不败 + 英格兰 vs 刚果(金)。强正EV，命中14.69%，评分86.5/100。",
+      "tier": "均衡收益型",
+      "rationale": "2场组合[平局退款+比分区间]：奥地利 不败 + 瑞士 vs 阿尔及利亚。强正EV，命中25.42%，评分95.3/100。",
+      "comparisonNote": "落后#1的理由：综合评分差0.7分"
+    },
+    {
+      "rank": 3,
+      "score": 95.2,
+      "odds": 11.25,
+      "hitPct": 25.33,
+      "ev": 1.85,
+      "mvi": 1.975,
+      "legs": [
+        {
+          "id": "esp-aut-r32_dnb_a",
+          "bet": "【平局退款】奥地利 不败",
+          "odds": 9,
+          "prob": 0.3333333333333333,
+          "mvi": 3,
+          "ev": 2,
+          "market": "平局退款",
+          "match": "西班牙 vs 奥地利",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        },
+        {
+          "id": "por-cro-r32_dc_ha",
+          "bet": "【双重机会】葡萄牙 或 克罗地亚",
+          "odds": 1.25,
+          "prob": 0.76,
+          "mvi": 0.95,
+          "ev": -0.05,
+          "market": "双重机会",
+          "match": "葡萄牙 vs 克罗地亚",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 13,
+        "mvi": 15,
+        "hit": 13,
+        "risk": 8.5,
+        "eff": 8,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 0,
+        "extRisk": 0,
+        "consist": 2.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 5,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[平局退款+双重机会]：奥地利 不败 + 葡萄牙 或 克罗地亚。强正EV，命中25.33%，评分95.2/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 9,
-      "score": 81.7,
-      "odds": 6.83,
-      "hitPct": 18.6,
-      "ev": 0.269,
-      "mvi": 1.151,
+      "rank": 4,
+      "score": 94.7,
+      "odds": 12,
+      "hitPct": 24,
+      "ev": 1.879,
+      "mvi": 1.98,
       "legs": [
         {
-          "id": "usa-bih-r32_un2.5",
-          "bet": "【小2.5球】美国 vs 波黑",
-          "odds": 2.1,
-          "prob": 0.6200000000000001,
-          "mvi": 1.3020000000000003,
-          "ev": 0.302,
+          "id": "esp-aut-r32_dnb_a",
+          "bet": "【平局退款】奥地利 不败",
+          "odds": 9,
+          "prob": 0.3333333333333333,
+          "mvi": 3,
+          "ev": 2,
+          "market": "平局退款",
+          "match": "西班牙 vs 奥地利",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        },
+        {
+          "id": "sui-alg-r32_dc_ha",
+          "bet": "【双重机会】瑞士 或 阿尔及利亚",
+          "odds": 1.333,
+          "prob": 0.72,
+          "mvi": 0.95976,
+          "ev": -0.04,
+          "market": "双重机会",
+          "match": "瑞士 vs 阿尔及利亚",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 13,
+        "mvi": 15,
+        "hit": 12,
+        "risk": 8.5,
+        "eff": 8.6,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 0,
+        "extRisk": 0,
+        "consist": 2.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 5,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[平局退款+双重机会]：奥地利 不败 + 瑞士 或 阿尔及利亚。强正EV，命中24%，评分94.7/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 5,
+      "score": 89,
+      "odds": 6.76,
+      "hitPct": 24,
+      "ev": 0.624,
+      "mvi": 1.292,
+      "legs": [
+        {
+          "id": "por-cro-r32_un2",
+          "bet": "【小2球】葡萄牙 vs 克罗地亚",
+          "odds": 3.3,
+          "prob": 0.48,
+          "mvi": 1.5839999999999999,
+          "ev": 0.584,
           "market": "比分区间",
-          "match": "美国 vs 波黑",
+          "match": "葡萄牙 vs 克罗地亚",
           "group": "Round of 32",
           "type": "goals_range",
           "source": ""
         },
         {
-          "id": "bel-sen-r32_d",
-          "bet": "【胜平负】比利时 vs 塞内加尔 平局",
-          "odds": 3.25,
-          "prob": 0.3,
+          "id": "esp-aut-r32_btts_y",
+          "bet": "【BTTS】西班牙 vs 奥地利 双方进球=是",
+          "odds": 2.05,
+          "prob": 0.5,
           "mvi": 1,
-          "ev": -0.025,
-          "market": "胜平负",
-          "match": "比利时 vs 塞内加尔",
+          "ev": 0.025,
+          "market": "BTTS",
+          "match": "西班牙 vs 奥地利",
           "group": "Round of 32",
-          "type": "direction",
+          "type": "btts",
           "source": ""
         }
       ],
       "breakdown": {
-        "ev": 7.2,
-        "mvi": 13.8,
-        "hit": 10,
+        "ev": 10,
+        "mvi": 15,
+        "hit": 12,
         "risk": 5,
         "eff": 3.8,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.1,
+        "stab": 3.2,
         "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0.2,
+        "consist": 5,
+        "strat": 0,
         "valCap": 0,
-        "qual": 4.2,
+        "qual": 5,
         "cert": 5,
         "weak": 0,
         "struct": 5
       },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[胜平负+比分区间]：美国 vs 波黑 + 比利时 vs 塞内加尔 平局。强正EV，命中18.6%，评分81.7/100。",
+      "tier": "均衡收益型",
+      "rationale": "2场组合[BTTS+比分区间]：葡萄牙 vs 克罗地亚 + 西班牙 vs 奥地利 双方进球=是。强正EV，命中24%，评分89/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 10,
-      "score": 77.3,
-      "odds": 5.06,
-      "hitPct": 22.03,
-      "ev": 0.115,
-      "mvi": 1.031,
+      "rank": 6,
+      "score": 87.6,
+      "odds": 12.38,
+      "hitPct": 15.4,
+      "ev": 0.906,
+      "mvi": 1.119,
       "legs": [
         {
-          "id": "eng-cod-r32_un3",
-          "bet": "【小3球】英格兰 vs 刚果(金)",
-          "odds": 1.35,
-          "prob": 0.7868884965045952,
-          "mvi": 1.0622994702812036,
-          "ev": 0.062,
+          "id": "sui-alg-r32_un2",
+          "bet": "【小2球】瑞士 vs 阿尔及利亚",
+          "odds": 2.25,
+          "prob": 0.5500000000000003,
+          "mvi": 1.2375000000000007,
+          "ev": 0.238,
           "market": "比分区间",
-          "match": "英格兰 vs 刚果(金)",
+          "match": "瑞士 vs 阿尔及利亚",
           "group": "Round of 32",
           "type": "goals_range",
           "source": ""
         },
         {
-          "id": "bel-sen-r32_a",
-          "bet": "【胜平负】塞内加尔 客胜",
-          "odds": 3.75,
+          "id": "esp-aut-r32_d",
+          "bet": "【胜平负】西班牙 vs 奥地利 平局",
+          "odds": 5.5,
           "prob": 0.28,
           "mvi": 1,
-          "ev": 0.05,
+          "ev": 0.54,
           "market": "胜平负",
-          "match": "比利时 vs 塞内加尔",
+          "match": "西班牙 vs 奥地利",
           "group": "Round of 32",
           "type": "direction",
           "source": ""
         }
       ],
       "breakdown": {
-        "ev": 5.9,
-        "mvi": 12.4,
-        "hit": 12,
+        "ev": 12.8,
+        "mvi": 13.4,
+        "hit": 10,
         "risk": 5,
-        "eff": 2.8,
+        "eff": 6.9,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.8,
+        "stab": 4.3,
         "extRisk": 0,
         "consist": 5,
         "strat": 0.2,
         "valCap": 0,
-        "qual": 4.2,
+        "qual": 5,
         "cert": 3,
         "weak": 0,
         "struct": 2
       },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[比分区间+胜平负]：英格兰 vs 刚果(金) + 塞内加尔 客胜。正EV，命中22.03%，评分77.3/100。",
+      "tier": "价值收益型",
+      "rationale": "2场组合[胜平负+比分区间]：瑞士 vs 阿尔及利亚 + 西班牙 vs 奥地利 平局。强正EV，命中15.4%，评分87.6/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 7,
+      "score": 85.9,
+      "odds": 6.44,
+      "hitPct": 24,
+      "ev": 0.544,
+      "mvi": 1.292,
+      "legs": [
+        {
+          "id": "por-cro-r32_un2",
+          "bet": "【小2球】葡萄牙 vs 克罗地亚",
+          "odds": 3.3,
+          "prob": 0.48,
+          "mvi": 1.5839999999999999,
+          "ev": 0.584,
+          "market": "比分区间",
+          "match": "葡萄牙 vs 克罗地亚",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "sui-alg-r32_h",
+          "bet": "【胜平负】瑞士 主胜",
+          "odds": 1.95,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": -0.025,
+          "market": "胜平负",
+          "match": "瑞士 vs 阿尔及利亚",
+          "group": "Round of 32",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 9.4,
+        "mvi": 15,
+        "hit": 12,
+        "risk": 5,
+        "eff": 3.6,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 3.2,
+        "extRisk": 0,
+        "consist": 2.5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 5,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[比分区间+胜平负]：葡萄牙 vs 克罗地亚 + 瑞士 主胜。强正EV，命中24%，评分85.9/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 8,
+      "score": 82.9,
+      "odds": 15.4,
+      "hitPct": 16.67,
+      "ev": 1.567,
+      "mvi": 0.986,
+      "legs": [
+        {
+          "id": "esp-aut-r32_a",
+          "bet": "【胜平负】奥地利 客胜",
+          "odds": 11,
+          "prob": 0.24,
+          "mvi": 1,
+          "ev": 1.64,
+          "market": "胜平负",
+          "match": "西班牙 vs 奥地利",
+          "group": "Round of 32",
+          "type": "direction",
+          "source": ""
+        },
+        {
+          "id": "sui-alg-r32_dnb_h",
+          "bet": "【平局退款】瑞士 不败",
+          "odds": 1.4,
+          "prob": 0.6944444444444444,
+          "mvi": 0.9722222222222222,
+          "ev": -0.028,
+          "market": "平局退款",
+          "match": "瑞士 vs 阿尔及利亚",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 13,
+        "mvi": 11.8,
+        "hit": 10,
+        "risk": 6.8,
+        "eff": 9.6,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.9,
+        "extRisk": 0,
+        "consist": 2.5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 0,
+        "weak": -1,
+        "struct": 0
+      },
+      "tier": "高赔率冲击型（弱腿风险）",
+      "rationale": "2场组合[胜平负+平局退款]：奥地利 客胜 + 瑞士 不败。强正EV，命中16.67%，评分82.9/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 9,
+      "score": 77.7,
+      "odds": 2.78,
+      "hitPct": 36.61,
+      "ev": 0.019,
+      "mvi": 1.005,
+      "legs": [
+        {
+          "id": "sui-alg-r32_un3",
+          "bet": "【小3球】瑞士 vs 阿尔及利亚",
+          "odds": 1.325,
+          "prob": 0.7627070392274351,
+          "mvi": 1.0105868269763514,
+          "ev": 0.011,
+          "market": "比分区间",
+          "match": "瑞士 vs 阿尔及利亚",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "por-cro-r32_u25",
+          "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
+          "odds": 2.1,
+          "prob": 0.48,
+          "mvi": 1,
+          "ev": 0.008,
+          "market": "大小球",
+          "match": "葡萄牙 vs 克罗地亚",
+          "group": "Round of 32",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 5.1,
+        "mvi": 12.1,
+        "hit": 14,
+        "risk": 5,
+        "eff": 1.5,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 5,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 0,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "确定性优先（稳健）",
+      "rationale": "2场组合[大小球+比分区间]：瑞士 vs 阿尔及利亚 + 葡萄牙 vs 克罗地亚。边际正EV，命中36.61%，评分77.7/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 10,
+      "score": 75.1,
+      "odds": 4.51,
+      "hitPct": 22.5,
+      "ev": 0.015,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "por-cro-r32_btts_n",
+          "bet": "【BTTS】葡萄牙 vs 克罗地亚 双方进球=否",
+          "odds": 2.05,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0.025,
+          "market": "BTTS",
+          "match": "葡萄牙 vs 克罗地亚",
+          "group": "Round of 32",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "sui-alg-r32_o25",
+          "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
+          "odds": 2.2,
+          "prob": 0.45,
+          "mvi": 1,
+          "ev": -0.01,
+          "market": "大小球",
+          "match": "瑞士 vs 阿尔及利亚",
+          "group": "Round of 32",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 5.1,
+        "mvi": 12,
+        "hit": 12,
+        "risk": 5,
+        "eff": 2.5,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 5,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 0,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[BTTS+大小球]：葡萄牙 vs 克罗地亚 双方进球=否 + 瑞士 vs 阿尔及利亚。边际正EV，命中22.5%，评分75.1/100。",
       "comparisonNote": ""
     }
   ],
@@ -996,35 +975,35 @@
       "tier": "核心仓位（均衡收益型·2腿）",
       "portfolio": {
         "id": "best",
-        "score": 93,
-        "odds": 8.25,
-        "ev": 1.046,
-        "hitPct": 24.8,
+        "score": 96,
+        "odds": 14.63,
+        "ev": 2.421,
+        "hitPct": 23.39,
         "legs": [
           {
-            "id": "usa-bih-r32_un2",
-            "bet": "【小2球】美国 vs 波黑",
-            "odds": 3.3,
-            "prob": 0.6200000000000001,
-            "mvi": 2.0460000000000003,
-            "ev": 1.046,
-            "market": "比分区间",
-            "match": "美国 vs 波黑",
+            "id": "esp-aut-r32_dnb_a",
+            "bet": "【平局退款】奥地利 不败",
+            "odds": 9,
+            "prob": 0.3333333333333333,
+            "mvi": 3,
+            "ev": 2,
+            "market": "平局退款",
+            "match": "西班牙 vs 奥地利",
             "group": "Round of 32",
-            "type": "goals_range",
+            "type": "safety",
             "source": ""
           },
           {
-            "id": "bel-sen-r32_dnb_a",
-            "bet": "【平局退款】塞内加尔 不败",
-            "odds": 2.5,
-            "prob": 0.4000000000000001,
-            "mvi": 1.0000000000000002,
-            "ev": 0,
-            "market": "平局退款",
-            "match": "比利时 vs 塞内加尔",
+            "id": "por-cro-r32_un3",
+            "bet": "【小3球】葡萄牙 vs 克罗地亚",
+            "odds": 1.625,
+            "prob": 0.7017032179377968,
+            "mvi": 1.1402677291489196,
+            "ev": 0.14,
+            "market": "比分区间",
+            "match": "葡萄牙 vs 克罗地亚",
             "group": "Round of 32",
-            "type": "safety",
+            "type": "goals_range",
             "source": ""
           }
         ]
@@ -1034,51 +1013,38 @@
       "isCore": true
     },
     {
-      "tier": "辅助仓位（均衡收益型·3腿）",
+      "tier": "辅助仓位（均衡收益型·2腿）",
       "portfolio": {
         "id": "alt",
-        "score": 90.8,
-        "odds": 17.32,
-        "ev": 2.491,
-        "hitPct": 20.15,
+        "score": 95.3,
+        "odds": 11.93,
+        "ev": 2.032,
+        "hitPct": 25.42,
         "legs": [
           {
-            "id": "usa-bih-r32_un2",
-            "bet": "【小2球】美国 vs 波黑",
-            "odds": 3.3,
-            "prob": 0.6200000000000001,
-            "mvi": 2.0460000000000003,
-            "ev": 1.046,
+            "id": "esp-aut-r32_dnb_a",
+            "bet": "【平局退款】奥地利 不败",
+            "odds": 9,
+            "prob": 0.3333333333333333,
+            "mvi": 3,
+            "ev": 2,
+            "market": "平局退款",
+            "match": "西班牙 vs 奥地利",
+            "group": "Round of 32",
+            "type": "safety",
+            "source": ""
+          },
+          {
+            "id": "sui-alg-r32_un3",
+            "bet": "【小3球】瑞士 vs 阿尔及利亚",
+            "odds": 1.325,
+            "prob": 0.7627070392274351,
+            "mvi": 1.0105868269763514,
+            "ev": 0.011,
             "market": "比分区间",
-            "match": "美国 vs 波黑",
+            "match": "瑞士 vs 阿尔及利亚",
             "group": "Round of 32",
             "type": "goals_range",
-            "source": ""
-          },
-          {
-            "id": "eng-cod-r32_btts_y",
-            "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-            "odds": 2.75,
-            "prob": 0.5,
-            "mvi": 1,
-            "ev": 0.375,
-            "market": "BTTS",
-            "match": "英格兰 vs 刚果(金)",
-            "group": "Round of 32",
-            "type": "btts",
-            "source": ""
-          },
-          {
-            "id": "bel-sen-r32_u25",
-            "bet": "【小2.5球】比利时 vs 塞内加尔",
-            "odds": 1.909,
-            "prob": 0.65,
-            "mvi": 1,
-            "ev": 0.241,
-            "market": "大小球",
-            "match": "比利时 vs 塞内加尔",
-            "group": "Round of 32",
-            "type": "goals",
             "source": ""
           }
         ]
@@ -1096,36 +1062,36 @@
   ],
   "bestPortfolio": {
     "tier": "均衡收益型",
-    "score": 93,
-    "odds": 8.25,
-    "hitPct": 24.8,
-    "ev": 1.046,
-    "mvi": 1.523,
+    "score": 96,
+    "odds": 14.63,
+    "hitPct": 23.39,
+    "ev": 2.421,
+    "mvi": 2.07,
     "legs": [
       {
-        "id": "usa-bih-r32_un2",
-        "bet": "【小2球】美国 vs 波黑",
-        "odds": 3.3,
-        "prob": 0.6200000000000001,
-        "mvi": 2.0460000000000003,
-        "ev": 1.046,
-        "market": "比分区间",
-        "match": "美国 vs 波黑",
+        "id": "esp-aut-r32_dnb_a",
+        "bet": "【平局退款】奥地利 不败",
+        "odds": 9,
+        "prob": 0.3333333333333333,
+        "mvi": 3,
+        "ev": 2,
+        "market": "平局退款",
+        "match": "西班牙 vs 奥地利",
         "group": "Round of 32",
-        "type": "goals_range",
+        "type": "safety",
         "source": ""
       },
       {
-        "id": "bel-sen-r32_dnb_a",
-        "bet": "【平局退款】塞内加尔 不败",
-        "odds": 2.5,
-        "prob": 0.4000000000000001,
-        "mvi": 1.0000000000000002,
-        "ev": 0,
-        "market": "平局退款",
-        "match": "比利时 vs 塞内加尔",
+        "id": "por-cro-r32_un3",
+        "bet": "【小3球】葡萄牙 vs 克罗地亚",
+        "odds": 1.625,
+        "prob": 0.7017032179377968,
+        "mvi": 1.1402677291489196,
+        "ev": 0.14,
+        "market": "比分区间",
+        "match": "葡萄牙 vs 克罗地亚",
         "group": "Round of 32",
-        "type": "safety",
+        "type": "goals_range",
         "source": ""
       }
     ],
@@ -1134,95 +1100,116 @@
       "mvi": 15,
       "hit": 12,
       "risk": 6.8,
-      "eff": 5.2,
+      "eff": 9.1,
       "indep": 10,
       "div": 10,
       "corr": 0,
       "sRisk": 0,
-      "stab": 1.9,
+      "stab": 0,
       "extRisk": 0,
       "consist": 5,
       "strat": 0.1,
       "valCap": 0,
-      "qual": 4.2,
+      "qual": 5,
       "cert": 5,
       "weak": 0,
       "struct": 5
     },
-    "rationale": "2场组合[比分区间+平局退款]：美国 vs 波黑 + 塞内加尔 不败。强正EV，命中24.8%，评分93/100。",
+    "rationale": "2场组合[平局退款+比分区间]：奥地利 不败 + 葡萄牙 vs 克罗地亚。强正EV，命中23.39%，评分96/100。",
     "decisionLogic": {
-      "whyBest": "综合评分领先2.2分；命中率更高(24.8% vs 20.15%)；MVI信号更强(1.52 vs 1.35)",
-      "keyDifferentiator": "更好的EV/风险/命中率综合平衡"
+      "whyBest": "综合评分领先0.7分；EV更高(+38.9%)；MVI信号更强(2.07 vs 2.00)",
+      "keyDifferentiator": "更高的期望值"
     }
   },
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-12.6%)",
-      "count": 2,
+      "reason": "EV显著负(-38.3%)",
+      "count": 1,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 主胜",
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 主胜",
           "odds": 1.285,
-          "ev": -0.126,
+          "ev": -0.383,
           "mvi": 1
-        },
-        {
-          "match": "美国 vs 波黑",
-          "bet": "美国 或 波黑",
-          "odds": 1.166,
-          "ev": -0.126,
-          "mvi": 0.8744999999999999
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-11.8%)",
+      "reason": "EV显著负(-8.4%)",
       "count": 2,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金)",
-          "odds": 2.1,
-          "ev": -0.118,
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利",
+          "odds": 1.666,
+          "ev": -0.084,
           "mvi": 1
         },
         {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 主胜",
-          "odds": 2.1,
-          "ev": -0.118,
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚",
+          "odds": 1.666,
+          "ev": -0.084,
           "mvi": 1
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-30.0%)",
-      "count": 1,
+      "reason": "EV显著负(-15.0%)",
+      "count": 2,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金) 双方进球=否",
-          "odds": 1.4,
-          "ev": -0.3,
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利 双方进球=否",
+          "odds": 1.7,
+          "ev": -0.15,
+          "mvi": 1
+        },
+        {
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚 双方进球=是",
+          "odds": 1.7,
+          "ev": -0.15,
           "mvi": 1
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-8.6%)",
+      "reason": "EV显著负(-16.0%)",
+      "count": 2,
+      "examples": [
+        {
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 或 奥地利",
+          "odds": 1.166,
+          "ev": -0.16,
+          "mvi": 0.8395199999999999
+        },
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "阿尔及利亚 不败",
+          "odds": 2.75,
+          "ev": -0.16,
+          "mvi": 0.8402777777777778
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-28.6%)",
       "count": 1,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 不败",
-          "odds": 1.062,
-          "ev": -0.086,
-          "mvi": 0.9141265822784811
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 不败",
+          "odds": 1.071,
+          "ev": -0.286,
+          "mvi": 0.714
         }
       ]
     },
@@ -1232,130 +1219,102 @@
       "count": 1,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金) 比分 2:0",
-          "odds": 5,
-          "ev": -0.34,
-          "mvi": 0.66
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-35.1%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金) 比分 1:0",
-          "odds": 5.5,
-          "ev": -0.351,
-          "mvi": 0.6489999999999999
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-34.8%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金) 比分 3:0",
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利 比分 1:0",
           "odds": 7.5,
-          "ev": -0.348,
-          "mvi": 0.6525
+          "ev": -0.34,
+          "mvi": 0.6599999999999999
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-13.1%)",
+      "reason": "EV显著负(-22.0%)",
       "count": 1,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金) 比分 1:1",
-          "odds": 11,
-          "ev": -0.131,
-          "mvi": 0.869
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利 比分 3:1",
+          "odds": 12,
+          "ev": -0.22,
+          "mvi": 0.78
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-25.2%)",
+      "reason": "EV显著负(-28.5%)",
       "count": 1,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金) 比分 2:1",
-          "odds": 11,
-          "ev": -0.252,
-          "mvi": 0.748
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利",
+          "odds": 1.3,
+          "ev": -0.285,
+          "mvi": 0.715
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-33.9%)",
-      "count": 2,
-      "examples": [
-        {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金)",
-          "odds": 1.575,
-          "ev": -0.339,
-          "mvi": 0.6614999999999995
-        },
-        {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金)",
-          "odds": 3.1,
-          "ev": -0.339,
-          "mvi": 0.6606456608357547
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-19.0%)",
+      "reason": "方向存疑(S2): 模型预测2:1(3球)，但推荐小2球小2球——方向矛盾",
       "count": 1,
       "examples": [
         {
-          "match": "英格兰 vs 刚果(金)",
-          "bet": "英格兰 vs 刚果(金)",
-          "odds": 3.8,
-          "ev": -0.19,
-          "mvi": 0.8098237132825381
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-33.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔",
-          "odds": 1.909,
-          "ev": -0.332,
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利",
+          "odds": 3.45,
+          "ev": 0.553,
           "mvi": 0.85
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-12.5%)",
+      "reason": "EV显著负(-32.3%)",
       "count": 1,
       "examples": [
         {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔 双方进球=是",
-          "odds": 1.75,
-          "ev": -0.125,
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利",
+          "odds": 2.075,
+          "ev": -0.323,
+          "mvi": 0.677458571319745
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-15.1%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "西班牙 vs 奥地利",
+          "bet": "西班牙 vs 奥地利",
+          "odds": 2.6,
+          "ev": -0.151,
+          "mvi": 0.848863752015102
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-11.2%)",
+      "count": 2,
+      "examples": [
+        {
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚 平局",
+          "odds": 3.7,
+          "ev": -0.112,
           "mvi": 1
+        },
+        {
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "克罗地亚 不败",
+          "odds": 3.75,
+          "ev": -0.112,
+          "mvi": 0.888157894736842
         }
       ]
     },
@@ -1365,15 +1324,15 @@
       "count": 2,
       "examples": [
         {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 不败",
-          "odds": 1.5,
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "克罗地亚 客胜",
+          "odds": 5,
           "ev": -0.1,
-          "mvi": 0.9
+          "mvi": 1
         },
         {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑 双方进球=否",
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚 双方进球=否",
           "odds": 1.8,
           "ev": -0.1,
           "mvi": 1
@@ -1382,295 +1341,225 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-13.3%)",
+      "reason": "EV显著负(-10.2%)",
       "count": 1,
       "examples": [
         {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔 比分 1:0",
-          "odds": 8.5,
-          "ev": -0.133,
-          "mvi": 0.867
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-41.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔 比分 1:1",
-          "odds": 6,
-          "ev": -0.412,
-          "mvi": 0.5880000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-28.7%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔 比分 0:0",
-          "odds": 9.5,
-          "ev": -0.287,
-          "mvi": 0.7125
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-30.6%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔 比分 2:1",
-          "odds": 9.5,
-          "ev": -0.306,
-          "mvi": 0.6935
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-19.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔 比分 1:2",
-          "odds": 13,
-          "ev": -0.194,
-          "mvi": 0.8059999999999999
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-48.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔",
-          "odds": 1.475,
-          "ev": -0.484,
-          "mvi": 0.5162500000000002
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "比分区间置信度不足",
-      "count": 3,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔",
-          "odds": 2.6,
-          "ev": 0.69,
-          "mvi": 1.69
-        },
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔",
-          "odds": 1.45,
-          "ev": 0.216,
-          "mvi": 1.2164061871008454
-        },
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔",
-          "odds": 1.325,
-          "ev": 0.112,
-          "mvi": 1.1115435847645656
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-56.9%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔",
-          "odds": 2.675,
-          "ev": -0.569,
-          "mvi": 0.43094031000361266
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-46.8%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "比利时 vs 塞内加尔",
-          "bet": "比利时 vs 塞内加尔",
-          "odds": 3.3,
-          "ev": -0.468,
-          "mvi": 0.5316272983222138
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-22.7%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "美国 vs 波黑",
-          "bet": "美国 主胜",
-          "odds": 1.38,
-          "ev": -0.227,
-          "mvi": 1
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-34.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑",
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚",
           "odds": 1.727,
-          "ev": -0.344,
+          "ev": -0.102,
           "mvi": 1
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-14.7%)",
+      "reason": "EV显著负(-11.8%)",
       "count": 1,
       "examples": [
         {
-          "match": "美国 vs 波黑",
-          "bet": "美国 不败",
-          "odds": 1.142,
-          "ev": -0.147,
-          "mvi": 0.8526933333333333
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-11.5%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑 比分 1:0",
-          "odds": 7.5,
-          "ev": -0.115,
-          "mvi": 0.885
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-9.8%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑 比分 1:1",
-          "odds": 9.5,
-          "ev": -0.098,
-          "mvi": 0.9025000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-40.5%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑 比分 2:0",
-          "odds": 7,
-          "ev": -0.405,
-          "mvi": 0.5950000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-35.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑 比分 2:1",
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚 比分 2:1",
           "odds": 9,
-          "ev": -0.352,
-          "mvi": 0.648
+          "ev": -0.118,
+          "mvi": 0.8820000000000001
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-11.6%)",
+      "reason": "EV显著负(-18.4%)",
       "count": 1,
       "examples": [
         {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑 比分 0:0",
-          "odds": 13,
-          "ev": -0.116,
-          "mvi": 0.884
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚 比分 0:0",
+          "odds": 12,
+          "ev": -0.184,
+          "mvi": 0.8160000000000001
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-49.7%)",
+      "reason": "EV显著负(-31.1%)",
       "count": 1,
       "examples": [
         {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑",
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚",
           "odds": 1.325,
-          "ev": -0.497,
-          "mvi": 0.5034999999999998
+          "ev": -0.311,
+          "mvi": 0.689
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-59.8%)",
+      "reason": "EV显著负(-32.9%)",
       "count": 1,
       "examples": [
         {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑",
-          "odds": 2.2,
-          "ev": -0.598,
-          "mvi": 0.4018129290328972
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚",
+          "odds": 2.25,
+          "ev": -0.329,
+          "mvi": 0.6711677596399573
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-49.8%)",
+      "reason": "EV显著负(-18.0%)",
       "count": 1,
       "examples": [
         {
-          "match": "美国 vs 波黑",
-          "bet": "美国 vs 波黑",
+          "match": "葡萄牙 vs 克罗地亚",
+          "bet": "葡萄牙 vs 克罗地亚",
           "odds": 2.75,
-          "ev": -0.498,
-          "mvi": 0.5022661612911214
+          "ev": -0.18,
+          "mvi": 0.8203161506710589
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-9.0%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚 平局",
+          "odds": 3.25,
+          "ev": -0.09,
+          "mvi": 1
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-10.4%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚 比分 1:0",
+          "odds": 7,
+          "ev": -0.104,
+          "mvi": 0.896
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-21.6%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚 比分 0:0",
+          "odds": 8,
+          "ev": -0.216,
+          "mvi": 0.784
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-42.8%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚 比分 1:1",
+          "odds": 6.5,
+          "ev": -0.428,
+          "mvi": 0.572
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-32.5%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚 比分 2:0",
+          "odds": 9,
+          "ev": -0.325,
+          "mvi": 0.675
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-38.2%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚 比分 2:1",
+          "odds": 9.5,
+          "ev": -0.382,
+          "mvi": 0.6175
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-26.9%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚",
+          "odds": 1.625,
+          "ev": -0.269,
+          "mvi": 0.7312499999999995
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-9.2%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚",
+          "odds": 1.65,
+          "ev": -0.092,
+          "mvi": 0.9075000000000004
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-21.7%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚",
+          "odds": 3.3,
+          "ev": -0.217,
+          "mvi": 0.7830667705494642
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "⚡方向矛盾(S3.5): 模型预测1:0(1球)，但推荐大3.5球——模型不支撑此方向",
+      "count": 1,
+      "examples": [
+        {
+          "match": "瑞士 vs 阿尔及利亚",
+          "bet": "瑞士 vs 阿尔及利亚",
+          "odds": 3.9,
+          "ev": -0.075,
+          "mvi": 0.925442547013003
         }
       ]
     }
@@ -1678,226 +1567,226 @@
   "scoreParlays": [
     {
       "rank": 1,
-      "odds": 42.9,
-      "hitPct": 3.84,
-      "ev": 0.649,
+      "odds": 75.9,
+      "hitPct": 3.46,
+      "ev": 1.623,
       "anchor": {
-        "bet": "【小2球】美国 vs 波黑",
+        "bet": "【小2球】葡萄牙 vs 克罗地亚",
         "odds": 3.3,
-        "prob": 62,
+        "prob": 48,
         "market": "比分区间"
       },
       "score": {
-        "match": "比利时 vs 塞内加尔",
-        "bet": "1:2",
-        "odds": 13,
-        "prob": 6.2
+        "match": "西班牙 vs 奥地利",
+        "bet": "2:2",
+        "odds": 23,
+        "prob": 7.2
       },
-      "rationale": "锚⚓美国 vs 波黑(62%) × 波胆🎯1:2(6.2%) → 42.9x, 命中3.8%"
+      "rationale": "锚⚓葡萄牙 vs 克罗地亚(48%) × 波胆🎯2:2(7.2%) → 75.9x, 命中3.5%"
     },
     {
       "rank": 2,
-      "odds": 36.3,
-      "hitPct": 4.9,
-      "ev": 0.778,
+      "odds": 51.8,
+      "hitPct": 3.96,
+      "ev": 1.049,
       "anchor": {
-        "bet": "【小2球】美国 vs 波黑",
-        "odds": 3.3,
-        "prob": 62,
+        "bet": "【小2球】瑞士 vs 阿尔及利亚",
+        "odds": 2.25,
+        "prob": 55,
         "market": "比分区间"
       },
       "score": {
-        "match": "英格兰 vs 刚果(金)",
-        "bet": "1:1",
-        "odds": 11,
-        "prob": 7.9
+        "match": "西班牙 vs 奥地利",
+        "bet": "2:2",
+        "odds": 23,
+        "prob": 7.2
       },
-      "rationale": "锚⚓美国 vs 波黑(62%) × 波胆🎯1:1(7.9%) → 36.3x, 命中4.9%"
+      "rationale": "锚⚓瑞士 vs 阿尔及利亚(55%) × 波胆🎯2:2(7.2%) → 51.8x, 命中4.0%"
     },
     {
       "rank": 3,
-      "odds": 35.8,
-      "hitPct": 3.4,
-      "ev": 0.216,
+      "odds": 31.4,
+      "hitPct": 5.66,
+      "ev": 0.776,
       "anchor": {
-        "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-        "odds": 2.75,
-        "prob": 50,
-        "market": "BTTS"
+        "bet": "【小2球】葡萄牙 vs 克罗地亚",
+        "odds": 3.3,
+        "prob": 48,
+        "market": "比分区间"
       },
       "score": {
-        "match": "美国 vs 波黑",
-        "bet": "0:0",
-        "odds": 13,
-        "prob": 6.8
+        "match": "西班牙 vs 奥地利",
+        "bet": "2:1",
+        "odds": 9.5,
+        "prob": 11.8
       },
-      "rationale": "锚⚓英格兰 vs 刚果(金) 双方进球=(50%) × 波胆🎯0:0(6.8%) → 35.8x, 命中3.4%"
+      "rationale": "锚⚓葡萄牙 vs 克罗地亚(48%) × 波胆🎯2:1(11.8%) → 31.3x, 命中5.7%"
     },
     {
       "rank": 4,
-      "odds": 35.8,
-      "hitPct": 3.1,
-      "ev": 0.108,
+      "odds": 33.8,
+      "hitPct": 3.96,
+      "ev": 0.337,
       "anchor": {
-        "bet": "【BTTS】英格兰 vs 刚果(金) 双方进球=是",
-        "odds": 2.75,
+        "bet": "【小2球】瑞士 vs 阿尔及利亚",
+        "odds": 2.25,
+        "prob": 55,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "葡萄牙 vs 克罗地亚",
+        "bet": "3:0",
+        "odds": 15,
+        "prob": 7.2
+      },
+      "rationale": "锚⚓瑞士 vs 阿尔及利亚(55%) × 波胆🎯3:0(7.2%) → 33.8x, 命中4.0%"
+    },
+    {
+      "rank": 5,
+      "odds": 33,
+      "hitPct": 3.24,
+      "ev": 0.069,
+      "anchor": {
+        "bet": "【小2.5球】西班牙 vs 奥地利",
+        "odds": 2.2,
+        "prob": 45,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "葡萄牙 vs 克罗地亚",
+        "bet": "3:0",
+        "odds": 15,
+        "prob": 7.2
+      },
+      "rationale": "锚⚓西班牙 vs 奥地利(45%) × 波胆🎯3:0(7.2%) → 33.0x, 命中3.2%"
+    },
+    {
+      "rank": 6,
+      "odds": 19.8,
+      "hitPct": 6.08,
+      "ev": 0.203,
+      "anchor": {
+        "bet": "【小2.5球】西班牙 vs 奥地利",
+        "odds": 2.2,
+        "prob": 45,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "葡萄牙 vs 克罗地亚",
+        "bet": "2:0",
+        "odds": 9,
+        "prob": 13.5
+      },
+      "rationale": "锚⚓西班牙 vs 奥地利(45%) × 波胆🎯2:0(13.5%) → 19.8x, 命中6.1%"
+    },
+    {
+      "rank": 7,
+      "odds": 19.8,
+      "hitPct": 6.08,
+      "ev": 0.203,
+      "anchor": {
+        "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
+        "odds": 2.2,
+        "prob": 45,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "葡萄牙 vs 克罗地亚",
+        "bet": "2:0",
+        "odds": 9,
+        "prob": 13.5
+      },
+      "rationale": "锚⚓瑞士 vs 阿尔及利亚(45%) × 波胆🎯2:0(13.5%) → 19.8x, 命中6.1%"
+    },
+    {
+      "rank": 8,
+      "odds": 20.9,
+      "hitPct": 5.31,
+      "ev": 0.11,
+      "anchor": {
+        "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
+        "odds": 2.2,
+        "prob": 45,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "西班牙 vs 奥地利",
+        "bet": "2:1",
+        "odds": 9.5,
+        "prob": 11.8
+      },
+      "rationale": "锚⚓瑞士 vs 阿尔及利亚(45%) × 波胆🎯2:1(11.8%) → 20.9x, 命中5.3%"
+    },
+    {
+      "rank": 9,
+      "odds": 21,
+      "hitPct": 5.04,
+      "ev": 0.058,
+      "anchor": {
+        "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
+        "odds": 2.1,
+        "prob": 48,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "西班牙 vs 奥地利",
+        "bet": "1:1",
+        "odds": 10,
+        "prob": 10.5
+      },
+      "rationale": "锚⚓葡萄牙 vs 克罗地亚(48%) × 波胆🎯1:1(10.5%) → 21.0x, 命中5.0%"
+    },
+    {
+      "rank": 10,
+      "odds": 20.5,
+      "hitPct": 5.25,
+      "ev": 0.076,
+      "anchor": {
+        "bet": "【BTTS】葡萄牙 vs 克罗地亚 双方进球=否",
+        "odds": 2.05,
         "prob": 50,
         "market": "BTTS"
       },
       "score": {
-        "match": "比利时 vs 塞内加尔",
-        "bet": "1:2",
-        "odds": 13,
-        "prob": 6.2
-      },
-      "rationale": "锚⚓英格兰 vs 刚果(金) 双方进球=(50%) × 波胆🎯1:2(6.2%) → 35.8x, 命中3.1%"
-    },
-    {
-      "rank": 5,
-      "odds": 30.6,
-      "hitPct": 3.94,
-      "ev": 0.205,
-      "anchor": {
-        "bet": "【小2球】英格兰 vs 刚果(金)",
-        "odds": 2.35,
-        "prob": 58,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "美国 vs 波黑",
-        "bet": "0:0",
-        "odds": 13,
-        "prob": 6.8
-      },
-      "rationale": "锚⚓英格兰 vs 刚果(金)(58%) × 波胆🎯0:0(6.8%) → 30.6x, 命中3.9%"
-    },
-    {
-      "rank": 6,
-      "odds": 22.3,
-      "hitPct": 5.51,
-      "ev": 0.23,
-      "anchor": {
-        "bet": "【小2球】英格兰 vs 刚果(金)",
-        "odds": 2.35,
-        "prob": 58,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "美国 vs 波黑",
+        "match": "西班牙 vs 奥地利",
         "bet": "1:1",
-        "odds": 9.5,
-        "prob": 9.5
+        "odds": 10,
+        "prob": 10.5
       },
-      "rationale": "锚⚓英格兰 vs 刚果(金)(58%) × 波胆🎯1:1(9.5%) → 22.3x, 命中5.5%"
-    },
-    {
-      "rank": 7,
-      "odds": 23.1,
-      "hitPct": 4.9,
-      "ev": 0.131,
-      "anchor": {
-        "bet": "【小2.5球】美国 vs 波黑",
-        "odds": 2.1,
-        "prob": 62,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "英格兰 vs 刚果(金)",
-        "bet": "1:1",
-        "odds": 11,
-        "prob": 7.9
-      },
-      "rationale": "锚⚓美国 vs 波黑(62%) × 波胆🎯1:1(7.9%) → 23.1x, 命中4.9%"
-    },
-    {
-      "rank": 8,
-      "odds": 23.1,
-      "hitPct": 4.22,
-      "ev": -0.026,
-      "anchor": {
-        "bet": "【小2.5球】美国 vs 波黑",
-        "odds": 2.1,
-        "prob": 62,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "英格兰 vs 刚果(金)",
-        "bet": "2:1",
-        "odds": 11,
-        "prob": 6.8
-      },
-      "rationale": "锚⚓美国 vs 波黑(62%) × 波胆🎯2:1(6.8%) → 23.1x, 命中4.2%"
-    },
-    {
-      "rank": 9,
-      "odds": 14,
-      "hitPct": 8.34,
-      "ev": 0.169,
-      "anchor": {
-        "bet": "【小3球】美国 vs 波黑",
-        "odds": 1.65,
-        "prob": 81.7,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "比利时 vs 塞内加尔",
-        "bet": "1:0",
-        "odds": 8.5,
-        "prob": 10.2
-      },
-      "rationale": "锚⚓美国 vs 波黑(82%) × 波胆🎯1:0(10.2%) → 14.0x, 命中8.3%"
-    },
-    {
-      "rank": 10,
-      "odds": 14.3,
-      "hitPct": 7.67,
-      "ev": 0.098,
-      "anchor": {
-        "bet": "【小2.5球】比利时 vs 塞内加尔",
-        "odds": 1.909,
-        "prob": 65,
-        "market": "大小球"
-      },
-      "score": {
-        "match": "美国 vs 波黑",
-        "bet": "1:0",
-        "odds": 7.5,
-        "prob": 11.8
-      },
-      "rationale": "锚⚓比利时 vs 塞内加尔(65%) × 波胆🎯1:0(11.8%) → 14.3x, 命中7.7%"
+      "rationale": "锚⚓葡萄牙 vs 克罗地亚 双方进球=否(50%) × 波胆🎯1:1(10.5%) → 20.5x, 命中5.3%"
     }
   ],
   "finalVerdict": {
-    "verdict": "今日最佳：均衡收益型组合 8.25x",
-    "reason": "美国 vs 波黑 + 塞内加尔 不败。Portfolio Score=93/100，EV=+104.6%，命中率24.8%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
+    "verdict": "今日最佳：均衡收益型组合 14.63x",
+    "reason": "奥地利 不败 + 葡萄牙 vs 克罗地亚。Portfolio Score=96/100，EV=+242.1%，命中率23.39%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
     "bestPortfolio": {
-      "score": 93,
-      "odds": 8.25,
+      "score": 96,
+      "odds": 14.63,
       "legs": [
         {
-          "id": "usa-bih-r32_un2",
-          "bet": "【小2球】美国 vs 波黑",
-          "odds": 3.3,
-          "prob": 0.6200000000000001,
-          "mvi": 2.0460000000000003,
-          "ev": 1.046,
-          "market": "比分区间",
-          "match": "美国 vs 波黑",
+          "id": "esp-aut-r32_dnb_a",
+          "bet": "【平局退款】奥地利 不败",
+          "odds": 9,
+          "prob": 0.3333333333333333,
+          "mvi": 3,
+          "ev": 2,
+          "market": "平局退款",
+          "match": "西班牙 vs 奥地利",
           "group": "Round of 32",
-          "type": "goals_range",
+          "type": "safety",
           "source": ""
         },
         {
-          "id": "bel-sen-r32_dnb_a",
-          "bet": "【平局退款】塞内加尔 不败",
-          "odds": 2.5,
-          "prob": 0.4000000000000001,
-          "mvi": 1.0000000000000002,
-          "ev": 0,
-          "market": "平局退款",
-          "match": "比利时 vs 塞内加尔",
+          "id": "por-cro-r32_un3",
+          "bet": "【小3球】葡萄牙 vs 克罗地亚",
+          "odds": 1.625,
+          "prob": 0.7017032179377968,
+          "mvi": 1.1402677291489196,
+          "ev": 0.14,
+          "market": "比分区间",
+          "match": "葡萄牙 vs 克罗地亚",
           "group": "Round of 32",
-          "type": "safety",
+          "type": "goals_range",
           "source": ""
         }
       ]
@@ -1905,15 +1794,15 @@
     "oddsAssessment": "⚠️ 综合赔率低于15倍，但组合综合投资价值最高。"
   },
   "yesterdayReview": {
-    "date": "7/1",
+    "date": "7/2",
     "summary": {
       "n": 3,
       "dirHits": 3,
       "dirRate": 1,
-      "over25Hits": 3,
-      "over25Rate": 1,
-      "bttsHits": 2,
-      "bttsRate": 0.6666666666666666,
+      "over25Hits": 1,
+      "over25Rate": 0.3333333333333333,
+      "bttsHits": 1,
+      "bttsRate": 0.3333333333333333,
       "top3Hits": 1,
       "top3Rate": 0.3333333333333333,
       "top1Hits": 0,
@@ -1923,39 +1812,40 @@
     },
     "keyInsights": [
       "方向准确率100%",
-      "大2.5球命中100%（优秀，今日大小球提升权重）",
-      "BTTS命中67%（良好）",
+      "大2.5球命中33%",
+      "BTTS命中33%",
       "Top3比分命中33%（1/3场）"
     ],
     "strategyWeights": {
       "direction": 1.12,
-      "goals": 1.12,
-      "btts": 1,
+      "goals": 0.76,
+      "btts": 0.76,
       "score": 0.6000000000000001,
       "safety": 1.06,
-      "goals_range": 1.02
+      "goals_range": 0.72
     }
   },
   "candidatePool": {
-    "total": 65,
-    "accepted": 25,
-    "rejected": 40,
+    "total": 66,
+    "accepted": 32,
+    "rejected": 34,
     "abandonedMatches": 0
   },
   "stats": {
-    "totalCombinations": 329,
-    "topScore": 93,
-    "scoredCount": 329,
+    "totalCombinations": 464,
+    "topScore": 96,
+    "scoredCount": 464,
     "byMarket": {
-      "胜平负": 6,
+      "胜平负": 5,
       "大小球": 3,
       "BTTS": 3,
-      "双重机会": 2,
       "平局退款": 3,
-      "比分区间": 8
+      "波胆": 6,
+      "比分区间": 10,
+      "双重机会": 2
     },
     "byLegs": {
-      "2腿": 204,
+      "2腿": 339,
       "3腿": 125
     }
   },
