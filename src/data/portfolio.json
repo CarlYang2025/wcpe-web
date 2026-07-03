@@ -1,63 +1,71 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-02T13:55:58.669Z",
-  "targetDate": "7/3",
-  "targetDateDisplay": "2026年7月3日（周五）",
+  "generatedAt": "2026-07-03T13:56:13.799Z",
+  "targetDate": "7/4",
+  "targetDateDisplay": "2026年7月4日（周六）",
   "targetMatchIds": [
-    "esp-aut-r32",
-    "por-cro-r32",
-    "sui-alg-r32"
+    "aus-egy-r32",
+    "arg-cpv-r32",
+    "col-gha-r32"
   ],
-  "oddsFreshness": "2026-07-02T13:55:30.662Z",
+  "oddsFreshness": "2026-07-03T13:55:48.815Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
-    "verdict": "✅ 值得下注",
-    "investableCount": 32,
-    "highMviCount": 9,
-    "positiveEvCount": 16,
-    "suggestedExposure": "70-80%",
-    "summary": "3场比赛，32个可投注项（16个正EV），9个高MVI信号。涵盖7种市场类型。",
+    "verdict": "🟡 机会有限",
+    "investableCount": 23,
+    "highMviCount": 10,
+    "positiveEvCount": 15,
+    "suggestedExposure": "50-70%",
+    "summary": "3场比赛，23个可投注项（15个正EV），10个高MVI信号。涵盖7种市场类型。",
     "highlights": [
-      "奥地利 不败 为本日最强MVI信号(3.00)",
+      "佛得角 不败 为本日最强MVI信号(2.43)",
       "昨日方向准确率正常(100%)，已动态调整策略权重",
-      "已自动排除34个低质量投注项+0场高风险比赛",
-      "多市场覆盖：胜平负、大小球、BTTS、平局退款、波胆、比分区间、双重机会"
+      "已自动排除39个低质量投注项+0场高风险比赛",
+      "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆、比分区间"
     ]
   },
   "qualitativeReport": [
     {
-      "matchId": "esp-aut-r32",
-      "matchDisplay": "西班牙 vs 奥地利",
+      "matchId": "aus-egy-r32",
+      "matchDisplay": "澳大利亚 vs 埃及",
       "flags": [
         "form_concern",
         "factor_weakness"
       ],
-      "thesis": "状态隐患: ⚠️ 奥地利3-3阿尔及利亚展示强大攻击火力——奥；因子短板: 战术匹配",
+      "thesis": "状态隐患: Salah是唯一能打破僵局的绝对巨星,若被限制则埃；因子短板: ELO差、历史交锋",
       "qualitativeConfidence": 1,
       "adjustments": {
         "weakFactors": [
+          "eloDiffScore",
+          "h2hScore",
           "tacticalScore"
         ],
-        "lessonsApplied": []
+        "marketGoalsLean": "under",
+        "lessonsApplied": [
+          "factor_breakdown_historical"
+        ]
       }
     },
     {
-      "matchId": "por-cro-r32",
-      "matchDisplay": "葡萄牙 vs 克罗地亚",
-      "flags": [],
-      "thesis": "",
-      "qualitativeConfidence": 1,
-      "adjustments": {
-        "lessonsApplied": []
-      }
-    },
-    {
-      "matchId": "sui-alg-r32",
-      "matchDisplay": "瑞士 vs 阿尔及利亚",
+      "matchId": "arg-cpv-r32",
+      "matchDisplay": "阿根廷 vs 佛得角",
       "flags": [
         "form_concern"
       ],
-      "thesis": "状态隐患: ⚠️ 瑞士进攻创造力有限——小组赛仅凭Embolo",
+      "thesis": "状态隐患: 佛得角小组赛0-0逼平西班牙,证明了极端防守策略的",
+      "qualitativeConfidence": 1,
+      "adjustments": {
+        "marketGoalsLean": "over",
+        "lessonsApplied": []
+      }
+    },
+    {
+      "matchId": "col-gha-r32",
+      "matchDisplay": "哥伦比亚 vs 加纳",
+      "flags": [
+        "form_concern"
+      ],
+      "thesis": "状态隐患: 加纳中场Partey+Sulemana的拦截能力可",
       "qualitativeConfidence": 1,
       "adjustments": {
         "lessonsApplied": []
@@ -66,601 +74,316 @@
   ],
   "investmentPool": [
     {
-      "match": "西班牙 vs 奥地利",
+      "match": "阿根廷 vs 佛得角",
+      "market": "胜平负",
+      "bet": "【胜平负】佛得角 客胜",
+      "odds": 21,
+      "ev": 1.52,
+      "mvi": 1.52,
+      "prob": 0.12,
+      "reason": "高错价信号",
+      "type": "direction",
+      "source": ""
+    },
+    {
+      "match": "阿根廷 vs 佛得角",
       "market": "平局退款",
-      "bet": "【平局退款】奥地利 不败",
-      "odds": 9,
-      "ev": 2,
-      "mvi": 3,
-      "prob": 0.3333333333333333,
+      "bet": "【平局退款】佛得角 不败",
+      "odds": 17,
+      "ev": 1.429,
+      "mvi": 2.4285714285714284,
+      "prob": 0.14285714285714285,
       "reason": "高错价信号",
       "type": "safety",
       "source": ""
     },
     {
-      "match": "西班牙 vs 奥地利",
-      "market": "胜平负",
-      "bet": "【胜平负】奥地利 客胜",
-      "odds": 11,
-      "ev": 1.64,
-      "mvi": 1,
-      "prob": 0.24,
-      "reason": "正EV",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "西班牙 vs 奥地利",
-      "market": "波胆",
-      "bet": "【波胆】西班牙 vs 奥地利 比分 2:2",
-      "odds": 23,
-      "ev": 0.656,
-      "mvi": 1.656,
-      "prob": 0.072,
+      "match": "阿根廷 vs 佛得角",
+      "market": "BTTS",
+      "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+      "odds": 3,
+      "ev": 0.5,
+      "mvi": 2.06,
+      "prob": 0.5,
       "reason": "高错价信号",
-      "type": "score",
-      "source": "Bet365"
+      "type": "btts",
+      "source": ""
     },
     {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "比分区间",
-      "bet": "【小2球】葡萄牙 vs 克罗地亚",
-      "odds": 3.3,
-      "ev": 0.584,
-      "mvi": 1.5839999999999999,
-      "prob": 0.48,
+      "match": "哥伦比亚 vs 加纳",
+      "market": "平局退款",
+      "bet": "【平局退款】加纳 不败",
+      "odds": 6.5,
+      "ev": 0.368,
+      "mvi": 1.3684210526315788,
+      "prob": 0.21052631578947367,
       "reason": "高错价信号",
-      "type": "goals_range",
+      "type": "safety",
       "source": ""
     },
     {
-      "match": "西班牙 vs 奥地利",
-      "market": "胜平负",
-      "bet": "【胜平负】西班牙 vs 奥地利 平局",
-      "odds": 5.5,
-      "ev": 0.54,
-      "mvi": 1,
-      "prob": 0.28,
-      "reason": "正EV",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "瑞士 vs 阿尔及利亚",
+      "match": "哥伦比亚 vs 加纳",
       "market": "比分区间",
-      "bet": "【小2球】瑞士 vs 阿尔及利亚",
-      "odds": 2.25,
-      "ev": 0.238,
-      "mvi": 1.2375000000000007,
+      "bet": "【小2球】哥伦比亚 vs 加纳",
+      "odds": 2.425,
+      "ev": 0.334,
+      "mvi": 1.3337500000000004,
       "prob": 0.5500000000000003,
       "reason": "高错价信号",
       "type": "goals_range",
       "source": ""
     },
     {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "波胆",
-      "bet": "【波胆】葡萄牙 vs 克罗地亚 比分 2:0",
-      "odds": 9,
-      "ev": 0.215,
-      "mvi": 1.215,
-      "prob": 0.135,
-      "reason": "高错价信号",
-      "type": "score",
-      "source": "Bet365"
+      "match": "哥伦比亚 vs 加纳",
+      "market": "胜平负",
+      "bet": "【胜平负】加纳 客胜",
+      "odds": 8.5,
+      "ev": 0.36,
+      "mvi": 0.98,
+      "prob": 0.16,
+      "reason": "正EV",
+      "type": "direction",
+      "source": ""
     },
     {
-      "match": "西班牙 vs 奥地利",
+      "match": "阿根廷 vs 佛得角",
+      "market": "胜平负",
+      "bet": "【胜平负】阿根廷 vs 佛得角 平局",
+      "odds": 8,
+      "ev": 0.28,
+      "mvi": 1.12,
+      "prob": 0.16,
+      "reason": "正EV",
+      "type": "direction",
+      "source": ""
+    },
+    {
+      "match": "阿根廷 vs 佛得角",
       "market": "比分区间",
-      "bet": "【小3球】西班牙 vs 奥地利",
-      "odds": 1.725,
-      "ev": 0.162,
-      "mvi": 1.1618115491438266,
-      "prob": 0.6735139415326531,
+      "bet": "【大3.5球】阿根廷 vs 佛得角",
+      "odds": 2.5,
+      "ev": 0.161,
+      "mvi": 1.1608909448922091,
+      "prob": 0.46435637795688367,
       "reason": "高错价信号",
       "type": "goals_range",
       "source": ""
     },
     {
-      "match": "葡萄牙 vs 克罗地亚",
+      "match": "哥伦比亚 vs 加纳",
+      "market": "BTTS",
+      "bet": "【BTTS】哥伦比亚 vs 加纳 双方进球=是",
+      "odds": 2.25,
+      "ev": 0.125,
+      "mvi": 1.11,
+      "prob": 0.5,
+      "reason": "正EV",
+      "type": "btts",
+      "source": ""
+    },
+    {
+      "match": "阿根廷 vs 佛得角",
+      "market": "大小球",
+      "bet": "【大2.5球】阿根廷 vs 佛得角",
+      "odds": 1.615,
+      "ev": 0.098,
+      "mvi": 1.13,
+      "prob": 0.68,
+      "reason": "正EV",
+      "type": "goals",
+      "source": ""
+    },
+    {
+      "match": "澳大利亚 vs 埃及",
+      "market": "BTTS",
+      "bet": "【BTTS】澳大利亚 vs 埃及 双方进球=是",
+      "odds": 2.2,
+      "ev": 0.1,
+      "mvi": 0.85,
+      "prob": 0.5,
+      "reason": "正EV",
+      "type": "btts",
+      "source": ""
+    },
+    {
+      "match": "哥伦比亚 vs 加纳",
       "market": "比分区间",
-      "bet": "【小3球】葡萄牙 vs 克罗地亚",
-      "odds": 1.625,
-      "ev": 0.14,
-      "mvi": 1.1402677291489196,
-      "prob": 0.7017032179377968,
+      "bet": "【小3球】哥伦比亚 vs 加纳",
+      "odds": 1.4,
+      "ev": 0.068,
+      "mvi": 1.067789854918409,
+      "prob": 0.7627070392274351,
       "reason": "正EV",
       "type": "goals_range",
       "source": ""
     },
     {
-      "match": "西班牙 vs 奥地利",
-      "market": "波胆",
-      "bet": "【波胆】西班牙 vs 奥地利 比分 2:1",
-      "odds": 9.5,
-      "ev": 0.121,
-      "mvi": 1.121,
-      "prob": 0.118,
-      "reason": "正EV",
-      "type": "score",
-      "source": "Bet365"
+      "match": "澳大利亚 vs 埃及",
+      "market": "平局退款",
+      "bet": "【平局退款】澳大利亚 不败",
+      "odds": 2.375,
+      "ev": 0.048,
+      "mvi": 1.0477941176470589,
+      "prob": 0.44117647058823534,
+      "reason": "边际价值",
+      "type": "safety",
+      "source": ""
     },
     {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "波胆",
-      "bet": "【波胆】葡萄牙 vs 克罗地亚 比分 3:0",
-      "odds": 15,
-      "ev": 0.08,
-      "mvi": 1.0799999999999998,
-      "prob": 0.072,
-      "reason": "正EV",
-      "type": "score",
-      "source": "Bet365"
-    },
-    {
-      "match": "西班牙 vs 奥地利",
-      "market": "波胆",
-      "bet": "【波胆】西班牙 vs 奥地利 比分 1:1",
-      "odds": 10,
+      "match": "澳大利亚 vs 埃及",
+      "market": "胜平负",
+      "bet": "【胜平负】澳大利亚 主胜",
+      "odds": 3.5,
       "ev": 0.05,
-      "mvi": 1.0499999999999998,
-      "prob": 0.105,
+      "mvi": 0.96,
+      "prob": 0.3,
       "reason": "正EV",
-      "type": "score",
-      "source": "Bet365"
-    },
-    {
-      "match": "西班牙 vs 奥地利",
-      "market": "BTTS",
-      "bet": "【BTTS】西班牙 vs 奥地利 双方进球=是",
-      "odds": 2.05,
-      "ev": 0.025,
-      "mvi": 1,
-      "prob": 0.5,
-      "reason": "边际价值",
-      "type": "btts",
+      "type": "direction",
       "source": ""
     },
     {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "BTTS",
-      "bet": "【BTTS】葡萄牙 vs 克罗地亚 双方进球=否",
-      "odds": 2.05,
-      "ev": 0.025,
-      "mvi": 1,
-      "prob": 0.5,
+      "match": "哥伦比亚 vs 加纳",
+      "market": "胜平负",
+      "bet": "【胜平负】哥伦比亚 vs 加纳 平局",
+      "odds": 4.333,
+      "ev": 0.04,
+      "mvi": 0.94,
+      "prob": 0.24,
       "reason": "边际价值",
-      "type": "btts",
+      "type": "direction",
       "source": ""
     },
     {
-      "match": "瑞士 vs 阿尔及利亚",
+      "match": "哥伦比亚 vs 加纳",
       "market": "比分区间",
-      "bet": "【小3球】瑞士 vs 阿尔及利亚",
-      "odds": 1.325,
-      "ev": 0.011,
-      "mvi": 1.0105868269763514,
+      "bet": "【小2.5球】哥伦比亚 vs 加纳",
+      "odds": 1.775,
+      "ev": -0.024,
+      "mvi": 0.9762500000000004,
+      "prob": 0.5500000000000003,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "哥伦比亚 vs 加纳",
+      "market": "比分区间",
+      "bet": "【小3.5球】哥伦比亚 vs 加纳",
+      "odds": 1.275,
+      "ev": -0.028,
+      "mvi": 0.9724514750149796,
       "prob": 0.7627070392274351,
       "reason": "边际价值",
       "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "大小球",
-      "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
-      "odds": 2.1,
-      "ev": 0.008,
-      "mvi": 1,
-      "prob": 0.48,
-      "reason": "边际价值",
-      "type": "goals",
-      "source": ""
-    },
-    {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "比分区间",
-      "bet": "【小3.5球】葡萄牙 vs 克罗地亚",
-      "odds": 1.425,
-      "ev": 0,
-      "mvi": 0.9999270855613605,
-      "prob": 0.7017032179377968,
-      "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "西班牙 vs 奥地利",
-      "market": "比分区间",
-      "bet": "【小3.5球】西班牙 vs 奥地利",
-      "odds": 1.475,
-      "ev": -0.007,
-      "mvi": 0.9934330637606633,
-      "prob": 0.6735139415326531,
-      "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "瑞士 vs 阿尔及利亚",
-      "market": "大小球",
-      "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
-      "odds": 2.2,
-      "ev": -0.01,
-      "mvi": 1,
-      "prob": 0.45,
-      "reason": "边际价值",
-      "type": "goals",
-      "source": ""
-    },
-    {
-      "match": "西班牙 vs 奥地利",
-      "market": "大小球",
-      "bet": "【小2.5球】西班牙 vs 奥地利",
-      "odds": 2.2,
-      "ev": -0.01,
-      "mvi": 1,
-      "prob": 0.44999999999999996,
-      "reason": "边际价值",
-      "type": "goals",
-      "source": ""
-    },
-    {
-      "match": "西班牙 vs 奥地利",
-      "market": "比分区间",
-      "bet": "【小2.5球】西班牙 vs 奥地利",
-      "odds": 2.2,
-      "ev": -0.01,
-      "mvi": 0.9900000000000002,
-      "prob": 0.45000000000000007,
-      "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "胜平负",
-      "bet": "【胜平负】葡萄牙 主胜",
-      "odds": 1.7,
-      "ev": -0.014,
-      "mvi": 1,
-      "prob": 0.58,
-      "reason": "边际价值",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "葡萄牙 vs 克罗地亚",
-      "market": "比分区间",
-      "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
-      "odds": 2.05,
-      "ev": -0.016,
-      "mvi": 0.9839999999999999,
-      "prob": 0.48,
-      "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "瑞士 vs 阿尔及利亚",
-      "market": "胜平负",
-      "bet": "【胜平负】瑞士 主胜",
-      "odds": 1.95,
-      "ev": -0.025,
-      "mvi": 1,
-      "prob": 0.5,
-      "reason": "边际价值",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "瑞士 vs 阿尔及利亚",
-      "market": "BTTS",
-      "bet": "【BTTS】瑞士 vs 阿尔及利亚 双方进球=是",
-      "odds": 1.95,
-      "ev": -0.025,
-      "mvi": 1,
-      "prob": 0.5,
-      "reason": "边际价值",
-      "type": "btts",
-      "source": ""
-    },
-    {
-      "match": "瑞士 vs 阿尔及利亚",
-      "market": "平局退款",
-      "bet": "【平局退款】瑞士 不败",
-      "odds": 1.4,
-      "ev": -0.028,
-      "mvi": 0.9722222222222222,
-      "prob": 0.6944444444444444,
-      "reason": "边际价值",
-      "type": "safety",
       "source": ""
     }
   ],
   "portfolios": [
     {
       "rank": 1,
-      "score": 96,
-      "odds": 14.63,
-      "hitPct": 23.39,
-      "ev": 2.421,
-      "mvi": 2.07,
+      "score": 89.8,
+      "odds": 7.13,
+      "hitPct": 22.06,
+      "ev": 0.572,
+      "mvi": 1.554,
       "legs": [
         {
-          "id": "esp-aut-r32_dnb_a",
-          "bet": "【平局退款】奥地利 不败",
-          "odds": 9,
-          "prob": 0.3333333333333333,
-          "mvi": 3,
-          "ev": 2,
-          "market": "平局退款",
-          "match": "西班牙 vs 奥地利",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "por-cro-r32_un3",
-          "bet": "【小3球】葡萄牙 vs 克罗地亚",
-          "odds": 1.625,
-          "prob": 0.7017032179377968,
-          "mvi": 1.1402677291489196,
-          "ev": 0.14,
-          "market": "比分区间",
-          "match": "葡萄牙 vs 克罗地亚",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 12,
-        "risk": 6.8,
-        "eff": 9.1,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 0,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 5,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[平局退款+比分区间]：奥地利 不败 + 葡萄牙 vs 克罗地亚。强正EV，命中23.39%，评分96/100。",
-      "comparisonNote": "优于#2的理由：综合评分领先0.7分；EV更高(+38.9%)；MVI信号更强(2.07 vs 2.00)"
-    },
-    {
-      "rank": 2,
-      "score": 95.3,
-      "odds": 11.93,
-      "hitPct": 25.42,
-      "ev": 2.032,
-      "mvi": 2.005,
-      "legs": [
-        {
-          "id": "esp-aut-r32_dnb_a",
-          "bet": "【平局退款】奥地利 不败",
-          "odds": 9,
-          "prob": 0.3333333333333333,
-          "mvi": 3,
-          "ev": 2,
-          "market": "平局退款",
-          "match": "西班牙 vs 奥地利",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "sui-alg-r32_un3",
-          "bet": "【小3球】瑞士 vs 阿尔及利亚",
-          "odds": 1.325,
-          "prob": 0.7627070392274351,
-          "mvi": 1.0105868269763514,
-          "ev": 0.011,
-          "market": "比分区间",
-          "match": "瑞士 vs 阿尔及利亚",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 13,
-        "risk": 6.8,
-        "eff": 7.5,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 0,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 5,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[平局退款+比分区间]：奥地利 不败 + 瑞士 vs 阿尔及利亚。强正EV，命中25.42%，评分95.3/100。",
-      "comparisonNote": "落后#1的理由：综合评分差0.7分"
-    },
-    {
-      "rank": 3,
-      "score": 95.2,
-      "odds": 11.25,
-      "hitPct": 25.33,
-      "ev": 1.85,
-      "mvi": 1.975,
-      "legs": [
-        {
-          "id": "esp-aut-r32_dnb_a",
-          "bet": "【平局退款】奥地利 不败",
-          "odds": 9,
-          "prob": 0.3333333333333333,
-          "mvi": 3,
-          "ev": 2,
-          "market": "平局退款",
-          "match": "西班牙 vs 奥地利",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "por-cro-r32_dc_ha",
-          "bet": "【双重机会】葡萄牙 或 克罗地亚",
-          "odds": 1.25,
-          "prob": 0.76,
-          "mvi": 0.95,
-          "ev": -0.05,
-          "market": "双重机会",
-          "match": "葡萄牙 vs 克罗地亚",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 13,
-        "risk": 8.5,
-        "eff": 8,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 0,
-        "extRisk": 0,
-        "consist": 2.5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 5,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[平局退款+双重机会]：奥地利 不败 + 葡萄牙 或 克罗地亚。强正EV，命中25.33%，评分95.2/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 4,
-      "score": 94.7,
-      "odds": 12,
-      "hitPct": 24,
-      "ev": 1.879,
-      "mvi": 1.98,
-      "legs": [
-        {
-          "id": "esp-aut-r32_dnb_a",
-          "bet": "【平局退款】奥地利 不败",
-          "odds": 9,
-          "prob": 0.3333333333333333,
-          "mvi": 3,
-          "ev": 2,
-          "market": "平局退款",
-          "match": "西班牙 vs 奥地利",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "sui-alg-r32_dc_ha",
-          "bet": "【双重机会】瑞士 或 阿尔及利亚",
-          "odds": 1.333,
-          "prob": 0.72,
-          "mvi": 0.95976,
-          "ev": -0.04,
-          "market": "双重机会",
-          "match": "瑞士 vs 阿尔及利亚",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 15,
-        "hit": 12,
-        "risk": 8.5,
-        "eff": 8.6,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 0,
-        "extRisk": 0,
-        "consist": 2.5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 5,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[平局退款+双重机会]：奥地利 不败 + 瑞士 或 阿尔及利亚。强正EV，命中24%，评分94.7/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 5,
-      "score": 89,
-      "odds": 6.76,
-      "hitPct": 24,
-      "ev": 0.624,
-      "mvi": 1.292,
-      "legs": [
-        {
-          "id": "por-cro-r32_un2",
-          "bet": "【小2球】葡萄牙 vs 克罗地亚",
-          "odds": 3.3,
-          "prob": 0.48,
-          "mvi": 1.5839999999999999,
-          "ev": 0.584,
-          "market": "比分区间",
-          "match": "葡萄牙 vs 克罗地亚",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "esp-aut-r32_btts_y",
-          "bet": "【BTTS】西班牙 vs 奥地利 双方进球=是",
-          "odds": 2.05,
+          "id": "arg-cpv-r32_btts_y",
+          "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+          "odds": 3,
           "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.025,
+          "mvi": 2.06,
+          "ev": 0.5,
           "market": "BTTS",
-          "match": "西班牙 vs 奥地利",
+          "match": "阿根廷 vs 佛得角",
           "group": "Round of 32",
           "type": "btts",
           "source": ""
+        },
+        {
+          "id": "aus-egy-r32_dnb_h",
+          "bet": "【平局退款】澳大利亚 不败",
+          "odds": 2.375,
+          "prob": 0.44117647058823534,
+          "mvi": 1.0477941176470589,
+          "ev": 0.048,
+          "market": "平局退款",
+          "match": "澳大利亚 vs 埃及",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
         }
       ],
       "breakdown": {
-        "ev": 10,
+        "ev": 9.6,
         "mvi": 15,
         "hit": 12,
-        "risk": 5,
-        "eff": 3.8,
+        "risk": 6.8,
+        "eff": 4.5,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 3.2,
+        "stab": 2,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 5,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[平局退款+BTTS]：阿根廷 vs 佛得角 双方进球=是 + 澳大利亚 不败。强正EV，命中22.06%，评分89.8/100。",
+      "comparisonNote": "优于#2的理由：综合评分领先1.9分"
+    },
+    {
+      "rank": 2,
+      "score": 87.9,
+      "odds": 7.28,
+      "hitPct": 27.5,
+      "ev": 1.001,
+      "mvi": 1.697,
+      "legs": [
+        {
+          "id": "arg-cpv-r32_btts_y",
+          "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+          "odds": 3,
+          "prob": 0.5,
+          "mvi": 2.06,
+          "ev": 0.5,
+          "market": "BTTS",
+          "match": "阿根廷 vs 佛得角",
+          "group": "Round of 32",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "col-gha-r32_un2",
+          "bet": "【小2球】哥伦比亚 vs 加纳",
+          "odds": 2.425,
+          "prob": 0.5500000000000003,
+          "mvi": 1.3337500000000004,
+          "ev": 0.334,
+          "market": "比分区间",
+          "match": "哥伦比亚 vs 加纳",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 13,
+        "mvi": 15,
+        "hit": 13,
+        "risk": 5,
+        "eff": 4,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 2.8,
         "extRisk": 0,
         "consist": 5,
         "strat": 0,
@@ -668,53 +391,433 @@
         "qual": 5,
         "cert": 5,
         "weak": 0,
-        "struct": 5
+        "struct": 0
       },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[BTTS+比分区间]：葡萄牙 vs 克罗地亚 + 西班牙 vs 奥地利 双方进球=是。强正EV，命中24%，评分89/100。",
-      "comparisonNote": ""
+      "tier": "确定性优先（平衡）",
+      "rationale": "2场组合[BTTS+比分区间]：阿根廷 vs 佛得角 双方进球=是 + 哥伦比亚 vs 加纳。强正EV，命中27.5%，评分87.9/100。",
+      "comparisonNote": "落后#1的理由：综合评分差1.9分"
     },
     {
-      "rank": 6,
-      "score": 87.6,
-      "odds": 12.38,
-      "hitPct": 15.4,
-      "ev": 0.906,
-      "mvi": 1.119,
+      "rank": 3,
+      "score": 87,
+      "odds": 5.76,
+      "hitPct": 24.26,
+      "ev": 0.397,
+      "mvi": 1.191,
       "legs": [
         {
-          "id": "sui-alg-r32_un2",
-          "bet": "【小2球】瑞士 vs 阿尔及利亚",
-          "odds": 2.25,
+          "id": "col-gha-r32_un2",
+          "bet": "【小2球】哥伦比亚 vs 加纳",
+          "odds": 2.425,
           "prob": 0.5500000000000003,
-          "mvi": 1.2375000000000007,
-          "ev": 0.238,
+          "mvi": 1.3337500000000004,
+          "ev": 0.334,
           "market": "比分区间",
-          "match": "瑞士 vs 阿尔及利亚",
+          "match": "哥伦比亚 vs 加纳",
           "group": "Round of 32",
           "type": "goals_range",
           "source": ""
         },
         {
-          "id": "esp-aut-r32_d",
-          "bet": "【胜平负】西班牙 vs 奥地利 平局",
-          "odds": 5.5,
-          "prob": 0.28,
-          "mvi": 1,
-          "ev": 0.54,
+          "id": "aus-egy-r32_dnb_h",
+          "bet": "【平局退款】澳大利亚 不败",
+          "odds": 2.375,
+          "prob": 0.44117647058823534,
+          "mvi": 1.0477941176470589,
+          "ev": 0.048,
+          "market": "平局退款",
+          "match": "澳大利亚 vs 埃及",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 8.2,
+        "mvi": 14.3,
+        "hit": 12,
+        "risk": 6.8,
+        "eff": 3.6,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.1,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[平局退款+比分区间]：哥伦比亚 vs 加纳 + 澳大利亚 不败。强正EV，命中24.26%，评分87/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 4,
+      "score": 86.6,
+      "odds": 17.28,
+      "hitPct": 12.13,
+      "ev": 1.096,
+      "mvi": 1.481,
+      "legs": [
+        {
+          "id": "arg-cpv-r32_btts_y",
+          "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+          "odds": 3,
+          "prob": 0.5,
+          "mvi": 2.06,
+          "ev": 0.5,
+          "market": "BTTS",
+          "match": "阿根廷 vs 佛得角",
+          "group": "Round of 32",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "col-gha-r32_un2",
+          "bet": "【小2球】哥伦比亚 vs 加纳",
+          "odds": 2.425,
+          "prob": 0.5500000000000003,
+          "mvi": 1.3337500000000004,
+          "ev": 0.334,
+          "market": "比分区间",
+          "match": "哥伦比亚 vs 加纳",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "aus-egy-r32_dnb_h",
+          "bet": "【平局退款】澳大利亚 不败",
+          "odds": 2.375,
+          "prob": 0.44117647058823534,
+          "mvi": 1.0477941176470589,
+          "ev": 0.048,
+          "market": "平局退款",
+          "match": "澳大利亚 vs 埃及",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 13,
+        "mvi": 15,
+        "hit": 8,
+        "risk": 6.2,
+        "eff": 6.9,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 2.4,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 0,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "价值收益型",
+      "rationale": "3场组合[平局退款+BTTS+比分区间]：阿根廷 vs 佛得角 双方进球=是 + 哥伦比亚 vs 加纳 + 澳大利亚 不败。强正EV，命中12.13%，评分86.6/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 5,
+      "score": 86.1,
+      "odds": 10.18,
+      "hitPct": 18.7,
+      "ev": 0.905,
+      "mvi": 1.449,
+      "legs": [
+        {
+          "id": "arg-cpv-r32_btts_y",
+          "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+          "odds": 3,
+          "prob": 0.5,
+          "mvi": 2.06,
+          "ev": 0.5,
+          "market": "BTTS",
+          "match": "阿根廷 vs 佛得角",
+          "group": "Round of 32",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "col-gha-r32_un2",
+          "bet": "【小2球】哥伦比亚 vs 加纳",
+          "odds": 2.425,
+          "prob": 0.5500000000000003,
+          "mvi": 1.3337500000000004,
+          "ev": 0.334,
+          "market": "比分区间",
+          "match": "哥伦比亚 vs 加纳",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "aus-egy-r32_dc_ha",
+          "bet": "【双重机会】澳大利亚 或 埃及",
+          "odds": 1.4,
+          "prob": 0.6799999999999999,
+          "mvi": 0.9519999999999998,
+          "ev": -0.048,
+          "market": "双重机会",
+          "match": "澳大利亚 vs 埃及",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 12.2,
+        "mvi": 15,
+        "hit": 10,
+        "risk": 6.2,
+        "eff": 4.1,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 2.2,
+        "extRisk": 0,
+        "consist": 3.3,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 5,
+        "weak": 0,
+        "struct": 3
+      },
+      "tier": "平衡收益型",
+      "rationale": "3场组合[双重机会+BTTS+比分区间]：阿根廷 vs 佛得角 双方进球=是 + 哥伦比亚 vs 加纳 + 澳大利亚 或 埃及。强正EV，命中18.7%，评分86.1/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 6,
+      "score": 85.3,
+      "odds": 10.5,
+      "hitPct": 15,
+      "ev": 0.575,
+      "mvi": 1.51,
+      "legs": [
+        {
+          "id": "arg-cpv-r32_btts_y",
+          "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+          "odds": 3,
+          "prob": 0.5,
+          "mvi": 2.06,
+          "ev": 0.5,
+          "market": "BTTS",
+          "match": "阿根廷 vs 佛得角",
+          "group": "Round of 32",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "aus-egy-r32_h",
+          "bet": "【胜平负】澳大利亚 主胜",
+          "odds": 3.5,
+          "prob": 0.3,
+          "mvi": 0.96,
+          "ev": 0.05,
           "market": "胜平负",
-          "match": "西班牙 vs 奥地利",
+          "match": "澳大利亚 vs 埃及",
           "group": "Round of 32",
           "type": "direction",
           "source": ""
         }
       ],
       "breakdown": {
-        "ev": 12.8,
-        "mvi": 13.4,
+        "ev": 9.6,
+        "mvi": 15,
         "hit": 10,
         "risk": 5,
-        "eff": 6.9,
+        "eff": 5.8,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 1.7,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[胜平负+BTTS]：阿根廷 vs 佛得角 双方进球=是 + 澳大利亚 主胜。强正EV，命中15%，评分85.3/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 7,
+      "score": 84.1,
+      "odds": 5.63,
+      "hitPct": 23.22,
+      "ev": 0.306,
+      "mvi": 1.135,
+      "legs": [
+        {
+          "id": "arg-cpv-r32_ov3.5",
+          "bet": "【大3.5球】阿根廷 vs 佛得角",
+          "odds": 2.5,
+          "prob": 0.46435637795688367,
+          "mvi": 1.1608909448922091,
+          "ev": 0.161,
+          "market": "比分区间",
+          "match": "阿根廷 vs 佛得角",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "col-gha-r32_btts_y",
+          "bet": "【BTTS】哥伦比亚 vs 加纳 双方进球=是",
+          "odds": 2.25,
+          "prob": 0.5,
+          "mvi": 1.11,
+          "ev": 0.125,
+          "market": "BTTS",
+          "match": "哥伦比亚 vs 加纳",
+          "group": "Round of 32",
+          "type": "btts",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 7.4,
+        "mvi": 13.6,
+        "hit": 12,
+        "risk": 5,
+        "eff": 3.1,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.8,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[比分区间+BTTS]：阿根廷 vs 佛得角 + 哥伦比亚 vs 加纳 双方进球=是。强正EV，命中23.22%，评分84.1/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 8,
+      "score": 83.8,
+      "odds": 8.49,
+      "hitPct": 16.5,
+      "ev": 0.4,
+      "mvi": 1.147,
+      "legs": [
+        {
+          "id": "col-gha-r32_un2",
+          "bet": "【小2球】哥伦比亚 vs 加纳",
+          "odds": 2.425,
+          "prob": 0.5500000000000003,
+          "mvi": 1.3337500000000004,
+          "ev": 0.334,
+          "market": "比分区间",
+          "match": "哥伦比亚 vs 加纳",
+          "group": "Round of 32",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "aus-egy-r32_h",
+          "bet": "【胜平负】澳大利亚 主胜",
+          "odds": 3.5,
+          "prob": 0.3,
+          "mvi": 0.96,
+          "ev": 0.05,
+          "market": "胜平负",
+          "match": "澳大利亚 vs 埃及",
+          "group": "Round of 32",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 8.2,
+        "mvi": 13.8,
+        "hit": 10,
+        "risk": 5,
+        "eff": 4.7,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 3.9,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 5,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[胜平负+比分区间]：哥伦比亚 vs 加纳 + 澳大利亚 主胜。强正EV，命中16.5%，评分83.8/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 9,
+      "score": 79,
+      "odds": 10.5,
+      "hitPct": 14.32,
+      "ev": 0.503,
+      "mvi": 1.249,
+      "legs": [
+        {
+          "id": "col-gha-r32_dnb_a",
+          "bet": "【平局退款】加纳 不败",
+          "odds": 6.5,
+          "prob": 0.21052631578947367,
+          "mvi": 1.3684210526315788,
+          "ev": 0.368,
+          "market": "平局退款",
+          "match": "哥伦比亚 vs 加纳",
+          "group": "Round of 32",
+          "type": "safety",
+          "source": ""
+        },
+        {
+          "id": "arg-cpv-r32_o25",
+          "bet": "【大2.5球】阿根廷 vs 佛得角",
+          "odds": 1.615,
+          "prob": 0.68,
+          "mvi": 1.13,
+          "ev": 0.098,
+          "market": "大小球",
+          "match": "阿根廷 vs 佛得角",
+          "group": "Round of 32",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 9.1,
+        "mvi": 15,
+        "hit": 8,
+        "risk": 6.8,
+        "eff": 6.6,
         "indep": 10,
         "div": 10,
         "corr": 0,
@@ -725,248 +828,71 @@
         "strat": 0.2,
         "valCap": 0,
         "qual": 5,
-        "cert": 3,
-        "weak": 0,
-        "struct": 2
-      },
-      "tier": "价值收益型",
-      "rationale": "2场组合[胜平负+比分区间]：瑞士 vs 阿尔及利亚 + 西班牙 vs 奥地利 平局。强正EV，命中15.4%，评分87.6/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 7,
-      "score": 85.9,
-      "odds": 6.44,
-      "hitPct": 24,
-      "ev": 0.544,
-      "mvi": 1.292,
-      "legs": [
-        {
-          "id": "por-cro-r32_un2",
-          "bet": "【小2球】葡萄牙 vs 克罗地亚",
-          "odds": 3.3,
-          "prob": 0.48,
-          "mvi": 1.5839999999999999,
-          "ev": 0.584,
-          "market": "比分区间",
-          "match": "葡萄牙 vs 克罗地亚",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "sui-alg-r32_h",
-          "bet": "【胜平负】瑞士 主胜",
-          "odds": 1.95,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": -0.025,
-          "market": "胜平负",
-          "match": "瑞士 vs 阿尔及利亚",
-          "group": "Round of 32",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 9.4,
-        "mvi": 15,
-        "hit": 12,
-        "risk": 5,
-        "eff": 3.6,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 3.2,
-        "extRisk": 0,
-        "consist": 2.5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 5,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[比分区间+胜平负]：葡萄牙 vs 克罗地亚 + 瑞士 主胜。强正EV，命中24%，评分85.9/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 8,
-      "score": 82.9,
-      "odds": 15.4,
-      "hitPct": 16.67,
-      "ev": 1.567,
-      "mvi": 0.986,
-      "legs": [
-        {
-          "id": "esp-aut-r32_a",
-          "bet": "【胜平负】奥地利 客胜",
-          "odds": 11,
-          "prob": 0.24,
-          "mvi": 1,
-          "ev": 1.64,
-          "market": "胜平负",
-          "match": "西班牙 vs 奥地利",
-          "group": "Round of 32",
-          "type": "direction",
-          "source": ""
-        },
-        {
-          "id": "sui-alg-r32_dnb_h",
-          "bet": "【平局退款】瑞士 不败",
-          "odds": 1.4,
-          "prob": 0.6944444444444444,
-          "mvi": 0.9722222222222222,
-          "ev": -0.028,
-          "market": "平局退款",
-          "match": "瑞士 vs 阿尔及利亚",
-          "group": "Round of 32",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 13,
-        "mvi": 11.8,
-        "hit": 10,
-        "risk": 6.8,
-        "eff": 9.6,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.9,
-        "extRisk": 0,
-        "consist": 2.5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 5,
         "cert": 0,
         "weak": -1,
         "struct": 0
       },
       "tier": "高赔率冲击型（弱腿风险）",
-      "rationale": "2场组合[胜平负+平局退款]：奥地利 客胜 + 瑞士 不败。强正EV，命中16.67%，评分82.9/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 9,
-      "score": 77.7,
-      "odds": 2.78,
-      "hitPct": 36.61,
-      "ev": 0.019,
-      "mvi": 1.005,
-      "legs": [
-        {
-          "id": "sui-alg-r32_un3",
-          "bet": "【小3球】瑞士 vs 阿尔及利亚",
-          "odds": 1.325,
-          "prob": 0.7627070392274351,
-          "mvi": 1.0105868269763514,
-          "ev": 0.011,
-          "market": "比分区间",
-          "match": "瑞士 vs 阿尔及利亚",
-          "group": "Round of 32",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "por-cro-r32_u25",
-          "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
-          "odds": 2.1,
-          "prob": 0.48,
-          "mvi": 1,
-          "ev": 0.008,
-          "market": "大小球",
-          "match": "葡萄牙 vs 克罗地亚",
-          "group": "Round of 32",
-          "type": "goals",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 5.1,
-        "mvi": 12.1,
-        "hit": 14,
-        "risk": 5,
-        "eff": 1.5,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 5,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0,
-        "valCap": 0,
-        "qual": 5,
-        "cert": 0,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[大小球+比分区间]：瑞士 vs 阿尔及利亚 + 葡萄牙 vs 克罗地亚。边际正EV，命中36.61%，评分77.7/100。",
+      "rationale": "2场组合[大小球+平局退款]：加纳 不败 + 阿根廷 vs 佛得角。强正EV，命中14.32%，评分79/100。",
       "comparisonNote": ""
     },
     {
       "rank": 10,
-      "score": 75.1,
-      "odds": 4.51,
-      "hitPct": 22.5,
-      "ev": 0.015,
-      "mvi": 1,
+      "score": 77.7,
+      "odds": 23.8,
+      "hitPct": 10.9,
+      "ev": 1.593,
+      "mvi": 1.748,
       "legs": [
         {
-          "id": "por-cro-r32_btts_n",
-          "bet": "【BTTS】葡萄牙 vs 克罗地亚 双方进球=否",
-          "odds": 2.05,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.025,
-          "market": "BTTS",
-          "match": "葡萄牙 vs 克罗地亚",
+          "id": "arg-cpv-r32_dnb_a",
+          "bet": "【平局退款】佛得角 不败",
+          "odds": 17,
+          "prob": 0.14285714285714285,
+          "mvi": 2.4285714285714284,
+          "ev": 1.429,
+          "market": "平局退款",
+          "match": "阿根廷 vs 佛得角",
           "group": "Round of 32",
-          "type": "btts",
+          "type": "safety",
           "source": ""
         },
         {
-          "id": "sui-alg-r32_o25",
-          "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
-          "odds": 2.2,
-          "prob": 0.45,
-          "mvi": 1,
-          "ev": -0.01,
-          "market": "大小球",
-          "match": "瑞士 vs 阿尔及利亚",
+          "id": "col-gha-r32_un3",
+          "bet": "【小3球】哥伦比亚 vs 加纳",
+          "odds": 1.4,
+          "prob": 0.7627070392274351,
+          "mvi": 1.067789854918409,
+          "ev": 0.068,
+          "market": "比分区间",
+          "match": "哥伦比亚 vs 加纳",
           "group": "Round of 32",
-          "type": "goals",
+          "type": "goals_range",
           "source": ""
         }
       ],
       "breakdown": {
-        "ev": 5.1,
-        "mvi": 12,
-        "hit": 12,
-        "risk": 5,
-        "eff": 2.5,
+        "ev": 13,
+        "mvi": 15,
+        "hit": 8,
+        "risk": 6.8,
+        "eff": 10,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 5,
+        "stab": 0.9,
         "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0,
+        "consist": 5,
+        "strat": 0.1,
         "valCap": 0,
         "qual": 5,
         "cert": 0,
-        "weak": 0,
-        "struct": 5
+        "weak": -6,
+        "struct": 0
       },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[BTTS+大小球]：葡萄牙 vs 克罗地亚 双方进球=否 + 瑞士 vs 阿尔及利亚。边际正EV，命中22.5%，评分75.1/100。",
+      "tier": "高赔率冲击型（弱腿风险）",
+      "rationale": "2场组合[平局退款+比分区间]：佛得角 不败 + 哥伦比亚 vs 加纳。强正EV，命中10.9%，评分77.7/100。",
       "comparisonNote": ""
     }
   ],
@@ -975,35 +901,35 @@
       "tier": "核心仓位（均衡收益型·2腿）",
       "portfolio": {
         "id": "best",
-        "score": 96,
-        "odds": 14.63,
-        "ev": 2.421,
-        "hitPct": 23.39,
+        "score": 89.8,
+        "odds": 7.13,
+        "ev": 0.572,
+        "hitPct": 22.06,
         "legs": [
           {
-            "id": "esp-aut-r32_dnb_a",
-            "bet": "【平局退款】奥地利 不败",
-            "odds": 9,
-            "prob": 0.3333333333333333,
-            "mvi": 3,
-            "ev": 2,
-            "market": "平局退款",
-            "match": "西班牙 vs 奥地利",
+            "id": "arg-cpv-r32_btts_y",
+            "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+            "odds": 3,
+            "prob": 0.5,
+            "mvi": 2.06,
+            "ev": 0.5,
+            "market": "BTTS",
+            "match": "阿根廷 vs 佛得角",
             "group": "Round of 32",
-            "type": "safety",
+            "type": "btts",
             "source": ""
           },
           {
-            "id": "por-cro-r32_un3",
-            "bet": "【小3球】葡萄牙 vs 克罗地亚",
-            "odds": 1.625,
-            "prob": 0.7017032179377968,
-            "mvi": 1.1402677291489196,
-            "ev": 0.14,
-            "market": "比分区间",
-            "match": "葡萄牙 vs 克罗地亚",
+            "id": "aus-egy-r32_dnb_h",
+            "bet": "【平局退款】澳大利亚 不败",
+            "odds": 2.375,
+            "prob": 0.44117647058823534,
+            "mvi": 1.0477941176470589,
+            "ev": 0.048,
+            "market": "平局退款",
+            "match": "澳大利亚 vs 埃及",
             "group": "Round of 32",
-            "type": "goals_range",
+            "type": "safety",
             "source": ""
           }
         ]
@@ -1013,36 +939,36 @@
       "isCore": true
     },
     {
-      "tier": "辅助仓位（均衡收益型·2腿）",
+      "tier": "辅助仓位（确定性优先（平衡）·2腿）",
       "portfolio": {
         "id": "alt",
-        "score": 95.3,
-        "odds": 11.93,
-        "ev": 2.032,
-        "hitPct": 25.42,
+        "score": 87.9,
+        "odds": 7.28,
+        "ev": 1.001,
+        "hitPct": 27.5,
         "legs": [
           {
-            "id": "esp-aut-r32_dnb_a",
-            "bet": "【平局退款】奥地利 不败",
-            "odds": 9,
-            "prob": 0.3333333333333333,
-            "mvi": 3,
-            "ev": 2,
-            "market": "平局退款",
-            "match": "西班牙 vs 奥地利",
+            "id": "arg-cpv-r32_btts_y",
+            "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+            "odds": 3,
+            "prob": 0.5,
+            "mvi": 2.06,
+            "ev": 0.5,
+            "market": "BTTS",
+            "match": "阿根廷 vs 佛得角",
             "group": "Round of 32",
-            "type": "safety",
+            "type": "btts",
             "source": ""
           },
           {
-            "id": "sui-alg-r32_un3",
-            "bet": "【小3球】瑞士 vs 阿尔及利亚",
-            "odds": 1.325,
-            "prob": 0.7627070392274351,
-            "mvi": 1.0105868269763514,
-            "ev": 0.011,
+            "id": "col-gha-r32_un2",
+            "bet": "【小2球】哥伦比亚 vs 加纳",
+            "odds": 2.425,
+            "prob": 0.5500000000000003,
+            "mvi": 1.3337500000000004,
+            "ev": 0.334,
             "market": "比分区间",
-            "match": "瑞士 vs 阿尔及利亚",
+            "match": "哥伦比亚 vs 加纳",
             "group": "Round of 32",
             "type": "goals_range",
             "source": ""
@@ -1062,50 +988,50 @@
   ],
   "bestPortfolio": {
     "tier": "均衡收益型",
-    "score": 96,
-    "odds": 14.63,
-    "hitPct": 23.39,
-    "ev": 2.421,
-    "mvi": 2.07,
+    "score": 89.8,
+    "odds": 7.13,
+    "hitPct": 22.06,
+    "ev": 0.572,
+    "mvi": 1.554,
     "legs": [
       {
-        "id": "esp-aut-r32_dnb_a",
-        "bet": "【平局退款】奥地利 不败",
-        "odds": 9,
-        "prob": 0.3333333333333333,
-        "mvi": 3,
-        "ev": 2,
-        "market": "平局退款",
-        "match": "西班牙 vs 奥地利",
+        "id": "arg-cpv-r32_btts_y",
+        "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+        "odds": 3,
+        "prob": 0.5,
+        "mvi": 2.06,
+        "ev": 0.5,
+        "market": "BTTS",
+        "match": "阿根廷 vs 佛得角",
         "group": "Round of 32",
-        "type": "safety",
+        "type": "btts",
         "source": ""
       },
       {
-        "id": "por-cro-r32_un3",
-        "bet": "【小3球】葡萄牙 vs 克罗地亚",
-        "odds": 1.625,
-        "prob": 0.7017032179377968,
-        "mvi": 1.1402677291489196,
-        "ev": 0.14,
-        "market": "比分区间",
-        "match": "葡萄牙 vs 克罗地亚",
+        "id": "aus-egy-r32_dnb_h",
+        "bet": "【平局退款】澳大利亚 不败",
+        "odds": 2.375,
+        "prob": 0.44117647058823534,
+        "mvi": 1.0477941176470589,
+        "ev": 0.048,
+        "market": "平局退款",
+        "match": "澳大利亚 vs 埃及",
         "group": "Round of 32",
-        "type": "goals_range",
+        "type": "safety",
         "source": ""
       }
     ],
     "breakdown": {
-      "ev": 13,
+      "ev": 9.6,
       "mvi": 15,
       "hit": 12,
       "risk": 6.8,
-      "eff": 9.1,
+      "eff": 4.5,
       "indep": 10,
       "div": 10,
       "corr": 0,
       "sRisk": 0,
-      "stab": 0,
+      "stab": 2,
       "extRisk": 0,
       "consist": 5,
       "strat": 0.1,
@@ -1115,311 +1041,241 @@
       "weak": 0,
       "struct": 5
     },
-    "rationale": "2场组合[平局退款+比分区间]：奥地利 不败 + 葡萄牙 vs 克罗地亚。强正EV，命中23.39%，评分96/100。",
+    "rationale": "2场组合[BTTS+平局退款]：阿根廷 vs 佛得角 双方进球=是 + 澳大利亚 不败。强正EV，命中22.06%，评分89.8/100。",
     "decisionLogic": {
-      "whyBest": "综合评分领先0.7分；EV更高(+38.9%)；MVI信号更强(2.07 vs 2.00)",
-      "keyDifferentiator": "更高的期望值"
+      "whyBest": "综合评分领先1.9分",
+      "keyDifferentiator": "更好的EV/风险/命中率综合平衡"
     }
   },
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-38.3%)",
+      "reason": "EV显著负(-9.8%)",
       "count": 1,
       "examples": [
         {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 主胜",
-          "odds": 1.285,
-          "ev": -0.383,
-          "mvi": 1
+          "match": "澳大利亚 vs 埃及",
+          "bet": "埃及 客胜",
+          "odds": 2.375,
+          "ev": -0.098,
+          "mvi": 0.96
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-8.4%)",
-      "count": 2,
+      "reason": "方向存疑(S2): 模型大2.5球概率仅35%，推荐大2.5缺乏模型支撑",
+      "count": 1,
       "examples": [
         {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利",
-          "odds": 1.666,
-          "ev": -0.084,
-          "mvi": 1
-        },
-        {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚",
-          "odds": 1.666,
-          "ev": -0.084,
-          "mvi": 1
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-15.0%)",
-      "count": 2,
-      "examples": [
-        {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利 双方进球=否",
-          "odds": 1.7,
-          "ev": -0.15,
-          "mvi": 1
-        },
-        {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚 双方进球=是",
-          "odds": 1.7,
-          "ev": -0.15,
-          "mvi": 1
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-16.0%)",
-      "count": 2,
-      "examples": [
-        {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 或 奥地利",
-          "odds": 1.166,
-          "ev": -0.16,
-          "mvi": 0.8395199999999999
-        },
-        {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "阿尔及利亚 不败",
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及",
           "odds": 2.75,
-          "ev": -0.16,
-          "mvi": 0.8402777777777778
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-28.6%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 不败",
-          "odds": 1.071,
-          "ev": -0.286,
-          "mvi": 0.714
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-34.0%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利 比分 1:0",
-          "odds": 7.5,
-          "ev": -0.34,
-          "mvi": 0.6599999999999999
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-22.0%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利 比分 3:1",
-          "odds": 12,
-          "ev": -0.22,
-          "mvi": 0.78
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-28.5%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利",
-          "odds": 1.3,
-          "ev": -0.285,
-          "mvi": 0.715
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "方向存疑(S2): 模型预测2:1(3球)，但推荐小2球小2球——方向矛盾",
-      "count": 1,
-      "examples": [
-        {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利",
-          "odds": 3.45,
-          "ev": 0.553,
+          "ev": -0.038,
           "mvi": 0.85
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-32.3%)",
+      "reason": "EV显著负(-19.3%)",
       "count": 1,
       "examples": [
         {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利",
-          "odds": 2.075,
-          "ev": -0.323,
-          "mvi": 0.677458571319745
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及 双方进球=否",
+          "odds": 1.615,
+          "ev": -0.192,
+          "mvi": 1
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-15.1%)",
+      "reason": "EV显著负(-14.3%)",
       "count": 1,
       "examples": [
         {
-          "match": "西班牙 vs 奥地利",
-          "bet": "西班牙 vs 奥地利",
-          "odds": 2.6,
-          "ev": -0.151,
-          "mvi": 0.848863752015102
+          "match": "澳大利亚 vs 埃及",
+          "bet": "埃及 不败",
+          "odds": 1.533,
+          "ev": -0.143,
+          "mvi": 0.8566764705882353
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-11.2%)",
+      "reason": "EV显著负(-12.6%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及 比分 0:1",
+          "odds": 6,
+          "ev": -0.126,
+          "mvi": 0.8742
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-20.4%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及 比分 1:1",
+          "odds": 6,
+          "ev": -0.204,
+          "mvi": 0.7962000000000001
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-26.4%)",
       "count": 2,
       "examples": [
         {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚 平局",
-          "odds": 3.7,
-          "ev": -0.112,
-          "mvi": 1
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及 比分 0:0",
+          "odds": 6,
+          "ev": -0.264,
+          "mvi": 0.7362000000000001
         },
         {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "克罗地亚 不败",
-          "odds": 3.75,
-          "ev": -0.112,
-          "mvi": 0.888157894736842
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角",
+          "odds": 2.3,
+          "ev": -0.264,
+          "mvi": 0.7
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-10.0%)",
-      "count": 2,
+      "reason": "极低置信+高风险",
+      "count": 1,
       "examples": [
         {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "克罗地亚 客胜",
-          "odds": 5,
-          "ev": -0.1,
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及 比分 1:0",
+          "odds": 8.5,
+          "ev": -0.05,
+          "mvi": 0.9503
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-13.5%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及 比分 0:2",
+          "odds": 10,
+          "ev": -0.135,
+          "mvi": 0.8649999999999999
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "比分区间置信度不足",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及",
+          "odds": 1.45,
+          "ev": -0.058,
+          "mvi": 0.9424999999999998
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-29.1%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及",
+          "odds": 4.4,
+          "ev": -0.291,
+          "mvi": 0.7088363977629517
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "方向存疑(S2): 模型预测1:1(2球)，但推荐大3球——模型不支撑此方向",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及",
+          "odds": 1.2,
+          "ev": 0.007,
+          "mvi": 0.85
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-11.4%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及",
+          "odds": 5.5,
+          "ev": -0.114,
+          "mvi": 0.85
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "方向存疑(S2.5): 模型预测1:1(2球)，但推荐大3.5球——模型不支撑此方向",
+      "count": 1,
+      "examples": [
+        {
+          "match": "澳大利亚 vs 埃及",
+          "bet": "澳大利亚 vs 埃及",
+          "odds": 1.15,
+          "ev": -0.035,
+          "mvi": 0.85
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-17.8%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 主胜",
+          "odds": 1.142,
+          "ev": -0.178,
+          "mvi": 0.9
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-31.9%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角 双方进球=否",
+          "odds": 1.363,
+          "ev": -0.318,
           "mvi": 1
-        },
-        {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚 双方进球=否",
-          "odds": 1.8,
-          "ev": -0.1,
-          "mvi": 1
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-10.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚",
-          "odds": 1.727,
-          "ev": -0.102,
-          "mvi": 1
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-11.8%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚 比分 2:1",
-          "odds": 9,
-          "ev": -0.118,
-          "mvi": 0.8820000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-18.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚 比分 0:0",
-          "odds": 12,
-          "ev": -0.184,
-          "mvi": 0.8160000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-31.1%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚",
-          "odds": 1.325,
-          "ev": -0.311,
-          "mvi": 0.689
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-32.9%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚",
-          "odds": 2.25,
-          "ev": -0.329,
-          "mvi": 0.6711677596399573
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-18.0%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "葡萄牙 vs 克罗地亚",
-          "bet": "葡萄牙 vs 克罗地亚",
-          "odds": 2.75,
-          "ev": -0.18,
-          "mvi": 0.8203161506710589
         }
       ]
     },
@@ -1429,137 +1285,298 @@
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚 平局",
-          "odds": 3.25,
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 或 佛得角",
+          "odds": 1.083,
           "ev": -0.09,
+          "mvi": 0.9097199999999999
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-12.1%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 不败",
+          "odds": 1.025,
+          "ev": -0.121,
+          "mvi": 0.8785714285714284
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-25.2%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角 比分 2:0",
+          "odds": 5.5,
+          "ev": -0.252,
+          "mvi": 0.748
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-19.5%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角 比分 3:0",
+          "odds": 6,
+          "ev": -0.195,
+          "mvi": 0.8046
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-15.6%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角 比分 4:0",
+          "odds": 8.5,
+          "ev": -0.156,
+          "mvi": 0.84405
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-35.7%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角 比分 1:0",
+          "odds": 7,
+          "ev": -0.357,
+          "mvi": 0.6433
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-13.3%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角",
+          "odds": 1.275,
+          "ev": -0.133,
+          "mvi": 0.8670000000000001
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "⚡方向矛盾(S3): 模型预测4:0(4球)，但推荐小2球小2球——方向矛盾",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角",
+          "odds": 3.55,
+          "ev": 0.136,
+          "mvi": 1.1359999999999995
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-28.0%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角",
+          "odds": 2.25,
+          "ev": -0.28,
+          "mvi": 0.7199999999999996
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-19.7%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "阿根廷 vs 佛得角",
+          "bet": "阿根廷 vs 佛得角",
+          "odds": 1.5,
+          "ev": -0.197,
+          "mvi": 0.8034654330646746
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-14.8%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 主胜",
+          "odds": 1.42,
+          "ev": -0.148,
+          "mvi": 0.93
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-21.5%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳 双方进球=否",
+          "odds": 1.571,
+          "ev": -0.215,
           "mvi": 1
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-10.4%)",
-      "count": 1,
+      "reason": "EV显著负(-8.8%)",
+      "count": 2,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚 比分 1:0",
-          "odds": 7,
-          "ev": -0.104,
-          "mvi": 0.896
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 或 加纳",
+          "odds": 1.2,
+          "ev": -0.088,
+          "mvi": 0.9119999999999999
+        },
+        {
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳 比分 1:0",
+          "odds": 6,
+          "ev": -0.088,
+          "mvi": 0.912
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-21.6%)",
+      "reason": "EV显著负(-12.3%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚 比分 0:0",
-          "odds": 8,
-          "ev": -0.216,
-          "mvi": 0.784
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 不败",
+          "odds": 1.111,
+          "ev": -0.123,
+          "mvi": 0.8771052631578947
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-42.8%)",
+      "reason": "EV显著负(-17.9%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚 比分 1:1",
-          "odds": 6.5,
-          "ev": -0.428,
-          "mvi": 0.572
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳 比分 2:0",
+          "odds": 6,
+          "ev": -0.179,
+          "mvi": 0.8214
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-32.5%)",
+      "reason": "EV显著负(-13.0%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚 比分 2:0",
-          "odds": 9,
-          "ev": -0.325,
-          "mvi": 0.675
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳 比分 1:1",
+          "odds": 8.5,
+          "ev": -0.13,
+          "mvi": 0.86955
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-38.2%)",
+      "reason": "EV显著负(-12.4%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚 比分 2:1",
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳 比分 2:1",
           "odds": 9.5,
-          "ev": -0.382,
-          "mvi": 0.6175
+          "ev": -0.124,
+          "mvi": 0.8759000000000001
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-26.9%)",
+      "reason": "EV显著负(-28.3%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚",
-          "odds": 1.625,
-          "ev": -0.269,
-          "mvi": 0.7312499999999995
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳 比分 0:0",
+          "odds": 8.5,
+          "ev": -0.283,
+          "mvi": 0.71655
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-9.2%)",
+      "reason": "EV显著负(-31.4%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚",
-          "odds": 1.65,
-          "ev": -0.092,
-          "mvi": 0.9075000000000004
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳",
+          "odds": 1.525,
+          "ev": -0.314,
+          "mvi": 0.6862499999999996
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-21.7%)",
+      "reason": "EV显著负(-32.4%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚",
-          "odds": 3.3,
-          "ev": -0.217,
-          "mvi": 0.7830667705494642
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳",
+          "odds": 2.85,
+          "ev": -0.324,
+          "mvi": 0.67628493820181
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "⚡方向矛盾(S3.5): 模型预测1:0(1球)，但推荐大3.5球——模型不支撑此方向",
+      "reason": "EV显著负(-15.8%)",
       "count": 1,
       "examples": [
         {
-          "match": "瑞士 vs 阿尔及利亚",
-          "bet": "瑞士 vs 阿尔及利亚",
-          "odds": 3.9,
-          "ev": -0.075,
-          "mvi": 0.925442547013003
+          "match": "哥伦比亚 vs 加纳",
+          "bet": "哥伦比亚 vs 加纳",
+          "odds": 3.55,
+          "ev": -0.158,
+          "mvi": 0.8423900107426053
         }
       ]
     }
@@ -1567,226 +1584,207 @@
   "scoreParlays": [
     {
       "rank": 1,
-      "odds": 75.9,
-      "hitPct": 3.46,
-      "ev": 1.623,
+      "odds": 31.5,
+      "hitPct": 4.08,
+      "ev": 0.285,
       "anchor": {
-        "bet": "【小2球】葡萄牙 vs 克罗地亚",
-        "odds": 3.3,
-        "prob": 48,
+        "bet": "【小2球】哥伦比亚 vs 加纳",
+        "odds": 2.425,
+        "prob": 55,
         "market": "比分区间"
       },
       "score": {
-        "match": "西班牙 vs 奥地利",
-        "bet": "2:2",
-        "odds": 23,
-        "prob": 7.2
+        "match": "阿根廷 vs 佛得角",
+        "bet": "2:1",
+        "odds": 13,
+        "prob": 7.4
       },
-      "rationale": "锚⚓葡萄牙 vs 克罗地亚(48%) × 波胆🎯2:2(7.2%) → 75.9x, 命中3.5%"
+      "rationale": "锚⚓哥伦比亚 vs 加纳(55%) × 波胆🎯2:1(7.4%) → 31.5x, 命中4.1%"
     },
     {
       "rank": 2,
-      "odds": 51.8,
-      "hitPct": 3.96,
-      "ev": 1.049,
+      "odds": 30,
+      "hitPct": 4.32,
+      "ev": 0.297,
       "anchor": {
-        "bet": "【小2球】瑞士 vs 阿尔及利亚",
-        "odds": 2.25,
-        "prob": 55,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "西班牙 vs 奥地利",
-        "bet": "2:2",
-        "odds": 23,
-        "prob": 7.2
-      },
-      "rationale": "锚⚓瑞士 vs 阿尔及利亚(55%) × 波胆🎯2:2(7.2%) → 51.8x, 命中4.0%"
-    },
-    {
-      "rank": 3,
-      "odds": 31.4,
-      "hitPct": 5.66,
-      "ev": 0.776,
-      "anchor": {
-        "bet": "【小2球】葡萄牙 vs 克罗地亚",
-        "odds": 3.3,
-        "prob": 48,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "西班牙 vs 奥地利",
-        "bet": "2:1",
-        "odds": 9.5,
-        "prob": 11.8
-      },
-      "rationale": "锚⚓葡萄牙 vs 克罗地亚(48%) × 波胆🎯2:1(11.8%) → 31.3x, 命中5.7%"
-    },
-    {
-      "rank": 4,
-      "odds": 33.8,
-      "hitPct": 3.96,
-      "ev": 0.337,
-      "anchor": {
-        "bet": "【小2球】瑞士 vs 阿尔及利亚",
-        "odds": 2.25,
-        "prob": 55,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "葡萄牙 vs 克罗地亚",
-        "bet": "3:0",
-        "odds": 15,
-        "prob": 7.2
-      },
-      "rationale": "锚⚓瑞士 vs 阿尔及利亚(55%) × 波胆🎯3:0(7.2%) → 33.8x, 命中4.0%"
-    },
-    {
-      "rank": 5,
-      "odds": 33,
-      "hitPct": 3.24,
-      "ev": 0.069,
-      "anchor": {
-        "bet": "【小2.5球】西班牙 vs 奥地利",
-        "odds": 2.2,
-        "prob": 45,
-        "market": "比分区间"
-      },
-      "score": {
-        "match": "葡萄牙 vs 克罗地亚",
-        "bet": "3:0",
-        "odds": 15,
-        "prob": 7.2
-      },
-      "rationale": "锚⚓西班牙 vs 奥地利(45%) × 波胆🎯3:0(7.2%) → 33.0x, 命中3.2%"
-    },
-    {
-      "rank": 6,
-      "odds": 19.8,
-      "hitPct": 6.08,
-      "ev": 0.203,
-      "anchor": {
-        "bet": "【小2.5球】西班牙 vs 奥地利",
-        "odds": 2.2,
-        "prob": 45,
-        "market": "大小球"
-      },
-      "score": {
-        "match": "葡萄牙 vs 克罗地亚",
-        "bet": "2:0",
-        "odds": 9,
-        "prob": 13.5
-      },
-      "rationale": "锚⚓西班牙 vs 奥地利(45%) × 波胆🎯2:0(13.5%) → 19.8x, 命中6.1%"
-    },
-    {
-      "rank": 7,
-      "odds": 19.8,
-      "hitPct": 6.08,
-      "ev": 0.203,
-      "anchor": {
-        "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
-        "odds": 2.2,
-        "prob": 45,
-        "market": "大小球"
-      },
-      "score": {
-        "match": "葡萄牙 vs 克罗地亚",
-        "bet": "2:0",
-        "odds": 9,
-        "prob": 13.5
-      },
-      "rationale": "锚⚓瑞士 vs 阿尔及利亚(45%) × 波胆🎯2:0(13.5%) → 19.8x, 命中6.1%"
-    },
-    {
-      "rank": 8,
-      "odds": 20.9,
-      "hitPct": 5.31,
-      "ev": 0.11,
-      "anchor": {
-        "bet": "【大2.5球】瑞士 vs 阿尔及利亚",
-        "odds": 2.2,
-        "prob": 45,
-        "market": "大小球"
-      },
-      "score": {
-        "match": "西班牙 vs 奥地利",
-        "bet": "2:1",
-        "odds": 9.5,
-        "prob": 11.8
-      },
-      "rationale": "锚⚓瑞士 vs 阿尔及利亚(45%) × 波胆🎯2:1(11.8%) → 20.9x, 命中5.3%"
-    },
-    {
-      "rank": 9,
-      "odds": 21,
-      "hitPct": 5.04,
-      "ev": 0.058,
-      "anchor": {
-        "bet": "【小2.5球】葡萄牙 vs 克罗地亚",
-        "odds": 2.1,
-        "prob": 48,
-        "market": "大小球"
-      },
-      "score": {
-        "match": "西班牙 vs 奥地利",
-        "bet": "1:1",
-        "odds": 10,
-        "prob": 10.5
-      },
-      "rationale": "锚⚓葡萄牙 vs 克罗地亚(48%) × 波胆🎯1:1(10.5%) → 21.0x, 命中5.0%"
-    },
-    {
-      "rank": 10,
-      "odds": 20.5,
-      "hitPct": 5.25,
-      "ev": 0.076,
-      "anchor": {
-        "bet": "【BTTS】葡萄牙 vs 克罗地亚 双方进球=否",
-        "odds": 2.05,
+        "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+        "odds": 3,
         "prob": 50,
         "market": "BTTS"
       },
       "score": {
-        "match": "西班牙 vs 奥地利",
-        "bet": "1:1",
+        "match": "澳大利亚 vs 埃及",
+        "bet": "0:2",
         "odds": 10,
-        "prob": 10.5
+        "prob": 8.7
       },
-      "rationale": "锚⚓葡萄牙 vs 克罗地亚 双方进球=否(50%) × 波胆🎯1:1(10.5%) → 20.5x, 命中5.3%"
+      "rationale": "锚⚓阿根廷 vs 佛得角 双方进球=是(50%) × 波胆🎯0:2(8.6%) → 30.0x, 命中4.3%"
+    },
+    {
+      "rank": 3,
+      "odds": 28.5,
+      "hitPct": 4.61,
+      "ev": 0.314,
+      "anchor": {
+        "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+        "odds": 3,
+        "prob": 50,
+        "market": "BTTS"
+      },
+      "score": {
+        "match": "哥伦比亚 vs 加纳",
+        "bet": "2:1",
+        "odds": 9.5,
+        "prob": 9.2
+      },
+      "rationale": "锚⚓阿根廷 vs 佛得角 双方进球=是(50%) × 波胆🎯2:1(9.2%) → 28.5x, 命中4.6%"
+    },
+    {
+      "rank": 4,
+      "odds": 29.3,
+      "hitPct": 3.71,
+      "ev": 0.084,
+      "anchor": {
+        "bet": "【BTTS】哥伦比亚 vs 加纳 双方进球=是",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "BTTS"
+      },
+      "score": {
+        "match": "阿根廷 vs 佛得角",
+        "bet": "2:1",
+        "odds": 13,
+        "prob": 7.4
+      },
+      "rationale": "锚⚓哥伦比亚 vs 加纳 双方进球=是(50%) × 波胆🎯2:1(7.4%) → 29.3x, 命中3.7%"
+    },
+    {
+      "rank": 5,
+      "odds": 24.3,
+      "hitPct": 4.76,
+      "ev": 0.154,
+      "anchor": {
+        "bet": "【小2球】哥伦比亚 vs 加纳",
+        "odds": 2.425,
+        "prob": 55,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "澳大利亚 vs 埃及",
+        "bet": "0:2",
+        "odds": 10,
+        "prob": 8.7
+      },
+      "rationale": "锚⚓哥伦比亚 vs 加纳(55%) × 波胆🎯0:2(8.6%) → 24.3x, 命中4.8%"
+    },
+    {
+      "rank": 6,
+      "odds": 23.8,
+      "hitPct": 4.28,
+      "ev": 0.017,
+      "anchor": {
+        "bet": "【大3.5球】阿根廷 vs 佛得角",
+        "odds": 2.5,
+        "prob": 46.4,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "哥伦比亚 vs 加纳",
+        "bet": "2:1",
+        "odds": 9.5,
+        "prob": 9.2
+      },
+      "rationale": "锚⚓阿根廷 vs 佛得角(46%) × 波胆🎯2:1(9.2%) → 23.8x, 命中4.3%"
+    },
+    {
+      "rank": 7,
+      "odds": 21.3,
+      "hitPct": 5.19,
+      "ev": 0.103,
+      "anchor": {
+        "bet": "【大3.5球】阿根廷 vs 佛得角",
+        "odds": 2.5,
+        "prob": 46.4,
+        "market": "比分区间"
+      },
+      "score": {
+        "match": "澳大利亚 vs 埃及",
+        "bet": "1:0",
+        "odds": 8.5,
+        "prob": 11.2
+      },
+      "rationale": "锚⚓阿根廷 vs 佛得角(46%) × 波胆🎯1:0(11.2%) → 21.3x, 命中5.2%"
+    },
+    {
+      "rank": 8,
+      "odds": 19.1,
+      "hitPct": 5.59,
+      "ev": 0.069,
+      "anchor": {
+        "bet": "【BTTS】哥伦比亚 vs 加纳 双方进球=是",
+        "odds": 2.25,
+        "prob": 50,
+        "market": "BTTS"
+      },
+      "score": {
+        "match": "澳大利亚 vs 埃及",
+        "bet": "1:0",
+        "odds": 8.5,
+        "prob": 11.2
+      },
+      "rationale": "锚⚓哥伦比亚 vs 加纳 双方进球=是(50%) × 波胆🎯1:0(11.2%) → 19.1x, 命中5.6%"
+    },
+    {
+      "rank": 9,
+      "odds": 18.7,
+      "hitPct": 5.12,
+      "ev": -0.043,
+      "anchor": {
+        "bet": "【BTTS】澳大利亚 vs 埃及 双方进球=是",
+        "odds": 2.2,
+        "prob": 50,
+        "market": "BTTS"
+      },
+      "score": {
+        "match": "哥伦比亚 vs 加纳",
+        "bet": "1:1",
+        "odds": 8.5,
+        "prob": 10.2
+      },
+      "rationale": "锚⚓澳大利亚 vs 埃及 双方进球=是(50%) × 波胆🎯1:1(10.2%) → 18.7x, 命中5.1%"
     }
   ],
   "finalVerdict": {
-    "verdict": "今日最佳：均衡收益型组合 14.63x",
-    "reason": "奥地利 不败 + 葡萄牙 vs 克罗地亚。Portfolio Score=96/100，EV=+242.1%，命中率23.39%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
+    "verdict": "今日最佳：均衡收益型组合 7.13x",
+    "reason": "阿根廷 vs 佛得角 双方进球=是 + 澳大利亚 不败。Portfolio Score=89.8/100，EV=+57.2%，命中率22.06%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
     "bestPortfolio": {
-      "score": 96,
-      "odds": 14.63,
+      "score": 89.8,
+      "odds": 7.13,
       "legs": [
         {
-          "id": "esp-aut-r32_dnb_a",
-          "bet": "【平局退款】奥地利 不败",
-          "odds": 9,
-          "prob": 0.3333333333333333,
-          "mvi": 3,
-          "ev": 2,
-          "market": "平局退款",
-          "match": "西班牙 vs 奥地利",
+          "id": "arg-cpv-r32_btts_y",
+          "bet": "【BTTS】阿根廷 vs 佛得角 双方进球=是",
+          "odds": 3,
+          "prob": 0.5,
+          "mvi": 2.06,
+          "ev": 0.5,
+          "market": "BTTS",
+          "match": "阿根廷 vs 佛得角",
           "group": "Round of 32",
-          "type": "safety",
+          "type": "btts",
           "source": ""
         },
         {
-          "id": "por-cro-r32_un3",
-          "bet": "【小3球】葡萄牙 vs 克罗地亚",
-          "odds": 1.625,
-          "prob": 0.7017032179377968,
-          "mvi": 1.1402677291489196,
-          "ev": 0.14,
-          "market": "比分区间",
-          "match": "葡萄牙 vs 克罗地亚",
+          "id": "aus-egy-r32_dnb_h",
+          "bet": "【平局退款】澳大利亚 不败",
+          "odds": 2.375,
+          "prob": 0.44117647058823534,
+          "mvi": 1.0477941176470589,
+          "ev": 0.048,
+          "market": "平局退款",
+          "match": "澳大利亚 vs 埃及",
           "group": "Round of 32",
-          "type": "goals_range",
+          "type": "safety",
           "source": ""
         }
       ]
@@ -1794,15 +1792,15 @@
     "oddsAssessment": "⚠️ 综合赔率低于15倍，但组合综合投资价值最高。"
   },
   "yesterdayReview": {
-    "date": "7/2",
+    "date": "7/3",
     "summary": {
       "n": 3,
       "dirHits": 3,
       "dirRate": 1,
-      "over25Hits": 1,
-      "over25Rate": 0.3333333333333333,
-      "bttsHits": 1,
-      "bttsRate": 0.3333333333333333,
+      "over25Hits": 3,
+      "over25Rate": 1,
+      "bttsHits": 2,
+      "bttsRate": 0.6666666666666666,
       "top3Hits": 1,
       "top3Rate": 0.3333333333333333,
       "top1Hits": 0,
@@ -1812,40 +1810,40 @@
     },
     "keyInsights": [
       "方向准确率100%",
-      "大2.5球命中33%",
-      "BTTS命中33%",
+      "大2.5球命中100%（优秀，今日大小球提升权重）",
+      "BTTS命中67%（良好）",
       "Top3比分命中33%（1/3场）"
     ],
     "strategyWeights": {
       "direction": 1.12,
-      "goals": 0.76,
-      "btts": 0.76,
+      "goals": 1.12,
+      "btts": 1,
       "score": 0.6000000000000001,
       "safety": 1.06,
-      "goals_range": 0.72
+      "goals_range": 1.02
     }
   },
   "candidatePool": {
-    "total": 66,
-    "accepted": 32,
-    "rejected": 34,
+    "total": 62,
+    "accepted": 23,
+    "rejected": 39,
     "abandonedMatches": 0
   },
   "stats": {
-    "totalCombinations": 464,
-    "topScore": 96,
-    "scoredCount": 464,
+    "totalCombinations": 297,
+    "topScore": 89.8,
+    "scoredCount": 297,
     "byMarket": {
-      "胜平负": 5,
-      "大小球": 3,
+      "胜平负": 6,
+      "大小球": 4,
       "BTTS": 3,
+      "双重机会": 1,
       "平局退款": 3,
-      "波胆": 6,
-      "比分区间": 10,
-      "双重机会": 2
+      "波胆": 1,
+      "比分区间": 5
     },
     "byLegs": {
-      "2腿": 339,
+      "2腿": 172,
       "3腿": 125
     }
   },
