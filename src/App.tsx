@@ -7,10 +7,11 @@ import Dashboard from './components/Dashboard'
 import MatchDetail from './components/MatchDetail'
 import MatchdaySummary from './components/MatchdaySummary'
 import Portfolio from './components/Portfolio'
+import ScoreParlay from './components/ScoreParlay'
 import portfolioData from './data/portfolio.json'
 import type { Match } from './lib/types'
 
-type Tab = 'dashboard' | 'matchday' | 'portfolio' | 'match'
+type Tab = 'dashboard' | 'matchday' | 'portfolio' | 'scoreParlay' | 'match'
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('dashboard')
@@ -160,6 +161,7 @@ export default function App() {
             <TabBtn active={tab === 'dashboard'} onClick={() => goTab('dashboard')} label="📊 首页" />
             <TabBtn active={tab === 'matchday'} onClick={() => goTab('matchday')} label="🎯 比赛日方案" />
             <TabBtn active={tab === 'portfolio'} onClick={() => goTab('portfolio')} label="📊 投资组合" />
+            <TabBtn active={tab === 'scoreParlay'} onClick={() => goTab('scoreParlay')} label="⚽ 比分串关" />
           </div>
 
           <div className="flex items-center gap-3 text-[10px] text-[#a0a0a0]">
@@ -209,6 +211,9 @@ export default function App() {
         )}
         {tab === 'portfolio' && (
           <Portfolio data={portfolioData} />
+        )}
+        {tab === 'scoreParlay' && (
+          <ScoreParlay matches={matches} predictions={predictions} />
         )}
         {tab === 'match' && selectedMatch && (
           <MatchDetail
