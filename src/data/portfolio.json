@@ -1,25 +1,25 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-04T14:19:39.891Z",
+  "generatedAt": "2026-07-04T15:00:59.974Z",
   "targetDate": "7/5",
   "targetDateDisplay": "2026年7月5日（周日）",
   "targetMatchIds": [
     "can-mar-r16",
     "par-fra-r16"
   ],
-  "oddsFreshness": "2026-07-04T14:08:56.001Z",
+  "oddsFreshness": "2026-07-04T15:00:42.485Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "🟡 机会有限",
-    "investableCount": 14,
-    "highMviCount": 7,
-    "positiveEvCount": 10,
+    "investableCount": 21,
+    "highMviCount": 4,
+    "positiveEvCount": 9,
     "suggestedExposure": "50-70%",
-    "summary": "2场比赛，14个可投注项（10个正EV），7个高MVI信号。涵盖7种市场类型。",
+    "summary": "2场比赛，21个可投注项（9个正EV），4个高MVI信号。涵盖7种市场类型。",
     "highlights": [
-      "巴拉圭 主胜 为本日最强MVI信号(2.04)",
+      "巴拉圭 vs 法国 双方进球=是 为本日最强MVI信号(1.51)",
       "昨日方向准确率正常(67%)，已动态调整策略权重",
-      "已自动排除29个低质量投注项+0场高风险比赛",
+      "已自动排除22个低质量投注项+0场高风险比赛",
       "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆、比分区间"
     ]
   },
@@ -77,45 +77,9 @@
       "market": "胜平负",
       "bet": "【胜平负】巴拉圭 主胜",
       "odds": 17,
-      "ev": 1.04,
-      "mvi": 2.04,
-      "prob": 0.12,
-      "reason": "高错价信号",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "巴拉圭 vs 法国",
-      "market": "平局退款",
-      "bet": "【平局退款】巴拉圭 不败",
-      "odds": 11,
-      "ev": 0.61,
-      "mvi": 1.6097560975609755,
-      "prob": 0.14634146341463414,
-      "reason": "高错价信号",
-      "type": "safety",
-      "source": ""
-    },
-    {
-      "match": "加拿大 vs 摩洛哥",
-      "market": "胜平负",
-      "bet": "【胜平负】加拿大 主胜",
-      "odds": 5.5,
-      "ev": 0.265,
-      "mvi": 1.27,
-      "prob": 0.23,
-      "reason": "高错价信号",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "巴拉圭 vs 法国",
-      "market": "胜平负",
-      "bet": "【胜平负】巴拉圭 vs 法国 平局",
-      "odds": 7,
-      "ev": 0.26,
-      "mvi": 1.26,
-      "prob": 0.18,
+      "ev": 0.36,
+      "mvi": 1.36,
+      "prob": 0.08,
       "reason": "高错价信号",
       "type": "direction",
       "source": ""
@@ -124,48 +88,48 @@
       "match": "巴拉圭 vs 法国",
       "market": "BTTS",
       "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-      "odds": 2.375,
-      "ev": 0.188,
-      "mvi": 1.44,
+      "odds": 2.5,
+      "ev": 0.25,
+      "mvi": 1.51,
       "prob": 0.5,
       "reason": "高错价信号",
       "type": "btts",
       "source": ""
     },
     {
+      "match": "巴拉圭 vs 法国",
+      "market": "胜平负",
+      "bet": "【胜平负】巴拉圭 vs 法国 平局",
+      "odds": 7,
+      "ev": 0.05,
+      "mvi": 1.05,
+      "prob": 0.15,
+      "reason": "正EV",
+      "type": "direction",
+      "source": ""
+    },
+    {
       "match": "加拿大 vs 摩洛哥",
-      "market": "平局退款",
-      "bet": "【平局退款】加拿大 不败",
-      "odds": 3.75,
-      "ev": 0.198,
-      "mvi": 1.1979166666666667,
-      "prob": 0.3194444444444445,
-      "reason": "高错价信号",
-      "type": "safety",
+      "market": "胜平负",
+      "bet": "【胜平负】加拿大 主胜",
+      "odds": 5.5,
+      "ev": 0.045,
+      "mvi": 1.05,
+      "prob": 0.19,
+      "reason": "MVI达标",
+      "type": "direction",
       "source": ""
     },
     {
       "match": "巴拉圭 vs 法国",
-      "market": "波胆",
-      "bet": "【波胆】巴拉圭 vs 法国 比分 1:1",
-      "odds": 15,
-      "ev": 0.131,
-      "mvi": 1.131,
-      "prob": 0.0754,
-      "reason": "正EV",
-      "type": "score",
-      "source": "Bet365"
-    },
-    {
-      "match": "巴拉圭 vs 法国",
-      "market": "比分区间",
-      "bet": "【小2.5球】巴拉圭 vs 法国",
-      "odds": 2.3,
+      "market": "平局退款",
+      "bet": "【平局退款】巴拉圭 不败",
+      "odds": 11,
       "ev": 0.035,
-      "mvi": 1.0350000000000001,
-      "prob": 0.45000000000000007,
+      "mvi": 1.0352941176470587,
+      "prob": 0.09411764705882353,
       "reason": "边际价值",
-      "type": "goals_range",
+      "type": "safety",
       "source": ""
     },
     {
@@ -178,6 +142,30 @@
       "prob": 0.44999999999999996,
       "reason": "边际价值",
       "type": "goals",
+      "source": ""
+    },
+    {
+      "match": "巴拉圭 vs 法国",
+      "market": "波胆",
+      "bet": "【波胆】巴拉圭 vs 法国 比分 0:2",
+      "odds": 6,
+      "ev": 0.028,
+      "mvi": 1.0278,
+      "prob": 0.1713,
+      "reason": "边际价值",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "巴拉圭 vs 法国",
+      "market": "比分区间",
+      "bet": "【小2.5球】巴拉圭 vs 法国",
+      "odds": 2.25,
+      "ev": 0.013,
+      "mvi": 1.0125000000000002,
+      "prob": 0.45000000000000007,
+      "reason": "边际价值",
+      "type": "goals_range",
       "source": ""
     },
     {
@@ -215,142 +203,60 @@
       "reason": "边际价值",
       "type": "goals",
       "source": ""
+    },
+    {
+      "match": "加拿大 vs 摩洛哥",
+      "market": "平局退款",
+      "bet": "【平局退款】加拿大 不败",
+      "odds": 3.75,
+      "ev": -0.01,
+      "mvi": 0.9895833333333334,
+      "prob": 0.2638888888888889,
+      "reason": "边际价值",
+      "type": "safety",
+      "source": ""
+    },
+    {
+      "match": "巴拉圭 vs 法国",
+      "market": "波胆",
+      "bet": "【波胆】巴拉圭 vs 法国 比分 0:3",
+      "odds": 7,
+      "ev": -0.018,
+      "mvi": 0.9821000000000001,
+      "prob": 0.1403,
+      "reason": "边际价值",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "巴拉圭 vs 法国",
+      "market": "波胆",
+      "bet": "【波胆】巴拉圭 vs 法国 比分 0:1",
+      "odds": 7,
+      "ev": -0.024,
+      "mvi": 0.9758,
+      "prob": 0.1394,
+      "reason": "边际价值",
+      "type": "score",
+      "source": "Bet365"
     }
   ],
   "portfolios": [
     {
       "rank": 1,
-      "score": 87.6,
-      "odds": 8.91,
-      "hitPct": 15.97,
-      "ev": 0.423,
-      "mvi": 1.319,
-      "legs": [
-        {
-          "id": "par-fra-r16_btts_y",
-          "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-          "odds": 2.375,
-          "prob": 0.5,
-          "mvi": 1.44,
-          "ev": 0.188,
-          "market": "BTTS",
-          "match": "巴拉圭 vs 法国",
-          "group": "Round of 16",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "can-mar-r16_dnb_h",
-          "bet": "【平局退款】加拿大 不败",
-          "odds": 3.75,
-          "prob": 0.3194444444444445,
-          "mvi": 1.1979166666666667,
-          "ev": 0.198,
-          "market": "平局退款",
-          "match": "加拿大 vs 摩洛哥",
-          "group": "Round of 16",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 8.4,
-        "mvi": 15,
-        "hit": 10,
-        "risk": 6.8,
-        "eff": 5.6,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.3,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 3,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[平局退款+BTTS]：巴拉圭 vs 法国 双方进球=是 + 加拿大 不败。强正EV，命中15.97%，评分87.6/100。",
-      "comparisonNote": "优于#2的理由：综合评分领先3.3分；EV更高(+21.3%)；MVI信号更强(1.32 vs 1.10)"
-    },
-    {
-      "rank": 2,
-      "score": 84.3,
-      "odds": 5.63,
-      "hitPct": 21.52,
-      "ev": 0.21,
-      "mvi": 1.104,
-      "legs": [
-        {
-          "id": "can-mar-r16_dnb_h",
-          "bet": "【平局退款】加拿大 不败",
-          "odds": 3.75,
-          "prob": 0.3194444444444445,
-          "mvi": 1.1979166666666667,
-          "ev": 0.198,
-          "market": "平局退款",
-          "match": "加拿大 vs 摩洛哥",
-          "group": "Round of 16",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "par-fra-r16_un3.5",
-          "bet": "【小3.5球】巴拉圭 vs 法国",
-          "odds": 1.5,
-          "prob": 0.6735139415326531,
-          "mvi": 1.0102709122989797,
-          "ev": 0.01,
-          "market": "比分区间",
-          "match": "巴拉圭 vs 法国",
-          "group": "Round of 16",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 6.7,
-        "mvi": 13.2,
-        "hit": 12,
-        "risk": 6.8,
-        "eff": 3.5,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.4,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 3,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[平局退款+比分区间]：加拿大 不败 + 巴拉圭 vs 法国。强正EV，命中21.52%，评分84.3/100。",
-      "comparisonNote": "落后#1的理由：综合评分差3.3分"
-    },
-    {
-      "rank": 3,
-      "score": 80.8,
-      "odds": 5.23,
+      "score": 81.7,
+      "odds": 5.5,
       "hitPct": 22.5,
-      "ev": 0.176,
-      "mvi": 1.215,
+      "ev": 0.238,
+      "mvi": 1.25,
       "legs": [
         {
           "id": "par-fra-r16_btts_y",
           "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-          "odds": 2.375,
+          "odds": 2.5,
           "prob": 0.5,
-          "mvi": 1.44,
-          "ev": 0.188,
+          "mvi": 1.51,
+          "ev": 0.25,
           "market": "BTTS",
           "match": "巴拉圭 vs 法国",
           "group": "Round of 16",
@@ -372,16 +278,16 @@
         }
       ],
       "breakdown": {
-        "ev": 6.4,
-        "mvi": 14.6,
+        "ev": 6.9,
+        "mvi": 15,
         "hit": 12,
         "risk": 5,
-        "eff": 2.9,
+        "eff": 3.1,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 3.7,
+        "stab": 3.4,
         "extRisk": 0,
         "consist": 3.5,
         "strat": 0.2,
@@ -392,11 +298,11 @@
         "struct": 5
       },
       "tier": "均衡收益型",
-      "rationale": "2场组合[大小球+BTTS]：巴拉圭 vs 法国 双方进球=是 + 加拿大 vs 摩洛哥。强正EV，命中22.5%，评分80.8/100。",
-      "comparisonNote": ""
+      "rationale": "2场组合[大小球+BTTS]：巴拉圭 vs 法国 双方进球=是 + 加拿大 vs 摩洛哥。强正EV，命中22.5%，评分81.7/100。",
+      "comparisonNote": "优于#2的理由：综合评分领先3.6分；EV更高(+23.8%)；MVI信号更强(1.25 vs 1.00)"
     },
     {
-      "rank": 4,
+      "rank": 2,
       "score": 78.1,
       "odds": 3.3,
       "hitPct": 30.31,
@@ -452,82 +358,23 @@
       },
       "tier": "确定性优先（稳健）",
       "rationale": "2场组合[大小球+比分区间]：巴拉圭 vs 法国 + 加拿大 vs 摩洛哥。EV偏低，命中30.31%，评分78.1/100。",
-      "comparisonNote": ""
+      "comparisonNote": "落后#1的理由：综合评分差3.6分"
     },
     {
-      "rank": 5,
-      "score": 77.7,
-      "odds": 13.06,
-      "hitPct": 11.5,
-      "ev": 0.502,
-      "mvi": 1.355,
-      "legs": [
-        {
-          "id": "par-fra-r16_btts_y",
-          "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-          "odds": 2.375,
-          "prob": 0.5,
-          "mvi": 1.44,
-          "ev": 0.188,
-          "market": "BTTS",
-          "match": "巴拉圭 vs 法国",
-          "group": "Round of 16",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "can-mar-r16_h",
-          "bet": "【胜平负】加拿大 主胜",
-          "odds": 5.5,
-          "prob": 0.23,
-          "mvi": 1.27,
-          "ev": 0.265,
-          "market": "胜平负",
-          "match": "加拿大 vs 摩洛哥",
-          "group": "Round of 16",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 9.2,
-        "mvi": 15,
-        "hit": 8,
-        "risk": 5,
-        "eff": 7.3,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.5,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 0,
-        "weak": -1,
-        "struct": 0
-      },
-      "tier": "高赔率冲击型（弱腿风险）",
-      "rationale": "2场组合[胜平负+BTTS]：巴拉圭 vs 法国 双方进球=是 + 加拿大 主胜。强正EV，命中11.5%，评分77.7/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 6,
-      "score": 76.5,
-      "odds": 3.09,
+      "rank": 3,
+      "score": 77,
+      "odds": 3.21,
       "hitPct": 36,
-      "ev": 0.111,
-      "mvi": 1.188,
+      "ev": 0.156,
+      "mvi": 1.218,
       "legs": [
         {
           "id": "par-fra-r16_btts_y",
           "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-          "odds": 2.375,
+          "odds": 2.5,
           "prob": 0.5,
-          "mvi": 1.44,
-          "ev": 0.188,
+          "mvi": 1.51,
+          "ev": 0.25,
           "market": "BTTS",
           "match": "巴拉圭 vs 法国",
           "group": "Round of 16",
@@ -537,10 +384,10 @@
         {
           "id": "can-mar-r16_dc_ha",
           "bet": "【双重机会】加拿大 或 摩洛哥",
-          "odds": 1.3,
+          "odds": 1.285,
           "prob": 0.72,
-          "mvi": 0.936,
-          "ev": -0.064,
+          "mvi": 0.9251999999999999,
+          "ev": -0.075,
           "market": "双重机会",
           "match": "加拿大 vs 摩洛哥",
           "group": "Round of 16",
@@ -549,16 +396,16 @@
         }
       ],
       "breakdown": {
-        "ev": 5.9,
-        "mvi": 14.3,
+        "ev": 6.3,
+        "mvi": 14.6,
         "hit": 14,
         "risk": 6.8,
-        "eff": 1.9,
+        "eff": 2,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 3.5,
+        "stab": 3.2,
         "extRisk": 0,
         "consist": 3.5,
         "strat": 0.1,
@@ -569,16 +416,134 @@
         "struct": 0
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[双重机会+BTTS]：巴拉圭 vs 法国 双方进球=是 + 加拿大 或 摩洛哥。正EV，命中36%，评分76.5/100。",
+      "rationale": "2场组合[双重机会+BTTS]：巴拉圭 vs 法国 双方进球=是 + 加拿大 或 摩洛哥。强正EV，命中36%，评分77/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 7,
-      "score": 75.5,
-      "odds": 2.99,
+      "rank": 4,
+      "score": 76.9,
+      "odds": 3.13,
+      "hitPct": 36.81,
+      "ev": 0.15,
+      "mvi": 1.215,
+      "legs": [
+        {
+          "id": "par-fra-r16_btts_y",
+          "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
+          "odds": 2.5,
+          "prob": 0.5,
+          "mvi": 1.51,
+          "ev": 0.25,
+          "market": "BTTS",
+          "match": "巴拉圭 vs 法国",
+          "group": "Round of 16",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "can-mar-r16_dnb_a",
+          "bet": "【平局退款】摩洛哥 不败",
+          "odds": 1.25,
+          "prob": 0.7361111111111112,
+          "mvi": 0.920138888888889,
+          "ev": -0.08,
+          "market": "平局退款",
+          "match": "加拿大 vs 摩洛哥",
+          "group": "Round of 16",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 6.2,
+        "mvi": 14.6,
+        "hit": 14,
+        "risk": 6.8,
+        "eff": 2,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 3.2,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 4.6,
+        "cert": 2,
+        "weak": 0,
+        "struct": 0
+      },
+      "tier": "确定性优先（稳健）",
+      "rationale": "2场组合[平局退款+BTTS]：巴拉圭 vs 法国 双方进球=是 + 摩洛哥 不败。正EV，命中36.81%，评分76.9/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 5,
+      "score": 76.1,
+      "odds": 9.38,
+      "hitPct": 13.19,
+      "ev": 0.237,
+      "mvi": 1.25,
+      "legs": [
+        {
+          "id": "par-fra-r16_btts_y",
+          "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
+          "odds": 2.5,
+          "prob": 0.5,
+          "mvi": 1.51,
+          "ev": 0.25,
+          "market": "BTTS",
+          "match": "巴拉圭 vs 法国",
+          "group": "Round of 16",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "can-mar-r16_dnb_h",
+          "bet": "【平局退款】加拿大 不败",
+          "odds": 3.75,
+          "prob": 0.2638888888888889,
+          "mvi": 0.9895833333333334,
+          "ev": -0.01,
+          "market": "平局退款",
+          "match": "加拿大 vs 摩洛哥",
+          "group": "Round of 16",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 6.9,
+        "mvi": 15,
+        "hit": 8,
+        "risk": 6.8,
+        "eff": 5.9,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 3.4,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 4.6,
+        "cert": 0,
+        "weak": 0,
+        "struct": 2
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[平局退款+BTTS]：巴拉圭 vs 法国 双方进球=是 + 加拿大 不败。强正EV，命中13.19%，评分76.1/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 6,
+      "score": 75.3,
+      "odds": 2.96,
       "hitPct": 32.4,
-      "ev": -0.031,
-      "mvi": 0.983,
+      "ev": -0.042,
+      "mvi": 0.978,
       "legs": [
         {
           "id": "par-fra-r16_u25",
@@ -596,10 +561,10 @@
         {
           "id": "can-mar-r16_dc_ha",
           "bet": "【双重机会】加拿大 或 摩洛哥",
-          "odds": 1.3,
+          "odds": 1.285,
           "prob": 0.72,
-          "mvi": 0.936,
-          "ev": -0.064,
+          "mvi": 0.9251999999999999,
+          "ev": -0.075,
           "market": "双重机会",
           "match": "加拿大 vs 摩洛哥",
           "group": "Round of 16",
@@ -609,10 +574,10 @@
       ],
       "breakdown": {
         "ev": 3,
-        "mvi": 11.8,
+        "mvi": 11.7,
         "hit": 14,
         "risk": 6.8,
-        "eff": 1.9,
+        "eff": 1.8,
         "indep": 10,
         "div": 10,
         "corr": 0,
@@ -628,96 +593,37 @@
         "struct": 5
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[双重机会+大小球]：巴拉圭 vs 法国 + 加拿大 或 摩洛哥。EV偏低，命中32.4%，评分75.5/100。",
+      "rationale": "2场组合[双重机会+大小球]：巴拉圭 vs 法国 + 加拿大 或 摩洛哥。EV偏低，命中32.4%，评分75.3/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 8,
-      "score": 75.3,
-      "odds": 2.99,
-      "hitPct": 32.4,
-      "ev": -0.031,
-      "mvi": 0.986,
+      "rank": 7,
+      "score": 75.2,
+      "odds": 2.88,
+      "hitPct": 33.13,
+      "ev": -0.048,
+      "mvi": 0.975,
       "legs": [
         {
-          "id": "par-fra-r16_un2.5",
+          "id": "par-fra-r16_u25",
           "bet": "【小2.5球】巴拉圭 vs 法国",
           "odds": 2.3,
-          "prob": 0.45000000000000007,
-          "mvi": 1.0350000000000001,
+          "prob": 0.44999999999999996,
+          "mvi": 1.03,
           "ev": 0.035,
-          "market": "比分区间",
+          "market": "大小球",
           "match": "巴拉圭 vs 法国",
           "group": "Round of 16",
-          "type": "goals_range",
+          "type": "goals",
           "source": ""
         },
         {
-          "id": "can-mar-r16_dc_ha",
-          "bet": "【双重机会】加拿大 或 摩洛哥",
-          "odds": 1.3,
-          "prob": 0.72,
-          "mvi": 0.936,
-          "ev": -0.064,
-          "market": "双重机会",
-          "match": "加拿大 vs 摩洛哥",
-          "group": "Round of 16",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 3,
-        "mvi": 11.8,
-        "hit": 14,
-        "risk": 6.8,
-        "eff": 1.9,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.7,
-        "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 0,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[双重机会+比分区间]：巴拉圭 vs 法国 + 加拿大 或 摩洛哥。EV偏低，命中32.4%，评分75.3/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 9,
-      "score": 75.2,
-      "odds": 26.25,
-      "hitPct": 5.75,
-      "ev": 0.509,
-      "mvi": 1.229,
-      "legs": [
-        {
-          "id": "par-fra-r16_d",
-          "bet": "【胜平负】巴拉圭 vs 法国 平局",
-          "odds": 7,
-          "prob": 0.18,
-          "mvi": 1.26,
-          "ev": 0.26,
-          "market": "胜平负",
-          "match": "巴拉圭 vs 法国",
-          "group": "Round of 16",
-          "type": "direction",
-          "source": ""
-        },
-        {
-          "id": "can-mar-r16_dnb_h",
-          "bet": "【平局退款】加拿大 不败",
-          "odds": 3.75,
-          "prob": 0.3194444444444445,
-          "mvi": 1.1979166666666667,
-          "ev": 0.198,
+          "id": "can-mar-r16_dnb_a",
+          "bet": "【平局退款】摩洛哥 不败",
+          "odds": 1.25,
+          "prob": 0.7361111111111112,
+          "mvi": 0.920138888888889,
+          "ev": -0.08,
           "market": "平局退款",
           "match": "加拿大 vs 摩洛哥",
           "group": "Round of 16",
@@ -726,44 +632,103 @@
         }
       ],
       "breakdown": {
-        "ev": 9.1,
-        "mvi": 14.7,
-        "hit": 4,
+        "ev": 3,
+        "mvi": 11.7,
+        "hit": 14,
         "risk": 6.8,
-        "eff": 10,
+        "eff": 1.8,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.8,
+        "stab": 4.7,
         "extRisk": 0,
-        "consist": 5,
+        "consist": 3.5,
         "strat": 0.2,
         "valCap": 0,
         "qual": 4.6,
         "cert": 0,
-        "weak": -4,
-        "struct": 0
+        "weak": 0,
+        "struct": 5
       },
-      "tier": "高赔率冲击型（弱腿风险）",
-      "rationale": "2场组合[平局退款+胜平负]：巴拉圭 vs 法国 平局 + 加拿大 不败。强正EV，命中5.75%，评分75.2/100。",
+      "tier": "确定性优先（稳健）",
+      "rationale": "2场组合[平局退款+大小球]：巴拉圭 vs 法国 + 摩洛哥 不败。EV偏低，命中33.13%，评分75.2/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 10,
-      "score": 75,
+      "rank": 8,
+      "score": 75.1,
       "odds": 4.6,
       "hitPct": 22.5,
       "ev": 0.035,
-      "mvi": 1.013,
+      "mvi": 1.01,
+      "legs": [
+        {
+          "id": "par-fra-r16_u25",
+          "bet": "【小2.5球】巴拉圭 vs 法国",
+          "odds": 2.3,
+          "prob": 0.44999999999999996,
+          "mvi": 1.03,
+          "ev": 0.035,
+          "market": "大小球",
+          "match": "巴拉圭 vs 法国",
+          "group": "Round of 16",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "can-mar-r16_btts_y",
+          "bet": "【BTTS】加拿大 vs 摩洛哥 双方进球=是",
+          "odds": 2,
+          "prob": 0.5,
+          "mvi": 0.99,
+          "ev": 0,
+          "market": "BTTS",
+          "match": "加拿大 vs 摩洛哥",
+          "group": "Round of 16",
+          "type": "btts",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 5.3,
+        "mvi": 12.1,
+        "hit": 12,
+        "risk": 5,
+        "eff": 2.6,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.9,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 4.6,
+        "cert": 0,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[BTTS+大小球]：巴拉圭 vs 法国 + 加拿大 vs 摩洛哥 双方进球=是。边际正EV，命中22.5%，评分75.1/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 9,
+      "score": 74.7,
+      "odds": 4.5,
+      "hitPct": 22.5,
+      "ev": 0.013,
+      "mvi": 1.001,
       "legs": [
         {
           "id": "par-fra-r16_un2.5",
           "bet": "【小2.5球】巴拉圭 vs 法国",
-          "odds": 2.3,
+          "odds": 2.25,
           "prob": 0.45000000000000007,
-          "mvi": 1.0350000000000001,
-          "ev": 0.035,
+          "mvi": 1.0125000000000002,
+          "ev": 0.013,
           "market": "比分区间",
           "match": "巴拉圭 vs 法国",
           "group": "Round of 16",
@@ -785,11 +750,11 @@
         }
       ],
       "breakdown": {
-        "ev": 5.3,
-        "mvi": 12.2,
+        "ev": 5.1,
+        "mvi": 12,
         "hit": 12,
         "risk": 5,
-        "eff": 2.6,
+        "eff": 2.5,
         "indep": 10,
         "div": 10,
         "corr": 0,
@@ -805,27 +770,86 @@
         "struct": 5
       },
       "tier": "均衡收益型",
-      "rationale": "2场组合[BTTS+比分区间]：巴拉圭 vs 法国 + 加拿大 vs 摩洛哥 双方进球=是。边际正EV，命中22.5%，评分75/100。",
+      "rationale": "2场组合[BTTS+比分区间]：巴拉圭 vs 法国 + 加拿大 vs 摩洛哥 双方进球=是。边际正EV，命中22.5%，评分74.7/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 10,
+      "score": 73.4,
+      "odds": 5.63,
+      "hitPct": 17.77,
+      "ev": 0,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "par-fra-r16_un3.5",
+          "bet": "【小3.5球】巴拉圭 vs 法国",
+          "odds": 1.5,
+          "prob": 0.6735139415326531,
+          "mvi": 1.0102709122989797,
+          "ev": 0.01,
+          "market": "比分区间",
+          "match": "巴拉圭 vs 法国",
+          "group": "Round of 16",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "can-mar-r16_dnb_h",
+          "bet": "【平局退款】加拿大 不败",
+          "odds": 3.75,
+          "prob": 0.2638888888888889,
+          "mvi": 0.9895833333333334,
+          "ev": -0.01,
+          "market": "平局退款",
+          "match": "加拿大 vs 摩洛哥",
+          "group": "Round of 16",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 3,
+        "mvi": 12,
+        "hit": 10,
+        "risk": 6.8,
+        "eff": 3.5,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.9,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 4.6,
+        "cert": 3,
+        "weak": 0,
+        "struct": 2
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[平局退款+比分区间]：巴拉圭 vs 法国 + 加拿大 不败。EV偏低，命中17.77%，评分73.4/100。",
       "comparisonNote": ""
     }
   ],
   "capitalAllocation": [
     {
-      "tier": "核心仓位（平衡收益型·2腿）",
+      "tier": "核心仓位（均衡收益型·2腿）",
       "portfolio": {
         "id": "best",
-        "score": 87.6,
-        "odds": 8.91,
-        "ev": 0.423,
-        "hitPct": 15.97,
+        "score": 81.7,
+        "odds": 5.5,
+        "ev": 0.238,
+        "hitPct": 22.5,
         "legs": [
           {
             "id": "par-fra-r16_btts_y",
             "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-            "odds": 2.375,
+            "odds": 2.5,
             "prob": 0.5,
-            "mvi": 1.44,
-            "ev": 0.188,
+            "mvi": 1.51,
+            "ev": 0.25,
             "market": "BTTS",
             "match": "巴拉圭 vs 法国",
             "group": "Round of 16",
@@ -833,16 +857,16 @@
             "source": ""
           },
           {
-            "id": "can-mar-r16_dnb_h",
-            "bet": "【平局退款】加拿大 不败",
-            "odds": 3.75,
-            "prob": 0.3194444444444445,
-            "mvi": 1.1979166666666667,
-            "ev": 0.198,
-            "market": "平局退款",
+            "id": "can-mar-r16_o25",
+            "bet": "【大2.5球】加拿大 vs 摩洛哥",
+            "odds": 2.2,
+            "prob": 0.45,
+            "mvi": 0.99,
+            "ev": -0.01,
+            "market": "大小球",
             "match": "加拿大 vs 摩洛哥",
             "group": "Round of 16",
-            "type": "safety",
+            "type": "goals",
             "source": ""
           }
         ]
@@ -852,27 +876,14 @@
       "isCore": true
     },
     {
-      "tier": "辅助仓位（均衡收益型·2腿）",
+      "tier": "辅助仓位（确定性优先（稳健）·2腿）",
       "portfolio": {
         "id": "alt",
-        "score": 84.3,
-        "odds": 5.63,
-        "ev": 0.21,
-        "hitPct": 21.52,
+        "score": 78.1,
+        "odds": 3.3,
+        "ev": 0,
+        "hitPct": 30.31,
         "legs": [
-          {
-            "id": "can-mar-r16_dnb_h",
-            "bet": "【平局退款】加拿大 不败",
-            "odds": 3.75,
-            "prob": 0.3194444444444445,
-            "mvi": 1.1979166666666667,
-            "ev": 0.198,
-            "market": "平局退款",
-            "match": "加拿大 vs 摩洛哥",
-            "group": "Round of 16",
-            "type": "safety",
-            "source": ""
-          },
           {
             "id": "par-fra-r16_un3.5",
             "bet": "【小3.5球】巴拉圭 vs 法国",
@@ -884,6 +895,19 @@
             "match": "巴拉圭 vs 法国",
             "group": "Round of 16",
             "type": "goals_range",
+            "source": ""
+          },
+          {
+            "id": "can-mar-r16_o25",
+            "bet": "【大2.5球】加拿大 vs 摩洛哥",
+            "odds": 2.2,
+            "prob": 0.45,
+            "mvi": 0.99,
+            "ev": -0.01,
+            "market": "大小球",
+            "match": "加拿大 vs 摩洛哥",
+            "group": "Round of 16",
+            "type": "goals",
             "source": ""
           }
         ]
@@ -900,20 +924,20 @@
     }
   ],
   "bestPortfolio": {
-    "tier": "平衡收益型",
-    "score": 87.6,
-    "odds": 8.91,
-    "hitPct": 15.97,
-    "ev": 0.423,
-    "mvi": 1.319,
+    "tier": "均衡收益型",
+    "score": 81.7,
+    "odds": 5.5,
+    "hitPct": 22.5,
+    "ev": 0.238,
+    "mvi": 1.25,
     "legs": [
       {
         "id": "par-fra-r16_btts_y",
         "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-        "odds": 2.375,
+        "odds": 2.5,
         "prob": 0.5,
-        "mvi": 1.44,
-        "ev": 0.188,
+        "mvi": 1.51,
+        "ev": 0.25,
         "market": "BTTS",
         "match": "巴拉圭 vs 法国",
         "group": "Round of 16",
@@ -921,57 +945,57 @@
         "source": ""
       },
       {
-        "id": "can-mar-r16_dnb_h",
-        "bet": "【平局退款】加拿大 不败",
-        "odds": 3.75,
-        "prob": 0.3194444444444445,
-        "mvi": 1.1979166666666667,
-        "ev": 0.198,
-        "market": "平局退款",
+        "id": "can-mar-r16_o25",
+        "bet": "【大2.5球】加拿大 vs 摩洛哥",
+        "odds": 2.2,
+        "prob": 0.45,
+        "mvi": 0.99,
+        "ev": -0.01,
+        "market": "大小球",
         "match": "加拿大 vs 摩洛哥",
         "group": "Round of 16",
-        "type": "safety",
+        "type": "goals",
         "source": ""
       }
     ],
     "breakdown": {
-      "ev": 8.4,
+      "ev": 6.9,
       "mvi": 15,
-      "hit": 10,
-      "risk": 6.8,
-      "eff": 5.6,
+      "hit": 12,
+      "risk": 5,
+      "eff": 3.1,
       "indep": 10,
       "div": 10,
       "corr": 0,
       "sRisk": 0,
-      "stab": 4.3,
+      "stab": 3.4,
       "extRisk": 0,
-      "consist": 5,
-      "strat": 0.1,
+      "consist": 3.5,
+      "strat": 0.2,
       "valCap": 0,
       "qual": 4.6,
       "cert": 3,
       "weak": 0,
       "struct": 5
     },
-    "rationale": "2场组合[BTTS+平局退款]：巴拉圭 vs 法国 双方进球=是 + 加拿大 不败。强正EV，命中15.97%，评分87.6/100。",
+    "rationale": "2场组合[BTTS+大小球]：巴拉圭 vs 法国 双方进球=是 + 加拿大 vs 摩洛哥。强正EV，命中22.5%，评分81.7/100。",
     "decisionLogic": {
-      "whyBest": "综合评分领先3.3分；EV更高(+21.3%)；MVI信号更强(1.32 vs 1.10)",
+      "whyBest": "综合评分领先3.6分；EV更高(+23.8%)；MVI信号更强(1.25 vs 1.00)",
       "keyDifferentiator": "更高的期望值"
     }
   },
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-15.4%)",
+      "reason": "EV显著负(-8.5%)",
       "count": 1,
       "examples": [
         {
           "match": "加拿大 vs 摩洛哥",
           "bet": "摩洛哥 客胜",
           "odds": 1.727,
-          "ev": -0.154,
-          "mvi": 0.85
+          "ev": -0.085,
+          "mvi": 0.92
         }
       ]
     },
@@ -1005,71 +1029,57 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-14.9%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "加拿大 vs 摩洛哥",
-          "bet": "摩洛哥 不败",
-          "odds": 1.25,
-          "ev": -0.149,
-          "mvi": 0.8506944444444444
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-12.6%)",
-      "count": 1,
+      "reason": "极低置信+高风险",
+      "count": 2,
       "examples": [
         {
           "match": "加拿大 vs 摩洛哥",
           "bet": "加拿大 vs 摩洛哥 比分 0:1",
           "odds": 6.5,
-          "ev": -0.126,
-          "mvi": 0.87425
+          "ev": -0.071,
+          "mvi": 0.92885
+        },
+        {
+          "match": "加拿大 vs 摩洛哥",
+          "bet": "加拿大 vs 摩洛哥 比分 0:2",
+          "odds": 8,
+          "ev": -0.03,
+          "mvi": 0.9704
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-23.2%)",
+      "reason": "EV显著负(-27.6%)",
       "count": 1,
       "examples": [
         {
           "match": "加拿大 vs 摩洛哥",
           "bet": "加拿大 vs 摩洛哥 比分 1:1",
           "odds": 6.5,
-          "ev": -0.232,
-          "mvi": 0.7683
+          "ev": -0.276,
+          "mvi": 0.7241
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-14.1%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "加拿大 vs 摩洛哥",
-          "bet": "加拿大 vs 摩洛哥 比分 0:2",
-          "odds": 8,
-          "ev": -0.141,
-          "mvi": 0.8592
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-10.3%)",
-      "count": 1,
+      "reason": "EV显著负(-10.2%)",
+      "count": 2,
       "examples": [
         {
           "match": "加拿大 vs 摩洛哥",
           "bet": "加拿大 vs 摩洛哥 比分 1:2",
           "odds": 9.5,
-          "ev": -0.103,
-          "mvi": 0.8968
+          "ev": -0.102,
+          "mvi": 0.89775
+        },
+        {
+          "match": "巴拉圭 vs 法国",
+          "bet": "法国 客胜",
+          "odds": 1.166,
+          "ev": -0.102,
+          "mvi": 0.9
         }
       ]
     },
@@ -1160,7 +1170,7 @@
     {
       "category": "投注项淘汰",
       "reason": "EV显著负(-9.8%)",
-      "count": 3,
+      "count": 1,
       "examples": [
         {
           "match": "加拿大 vs 摩洛哥",
@@ -1168,20 +1178,6 @@
           "odds": 3.8,
           "ev": -0.098,
           "mvi": 0.9017132509357466
-        },
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "法国 或 平局",
-          "odds": 1.025,
-          "ev": -0.098,
-          "mvi": 0.9019999999999998
-        },
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "巴拉圭 或 法国",
-          "odds": 1.1,
-          "ev": -0.098,
-          "mvi": 0.902
         }
       ]
     },
@@ -1201,27 +1197,6 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-18.4%)",
-      "count": 2,
-      "examples": [
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "法国 客胜",
-          "odds": 1.166,
-          "ev": -0.184,
-          "mvi": 0.82
-        },
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "巴拉圭 vs 法国",
-          "odds": 2.5,
-          "ev": -0.184,
-          "mvi": 0.8162151461683672
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
       "reason": "EV显著负(-11.2%)",
       "count": 1,
       "examples": [
@@ -1236,85 +1211,29 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-23.4%)",
+      "reason": "EV显著负(-25.0%)",
       "count": 1,
       "examples": [
         {
           "match": "巴拉圭 vs 法国",
           "bet": "巴拉圭 vs 法国 双方进球=否",
-          "odds": 1.533,
-          "ev": -0.234,
+          "odds": 1.5,
+          "ev": -0.25,
           "mvi": 1
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-10.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "法国 不败",
-          "odds": 1.05,
-          "ev": -0.104,
-          "mvi": 0.8963414634146342
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-10.1%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "巴拉圭 vs 法国 比分 0:2",
-          "odds": 6,
-          "ev": -0.101,
-          "mvi": 0.8994000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-8.9%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "巴拉圭 vs 法国 比分 0:1",
-          "odds": 7,
-          "ev": -0.089,
-          "mvi": 0.9114000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-19.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "巴拉圭 vs 法国",
-          "bet": "巴拉圭 vs 法国 比分 0:3",
-          "odds": 7,
-          "ev": -0.194,
-          "mvi": 0.8057
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-13.1%)",
+      "reason": "EV显著负(-27.2%)",
       "count": 1,
       "examples": [
         {
           "match": "巴拉圭 vs 法国",
           "bet": "巴拉圭 vs 法国 比分 1:2",
           "odds": 10,
-          "ev": -0.131,
-          "mvi": 0.869
+          "ev": -0.272,
+          "mvi": 0.728
         }
       ]
     },
@@ -1345,55 +1264,31 @@
           "mvi": 0.85
         }
       ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-18.4%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "巴拉圭 vs 法国",
+          "bet": "巴拉圭 vs 法国",
+          "odds": 2.5,
+          "ev": -0.184,
+          "mvi": 0.8162151461683672
+        }
+      ]
     }
   ],
   "scoreParlays": [
     {
       "rank": 1,
-      "odds": 33,
-      "hitPct": 3.39,
-      "ev": 0.12,
-      "anchor": {
-        "bet": "【大2.5球】加拿大 vs 摩洛哥",
-        "odds": 2.2,
-        "prob": 45,
-        "market": "大小球"
-      },
-      "score": {
-        "match": "巴拉圭 vs 法国",
-        "bet": "1:1",
-        "odds": 15,
-        "prob": 7.5
-      },
-      "rationale": "锚⚓加拿大 vs 摩洛哥(45%) × 波胆🎯1:1(7.5%) → 33.0x, 命中3.4%"
-    },
-    {
-      "rank": 2,
-      "odds": 30,
-      "hitPct": 3.77,
-      "ev": 0.131,
-      "anchor": {
-        "bet": "【BTTS】加拿大 vs 摩洛哥 双方进球=是",
-        "odds": 2,
-        "prob": 50,
-        "market": "BTTS"
-      },
-      "score": {
-        "match": "巴拉圭 vs 法国",
-        "bet": "1:1",
-        "odds": 15,
-        "prob": 7.5
-      },
-      "rationale": "锚⚓加拿大 vs 摩洛哥 双方进球=是(50%) × 波胆🎯1:1(7.5%) → 30.0x, 命中3.8%"
-    },
-    {
-      "rank": 3,
-      "odds": 22.6,
-      "hitPct": 4.72,
-      "ev": 0.065,
+      "odds": 23.8,
+      "hitPct": 4.73,
+      "ev": 0.122,
       "anchor": {
         "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-        "odds": 2.375,
+        "odds": 2.5,
         "prob": 50,
         "market": "BTTS"
       },
@@ -1401,18 +1296,18 @@
         "match": "加拿大 vs 摩洛哥",
         "bet": "1:2",
         "odds": 9.5,
-        "prob": 9.4
+        "prob": 9.5
       },
-      "rationale": "锚⚓巴拉圭 vs 法国 双方进球=是(50%) × 波胆🎯1:2(9.4%) → 22.6x, 命中4.7%"
+      "rationale": "锚⚓巴拉圭 vs 法国 双方进球=是(50%) × 波胆🎯1:2(9.4%) → 23.8x, 命中4.7%"
     },
     {
-      "rank": 4,
-      "odds": 19,
-      "hitPct": 5.37,
-      "ev": 0.02,
+      "rank": 2,
+      "odds": 20,
+      "hitPct": 6.07,
+      "ev": 0.213,
       "anchor": {
         "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-        "odds": 2.375,
+        "odds": 2.5,
         "prob": 50,
         "market": "BTTS"
       },
@@ -1420,25 +1315,44 @@
         "match": "加拿大 vs 摩洛哥",
         "bet": "0:2",
         "odds": 8,
-        "prob": 10.7
+        "prob": 12.1
       },
-      "rationale": "锚⚓巴拉圭 vs 法国 双方进球=是(50%) × 波胆🎯0:2(10.7%) → 19.0x, 命中5.4%"
+      "rationale": "锚⚓巴拉圭 vs 法国 双方进球=是(50%) × 波胆🎯0:2(12.1%) → 20.0x, 命中6.1%"
+    },
+    {
+      "rank": 3,
+      "odds": 18.4,
+      "hitPct": 5.46,
+      "ev": 0.004,
+      "anchor": {
+        "bet": "【小2.5球】巴拉圭 vs 法国",
+        "odds": 2.3,
+        "prob": 45,
+        "market": "大小球"
+      },
+      "score": {
+        "match": "加拿大 vs 摩洛哥",
+        "bet": "0:2",
+        "odds": 8,
+        "prob": 12.1
+      },
+      "rationale": "锚⚓巴拉圭 vs 法国(45%) × 波胆🎯0:2(12.1%) → 18.4x, 命中5.5%"
     }
   ],
   "finalVerdict": {
-    "verdict": "今日最佳：平衡收益型组合 8.91x",
-    "reason": "巴拉圭 vs 法国 双方进球=是 + 加拿大 不败。Portfolio Score=87.6/100，EV=+42.3%，命中率15.97%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
+    "verdict": "今日最佳：均衡收益型组合 5.5x",
+    "reason": "巴拉圭 vs 法国 双方进球=是 + 加拿大 vs 摩洛哥。Portfolio Score=81.7/100，EV=+23.8%，命中率22.5%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
     "bestPortfolio": {
-      "score": 87.6,
-      "odds": 8.91,
+      "score": 81.7,
+      "odds": 5.5,
       "legs": [
         {
           "id": "par-fra-r16_btts_y",
           "bet": "【BTTS】巴拉圭 vs 法国 双方进球=是",
-          "odds": 2.375,
+          "odds": 2.5,
           "prob": 0.5,
-          "mvi": 1.44,
-          "ev": 0.188,
+          "mvi": 1.51,
+          "ev": 0.25,
           "market": "BTTS",
           "match": "巴拉圭 vs 法国",
           "group": "Round of 16",
@@ -1446,16 +1360,16 @@
           "source": ""
         },
         {
-          "id": "can-mar-r16_dnb_h",
-          "bet": "【平局退款】加拿大 不败",
-          "odds": 3.75,
-          "prob": 0.3194444444444445,
-          "mvi": 1.1979166666666667,
-          "ev": 0.198,
-          "market": "平局退款",
+          "id": "can-mar-r16_o25",
+          "bet": "【大2.5球】加拿大 vs 摩洛哥",
+          "odds": 2.2,
+          "prob": 0.45,
+          "mvi": 0.99,
+          "ev": -0.01,
+          "market": "大小球",
           "match": "加拿大 vs 摩洛哥",
           "group": "Round of 16",
-          "type": "safety",
+          "type": "goals",
           "source": ""
         }
       ]
@@ -1496,25 +1410,25 @@
   },
   "candidatePool": {
     "total": 43,
-    "accepted": 14,
-    "rejected": 29,
+    "accepted": 21,
+    "rejected": 22,
     "abandonedMatches": 0
   },
   "stats": {
-    "totalCombinations": 48,
-    "topScore": 87.6,
-    "scoredCount": 48,
+    "totalCombinations": 98,
+    "topScore": 81.7,
+    "scoredCount": 98,
     "byMarket": {
       "胜平负": 4,
       "大小球": 2,
       "BTTS": 2,
-      "双重机会": 1,
-      "平局退款": 2,
-      "波胆": 1,
+      "双重机会": 3,
+      "平局退款": 4,
+      "波胆": 4,
       "比分区间": 2
     },
     "byLegs": {
-      "2腿": 48
+      "2腿": 98
     }
   },
   "wcpeValidations": {

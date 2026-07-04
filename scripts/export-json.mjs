@@ -1140,6 +1140,16 @@ for (const [matchId, pred] of Object.entries(mergedPredictions)) {
   }
 }
 
+// ★★ 已完赛比赛: predictedScore 必须 = top5Scores[0]（模型真实最优预测）
+// 手动覆盖的 predictedScore 在赛后不再有意义，应以概率引擎实际输出为准
+for (const [matchId, pred] of Object.entries(mergedPredictions)) {
+  const match = mergedMatches.find(m => m.id === matchId)
+  if (!match || match.status !== 'finished') continue
+  if (pred.top5Scores?.length > 0 && pred.predictedScore !== pred.top5Scores[0].score) {
+    pred.predictedScore = pred.top5Scores[0].score
+  }
+}
+
 // Compute modelState FRESH from actual match data (not incremental patching)
 const computedModelState = computeModelState(mergedMatches, mergedPredictions, existingData?.modelState)
 
