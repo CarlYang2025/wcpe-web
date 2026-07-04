@@ -906,11 +906,13 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
       // 市场校准后重新排序
       pred.top5Scores.sort((a, b) => (b.probability || 0) - (a.probability || 0))
     }
-    // 同步 predictedScore：取 Poisson 全空间搜索后的单比分最高概率
-    // 注意：predictedScore 和 predictedDirection 可以不一致
-    // （如 direction=home_win 但单比分 1:1 最可能，两者不矛盾）
+    // predictedScore: 优先保留自动化（WCPE V2.2+）手动设置的值
+    // 仅在 top5 排序变化后且 predictedScore 不在 top5 中时才回退到 top5[0]
+    // 防止覆盖人工根据13维分析设定的合理比分
     if (pred.top5Scores.length > 0) {
-      pred.predictedScore = pred.top5Scores[0].score
+      if (!pred.predictedScore || !pred.top5Scores.some(s => s.score === pred.predictedScore)) {
+        pred.predictedScore = pred.top5Scores[0].score
+      }
     }
 
     // 附上完整市场赔率数据（前端展示用，compact 格式）
@@ -1130,8 +1132,10 @@ for (const [matchId, pred] of Object.entries(mergedPredictions)) {
         else if (dp > hwp + EPS && dp > awp + EPS) pred.predictedDirection = 'draw'
         else pred.predictedDirection = hwp >= awp ? 'home_win' : 'away_win'
       }
-      // predictedScore = 单比分最高概率（可能与 direction 不同，不矛盾）
-      pred.predictedScore = pred.top5Scores[0].score
+      // predictedScore: 保留手动设置值，仅在不合理时回退
+      if (!pred.predictedScore || !pred.top5Scores.some(s => s.score === pred.predictedScore)) {
+        pred.predictedScore = pred.top5Scores[0].score
+      }
     }
   }
 }
