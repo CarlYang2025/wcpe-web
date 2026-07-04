@@ -213,7 +213,7 @@ export default function App() {
           <Portfolio data={portfolioData} />
         )}
         {tab === 'scoreParlay' && (
-          <ScoreParlay matches={matches} predictions={predictions} />
+          <ScoreParlay matches={matches} predictions={predictions} modelState={displayModelState} />
         )}
         {tab === 'match' && selectedMatch && (
           <MatchDetail
