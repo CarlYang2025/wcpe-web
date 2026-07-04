@@ -597,9 +597,9 @@ export const matches: Match[] = [
   { id: 'sui-alg-r32', date: '2026-07-02', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 22, homeTeam: 'Switzerland', awayTeam: 'Algeria', venue: 'BC Place, Vancouver', kickoff: '7/3 11:00', localKickoff: '7/2 20:00', localTZ: 'PT', status: 'finished', homeScore: 2, awayScore: 0 },
 
   // ---- 7月3日 (周五) Round of 32 第23比赛日 (北京时间7月4日) ----
-  { id: 'aus-egy-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Australia', awayTeam: 'Egypt', venue: 'AT&T Stadium, Dallas', kickoff: '7/4 02:00', localKickoff: '7/3 13:00', localTZ: 'CT', status: 'upcoming' },
-  { id: 'arg-cpv-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Argentina', awayTeam: 'Cape Verde', venue: 'Hard Rock Stadium, Miami', kickoff: '7/4 06:00', localKickoff: '7/3 18:00', localTZ: 'ET', status: 'upcoming' },
-  { id: 'col-gha-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Colombia', awayTeam: 'Ghana', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/4 09:30', localKickoff: '7/3 20:30', localTZ: 'CT', status: 'upcoming' },
+  { id: 'aus-egy-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Australia', awayTeam: 'Egypt', venue: 'AT&T Stadium, Dallas', kickoff: '7/4 02:00', localKickoff: '7/3 13:00', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 1 },
+  { id: 'arg-cpv-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Argentina', awayTeam: 'Cape Verde', venue: 'Hard Rock Stadium, Miami', kickoff: '7/4 06:00', localKickoff: '7/3 18:00', localTZ: 'ET', status: 'finished', homeScore: 3, awayScore: 2 },
+  { id: 'col-gha-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Colombia', awayTeam: 'Ghana', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/4 09:30', localKickoff: '7/3 20:30', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 0 },
 ];
 
 // ========== 预测数据 ==========
