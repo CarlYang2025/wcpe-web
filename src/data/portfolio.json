@@ -1,25 +1,25 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-05T13:40:22.150Z",
+  "generatedAt": "2026-07-05T13:58:07.785Z",
   "targetDate": "7/6",
   "targetDateDisplay": "2026年7月6日（周一）",
   "targetMatchIds": [
     "bra-nor-r16",
     "mex-eng-r16"
   ],
-  "oddsFreshness": "2026-07-05T13:39:49.098Z",
+  "oddsFreshness": "2026-07-05T13:57:31.422Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "🟡 机会有限",
-    "investableCount": 19,
+    "investableCount": 18,
     "highMviCount": 0,
     "positiveEvCount": 3,
     "suggestedExposure": "50-70%",
-    "summary": "2场比赛，19个可投注项（3个正EV），0个高MVI信号。涵盖6种市场类型。",
+    "summary": "2场比赛，18个可投注项（3个正EV），0个高MVI信号。涵盖6种市场类型。",
     "highlights": [
       "巴西 vs 挪威 比分 0:1 为本日最强MVI信号(1.05)",
       "昨日方向准确率正常(100%)，已动态调整策略权重",
-      "已自动排除25个低质量投注项+0场高风险比赛",
+      "已自动排除26个低质量投注项+0场高风险比赛",
       "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆"
     ]
   },
@@ -120,18 +120,6 @@
     },
     {
       "match": "墨西哥 vs 英格兰",
-      "market": "胜平负",
-      "bet": "【胜平负】墨西哥 vs 英格兰 平局",
-      "odds": 3.2,
-      "ev": -0.008,
-      "mvi": 0.99,
-      "prob": 0.31,
-      "reason": "边际价值",
-      "type": "direction",
-      "source": ""
-    },
-    {
-      "match": "墨西哥 vs 英格兰",
       "market": "BTTS",
       "bet": "【BTTS】墨西哥 vs 英格兰 双方进球=是",
       "odds": 1.95,
@@ -146,6 +134,65 @@
   "portfolios": [
     {
       "rank": 1,
+      "score": 77.7,
+      "odds": 5.28,
+      "hitPct": 20,
+      "ev": 0.056,
+      "mvi": 0.98,
+      "legs": [
+        {
+          "id": "bra-nor-r16_btts_n",
+          "bet": "【BTTS】巴西 vs 挪威 双方进球=否",
+          "odds": 2.2,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0.1,
+          "market": "BTTS",
+          "match": "巴西 vs 挪威",
+          "group": "Round of 16",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "mex-eng-r16_a",
+          "bet": "【胜平负】英格兰 客胜",
+          "odds": 2.4,
+          "prob": 0.4,
+          "mvi": 0.96,
+          "ev": -0.04,
+          "market": "胜平负",
+          "match": "墨西哥 vs 英格兰",
+          "group": "Round of 16",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 5.4,
+        "mvi": 11.8,
+        "hit": 12,
+        "risk": 5,
+        "eff": 2.9,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.9,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.4,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 英格兰 客胜。正EV，命中20%，评分77.7/100。",
+      "comparisonNote": "优于#2的理由：综合评分领先0.3分"
+    },
+    {
+      "rank": 2,
       "score": 77.4,
       "odds": 5.06,
       "hitPct": 21,
@@ -201,15 +248,15 @@
       },
       "tier": "均衡收益型",
       "rationale": "2场组合[BTTS+大小球]：巴西 vs 挪威 双方进球=否 + 墨西哥 vs 英格兰。正EV，命中21%，评分77.4/100。",
-      "comparisonNote": "优于#2的理由：综合评分领先0.2分；命中率更高(21% vs 15.5%)"
+      "comparisonNote": "落后#1的理由：综合评分差0.3分"
     },
     {
-      "rank": 2,
-      "score": 77.2,
+      "rank": 3,
+      "score": 76.7,
       "odds": 7.04,
-      "hitPct": 15.5,
-      "ev": 0.091,
-      "mvi": 0.995,
+      "hitPct": 15,
+      "ev": 0.056,
+      "mvi": 0.98,
       "legs": [
         {
           "id": "bra-nor-r16_btts_n",
@@ -228,9 +275,9 @@
           "id": "mex-eng-r16_d",
           "bet": "【胜平负】墨西哥 vs 英格兰 平局",
           "odds": 3.2,
-          "prob": 0.31,
-          "mvi": 0.99,
-          "ev": -0.008,
+          "prob": 0.3,
+          "mvi": 0.96,
+          "ev": -0.04,
           "market": "胜平负",
           "match": "墨西哥 vs 英格兰",
           "group": "Round of 16",
@@ -239,8 +286,8 @@
         }
       ],
       "breakdown": {
-        "ev": 5.7,
-        "mvi": 11.9,
+        "ev": 5.4,
+        "mvi": 11.8,
         "hit": 10,
         "risk": 5,
         "eff": 3.9,
@@ -248,7 +295,7 @@
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 5,
+        "stab": 4.9,
         "extRisk": 0,
         "consist": 3.5,
         "strat": 0.4,
@@ -259,11 +306,11 @@
         "struct": 5
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 墨西哥 vs 英格兰 平局。正EV，命中15.5%，评分77.2/100。",
-      "comparisonNote": "落后#1的理由：综合评分差0.2分"
+      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 墨西哥 vs 英格兰 平局。正EV，命中15%，评分76.7/100。",
+      "comparisonNote": ""
     },
     {
-      "rank": 3,
+      "rank": 4,
       "score": 76.6,
       "odds": 6.82,
       "hitPct": 15.5,
@@ -322,130 +369,12 @@
       "comparisonNote": ""
     },
     {
-      "rank": 4,
-      "score": 75.6,
-      "odds": 4.62,
-      "hitPct": 22.14,
-      "ev": 0.023,
-      "mvi": 0.965,
-      "legs": [
-        {
-          "id": "bra-nor-r16_btts_n",
-          "bet": "【BTTS】巴西 vs 挪威 双方进球=否",
-          "odds": 2.2,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.1,
-          "market": "BTTS",
-          "match": "巴西 vs 挪威",
-          "group": "Round of 16",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "mex-eng-r16_dnb_h",
-          "bet": "【平局退款】墨西哥 不败",
-          "odds": 2.1,
-          "prob": 0.4428571428571429,
-          "mvi": 0.9300000000000002,
-          "ev": -0.07,
-          "market": "平局退款",
-          "match": "墨西哥 vs 英格兰",
-          "group": "Round of 16",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 5.2,
-        "mvi": 11.6,
-        "hit": 12,
-        "risk": 6.8,
-        "eff": 2.9,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.8,
-        "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0.2,
-        "valCap": 0,
-        "qual": 3.8,
-        "cert": 0,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[BTTS+平局退款]：巴西 vs 挪威 双方进球=否 + 墨西哥 不败。边际正EV，命中22.14%，评分75.6/100。",
-      "comparisonNote": ""
-    },
-    {
       "rank": 5,
-      "score": 75.3,
-      "odds": 5.28,
-      "hitPct": 19.5,
-      "ev": 0.03,
-      "mvi": 0.97,
-      "legs": [
-        {
-          "id": "bra-nor-r16_btts_n",
-          "bet": "【BTTS】巴西 vs 挪威 双方进球=否",
-          "odds": 2.2,
-          "prob": 0.5,
-          "mvi": 1,
-          "ev": 0.1,
-          "market": "BTTS",
-          "match": "巴西 vs 挪威",
-          "group": "Round of 16",
-          "type": "btts",
-          "source": ""
-        },
-        {
-          "id": "mex-eng-r16_a",
-          "bet": "【胜平负】英格兰 客胜",
-          "odds": 2.4,
-          "prob": 0.39,
-          "mvi": 0.94,
-          "ev": -0.064,
-          "market": "胜平负",
-          "match": "墨西哥 vs 英格兰",
-          "group": "Round of 16",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 5.2,
-        "mvi": 11.6,
-        "hit": 10,
-        "risk": 5,
-        "eff": 2.9,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.8,
-        "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0.4,
-        "valCap": 0,
-        "qual": 3.8,
-        "cert": 3,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 英格兰 客胜。边际正EV，命中19.5%，评分75.3/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 6,
-      "score": 74.5,
+      "score": 74.7,
       "odds": 3,
-      "hitPct": 32.2,
-      "ev": -0.034,
-      "mvi": 0.982,
+      "hitPct": 32.66,
+      "ev": -0.021,
+      "mvi": 0.989,
       "legs": [
         {
           "id": "bra-nor-r16_u25",
@@ -464,9 +393,9 @@
           "id": "mex-eng-r16_dc_ha",
           "bet": "【双重机会】墨西哥 或 英格兰",
           "odds": 1.363,
-          "prob": 0.7,
-          "mvi": 0.9541,
-          "ev": -0.046,
+          "prob": 0.71,
+          "mvi": 0.9677299999999999,
+          "ev": -0.032,
           "market": "双重机会",
           "match": "墨西哥 vs 英格兰",
           "group": "Round of 16",
@@ -476,7 +405,7 @@
       ],
       "breakdown": {
         "ev": 3,
-        "mvi": 11.8,
+        "mvi": 11.9,
         "hit": 14,
         "risk": 6.8,
         "eff": 1.9,
@@ -484,7 +413,7 @@
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.8,
+        "stab": 4.9,
         "extRisk": 0,
         "consist": 3.5,
         "strat": 0.1,
@@ -495,16 +424,16 @@
         "struct": 5
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[大小球+双重机会]：巴西 vs 挪威 + 墨西哥 或 英格兰。EV偏低，命中32.2%，评分74.5/100。",
+      "rationale": "2场组合[大小球+双重机会]：巴西 vs 挪威 + 墨西哥 或 英格兰。EV偏低，命中32.66%，评分74.7/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 7,
-      "score": 73,
+      "rank": 6,
+      "score": 73.2,
       "odds": 3.67,
-      "hitPct": 27.86,
-      "ev": 0.021,
-      "mvi": 0.964,
+      "hitPct": 28.17,
+      "ev": 0.032,
+      "mvi": 0.969,
       "legs": [
         {
           "id": "bra-nor-r16_btts_n",
@@ -523,9 +452,9 @@
           "id": "mex-eng-r16_dnb_a",
           "bet": "【平局退款】英格兰 不败",
           "odds": 1.666,
-          "prob": 0.5571428571428572,
-          "mvi": 0.9281999999999999,
-          "ev": -0.072,
+          "prob": 0.5633802816901409,
+          "mvi": 0.9385915492957746,
+          "ev": -0.061,
           "market": "平局退款",
           "match": "墨西哥 vs 英格兰",
           "group": "Round of 16",
@@ -534,7 +463,7 @@
         }
       ],
       "breakdown": {
-        "ev": 5.2,
+        "ev": 5.3,
         "mvi": 11.6,
         "hit": 13,
         "risk": 6.8,
@@ -554,16 +483,16 @@
         "struct": 0
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[BTTS+平局退款]：巴西 vs 挪威 双方进球=否 + 英格兰 不败。边际正EV，命中27.86%，评分73/100。",
+      "rationale": "2场组合[BTTS+平局退款]：巴西 vs 挪威 双方进球=否 + 英格兰 不败。边际正EV，命中28.17%，评分73.2/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 8,
-      "score": 72.7,
+      "rank": 7,
+      "score": 72.8,
       "odds": 3.67,
-      "hitPct": 25.63,
-      "ev": -0.061,
-      "mvi": 0.969,
+      "hitPct": 25.92,
+      "ev": -0.05,
+      "mvi": 0.974,
       "legs": [
         {
           "id": "bra-nor-r16_u25",
@@ -582,9 +511,9 @@
           "id": "mex-eng-r16_dnb_a",
           "bet": "【平局退款】英格兰 不败",
           "odds": 1.666,
-          "prob": 0.5571428571428572,
-          "mvi": 0.9281999999999999,
-          "ev": -0.072,
+          "prob": 0.5633802816901409,
+          "mvi": 0.9385915492957746,
+          "ev": -0.061,
           "market": "平局退款",
           "match": "墨西哥 vs 英格兰",
           "group": "Round of 16",
@@ -594,7 +523,7 @@
       ],
       "breakdown": {
         "ev": 0,
-        "mvi": 11.6,
+        "mvi": 11.7,
         "hit": 13,
         "risk": 6.8,
         "eff": 2.3,
@@ -613,17 +542,89 @@
         "struct": 5
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[大小球+平局退款]：巴西 vs 挪威 + 英格兰 不败。EV偏低，命中25.63%，评分72.7/100。",
+      "rationale": "2场组合[大小球+平局退款]：巴西 vs 挪威 + 英格兰 不败。EV偏低，命中25.92%，评分72.8/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 8,
+      "score": 72.3,
+      "odds": 3,
+      "hitPct": 35.5,
+      "ev": 0.065,
+      "mvi": 0.984,
+      "legs": [
+        {
+          "id": "bra-nor-r16_btts_n",
+          "bet": "【BTTS】巴西 vs 挪威 双方进球=否",
+          "odds": 2.2,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0.1,
+          "market": "BTTS",
+          "match": "巴西 vs 挪威",
+          "group": "Round of 16",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "mex-eng-r16_dc_ha",
+          "bet": "【双重机会】墨西哥 或 英格兰",
+          "odds": 1.363,
+          "prob": 0.71,
+          "mvi": 0.9677299999999999,
+          "ev": -0.032,
+          "market": "双重机会",
+          "match": "墨西哥 vs 英格兰",
+          "group": "Round of 16",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 5.5,
+        "mvi": 11.8,
+        "hit": 14,
+        "risk": 6.8,
+        "eff": 1.9,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.9,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 0,
+        "weak": 0,
+        "struct": 0
+      },
+      "tier": "确定性优先（稳健）",
+      "rationale": "2场组合[BTTS+双重机会]：巴西 vs 挪威 双方进球=否 + 墨西哥 或 英格兰。正EV，命中35.5%，评分72.3/100。",
       "comparisonNote": ""
     },
     {
       "rank": 9,
-      "score": 70.5,
-      "odds": 2.7,
-      "hitPct": 32.77,
-      "ev": -0.116,
-      "mvi": 0.94,
+      "score": 68.9,
+      "odds": 2.96,
+      "hitPct": 31.08,
+      "ev": -0.081,
+      "mvi": 0.96,
       "legs": [
+        {
+          "id": "mex-eng-r16_o25",
+          "bet": "【大2.5球】墨西哥 vs 英格兰",
+          "odds": 2.3,
+          "prob": 0.42,
+          "mvi": 0.97,
+          "ev": -0.034,
+          "market": "大小球",
+          "match": "墨西哥 vs 英格兰",
+          "group": "Round of 16",
+          "type": "goals",
+          "source": ""
+        },
         {
           "id": "bra-nor-r16_dc_ha",
           "bet": "【双重机会】巴西 或 挪威",
@@ -636,27 +637,14 @@
           "group": "Round of 16",
           "type": "safety",
           "source": ""
-        },
-        {
-          "id": "mex-eng-r16_dnb_h",
-          "bet": "【平局退款】墨西哥 不败",
-          "odds": 2.1,
-          "prob": 0.4428571428571429,
-          "mvi": 0.9300000000000002,
-          "ev": -0.07,
-          "market": "平局退款",
-          "match": "墨西哥 vs 英格兰",
-          "group": "Round of 16",
-          "type": "safety",
-          "source": ""
         }
       ],
       "breakdown": {
         "ev": 0,
-        "mvi": 11.3,
+        "mvi": 11.5,
         "hit": 14,
-        "risk": 8.5,
-        "eff": 1.9,
+        "risk": 6.8,
+        "eff": 1.8,
         "indep": 10,
         "div": 10,
         "corr": 0,
@@ -672,17 +660,30 @@
         "struct": 5
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[双重机会+平局退款]：巴西 或 挪威 + 墨西哥 不败。EV偏低，命中32.77%，评分70.5/100。",
+      "rationale": "2场组合[双重机会+大小球]：墨西哥 vs 英格兰 + 巴西 或 挪威。EV偏低，命中31.08%，评分68.9/100。",
       "comparisonNote": ""
     },
     {
       "rank": 10,
-      "score": 70.1,
-      "odds": 3.12,
-      "hitPct": 28.46,
-      "ev": -0.112,
-      "mvi": 0.944,
+      "score": 67.9,
+      "odds": 4.16,
+      "hitPct": 21.89,
+      "ev": -0.089,
+      "mvi": 0.954,
       "legs": [
+        {
+          "id": "mex-eng-r16_d",
+          "bet": "【胜平负】墨西哥 vs 英格兰 平局",
+          "odds": 3.2,
+          "prob": 0.3,
+          "mvi": 0.96,
+          "ev": -0.04,
+          "market": "胜平负",
+          "match": "墨西哥 vs 英格兰",
+          "group": "Round of 16",
+          "type": "direction",
+          "source": ""
+        },
         {
           "id": "bra-nor-r16_dnb_h",
           "bet": "【平局退款】巴西 不败",
@@ -695,27 +696,14 @@
           "group": "Round of 16",
           "type": "safety",
           "source": ""
-        },
-        {
-          "id": "mex-eng-r16_a",
-          "bet": "【胜平负】英格兰 客胜",
-          "odds": 2.4,
-          "prob": 0.39,
-          "mvi": 0.94,
-          "ev": -0.064,
-          "market": "胜平负",
-          "match": "墨西哥 vs 英格兰",
-          "group": "Round of 16",
-          "type": "direction",
-          "source": ""
         }
       ],
       "breakdown": {
         "ev": 0,
-        "mvi": 11.3,
-        "hit": 13,
+        "mvi": 11.5,
+        "hit": 12,
         "risk": 6.8,
-        "eff": 2,
+        "eff": 2.6,
         "indep": 10,
         "div": 10,
         "corr": 0,
@@ -726,12 +714,12 @@
         "strat": 0.4,
         "valCap": 0,
         "qual": 3.8,
-        "cert": 2,
+        "cert": 0,
         "weak": 0,
         "struct": 5
       },
-      "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[平局退款+胜平负]：巴西 不败 + 英格兰 客胜。EV偏低，命中28.46%，评分70.1/100。",
+      "tier": "均衡收益型",
+      "rationale": "2场组合[平局退款+胜平负]：墨西哥 vs 英格兰 平局 + 巴西 不败。EV偏低，命中21.89%，评分67.9/100。",
       "comparisonNote": ""
     }
   ],
@@ -740,6 +728,47 @@
       "tier": "核心仓位（均衡收益型·2腿）",
       "portfolio": {
         "id": "best",
+        "score": 77.7,
+        "odds": 5.28,
+        "ev": 0.056,
+        "hitPct": 20,
+        "legs": [
+          {
+            "id": "bra-nor-r16_btts_n",
+            "bet": "【BTTS】巴西 vs 挪威 双方进球=否",
+            "odds": 2.2,
+            "prob": 0.5,
+            "mvi": 1,
+            "ev": 0.1,
+            "market": "BTTS",
+            "match": "巴西 vs 挪威",
+            "group": "Round of 16",
+            "type": "btts",
+            "source": ""
+          },
+          {
+            "id": "mex-eng-r16_a",
+            "bet": "【胜平负】英格兰 客胜",
+            "odds": 2.4,
+            "prob": 0.4,
+            "mvi": 0.96,
+            "ev": -0.04,
+            "market": "胜平负",
+            "match": "墨西哥 vs 英格兰",
+            "group": "Round of 16",
+            "type": "direction",
+            "source": ""
+          }
+        ]
+      },
+      "pct": 56,
+      "amount": 56,
+      "isCore": true
+    },
+    {
+      "tier": "辅助仓位（均衡收益型·2腿）",
+      "portfolio": {
+        "id": "alt",
         "score": 77.4,
         "odds": 5.06,
         "ev": 0.063,
@@ -773,47 +802,6 @@
           }
         ]
       },
-      "pct": 56,
-      "amount": 56,
-      "isCore": true
-    },
-    {
-      "tier": "辅助仓位（平衡收益型·2腿）",
-      "portfolio": {
-        "id": "alt",
-        "score": 77.2,
-        "odds": 7.04,
-        "ev": 0.091,
-        "hitPct": 15.5,
-        "legs": [
-          {
-            "id": "bra-nor-r16_btts_n",
-            "bet": "【BTTS】巴西 vs 挪威 双方进球=否",
-            "odds": 2.2,
-            "prob": 0.5,
-            "mvi": 1,
-            "ev": 0.1,
-            "market": "BTTS",
-            "match": "巴西 vs 挪威",
-            "group": "Round of 16",
-            "type": "btts",
-            "source": ""
-          },
-          {
-            "id": "mex-eng-r16_d",
-            "bet": "【胜平负】墨西哥 vs 英格兰 平局",
-            "odds": 3.2,
-            "prob": 0.31,
-            "mvi": 0.99,
-            "ev": -0.008,
-            "market": "胜平负",
-            "match": "墨西哥 vs 英格兰",
-            "group": "Round of 16",
-            "type": "direction",
-            "source": ""
-          }
-        ]
-      },
       "pct": 34,
       "amount": 34
     },
@@ -827,11 +815,11 @@
   ],
   "bestPortfolio": {
     "tier": "均衡收益型",
-    "score": 77.4,
-    "odds": 5.06,
-    "hitPct": 21,
-    "ev": 0.063,
-    "mvi": 0.985,
+    "score": 77.7,
+    "odds": 5.28,
+    "hitPct": 20,
+    "ev": 0.056,
+    "mvi": 0.98,
     "legs": [
       {
         "id": "bra-nor-r16_btts_n",
@@ -847,25 +835,25 @@
         "source": ""
       },
       {
-        "id": "mex-eng-r16_o25",
-        "bet": "【大2.5球】墨西哥 vs 英格兰",
-        "odds": 2.3,
-        "prob": 0.42,
-        "mvi": 0.97,
-        "ev": -0.034,
-        "market": "大小球",
+        "id": "mex-eng-r16_a",
+        "bet": "【胜平负】英格兰 客胜",
+        "odds": 2.4,
+        "prob": 0.4,
+        "mvi": 0.96,
+        "ev": -0.04,
+        "market": "胜平负",
         "match": "墨西哥 vs 英格兰",
         "group": "Round of 16",
-        "type": "goals",
+        "type": "direction",
         "source": ""
       }
     ],
     "breakdown": {
-      "ev": 5.5,
+      "ev": 5.4,
       "mvi": 11.8,
       "hit": 12,
       "risk": 5,
-      "eff": 2.8,
+      "eff": 2.9,
       "indep": 10,
       "div": 10,
       "corr": 0,
@@ -873,16 +861,16 @@
       "stab": 4.9,
       "extRisk": 0,
       "consist": 3.5,
-      "strat": 0.1,
+      "strat": 0.4,
       "valCap": 0,
       "qual": 3.8,
       "cert": 3,
       "weak": 0,
       "struct": 5
     },
-    "rationale": "2场组合[BTTS+大小球]：巴西 vs 挪威 双方进球=否 + 墨西哥 vs 英格兰。正EV，命中21%，评分77.4/100。",
+    "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 英格兰 客胜。正EV，命中20%，评分77.7/100。",
     "decisionLogic": {
-      "whyBest": "综合评分领先0.2分；命中率更高(21% vs 15.5%)",
+      "whyBest": "综合评分领先0.3分",
       "keyDifferentiator": "更好的EV/风险/命中率综合平衡"
     }
   },
@@ -890,7 +878,7 @@
     {
       "category": "投注项淘汰",
       "reason": "EV显著负(-10.0%)",
-      "count": 2,
+      "count": 3,
       "examples": [
         {
           "match": "巴西 vs 挪威",
@@ -905,6 +893,13 @@
           "odds": 1.8,
           "ev": -0.1,
           "mvi": 1
+        },
+        {
+          "match": "墨西哥 vs 英格兰",
+          "bet": "墨西哥 vs 英格兰 比分 0:1",
+          "odds": 7.5,
+          "ev": -0.1,
+          "mvi": 0.9
         }
       ]
     },
@@ -1050,43 +1045,43 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-21.3%)",
+      "reason": "EV显著负(-8.3%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "墨西哥 vs 英格兰",
+          "bet": "墨西哥 不败",
+          "odds": 2.1,
+          "ev": -0.083,
+          "mvi": 0.9169014084507043
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-21.6%)",
       "count": 1,
       "examples": [
         {
           "match": "墨西哥 vs 英格兰",
           "bet": "墨西哥 vs 英格兰 比分 1:1",
           "odds": 6,
-          "ev": -0.213,
-          "mvi": 0.7866
+          "ev": -0.216,
+          "mvi": 0.7842000000000001
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-11.4%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "墨西哥 vs 英格兰",
-          "bet": "墨西哥 vs 英格兰 比分 0:1",
-          "odds": 7.5,
-          "ev": -0.114,
-          "mvi": 0.88575
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-10.9%)",
+      "reason": "EV显著负(-12.5%)",
       "count": 1,
       "examples": [
         {
           "match": "墨西哥 vs 英格兰",
           "bet": "墨西哥 vs 英格兰 比分 1:0",
           "odds": 8.5,
-          "ev": -0.109,
-          "mvi": 0.8908
+          "ev": -0.125,
+          "mvi": 0.87465
         }
       ]
     },
@@ -1106,15 +1101,15 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-18.0%)",
+      "reason": "EV显著负(-16.9%)",
       "count": 1,
       "examples": [
         {
           "match": "墨西哥 vs 英格兰",
           "bet": "墨西哥 vs 英格兰 比分 1:2",
           "odds": 10,
-          "ev": -0.18,
-          "mvi": 0.82
+          "ev": -0.169,
+          "mvi": 0.8309999999999998
         }
       ]
     },
@@ -1165,12 +1160,12 @@
     {
       "rank": 1,
       "odds": 40.8,
-      "hitPct": 2.4,
-      "ev": -0.021,
+      "hitPct": 2.46,
+      "ev": 0.004,
       "anchor": {
         "bet": "【胜平负】英格兰 客胜",
         "odds": 2.4,
-        "prob": 39,
+        "prob": 40,
         "market": "胜平负"
       },
       "score": {
@@ -1179,7 +1174,7 @@
         "odds": 17,
         "prob": 6.2
       },
-      "rationale": "锚⚓英格兰 客胜(39%) × 波胆🎯0:1(6.2%) → 40.8x, 命中2.4%"
+      "rationale": "锚⚓英格兰 客胜(40%) × 波胆🎯0:1(6.2%) → 40.8x, 命中2.5%"
     },
     {
       "rank": 2,
@@ -1202,6 +1197,25 @@
     },
     {
       "rank": 3,
+      "odds": 22.8,
+      "hitPct": 4.2,
+      "ev": -0.043,
+      "anchor": {
+        "bet": "【胜平负】英格兰 客胜",
+        "odds": 2.4,
+        "prob": 40,
+        "market": "胜平负"
+      },
+      "score": {
+        "match": "巴西 vs 挪威",
+        "bet": "1:0",
+        "odds": 9.5,
+        "prob": 10.5
+      },
+      "rationale": "锚⚓英格兰 客胜(40%) × 波胆🎯1:0(10.5%) → 22.8x, 命中4.2%"
+    },
+    {
+      "rank": 4,
       "odds": 21.8,
       "hitPct": 4.41,
       "ev": -0.037,
@@ -1220,10 +1234,10 @@
       "rationale": "锚⚓墨西哥 vs 英格兰(42%) × 波胆🎯1:0(10.5%) → 21.8x, 命中4.4%"
     },
     {
-      "rank": 4,
+      "rank": 5,
       "odds": 18.7,
-      "hitPct": 5.24,
-      "ev": -0.02,
+      "hitPct": 5.15,
+      "ev": -0.038,
       "anchor": {
         "bet": "【BTTS】巴西 vs 挪威 双方进球=否",
         "odds": 2.2,
@@ -1234,17 +1248,17 @@
         "match": "墨西哥 vs 英格兰",
         "bet": "1:0",
         "odds": 8.5,
-        "prob": 10.5
+        "prob": 10.3
       },
-      "rationale": "锚⚓巴西 vs 挪威 双方进球=否(50%) × 波胆🎯1:0(10.5%) → 18.7x, 命中5.2%"
+      "rationale": "锚⚓巴西 vs 挪威 双方进球=否(50%) × 波胆🎯1:0(10.3%) → 18.7x, 命中5.1%"
     }
   ],
   "finalVerdict": {
-    "verdict": "今日最佳：均衡收益型组合 5.06x",
-    "reason": "巴西 vs 挪威 双方进球=否 + 墨西哥 vs 英格兰。Portfolio Score=77.4/100，EV=+6.3%，命中率21%。正期望值可接受，建议适量配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
+    "verdict": "今日最佳：均衡收益型组合 5.28x",
+    "reason": "巴西 vs 挪威 双方进球=否 + 英格兰 客胜。Portfolio Score=77.7/100，EV=+5.6%，命中率20%。正期望值可接受，建议适量配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
     "bestPortfolio": {
-      "score": 77.4,
-      "odds": 5.06,
+      "score": 77.7,
+      "odds": 5.28,
       "legs": [
         {
           "id": "bra-nor-r16_btts_n",
@@ -1260,16 +1274,16 @@
           "source": ""
         },
         {
-          "id": "mex-eng-r16_o25",
-          "bet": "【大2.5球】墨西哥 vs 英格兰",
-          "odds": 2.3,
-          "prob": 0.42,
-          "mvi": 0.97,
-          "ev": -0.034,
-          "market": "大小球",
+          "id": "mex-eng-r16_a",
+          "bet": "【胜平负】英格兰 客胜",
+          "odds": 2.4,
+          "prob": 0.4,
+          "mvi": 0.96,
+          "ev": -0.04,
+          "market": "胜平负",
           "match": "墨西哥 vs 英格兰",
           "group": "Round of 16",
-          "type": "goals",
+          "type": "direction",
           "source": ""
         }
       ]
@@ -1313,29 +1327,29 @@
   },
   "candidatePool": {
     "total": 44,
-    "accepted": 19,
-    "rejected": 25,
+    "accepted": 18,
+    "rejected": 26,
     "abandonedMatches": 0
   },
   "stats": {
-    "totalCombinations": 90,
-    "topScore": 77.4,
-    "scoredCount": 90,
+    "totalCombinations": 80,
+    "topScore": 77.7,
+    "scoredCount": 80,
     "byMarket": {
       "胜平负": 6,
       "大小球": 3,
       "BTTS": 2,
       "双重机会": 2,
-      "平局退款": 3,
+      "平局退款": 2,
       "波胆": 3
     },
     "byLegs": {
-      "2腿": 90
+      "2腿": 80
     }
   },
   "wcpeValidations": {
     "total": 2,
-    "valid": 2,
-    "withIssues": 0
+    "valid": 1,
+    "withIssues": 1
   }
 }
