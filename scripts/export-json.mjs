@@ -669,6 +669,84 @@ function generateMviAnalysis(homeWinProb, drawProb, awayWinProb, over25Prob, und
   return items.sort((a, b) => b.mvi - a.mvi)
 }
 
+function poissonPMF(k, lambda) {
+  if (lambda <= 0) return k === 0 ? 1 : 0
+  let logP = -lambda + k * Math.log(lambda)
+  let logFact = 0
+  for (let i = 2; i <= k; i++) logFact += Math.log(i)
+  return Math.exp(logP - logFact)
+}
+
+function estimateTotalLambda(over25Prob) {
+  const o25p = Math.min(Math.max(typeof over25Prob === 'number' ? over25Prob : 0.5, 0.05), 0.95)
+  const targetUnder25 = 1 - o25p
+  let lo = 0.3, hi = 8.0
+  for (let iter = 0; iter < 60; iter++) {
+    const mid = (lo + hi) / 2
+    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
+    if (pUnder25 > targetUnder25) lo = mid
+    else hi = mid
+  }
+  return (lo + hi) / 2
+}
+
+function scoreDistributionError(homeLambda, awayLambda, targets) {
+  let home = 0, draw = 0, away = 0, over25 = 0
+  for (let h = 0; h <= 8; h++) {
+    const hp = poissonPMF(h, homeLambda)
+    for (let a = 0; a <= 8; a++) {
+      const p = hp * poissonPMF(a, awayLambda)
+      if (h > a) home += p
+      else if (h === a) draw += p
+      else away += p
+      if (h + a > 2) over25 += p
+    }
+  }
+  return Math.pow(home - targets.home, 2)
+    + Math.pow(draw - targets.draw, 2) * 1.4
+    + Math.pow(away - targets.away, 2)
+    + Math.pow(over25 - targets.over25, 2) * 0.8
+}
+
+function deriveGoalLambdas(homeWinProb, drawProb, awayWinProb, over25Prob) {
+  const totalLambda = estimateTotalLambda(over25Prob)
+  const targets = {
+    home: Math.min(Math.max(typeof homeWinProb === 'number' ? homeWinProb : 0.33, 0.02), 0.96),
+    draw: Math.min(Math.max(typeof drawProb === 'number' ? drawProb : 0.34, 0.02), 0.60),
+    away: Math.min(Math.max(typeof awayWinProb === 'number' ? awayWinProb : 0.33, 0.02), 0.96),
+    over25: Math.min(Math.max(typeof over25Prob === 'number' ? over25Prob : 0.5, 0.05), 0.95),
+  }
+
+  let best = { homeLambda: totalLambda / 2, awayLambda: totalLambda / 2, error: Infinity }
+  for (let homeLambda = 0.15; homeLambda < totalLambda; homeLambda += 0.02) {
+    const awayLambda = totalLambda - homeLambda
+    if (awayLambda < 0.15) continue
+    const error = scoreDistributionError(homeLambda, awayLambda, targets)
+    if (error < best.error) best = { homeLambda, awayLambda, error }
+  }
+  return best
+}
+
+function inferPredictedDirection(homeWinProb, drawProb, awayWinProb) {
+  const hwp = typeof homeWinProb === 'number' ? homeWinProb : 0.33
+  const dp = typeof drawProb === 'number' ? drawProb : 0.34
+  const awp = typeof awayWinProb === 'number' ? awayWinProb : 0.33
+  const maxProb = Math.max(hwp, dp, awp)
+  if (dp >= 0.28 && maxProb - dp <= 0.03) return 'draw'
+  if (hwp >= awp && hwp >= dp) return 'home_win'
+  if (awp >= hwp && awp >= dp) return 'away_win'
+  return 'draw'
+}
+
+function inferDirectionFromScore(score) {
+  if (typeof score !== 'string') return undefined
+  const parts = score.split(':').map(Number)
+  if (parts.length !== 2 || parts.some(Number.isNaN)) return undefined
+  if (parts[0] > parts[1]) return 'home_win'
+  if (parts[0] < parts[1]) return 'away_win'
+  return 'draw'
+}
+
 /**
  * Poisson 估算 top5 比分概率 — 当模型概率未校准时（全 0.01）替代硬编码占位值。
  * 从 over25Prob 反推 λ → 按 ML 概率分配主客队 λ → Poisson PMF 计算各比分概率 → 归一化。
@@ -699,33 +777,7 @@ function enrichTop5WithPoisson(top5Scores, homeWinProb, drawProb, awayWinProb, o
   const dp  = typeof drawProb === 'number' ? drawProb : 0.34
   const awp = typeof awayWinProb === 'number' ? awayWinProb : 0.33
   const o25p = typeof over25Prob === 'number' ? over25Prob : 0.5
-
-  // Step 1: 从 over25Prob 反推总期望进球 λ（二分法求解 Poisson CDF）
-  const targetUnder25 = 1 - o25p
-  let lo = 0.3, hi = 8.0
-  for (let iter = 0; iter < 60; iter++) {
-    const mid = (lo + hi) / 2
-    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
-    if (pUnder25 > targetUnder25) lo = mid
-    else hi = mid
-  }
-  const totalLambda = (lo + hi) / 2
-
-  // Step 2: 用 ML 概率分配主客队 λ
-  const homeShare = hwp + dp * 0.45
-  const awayShare = awp + dp * 0.55
-  const shareSum = homeShare + awayShare
-  const homeLambda = shareSum > 0 ? totalLambda * (homeShare / shareSum) : totalLambda * 0.5
-  const awayLambda = shareSum > 0 ? totalLambda * (awayShare / shareSum) : totalLambda * 0.5
-
-  // Step 3: Poisson PMF
-  function poissonPMF(k, lambda) {
-    if (lambda <= 0) return k === 0 ? 1 : 0
-    let logP = -lambda + k * Math.log(lambda)
-    let logFact = 0
-    for (let i = 2; i <= k; i++) logFact += Math.log(i)
-    return Math.exp(logP - logFact)
-  }
+  const { homeLambda, awayLambda } = deriveGoalLambdas(hwp, dp, awp, o25p)
 
   // Step 4: 从 LLM top5 中提取已有 reason（用于保留人类可读的解释）
   const llmReasons = {}
@@ -873,27 +925,13 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
     pred._blended = true // 标记已混合
     blendedCount++
 
-    // 更新 predictedDirection
-    // V4.3 修复: 当主胜/客胜概率相等且都高于平局时，不应默认平局
-    const EPS = 0.005
-    if (blended.home > blended.away + EPS && blended.home > blended.draw + EPS) {
-      pred.predictedDirection = 'home_win'
-    } else if (blended.away > blended.home + EPS && blended.away > blended.draw + EPS) {
-      pred.predictedDirection = 'away_win'
-    } else if (blended.draw > blended.home + EPS && blended.draw > blended.away + EPS) {
-      pred.predictedDirection = 'draw'
-    } else {
-      // 势均力敌：取最高概率方向，平局作为最低优先级
-      // 因为势均力敌时平局概率往往被低估，但应尊重数据
-      const maxProb = Math.max(blended.home, blended.away, blended.draw)
-      if (Math.abs(blended.home - maxProb) <= EPS) {
-        pred.predictedDirection = 'home_win'
-      } else if (Math.abs(blended.away - maxProb) <= EPS) {
-        pred.predictedDirection = 'away_win'
-      } else {
-        pred.predictedDirection = 'draw'
-      }
-    }
+    // 更新 predictedDirection：市场混合可辅助修正，但不能覆盖 WCPE V2.2+ 手动给出的自洽判断。
+    // 如果自动化给出的 predictedDirection 与 predictedScore 方向一致，优先保留它，避免 1:1 被市场概率硬改为 away_win。
+    const originalDirection = pred.predictedDirection
+    const inferredDirection = inferPredictedDirection(blended.home, blended.draw, blended.away)
+    const scoreDirection = inferDirectionFromScore(pred.predictedScore)
+    const isManualDirectionConsistent = scoreDirection && originalDirection === scoreDirection
+    pred.predictedDirection = isManualDirectionConsistent ? originalDirection : inferredDirection
 
     // 生成 MVI 分析
     pred.mviAnalysis = generateMviAnalysis(blended.home, blended.draw, blended.away, o25p, u25p, market)
@@ -996,8 +1034,9 @@ function computeModelState(matches, predictions, existingModelState) {
       const scores = top5.slice(0, 5).map(s =>
         typeof s === 'object' && s !== null ? s.score : s
       )
-      if (scores[0] === actualScore) scoreTop1Correct++
-      if (scores.slice(0, 3).includes(actualScore)) scoreTop3Correct++
+      const top1Score = pred.predictedScore || scores[0]
+      if (top1Score === actualScore) scoreTop1Correct++
+      if (scores.slice(0, 3).includes(actualScore) || top1Score === actualScore) scoreTop3Correct++
     }
   }
 
@@ -1126,27 +1165,13 @@ for (const [matchId, pred] of Object.entries(mergedPredictions)) {
     if (pred.top5Scores.length > 0) {
       // 如果 predictedDirection 缺失，从概率推导
       if (!pred.predictedDirection) {
-        const EPS = 0.005
-        if (hwp > awp + EPS && hwp > dp + EPS) pred.predictedDirection = 'home_win'
-        else if (awp > hwp + EPS && awp > dp + EPS) pred.predictedDirection = 'away_win'
-        else if (dp > hwp + EPS && dp > awp + EPS) pred.predictedDirection = 'draw'
-        else pred.predictedDirection = hwp >= awp ? 'home_win' : 'away_win'
+        pred.predictedDirection = inferPredictedDirection(hwp, dp, awp)
       }
       // predictedScore: 保留手动设置值，仅在不合理时回退
       if (!pred.predictedScore || !pred.top5Scores.some(s => s.score === pred.predictedScore)) {
         pred.predictedScore = pred.top5Scores[0].score
       }
     }
-  }
-}
-
-// ★★ 已完赛比赛: predictedScore 必须 = top5Scores[0]（模型真实最优预测）
-// 手动覆盖的 predictedScore 在赛后不再有意义，应以概率引擎实际输出为准
-for (const [matchId, pred] of Object.entries(mergedPredictions)) {
-  const match = mergedMatches.find(m => m.id === matchId)
-  if (!match || match.status !== 'finished') continue
-  if (pred.top5Scores?.length > 0 && pred.predictedScore !== pred.top5Scores[0].score) {
-    pred.predictedScore = pred.top5Scores[0].score
   }
 }
 

@@ -1501,5 +1501,123 @@
       "away": 3
     },
     "_source": "11v11.com/ahram.org"
+  },
+  "can-mar-r16": {
+    "possession": {
+      "home": 44,
+      "away": 56
+    },
+    "shots": {
+      "home": 10,
+      "away": 5
+    },
+    "shotsOnTarget": {
+      "home": 3,
+      "away": 4
+    },
+    "xg": {
+      "home": 0.84,
+      "away": 0.9
+    },
+    "corners": {
+      "home": 11,
+      "away": 1
+    },
+    "fouls": {
+      "home": 23,
+      "away": 14
+    },
+    "cards": {
+      "home": {
+        "yellow": 4,
+        "red": 0
+      },
+      "away": {
+        "yellow": 4,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 3
+    },
+    "crosses": {
+      "home": 34,
+      "away": 7
+    },
+    "interceptions": {
+      "home": 8,
+      "away": 8
+    },
+    "saves": {
+      "home": 1,
+      "away": 3
+    },
+    "tackles": {
+      "home": 10,
+      "away": 9
+    },
+    "clearances": {
+      "home": 26,
+      "away": 51
+    },
+    "blocks": {
+      "home": 0,
+      "away": 3
+    },
+    "_source": "foxsports.com/fifa.com/ctvnews.ca"
+  },
+  "par-fra-r16": {
+    "possession": {
+      "home": 24,
+      "away": 76
+    },
+    "shots": {
+      "home": 5,
+      "away": 15
+    },
+    "shotsOnTarget": {
+      "home": 1,
+      "away": 5
+    },
+    "xg": {
+      "home": 0.15,
+      "away": 1.36
+    },
+    "corners": {
+      "home": 2,
+      "away": 12
+    },
+    "fouls": {
+      "home": 13,
+      "away": 11
+    },
+    "cards": {
+      "home": {
+        "yellow": 0,
+        "red": 0
+      },
+      "away": {
+        "yellow": 3,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 0
+    },
+    "crosses": {
+      "home": 0,
+      "away": 0
+    },
+    "interceptions": {
+      "home": 0,
+      "away": 0
+    },
+    "saves": {
+      "home": 4,
+      "away": 1
+    },
+    "_source": "extratime.com/espn.com/fifa.com"
   }
 }

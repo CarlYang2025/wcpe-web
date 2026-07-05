@@ -53,9 +53,8 @@ export default function RecapTable({ matches, predictions, reviews, onSelect }: 
               const actualScore = `${match.homeScore}:${match.awayScore}`
               const top5 = pred!.top5Scores
               if (Array.isArray(top5) && top5.length > 0) {
-                scoreHitTop3 = top5.slice(0, 3).some(s => (typeof s === 'object' && s !== null ? (s as any).score : s) === actualScore)
-                const first = top5[0]
-                scoreHitTop1 = (typeof first === 'object' && first !== null ? (first as any).score : first) === actualScore
+                scoreHitTop1 = pred!.predictedScore === actualScore
+                scoreHitTop3 = scoreHitTop1 || top5.slice(0, 3).some(s => (typeof s === 'object' && s !== null ? (s as any).score : s) === actualScore)
               }
             }
 

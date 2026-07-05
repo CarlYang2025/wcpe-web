@@ -432,6 +432,64 @@ function estimateOverHdpProb(over25p, top5Scores, hdp) {
 }
 
 // ========== Poisson 波胆赔率估算器 ==========
+function poissonPMF(k, lambda) {
+  if (lambda <= 0) return k === 0 ? 1 : 0
+  let logP = -lambda + k * Math.log(lambda)
+  let logFact = 0
+  for (let i = 2; i <= k; i++) logFact += Math.log(i)
+  return Math.exp(logP - logFact)
+}
+
+function estimateTotalLambda(over25Prob) {
+  const o25p = Math.min(Math.max(typeof over25Prob === 'number' ? over25Prob : 0.5, 0.05), 0.95)
+  const targetUnder25 = 1 - o25p
+  let lo = 0.3, hi = 8.0
+  for (let iter = 0; iter < 60; iter++) {
+    const mid = (lo + hi) / 2
+    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
+    if (pUnder25 > targetUnder25) lo = mid
+    else hi = mid
+  }
+  return (lo + hi) / 2
+}
+
+function scoreDistributionError(homeLambda, awayLambda, targets) {
+  let home = 0, draw = 0, away = 0, over25 = 0
+  for (let h = 0; h <= 8; h++) {
+    const hp = poissonPMF(h, homeLambda)
+    for (let a = 0; a <= 8; a++) {
+      const p = hp * poissonPMF(a, awayLambda)
+      if (h > a) home += p
+      else if (h === a) draw += p
+      else away += p
+      if (h + a > 2) over25 += p
+    }
+  }
+  return Math.pow(home - targets.home, 2)
+    + Math.pow(draw - targets.draw, 2) * 1.4
+    + Math.pow(away - targets.away, 2)
+    + Math.pow(over25 - targets.over25, 2) * 0.8
+}
+
+function deriveGoalLambdas(homeWinProb, drawProb, awayWinProb, over25Prob) {
+  const totalLambda = estimateTotalLambda(over25Prob)
+  const targets = {
+    home: Math.min(Math.max(typeof homeWinProb === 'number' ? homeWinProb : 0.33, 0.02), 0.96),
+    draw: Math.min(Math.max(typeof drawProb === 'number' ? drawProb : 0.34, 0.02), 0.60),
+    away: Math.min(Math.max(typeof awayWinProb === 'number' ? awayWinProb : 0.33, 0.02), 0.96),
+    over25: Math.min(Math.max(typeof over25Prob === 'number' ? over25Prob : 0.5, 0.05), 0.95),
+  }
+
+  let best = { homeLambda: totalLambda / 2, awayLambda: totalLambda / 2, error: Infinity }
+  for (let homeLambda = 0.15; homeLambda < totalLambda; homeLambda += 0.02) {
+    const awayLambda = totalLambda - homeLambda
+    if (awayLambda < 0.15) continue
+    const error = scoreDistributionError(homeLambda, awayLambda, targets)
+    if (error < best.error) best = { homeLambda, awayLambda, error }
+  }
+  return best
+}
+
 /**
  * 当 Bet365 correctScore 赔率不可用时，用 Poisson 模型从 ML + O/U 赔率推导。
  * 行业标准方法：从 O/U 2.5 推导总期望进球 λ，从 ML 分配主客队 λ，Poisson 生成比分概率。
@@ -444,35 +502,7 @@ function estimateOverHdpProb(over25p, top5Scores, hdp) {
  * @returns {Object} { "2-1": 8.5, "1-1": 6.0, ... } Bet365 格式（横杠）
  */
 function estimateCorrectScoreOdds(homeWinProb, drawProb, awayWinProb, over25Prob, top5Scores) {
-  // Step 1: 从 over25Prob 反推总期望进球 λ（二分法求解 Poisson CDF）
-  // P(≤2 goals) = e^-λ × (1 + λ + λ²/2) = 1 - over25Prob
-  const targetUnder25 = 1 - over25Prob
-  let lo = 0.3, hi = 8.0
-  for (let iter = 0; iter < 60; iter++) {
-    const mid = (lo + hi) / 2
-    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
-    if (pUnder25 > targetUnder25) lo = mid
-    else hi = mid
-  }
-  const totalLambda = (lo + hi) / 2
-
-  // Step 2: 用 ML 概率分配主客队 λ
-  // 主胜概率高 → 主队进球多；用 logit 变换使分配更平滑
-  const homeShare = homeWinProb + drawProb * 0.45 // 平局贡献部分给主队
-  const awayShare = awayWinProb + drawProb * 0.55
-  const shareSum = homeShare + awayShare
-  const homeLambda = totalLambda * (homeShare / shareSum)
-  const awayLambda = totalLambda * (awayShare / shareSum)
-
-  // Step 3: Poisson PMF
-  function poissonPMF(k, lambda) {
-    if (lambda <= 0) return k === 0 ? 1 : 0
-    let logP = -lambda + k * Math.log(lambda)
-    // log(k!) via Stirling for large k, exact for small
-    let logFact = 0
-    for (let i = 2; i <= k; i++) logFact += Math.log(i)
-    return Math.exp(logP - logFact)
-  }
+  const { homeLambda, awayLambda } = deriveGoalLambdas(homeWinProb, drawProb, awayWinProb, over25Prob)
 
   // Step 4: 为 top5Scores 中的每个比分计算赔率
   const MARGIN = 0.25 // 25% bookmaker margin (Bet365 correct score 典型值)
@@ -508,32 +538,7 @@ function estimateCorrectScoreOdds(homeWinProb, drawProb, awayWinProb, over25Prob
  * @returns {Object} { "2:1": 0.12, "1:1": 0.08, ... } WCPE 格式（冒号）
  */
 function estimateScoreProbabilities(homeWinProb, drawProb, awayWinProb, over25Prob, top5Scores) {
-  // Step 1: 从 over25Prob 反推总期望进球 λ
-  const targetUnder25 = 1 - over25Prob
-  let lo = 0.3, hi = 8.0
-  for (let iter = 0; iter < 60; iter++) {
-    const mid = (lo + hi) / 2
-    const pUnder25 = Math.exp(-mid) * (1 + mid + mid * mid / 2)
-    if (pUnder25 > targetUnder25) lo = mid
-    else hi = mid
-  }
-  const totalLambda = (lo + hi) / 2
-
-  // Step 2: 用 ML 概率分配主客队 λ
-  const homeShare = homeWinProb + drawProb * 0.45
-  const awayShare = awayWinProb + drawProb * 0.55
-  const shareSum = homeShare + awayShare
-  const homeLambda = totalLambda * (homeShare / shareSum)
-  const awayLambda = totalLambda * (awayShare / shareSum)
-
-  // Step 3: Poisson PMF
-  function poissonPMF(k, lambda) {
-    if (lambda <= 0) return k === 0 ? 1 : 0
-    let logP = -lambda + k * Math.log(lambda)
-    let logFact = 0
-    for (let i = 2; i <= k; i++) logFact += Math.log(i)
-    return Math.exp(logP - logFact)
-  }
+  const { homeLambda, awayLambda } = deriveGoalLambdas(homeWinProb, drawProb, awayWinProb, over25Prob)
 
   // Step 4: 计算每个比分的 Poisson 概率
   const result = {}

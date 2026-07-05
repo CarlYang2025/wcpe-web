@@ -602,8 +602,34 @@ export const matches: Match[] = [
   { id: 'col-gha-r32', date: '2026-07-03', tournament: '2026 FIFA World Cup', group: 'Round of 32', round: 'Round of 32', matchday: 23, homeTeam: 'Colombia', awayTeam: 'Ghana', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/4 09:30', localKickoff: '7/3 20:30', localTZ: 'CT', status: 'finished', homeScore: 1, awayScore: 0 },
 
   // ---- 7月4-5日 Round of 16 第24/25比赛日 ----
-  { id: 'can-mar-r16', date: '2026-07-04', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 24, homeTeam: 'Canada', awayTeam: 'Morocco', venue: 'NRG Stadium, Houston', kickoff: '7/5 01:00', localKickoff: '7/4 13:00', localTZ: 'CT', status: 'upcoming' },
-  { id: 'par-fra-r16', date: '2026-07-04', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 24, homeTeam: 'Paraguay', awayTeam: 'France', venue: 'Lincoln Financial Field, Philadelphia', kickoff: '7/5 05:00', localKickoff: '7/4 17:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'can-mar-r16', date: '2026-07-04', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 24, homeTeam: 'Canada', awayTeam: 'Morocco', venue: 'NRG Stadium, Houston', kickoff: '7/5 01:00', localKickoff: '7/4 13:00', localTZ: 'CT', status: 'finished',
+    matchStats: {
+    possession: { home: 44, away: 56 },
+    shots: { home: 10, away: 5 },
+    shotsOnTarget: { home: 3, away: 4 },
+    xg: { home: 0.84, away: 0.9 },
+    corners: { home: 11, away: 1 },
+    fouls: { home: 23, away: 14 },
+    cards: { home: { yellow: 4, red: 0 }, away: { yellow: 4, red: 0 } },
+    offsides: { home: 2, away: 3 },
+    crosses: { home: 34, away: 7 },
+    interceptions: { home: 8, away: 8 },
+    saves: { home: 1, away: 3 }
+  }, homeScore: 0, awayScore: 3 },
+  { id: 'par-fra-r16', date: '2026-07-04', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 24, homeTeam: 'Paraguay', awayTeam: 'France', venue: 'Lincoln Financial Field, Philadelphia', kickoff: '7/5 05:00', localKickoff: '7/4 17:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 24, away: 76 },
+    shots: { home: 5, away: 15 },
+    shotsOnTarget: { home: 1, away: 5 },
+    xg: { home: 0.15, away: 1.36 },
+    corners: { home: 2, away: 12 },
+    fouls: { home: 13, away: 11 },
+    cards: { home: { yellow: 0, red: 0 }, away: { yellow: 3, red: 0 } },
+    offsides: { home: 0, away: 0 },
+    crosses: { home: 0, away: 0 },
+    interceptions: { home: 0, away: 0 },
+    saves: { home: 4, away: 1 }
+  }, homeScore: 0, awayScore: 1 },
   // ---- 7月5-6日 Round of 16 第25/26比赛日 ----
   { id: 'bra-nor-r16', date: '2026-07-05', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 25, homeTeam: 'Brazil', awayTeam: 'Norway', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/6 04:00', localKickoff: '7/5 16:00', localTZ: 'ET', status: 'upcoming' },
   { id: 'mex-eng-r16', date: '2026-07-05', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 25, homeTeam: 'Mexico', awayTeam: 'England', venue: 'Estadio Azteca, Mexico City', kickoff: '7/6 08:00', localKickoff: '7/5 18:00', localTZ: 'CT', status: 'upcoming' },
