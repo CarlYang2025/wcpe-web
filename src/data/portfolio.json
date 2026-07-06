@@ -1,13 +1,13 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-05T13:58:07.785Z",
+  "generatedAt": "2026-07-06T03:37:36.926Z",
   "targetDate": "7/6",
-  "targetDateDisplay": "2026年7月6日（周一）",
+  "targetDateDisplay": "2026年7月7日（周二）",
   "targetMatchIds": [
     "bra-nor-r16",
     "mex-eng-r16"
   ],
-  "oddsFreshness": "2026-07-05T13:57:31.422Z",
+  "oddsFreshness": "2026-07-06T03:37:26.192Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "🟡 机会有限",
@@ -18,7 +18,7 @@
     "summary": "2场比赛，18个可投注项（3个正EV），0个高MVI信号。涵盖6种市场类型。",
     "highlights": [
       "巴西 vs 挪威 比分 0:1 为本日最强MVI信号(1.05)",
-      "昨日方向准确率正常(100%)，已动态调整策略权重",
+      "昨日方向准确率正常(90%)，已动态调整策略权重",
       "已自动排除26个低质量投注项+0场高风险比赛",
       "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆"
     ]
@@ -252,7 +252,7 @@
     },
     {
       "rank": 3,
-      "score": 76.7,
+      "score": 76.6,
       "odds": 7.04,
       "hitPct": 15,
       "ev": 0.056,
@@ -306,12 +306,12 @@
         "struct": 5
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 墨西哥 vs 英格兰 平局。正EV，命中15%，评分76.7/100。",
+      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 墨西哥 vs 英格兰 平局。正EV，命中15%，评分76.6/100。",
       "comparisonNote": ""
     },
     {
       "rank": 4,
-      "score": 76.6,
+      "score": 76.5,
       "odds": 6.82,
       "hitPct": 15.5,
       "ev": 0.057,
@@ -365,7 +365,7 @@
         "struct": 5
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 墨西哥 主胜。正EV，命中15.5%，评分76.6/100。",
+      "rationale": "2场组合[BTTS+胜平负]：巴西 vs 挪威 双方进球=否 + 墨西哥 主胜。正EV，命中15.5%，评分76.5/100。",
       "comparisonNote": ""
     },
     {
@@ -429,7 +429,7 @@
     },
     {
       "rank": 6,
-      "score": 73.2,
+      "score": 73.1,
       "odds": 3.67,
       "hitPct": 28.17,
       "ev": 0.032,
@@ -475,7 +475,7 @@
         "stab": 4.8,
         "extRisk": 0,
         "consist": 3.5,
-        "strat": 0.2,
+        "strat": 0.1,
         "valCap": 0,
         "qual": 3.8,
         "cert": 2,
@@ -483,7 +483,7 @@
         "struct": 0
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[BTTS+平局退款]：巴西 vs 挪威 双方进球=否 + 英格兰 不败。边际正EV，命中28.17%，评分73.2/100。",
+      "rationale": "2场组合[BTTS+平局退款]：巴西 vs 挪威 双方进球=否 + 英格兰 不败。边际正EV，命中28.17%，评分73.1/100。",
       "comparisonNote": ""
     },
     {
@@ -547,7 +547,7 @@
     },
     {
       "rank": 8,
-      "score": 72.3,
+      "score": 72.2,
       "odds": 3,
       "hitPct": 35.5,
       "ev": 0.065,
@@ -593,7 +593,7 @@
         "stab": 4.9,
         "extRisk": 0,
         "consist": 3.5,
-        "strat": 0.2,
+        "strat": 0.1,
         "valCap": 0,
         "qual": 3.8,
         "cert": 0,
@@ -601,7 +601,7 @@
         "struct": 0
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[BTTS+双重机会]：巴西 vs 挪威 双方进球=否 + 墨西哥 或 英格兰。正EV，命中35.5%，评分72.3/100。",
+      "rationale": "2场组合[BTTS+双重机会]：巴西 vs 挪威 双方进球=否 + 墨西哥 或 英格兰。正EV，命中35.5%，评分72.2/100。",
       "comparisonNote": ""
     },
     {
@@ -1291,38 +1291,38 @@
     "oddsAssessment": "⚠️ 综合赔率低于15倍，但组合综合投资价值最高。"
   },
   "yesterdayReview": {
-    "date": "7/5",
+    "date": "7/6",
     "summary": {
       "n": 8,
-      "dirHits": 8,
-      "dirRate": 1,
-      "over25Hits": 3,
-      "over25Rate": 0.36666666666666664,
+      "dirHits": 7,
+      "dirRate": 0.8999999999999999,
+      "over25Hits": 4,
+      "over25Rate": 0.5,
       "bttsHits": 6,
-      "bttsRate": 0.7666666666666666,
-      "top3Hits": 3,
-      "top3Rate": 0.41666666666666663,
-      "top1Hits": 0,
-      "top1Rate": 0,
-      "draws": 0,
+      "bttsRate": 0.7333333333333333,
+      "top3Hits": 4,
+      "top3Rate": 0.5166666666666666,
+      "top1Hits": 1,
+      "top1Rate": 0.09999999999999999,
+      "draws": 1,
       "upsets": 0,
       "_multiDay": true,
       "_dayCount": 3,
       "_weightStr": "2场×50% + 3场×30% + 3场×20%"
     },
     "keyInsights": [
-      "方向准确率100%",
-      "大2.5球命中37%",
-      "BTTS命中77%（良好）",
-      "Top3比分命中42%（3/8场）"
+      "方向准确率90%",
+      "大2.5球命中50%",
+      "BTTS命中73%（良好）",
+      "Top3比分命中52%（4/8场）"
     ],
     "strategyWeights": {
       "direction": 1.2,
-      "goals": 0.73,
-      "btts": 1.0899999999999999,
-      "score": 0.6,
+      "goals": 0.85,
+      "btts": 1.06,
+      "score": 0.6719999999999999,
       "safety": 1.05,
-      "goals_range": 0.646
+      "goals_range": 0.75
     }
   },
   "candidatePool": {

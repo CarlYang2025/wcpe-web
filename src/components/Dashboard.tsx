@@ -17,6 +17,21 @@ interface Props {
 export default function Dashboard({
   historicalMatches, todayMatches, predictions, postMatchReviews, modelState, keyLearnings, onSelectMatch,
 }: Props) {
+  const dynamicEloRatings = useMemo(() => normalizeEloRatings((modelState as any).eloRatings), [modelState])
+  const reviewEloChanges = useMemo(() => buildReviewEloChangeMap(postMatchReviews), [postMatchReviews])
+  const eloRows = useMemo(() => Object.entries(teamRatings)
+    .map(([name, rating]) => {
+      const currentElo = dynamicEloRatings[name] ?? rating.elo
+      const reviewDelta = reviewEloChanges[name]
+      const baselineDelta = currentElo - rating.elo
+      return {
+        name,
+        elo: currentElo,
+        delta: typeof reviewDelta === 'number' && reviewDelta !== 0 ? reviewDelta : baselineDelta,
+      }
+    })
+    .sort((a, b) => b.elo - a.elo), [dynamicEloRatings, reviewEloChanges])
+
   // Derive Beijing date from kickoff times (date field is local venue date)
   const todayBeijingDate = useMemo(() => {
     if (todayMatches.length === 0) return ''
@@ -119,17 +134,16 @@ export default function Dashboard({
         <h3 className="text-xs font-bold text-[#a0a0a0] mb-4 uppercase tracking-wider">模型进化</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <h4 className="text-[10px] text-[#54a0ff] font-bold mb-2">📈 ELO 排行榜 ({Object.keys(teamRatings).length}队)</h4>
+            <h4 className="text-[10px] text-[#54a0ff] font-bold mb-2">📈 ELO 排行榜 ({eloRows.length}队)</h4>
             <div className="space-y-1 max-h-[420px] overflow-y-auto pr-1 custom-scrollbar">
-              {Object.entries(teamRatings)
-                .sort(([, a], [, b]) => b.elo - a.elo)
-                .map(([name, rating], i) => (
-                  <div key={name} className="flex items-center gap-2 text-[10px]">
-                    <span className="w-4 text-[#555555] text-right">{i + 1}</span>
-                    <span className="text-xs">{flag(name)}</span>
-                    <span className="text-[#a0a0a0] flex-1">{cn(name)}</span>
-                    <span className="font-mono text-white font-bold">{rating.elo}</span>
-                  </div>
+              {eloRows.map((row, i) => (
+                <div key={row.name} className="flex items-center gap-2 text-[10px]">
+                  <span className="w-4 text-[#555555] text-right">{i + 1}</span>
+                  <span className="text-xs">{flag(row.name)}</span>
+                  <span className="text-[#a0a0a0] flex-1">{cn(row.name)}</span>
+                  <EloDelta delta={row.delta} />
+                  <span className="font-mono text-white font-bold w-10 text-right">{Math.round(row.elo)}</span>
+                </div>
               ))}
             </div>
           </div>
@@ -144,17 +158,19 @@ export default function Dashboard({
                   { key: 'marketConsensus', label: '市场共识' },
                   { key: 'tacticalMatchup', label: '战术匹配' },
                 ]).map(f => {
-                  const fw = modelState.factorWeights![f.key]
+                  const fw = normalizeFactorWeight(modelState.factorWeights?.[f.key])
                   if (!fw) return null // 静态 modelState 加载前可能缺因子数据
-                  const hitColor = fw.hitRate > 0.5 ? '#00ff88' : fw.hitRate > 0.35 ? '#ffa502' : '#ff4757'
+                  const hasHitRate = typeof fw.hitRate === 'number'
+                  const hitColor = !hasHitRate ? '#54a0ff' : fw.hitRate! > 0.5 ? '#00ff88' : fw.hitRate! > 0.35 ? '#ffa502' : '#ff4757'
                   const weightPct = Math.round(fw.weight * 100)
+                  const hitRateText = hasHitRate ? `${Math.round(fw.hitRate! * 100)}%` : '—'
                   return (
                     <div key={f.key} className="flex items-center gap-2 text-[10px]">
                       <span className="w-16 text-[#a0a0a0] text-right">{f.label}</span>
                       <div className="flex-1 h-4 rounded bg-[#1a1f3a] relative overflow-hidden">
-                        <div className="h-full rounded" style={{ width: `${weightPct}%`, backgroundColor: hitColor, opacity: 0.25 }} />
+                        <div className="h-full rounded" style={{ width: `${Math.max(2, Math.min(100, weightPct))}%`, backgroundColor: hitColor, opacity: 0.25 }} />
                         <div className="absolute inset-0 flex items-center px-2 justify-between">
-                          <span className="font-mono font-bold" style={{ color: hitColor }}>{Math.round(fw.hitRate * 100)}%</span>
+                          <span className="font-mono font-bold" style={{ color: hitColor }}>{hitRateText}</span>
                           <span className="text-[#555555] font-mono">w={weightPct}%</span>
                         </div>
                       </div>
@@ -168,6 +184,59 @@ export default function Dashboard({
         </div>
       </section>
     </div>
+  )
+}
+
+function normalizeEloRatings(raw: unknown): Record<string, number> {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {}
+  const result: Record<string, number> = {}
+  for (const [team, value] of Object.entries(raw as Record<string, unknown>)) {
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      result[team] = value
+    } else if (value && typeof value === 'object') {
+      const elo = (value as { elo?: unknown }).elo
+      if (typeof elo === 'number' && Number.isFinite(elo)) result[team] = elo
+    }
+  }
+  return result
+}
+
+function buildReviewEloChangeMap(reviews: Record<string, PostMatchReview>): Record<string, number> {
+  const result: Record<string, number> = {}
+  for (const review of Object.values(reviews)) {
+    for (const change of review.eloChanges ?? []) {
+      if (typeof change.change === 'number' && Number.isFinite(change.change)) {
+        result[change.team] = (result[change.team] ?? 0) + change.change
+      }
+    }
+  }
+  return result
+}
+
+function normalizeFactorWeight(raw: unknown): { hitRate?: number; weight: number } | null {
+  if (typeof raw === 'number' && Number.isFinite(raw)) return { weight: raw }
+  if (!raw || typeof raw !== 'object') return null
+  const item = raw as { hitRate?: unknown; weight?: unknown }
+  const weight = typeof item.weight === 'number' && Number.isFinite(item.weight) ? item.weight : null
+  if (weight === null) return null
+  const hitRate = typeof item.hitRate === 'number' && Number.isFinite(item.hitRate) ? item.hitRate : undefined
+  return { hitRate, weight }
+}
+
+function EloDelta({ delta }: { delta: number }) {
+  const rounded = Math.round(delta)
+  if (!Number.isFinite(rounded) || rounded === 0) {
+    return <span className="w-12 text-right text-[9px] text-[#555555]">—</span>
+  }
+  const isUp = rounded > 0
+  return (
+    <span
+      className="w-12 text-right text-[9px] font-mono font-bold"
+      style={{ color: isUp ? '#00ff88' : '#ff4757' }}
+      title={`较静态基准 ${isUp ? '上升' : '下降'} ${Math.abs(rounded)} ELO`}
+    >
+      {isUp ? '↑' : '↓'}{Math.abs(rounded)}
+    </span>
   )
 }
 

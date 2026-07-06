@@ -208,10 +208,10 @@ export interface ModelState {
   scoreTop1Correct: number;
   overallDrawRate: number;
   overallTotalMatches: number;
-  /** 8维因子权重表现 */
-  factorWeights?: Record<string, { hitRate: number; weight: number; samples: number }>;
-  /** 全局ELO评分快照 */
-  eloRatings?: Record<string, number>;
+  /** 8维因子权重表现；历史数据可能是纯权重数字，新数据可能带 hitRate/samples */
+  factorWeights?: Record<string, number | { hitRate?: number; weight: number; samples?: number }>;
+  /** 全局ELO评分快照；remote.json 顶层兼容结构可能携带完整 TeamRatings 对象 */
+  eloRatings?: Record<string, number | TeamRatings>;
 }
 
 export const QUADRANT_NAMES: Record<string, string> = {

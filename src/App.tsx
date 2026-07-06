@@ -62,8 +62,17 @@ export default function App() {
     return result
   }, [safePredictions])
 
-  // Use remote data when available, fall back to static
-  const displayModelState = useMemo(() => remoteData?.modelState || modelState, [remoteData])
+  // Use remote data when available, fall back to static.
+  // Some automation-learned fields live at the top level of remote.json for legacy compatibility,
+  // so fold them back into modelState before rendering.
+  const displayModelState = useMemo(() => {
+    if (!remoteData?.modelState) return modelState
+    return {
+      ...remoteData.modelState,
+      factorWeights: remoteData.modelState.factorWeights || remoteData.factorWeights || modelState.factorWeights,
+      eloRatings: remoteData.modelState.eloRatings || remoteData.eloRatings,
+    }
+  }, [remoteData])
   const displayKeyLearnings = useMemo(() => remoteData?.keyLearnings || keyLearnings, [remoteData])
 
   // Merge remote matches with static (remote takes priority, but preserve static scores if remote lacks them)
