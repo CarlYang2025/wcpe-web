@@ -660,8 +660,34 @@ export const matches: Match[] = [
     saves: { home: 2, away: 3 }
   }, homeScore: 2, awayScore: 3 },
   // ---- 7月6-7日 Round of 16 第26/27比赛日 ----
-  { id: 'por-esp-r16', date: '2026-07-06', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 26, homeTeam: 'Portugal', awayTeam: 'Spain', venue: 'AT&T Stadium, Arlington', kickoff: '7/7 03:00', localKickoff: '7/6 15:00', localTZ: 'CT', status: 'upcoming' },
-  { id: 'usa-bel-r16', date: '2026-07-06', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 26, homeTeam: 'USA', awayTeam: 'Belgium', venue: 'Lumen Field, Seattle', kickoff: '7/7 08:00', localKickoff: '7/6 20:00', localTZ: 'PT', status: 'upcoming' },
+  { id: 'por-esp-r16', date: '2026-07-06', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 26, homeTeam: 'Portugal', awayTeam: 'Spain', venue: 'AT&T Stadium, Arlington', kickoff: '7/7 03:00', localKickoff: '7/6 15:00', localTZ: 'CT', status: 'finished',
+    matchStats: {
+    possession: { home: 45, away: 55 },
+    shots: { home: 10, away: 15 },
+    shotsOnTarget: { home: 2, away: 6 },
+    xg: { home: 0.63, away: 1.69 },
+    corners: { home: 3, away: 7 },
+    fouls: { home: 9, away: 13 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 1, red: 0 } },
+    offsides: { home: 2, away: 1 },
+    crosses: { home: 4, away: 1 },
+    interceptions: { home: 7, away: 6 },
+    saves: { home: 5, away: 2 }
+  }, homeScore: 0, awayScore: 1 },
+  { id: 'usa-bel-r16', date: '2026-07-06', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 26, homeTeam: 'USA', awayTeam: 'Belgium', venue: 'Lumen Field, Seattle', kickoff: '7/7 08:00', localKickoff: '7/6 20:00', localTZ: 'PT', status: 'finished',
+    matchStats: {
+    possession: { home: 55, away: 45 },
+    shots: { home: 7, away: 15 },
+    shotsOnTarget: { home: 2, away: 7 },
+    xg: { home: 0.63, away: 2.01 },
+    corners: { home: 3, away: 5 },
+    fouls: { home: 11, away: 9 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 0, red: 0 } },
+    offsides: { home: 0, away: 1 },
+    crosses: { home: 2, away: 5 },
+    interceptions: { home: 9, away: 9 },
+    saves: { home: 3, away: 1 }
+  }, homeScore: 1, awayScore: 4 },
   // ---- 7月7-8日 Round of 16 第27/28比赛日 ----
   { id: 'arg-egy-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Argentina', awayTeam: 'Egypt', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '7/8 00:00', localKickoff: '7/7 12:00', localTZ: 'ET', status: 'upcoming' },
   { id: 'sui-col-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Switzerland', awayTeam: 'Colombia', venue: 'BC Place, Vancouver', kickoff: '7/8 04:00', localKickoff: '7/7 16:00', localTZ: 'PT', status: 'upcoming' },

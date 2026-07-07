@@ -1727,5 +1727,111 @@
     },
     "_source": "espn.co.uk/espn.com",
     "_notes": "Mexico 2-3 England; Bellingham 36/38, Quinones 42, Kane pen 60, Jimenez pen 69; Quansah red 54; ESPN team stats xG 1.88-1.61, shots 20-6, SOT 5-5."
+  },
+  "por-esp-r16": {
+    "possession": {
+      "home": 45,
+      "away": 55
+    },
+    "shots": {
+      "home": 10,
+      "away": 15
+    },
+    "shotsOnTarget": {
+      "home": 2,
+      "away": 6
+    },
+    "xg": {
+      "home": 0.63,
+      "away": 1.69
+    },
+    "corners": {
+      "home": 3,
+      "away": 7
+    },
+    "fouls": {
+      "home": 9,
+      "away": 13
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 1
+    },
+    "crosses": {
+      "home": 4,
+      "away": 1
+    },
+    "interceptions": {
+      "home": 7,
+      "away": 6
+    },
+    "saves": {
+      "home": 5,
+      "away": 2
+    },
+    "_source": "espn.com team-stats 2026-07-07 (Portugal 0-1 Spain, Merino 90+1)"
+  },
+  "usa-bel-r16": {
+    "possession": {
+      "home": 55,
+      "away": 45
+    },
+    "shots": {
+      "home": 7,
+      "away": 15
+    },
+    "shotsOnTarget": {
+      "home": 2,
+      "away": 7
+    },
+    "xg": {
+      "home": 0.63,
+      "away": 2.01
+    },
+    "corners": {
+      "home": 3,
+      "away": 5
+    },
+    "fouls": {
+      "home": 11,
+      "away": 9
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 0,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 0,
+      "away": 1
+    },
+    "crosses": {
+      "home": 2,
+      "away": 5
+    },
+    "interceptions": {
+      "home": 9,
+      "away": 9
+    },
+    "saves": {
+      "home": 3,
+      "away": 1
+    },
+    "_source": "espn.com team-stats 2026-07-07 (USA 1-4 Belgium); possession estimated from pass volume USA 527 vs BEL 414"
   }
 }
