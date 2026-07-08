@@ -1297,7 +1297,8 @@ function mergeMatches(hardcoded, existing) {
       // Use existing scores if available (from automation or ESPN)
       homeScore: ex.homeScore ?? m.homeScore,
       awayScore: ex.awayScore ?? m.awayScore,
-      status: ex.status || m.status,
+      // Use hardcoded (matches.ts) status as authoritative — automation syncs status to matches.ts before export
+      status: m.status || ex.status,
       // Preserve matchStats from existing if not in hardcoded
       matchStats: m.matchStats || ex.matchStats,
     }

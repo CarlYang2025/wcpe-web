@@ -689,8 +689,13 @@ export const matches: Match[] = [
     saves: { home: 3, away: 1 }
   }, homeScore: 1, awayScore: 4 },
   // ---- 7月7-8日 Round of 16 第27/28比赛日 ----
-  { id: 'arg-egy-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Argentina', awayTeam: 'Egypt', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '7/8 00:00', localKickoff: '7/7 12:00', localTZ: 'ET', status: 'upcoming' },
-  { id: 'sui-col-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Switzerland', awayTeam: 'Colombia', venue: 'BC Place, Vancouver', kickoff: '7/8 04:00', localKickoff: '7/7 16:00', localTZ: 'PT', status: 'upcoming' },
+  { id: 'arg-egy-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Argentina', awayTeam: 'Egypt', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '7/8 00:00', localKickoff: '7/7 12:00', localTZ: 'ET', status: 'finished', homeScore: 3, awayScore: 2 },
+  { id: 'sui-col-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Switzerland', awayTeam: 'Colombia', venue: 'BC Place, Vancouver', kickoff: '7/8 04:00', localKickoff: '7/7 16:00', localTZ: 'PT', status: 'finished', homeScore: 0, awayScore: 0 },
+  // ---- 7月10-12日 Quarter-Finals ----
+  { id: 'fra-mar-qf', date: '2026-07-09', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 28, homeTeam: 'France', awayTeam: 'Morocco', venue: 'Gillette Stadium, Foxborough', kickoff: '7/10 04:00', localKickoff: '7/9 16:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'esp-bel-qf', date: '2026-07-10', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 28, homeTeam: 'Spain', awayTeam: 'Belgium', venue: 'SoFi Stadium, Inglewood', kickoff: '7/11 03:00', localKickoff: '7/10 12:00', localTZ: 'PT', status: 'upcoming' },
+  { id: 'nor-eng-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Norway', awayTeam: 'England', venue: 'Hard Rock Stadium, Miami Gardens', kickoff: '7/12 05:00', localKickoff: '7/11 17:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'arg-sui-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Argentina', awayTeam: 'Switzerland', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/12 09:00', localKickoff: '7/11 20:00', localTZ: 'CT', status: 'upcoming' },
 ];
 
 // ========== 预测数据 ==========
