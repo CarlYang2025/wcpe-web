@@ -44,9 +44,34 @@ export default function Dashboard({
 
   const todayTitle = todayBeijingDate ? `北京时间${todayBeijingDate} 比赛日` : '预测'
   const [historyPage, setHistoryPage] = useState(1)
+  const [searchQuery, setSearchQuery] = useState('')
   const perPage = 10
-  const totalPages = Math.ceil(historicalMatches.length / perPage)
-  const pagedMatches = historicalMatches.slice((historyPage - 1) * perPage, historyPage * perPage)
+  const filteredMatches = useMemo(() => {
+    if (!searchQuery.trim()) return historicalMatches
+    const q = searchQuery.trim().toLowerCase()
+    return historicalMatches.filter(m => {
+      // 球队名（英文 + 中文）
+      const homeEn = m.homeTeam.toLowerCase()
+      const awayEn = m.awayTeam.toLowerCase()
+      const homeCn = cn(m.homeTeam).toLowerCase()
+      const awayCn = cn(m.awayTeam).toLowerCase()
+      if (homeEn.includes(q) || awayEn.includes(q) || homeCn.includes(q) || awayCn.includes(q)) return true
+      // 比分 (3:2 或 3-2)
+      if (m.homeScore !== undefined && m.awayScore !== undefined) {
+        if (`${m.homeScore}:${m.awayScore}`.includes(q) || `${m.homeScore}-${m.awayScore}`.includes(q)) return true
+      }
+      // 日期 / 开球时间
+      if (m.date.includes(q) || (m.kickoff || '').includes(q)) return true
+      // 轮次（英文 + 中文）
+      const round = (m.round || m.group || '').toLowerCase()
+      if (round.includes(q)) return true
+      const roundCn = cn(m.round || m.group || '').toLowerCase()
+      if (roundCn.includes(q)) return true
+      return false
+    })
+  }, [historicalMatches, searchQuery])
+  const totalPages = Math.ceil(filteredMatches.length / perPage)
+  const pagedMatches = filteredMatches.slice((historyPage - 1) * perPage, historyPage * perPage)
 
   return (
     <div className="animate-fade-in space-y-8">
@@ -86,24 +111,61 @@ export default function Dashboard({
           📊 历史比赛
           <span className="text-sm font-normal text-[#a0a0a0] ml-2">({historicalMatches.length} 场)</span>
         </h2>
-        <div className="bg-[#141937] rounded-xl border border-[#1a1f3a] overflow-hidden">
-          <RecapTable matches={pagedMatches} predictions={predictions} reviews={postMatchReviews} onSelect={onSelectMatch} />
-        </div>
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 mt-3">
-            <button onClick={() => setHistoryPage(p => Math.max(1, p - 1))} disabled={historyPage === 1}
-              className="text-[10px] px-3 py-1 rounded bg-[#141937] border border-[#1a1f3a] text-[#a0a0a0] hover:text-white disabled:opacity-30">
-              上一页
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i} onClick={() => setHistoryPage(i + 1)}
-                className={`text-[10px] w-7 h-7 rounded ${historyPage === i + 1 ? 'bg-[#ffd700]/20 text-[#ffd700] border border-[#ffd700]/50' : 'bg-[#141937] text-[#a0a0a0] border border-[#1a1f3a] hover:text-white'}`}>
-                {i + 1}
+        {/* 搜索框 */}
+        <div className="flex items-center gap-2 mb-3">
+          <div className="relative flex-1">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#555555] text-xs">🔍</span>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => { setSearchQuery(e.target.value); setHistoryPage(1) }}
+              placeholder="搜索球队 / 比分 / 日期 / 轮次..."
+              className="w-full bg-[#141937] border border-[#1a1f3a] rounded-lg pl-9 pr-8 py-2 text-xs text-white placeholder-[#555555] focus:outline-none focus:border-[#ffd700]/50 transition-colors"
+            />
+            {searchQuery && (
+              <button onClick={() => { setSearchQuery(''); setHistoryPage(1) }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#555555] hover:text-white text-xs">
+                ✕
               </button>
-            ))}
-            <button onClick={() => setHistoryPage(p => Math.min(totalPages, p + 1))} disabled={historyPage === totalPages}
-              className="text-[10px] px-3 py-1 rounded bg-[#141937] border border-[#1a1f3a] text-[#a0a0a0] hover:text-white disabled:opacity-30">
-              下一页
+            )}
+          </div>
+          {searchQuery && (
+            <span className="text-[10px] text-[#a0a0a0] whitespace-nowrap">
+              {filteredMatches.length} 场匹配
+            </span>
+          )}
+        </div>
+        {/* 搜索结果 / 空状态 */}
+        {filteredMatches.length > 0 ? (
+          <>
+            <div className="bg-[#141937] rounded-xl border border-[#1a1f3a] overflow-hidden">
+              <RecapTable matches={pagedMatches} predictions={predictions} reviews={postMatchReviews} onSelect={onSelectMatch} />
+            </div>
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-3">
+                <button onClick={() => setHistoryPage(p => Math.max(1, p - 1))} disabled={historyPage === 1}
+                  className="text-[10px] px-3 py-1 rounded bg-[#141937] border border-[#1a1f3a] text-[#a0a0a0] hover:text-white disabled:opacity-30">
+                  上一页
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button key={i} onClick={() => setHistoryPage(i + 1)}
+                    className={`text-[10px] w-7 h-7 rounded ${historyPage === i + 1 ? 'bg-[#ffd700]/20 text-[#ffd700] border border-[#ffd700]/50' : 'bg-[#141937] text-[#a0a0a0] border border-[#1a1f3a] hover:text-white'}`}>
+                    {i + 1}
+                  </button>
+                ))}
+                <button onClick={() => setHistoryPage(p => Math.min(totalPages, p + 1))} disabled={historyPage === totalPages}
+                  className="text-[10px] px-3 py-1 rounded bg-[#141937] border border-[#1a1f3a] text-[#a0a0a0] hover:text-white disabled:opacity-30">
+                  下一页
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="bg-[#141937] rounded-xl border border-[#1a1f3a] py-12 text-center">
+            <p className="text-sm text-[#555555]">未找到匹配的比赛</p>
+            <button onClick={() => { setSearchQuery(''); setHistoryPage(1) }}
+              className="text-[10px] text-[#ffd700] mt-2 hover:underline">
+              清除搜索
             </button>
           </div>
         )}
