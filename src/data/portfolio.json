@@ -1,24 +1,25 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-09T13:57:15.053Z",
+  "generatedAt": "2026-07-09T14:06:02.818Z",
   "targetDate": "7/10",
   "targetDateDisplay": "2026年7月10日（周五）",
   "targetMatchIds": [
     "fra-mar-qf"
   ],
-  "oddsFreshness": "2026-07-06T13:56:25.776Z",
+  "oddsFreshness": "2026-07-09T14:05:47.186Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "⚠️ 机会稀缺",
-    "investableCount": 0,
-    "highMviCount": 0,
-    "positiveEvCount": 0,
+    "investableCount": 10,
+    "highMviCount": 2,
+    "positiveEvCount": 4,
     "suggestedExposure": "30-50%或建议空仓",
-    "summary": "1场比赛，0个可投注项（0个正EV），0个高MVI信号。涵盖0种市场类型。",
+    "summary": "1场比赛，10个可投注项（4个正EV），2个高MVI信号。涵盖7种市场类型。",
     "highlights": [
-      "暂无高MVI信号",
+      "摩洛哥 不败 为本日最强MVI信号(1.71)",
       "昨日方向准确率正常(55%)，已动态调整策略权重",
-      "已自动排除5个低质量投注项+0场高风险比赛"
+      "已自动排除11个低质量投注项+0场高风险比赛",
+      "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆、比分区间"
     ]
   },
   "qualitativeReport": [
@@ -38,7 +39,80 @@
       }
     }
   ],
-  "investmentPool": [],
+  "investmentPool": [
+    {
+      "match": "法国 vs 摩洛哥",
+      "market": "胜平负",
+      "bet": "【胜平负】摩洛哥 客胜",
+      "odds": 6.25,
+      "ev": 0.875,
+      "mvi": 1.03,
+      "prob": 0.3,
+      "reason": "正EV",
+      "type": "direction",
+      "source": ""
+    },
+    {
+      "match": "法国 vs 摩洛哥",
+      "market": "平局退款",
+      "bet": "【平局退款】摩洛哥 不败",
+      "odds": 4.333,
+      "ev": 0.71,
+      "mvi": 1.7103947368421055,
+      "prob": 0.39473684210526316,
+      "reason": "高错价信号",
+      "type": "safety",
+      "source": ""
+    },
+    {
+      "match": "法国 vs 摩洛哥",
+      "market": "波胆",
+      "bet": "【波胆】法国 vs 摩洛哥 比分 0:1",
+      "odds": 15,
+      "ev": 0.206,
+      "mvi": 1.206,
+      "prob": 0.0804,
+      "reason": "高错价信号",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "法国 vs 摩洛哥",
+      "market": "比分区间",
+      "bet": "【小3球】法国 vs 摩洛哥",
+      "odds": 1.425,
+      "ev": 0.026,
+      "mvi": 1.0257186195936818,
+      "prob": 0.7198025400657415,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "法国 vs 摩洛哥",
+      "market": "BTTS",
+      "bet": "【BTTS】法国 vs 摩洛哥 双方进球=是",
+      "odds": 2,
+      "ev": 0,
+      "mvi": 1.04,
+      "prob": 0.5,
+      "reason": "边际价值",
+      "type": "btts",
+      "source": ""
+    },
+    {
+      "match": "法国 vs 摩洛哥",
+      "market": "大小球",
+      "bet": "【大2.5球】法国 vs 摩洛哥",
+      "odds": 2,
+      "ev": 0,
+      "mvi": 0.9,
+      "prob": 0.5,
+      "reason": "边际价值",
+      "type": "goals",
+      "source": ""
+    }
+  ],
   "portfolios": [],
   "capitalAllocation": [
     {
@@ -53,50 +127,155 @@
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-20.0%)",
-      "count": 3,
+      "reason": "EV显著负(-27.7%)",
+      "count": 1,
       "examples": [
         {
           "match": "法国 vs 摩洛哥",
-          "bet": "法国 vs 摩洛哥 比分 1:1",
-          "odds": 6.59,
-          "ev": -0.2,
-          "mvi": 0.6800221
-        },
-        {
-          "match": "法国 vs 摩洛哥",
-          "bet": "法国 vs 摩洛哥 比分 1:0",
-          "odds": 7.67,
-          "ev": -0.2,
-          "mvi": 0.6799838500000001
-        },
-        {
-          "match": "法国 vs 摩洛哥",
-          "bet": "法国 vs 摩洛哥 比分 2:0",
-          "odds": 10.17,
-          "ev": -0.2,
-          "mvi": 0.6803221500000001
+          "bet": "法国 主胜",
+          "odds": 1.571,
+          "ev": -0.277,
+          "mvi": 1.05
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-19.9%)",
-      "count": 2,
+      "reason": "EV显著负(-10.0%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 vs 摩洛哥",
+          "odds": 1.8,
+          "ev": -0.1,
+          "mvi": 1.04
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-12.5%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 vs 摩洛哥 双方进球=否",
+          "odds": 1.75,
+          "ev": -0.125,
+          "mvi": 1
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-27.4%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 不败",
+          "odds": 1.2,
+          "ev": -0.274,
+          "mvi": 0.7263157894736841
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-9.0%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 vs 摩洛哥 比分 1:1",
+          "odds": 7.5,
+          "ev": -0.09,
+          "mvi": 0.9105
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-32.2%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 vs 摩洛哥 比分 1:0",
+          "odds": 6.5,
+          "ev": -0.322,
+          "mvi": 0.6779499999999999
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-17.6%)",
+      "count": 1,
       "examples": [
         {
           "match": "法国 vs 摩洛哥",
           "bet": "法国 vs 摩洛哥 比分 2:1",
-          "odds": 8.74,
-          "ev": -0.199,
-          "mvi": 0.6804964
-        },
+          "odds": 9,
+          "ev": -0.176,
+          "mvi": 0.8244
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-41.0%)",
+      "count": 1,
+      "examples": [
         {
           "match": "法国 vs 摩洛哥",
-          "bet": "法国 vs 摩洛哥 比分 0:1",
-          "odds": 9.96,
-          "ev": -0.199,
-          "mvi": 0.6806664000000001
+          "bet": "法国 vs 摩洛哥 比分 2:0",
+          "odds": 7.5,
+          "ev": -0.41,
+          "mvi": 0.59025
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-25.0%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 vs 摩洛哥",
+          "odds": 1.5,
+          "ev": -0.25,
+          "mvi": 0.7499999999999997
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "方向存疑(S2): 模型预测2:1(3球)，但推荐小2球小2球——方向矛盾",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 vs 摩洛哥",
+          "odds": 2.5,
+          "ev": 0.25,
+          "mvi": 0.85
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-22.9%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 摩洛哥",
+          "bet": "法国 vs 摩洛哥",
+          "odds": 2.75,
+          "ev": -0.229,
+          "mvi": 0.7705430148192108
         }
       ]
     }
@@ -104,7 +283,7 @@
   "scoreParlays": [],
   "finalVerdict": {
     "verdict": "今日建议空仓，不投注",
-    "reason": "可投注项仅0个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
+    "reason": "可投注项仅10个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
     "bestPortfolio": null
   },
   "yesterdayReview": {
@@ -143,16 +322,24 @@
     }
   },
   "candidatePool": {
-    "total": 5,
-    "accepted": 0,
-    "rejected": 5,
+    "total": 21,
+    "accepted": 10,
+    "rejected": 11,
     "abandonedMatches": 0
   },
   "stats": {
     "totalCombinations": 0,
     "topScore": 0,
     "scoredCount": 0,
-    "byMarket": {},
+    "byMarket": {
+      "胜平负": 2,
+      "大小球": 1,
+      "BTTS": 1,
+      "双重机会": 1,
+      "平局退款": 1,
+      "波胆": 1,
+      "比分区间": 3
+    },
     "byLegs": {}
   },
   "wcpeValidations": {

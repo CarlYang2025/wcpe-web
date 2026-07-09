@@ -30,6 +30,26 @@ const API_SOURCE = process.env.ODDS_API_SOURCE || (process.env.ODDS_API_KEY ? 'o
 const API_KEY = process.env.ODDS_API_KEY || ''
 
 // ============================================================
+// 代理支持: Node 的全局 fetch (undici) 默认忽略 HTTP(S)_PROXY 环境变量。
+// 在开发桌面等通过代理出网的环境中（如本地 Clash），必须显式把 fetch 路由
+// 到代理，否则会 UND_ERR_CONNECT_TIMEOUT 导致抓取失败并回退到样本赔率污染预测。
+// 仅在检测到代理环境变量时启用；undici 不可用则降级为原有直连行为。
+// ============================================================
+{
+  const proxyUrl = process.env.HTTPS_PROXY || process.env.https_proxy ||
+    process.env.HTTP_PROXY || process.env.http_proxy
+  if (proxyUrl) {
+    try {
+      const { setGlobalDispatcher, ProxyAgent } = await import('undici')
+      setGlobalDispatcher(new ProxyAgent(proxyUrl))
+      console.log(`🌐 检测到代理，已将 fetch 路由至: ${proxyUrl}`)
+    } catch (e) {
+      console.warn(`⚠️ 检测到代理 ${proxyUrl} 但 undici 不可用，fetch 可能直连失败: ${e.message}`)
+    }
+  }
+}
+
+// ============================================================
 // 球队名映射: API 中的名称 → WCPE project matchId 匹配用名
 // ============================================================
 const TEAM_NAME_MAP = {
