@@ -953,6 +953,13 @@ function applyMarketOdds(predictions, matches, marketOddsData) {
       }
     }
 
+    // 方向一致性兜底：predictedScore 在上面的回退中可能变为与原始方向不同的比分
+    // （如手动 away_win + 1:2，但回退后变成 1:1），若不重算方向会出现
+    // "方向=客胜" 但 "比分=1:1" 的自相矛盾数据。此处按最终 predictedScore 重新推导方向，
+    // 保证数据完整性（predictedDirection 必须与实际展示的比分方向一致）。
+    const finalScoreDir = inferDirectionFromScore(pred.predictedScore)
+    if (finalScoreDir) pred.predictedDirection = finalScoreDir
+
     // 附上完整市场赔率数据（前端展示用，compact 格式）
     pred._marketOdds = {
       btts: market.bttsYes ? { yes: market.bttsYes, no: market.bttsNo } : undefined,
