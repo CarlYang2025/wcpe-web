@@ -562,6 +562,15 @@ async function main() {
     odds: mergedOdds,
   }
 
+  // 无 API key 时生成的样本数据不应写入文件，避免污染预测
+  // （build/deploy 流程无 ODDS_API_KEY，若写入样本赔率，export-json 会将其与
+  //  ELO 模型概率混合，扭曲自动化给出的预测。真实赔率由 22:00 Portfolio 自动化获取）
+  if (isSample && !API_KEY) {
+    console.log('\n⚠️ 无 ODDS_API_KEY，跳过写入样本赔率（保留已有 market-odds.json，避免样本数据污染预测）')
+    console.log('   真实赔率由 22:00 Portfolio Optimizer 自动化任务获取。')
+    return
+  }
+
   writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2))
   console.log(`\n✅ 已写入 ${OUTPUT_PATH}`)
   console.log(`   共 ${output.totalMatches} 场比赛的市场赔率`)
