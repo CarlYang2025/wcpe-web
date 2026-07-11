@@ -1833,5 +1833,111 @@
       "away": 1
     },
     "_source": "espn.com team-stats 2026-07-07 (USA 1-4 Belgium); possession estimated from pass volume USA 527 vs BEL 414"
+  },
+  "fra-mar-qf": {
+    "possession": {
+      "home": 48,
+      "away": 52
+    },
+    "shots": {
+      "home": 17,
+      "away": 4
+    },
+    "shotsOnTarget": {
+      "home": 8,
+      "away": 1
+    },
+    "xg": {
+      "home": 1.8,
+      "away": 0.3
+    },
+    "corners": {
+      "home": 5,
+      "away": 5
+    },
+    "fouls": {
+      "home": 10,
+      "away": 12
+    },
+    "cards": {
+      "home": {
+        "yellow": 0,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 1
+    },
+    "crosses": {
+      "home": 18,
+      "away": 12
+    },
+    "interceptions": {
+      "home": 6,
+      "away": 8
+    },
+    "saves": {
+      "home": 0,
+      "away": 6
+    },
+    "_source": "qiumiwu.com team-stats 2026-07-10 (France 2-0 Morocco); xg/fouls/crosses/interceptions estimated from match report"
+  },
+  "esp-bel-qf": {
+    "possession": {
+      "home": 68,
+      "away": 32
+    },
+    "shots": {
+      "home": 12,
+      "away": 3
+    },
+    "shotsOnTarget": {
+      "home": 8,
+      "away": 2
+    },
+    "xg": {
+      "home": 2,
+      "away": 0.5
+    },
+    "corners": {
+      "home": 5,
+      "away": 1
+    },
+    "fouls": {
+      "home": 9,
+      "away": 12
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 2,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 4,
+      "away": 1
+    },
+    "crosses": {
+      "home": 20,
+      "away": 8
+    },
+    "interceptions": {
+      "home": 6,
+      "away": 10
+    },
+    "saves": {
+      "home": 1,
+      "away": 6
+    },
+    "_source": "qiumiwu.com team-stats 2026-07-11 (Spain 2-1 Belgium); possession/shots/SOT/corners/cards from report, xg/fouls/crosses/interceptions estimated"
   }
 }

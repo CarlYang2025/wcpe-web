@@ -692,8 +692,34 @@ export const matches: Match[] = [
   { id: 'arg-egy-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Argentina', awayTeam: 'Egypt', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '7/8 00:00', localKickoff: '7/7 12:00', localTZ: 'ET', status: 'finished', homeScore: 3, awayScore: 2 },
   { id: 'sui-col-r16', date: '2026-07-07', tournament: '2026 FIFA World Cup', group: 'Round of 16', round: 'Round of 16', matchday: 27, homeTeam: 'Switzerland', awayTeam: 'Colombia', venue: 'BC Place, Vancouver', kickoff: '7/8 04:00', localKickoff: '7/7 16:00', localTZ: 'PT', status: 'finished', homeScore: 0, awayScore: 0 },
   // ---- 7月10-12日 Quarter-Finals ----
-  { id: 'fra-mar-qf', date: '2026-07-09', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 28, homeTeam: 'France', awayTeam: 'Morocco', venue: 'Gillette Stadium, Foxborough', kickoff: '7/10 04:00', localKickoff: '7/9 16:00', localTZ: 'ET', status: 'upcoming' },
-  { id: 'esp-bel-qf', date: '2026-07-10', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 28, homeTeam: 'Spain', awayTeam: 'Belgium', venue: 'SoFi Stadium, Inglewood', kickoff: '7/11 03:00', localKickoff: '7/10 12:00', localTZ: 'PT', status: 'upcoming' },
+  { id: 'fra-mar-qf', date: '2026-07-09', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 28, homeTeam: 'France', awayTeam: 'Morocco', venue: 'Gillette Stadium, Foxborough', kickoff: '7/10 04:00', localKickoff: '7/9 16:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 48, away: 52 },
+    shots: { home: 17, away: 4 },
+    shotsOnTarget: { home: 8, away: 1 },
+    xg: { home: 1.8, away: 0.3 },
+    corners: { home: 5, away: 5 },
+    fouls: { home: 10, away: 12 },
+    cards: { home: { yellow: 0, red: 0 }, away: { yellow: 1, red: 0 } },
+    offsides: { home: 2, away: 1 },
+    crosses: { home: 18, away: 12 },
+    interceptions: { home: 6, away: 8 },
+    saves: { home: 0, away: 6 }
+  }, homeScore: 2, awayScore: 0 },
+  { id: 'esp-bel-qf', date: '2026-07-10', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 28, homeTeam: 'Spain', awayTeam: 'Belgium', venue: 'SoFi Stadium, Inglewood', kickoff: '7/11 03:00', localKickoff: '7/10 12:00', localTZ: 'PT', status: 'finished',
+    matchStats: {
+    possession: { home: 68, away: 32 },
+    shots: { home: 12, away: 3 },
+    shotsOnTarget: { home: 8, away: 2 },
+    xg: { home: 2, away: 0.5 },
+    corners: { home: 5, away: 1 },
+    fouls: { home: 9, away: 12 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 2, red: 0 } },
+    offsides: { home: 4, away: 1 },
+    crosses: { home: 20, away: 8 },
+    interceptions: { home: 6, away: 10 },
+    saves: { home: 1, away: 6 }
+  }, homeScore: 2, awayScore: 1 },
   { id: 'nor-eng-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Norway', awayTeam: 'England', venue: 'Hard Rock Stadium, Miami Gardens', kickoff: '7/12 05:00', localKickoff: '7/11 17:00', localTZ: 'ET', status: 'upcoming' },
   { id: 'arg-sui-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Argentina', awayTeam: 'Switzerland', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/12 09:00', localKickoff: '7/11 20:00', localTZ: 'CT', status: 'upcoming' },
 ];
