@@ -82,7 +82,7 @@ type BracketNode =
 function winnerOf(m: Match): string | null {
   if (m.status !== 'finished' || m.homeScore == null || m.awayScore == null) return null
   if (m.homeScore > m.awayScore) return m.homeTeam
-  if (m.awayScore < m.homeScore) return m.awayTeam
+  if (m.awayScore > m.homeScore) return m.awayTeam
   return null
 }
 
