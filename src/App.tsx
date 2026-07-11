@@ -201,10 +201,12 @@ export default function App() {
           <Dashboard
             historicalMatches={historicalMatches}
             todayMatches={todayMatches}
+            allMatches={matches}
             predictions={predictions}
             postMatchReviews={postMatchReviews}
             modelState={displayModelState}
             keyLearnings={displayKeyLearnings}
+            lastUpdated={lastUpdated}
             onSelectMatch={handleSelectMatch}
           />
         )}

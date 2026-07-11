@@ -3,21 +3,28 @@ import type { Match, Prediction, PostMatchReview, ModelState } from '../lib/type
 import { teamRatings, cn, flag } from '../data/matches'
 import MatchCard from './MatchCard'
 import RecapTable from './RecapTable'
+import ChampionOdds from './ChampionOdds'
 
 interface Props {
   historicalMatches: Match[]
   todayMatches: Match[]
+  allMatches?: Match[]
   predictions: Record<string, Prediction>
   postMatchReviews: Record<string, PostMatchReview>
   modelState: ModelState
   keyLearnings: string[]
+  lastUpdated?: Date | null
   onSelectMatch: (match: Match) => void
 }
 
 export default function Dashboard({
-  historicalMatches, todayMatches, predictions, postMatchReviews, modelState, keyLearnings, onSelectMatch,
+  historicalMatches, todayMatches, allMatches, predictions, postMatchReviews, modelState, keyLearnings, lastUpdated, onSelectMatch,
 }: Props) {
   const dynamicEloRatings = useMemo(() => normalizeEloRatings((modelState as any).eloRatings), [modelState])
+  const championMatches = useMemo(
+    () => (allMatches && allMatches.length > 0 ? allMatches : [...historicalMatches, ...todayMatches]),
+    [allMatches, historicalMatches, todayMatches],
+  )
   const reviewEloChanges = useMemo(() => buildReviewEloChangeMap(postMatchReviews), [postMatchReviews])
   const eloRows = useMemo(() => Object.entries(teamRatings)
     .map(([name, rating]) => {
@@ -75,6 +82,9 @@ export default function Dashboard({
 
   return (
     <div className="animate-fade-in space-y-8">
+      {/* 置顶：总冠军归属预测（实时动态） */}
+      <ChampionOdds matches={championMatches} eloRatings={dynamicEloRatings} lastUpdated={lastUpdated} />
+
       <div className="text-center py-4">
         <h1 className="text-2xl font-black tracking-wide">
           <span className="text-[#ffd700]">WC</span><span className="text-white">PE</span>
