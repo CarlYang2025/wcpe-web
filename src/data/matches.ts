@@ -720,8 +720,36 @@ export const matches: Match[] = [
     interceptions: { home: 6, away: 10 },
     saves: { home: 1, away: 6 }
   }, homeScore: 2, awayScore: 1 },
-  { id: 'nor-eng-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Norway', awayTeam: 'England', venue: 'Hard Rock Stadium, Miami Gardens', kickoff: '7/12 05:00', localKickoff: '7/11 17:00', localTZ: 'ET', status: 'upcoming' },
-  { id: 'arg-sui-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Argentina', awayTeam: 'Switzerland', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/12 09:00', localKickoff: '7/11 20:00', localTZ: 'CT', status: 'upcoming' },
+  { id: 'nor-eng-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Norway', awayTeam: 'England', venue: 'Hard Rock Stadium, Miami Gardens', kickoff: '7/12 05:00', localKickoff: '7/11 17:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 42, away: 58 },
+    shots: { home: 11, away: 17 },
+    shotsOnTarget: { home: 4, away: 7 },
+    xg: { home: 1.2, away: 1.9 },
+    corners: { home: 5, away: 8 },
+    fouls: { home: 13, away: 11 },
+    cards: { home: { yellow: 3, red: 0 }, away: { yellow: 2, red: 0 } },
+    offsides: { home: 2, away: 3 },
+    crosses: { home: 14, away: 22 },
+    interceptions: { home: 9, away: 7 },
+    saves: { home: 5, away: 3 }
+  }, homeScore: 1, awayScore: 2 },
+  { id: 'arg-sui-qf', date: '2026-07-11', tournament: '2026 FIFA World Cup', group: 'Quarter-Finals', round: 'Quarter-Finals', matchday: 29, homeTeam: 'Argentina', awayTeam: 'Switzerland', venue: 'Arrowhead Stadium, Kansas City', kickoff: '7/12 09:00', localKickoff: '7/11 20:00', localTZ: 'CT', status: 'finished',
+    matchStats: {
+    possession: { home: 63, away: 37 },
+    shots: { home: 18, away: 8 },
+    shotsOnTarget: { home: 9, away: 3 },
+    xg: { home: 2.5, away: 0.8 },
+    corners: { home: 9, away: 3 },
+    fouls: { home: 10, away: 15 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 3, red: 1 } },
+    offsides: { home: 3, away: 1 },
+    crosses: { home: 22, away: 10 },
+    interceptions: { home: 6, away: 9 },
+    saves: { home: 2, away: 6 }
+  }, homeScore: 3, awayScore: 1 },
+  { id: 'fra-spa-sf', date: '2026-07-14', tournament: '2026 FIFA World Cup', group: 'Semi-Finals', round: 'Semi-Finals', matchday: 30, homeTeam: 'France', awayTeam: 'Spain', venue: 'AT&T Stadium, Arlington', kickoff: '7/15 03:00', localKickoff: '7/14 14:00', localTZ: 'CT', status: 'upcoming' },
+  { id: 'eng-arg-sf', date: '2026-07-15', tournament: '2026 FIFA World Cup', group: 'Semi-Finals', round: 'Semi-Finals', matchday: 30, homeTeam: 'England', awayTeam: 'Argentina', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '7/16 03:00', localKickoff: '7/15 15:00', localTZ: 'ET', status: 'upcoming' },
 ];
 
 // ========== 预测数据 ==========
