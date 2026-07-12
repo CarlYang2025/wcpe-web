@@ -1,11 +1,11 @@
 {
-  "fetchedAt": "2026-07-12T13:25:20.753Z",
+  "fetchedAt": "2026-07-12T13:57:41.565Z",
   "source": "odds-api.io (Bet365)",
   "updatedMatchIds": [
-    "fra-esp-3",
+    "fra-spa-sf",
     "eng-arg-sf"
   ],
-  "totalMatches": 71,
+  "totalMatches": 72,
   "odds": {
     "ecu-ger-3": {
       "homeWin": 5.8,
@@ -10488,8 +10488,8 @@
       },
       "spread": {
         "hdp": -0.25,
-        "home": 1.975,
-        "away": 1.875
+        "home": 2,
+        "away": 1.85
       },
       "altGoalLines": [
         {
@@ -10560,19 +10560,22 @@
       ],
       "europeanHandicap": [
         {
+          "hdp": -3,
+          "home": 23
+        },
+        {
           "hdp": -1,
-          "draw": 5,
-          "away": 7
+          "home": 4.333
         },
         {
           "hdp": 1,
-          "home": 1.333
+          "draw": 4,
+          "away": 1.571
         },
         {
-          "hdp": 2,
-          "home": 1.09,
-          "draw": 6.5,
-          "away": 1.2
+          "hdp": 3,
+          "draw": 15,
+          "away": 1.05
         }
       ],
       "halfTime": {
@@ -10597,7 +10600,7 @@
         }
       },
       "_source": "Bet365",
-      "_updatedAt": "2026-07-12T13:25:04.611Z"
+      "_updatedAt": "2026-07-12T13:55:48.944Z"
     },
     "eng-arg-sf": {
       "homeWin": 2.55,
@@ -10652,9 +10655,9 @@
         "homeOrAway": 1.363
       },
       "spread": {
-        "hdp": -0.25,
-        "home": 2.1,
-        "away": 1.775
+        "hdp": 0,
+        "home": 1.75,
+        "away": null
       },
       "altGoalLines": [
         {
@@ -10725,15 +10728,14 @@
         },
         {
           "hdp": 1,
-          "draw": 4.333,
-          "away": 1.5
+          "home": 1.363
         }
       ],
       "halfTime": {
         "spread": {
           "hdp": 0,
-          "home": 1.8,
-          "away": 2.05
+          "home": 1.775,
+          "away": 2.1
         },
         "totals": {
           "hdp": 0.75,
@@ -10741,9 +10743,9 @@
           "under": 2.15
         },
         "result": {
-          "draw": 2,
           "home": 3.2,
-          "away": 3.6
+          "away": 3.6,
+          "draw": 2
         },
         "btts": {
           "yes": 5.5,
@@ -10751,7 +10753,179 @@
         }
       },
       "_source": "Bet365",
-      "_updatedAt": "2026-07-12T13:25:04.611Z"
+      "_updatedAt": "2026-07-12T13:57:33.699Z"
+    },
+    "fra-spa-sf": {
+      "homeWin": 2.3,
+      "draw": 3.25,
+      "awayWin": 3.25,
+      "over25": 1.909,
+      "under25": 1.909,
+      "bttsYes": 1.7,
+      "bttsNo": 2.05,
+      "correctScore": {
+        "2-0": 12,
+        "2-5": 201,
+        "4-0": 41,
+        "0-1": 11,
+        "1-2": 12,
+        "0-0": 10,
+        "0-2": 17,
+        "0-3": 34,
+        "0-4": 67,
+        "0-5": 201,
+        "1-0": 9,
+        "1-3": 26,
+        "1-4": 51,
+        "1-5": 151,
+        "2-1": 10,
+        "2-2": 13,
+        "2-3": 34,
+        "2-4": 67,
+        "3-0": 23,
+        "3-2": 29,
+        "3-3": 41,
+        "4-3": 101,
+        "4-4": 201,
+        "5-2": 126,
+        "5-3": 251,
+        "5-1": 81,
+        "3-1": 19,
+        "3-4": 101,
+        "6-1": 251,
+        "6-2": 401,
+        "6-0": 301,
+        "1-6": 501,
+        "3-5": 351,
+        "1-1": 6.5,
+        "4-1": 41,
+        "4-2": 51,
+        "5-0": 101
+      },
+      "drawNoBet": {
+        "home": 1.571,
+        "away": 2.25
+      },
+      "doubleChance": {
+        "homeOrDraw": 0,
+        "drawOrAway": 0,
+        "homeOrAway": 1.333
+      },
+      "spread": {
+        "hdp": -0.25,
+        "home": 2,
+        "away": 1.85
+      },
+      "altGoalLines": [
+        {
+          "hdp": 1.25,
+          "over": 1.17,
+          "under": 5
+        },
+        {
+          "hdp": 1.5,
+          "over": 1.275,
+          "under": 3.55
+        },
+        {
+          "hdp": 1.75,
+          "over": 1.325,
+          "under": 3.3
+        },
+        {
+          "hdp": 2,
+          "over": 1.425,
+          "under": 2.75
+        },
+        {
+          "hdp": 2.25,
+          "over": 1.65,
+          "under": 2.2
+        },
+        {
+          "hdp": 2.75,
+          "over": 2.1,
+          "under": 1.7
+        },
+        {
+          "hdp": 3,
+          "over": 2.5,
+          "under": 1.5
+        },
+        {
+          "hdp": 3.25,
+          "over": 2.75,
+          "under": 1.425
+        },
+        {
+          "hdp": 3.5,
+          "over": 3.1,
+          "under": 1.35
+        },
+        {
+          "hdp": 3.75,
+          "over": 3.8,
+          "under": 1.25
+        },
+        {
+          "hdp": 4,
+          "over": 5.5,
+          "under": 1.15
+        },
+        {
+          "hdp": 4.25,
+          "over": 5.9,
+          "under": 1.13
+        },
+        {
+          "hdp": 4.5,
+          "over": 6.25,
+          "under": 1.12
+        }
+      ],
+      "europeanHandicap": [
+        {
+          "hdp": -3,
+          "home": 23
+        },
+        {
+          "hdp": -1,
+          "home": 4.333
+        },
+        {
+          "hdp": 1,
+          "draw": 4,
+          "away": 1.571
+        },
+        {
+          "hdp": 3,
+          "draw": 15,
+          "away": 1.05
+        }
+      ],
+      "halfTime": {
+        "spread": {
+          "hdp": 0,
+          "home": 1.725,
+          "away": 2.15
+        },
+        "totals": {
+          "hdp": 1,
+          "over": 2,
+          "under": 1.85
+        },
+        "result": {
+          "home": 3,
+          "draw": 2.1,
+          "away": 3.75
+        },
+        "btts": {
+          "yes": 4.5,
+          "no": 1.181
+        }
+      },
+      "_source": "Bet365",
+      "_updatedAt": "2026-07-12T13:57:33.699Z"
     }
   }
 }

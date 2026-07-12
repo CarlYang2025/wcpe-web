@@ -425,6 +425,15 @@ function findMatchId(home, away) {
   const awayAbbr = mapping[normalizeTeam(away)]
   if (!homeAbbr || !awayAbbr) return null
 
+  // 别名表：同一球队在 remote.json 不同轮次可能用不同缩写（数据源命名不一致）
+  // 例：西班牙 QF 用 esp，SF 用 spa。用别名让 matchId 匹配更鲁棒。
+  const aliases = {
+    esp: ['esp', 'spa'],
+    spa: ['esp', 'spa'],
+  }
+  const homeAliases = aliases[homeAbbr] || [homeAbbr]
+  const awayAliases = aliases[awayAbbr] || [awayAbbr]
+
   // 优先：从 remote.json 已知 matchId 中精确匹配（轮次后缀自动正确）
   const knownIds = getKnownMatchIds()
   for (const mid of knownIds) {
@@ -432,20 +441,24 @@ function findMatchId(home, away) {
     const prefix = mid.replace(/-r\d+$|-r\d+po$|-\d+po$|-\d+$|-qf$|-sf$|-f$/, '')
     const teams = prefix.split('-')
     if (teams.length >= 2) {
-      if ((teams[0] === homeAbbr && teams[1] === awayAbbr) ||
-          (teams[0] === awayAbbr && teams[1] === homeAbbr)) {
+      if ((homeAliases.includes(teams[0]) && awayAliases.includes(teams[1])) ||
+          (awayAliases.includes(teams[0]) && homeAliases.includes(teams[1]))) {
         return mid
       }
     }
   }
 
-  // 回退：生成候选（覆盖小组赛到淘汰赛各阶段）
+  // 回退：生成候选（覆盖小组赛到淘汰赛各阶段，遍历所有别名组合）
   const suffixes = ['-r32', '-r16', '-qf', '-sf', '-f', '-3po', '-3', '-2', '-1', '']
   for (const suffix of suffixes) {
-    const id1 = `${homeAbbr}-${awayAbbr}${suffix}`
-    if (knownIds.includes(id1)) return id1
-    const id2 = `${awayAbbr}-${homeAbbr}${suffix}`
-    if (knownIds.includes(id2)) return id2
+    for (const ha of homeAliases) {
+      for (const aa of awayAliases) {
+        const id1 = `${ha}-${aa}${suffix}`
+        if (knownIds.includes(id1)) return id1
+        const id2 = `${aa}-${ha}${suffix}`
+        if (knownIds.includes(id2)) return id2
+      }
+    }
   }
   // 真实回退：使用最常见的模式
   return `${homeAbbr}-${awayAbbr}-3`

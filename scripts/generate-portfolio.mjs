@@ -72,7 +72,35 @@ function getNextUpcomingBJTDate(matches) {
   // 今天有 upcoming 比赛吗？
   const todayUpcoming = (matches || []).filter(m => m.status === 'upcoming' && kickoffBJTDate(m.kickoff) === todayStr)
   if (todayUpcoming.length > 0) return todayStr
+  // 下一个有 upcoming 的北京日期（不局限于明天，覆盖淘汰赛多日间隙，如 SF/决赛）
+  const upcoming = (matches || []).filter(m => m.status === 'upcoming' && kickoffBJTDate(m.kickoff))
+  if (upcoming.length > 0) {
+    upcoming.sort((a, b) => kickoffSortKey(a.kickoff) - kickoffSortKey(b.kickoff))
+    return kickoffBJTDate(upcoming[0].kickoff)
+  }
   return getTomorrowBJTString()
+}
+/** kickoff "M/D HH:MM" → 可比较排序键（同年内有效） */
+function kickoffSortKey(kickoff) {
+  if (!kickoff) return Number.MAX_SAFE_INTEGER
+  const m = String(kickoff).match(/(\d+)\/(\d+)(?:\s+(\d+):(\d+))?/)
+  if (!m) return Number.MAX_SAFE_INTEGER
+  const mo = parseInt(m[1]), d = parseInt(m[2]), hh = parseInt(m[3] || '0'), mm = parseInt(m[4] || '0')
+  return mo * 1e6 + d * 1e4 + hh * 100 + mm
+}
+/**
+ * 目标比赛集合：正常返回目标日 upcoming 比赛；
+ * 淘汰赛尾段（SF/决赛，单场日无法成局）— 目标日不足2场且剩余 upcoming ≤4 场时，
+ * 合并所有剩余 upcoming 以便构建 final-four 分散化组合。
+ */
+function getTargetUpcomingMatches(matches) {
+  const target = getNextUpcomingBJTDate(matches)
+  const onTarget = matchesByBJTDate(matches, target)
+  const allUpcoming = (matches || []).filter(m => m.status === 'upcoming' && kickoffBJTDate(m.kickoff))
+  if (onTarget.length < 2 && allUpcoming.length >= 2 && allUpcoming.length <= 4) {
+    return allUpcoming.slice().sort((a, b) => kickoffSortKey(a.kickoff) - kickoffSortKey(b.kickoff))
+  }
+  return onTarget
 }
 function getTodayBJTString() {
   const now = Date.now()
@@ -564,7 +592,7 @@ function estimateScoreProbabilities(homeWinProb, drawProb, awayWinProb, over25Pr
 }
 
 function buildCandidatePool(remote, market) {
-  const tomorrowMatches = matchesByBJTDate(remote.matches || [], TOMORROW_BJT)
+  const tomorrowMatches = getTargetUpcomingMatches(remote.matches || [])
   const tomorrowIds = tomorrowMatches.map(m => m.id)
 
   // 独立二次校验结果
@@ -1718,7 +1746,7 @@ function main() {
 
   // Step 2: WCPE独立校验
   console.log('[Step 2] 独立校验WCPE预测...')
-  const tomorrowMatches = matchesByBJTDate(remote.matches || [], TOMORROW_BJT)
+  const tomorrowMatches = getTargetUpcomingMatches(remote.matches || [])
   const tomorrowIds = tomorrowMatches.map(m => m.id)
   const validations = tomorrowIds.map(id => validateWCPE(id, remote, market))
   const fullyValidated = validations.filter(v => v.agree).length
@@ -1774,10 +1802,11 @@ function main() {
   const displayCount = topSelected.length
   console.log(`  去集中后: ${displayCount} 组 (原 Top ${scored.slice(0, 10).length} 组)`)
 
-  const tomorrowBJDate = new Date()
-  tomorrowBJDate.setDate(tomorrowBJDate.getDate() + 1)
   const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-  const targetDateDisplay = `${tomorrowBJDate.getFullYear()}年${tomorrowBJDate.getMonth() + 1}月${tomorrowBJDate.getDate()}日（${weekDays[tomorrowBJDate.getDay()]}）`
+  const [tgtMo, tgtDay] = String(TOMORROW_BJT).split('/').map(Number)
+  const dispYear = new Date().getFullYear()
+  const dispDate = new Date(Date.UTC(dispYear, tgtMo - 1, tgtDay))
+  const targetDateDisplay = `${dispYear}年${tgtMo}月${tgtDay}日（${weekDays[dispDate.getUTCDay()]}）`
 
   // MVI高亮
   const topMviBet = accepted.sort((a, b) => b.mvi - a.mvi)[0]
