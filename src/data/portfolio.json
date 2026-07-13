@@ -1,13 +1,13 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-13T13:13:29.008Z",
+  "generatedAt": "2026-07-13T13:56:01.044Z",
   "targetDate": "7/15",
   "targetDateDisplay": "2026年7月15日（周三）",
   "targetMatchIds": [
     "fra-spa-sf",
     "eng-arg-sf"
   ],
-  "oddsFreshness": "2026-07-13T13:13:24.152Z",
+  "oddsFreshness": "2026-07-13T13:55:52.848Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "🟡 机会有限",
@@ -31,7 +31,7 @@
         "injury_concern",
         "form_concern"
       ],
-      "thesis": "伤病缺阵影响阵容；状态隐患: 西班牙主力边锋尼科·威廉姆斯(大腿伤)大概率替补，",
+      "thesis": "伤病缺阵影响阵容；状态隐患: 姆巴佩脚踝一级扭伤(赛前被淡化)，法国进攻命脉存健",
       "qualitativeConfidence": 0.9,
       "adjustments": {
         "injuryPenalty": 0.1,
@@ -45,10 +45,10 @@
         "injury_concern",
         "form_concern"
       ],
-      "thesis": "伤病缺阵影响阵容；状态隐患: 英格兰进攻依赖贝林厄姆/凯恩个人，体系创造力存疑",
-      "qualitativeConfidence": 0.95,
+      "thesis": "伤病缺阵影响阵容；状态隐患: 英格兰后卫宽萨(昆萨)红牌停赛，右路防守暴露，正对",
+      "qualitativeConfidence": 0.9,
       "adjustments": {
-        "injuryPenalty": 0.05,
+        "injuryPenalty": 0.1,
         "lessonsApplied": []
       }
     }
@@ -154,7 +154,7 @@
   "portfolios": [
     {
       "rank": 1,
-      "score": 78.7,
+      "score": 78.3,
       "odds": 5.29,
       "hitPct": 21.32,
       "ev": 0.128,
@@ -202,18 +202,18 @@
         "consist": 3.5,
         "strat": 0.4,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 3,
         "weak": 0,
         "struct": 5
       },
       "tier": "均衡收益型",
-      "rationale": "2场组合[胜平负+大小球]：英格兰 vs 阿根廷 + 法国 主胜。正EV，命中21.32%，评分78.7/100。",
+      "rationale": "2场组合[胜平负+大小球]：英格兰 vs 阿根廷 + 法国 主胜。正EV，命中21.32%，评分78.3/100。",
       "comparisonNote": "优于#2的理由：综合评分领先0.5分；命中率更高(21.32% vs 16.11%)"
     },
     {
       "rank": 2,
-      "score": 78.2,
+      "score": 77.8,
       "odds": 7.83,
       "hitPct": 16.11,
       "ev": 0.261,
@@ -261,18 +261,18 @@
         "consist": 5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 3,
         "weak": 0,
         "struct": 2
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[大小球+比分区间]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中16.11%，评分78.2/100。",
+      "rationale": "2场组合[大小球+比分区间]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中16.11%，评分77.8/100。",
       "comparisonNote": "落后#1的理由：综合评分差0.5分"
     },
     {
       "rank": 3,
-      "score": 77.7,
+      "score": 77.2,
       "odds": 5.47,
       "hitPct": 20.88,
       "ev": 0.141,
@@ -320,18 +320,18 @@
         "consist": 3.5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 3,
         "weak": 0,
         "struct": 2
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[双重机会+比分区间]：英格兰 vs 阿根廷 + 法国 或 西班牙。正EV，命中20.88%，评分77.7/100。",
+      "rationale": "2场组合[双重机会+比分区间]：英格兰 vs 阿根廷 + 法国 或 西班牙。正EV，命中20.88%，评分77.2/100。",
       "comparisonNote": ""
     },
     {
       "rank": 4,
-      "score": 77.5,
+      "score": 77,
       "odds": 6.9,
       "hitPct": 16.48,
       "ev": 0.137,
@@ -379,18 +379,18 @@
         "consist": 3.5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 3,
         "weak": 0,
         "struct": 5
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[比分区间+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙。正EV，命中16.48%，评分77.5/100。",
+      "rationale": "2场组合[比分区间+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙。正EV，命中16.48%，评分77/100。",
       "comparisonNote": ""
     },
     {
       "rank": 5,
-      "score": 77.1,
+      "score": 76.7,
       "odds": 3.57,
       "hitPct": 35.52,
       "ev": 0.266,
@@ -438,18 +438,18 @@
         "consist": 5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 2,
         "weak": 0,
         "struct": 0
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[比分区间+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中35.52%，评分77.1/100。",
+      "rationale": "2场组合[比分区间+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中35.52%，评分76.7/100。",
       "comparisonNote": ""
     },
     {
       "rank": 6,
-      "score": 76.6,
+      "score": 76.2,
       "odds": 3.1,
       "hitPct": 32.14,
       "ev": -0.004,
@@ -497,18 +497,18 @@
         "consist": 3.5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 2,
         "weak": 0,
         "struct": 5
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[比分区间+平局退款]：法国 vs 西班牙 + 阿根廷 不败。EV偏低，命中32.14%，评分76.6/100。",
+      "rationale": "2场组合[比分区间+平局退款]：法国 vs 西班牙 + 阿根廷 不败。EV偏低，命中32.14%，评分76.2/100。",
       "comparisonNote": ""
     },
     {
       "rank": 7,
-      "score": 76.6,
+      "score": 76.2,
       "odds": 6.62,
       "hitPct": 17.47,
       "ev": 0.157,
@@ -556,18 +556,18 @@
         "consist": 3.5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 3,
         "weak": 0,
         "struct": 2
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[平局退款+比分区间]：英格兰 vs 阿根廷 + 法国 不败。强正EV，命中17.47%，评分76.6/100。",
+      "rationale": "2场组合[平局退款+比分区间]：英格兰 vs 阿根廷 + 法国 不败。强正EV，命中17.47%，评分76.2/100。",
       "comparisonNote": ""
     },
     {
       "rank": 8,
-      "score": 76.2,
+      "score": 75.8,
       "odds": 4.83,
       "hitPct": 26,
       "ev": 0.256,
@@ -615,18 +615,18 @@
         "consist": 5,
         "strat": 0.1,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 2,
         "weak": 0,
         "struct": 0
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[BTTS+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙 双方进球=否。强正EV，命中26%，评分76.2/100。",
+      "rationale": "2场组合[BTTS+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙 双方进球=否。强正EV，命中26%，评分75.8/100。",
       "comparisonNote": ""
     },
     {
       "rank": 9,
-      "score": 76.1,
+      "score": 75.7,
       "odds": 3.82,
       "hitPct": 25.41,
       "ev": -0.03,
@@ -674,18 +674,18 @@
         "consist": 3.5,
         "strat": 0.2,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 2,
         "weak": 0,
         "struct": 5
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[大小球+平局退款]：法国 vs 西班牙 + 阿根廷 不败。EV偏低，命中25.41%，评分76.1/100。",
+      "rationale": "2场组合[大小球+平局退款]：法国 vs 西班牙 + 阿根廷 不败。EV偏低，命中25.41%，评分75.7/100。",
       "comparisonNote": ""
     },
     {
       "rank": 10,
-      "score": 75.8,
+      "score": 75.3,
       "odds": 6.3,
       "hitPct": 16,
       "ev": 0.008,
@@ -705,8 +705,8 @@
           "source": ""
         },
         {
-          "id": "eng-arg-sf_a",
-          "bet": "【胜平负】阿根廷 客胜",
+          "id": "eng-arg-sf_d",
+          "bet": "【胜平负】英格兰 vs 阿根廷 平局",
           "odds": 3,
           "prob": 0.32,
           "mvi": 0.96,
@@ -733,13 +733,13 @@
         "consist": 3.5,
         "strat": 0.3,
         "valCap": 0,
-        "qual": 3.8,
+        "qual": 3.3,
         "cert": 3,
         "weak": 0,
         "struct": 5
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[BTTS+胜平负]：法国 vs 西班牙 双方进球=否 + 阿根廷 客胜。边际正EV，命中16%，评分75.8/100。",
+      "rationale": "2场组合[BTTS+胜平负]：法国 vs 西班牙 双方进球=否 + 英格兰 vs 阿根廷 平局。边际正EV，命中16%，评分75.3/100。",
       "comparisonNote": ""
     }
   ],
@@ -748,7 +748,7 @@
       "tier": "核心仓位（均衡收益型·2腿）",
       "portfolio": {
         "id": "best",
-        "score": 78.7,
+        "score": 78.3,
         "odds": 5.29,
         "ev": 0.128,
         "hitPct": 21.32,
@@ -789,7 +789,7 @@
       "tier": "辅助仓位（平衡收益型·2腿）",
       "portfolio": {
         "id": "alt",
-        "score": 78.2,
+        "score": 77.8,
         "odds": 7.83,
         "ev": 0.261,
         "hitPct": 16.11,
@@ -835,7 +835,7 @@
   ],
   "bestPortfolio": {
     "tier": "均衡收益型",
-    "score": 78.7,
+    "score": 78.3,
     "odds": 5.29,
     "hitPct": 21.32,
     "ev": 0.128,
@@ -883,12 +883,12 @@
       "consist": 3.5,
       "strat": 0.4,
       "valCap": 0,
-      "qual": 3.8,
+      "qual": 3.3,
       "cert": 3,
       "weak": 0,
       "struct": 5
     },
-    "rationale": "2场组合[大小球+胜平负]：英格兰 vs 阿根廷 + 法国 主胜。正EV，命中21.32%，评分78.7/100。",
+    "rationale": "2场组合[大小球+胜平负]：英格兰 vs 阿根廷 + 法国 主胜。正EV，命中21.32%，评分78.3/100。",
     "decisionLogic": {
       "whyBest": "综合评分领先0.5分；命中率更高(21.32% vs 16.11%)",
       "keyDifferentiator": "更好的EV/风险/命中率综合平衡"
@@ -1200,9 +1200,9 @@
   "scoreParlays": [],
   "finalVerdict": {
     "verdict": "今日最佳：均衡收益型组合 5.29x",
-    "reason": "英格兰 vs 阿根廷 + 法国 主胜。Portfolio Score=78.7/100，EV=+12.8%，命中率21.32%。正期望值可接受，建议适量配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
+    "reason": "英格兰 vs 阿根廷 + 法国 主胜。Portfolio Score=78.3/100，EV=+12.8%，命中率21.32%。正期望值可接受，建议适量配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
     "bestPortfolio": {
-      "score": 78.7,
+      "score": 78.3,
       "odds": 5.29,
       "legs": [
         {
@@ -1278,7 +1278,7 @@
   },
   "stats": {
     "totalCombinations": 110,
-    "topScore": 78.7,
+    "topScore": 78.3,
     "scoredCount": 110,
     "byMarket": {
       "胜平负": 6,
