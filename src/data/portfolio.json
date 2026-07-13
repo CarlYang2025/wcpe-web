@@ -1,13 +1,13 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-13T13:56:01.044Z",
+  "generatedAt": "2026-07-13T13:56:34.428Z",
   "targetDate": "7/15",
   "targetDateDisplay": "2026年7月15日（周三）",
   "targetMatchIds": [
     "fra-spa-sf",
     "eng-arg-sf"
   ],
-  "oddsFreshness": "2026-07-13T13:55:52.848Z",
+  "oddsFreshness": "2026-07-13T13:56:26.030Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "🟡 机会有限",
