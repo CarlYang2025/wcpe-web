@@ -1,26 +1,26 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-12T14:02:25.501Z",
+  "generatedAt": "2026-07-13T13:13:29.008Z",
   "targetDate": "7/15",
   "targetDateDisplay": "2026年7月15日（周三）",
   "targetMatchIds": [
     "fra-spa-sf",
     "eng-arg-sf"
   ],
-  "oddsFreshness": "2026-07-12T13:57:41.565Z",
+  "oddsFreshness": "2026-07-13T13:13:24.152Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "🟡 机会有限",
-    "investableCount": 18,
-    "highMviCount": 5,
-    "positiveEvCount": 10,
+    "investableCount": 21,
+    "highMviCount": 4,
+    "positiveEvCount": 6,
     "suggestedExposure": "50-70%",
-    "summary": "2场比赛，18个可投注项（10个正EV），5个高MVI信号。涵盖7种市场类型。",
+    "summary": "2场比赛，21个可投注项（6个正EV），4个高MVI信号。涵盖7种市场类型。",
     "highlights": [
-      "英格兰 vs 阿根廷 为本日最强MVI信号(1.24)",
-      "昨日方向准确率正常(100%)，已动态调整策略权重",
-      "已自动排除25个低质量投注项+0场高风险比赛",
-      "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆、比分区间"
+      "英格兰 vs 阿根廷 为本日最强MVI信号(1.22)",
+      "昨日方向准确率正常(70%)，已动态调整策略权重",
+      "已自动排除22个低质量投注项+0场高风险比赛",
+      "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、比分区间、波胆"
     ]
   },
   "qualitativeReport": [
@@ -28,12 +28,13 @@
       "matchId": "fra-spa-sf",
       "matchDisplay": "法国 vs 西班牙",
       "flags": [
-        "injury_concern"
+        "injury_concern",
+        "form_concern"
       ],
-      "thesis": "伤病缺阵影响阵容",
-      "qualitativeConfidence": 0.95,
+      "thesis": "伤病缺阵影响阵容；状态隐患: 西班牙主力边锋尼科·威廉姆斯(大腿伤)大概率替补，",
+      "qualitativeConfidence": 0.9,
       "adjustments": {
-        "injuryPenalty": 0.05,
+        "injuryPenalty": 0.1,
         "lessonsApplied": []
       }
     },
@@ -41,11 +42,13 @@
       "matchId": "eng-arg-sf",
       "matchDisplay": "英格兰 vs 阿根廷",
       "flags": [
+        "injury_concern",
         "form_concern"
       ],
-      "thesis": "状态隐患: 英格兰进攻依赖贝林厄姆/凯恩个人，体系创造力存疑",
-      "qualitativeConfidence": 1,
+      "thesis": "伤病缺阵影响阵容；状态隐患: 英格兰进攻依赖贝林厄姆/凯恩个人，体系创造力存疑",
+      "qualitativeConfidence": 0.95,
       "adjustments": {
+        "injuryPenalty": 0.05,
         "lessonsApplied": []
       }
     }
@@ -55,9 +58,9 @@
       "match": "英格兰 vs 阿根廷",
       "market": "比分区间",
       "bet": "【大3.5球】英格兰 vs 阿根廷",
-      "odds": 4.15,
-      "ev": 0.238,
-      "mvi": 1.2379316455581435,
+      "odds": 4.1,
+      "ev": 0.223,
+      "mvi": 1.223016806455033,
       "prob": 0.2982967820622032,
       "reason": "高错价信号",
       "type": "goals_range",
@@ -76,40 +79,40 @@
       "source": ""
     },
     {
-      "match": "英格兰 vs 阿根廷",
-      "market": "胜平负",
-      "bet": "【胜平负】阿根廷 客胜",
-      "odds": 3,
-      "ev": 0.11,
-      "mvi": 1.11,
-      "prob": 0.37,
+      "match": "法国 vs 西班牙",
+      "market": "比分区间",
+      "bet": "【小3球】法国 vs 西班牙",
+      "odds": 1.55,
+      "ev": 0.059,
+      "mvi": 1.0587294658095203,
+      "prob": 0.6830512682642066,
       "reason": "正EV",
-      "type": "direction",
+      "type": "goals_range",
       "source": ""
     },
     {
-      "match": "英格兰 vs 阿根廷",
-      "market": "平局退款",
-      "bet": "【平局退款】阿根廷 不败",
-      "odds": 2,
-      "ev": 0.057,
-      "mvi": 1.0571428571428572,
-      "prob": 0.5285714285714286,
+      "match": "法国 vs 西班牙",
+      "market": "BTTS",
+      "bet": "【BTTS】法国 vs 西班牙 双方进球=否",
+      "odds": 2.1,
+      "ev": 0.05,
+      "mvi": 1,
+      "prob": 0.5,
       "reason": "正EV",
-      "type": "safety",
+      "type": "btts",
       "source": ""
     },
     {
-      "match": "英格兰 vs 阿根廷",
-      "market": "波胆",
-      "bet": "【波胆】英格兰 vs 阿根廷 比分 1:2",
-      "odds": 12,
-      "ev": 0.032,
-      "mvi": 1.032,
-      "prob": 0.086,
+      "match": "法国 vs 西班牙",
+      "market": "大小球",
+      "bet": "【大2.5球】法国 vs 西班牙",
+      "odds": 1.909,
+      "ev": 0.031,
+      "mvi": 1.03,
+      "prob": 0.54,
       "reason": "边际价值",
-      "type": "score",
-      "source": "Bet365"
+      "type": "goals",
+      "source": ""
     },
     {
       "match": "英格兰 vs 阿根廷",
@@ -121,54 +124,6 @@
       "prob": 0.2982967820622032,
       "reason": "边际价值",
       "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "法国 vs 西班牙",
-      "market": "大小球",
-      "bet": "【大2.5球】法国 vs 西班牙",
-      "odds": 1.909,
-      "ev": 0.031,
-      "mvi": 1,
-      "prob": 0.54,
-      "reason": "边际价值",
-      "type": "goals",
-      "source": ""
-    },
-    {
-      "match": "法国 vs 西班牙",
-      "market": "比分区间",
-      "bet": "【小3球】法国 vs 西班牙",
-      "odds": 1.5,
-      "ev": 0.025,
-      "mvi": 1.02457690239631,
-      "prob": 0.6830512682642066,
-      "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "法国 vs 西班牙",
-      "market": "BTTS",
-      "bet": "【BTTS】法国 vs 西班牙 双方进球=否",
-      "odds": 2.05,
-      "ev": 0.025,
-      "mvi": 1,
-      "prob": 0.5,
-      "reason": "边际价值",
-      "type": "btts",
-      "source": ""
-    },
-    {
-      "match": "法国 vs 西班牙",
-      "market": "胜平负",
-      "bet": "【胜平负】法国 主胜",
-      "odds": 2.3,
-      "ev": 0.012,
-      "mvi": 1,
-      "prob": 0.44,
-      "reason": "边际价值",
-      "type": "direction",
       "source": ""
     },
     {
@@ -184,37 +139,438 @@
       "source": ""
     },
     {
-      "match": "法国 vs 西班牙",
-      "market": "比分区间",
-      "bet": "【大3.5球】法国 vs 西班牙",
-      "odds": 3.1,
-      "ev": -0.017,
-      "mvi": 0.9825410683809596,
-      "prob": 0.3169487317357934,
+      "match": "英格兰 vs 阿根廷",
+      "market": "波胆",
+      "bet": "【波胆】英格兰 vs 阿根廷 比分 1:2",
+      "odds": 12,
+      "ev": -0.024,
+      "mvi": 0.9756,
+      "prob": 0.0813,
       "reason": "边际价值",
-      "type": "goals_range",
-      "source": ""
-    },
-    {
-      "match": "法国 vs 西班牙",
-      "market": "双重机会",
-      "bet": "【双重机会】法国 或 西班牙",
-      "odds": 1.333,
-      "ev": -0.027,
-      "mvi": 0.9730899999999999,
-      "prob": 0.73,
-      "reason": "边际价值",
-      "type": "safety",
-      "source": ""
+      "type": "score",
+      "source": "Bet365"
     }
   ],
   "portfolios": [
     {
       "rank": 1,
-      "score": 82.1,
+      "score": 78.7,
       "odds": 5.29,
-      "hitPct": 22.88,
-      "ev": 0.21,
+      "hitPct": 21.32,
+      "ev": 0.128,
+      "mvi": 1.07,
+      "legs": [
+        {
+          "id": "eng-arg-sf_o25",
+          "bet": "【大2.5球】英格兰 vs 阿根廷",
+          "odds": 2.3,
+          "prob": 0.52,
+          "mvi": 1.2,
+          "ev": 0.196,
+          "market": "大小球",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "fra-spa-sf_h",
+          "bet": "【胜平负】法国 主胜",
+          "odds": 2.3,
+          "prob": 0.41,
+          "mvi": 0.94,
+          "ev": -0.057,
+          "market": "胜平负",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 6,
+        "mvi": 12.8,
+        "hit": 12,
+        "risk": 5,
+        "eff": 2.9,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.2,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.4,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "均衡收益型",
+      "rationale": "2场组合[胜平负+大小球]：英格兰 vs 阿根廷 + 法国 主胜。正EV，命中21.32%，评分78.7/100。",
+      "comparisonNote": "优于#2的理由：综合评分领先0.5分；命中率更高(21.32% vs 16.11%)"
+    },
+    {
+      "rank": 2,
+      "score": 78.2,
+      "odds": 7.83,
+      "hitPct": 16.11,
+      "ev": 0.261,
+      "mvi": 1.127,
+      "legs": [
+        {
+          "id": "eng-arg-sf_ov3.5",
+          "bet": "【大3.5球】英格兰 vs 阿根廷",
+          "odds": 4.1,
+          "prob": 0.2982967820622032,
+          "mvi": 1.223016806455033,
+          "ev": 0.223,
+          "market": "比分区间",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "fra-spa-sf_o25",
+          "bet": "【大2.5球】法国 vs 西班牙",
+          "odds": 1.909,
+          "prob": 0.54,
+          "mvi": 1.03,
+          "ev": 0.031,
+          "market": "大小球",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "goals",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 7.1,
+        "mvi": 13.5,
+        "hit": 10,
+        "risk": 5,
+        "eff": 4.3,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.4,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 3,
+        "weak": 0,
+        "struct": 2
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[大小球+比分区间]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中16.11%，评分78.2/100。",
+      "comparisonNote": "落后#1的理由：综合评分差0.5分"
+    },
+    {
+      "rank": 3,
+      "score": 77.7,
+      "odds": 5.47,
+      "hitPct": 20.88,
+      "ev": 0.141,
+      "mvi": 1.078,
+      "legs": [
+        {
+          "id": "eng-arg-sf_ov3.5",
+          "bet": "【大3.5球】英格兰 vs 阿根廷",
+          "odds": 4.1,
+          "prob": 0.2982967820622032,
+          "mvi": 1.223016806455033,
+          "ev": 0.223,
+          "market": "比分区间",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "fra-spa-sf_dc_ha",
+          "bet": "【双重机会】法国 或 西班牙",
+          "odds": 1.333,
+          "prob": 0.7,
+          "mvi": 0.9330999999999998,
+          "ev": -0.067,
+          "market": "双重机会",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 6.1,
+        "mvi": 12.9,
+        "hit": 12,
+        "risk": 6.8,
+        "eff": 3.4,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.1,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 3,
+        "weak": 0,
+        "struct": 2
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[双重机会+比分区间]：英格兰 vs 阿根廷 + 法国 或 西班牙。正EV，命中20.88%，评分77.7/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 4,
+      "score": 77.5,
+      "odds": 6.9,
+      "hitPct": 16.48,
+      "ev": 0.137,
+      "mvi": 1.075,
+      "legs": [
+        {
+          "id": "eng-arg-sf_o25",
+          "bet": "【大2.5球】英格兰 vs 阿根廷",
+          "odds": 2.3,
+          "prob": 0.52,
+          "mvi": 1.2,
+          "ev": 0.196,
+          "market": "大小球",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "fra-spa-sf_ov3.5",
+          "bet": "【大3.5球】法国 vs 西班牙",
+          "odds": 3,
+          "prob": 0.3169487317357934,
+          "mvi": 0.9508461952073802,
+          "ev": -0.049,
+          "market": "比分区间",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "goals_range",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 6.1,
+        "mvi": 12.9,
+        "hit": 10,
+        "risk": 5,
+        "eff": 3.8,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.3,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 3,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[比分区间+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙。正EV，命中16.48%，评分77.5/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 5,
+      "score": 77.1,
+      "odds": 3.57,
+      "hitPct": 35.52,
+      "ev": 0.266,
+      "mvi": 1.129,
+      "legs": [
+        {
+          "id": "eng-arg-sf_o25",
+          "bet": "【大2.5球】英格兰 vs 阿根廷",
+          "odds": 2.3,
+          "prob": 0.52,
+          "mvi": 1.2,
+          "ev": 0.196,
+          "market": "大小球",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "goals",
+          "source": ""
+        },
+        {
+          "id": "fra-spa-sf_un3",
+          "bet": "【小3球】法国 vs 西班牙",
+          "odds": 1.55,
+          "prob": 0.6830512682642066,
+          "mvi": 1.0587294658095203,
+          "ev": 0.059,
+          "market": "比分区间",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "goals_range",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 7.1,
+        "mvi": 13.6,
+        "hit": 14,
+        "risk": 5,
+        "eff": 2,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.6,
+        "extRisk": 0,
+        "consist": 5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 2,
+        "weak": 0,
+        "struct": 0
+      },
+      "tier": "确定性优先（稳健）",
+      "rationale": "2场组合[比分区间+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中35.52%，评分77.1/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 6,
+      "score": 76.6,
+      "odds": 3.1,
+      "hitPct": 32.14,
+      "ev": -0.004,
+      "mvi": 1,
+      "legs": [
+        {
+          "id": "fra-spa-sf_un3",
+          "bet": "【小3球】法国 vs 西班牙",
+          "odds": 1.55,
+          "prob": 0.6830512682642066,
+          "mvi": 1.0587294658095203,
+          "ev": 0.059,
+          "market": "比分区间",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "eng-arg-sf_dnb_a",
+          "bet": "【平局退款】阿根廷 不败",
+          "odds": 2,
+          "prob": 0.4705882352941177,
+          "mvi": 0.9411764705882354,
+          "ev": -0.059,
+          "market": "平局退款",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 3,
+        "mvi": 12,
+        "hit": 14,
+        "risk": 6.8,
+        "eff": 1.9,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.6,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 2,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "确定性优先（稳健）",
+      "rationale": "2场组合[比分区间+平局退款]：法国 vs 西班牙 + 阿根廷 不败。EV偏低，命中32.14%，评分76.6/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 7,
+      "score": 76.6,
+      "odds": 6.62,
+      "hitPct": 17.47,
+      "ev": 0.157,
+      "mvi": 1.084,
+      "legs": [
+        {
+          "id": "eng-arg-sf_ov3.5",
+          "bet": "【大3.5球】英格兰 vs 阿根廷",
+          "odds": 4.1,
+          "prob": 0.2982967820622032,
+          "mvi": 1.223016806455033,
+          "ev": 0.223,
+          "market": "比分区间",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "goals_range",
+          "source": ""
+        },
+        {
+          "id": "fra-spa-sf_dnb_h",
+          "bet": "【平局退款】法国 不败",
+          "odds": 1.615,
+          "prob": 0.5857142857142857,
+          "mvi": 0.9459285714285715,
+          "ev": -0.054,
+          "market": "平局退款",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "safety",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 6.3,
+        "mvi": 13,
+        "hit": 10,
+        "risk": 6.8,
+        "eff": 4.1,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.2,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.1,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 3,
+        "weak": 0,
+        "struct": 2
+      },
+      "tier": "平衡收益型",
+      "rationale": "2场组合[平局退款+比分区间]：英格兰 vs 阿根廷 + 法国 不败。强正EV，命中17.47%，评分76.6/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 8,
+      "score": 76.2,
+      "odds": 4.83,
+      "hitPct": 26,
+      "ev": 0.256,
       "mvi": 1.1,
       "legs": [
         {
@@ -231,71 +587,12 @@
           "source": ""
         },
         {
-          "id": "fra-spa-sf_h",
-          "bet": "【胜平负】法国 主胜",
-          "odds": 2.3,
-          "prob": 0.44,
-          "mvi": 1,
-          "ev": 0.012,
-          "market": "胜平负",
-          "match": "法国 vs 西班牙",
-          "group": "Semi-Finals",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 6.7,
-        "mvi": 13.2,
-        "hit": 12,
-        "risk": 5,
-        "eff": 2.9,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.4,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.3,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 3,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[胜平负+大小球]：英格兰 vs 阿根廷 + 法国 主胜。强正EV，命中22.88%，评分82.1/100。",
-      "comparisonNote": "优于#2的理由：综合评分领先0.4分；EV更高(+7.2%)；命中率更高(22.88% vs 18.5%)；MVI信号更强(1.10 vs 1.05)"
-    },
-    {
-      "rank": 2,
-      "score": 81.7,
-      "odds": 6.15,
-      "hitPct": 18.5,
-      "ev": 0.138,
-      "mvi": 1.055,
-      "legs": [
-        {
-          "id": "eng-arg-sf_a",
-          "bet": "【胜平负】阿根廷 客胜",
-          "odds": 3,
-          "prob": 0.37,
-          "mvi": 1.11,
-          "ev": 0.11,
-          "market": "胜平负",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "direction",
-          "source": ""
-        },
-        {
           "id": "fra-spa-sf_btts_n",
           "bet": "【BTTS】法国 vs 西班牙 双方进球=否",
-          "odds": 2.05,
+          "odds": 2.1,
           "prob": 0.5,
           "mvi": 1,
-          "ev": 0.025,
+          "ev": 0.05,
           "market": "BTTS",
           "match": "法国 vs 西班牙",
           "group": "Semi-Finals",
@@ -304,499 +601,145 @@
         }
       ],
       "breakdown": {
-        "ev": 6.1,
-        "mvi": 12.7,
-        "hit": 10,
-        "risk": 5,
-        "eff": 3.4,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.7,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.3,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 5,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[BTTS+胜平负]：阿根廷 客胜 + 法国 vs 西班牙 双方进球=否。正EV，命中18.5%，评分81.7/100。",
-      "comparisonNote": "落后#1的理由：综合评分差0.4分"
-    },
-    {
-      "rank": 3,
-      "score": 81,
-      "odds": 4.5,
-      "hitPct": 25.27,
-      "ev": 0.137,
-      "mvi": 1.067,
-      "legs": [
-        {
-          "id": "eng-arg-sf_a",
-          "bet": "【胜平负】阿根廷 客胜",
-          "odds": 3,
-          "prob": 0.37,
-          "mvi": 1.11,
-          "ev": 0.11,
-          "market": "胜平负",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "direction",
-          "source": ""
-        },
-        {
-          "id": "fra-spa-sf_un3",
-          "bet": "【小3球】法国 vs 西班牙",
-          "odds": 1.5,
-          "prob": 0.6830512682642066,
-          "mvi": 1.02457690239631,
-          "ev": 0.025,
-          "market": "比分区间",
-          "match": "法国 vs 西班牙",
-          "group": "Semi-Finals",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 6.1,
-        "mvi": 12.8,
+        "ev": 7,
+        "mvi": 13.2,
         "hit": 13,
         "risk": 5,
-        "eff": 2.5,
+        "eff": 2.7,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.7,
+        "stab": 4.4,
         "extRisk": 0,
         "consist": 5,
-        "strat": 0.3,
+        "strat": 0.1,
         "valCap": 0,
-        "qual": 4.6,
+        "qual": 3.8,
         "cert": 2,
         "weak": 0,
-        "struct": 5
+        "struct": 0
       },
       "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[比分区间+胜平负]：阿根廷 客胜 + 法国 vs 西班牙。正EV，命中25.27%，评分81/100。",
+      "rationale": "2场组合[BTTS+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙 双方进球=否。强正EV，命中26%，评分76.2/100。",
       "comparisonNote": ""
     },
     {
-      "rank": 4,
-      "score": 80.4,
-      "odds": 4,
-      "hitPct": 27.01,
-      "ev": 0.08,
-      "mvi": 1.042,
+      "rank": 9,
+      "score": 76.1,
+      "odds": 3.82,
+      "hitPct": 25.41,
+      "ev": -0.03,
+      "mvi": 0.986,
       "legs": [
-        {
-          "id": "eng-arg-sf_a",
-          "bet": "【胜平负】阿根廷 客胜",
-          "odds": 3,
-          "prob": 0.37,
-          "mvi": 1.11,
-          "ev": 0.11,
-          "market": "胜平负",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "direction",
-          "source": ""
-        },
-        {
-          "id": "fra-spa-sf_dc_ha",
-          "bet": "【双重机会】法国 或 西班牙",
-          "odds": 1.333,
-          "prob": 0.73,
-          "mvi": 0.9730899999999999,
-          "ev": -0.027,
-          "market": "双重机会",
-          "match": "法国 vs 西班牙",
-          "group": "Semi-Finals",
-          "type": "safety",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 5.6,
-        "mvi": 12.5,
-        "hit": 13,
-        "risk": 6.8,
-        "eff": 2.5,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.6,
-        "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0.4,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 2,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "确定性优先（稳健）",
-      "rationale": "2场组合[双重机会+胜平负]：阿根廷 客胜 + 法国 或 西班牙。正EV，命中27.01%，评分80.4/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 5,
-      "score": 79.6,
-      "odds": 5.73,
-      "hitPct": 19.98,
-      "ev": 0.144,
-      "mvi": 1.055,
-      "legs": [
-        {
-          "id": "eng-arg-sf_a",
-          "bet": "【胜平负】阿根廷 客胜",
-          "odds": 3,
-          "prob": 0.37,
-          "mvi": 1.11,
-          "ev": 0.11,
-          "market": "胜平负",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "direction",
-          "source": ""
-        },
         {
           "id": "fra-spa-sf_o25",
           "bet": "【大2.5球】法国 vs 西班牙",
           "odds": 1.909,
           "prob": 0.54,
-          "mvi": 1,
+          "mvi": 1.03,
           "ev": 0.031,
           "market": "大小球",
           "match": "法国 vs 西班牙",
           "group": "Semi-Finals",
           "type": "goals",
           "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 6.2,
-        "mvi": 12.7,
-        "hit": 10,
-        "risk": 5,
-        "eff": 3.2,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.7,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.3,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 3,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[大小球+胜平负]：阿根廷 客胜 + 法国 vs 西班牙。正EV，命中19.98%，评分79.6/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 6,
-      "score": 79.4,
-      "odds": 5.53,
-      "hitPct": 21.78,
-      "ev": 0.205,
-      "mvi": 1.106,
-      "legs": [
-        {
-          "id": "eng-arg-sf_ov3.5",
-          "bet": "【大3.5球】英格兰 vs 阿根廷",
-          "odds": 4.15,
-          "prob": 0.2982967820622032,
-          "mvi": 1.2379316455581435,
-          "ev": 0.238,
-          "market": "比分区间",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "goals_range",
-          "source": ""
         },
         {
-          "id": "fra-spa-sf_dc_ha",
-          "bet": "【双重机会】法国 或 西班牙",
-          "odds": 1.333,
-          "prob": 0.73,
-          "mvi": 0.9730899999999999,
-          "ev": -0.027,
-          "market": "双重机会",
-          "match": "法国 vs 西班牙",
+          "id": "eng-arg-sf_dnb_a",
+          "bet": "【平局退款】阿根廷 不败",
+          "odds": 2,
+          "prob": 0.4705882352941177,
+          "mvi": 0.9411764705882354,
+          "ev": -0.059,
+          "market": "平局退款",
+          "match": "英格兰 vs 阿根廷",
           "group": "Semi-Finals",
           "type": "safety",
           "source": ""
         }
       ],
       "breakdown": {
-        "ev": 6.6,
-        "mvi": 13.3,
-        "hit": 12,
+        "ev": 3,
+        "mvi": 11.8,
+        "hit": 13,
         "risk": 6.8,
+        "eff": 2.4,
+        "indep": 10,
+        "div": 10,
+        "corr": 0,
+        "sRisk": 0,
+        "stab": 4.7,
+        "extRisk": 0,
+        "consist": 3.5,
+        "strat": 0.2,
+        "valCap": 0,
+        "qual": 3.8,
+        "cert": 2,
+        "weak": 0,
+        "struct": 5
+      },
+      "tier": "确定性优先（稳健）",
+      "rationale": "2场组合[大小球+平局退款]：法国 vs 西班牙 + 阿根廷 不败。EV偏低，命中25.41%，评分76.1/100。",
+      "comparisonNote": ""
+    },
+    {
+      "rank": 10,
+      "score": 75.8,
+      "odds": 6.3,
+      "hitPct": 16,
+      "ev": 0.008,
+      "mvi": 0.98,
+      "legs": [
+        {
+          "id": "fra-spa-sf_btts_n",
+          "bet": "【BTTS】法国 vs 西班牙 双方进球=否",
+          "odds": 2.1,
+          "prob": 0.5,
+          "mvi": 1,
+          "ev": 0.05,
+          "market": "BTTS",
+          "match": "法国 vs 西班牙",
+          "group": "Semi-Finals",
+          "type": "btts",
+          "source": ""
+        },
+        {
+          "id": "eng-arg-sf_a",
+          "bet": "【胜平负】阿根廷 客胜",
+          "odds": 3,
+          "prob": 0.32,
+          "mvi": 0.96,
+          "ev": -0.04,
+          "market": "胜平负",
+          "match": "英格兰 vs 阿根廷",
+          "group": "Semi-Finals",
+          "type": "direction",
+          "source": ""
+        }
+      ],
+      "breakdown": {
+        "ev": 5.1,
+        "mvi": 11.8,
+        "hit": 10,
+        "risk": 5,
         "eff": 3.5,
         "indep": 10,
         "div": 10,
         "corr": 0,
         "sRisk": 0,
-        "stab": 4.2,
+        "stab": 4.9,
         "extRisk": 0,
         "consist": 3.5,
-        "strat": 0.1,
+        "strat": 0.3,
         "valCap": 0,
-        "qual": 4.6,
-        "cert": 3,
-        "weak": 0,
-        "struct": 2
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[双重机会+比分区间]：英格兰 vs 阿根廷 + 法国 或 西班牙。强正EV，命中21.78%，评分79.4/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 7,
-      "score": 79.3,
-      "odds": 4.6,
-      "hitPct": 23.26,
-      "ev": 0.07,
-      "mvi": 1.029,
-      "legs": [
-        {
-          "id": "eng-arg-sf_dnb_a",
-          "bet": "【平局退款】阿根廷 不败",
-          "odds": 2,
-          "prob": 0.5285714285714286,
-          "mvi": 1.0571428571428572,
-          "ev": 0.057,
-          "market": "平局退款",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "fra-spa-sf_h",
-          "bet": "【胜平负】法国 主胜",
-          "odds": 2.3,
-          "prob": 0.44,
-          "mvi": 1,
-          "ev": 0.012,
-          "market": "胜平负",
-          "match": "法国 vs 西班牙",
-          "group": "Semi-Finals",
-          "type": "direction",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 5.6,
-        "mvi": 12.3,
-        "hit": 12,
-        "risk": 6.8,
-        "eff": 2.9,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.8,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0.4,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 0,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "均衡收益型",
-      "rationale": "2场组合[胜平负+平局退款]：阿根廷 不败 + 法国 主胜。正EV，命中23.26%，评分79.3/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 8,
-      "score": 79.1,
-      "odds": 6.2,
-      "hitPct": 16.75,
-      "ev": 0.039,
-      "mvi": 1.02,
-      "legs": [
-        {
-          "id": "eng-arg-sf_dnb_a",
-          "bet": "【平局退款】阿根廷 不败",
-          "odds": 2,
-          "prob": 0.5285714285714286,
-          "mvi": 1.0571428571428572,
-          "ev": 0.057,
-          "market": "平局退款",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "safety",
-          "source": ""
-        },
-        {
-          "id": "fra-spa-sf_ov3.5",
-          "bet": "【大3.5球】法国 vs 西班牙",
-          "odds": 3.1,
-          "prob": 0.3169487317357934,
-          "mvi": 0.9825410683809596,
-          "ev": -0.017,
-          "market": "比分区间",
-          "match": "法国 vs 西班牙",
-          "group": "Semi-Finals",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 5.3,
-        "mvi": 12.2,
-        "hit": 10,
-        "risk": 6.8,
-        "eff": 3.9,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.8,
-        "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0.1,
-        "valCap": 0,
-        "qual": 4.6,
+        "qual": 3.8,
         "cert": 3,
         "weak": 0,
         "struct": 5
       },
       "tier": "平衡收益型",
-      "rationale": "2场组合[比分区间+平局退款]：阿根廷 不败 + 法国 vs 西班牙。边际正EV，命中16.75%，评分79.1/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 9,
-      "score": 78.9,
-      "odds": 7.92,
-      "hitPct": 16.11,
-      "ev": 0.276,
-      "mvi": 1.119,
-      "legs": [
-        {
-          "id": "eng-arg-sf_ov3.5",
-          "bet": "【大3.5球】英格兰 vs 阿根廷",
-          "odds": 4.15,
-          "prob": 0.2982967820622032,
-          "mvi": 1.2379316455581435,
-          "ev": 0.238,
-          "market": "比分区间",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "goals_range",
-          "source": ""
-        },
-        {
-          "id": "fra-spa-sf_o25",
-          "bet": "【大2.5球】法国 vs 西班牙",
-          "odds": 1.909,
-          "prob": 0.54,
-          "mvi": 1,
-          "ev": 0.031,
-          "market": "大小球",
-          "match": "法国 vs 西班牙",
-          "group": "Semi-Finals",
-          "type": "goals",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 7.2,
-        "mvi": 13.4,
-        "hit": 10,
-        "risk": 5,
-        "eff": 4.4,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.3,
-        "extRisk": 0,
-        "consist": 5,
-        "strat": 0,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 3,
-        "weak": 0,
-        "struct": 2
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[大小球+比分区间]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中16.11%，评分78.9/100。",
-      "comparisonNote": ""
-    },
-    {
-      "rank": 10,
-      "score": 78.9,
-      "odds": 7.13,
-      "hitPct": 16.48,
-      "ev": 0.175,
-      "mvi": 1.091,
-      "legs": [
-        {
-          "id": "eng-arg-sf_o25",
-          "bet": "【大2.5球】英格兰 vs 阿根廷",
-          "odds": 2.3,
-          "prob": 0.52,
-          "mvi": 1.2,
-          "ev": 0.196,
-          "market": "大小球",
-          "match": "英格兰 vs 阿根廷",
-          "group": "Semi-Finals",
-          "type": "goals",
-          "source": ""
-        },
-        {
-          "id": "fra-spa-sf_ov3.5",
-          "bet": "【大3.5球】法国 vs 西班牙",
-          "odds": 3.1,
-          "prob": 0.3169487317357934,
-          "mvi": 0.9825410683809596,
-          "ev": -0.017,
-          "market": "比分区间",
-          "match": "法国 vs 西班牙",
-          "group": "Semi-Finals",
-          "type": "goals_range",
-          "source": ""
-        }
-      ],
-      "breakdown": {
-        "ev": 6.4,
-        "mvi": 13.1,
-        "hit": 10,
-        "risk": 5,
-        "eff": 4,
-        "indep": 10,
-        "div": 10,
-        "corr": 0,
-        "sRisk": 0,
-        "stab": 4.3,
-        "extRisk": 0,
-        "consist": 3.5,
-        "strat": 0,
-        "valCap": 0,
-        "qual": 4.6,
-        "cert": 3,
-        "weak": 0,
-        "struct": 5
-      },
-      "tier": "平衡收益型",
-      "rationale": "2场组合[比分区间+大小球]：英格兰 vs 阿根廷 + 法国 vs 西班牙。强正EV，命中16.48%，评分78.9/100。",
+      "rationale": "2场组合[BTTS+胜平负]：法国 vs 西班牙 双方进球=否 + 阿根廷 客胜。边际正EV，命中16%，评分75.8/100。",
       "comparisonNote": ""
     }
   ],
@@ -805,10 +748,10 @@
       "tier": "核心仓位（均衡收益型·2腿）",
       "portfolio": {
         "id": "best",
-        "score": 82.1,
+        "score": 78.7,
         "odds": 5.29,
-        "ev": 0.21,
-        "hitPct": 22.88,
+        "ev": 0.128,
+        "hitPct": 21.32,
         "legs": [
           {
             "id": "eng-arg-sf_o25",
@@ -827,9 +770,9 @@
             "id": "fra-spa-sf_h",
             "bet": "【胜平负】法国 主胜",
             "odds": 2.3,
-            "prob": 0.44,
-            "mvi": 1,
-            "ev": 0.012,
+            "prob": 0.41,
+            "mvi": 0.94,
+            "ev": -0.057,
             "market": "胜平负",
             "match": "法国 vs 西班牙",
             "group": "Semi-Finals",
@@ -846,35 +789,35 @@
       "tier": "辅助仓位（平衡收益型·2腿）",
       "portfolio": {
         "id": "alt",
-        "score": 81.7,
-        "odds": 6.15,
-        "ev": 0.138,
-        "hitPct": 18.5,
+        "score": 78.2,
+        "odds": 7.83,
+        "ev": 0.261,
+        "hitPct": 16.11,
         "legs": [
           {
-            "id": "eng-arg-sf_a",
-            "bet": "【胜平负】阿根廷 客胜",
-            "odds": 3,
-            "prob": 0.37,
-            "mvi": 1.11,
-            "ev": 0.11,
-            "market": "胜平负",
+            "id": "eng-arg-sf_ov3.5",
+            "bet": "【大3.5球】英格兰 vs 阿根廷",
+            "odds": 4.1,
+            "prob": 0.2982967820622032,
+            "mvi": 1.223016806455033,
+            "ev": 0.223,
+            "market": "比分区间",
             "match": "英格兰 vs 阿根廷",
             "group": "Semi-Finals",
-            "type": "direction",
+            "type": "goals_range",
             "source": ""
           },
           {
-            "id": "fra-spa-sf_btts_n",
-            "bet": "【BTTS】法国 vs 西班牙 双方进球=否",
-            "odds": 2.05,
-            "prob": 0.5,
-            "mvi": 1,
-            "ev": 0.025,
-            "market": "BTTS",
+            "id": "fra-spa-sf_o25",
+            "bet": "【大2.5球】法国 vs 西班牙",
+            "odds": 1.909,
+            "prob": 0.54,
+            "mvi": 1.03,
+            "ev": 0.031,
+            "market": "大小球",
             "match": "法国 vs 西班牙",
             "group": "Semi-Finals",
-            "type": "btts",
+            "type": "goals",
             "source": ""
           }
         ]
@@ -892,11 +835,11 @@
   ],
   "bestPortfolio": {
     "tier": "均衡收益型",
-    "score": 82.1,
+    "score": 78.7,
     "odds": 5.29,
-    "hitPct": 22.88,
-    "ev": 0.21,
-    "mvi": 1.1,
+    "hitPct": 21.32,
+    "ev": 0.128,
+    "mvi": 1.07,
     "legs": [
       {
         "id": "eng-arg-sf_o25",
@@ -915,9 +858,9 @@
         "id": "fra-spa-sf_h",
         "bet": "【胜平负】法国 主胜",
         "odds": 2.3,
-        "prob": 0.44,
-        "mvi": 1,
-        "ev": 0.012,
+        "prob": 0.41,
+        "mvi": 0.94,
+        "ev": -0.057,
         "market": "胜平负",
         "match": "法国 vs 西班牙",
         "group": "Semi-Finals",
@@ -926,8 +869,8 @@
       }
     ],
     "breakdown": {
-      "ev": 6.7,
-      "mvi": 13.2,
+      "ev": 6,
+      "mvi": 12.8,
       "hit": 12,
       "risk": 5,
       "eff": 2.9,
@@ -935,69 +878,125 @@
       "div": 10,
       "corr": 0,
       "sRisk": 0,
-      "stab": 4.4,
+      "stab": 4.2,
       "extRisk": 0,
-      "consist": 5,
-      "strat": 0.3,
+      "consist": 3.5,
+      "strat": 0.4,
       "valCap": 0,
-      "qual": 4.6,
+      "qual": 3.8,
       "cert": 3,
       "weak": 0,
       "struct": 5
     },
-    "rationale": "2场组合[大小球+胜平负]：英格兰 vs 阿根廷 + 法国 主胜。强正EV，命中22.88%，评分82.1/100。",
+    "rationale": "2场组合[大小球+胜平负]：英格兰 vs 阿根廷 + 法国 主胜。正EV，命中21.32%，评分78.7/100。",
     "decisionLogic": {
-      "whyBest": "综合评分领先0.4分；EV更高(+7.2%)；命中率更高(22.88% vs 18.5%)；MVI信号更强(1.10 vs 1.05)",
-      "keyDifferentiator": "更高的期望值"
+      "whyBest": "综合评分领先0.5分；命中率更高(21.32% vs 16.11%)",
+      "keyDifferentiator": "更好的EV/风险/命中率综合平衡"
     }
   },
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
       "reason": "EV显著负(-12.2%)",
-      "count": 2,
+      "count": 1,
       "examples": [
-        {
-          "match": "法国 vs 西班牙",
-          "bet": "法国 vs 西班牙 平局",
-          "odds": 3.25,
-          "ev": -0.122,
-          "mvi": 0.96
-        },
         {
           "match": "法国 vs 西班牙",
           "bet": "法国 vs 西班牙",
           "odds": 1.909,
           "ev": -0.122,
-          "mvi": 1
+          "mvi": 0.88
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-15.0%)",
+      "reason": "EV显著负(-16.7%)",
       "count": 1,
       "examples": [
         {
           "match": "法国 vs 西班牙",
           "bet": "法国 vs 西班牙 双方进球=是",
-          "odds": 1.7,
-          "ev": -0.15,
-          "mvi": 1
+          "odds": 1.666,
+          "ev": -0.167,
+          "mvi": 0.99
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-10.6%)",
+      "reason": "EV显著负(-8.9%)",
       "count": 1,
       "examples": [
         {
           "match": "法国 vs 西班牙",
           "bet": "西班牙 不败",
-          "odds": 2.25,
-          "ev": -0.106,
-          "mvi": 0.8938356164383562
+          "odds": 2.2,
+          "ev": -0.089,
+          "mvi": 0.9114285714285714
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-23.9%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 西班牙",
+          "bet": "法国 vs 西班牙 比分 1:1",
+          "odds": 6.5,
+          "ev": -0.239,
+          "mvi": 0.7605
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-13.8%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 西班牙",
+          "bet": "法国 vs 西班牙 比分 1:0",
+          "odds": 9.5,
+          "ev": -0.138,
+          "mvi": 0.86165
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-9.3%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "法国 vs 西班牙",
+          "bet": "法国 vs 西班牙 比分 2:1",
+          "odds": 10,
+          "ev": -0.093,
+          "mvi": 0.907
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-9.4%)",
+      "count": 2,
+      "examples": [
+        {
+          "match": "法国 vs 西班牙",
+          "bet": "法国 vs 西班牙 比分 0:1",
+          "odds": 12,
+          "ev": -0.094,
+          "mvi": 0.906
+        },
+        {
+          "match": "法国 vs 西班牙",
+          "bet": "法国 vs 西班牙 比分 1:2",
+          "odds": 12,
+          "ev": -0.094,
+          "mvi": 0.906
         }
       ]
     },
@@ -1008,66 +1007,10 @@
       "examples": [
         {
           "match": "法国 vs 西班牙",
-          "bet": "法国 vs 西班牙 比分 1:1",
-          "odds": 6.5,
-          "ev": -0.244,
-          "mvi": 0.75595
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-16.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "法国 vs 西班牙",
-          "bet": "法国 vs 西班牙 比分 1:0",
-          "odds": 9,
-          "ev": -0.162,
-          "mvi": 0.8379000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-11.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "法国 vs 西班牙",
-          "bet": "法国 vs 西班牙 比分 2:0",
-          "odds": 12,
-          "ev": -0.112,
-          "mvi": 0.888
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-19.5%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "法国 vs 西班牙",
-          "bet": "法国 vs 西班牙 比分 0:1",
-          "odds": 11,
-          "ev": -0.195,
-          "mvi": 0.8052
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-23.0%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "法国 vs 西班牙",
           "bet": "法国 vs 西班牙",
-          "odds": 1.425,
-          "ev": -0.23,
-          "mvi": 0.7695000000000001
+          "odds": 1.4,
+          "ev": -0.244,
+          "mvi": 0.756
         }
       ]
     },
@@ -1079,51 +1022,23 @@
         {
           "match": "法国 vs 西班牙",
           "bet": "法国 vs 西班牙",
-          "odds": 2.75,
-          "ev": 0.265,
+          "odds": 2.85,
+          "ev": 0.311,
           "mvi": 0.85
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-20.8%)",
+      "reason": "EV显著负(-24.7%)",
       "count": 1,
       "examples": [
         {
           "match": "法国 vs 西班牙",
           "bet": "法国 vs 西班牙",
-          "odds": 2.5,
-          "ev": -0.208,
-          "mvi": 0.7923718293394835
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-15.8%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 阿根廷",
-          "bet": "英格兰 主胜",
-          "odds": 2.55,
-          "ev": -0.158,
-          "mvi": 0.84
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-13.0%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 阿根廷",
-          "bet": "英格兰 vs 阿根廷 平局",
-          "odds": 3,
-          "ev": -0.13,
-          "mvi": 0.87
+          "odds": 2.375,
+          "ev": -0.247,
+          "mvi": 0.7527532378725094
         }
       ]
     },
@@ -1157,15 +1072,15 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-18.6%)",
+      "reason": "EV显著负(-8.6%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 不败",
           "odds": 1.727,
-          "ev": -0.186,
-          "mvi": 0.8141571428571429
+          "ev": -0.086,
+          "mvi": 0.9142941176470588
         }
       ]
     },
@@ -1185,57 +1100,43 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-22.9%)",
+      "reason": "EV显著负(-28.2%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "英格兰 vs 阿根廷",
+          "bet": "英格兰 vs 阿根廷 比分 1:0",
+          "odds": 8,
+          "ev": -0.282,
+          "mvi": 0.7176
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-27.2%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷 比分 0:1",
           "odds": 8.5,
-          "ev": -0.229,
-          "mvi": 0.77095
+          "ev": -0.272,
+          "mvi": 0.7276
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-36.6%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 阿根廷",
-          "bet": "英格兰 vs 阿根廷 比分 1:0",
-          "odds": 7.5,
-          "ev": -0.366,
-          "mvi": 0.6345
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-11.8%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 阿根廷",
-          "bet": "英格兰 vs 阿根廷 比分 2:1",
-          "odds": 11,
-          "ev": -0.118,
-          "mvi": 0.8821999999999999
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-11.6%)",
+      "reason": "EV显著负(-12.9%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷",
-          "odds": 1.7,
-          "ev": -0.116,
-          "mvi": 0.884
+          "odds": 1.675,
+          "ev": -0.129,
+          "mvi": 0.8710000000000001
         }
       ]
     },
@@ -1247,8 +1148,8 @@
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷",
-          "odds": 2.1,
-          "ev": 0.008,
+          "odds": 2.15,
+          "ev": 0.032,
           "mvi": 0.85
         }
       ]
@@ -1283,15 +1184,15 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-14.4%)",
+      "reason": "EV显著负(-14.0%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷",
-          "odds": 1.22,
-          "ev": -0.144,
-          "mvi": 0.856077925884112
+          "odds": 1.225,
+          "ev": -0.14,
+          "mvi": 0.8595864419738012
         }
       ]
     }
@@ -1299,9 +1200,9 @@
   "scoreParlays": [],
   "finalVerdict": {
     "verdict": "今日最佳：均衡收益型组合 5.29x",
-    "reason": "英格兰 vs 阿根廷 + 法国 主胜。Portfolio Score=82.1/100，EV=+21.0%，命中率22.88%。正期望值显著，优先配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
+    "reason": "英格兰 vs 阿根廷 + 法国 主胜。Portfolio Score=78.7/100，EV=+12.8%，命中率21.32%。正期望值可接受，建议适量配置。 ⚠️ 综合赔率低于15倍，但组合综合投资价值最高。",
     "bestPortfolio": {
-      "score": 82.1,
+      "score": 78.7,
       "odds": 5.29,
       "legs": [
         {
@@ -1321,9 +1222,9 @@
           "id": "fra-spa-sf_h",
           "bet": "【胜平负】法国 主胜",
           "odds": 2.3,
-          "prob": 0.44,
-          "mvi": 1,
-          "ev": 0.012,
+          "prob": 0.41,
+          "mvi": 0.94,
+          "ev": -0.057,
           "market": "胜平负",
           "match": "法国 vs 西班牙",
           "group": "Semi-Finals",
@@ -1335,61 +1236,61 @@
     "oddsAssessment": "⚠️ 综合赔率低于15倍，但组合综合投资价值最高。"
   },
   "yesterdayReview": {
-    "date": "7/12",
+    "date": "7/13",
     "summary": {
-      "n": 3,
+      "n": 4,
       "dirHits": 3,
-      "dirRate": 1,
-      "over25Hits": 2,
-      "over25Rate": 0.6875,
+      "dirRate": 0.7,
+      "over25Hits": 3,
+      "over25Rate": 0.75,
       "bttsHits": 1,
-      "bttsRate": 0.37499999999999994,
+      "bttsRate": 0.2,
       "top3Hits": 1,
-      "top3Rate": 0.3125,
+      "top3Rate": 0.25,
       "top1Hits": 0,
       "top1Rate": 0,
       "draws": 0,
       "upsets": 0,
       "_multiDay": true,
-      "_dayCount": 2,
-      "_weightStr": "2场×63% + 1场×37%"
+      "_dayCount": 3,
+      "_weightStr": "2场×50% + 1场×30% + 1场×20%"
     },
     "keyInsights": [
-      "方向准确率100%",
-      "大2.5球命中69%",
-      "BTTS命中37%",
-      "Top3比分命中31%（1/3场）"
+      "方向准确率70%",
+      "大2.5球命中75%（优秀，今日大小球提升权重）",
+      "BTTS命中20%",
+      "Top3比分命中25%（1/4场）"
     ],
     "strategyWeights": {
       "direction": 1.2,
-      "goals": 1.01875,
-      "btts": 0.7374999999999999,
-      "score": 0.525,
+      "goals": 1.075,
+      "btts": 0.6,
+      "score": 0.5,
       "safety": 1.05,
-      "goals_range": 0.89625
+      "goals_range": 0.9450000000000001
     }
   },
   "candidatePool": {
     "total": 43,
-    "accepted": 18,
-    "rejected": 25,
+    "accepted": 21,
+    "rejected": 22,
     "abandonedMatches": 0
   },
   "stats": {
-    "totalCombinations": 80,
-    "topScore": 82.1,
-    "scoredCount": 80,
+    "totalCombinations": 110,
+    "topScore": 78.7,
+    "scoredCount": 110,
     "byMarket": {
-      "胜平负": 3,
+      "胜平负": 6,
       "大小球": 2,
       "BTTS": 2,
       "双重机会": 2,
       "平局退款": 2,
-      "波胆": 2,
-      "比分区间": 5
+      "比分区间": 5,
+      "波胆": 2
     },
     "byLegs": {
-      "2腿": 80
+      "2腿": 110
     }
   },
   "wcpeValidations": {
