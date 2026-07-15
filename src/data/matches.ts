@@ -748,7 +748,20 @@ export const matches: Match[] = [
     interceptions: { home: 6, away: 9 },
     saves: { home: 2, away: 6 }
   }, homeScore: 3, awayScore: 1 },
-  { id: 'fra-spa-sf', date: '2026-07-14', tournament: '2026 FIFA World Cup', group: 'Semi-Finals', round: 'Semi-Finals', matchday: 30, homeTeam: 'France', awayTeam: 'Spain', venue: 'AT&T Stadium, Arlington', kickoff: '7/15 03:00', localKickoff: '7/14 14:00', localTZ: 'CT', status: 'upcoming' },
+  { id: 'fra-spa-sf', date: '2026-07-14', tournament: '2026 FIFA World Cup', group: 'Semi-Finals', round: 'Semi-Finals', matchday: 30, homeTeam: 'France', awayTeam: 'Spain', venue: 'AT&T Stadium, Arlington', kickoff: '7/15 03:00', localKickoff: '7/14 14:00', localTZ: 'CT', status: 'finished',
+    matchStats: {
+    possession: { home: 49, away: 51 },
+    shots: { home: 10, away: 10 },
+    shotsOnTarget: { home: 3, away: 2 },
+    xg: { home: 0.30, away: 1.63 },
+    corners: { home: 7, away: 1 },
+    fouls: { home: 11, away: 12 },
+    cards: { home: { yellow: 2, red: 0 }, away: { yellow: 1, red: 0 } },
+    offsides: { home: 1, away: 1 },
+    crosses: { home: 14, away: 18 },
+    interceptions: { home: 8, away: 9 },
+    saves: { home: 0, away: 3 }
+  }, homeScore: 0, awayScore: 2 },
   { id: 'eng-arg-sf', date: '2026-07-15', tournament: '2026 FIFA World Cup', group: 'Semi-Finals', round: 'Semi-Finals', matchday: 30, homeTeam: 'England', awayTeam: 'Argentina', venue: 'Mercedes-Benz Stadium, Atlanta', kickoff: '7/16 03:00', localKickoff: '7/15 15:00', localTZ: 'ET', status: 'upcoming' },
 ];
 

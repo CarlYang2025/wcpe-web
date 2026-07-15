@@ -1939,34 +1939,164 @@
       "away": 6
     },
     "_source": "qiumiwu.com team-stats 2026-07-11 (Spain 2-1 Belgium); possession/shots/SOT/corners/cards from report, xg/fouls/crosses/interceptions estimated"
-  }
-,
+  },
   "nor-eng-qf": {
-    "possession": { "home": 42, "away": 58 },
-    "shots": { "home": 11, "away": 17 },
-    "shotsOnTarget": { "home": 4, "away": 7 },
-    "xg": { "home": 1.2, "away": 1.9 },
-    "corners": { "home": 5, "away": 8 },
-    "fouls": { "home": 13, "away": 11 },
-    "cards": { "home": { "yellow": 3, "red": 0 }, "away": { "yellow": 2, "red": 0 } },
-    "offsides": { "home": 2, "away": 3 },
-    "crosses": { "home": 14, "away": 22 },
-    "interceptions": { "home": 9, "away": 7 },
-    "saves": { "home": 5, "away": 3 },
+    "possession": {
+      "home": 42,
+      "away": 58
+    },
+    "shots": {
+      "home": 11,
+      "away": 17
+    },
+    "shotsOnTarget": {
+      "home": 4,
+      "away": 7
+    },
+    "xg": {
+      "home": 1.2,
+      "away": 1.9
+    },
+    "corners": {
+      "home": 5,
+      "away": 8
+    },
+    "fouls": {
+      "home": 13,
+      "away": 11
+    },
+    "cards": {
+      "home": {
+        "yellow": 3,
+        "red": 0
+      },
+      "away": {
+        "yellow": 2,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 3
+    },
+    "crosses": {
+      "home": 14,
+      "away": 22
+    },
+    "interceptions": {
+      "home": 9,
+      "away": 7
+    },
+    "saves": {
+      "home": 5,
+      "away": 3
+    },
     "_source": "cctv/163/qq match reports 2026-07-12 (Norway 1-2 England AET); Schjelderup 36', Bellingham 45+2' & 93'; possession/shots/SOT/corners/xg estimated from narrative"
   },
   "arg-sui-qf": {
-    "possession": { "home": 63, "away": 37 },
-    "shots": { "home": 18, "away": 8 },
-    "shotsOnTarget": { "home": 9, "away": 3 },
-    "xg": { "home": 2.5, "away": 0.8 },
-    "corners": { "home": 9, "away": 3 },
-    "fouls": { "home": 10, "away": 15 },
-    "cards": { "home": { "yellow": 2, "red": 0 }, "away": { "yellow": 3, "red": 1 } },
-    "offsides": { "home": 3, "away": 1 },
-    "crosses": { "home": 22, "away": 10 },
-    "interceptions": { "home": 6, "away": 9 },
-    "saves": { "home": 2, "away": 6 },
+    "possession": {
+      "home": 63,
+      "away": 37
+    },
+    "shots": {
+      "home": 18,
+      "away": 8
+    },
+    "shotsOnTarget": {
+      "home": 9,
+      "away": 3
+    },
+    "xg": {
+      "home": 2.5,
+      "away": 0.8
+    },
+    "corners": {
+      "home": 9,
+      "away": 3
+    },
+    "fouls": {
+      "home": 10,
+      "away": 15
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 3,
+        "red": 1
+      }
+    },
+    "offsides": {
+      "home": 3,
+      "away": 1
+    },
+    "crosses": {
+      "home": 22,
+      "away": 10
+    },
+    "interceptions": {
+      "home": 6,
+      "away": 9
+    },
+    "saves": {
+      "home": 2,
+      "away": 6
+    },
     "_source": "163/zhibo8/qq match reports 2026-07-12 (Argentina 3-1 Switzerland AET, 10-man); Mac Allister 10', Ndoeye 67', Embolo red 72', Alvarez 112', Lautaro 121'; stats estimated from narrative"
+  },
+  "fra-spa-sf": {
+    "possession": {
+      "home": 49,
+      "away": 51
+    },
+    "shots": {
+      "home": 10,
+      "away": 10
+    },
+    "shotsOnTarget": {
+      "home": 2,
+      "away": 3
+    },
+    "xg": {
+      "home": 0.3,
+      "away": 1.63
+    },
+    "corners": {
+      "home": 3,
+      "away": 6
+    },
+    "fouls": {
+      "home": 12,
+      "away": 10
+    },
+    "cards": {
+      "home": {
+        "yellow": 2,
+        "red": 0
+      },
+      "away": {
+        "yellow": 1,
+        "red": 0
+      }
+    },
+    "offsides": {
+      "home": 3,
+      "away": 2
+    },
+    "crosses": {
+      "home": 14,
+      "away": 22
+    },
+    "interceptions": {
+      "home": 8,
+      "away": 9
+    },
+    "saves": {
+      "home": 1,
+      "away": 2
+    },
+    "_source": "CCTV/QQ/163 赛后报道 2026-07-15 (西班牙2-0法国, Oyarzabal 22'点球, Porro 58'; 控球/射门/SOT/xG 来自转播; 角球/犯规/黄牌/越位/传中/拦截/扑救按叙事估算)"
   }
 }
