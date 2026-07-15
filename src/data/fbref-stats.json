@@ -2056,20 +2056,20 @@
       "away": 10
     },
     "shotsOnTarget": {
-      "home": 2,
-      "away": 3
+      "home": 3,
+      "away": 2
     },
     "xg": {
       "home": 0.3,
       "away": 1.63
     },
     "corners": {
-      "home": 3,
-      "away": 6
+      "home": 7,
+      "away": 1
     },
     "fouls": {
-      "home": 12,
-      "away": 10
+      "home": 11,
+      "away": 12
     },
     "cards": {
       "home": {
@@ -2082,21 +2082,21 @@
       }
     },
     "offsides": {
-      "home": 3,
-      "away": 2
+      "home": 1,
+      "away": 1
     },
     "crosses": {
       "home": 14,
-      "away": 22
+      "away": 18
     },
     "interceptions": {
       "home": 8,
       "away": 9
     },
     "saves": {
-      "home": 1,
-      "away": 2
+      "home": 0,
+      "away": 3
     },
-    "_source": "CCTV/QQ/163 赛后报道 2026-07-15 (西班牙2-0法国, Oyarzabal 22'点球, Porro 58'; 控球/射门/SOT/xG 来自转播; 角球/犯规/黄牌/越位/传中/拦截/扑救按叙事估算)"
+    "_source": "qiumiwu.com + oddscalendar + FIFA/Sina/QQ 赛后报道 2026-07-15 (西班牙2-0法国, Oyarzabal 22'点球, Porro 58'; 控球49/51, 射门10/10, 射正3/2, xG 0.30/1.63, 角球7/1, 犯规11/12, 黄牌2/1, 扑救0/3)"
   }
 }
