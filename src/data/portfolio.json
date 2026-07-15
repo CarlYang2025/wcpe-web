@@ -1,24 +1,24 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-15T13:19:29.955Z",
+  "generatedAt": "2026-07-15T13:55:45.569Z",
   "targetDate": "7/16",
   "targetDateDisplay": "2026年7月16日（周四）",
   "targetMatchIds": [
     "eng-arg-sf"
   ],
-  "oddsFreshness": "2026-07-15T13:19:27.330Z",
+  "oddsFreshness": "2026-07-15T13:55:40.237Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "⚠️ 机会稀缺",
-    "investableCount": 11,
-    "highMviCount": 4,
-    "positiveEvCount": 3,
+    "investableCount": 8,
+    "highMviCount": 5,
+    "positiveEvCount": 5,
     "suggestedExposure": "30-50%或建议空仓",
-    "summary": "1场比赛，11个可投注项（3个正EV），4个高MVI信号。涵盖7种市场类型。",
+    "summary": "1场比赛，8个可投注项（5个正EV），5个高MVI信号。涵盖7种市场类型。",
     "highlights": [
-      "英格兰 vs 阿根廷 为本日最强MVI信号(1.31)",
+      "英格兰 vs 阿根廷 比分 1:2 为本日最强MVI信号(1.26)",
       "昨日方向准确率低(29%)，已动态调整策略权重",
-      "已自动排除9个低质量投注项+0场高风险比赛",
+      "已自动排除12个低质量投注项+0场高风险比赛",
       "多市场覆盖：胜平负、大小球、BTTS、双重机会、平局退款、波胆、比分区间"
     ]
   },
@@ -40,12 +40,24 @@
   "investmentPool": [
     {
       "match": "英格兰 vs 阿根廷",
+      "market": "波胆",
+      "bet": "【波胆】英格兰 vs 阿根廷 比分 1:2",
+      "odds": 12,
+      "ev": 0.26,
+      "mvi": 1.26,
+      "prob": 0.105,
+      "reason": "高错价信号",
+      "type": "score",
+      "source": "Bet365"
+    },
+    {
+      "match": "英格兰 vs 阿根廷",
       "market": "比分区间",
       "bet": "【大3.5球】英格兰 vs 阿根廷",
       "odds": 4.4,
-      "ev": 0.313,
-      "mvi": 1.3125058410736943,
-      "prob": 0.2982967820622032,
+      "ev": 0.233,
+      "mvi": 1.2328688237107375,
+      "prob": 0.2801974599342585,
       "reason": "高错价信号",
       "type": "goals_range",
       "source": ""
@@ -55,11 +67,35 @@
       "market": "大小球",
       "bet": "【大2.5球】英格兰 vs 阿根廷",
       "odds": 2.375,
-      "ev": 0.235,
-      "mvi": 1.24,
-      "prob": 0.52,
+      "ev": 0.188,
+      "mvi": 1.19,
+      "prob": 0.5,
       "reason": "高错价信号",
       "type": "goals",
+      "source": ""
+    },
+    {
+      "match": "英格兰 vs 阿根廷",
+      "market": "胜平负",
+      "bet": "【胜平负】阿根廷 客胜",
+      "odds": 3,
+      "ev": 0.08,
+      "mvi": 1.09,
+      "prob": 0.36,
+      "reason": "正EV",
+      "type": "direction",
+      "source": ""
+    },
+    {
+      "match": "英格兰 vs 阿根廷",
+      "market": "平局退款",
+      "bet": "【平局退款】阿根廷 不败",
+      "odds": 2,
+      "ev": 0.029,
+      "mvi": 1.0285714285714287,
+      "prob": 0.5142857142857143,
+      "reason": "边际价值",
+      "type": "safety",
       "source": ""
     },
     {
@@ -67,10 +103,10 @@
       "market": "比分区间",
       "bet": "【大3球】英格兰 vs 阿根廷",
       "odds": 3.55,
-      "ev": 0.059,
-      "mvi": 1.0589535763208213,
-      "prob": 0.2982967820622032,
-      "reason": "正EV",
+      "ev": -0.005,
+      "mvi": 0.9947009827666176,
+      "prob": 0.2801974599342585,
+      "reason": "边际价值",
       "type": "goals_range",
       "source": ""
     },
@@ -80,7 +116,7 @@
       "bet": "【BTTS】英格兰 vs 阿根廷 双方进球=是",
       "odds": 1.95,
       "ev": -0.025,
-      "mvi": 1.12,
+      "mvi": 1.08,
       "prob": 0.5,
       "reason": "MVI达标",
       "type": "btts",
@@ -88,15 +124,15 @@
     },
     {
       "match": "英格兰 vs 阿根廷",
-      "market": "波胆",
-      "bet": "【波胆】英格兰 vs 阿根廷 比分 1:2",
-      "odds": 12,
-      "ev": -0.024,
-      "mvi": 0.9756,
-      "prob": 0.0813,
+      "market": "双重机会",
+      "bet": "【双重机会】英格兰 或 阿根廷",
+      "odds": 1.4,
+      "ev": -0.02,
+      "mvi": 0.9799999999999999,
+      "prob": 0.7,
       "reason": "边际价值",
-      "type": "score",
-      "source": "Bet365"
+      "type": "safety",
+      "source": ""
     }
   ],
   "portfolios": [],
@@ -113,15 +149,50 @@
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-24.6%)",
+      "reason": "EV显著负(-8.2%)",
+      "count": 2,
+      "examples": [
+        {
+          "match": "英格兰 vs 阿根廷",
+          "bet": "英格兰 主胜",
+          "odds": 2.7,
+          "ev": -0.082,
+          "mvi": 0.92
+        },
+        {
+          "match": "英格兰 vs 阿根廷",
+          "bet": "英格兰 vs 阿根廷",
+          "odds": 1.275,
+          "ev": -0.082,
+          "mvi": 0.9177482385838203
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-13.8%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "英格兰 vs 阿根廷",
+          "bet": "英格兰 vs 阿根廷 平局",
+          "odds": 2.875,
+          "ev": -0.138,
+          "mvi": 0.86
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-21.5%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷",
           "odds": 1.571,
-          "ev": -0.246,
-          "mvi": 0.75
+          "ev": -0.215,
+          "mvi": 0.78
         }
       ]
     },
@@ -141,99 +212,99 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-9.8%)",
+      "reason": "EV显著负(-16.1%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 不败",
           "odds": 1.727,
-          "ev": -0.098,
-          "mvi": 0.9021641791044778
+          "ev": -0.161,
+          "mvi": 0.8388285714285715
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-33.6%)",
+      "reason": "EV显著负(-35.1%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷 比分 1:1",
           "odds": 5.5,
-          "ev": -0.336,
-          "mvi": 0.6638499999999999
+          "ev": -0.351,
+          "mvi": 0.6489999999999999
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-32.7%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 阿根廷",
-          "bet": "英格兰 vs 阿根廷 比分 1:0",
-          "odds": 7.5,
-          "ev": -0.327,
-          "mvi": 0.6727500000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-27.2%)",
+      "reason": "EV显著负(-21.8%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷 比分 0:1",
           "odds": 8.5,
-          "ev": -0.272,
-          "mvi": 0.7276
+          "ev": -0.218,
+          "mvi": 0.782
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-25.6%)",
+      "reason": "EV显著负(-36.2%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "英格兰 vs 阿根廷",
+          "bet": "英格兰 vs 阿根廷 比分 1:0",
+          "odds": 7.5,
+          "ev": -0.362,
+          "mvi": 0.6375000000000001
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-12.0%)",
+      "count": 1,
+      "examples": [
+        {
+          "match": "英格兰 vs 阿根廷",
+          "bet": "英格兰 vs 阿根廷 比分 2:1",
+          "odds": 11,
+          "ev": -0.12,
+          "mvi": 0.88
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
+      "reason": "EV显著负(-22.5%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷",
           "odds": 1.55,
-          "ev": -0.256,
-          "mvi": 0.744
+          "ev": -0.225,
+          "mvi": 0.7750000000000004
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-10.5%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "英格兰 vs 阿根廷",
-          "bet": "英格兰 vs 阿根廷",
-          "odds": 1.275,
-          "ev": -0.105,
-          "mvi": 0.8946716028706908
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-15.8%)",
+      "reason": "EV显著负(-13.6%)",
       "count": 1,
       "examples": [
         {
           "match": "英格兰 vs 阿根廷",
           "bet": "英格兰 vs 阿根廷",
           "odds": 1.2,
-          "ev": -0.158,
-          "mvi": 0.842043861525356
+          "ev": -0.136,
+          "mvi": 0.8637630480788898
         }
       ]
     }
@@ -241,7 +312,7 @@
   "scoreParlays": [],
   "finalVerdict": {
     "verdict": "今日建议空仓，不投注",
-    "reason": "可投注项仅11个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
+    "reason": "可投注项仅8个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
     "bestPortfolio": null
   },
   "yesterdayReview": {
@@ -281,8 +352,8 @@
   },
   "candidatePool": {
     "total": 20,
-    "accepted": 11,
-    "rejected": 9,
+    "accepted": 8,
+    "rejected": 12,
     "abandonedMatches": 0
   },
   "stats": {
@@ -290,12 +361,12 @@
     "topScore": 0,
     "scoredCount": 0,
     "byMarket": {
-      "胜平负": 3,
+      "胜平负": 1,
       "大小球": 1,
       "BTTS": 1,
       "双重机会": 1,
       "平局退款": 1,
-      "波胆": 2,
+      "波胆": 1,
       "比分区间": 2
     },
     "byLegs": {}
