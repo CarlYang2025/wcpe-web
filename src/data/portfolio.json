@@ -1,25 +1,25 @@
 {
   "version": "5.0",
-  "generatedAt": "2026-07-19T13:15:33.668Z",
+  "generatedAt": "2026-07-19T13:56:27.317Z",
   "targetDate": "7/20",
   "targetDateDisplay": "2026年7月20日（周一）",
   "targetMatchIds": [
     "spa-arg-final"
   ],
-  "oddsFreshness": "2026-07-19T13:15:30.214Z",
+  "oddsFreshness": "2026-07-19T13:56:12.985Z",
   "oddsSource": "odds-api.io (Bet365)",
   "marketRating": {
     "verdict": "⚠️ 机会稀缺",
-    "investableCount": 7,
-    "highMviCount": 1,
-    "positiveEvCount": 1,
+    "investableCount": 8,
+    "highMviCount": 2,
+    "positiveEvCount": 3,
     "suggestedExposure": "30-50%或建议空仓",
-    "summary": "1场比赛，7个可投注项（1个正EV），1个高MVI信号。涵盖4种市场类型。",
+    "summary": "1场比赛，8个可投注项（3个正EV），2个高MVI信号。涵盖5种市场类型。",
     "highlights": [
-      "西班牙 vs 阿根廷 为本日最强MVI信号(1.06)",
+      "西班牙 vs 阿根廷 为本日最强MVI信号(1.19)",
       "昨日方向准确率低(29%)，已动态调整策略权重",
-      "已自动排除15个低质量投注项+0场高风险比赛",
-      "多市场覆盖：胜平负、大小球、BTTS、平局退款"
+      "已自动排除14个低质量投注项+0场高风险比赛",
+      "多市场覆盖：胜平负、大小球、BTTS、平局退款、比分区间"
     ]
   },
   "qualitativeReport": [
@@ -27,9 +27,10 @@
       "matchId": "spa-arg-final",
       "matchDisplay": "西班牙 vs 阿根廷",
       "flags": [
-        "injury_concern"
+        "injury_concern",
+        "form_concern"
       ],
-      "thesis": "伤病缺阵影响阵容",
+      "thesis": "伤病缺阵影响阵容；状态隐患: 拉明亚马尔赛前单独训练疑云已消散——德拉富恩特确认",
       "qualitativeConfidence": 0.95,
       "adjustments": {
         "injuryPenalty": 0.05,
@@ -38,6 +39,18 @@
     }
   ],
   "investmentPool": [
+    {
+      "match": "西班牙 vs 阿根廷",
+      "market": "比分区间",
+      "bet": "【小2球】西班牙 vs 阿根廷",
+      "odds": 2.2,
+      "ev": 0.188,
+      "mvi": 1.1880000000000002,
+      "prob": 0.54,
+      "reason": "高错价信号",
+      "type": "goals_range",
+      "source": ""
+    },
     {
       "match": "西班牙 vs 阿根廷",
       "market": "大小球",
@@ -52,6 +65,30 @@
     },
     {
       "match": "西班牙 vs 阿根廷",
+      "market": "胜平负",
+      "bet": "【胜平负】西班牙 vs 阿根廷 平局",
+      "odds": 3,
+      "ev": 0.02,
+      "mvi": 0.96,
+      "prob": 0.34,
+      "reason": "边际价值",
+      "type": "direction",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 阿根廷",
+      "market": "比分区间",
+      "bet": "【小3球】西班牙 vs 阿根廷",
+      "odds": 1.325,
+      "ev": 0,
+      "mvi": 0.9995655311452009,
+      "prob": 0.7543890801095856,
+      "reason": "边际价值",
+      "type": "goals_range",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 阿根廷",
       "market": "BTTS",
       "bet": "【BTTS】西班牙 vs 阿根廷 双方进球=否",
       "odds": 1.95,
@@ -60,6 +97,30 @@
       "prob": 0.5,
       "reason": "边际价值",
       "type": "btts",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 阿根廷",
+      "market": "平局退款",
+      "bet": "【平局退款】阿根廷 不败",
+      "odds": 2.375,
+      "ev": -0.028,
+      "mvi": 0.9715909090909092,
+      "prob": 0.4090909090909091,
+      "reason": "边际价值",
+      "type": "safety",
+      "source": ""
+    },
+    {
+      "match": "西班牙 vs 阿根廷",
+      "market": "胜平负",
+      "bet": "【胜平负】阿根廷 客胜",
+      "odds": 3.6,
+      "ev": -0.028,
+      "mvi": 0.94,
+      "prob": 0.27,
+      "reason": "边际价值",
+      "type": "direction",
       "source": ""
     }
   ],
@@ -77,6 +138,27 @@
   "abandonedOpportunities": [
     {
       "category": "投注项淘汰",
+      "reason": "EV显著负(-12.2%)",
+      "count": 2,
+      "examples": [
+        {
+          "match": "西班牙 vs 阿根廷",
+          "bet": "西班牙 主胜",
+          "odds": 2.25,
+          "ev": -0.122,
+          "mvi": 0.92
+        },
+        {
+          "match": "西班牙 vs 阿根廷",
+          "bet": "西班牙 vs 阿根廷",
+          "odds": 1.625,
+          "ev": -0.122,
+          "mvi": 0.8775000000000001
+        }
+      ]
+    },
+    {
+      "category": "投注项淘汰",
       "reason": "EV显著负(-12.8%)",
       "count": 1,
       "examples": [
@@ -92,7 +174,7 @@
     {
       "category": "投注项淘汰",
       "reason": "EV显著负(-10.0%)",
-      "count": 1,
+      "count": 2,
       "examples": [
         {
           "match": "西班牙 vs 阿根廷",
@@ -100,20 +182,27 @@
           "odds": 1.8,
           "ev": -0.1,
           "mvi": 0.91
+        },
+        {
+          "match": "西班牙 vs 阿根廷",
+          "bet": "西班牙 或 阿根廷",
+          "odds": 1.363,
+          "ev": -0.1,
+          "mvi": 0.89958
         }
       ]
     },
     {
       "category": "投注项淘汰",
-      "reason": "EV显著负(-8.7%)",
+      "reason": "EV显著负(-9.4%)",
       "count": 1,
       "examples": [
         {
           "match": "西班牙 vs 阿根廷",
-          "bet": "西班牙 或 阿根廷",
-          "odds": 1.363,
-          "ev": -0.087,
-          "mvi": 0.9132099999999999
+          "bet": "西班牙 不败",
+          "odds": 1.533,
+          "ev": -0.094,
+          "mvi": 0.9058636363636363
         }
       ]
     },
@@ -203,48 +292,6 @@
     },
     {
       "category": "投注项淘汰",
-      "reason": "比分区间置信度不足",
-      "count": 3,
-      "examples": [
-        {
-          "match": "西班牙 vs 阿根廷",
-          "bet": "西班牙 vs 阿根廷",
-          "odds": 2.2,
-          "ev": 0.188,
-          "mvi": 1.1880000000000002
-        },
-        {
-          "match": "西班牙 vs 阿根廷",
-          "bet": "西班牙 vs 阿根廷",
-          "odds": 1.325,
-          "ev": 0,
-          "mvi": 0.9995655311452009
-        },
-        {
-          "match": "西班牙 vs 阿根廷",
-          "bet": "西班牙 vs 阿根廷",
-          "odds": 1.23,
-          "ev": -0.072,
-          "mvi": 0.9278985685347904
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
-      "reason": "EV显著负(-12.2%)",
-      "count": 1,
-      "examples": [
-        {
-          "match": "西班牙 vs 阿根廷",
-          "bet": "西班牙 vs 阿根廷",
-          "odds": 1.625,
-          "ev": -0.122,
-          "mvi": 0.8775000000000001
-        }
-      ]
-    },
-    {
-      "category": "投注项淘汰",
       "reason": "EV显著负(-18.9%)",
       "count": 1,
       "examples": [
@@ -275,7 +322,7 @@
   "scoreParlays": [],
   "finalVerdict": {
     "verdict": "今日建议空仓，不投注",
-    "reason": "可投注项仅7个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
+    "reason": "可投注项仅8个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
     "bestPortfolio": null
   },
   "yesterdayReview": {
@@ -315,8 +362,8 @@
   },
   "candidatePool": {
     "total": 22,
-    "accepted": 7,
-    "rejected": 15,
+    "accepted": 8,
+    "rejected": 14,
     "abandonedMatches": 0
   },
   "stats": {
@@ -324,10 +371,11 @@
     "topScore": 0,
     "scoredCount": 0,
     "byMarket": {
-      "胜平负": 3,
+      "胜平负": 2,
       "大小球": 1,
       "BTTS": 1,
-      "平局退款": 2
+      "平局退款": 1,
+      "比分区间": 3
     },
     "byLegs": {}
   },
