@@ -776,7 +776,20 @@ export const matches: Match[] = [
     interceptions: { home: 8, away: 9 },
     saves: { home: 3, away: 1 }
   }, homeScore: 1, awayScore: 2 },
-  { id: 'fra-eng-3rd', date: '2026-07-18', tournament: '2026 FIFA World Cup', group: 'Third Place', round: 'Third Place', matchday: 31, homeTeam: 'France', awayTeam: 'England', venue: 'Hard Rock Stadium, Miami Gardens', kickoff: '7/19 05:00', localKickoff: '7/18 17:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'fra-eng-3rd', date: '2026-07-18', tournament: '2026 FIFA World Cup', group: 'Third Place', round: 'Third Place', matchday: 31, homeTeam: 'France', awayTeam: 'England', venue: 'Hard Rock Stadium, Miami Gardens', kickoff: '7/19 05:00', localKickoff: '7/18 17:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 46, away: 54 },
+    shots: { home: 19, away: 19 },
+    shotsOnTarget: { home: 9, away: 11 },
+    xg: { home: 2.87, away: 2.58 },
+    corners: { home: 3, away: 4 },
+    fouls: { home: 14, away: 8 },
+    cards: { home: { yellow: 0, red: 0 }, away: { yellow: 0, red: 0 } },
+    offsides: { home: 3, away: 3 },
+    crosses: { home: 16, away: 20 },
+    interceptions: { home: 10, away: 8 },
+    saves: { home: 4, away: 5 }
+  }, homeScore: 4, awayScore: 6 },
   { id: 'spa-arg-final', date: '2026-07-19', tournament: '2026 FIFA World Cup', group: 'Final', round: 'Final', matchday: 31, homeTeam: 'Spain', awayTeam: 'Argentina', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/20 03:00', localKickoff: '7/19 15:00', localTZ: 'ET', status: 'upcoming' },
 ];
 

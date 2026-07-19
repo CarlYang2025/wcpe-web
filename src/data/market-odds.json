@@ -1,8 +1,7 @@
 {
-  "fetchedAt": "2026-07-18T13:55:44.021Z",
+  "fetchedAt": "2026-07-19T13:15:30.214Z",
   "source": "odds-api.io (Bet365)",
   "updatedMatchIds": [
-    "fra-eng-3rd",
     "spa-arg-final"
   ],
   "totalMatches": 74,
@@ -11128,8 +11127,8 @@
       "awayWin": 3.6,
       "over25": 2.3,
       "under25": 1.615,
-      "bttsYes": 1.909,
-      "bttsNo": 1.909,
+      "bttsYes": 1.8,
+      "bttsNo": 1.95,
       "correctScore": {
         "3-1": 21,
         "0-0": 7.5,
@@ -11245,8 +11244,7 @@
       "europeanHandicap": [
         {
           "hdp": -1,
-          "draw": 5.5,
-          "away": 8
+          "home": 4.5
         },
         {
           "hdp": 1,
@@ -11256,26 +11254,26 @@
       "halfTime": {
         "spread": {
           "hdp": 0,
-          "home": 1.65,
-          "away": 2.3
+          "home": 1.625,
+          "away": 2.35
         },
         "totals": {
           "hdp": 1,
           "over": 2.15,
           "under": 1.725
         },
+        "btts": {
+          "yes": 5.5,
+          "no": 1.142
+        },
         "result": {
           "away": 4,
           "home": 2.875,
           "draw": 2.05
-        },
-        "btts": {
-          "yes": 5.5,
-          "no": 1.142
         }
       },
       "_source": "Bet365",
-      "_updatedAt": "2026-07-18T13:55:18.107Z"
+      "_updatedAt": "2026-07-19T13:15:18.803Z"
     }
   }
 }
