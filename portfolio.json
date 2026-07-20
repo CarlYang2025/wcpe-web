@@ -1,0 +1,92 @@
+{
+  "version": "5.0",
+  "generatedAt": "2026-07-20T13:56:56.085Z",
+  "targetDate": "7/21",
+  "targetDateDisplay": "2026年7月21日（周二）",
+  "targetMatchIds": [],
+  "oddsFreshness": "2026-07-20T13:56:55.196Z",
+  "oddsSource": "odds-api.io (Bet365)",
+  "marketRating": {
+    "verdict": "⚠️ 机会稀缺",
+    "investableCount": 0,
+    "highMviCount": 0,
+    "positiveEvCount": 0,
+    "suggestedExposure": "30-50%或建议空仓",
+    "summary": "0场比赛，0个可投注项（0个正EV），0个高MVI信号。涵盖0种市场类型。",
+    "highlights": [
+      "暂无高MVI信号",
+      "昨日方向准确率低(0%)，已动态调整策略权重",
+      "已自动排除0个低质量投注项+0场高风险比赛"
+    ]
+  },
+  "qualitativeReport": [],
+  "investmentPool": [],
+  "portfolios": [],
+  "capitalAllocation": [
+    {
+      "tier": "现金保留（空仓）",
+      "portfolio": null,
+      "pct": 100,
+      "amount": 100,
+      "isCash": true
+    }
+  ],
+  "bestPortfolio": null,
+  "abandonedOpportunities": [],
+  "scoreParlays": [],
+  "finalVerdict": {
+    "verdict": "今日建议空仓，不投注",
+    "reason": "可投注项仅0个（需≥4），正EV机会不足。保留资金等待下一比赛日。",
+    "bestPortfolio": null
+  },
+  "yesterdayReview": {
+    "date": "7/20",
+    "summary": {
+      "n": 1,
+      "dirHits": 0,
+      "dirRate": 0,
+      "over25Hits": 1,
+      "over25Rate": 1,
+      "bttsHits": 1,
+      "bttsRate": 1,
+      "top3Hits": 1,
+      "top3Rate": 1,
+      "top1Hits": 0,
+      "top1Rate": 0,
+      "draws": 0,
+      "upsets": 0
+    },
+    "keyInsights": [
+      "方向准确率0%（偏低，今日方向类降低权重）",
+      "大2.5球命中100%（优秀，今日大小球提升权重）",
+      "BTTS命中100%（良好）",
+      "Top3比分命中100%（1/1场）"
+    ],
+    "strategyWeights": {
+      "direction": 0.76,
+      "goals": 1.12,
+      "btts": 1.12,
+      "score": 0.9,
+      "safety": 0.9400000000000001,
+      "goals_range": 1.02
+    }
+  },
+  "candidatePool": {
+    "total": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "abandonedMatches": 0
+  },
+  "stats": {
+    "totalCombinations": 0,
+    "topScore": 0,
+    "scoredCount": 0,
+    "byMarket": {},
+    "byLegs": {}
+  },
+  "wcpeValidations": {
+    "total": 0,
+    "valid": 0,
+    "withIssues": 0
+  }
+}
