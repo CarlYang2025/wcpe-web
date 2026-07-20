@@ -1,9 +1,7 @@
 {
-  "fetchedAt": "2026-07-19T13:56:12.985Z",
+  "fetchedAt": "2026-07-20T13:17:28.139Z",
   "source": "odds-api.io (Bet365)",
-  "updatedMatchIds": [
-    "spa-arg-final"
-  ],
+  "updatedMatchIds": [],
   "totalMatches": 74,
   "odds": {
     "ecu-ger-3": {

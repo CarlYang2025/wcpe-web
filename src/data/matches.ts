@@ -790,7 +790,20 @@ export const matches: Match[] = [
     interceptions: { home: 10, away: 8 },
     saves: { home: 4, away: 5 }
   }, homeScore: 4, awayScore: 6 },
-  { id: 'spa-arg-final', date: '2026-07-19', tournament: '2026 FIFA World Cup', group: 'Final', round: 'Final', matchday: 31, homeTeam: 'Spain', awayTeam: 'Argentina', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/20 03:00', localKickoff: '7/19 15:00', localTZ: 'ET', status: 'upcoming' },
+  { id: 'spa-arg-final', date: '2026-07-19', tournament: '2026 FIFA World Cup', group: 'Final', round: 'Final', matchday: 31, homeTeam: 'Spain', awayTeam: 'Argentina', venue: 'MetLife Stadium, East Rutherford', kickoff: '7/20 03:00', localKickoff: '7/19 15:00', localTZ: 'ET', status: 'finished',
+    matchStats: {
+    possession: { home: 65, away: 35 },
+    shots: { home: 20, away: 2 },
+    shotsOnTarget: { home: 12, away: 0 },
+    xg: { home: 2.4, away: 0.08 },
+    corners: { home: 9, away: 4 },
+    fouls: { home: 8, away: 14 },
+    cards: { home: { yellow: 0, red: 0 }, away: { yellow: 7, red: 1 } },
+    offsides: { home: 2, away: 3 },
+    crosses: { home: 18, away: 6 },
+    interceptions: { home: 11, away: 7 },
+    saves: { home: 0, away: 11 }
+  }, homeScore: 1, awayScore: 0 },
 ];
 
 // ========== 预测数据 ==========

@@ -2204,5 +2204,58 @@
       "away": 5
     },
     "_source": "goalfront.ca / clutchbrief.com / bleacherreport / qq.com 2026-07-19 (FRA 4-6 ENG; poss 46/54, shots 19/19, SOT 9/11, xG 2.87/2.58, corners 3/4, fouls 14/8, saves 4/5, cards 0/0, offsides 3/3; crosses/interceptions estimated from high-tempo 10-goal match)"
+  },
+  "spa-arg-final": {
+    "possession": {
+      "home": 65,
+      "away": 35
+    },
+    "shots": {
+      "home": 20,
+      "away": 2
+    },
+    "shotsOnTarget": {
+      "home": 12,
+      "away": 0
+    },
+    "xg": {
+      "home": 2.4,
+      "away": 0.08
+    },
+    "corners": {
+      "home": 9,
+      "away": 4
+    },
+    "fouls": {
+      "home": 8,
+      "away": 14
+    },
+    "cards": {
+      "home": {
+        "yellow": 0,
+        "red": 0
+      },
+      "away": {
+        "yellow": 7,
+        "red": 1
+      }
+    },
+    "offsides": {
+      "home": 2,
+      "away": 3
+    },
+    "crosses": {
+      "home": 18,
+      "away": 6
+    },
+    "interceptions": {
+      "home": 11,
+      "away": 7
+    },
+    "saves": {
+      "home": 0,
+      "away": 11
+    },
+    "_source": "websearch-2026final (Sohu/BleacherReport/world-cup-schedule: possession 65/35, shots 20/2, SOT 12/0, xG 1.94/0.22, corners 9/4, Argentina 0 SOT in 120min, Enzo 90+3 red)"
   }
 }
